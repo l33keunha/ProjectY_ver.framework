@@ -1,0 +1,265 @@
+*{
+    margin: 0 auto;
+    padding: 0 auto;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 12px;
+}
+.header {
+    width: 1920px;
+    height: 80px;
+    border-bottom: 3px solid #1f2958;
+    margin: 0 auto;
+    padding-bottom: 5px;
+}
+.logo{
+    float: left;
+    width: 233px;
+    height: 80px;
+    /* border: 1px solid red; */
+}
+.logo02{
+    float: left;
+    color: #1f2958;
+    font-size: 45px;
+    padding: 10px 0;
+    font-weight: bold;
+}
+.mtap{
+    float: right;
+}
+.mtap p{
+    float: right;
+    margin: 50px 12px;
+    font-size: 20px;
+
+}
+.ConName{
+    height: 43px;
+    width: 1920px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    border-bottom: 3px solid #5C7D9A;
+}
+.contents{
+    text-align: center;
+    width: 1377px;
+    height: 42px;
+}
+.contents span{
+    float: left;
+    font-size: 23px;
+    margin-left: 38px;
+    width: 93px;
+    padding: 5px;
+}
+.contents :first-child{
+    margin-left: 0;
+}
+.contents :nth-child(2){
+    height: 36px;
+    border-radius: 15px;
+    background-color: #5C7D9A;
+    color: white;
+}
+.ConEx{
+    width: 1920px;
+    height: 73px;
+    background-color: #555555;
+}
+.selectbox{
+    height: 625px;
+    width: 1920px;
+    /* border: 1px solid red; */
+}
+.selectbox >*{ 
+    float: left;
+    width: 272px;
+    height: 625px;
+    border-left: 1px solid rgb(189, 189, 189);
+}
+.cell1{}
+.cell1_01{
+    height: 280px;
+    margin-bottom: 4px;
+}
+.cell1_02{
+    height: 280px;
+}
+.cell1 p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 152px;
+    font-size: 25px;
+    font-weight: bold;
+    border-bottom: 2px solid #1f2958;
+}
+.cell1 label{
+    margin: 12px;
+    font-size: 20px;
+}
+#PassDate {
+    margin: 10px auto;
+    display: block;
+    font-size: 15px;
+}
+#PassSido{
+    margin: 10px auto;
+    width: 154px;
+    display: block;
+    font-size: 15px;
+}
+#PassSigungu{
+    margin: 10px auto;
+    width: 154px;
+    display: block;
+    font-size: 15px;
+}
+
+.cell2{}
+.cell2 p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 152px;
+    font-size: 25px;
+    font-weight: bold;
+    border-bottom: 2px solid #1f2958;
+}
+.cell2 label{
+    margin: 12px;
+    font-size: 20px;
+    display: block;
+}
+
+.cell3{}
+.cell3 p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 152px;
+    font-size: 25px;
+    font-weight: bold;
+    border-bottom: 2px solid #1f2958;
+}
+.cell3 label{
+    margin: 12px;
+    font-size: 20px;
+    display: block;
+}
+.cell3_01{
+    height: 180px;
+}
+.cell3_02{
+    height: 180px;
+}
+.cell3_03{
+    height: 180px;
+}
+.cell4{}
+.cell4 p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 152px;
+    font-size: 25px;
+    font-weight: bold;
+    border-bottom: 2px solid #1f2958;
+}
+.cell4 label{
+    margin: 12px;
+    font-size: 20px;
+    display: block;
+}
+.cell4_01{
+    height: 180px;
+}
+.cell4_02{
+    height: 180px;
+}
+.cell4_03{
+    height: 180px;
+}
+.cell5{}
+.cell5 p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 152px;
+    font-size: 25px;
+    font-weight: bold;
+    border-bottom: 2px solid #1f2958;
+}
+.cell5 label{
+    margin: 12px;
+    font-size: 20px;
+    display: block;
+}
+.cell5_01{
+    height: 280px;
+    margin-bottom: 4px;
+}
+.cell5_02{
+    height: 280px;
+}
+.cell5 select{
+    font-size: 15px;
+    margin-left: 10px;
+}
+.cell6{}
+.cell6 p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 152px;
+    font-size: 25px;
+    font-weight: bold;
+    border-bottom: 2px solid #1f2958;
+}
+.cell6 select{
+    font-size: 15px;
+    width: 190px;
+    margin-left: 10px;
+}
+.cell6_01{
+    height: 280px;
+    margin-bottom: 4px;
+}
+.cell6_02{
+    height: 280px;
+}
+
+.cell7{}
+.cell7 p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 152px;
+    font-size: 25px;
+    font-weight: bold;
+    border-bottom: 2px solid #1f2958;
+}
+.cell7 select{
+    font-size: 15px;
+    width: 190px;
+    margin-left: 10px;
+}
+.cell7_01{
+    height: 280px;
+    margin-bottom: 4px;
+}
+.cell7_02{
+    height: 280px;
+}
+
+.submit{
+    text-align: center;
+    display: block;
+    width: 180px;
+    height: 50px;
+    font-size: 25px;
+    background-color: #5c7d9a;
+    color: white;
+    font-weight: bold;
+    border-radius: 20px;
+}
