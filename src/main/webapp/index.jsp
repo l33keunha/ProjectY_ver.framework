@@ -6,7 +6,9 @@
     <head>
         <title>통행지표</title>
         <link rel="stylesheet" type="text/css" href="css/indexCSS.css">
-
+        <script src ="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     </head>
 
     <body>
@@ -24,14 +26,14 @@
         </div>
        <div class="ConName">
            <div class="contents">
-            <span>이용지표</span>
-            <span>통행지표</span>
-            <span>환승지표</span>
-            <span>혼잡지표</span>
-            <span>시간지표</span>
-            <span>거리지표</span>
-            <span>운행지표</span>
-            <span>주제도</span>
+            <span>이용분석</span>
+            <div><span>통행분석</span></div>
+            <span>환승분석</span>
+            <span>혼잡분석</span>
+            <span>시간분석</span>
+            <span>거리분석</span>
+            <span>운행분석</span>
+            <span>지도분석</span>
             <span>다운로드</span>
            </div>
      </div>
@@ -41,237 +43,302 @@
      <div class="selectbox">
         <div class ="cell1">
             
-                <p>날짜 및 지역</p>
+                <p>날짜</p>
             <div class = "cell1_01">
-                <label><input type="checkbox"> 분석날짜</label>
-
-                <input type="date" id="PassDate" name="passDateStart" value='2021-11-22'>
-                <input type="date" id="PassDate" name="passDateEnd" style="display:none;">
+                <label> 분석날짜</label>
+                <input type="date" id="PassDate" name="passDateStart" value='2021-11-22' onchange='chngDate()'>
+                <input type="date" id="PassDate" name="passDateEnd" value='2021-11-22' onchange='chngDate()'>
              </div>
+             <div class ="cell2">
+                <p>분석자료</p>
+                <div>
+                <label><input type="checkbox" name="passOwner" value="00"> 국토부</label>
+                <label><input type="checkbox" name="passOwner" value="99"> 정산사</label>
+                </div>
+    
+            </div>
              <div class="cell1_02">
-                <label><input type="checkbox"> 분석지역</label>
+                <p>지역</p>
+                <label> 분석지역</label>
 
                 <select id="PassSido" name="passSido">
                     <option>광역/도</option>
-                    <option value="Gyenggido">경기도</option>
+                    <option value="31">경기도</option>
                 </select>
                 <select id="PassSigungu" name="passSigungu">
                     <option>시/군</option>
-                    <option value="PT">평택시</option>
+                    <option value="31070">평택시</option>
                 </select>
              </div>
         </div>
 
-        <div class ="cell2">
+        <!-- <div class ="cell2">
             <p>분석자료</p>
             <label><input type="checkbox" name="passOwner" value="00"> 국토부</label>
             <label><input type="checkbox" name="passOwner" value="99"> 정산사</label>
 
-        </div>
+        </div> -->
         <div class ="cell3">
             <p>분석지표</p>
             <div class="cell3_01"> 
+                <div>
                 <label><input type="checkbox" name="passGroup" value="passCnt"> 통행량</label>
+                </div>
             </div>
             <div class="cell3_02">
+                <div>
                 <label><input type="checkbox" name="passGroup" value="passOdCnt"> 기종점통행량</label>
+                </div>
             </div>
             <div class="cell3_03">
+                <div>
                 <label><input type="checkbox" name="passGroup" value="passEtc"> 기타</label>
+                </div>
             </div>
         </div>
         <div class ="cell4">
             <p>분석유형</p>
             <div class="cell4_01">
+                <div>
                 <label><input type="checkbox" name="passType" value="passCnt_purpose"> 목적통행</label>
                 <label><input type="checkbox" name="passType" value="passCnt_method"> 수단통행</label>
                 <label><input type="checkbox" name="passType" value="passCnt_route"> 노선별통행</label>
                 <label><input type="checkbox" name="passType" value="passCnt_station"> 정류장별통행</label>
+                </div>
             </div>
             <div class="cell4_02">
+                <div>
                 <label><input type="checkbox" name="passType" value="passODCnt_station_purpose"> 정류장별목적통행</label>
                 <label><input type="checkbox" name="passType" value="passODCnt_station_method"> 정류장별수단통행</label>
                 <label><input type="checkbox" name="passType" value="passODCnt_dong_purpose"> 행정동별목적통행</label>
                 <label><input type="checkbox" name="passType" value="passODCnt_dong_method"> 행정동별수단통행</label>
+                </div>
             </div>
             <div class="cell4_03">
+                <div>
                 <label><input type="checkbox" name="passType" value="passEtc_max_route"> 최다이용노선</label>
                 <label><input type="checkbox" name="passType" value="passEtc_max_station"> 최다이용정류장</label>
+                <label><input type="checkbox" name="passType" value=""> 노선별OD</label>
+                </div>
             </div>
-        </div>
-        <div class ="cell5">
-            <p>시간대</p>
-            <div class="cell5_01">
-                <label><input type="checkbox" name="passTime" value="allDay"> 1일</label>
-                <select name="passTimeStart">
-                    <option value="0" >0</option>
-                    <option value="1" >1</option>
-                    <option value="2" >2</option>
-                    <option value="3" >3</option>
-                    <option value="4" >4</option>
-                    <option value="5" >5</option>
-                    <option value="6" >6</option>
-                    <option value="7" >7</option>
-                    <option value="8" >8</option>
-                    <option value="9" >9</option>
-                    <option value="10" >10</option>
-                    <option value="11" >11</option>
-                    <option value="12" >12</option>
-                    <option value="13" >13</option>
-                    <option value="14" >14</option>
-                    <option value="15" >15</option>
-                    <option value="16" >16</option>
-                    <option value="17" >17</option>
-                    <option value="18" >18</option>
-                    <option value="19" >19</option>
-                    <option value="20" >20</option>
-                    <option value="21" >21</option>
-                    <option value="22" >22</option>
-                    <option value="23" >23</option>
+            </div>
 
-
-                </select> ~
-                <select name="passTimeEnd">
-                    <option value="0" >0</option>
-                    <option value="1" >1</option>
-                    <option value="2" >2</option>
-                    <option value="3" >3</option>
-                    <option value="4" >4</option>
-                    <option value="5" >5</option>
-                    <option value="6" >6</option>
-                    <option value="7" >7</option>
-                    <option value="8" >8</option>
-                    <option value="9" >9</option>
-                    <option value="10" >10</option>
-                    <option value="11" >11</option>
-                    <option value="12" >12</option>
-                    <option value="13" >13</option>
-                    <option value="14" >14</option>
-                    <option value="15" >15</option>
-                    <option value="16" >16</option>
-                    <option value="17" >17</option>
-                    <option value="18" >18</option>
-                    <option value="19" >19</option>
-                    <option value="20" >20</option>
-                    <option value="21" >21</option>
-                    <option value="22" >22</option>
-                    <option value="23" >23</option>
-                </select>
-            </div>
-            <div class="cell5_02">
-                <label><input type="checkbox" name="PassTime1" value="allDay"> 1일</label>
-                <select name="passTimeStart1">
-                    <option value="0" >0</option>
-                    <option value="1" >1</option>
-                    <option value="2" >2</option>
-                    <option value="3" >3</option>
-                    <option value="4" >4</option>
-                    <option value="5" >5</option>
-                    <option value="6" >6</option>
-                    <option value="7" >7</option>
-                    <option value="8" >8</option>
-                    <option value="9" >9</option>
-                    <option value="10" >10</option>
-                    <option value="11" >11</option>
-                    <option value="12" >12</option>
-                    <option value="13" >13</option>
-                    <option value="14" >14</option>
-                    <option value="15" >15</option>
-                    <option value="16" >16</option>
-                    <option value="17" >17</option>
-                    <option value="18" >18</option>
-                    <option value="19" >19</option>
-                    <option value="20" >20</option>
-                    <option value="21" >21</option>
-                    <option value="22" >22</option>
-                    <option value="23" >23</option>
-
-
-                </select> ~
-                <select name="PassTimeEnd1">
-                    <option value="0" >0</option>
-                    <option value="1" >1</option>
-                    <option value="2" >2</option>
-                    <option value="3" >3</option>
-                    <option value="4" >4</option>
-                    <option value="5" >5</option>
-                    <option value="6" >6</option>
-                    <option value="7" >7</option>
-                    <option value="8" >8</option>
-                    <option value="9" >9</option>
-                    <option value="10" >10</option>
-                    <option value="11" >11</option>
-                    <option value="12" >12</option>
-                    <option value="13" >13</option>
-                    <option value="14" >14</option>
-                    <option value="15" >15</option>
-                    <option value="16" >16</option>
-                    <option value="17" >17</option>
-                    <option value="18" >18</option>
-                    <option value="19" >19</option>
-                    <option value="20" >20</option>
-                    <option value="21" >21</option>
-                    <option value="22" >22</option>
-                    <option value="23" >23</option>
-                </select>
-            </div>
-        </div>
-        <div class ="cell6">
-            <p>이용자유형</p>
-            <div class="cell6_01">
-                <select name="passUserType">
-                    <option value="전체" >전체</option>
-                    <option value="일반" >일반</option>
-                    <option value="어린이" >어린이</option>
-                    <option value="청소년" >청소년</option>
-                    <option value="경로" >경로</option>
-                    <option value="장애인" >장애인</option>
-                    <option value="국가유공자" >국가유공자</option>
-                    <option value="다자녀부모" >다자녀부모</option>
-                    <option value="동반" >동반</option>
-                    <option value="대학생" >대학생</option>
-                    <option value="복지" >복지</option>
-                    <option value="기타" >기타</option>
-                </select>
-            </div>
-            <div class="cell6_02">
-               <select name="passUserType1">
-                   <option value="전체" >전체</option>
-                    <option value="일반" >일반</option>
-                    <option value="어린이" >어린이</option>
-                    <option value="청소년" >청소년</option>
-                    <option value="경로" >경로</option>
-                    <option value="장애인" >장애인</option>
-                    <option value="국가유공자" >국가유공자</option>
-                    <option value="다자녀부모" >다자녀부모</option>
-                    <option value="동반" >동반</option>
-                    <option value="대학생" >대학생</option>
-                    <option value="복지" >복지</option>
-                    <option value="기타" >기타</option>
-                </select>
-            </div>
-        </div>
-        <div class ="cell7">
-            <p>교통수단</p>
-            <div class="cell7_01">
-                <select name="passTransport">
-                    <option value="전체" >전체</option>
-                    <option value="B" >버스</option>
-                    <option value="T" >지하철</option>
-                </select>
-            </div>
-            <div class="cell7_02">
-               <select name="passTransport1">
-                    <option value="전체" >전체</option>
-                    <option value="B" >시내</option>
-                    <option value="T" >시외</option>
-                </select>
-            </div>
-        </div>
+            <div class ="hcell1">
+                <div class ="cell5">
+                    <p>시간대</p>
+                    <div class="cell5_01">
+                        <label><input type="checkbox" name="passTime" value="allDay"> 1일</label>
+                        <select name="passTimeStart">
+                            <option value="00" >00</option>
+                            <option value="01" >01</option>
+                            <option value="02" >02</option>
+                            <option value="03" >03</option>
+                            <option value="04" >04</option>
+                            <option value="05" >05</option>
+                            <option value="06" >06</option>
+                            <option value="07" >07</option>
+                            <option value="08" >08</option>
+                            <option value="09" >09</option>
+                            <option value="10" >10</option>
+                            <option value="11" >11</option>
+                            <option value="12" >12</option>
+                            <option value="13" >13</option>
+                            <option value="14" >14</option>
+                            <option value="15" >15</option>
+                            <option value="16" >16</option>
+                            <option value="17" >17</option>
+                            <option value="18" >18</option>
+                            <option value="19" >19</option>
+                            <option value="20" >20</option>
+                            <option value="21" >21</option>
+                            <option value="22" >22</option>
+                            <option value="23" >23</option>
         
-    </div>
-        <input class="submit" type="submit">
+        
+                        </select> ~
+                        <select name="passTimeEnd">
+                            <option value="00" >00</option>
+                            <option value="01" >01</option>
+                            <option value="02" >02</option>
+                            <option value="03" >03</option>
+                            <option value="04" >04</option>
+                            <option value="05" >05</option>
+                            <option value="06" >06</option>
+                            <option value="07" >07</option>
+                            <option value="08" >08</option>
+                            <option value="09" >09</option>
+                            <option value="10" >10</option>
+                            <option value="11" >11</option>
+                            <option value="12" >12</option>
+                            <option value="13" >13</option>
+                            <option value="14" >14</option>
+                            <option value="15" >15</option>
+                            <option value="16" >16</option>
+                            <option value="17" >17</option>
+                            <option value="18" >18</option>
+                            <option value="19" >19</option>
+                            <option value="20" >20</option>
+                            <option value="21" >21</option>
+                            <option value="22" >22</option>
+                            <option value="23" >23</option>
+                        </select>
+                    </div>
+                </div>
+                <div class ="cell6">
+                    <p>이용자유형</p>
+                    <div class="cell6_01">
+                        <div>
+                        <label><input type="checkbox" name="passUserType" value="00"> 전체</label>
+                        <label><input type="checkbox" name="passUserType" value="01"> 일반</label>
+                        <label><input type="checkbox" name="passUserType" value="02"> 어린이</label>
+                        <label><input type="checkbox" name="passUserType" value="03"> 청소년</label>
+                        <label><input type="checkbox" name="passUserType" value="04"> 경로</label>
+                        <label><input type="checkbox" name="passUserType" value="05"> 장애인</label>
+                        <label><input type="checkbox" name="passUserType" value="06"> 국가유공자</label>
+                        <label><input type="checkbox" name="passUserType" value="07"> 다자녀부모</label>
+                        <label><input type="checkbox" name="passUserType" value="08"> 동반</label>
+                        <label><input type="checkbox" name="passUserType" value="09"> 대학생</label>
+                        <label><input type="checkbox" name="passUserType" value="10"> 복지</label>
+                        <label><input type="checkbox" name="passUserType" value="11"> 기타</label>
+                        </div>
+                    </div>
+                </div>
+                <div class ="cell7">
+                    <p>교통수단</p>
+                    <div class="cell7_01">
+                        <div>
+                        <label><input type="checkbox" name="passTransport" value="00"> 전체</label>
+                        <label><input type="checkbox" name="passTransport" value="B"> 버스</label>
+                        <label><input type="checkbox" name="passTransport" value="T"> 지하철</label>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class ="hcell2">
+                    <div class ="cell5">
+                        <p>시간대</p>
+                        <div class="cell5_01">
+                            <label><input type="checkbox" name="passTime" value="allDay"> 1일</label>
+                            <select name="passTimeStart1">
+                                <option value="00" >00</option>
+                                <option value="01" >01</option>
+                                <option value="02" >02</option>
+                                <option value="03" >03</option>
+                                <option value="04" >04</option>
+                                <option value="05" >05</option>
+                                <option value="06" >06</option>
+                                <option value="07" >07</option>
+                                <option value="08" >08</option>
+                                <option value="09" >09</option>
+                                <option value="10" >10</option>
+                                <option value="11" >11</option>
+                                <option value="12" >12</option>
+                                <option value="13" >13</option>
+                                <option value="14" >14</option>
+                                <option value="15" >15</option>
+                                <option value="16" >16</option>
+                                <option value="17" >17</option>
+                                <option value="18" >18</option>
+                                <option value="19" >19</option>
+                                <option value="20" >20</option>
+                                <option value="21" >21</option>
+                                <option value="22" >22</option>
+                                <option value="23" >23</option>
+            
+            
+                            </select> ~
+                            <select name="passTimeEnd1">
+                                <option value="00" >00</option>
+                                <option value="01" >01</option>
+                                <option value="02" >02</option>
+                                <option value="03" >03</option>
+                                <option value="04" >04</option>
+                                <option value="05" >05</option>
+                                <option value="06" >06</option>
+                                <option value="07" >07</option>
+                                <option value="08" >08</option>
+                                <option value="09" >09</option>
+                                <option value="10" >10</option>
+                                <option value="11" >11</option>
+                                <option value="12" >12</option>
+                                <option value="13" >13</option>
+                                <option value="14" >14</option>
+                                <option value="15" >15</option>
+                                <option value="16" >16</option>
+                                <option value="17" >17</option>
+                                <option value="18" >18</option>
+                                <option value="19" >19</option>
+                                <option value="20" >20</option>
+                                <option value="21" >21</option>
+                                <option value="22" >22</option>
+                                <option value="23" >23</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class ="cell6">
+                        <p>이용자유형</p>
+                        <div class="cell6_01">
+                            <div>
+                            <label><input type="checkbox" name="passUserType1" value="00"> 전체</label>
+                            <label><input type="checkbox" name="passUserType1" value="01"> 일반</label>
+                            <label><input type="checkbox" name="passUserType1" value="02"> 어린이</label>
+                            <label><input type="checkbox" name="passUserType1" value="03"> 청소년</label>
+                            <label><input type="checkbox" name="passUserType1" value="04"> 경로</label>
+                            <label><input type="checkbox" name="passUserType1" value="05"> 장애인</label>
+                            <label><input type="checkbox" name="passUserType1" value="06"> 국가유공자</label>
+                            <label><input type="checkbox" name="passUserType1" value="07"> 다자녀부모</label>
+                            <label><input type="checkbox" name="passUserType1" value="08"> 동반</label>
+                            <label><input type="checkbox" name="passUserType1" value="09"> 대학생</label>
+                            <label><input type="checkbox" name="passUserType1" value="10"> 복지</label>
+                            <label><input type="checkbox" name="passUserType1" value="11"> 기타</label>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class ="hcell3">
+                        <div class ="cell8">
+                            <p>노선번호</p>
+                            <div class ="cell8_01">
+
+                            </div>
+                        </div>
+                    </div>
+        </div>
+   
+        <input class="submit" type="submit" value="조회" >
     </form>
     </body>
-
+	
+	<script>
+		window.onload = function(){
+			selectPassGroup()
+			
+		}
+		
+		function chngDate(){
+			selectPassGroup()
+		}
+		
+		function selectPassGroup(){
+			var passDateStart = $("input[name=passDateStart]").val();
+			var passDateEnd = $("input[name=passDateEnd]").val();
+			
+			$.ajax({
+				url:'selectPassGroup.do',
+				data : {passDateStart:passDateStart,
+					    passDateEnd:passDateEnd},
+				dataType: 'text',
+				success: function(data){
+					console.log('성공');
+				}
+			}) 
+		}
+		
+		
+		
+		
+		
+		
+	</script>
 </html>

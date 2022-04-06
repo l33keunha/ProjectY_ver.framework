@@ -13,5 +13,8 @@ public interface PassMapper {
 	List<EgovMap> selectPassResultListPurpose(PassSearchVO pVO);
 
 	List<EgovMap> selectPassResultListMethod(PassSearchVO pVO);
+
+	List<EgovMap> selectPassGroup(PassSearchVO pVO);
+
 	
 }

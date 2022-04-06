@@ -26,6 +26,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 	public List<EgovMap> selectPassResultList(PassSearchVO pVO) {
 		List<EgovMap> passResultList = new ArrayList<EgovMap>();
 		
+		
 		if(pVO.getPassGroup().equals("passCnt")) {
 			switch(pVO.getPassType()) {
 			case "passCnt_purpose": 
@@ -37,6 +38,14 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 		
 		return passResultList;
 	}
+
+
+	@Override
+	public List<EgovMap> selectPassGroup(PassSearchVO pVO) {
+		List<EgovMap> passGroupList = new ArrayList<EgovMap>();
+		return passGroupList = mapper.selectPassGroup(pVO); 
+	}
+
 
 
 	

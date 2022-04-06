@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="egovframework.example.sample.service.impl.MainMapper">
+
+	<resultMap id="main" type="egovframework.example.sample.service.MainVO">
+		<result property="ref_date" column="ref_date"/>
+		<result property="top" column="top"/>
+	</resultMap>
+
+
+	<select id="selectSampleList" resultType="egovMap">
+
+	SELECT 운행일자
+	   ,요일
+	   ,요일별통행량
+	   ,ROUND(RATIO_TO_REPORT(요일별통행량) OVER(), 2) * 100 || '%'  AS 요일별비율
+		FROM
+		(
+			SELECT 
+				운행일자
+				,TO_CHAR(TO_DATE(운행일자, 'YYYYMMDD'), 'dy') 요일
+				,COUNT(TO_CHAR(TO_DATE(운행일자, 'YYYYMMDD'), 'dy')) 요일별통행량
+			FROM YTBS.TCN_PT_PURPOSE
+			WHERE 1=1
+			  <!-- AND SDATE=TO_DATE('20211123','YYYYMMDD')
+			  AND 운행일자='20211123' --> 
+			  AND OWNER = '00'
+			  AND 종료하차역ID IS NOT NULL
+			GROUP BY 운행일자, TO_CHAR(TO_DATE(운행일자, 'YYYYMMDD'), 'dy')
+		)
+			GROUP BY 운행일자, 요일, 요일별통행량
+			ORDER BY 운행일자, 요일, 요일별통행량
+			
+	</select>
+
+
+</mapper>

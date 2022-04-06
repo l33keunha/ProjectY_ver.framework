@@ -1,5 +1,6 @@
 package com.ybs.indicator.pass.service;
 
+import java.util.Arrays;
 import java.util.Date;
 
 public class PassSearchVO {
@@ -8,25 +9,27 @@ public class PassSearchVO {
 	private String passDateEnd;
 	private String passSido;
 	private String passSigungu;
+	private String passUseArea;
 	private String passOwner;
 	private String passGroup;
 	private String passType;
 	private String passTime;
 	private int passTimeStart;
 	private int passTimeEnd;
-	private String passUserType;
+	private String[] passUserType;
 	private String passTransport;
 	
 	public PassSearchVO() {}
 
-	public PassSearchVO(String passDateStart, String passDateEnd, String passSido, String passSigungu, String passOwner,
-			String passGroup, String passType, String passTime, int passTimeStart, int passTimeEnd, String passUserType,
-			String passTransport) {
+	public PassSearchVO(String passDateStart, String passDateEnd, String passSido, String passSigungu,
+			String passUseArea, String passOwner, String passGroup, String passType, String passTime, int passTimeStart,
+			int passTimeEnd, String[] passUserType, String passTransport) {
 		super();
 		this.passDateStart = passDateStart;
 		this.passDateEnd = passDateEnd;
 		this.passSido = passSido;
 		this.passSigungu = passSigungu;
+		this.passUseArea = passUseArea;
 		this.passOwner = passOwner;
 		this.passGroup = passGroup;
 		this.passType = passType;
@@ -67,6 +70,14 @@ public class PassSearchVO {
 
 	public void setPassSigungu(String passSigungu) {
 		this.passSigungu = passSigungu;
+	}
+
+	public String getPassUseArea() {
+		return passUseArea;
+	}
+
+	public void setPassUseArea(String passUseArea) {
+		this.passUseArea = passUseArea;
 	}
 
 	public String getPassOwner() {
@@ -117,11 +128,11 @@ public class PassSearchVO {
 		this.passTimeEnd = passTimeEnd;
 	}
 
-	public String getPassUserType() {
+	public String[] getPassUserType() {
 		return passUserType;
 	}
 
-	public void setPassUserType(String passUserType) {
+	public void setPassUserType(String[] passUserType) {
 		this.passUserType = passUserType;
 	}
 
@@ -136,10 +147,10 @@ public class PassSearchVO {
 	@Override
 	public String toString() {
 		return "PassSearchVO [passDateStart=" + passDateStart + ", passDateEnd=" + passDateEnd + ", passSido="
-				+ passSido + ", passSigungu=" + passSigungu + ", passOwner=" + passOwner + ", passGroup=" + passGroup
-				+ ", passType=" + passType + ", passTime=" + passTime + ", passTimeStart=" + passTimeStart
-				+ ", passTimeEnd=" + passTimeEnd + ", passUserType=" + passUserType + ", passTransport=" + passTransport
-				+ "]";
+				+ passSido + ", passSigungu=" + passSigungu + ", passUseArea=" + passUseArea + ", passOwner="
+				+ passOwner + ", passGroup=" + passGroup + ", passType=" + passType + ", passTime=" + passTime
+				+ ", passTimeStart=" + passTimeStart + ", passTimeEnd=" + passTimeEnd + ", passUserType="
+				+ Arrays.toString(passUserType) + ", passTransport=" + passTransport + "]";
 	}
 
 }

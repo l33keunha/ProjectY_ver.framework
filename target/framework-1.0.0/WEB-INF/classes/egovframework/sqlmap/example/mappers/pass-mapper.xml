@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ybs.indicator.pass.service.impl.PassMapper">
+
+	<select id ="selectPassResultListPurpose" parameterType="pVO" resultType="egovMap">
+	
+	SELECT ROWNUM, PASSDATE, PASSTIME, PASSUSERTYPE, PASSTRANSPORT, PASSCNT
+	FROM
+		(SELECT 
+			BF.일자 passDate, BF.시간 passTime, BF.코드번호 passUserType, BF.교통수단 passTransport, NVL(집계,0) passCnt
+		FROM
+			(SELECT T.운행일자, 시간, 코드번호, 노선구분, COUNT(*) 집계
+			FROM 
+				(SELECT A.운행일자
+						,LPAD(TO_NUMBER(SUBSTR(A.시작승차일시, 9, 2)),2,'0') 시간
+						,B.코드번호 
+						,CASE WHEN LENGTH(A.시작승차노선ID) = 3 THEN 'T' ELSE 'B' END 노선구분
+						,A.SDATE
+						,A.OWNER
+						,A.가상카드번호
+						,A.트랜잭션ID
+				FROM TCN_PT_PURPOSE_REV A, MOL_USERTYPE B
+					WHERE 1=1
+					  AND SDATE=TO_DATE(#{passDateStart},'YYYYMMDD')
+					  AND A.OWNER = B.OWNER 
+					  AND A.정산사ID = B.정산사ID 
+					  AND A.교통카드사용자구분코드 = B.정산사이용자유형코드
+					  AND A.운행일자 = #{passDateStart}
+					  AND A.OWNER = #{passOwner}
+					  AND A.종료하차역ID IS NOT NULL
+				) T,
+				(SELECT DISTINCT  SDATE, 운행일자, OWNER, 가상카드번호, 트랜잭션ID FROM STDNN_TRANSACTION_RS_REV
+				WHERE 1=1
+				AND SDATE=TO_DATE(#{passDateStart},'YYYYMMDD')
+				AND 운행일자 =#{passDateStart}
+				AND OWNER = #{passOwner}
+				AND 인허가지역코드 =#{passSigungu}
+				OR 시군구코드 = #{passSigungu}) RS
+				WHERE 1=1
+				AND T.SDATE=RS.SDATE 
+			    AND T.운행일자=RS.운행일자
+			    AND T.OWNER=RS.OWNER 
+			    AND T.가상카드번호=RS.가상카드번호
+			    AND T.트랜잭션ID=RS.트랜잭션ID
+			GROUP BY T.운행일자, 시간, 코드번호, 노선구분
+			ORDER BY T.운행일자, 시간, 코드번호, 노선구분) F,
+			(SELECT #{passDateStart} 일자, 시간, 코드번호, 교통수단 FROM BASETABLE_FORJOIN) BF
+				WHERE 1=1
+			    AND F.운행일자(+) = BF.일자
+			    AND F.시간(+) = BF.시간 
+			    AND F.코드번호(+) = BF.코드번호 
+			    AND F.노선구분(+) = BF.교통수단
+		    	<if test="passTime==null">
+			    	AND BF.시간 BETWEEN #{passTimeStart} AND #{passTimeEnd}
+			    </if>
+			    <if test="!passUserType.equals('00')">
+			    	AND BF.코드번호 = #{passUserType}
+			    </if>
+			    <if test="!passTransport.equals('00')">
+			    	AND BF.교통수단 = #{passTransport}
+			    </if>
+		ORDER BY BF.일자, BF.시간, BF.코드번호, BF.교통수단)
+			
+	</select>
+	
+	<select id ="selectPassResultListMethod" parameterType="pVO" resultType="egovMap">
+	
+	SELECT ROWNUM, PASSDATE, PASSTIME, PASSUSERTYPE, PASSTRANSPORT, PASSCNT
+	FROM
+	(
+		SELECT  BF.일자 PASSDATE, BF.시간 PASSTIME, BF.코드번호 PASSUSERTYPE, BF.교통수단 PASSTRANSPORT, NVL(집계,0) PASSCNT
+			FROM
+				(SELECT 
+				       운행일자
+				       ,시간
+				       ,코드번호
+				       ,노선구분
+				       ,COUNT(*) 집계
+				FROM(
+					SELECT 
+						A.운행일자
+						,LPAD(TO_NUMBER(SUBSTR(A.승차일시, 9, 2)),2,'0') 시간
+						,B.코드번호
+						,CASE WHEN LENGTH(A.노선ID) = 3 THEN 'T' ELSE 'B' END 노선구분
+					FROM YTBS.TCN_PT_METHOD A, MOL_USERTYPE B
+					WHERE 1=1
+					  AND SDATE=TO_DATE(#{passDateStart},'YYYYMMDD')
+					  AND A.OWNER = B.OWNER 
+					  AND A.정산사ID = B.정산사ID 
+					  AND A.교통카드사용자구분코드 = B.정산사이용자유형코드
+					  AND A.운행일자 = #{passDateStart}
+					  AND A.OWNER = #{passOwner}
+					  AND A.하차역ID IS NOT NULL
+					 )
+					WHERE 1=1
+					GROUP BY 운행일자, 시간, 코드번호, 노선구분
+					ORDER BY 운행일자, 시간, 코드번호, 노선구분) F,
+					(SELECT #{passDateStart} 일자, 시간, 코드번호, 교통수단 FROM BASETABLE_FORJOIN) BF
+					WHERE 1=1
+				    AND F.운행일자(+) = BF.일자
+				    AND F.시간(+) = BF.시간 
+				    AND F.코드번호(+) = BF.코드번호 
+				    AND F.노선구분(+) = BF.교통수단
+				    <if test="passTime==null">
+				    	AND BF.시간 BETWEEN #{passTimeStart} AND #{passTimeEnd}
+				    </if>
+				    <if test="!passUserType.equals('00')">
+				    	AND BF.코드번호 = #{passUserType}
+				    </if>
+				    <if test="!passTransport.equals('00')">
+				    	AND BF.교통수단 = #{passTransport}
+				    </if>
+			ORDER BY BF.일자, BF.시간, BF.코드번호, BF.교통수단
+		)
+			
+	</select>
+	
+</mapper>

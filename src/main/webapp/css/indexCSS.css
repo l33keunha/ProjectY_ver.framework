@@ -5,39 +5,44 @@
     font-size: 12px;
 }
 .header {
-    width: 1920px;
-    height: 80px;
+    width: 100%;
+    height: 69px;
     border-bottom: 3px solid #1f2958;
-    margin: 0 auto;
     padding-bottom: 5px;
+    position: relative;
 }
+
 .logo{
     float: left;
-    width: 233px;
-    height: 80px;
+    width: 156px;
+    height: 57px;
     /* border: 1px solid red; */
+    margin-left: 14px;
+    margin-top: 10px;
 }
 .logo02{
     float: left;
     color: #1f2958;
-    font-size: 45px;
+    font-size: 35px;
     padding: 10px 0;
     font-weight: bold;
 }
 .mtap{
+    position: absolute;
     float: right;
+    bottom: 0;
+    right: 20px;
 }
 .mtap p{
     float: right;
-    margin: 50px 12px;
-    font-size: 20px;
-
+    font-size: 17px;
+    padding: 0 6px;
 }
 .ConName{
     height: 43px;
     width: 1920px;
-    margin-top: 15px;
-    margin-bottom: 10px;
+    /* margin-top: 15px; */
+    /* margin-bottom: 10px; */
     border-bottom: 3px solid #5C7D9A;
 }
 .contents{
@@ -52,38 +57,55 @@
     width: 93px;
     padding: 5px;
 }
+.contents div{
+    background-color: #5C7D9A;
+    width: 103px;
+    float: left;
+    margin-left: 38px;
+    height: 43px;
+}
 .contents :first-child{
     margin-left: 0;
 }
 .contents :nth-child(2){
-    height: 36px;
-    border-radius: 15px;
     background-color: #5C7D9A;
     color: white;
 }
 .ConEx{
     width: 1920px;
-    height: 73px;
+    height: 190px;
     background-color: #555555;
 }
 .selectbox{
-    height: 625px;
+    height: 555px;
     width: 1920px;
     /* border: 1px solid red; */
 }
 .selectbox >*{ 
     float: left;
-    width: 272px;
-    height: 625px;
-    border-left: 1px solid rgb(189, 189, 189);
+    width: 265px;
+    height: 555px;
+    /* border-left: 1px solid rgb(189, 189, 189); */
 }
-.cell1{}
-.cell1_01{
-    height: 280px;
-    margin-bottom: 4px;
+.cell1{
+    background: #ccdded;
 }
-.cell1_02{
-    height: 280px;
+.cell1_01{}
+.cell2{
+    margin: 59px 0;
+}
+.cell2 p {
+    margin-bottom: 10px;
+    text-align: center;
+    width: 152px;
+    font-size: 25px;
+    font-weight: bold;
+    border-bottom: 2px solid #1f2958;
+}
+.cell2 label{
+    margin: 12px;
+    font-size: 20px;
+    display: block;
 }
 .cell1 p {
     margin-top: 10px;
@@ -95,7 +117,7 @@
     border-bottom: 2px solid #1f2958;
 }
 .cell1 label{
-    margin: 12px;
+    margin: 0 45px;
     font-size: 20px;
 }
 #PassDate {
@@ -116,23 +138,11 @@
     font-size: 15px;
 }
 
-.cell2{}
-.cell2 p {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    text-align: center;
-    width: 152px;
-    font-size: 25px;
-    font-weight: bold;
-    border-bottom: 2px solid #1f2958;
-}
-.cell2 label{
-    margin: 12px;
-    font-size: 20px;
-    display: block;
-}
 
-.cell3{}
+
+.cell3{
+    border-right: 1px solid gray;
+}
 .cell3 p {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -143,20 +153,34 @@
     border-bottom: 2px solid #1f2958;
 }
 .cell3 label{
-    margin: 12px;
+    margin: 0 39px;
     font-size: 20px;
     display: block;
 }
 .cell3_01{
-    height: 180px;
+    margin-top: 43px;
+    height: 163px;
+    border-bottom: 1px solid gray;
+}
+.cell3_01 div{
+    width: 235px;
 }
 .cell3_02{
-    height: 180px;
+    height: 163px;
+    border-bottom: 1px solid gray;
+}
+.cell3_02 div{
+    width: 235px;
 }
 .cell3_03{
-    height: 180px;
+    height: 106px;
 }
-.cell4{}
+.cell3_03 div{
+    width: 235px;
+}
+.cell4{
+    border-right: 1px solid gray;
+}
 .cell4 p {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -172,14 +196,93 @@
     display: block;
 }
 .cell4_01{
-    height: 180px;
+    margin-top: 43px;
+    height: 163px;
+    border-bottom: 1px solid gray;
+}
+.cell4_01 div{
+    width: 207px;
 }
 .cell4_02{
-    height: 180px;
+    height: 151px;
+    border-bottom: 1px solid gray;
+}
+.cell4_02 div{
+    width: 207px;
 }
 .cell4_03{
-    height: 180px;
+    height: 100px;
 }
+.cell4_03 div{
+    width: 207px;
+}
+
+/* hcell1 */
+.hcell1{
+    /* display: none;  */
+    float: left;
+    height: 555px;
+    width: 1119px;
+    /* border: 1px solid red; */
+}
+.hcell1 >*{ 
+    float: left;
+    width: 371px;
+    height: 555px;
+    /* border-left: 1px solid rgb(189, 189, 189); */
+}
+/* hcell2 */
+.hcell2{
+    display: none;
+    float: left;
+    height: 555px;
+    width: 1119px;
+    /* border: 1px solid red; */
+}
+.hcell2 >*{ 
+    float: left;
+    width: 371px;
+    height: 555px;
+    /* border-left: 1px solid rgb(189, 189, 189); */
+}
+
+.hcell2 > .cell5{
+    width: 493px;
+}
+.hcell2 > .cell5 p{
+    width: 329px;
+}
+.hcell2 > .cell5 > .cell5_01{
+    width: 288px;
+}
+.hcell2 > .cell6{
+    width: 493px;
+}
+.hcell2 > .cell6 p {
+    width: 329px;
+}
+.hcell2 >.cell6 > .cell6_01 div{
+    width: 286px;
+}
+/* hcell3 */
+.hcell3{
+    display: none; 
+    float: left;
+    height: 555px;
+    width: 1119px;
+    /* border: 1px solid red; */
+}
+.hcell3{}
+.hcell3 > .cell8{}
+.hcell3 > .cell8 > p{
+    width: 549px;
+}
+.hcell3 > .cell8 > .cell8_01{
+    background-color: blue;
+    width: 979px;
+    height: 485px;
+}
+/* hcell 요소 */
 .cell5{}
 .cell5 p {
     margin-top: 10px;
@@ -196,15 +299,14 @@
     display: block;
 }
 .cell5_01{
-    height: 280px;
-    margin-bottom: 4px;
-}
-.cell5_02{
-    height: 280px;
+    margin-top: 43px;
+    height: 163px;
+    /* border-bottom: 1px solid gray; */
 }
 .cell5 select{
     font-size: 15px;
     margin-left: 10px;
+    width: 110px;
 }
 .cell6{}
 .cell6 p {
@@ -216,19 +318,19 @@
     font-weight: bold;
     border-bottom: 2px solid #1f2958;
 }
-.cell6 select{
-    font-size: 15px;
-    width: 190px;
-    margin-left: 10px;
+.cell6 label{
+    margin: 9px;
+    font-size: 20px;
+    display: block;
 }
 .cell6_01{
-    height: 280px;
-    margin-bottom: 4px;
+    margin-top: 43px;
+    height: 163px;
+    /* border-bottom: 1px solid gray; */
 }
-.cell6_02{
-    height: 280px;
+.cell6_01 div{
+    width: 179px;
 }
-
 .cell7{}
 .cell7 p {
     margin-top: 10px;
@@ -239,27 +341,42 @@
     font-weight: bold;
     border-bottom: 2px solid #1f2958;
 }
-.cell7 select{
-    font-size: 15px;
-    width: 190px;
-    margin-left: 10px;
+.cell7 label{
+    margin: 9px;
+    font-size: 20px;
+    display: block;
 }
 .cell7_01{
-    height: 280px;
-    margin-bottom: 4px;
+    margin-top: 43px;
+    height: 163px;
+    /* border-bottom: 1px solid gray; */
 }
-.cell7_02{
-    height: 280px;
+.cell7_01 div{
+    width: 179px;
 }
-
 .submit{
+    margin-top: 5px;
     text-align: center;
     display: block;
-    width: 180px;
-    height: 50px;
+    width: 92px;
+    height: 49px;
     font-size: 25px;
     background-color: #5c7d9a;
     color: white;
     font-weight: bold;
     border-radius: 20px;
+}
+a{
+    text-decoration-line: none;
+
+}
+.cell8{}
+.cell8 p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 152px;
+    font-size: 25px;
+    font-weight: bold;
+    border-bottom: 2px solid #1f2958;
 }

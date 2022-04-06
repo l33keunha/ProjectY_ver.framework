@@ -8,5 +8,7 @@ public interface PassService {
 
 	List<EgovMap> selectPassResultList(PassSearchVO pVO);
 
+	List<EgovMap> selectPassGroup(PassSearchVO pVO);
+
 
 }
