@@ -8,7 +8,7 @@ import org.egovframe.rte.psl.dataaccess.util.EgovMap;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springmodules.validation.commons.DefaultBeanValidator;
 
@@ -45,7 +45,8 @@ public class PassController {
 		return mv;
 	}
 	
-	//
+	// 분석날짜 선택시 분석자료를 보고싶다
+	@ResponseBody
 	@RequestMapping(value="/selectPassGroup.do")
 	public List<EgovMap> selectPassGroup(@ModelAttribute PassSearchVO pVO) {
 		pVO.setPassDateStart(pVO.getPassDateStart().replace("-", "").toString());

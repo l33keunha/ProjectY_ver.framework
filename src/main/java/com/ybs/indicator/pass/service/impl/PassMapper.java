@@ -16,5 +16,9 @@ public interface PassMapper {
 
 	List<EgovMap> selectPassGroup(PassSearchVO pVO);
 
+	List<EgovMap> selectPassResultListRoute(PassSearchVO pVO);
+
+	List<EgovMap> selectPassResultListStation(PassSearchVO pVO);
+
 	
 }

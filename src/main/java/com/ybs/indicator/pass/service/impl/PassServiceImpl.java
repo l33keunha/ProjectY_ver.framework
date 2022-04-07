@@ -33,6 +33,10 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 				passResultList = mapper.selectPassResultListPurpose(pVO); break;
 			case "passCnt_method":
 				passResultList = mapper.selectPassResultListMethod(pVO); break;
+			case "passCnt_route":
+				passResultList = mapper.selectPassResultListRoute(pVO); break;
+			case "passCnt_station":
+				passResultList = mapper.selectPassResultListStation(pVO); break;
 			}
 		}
 		

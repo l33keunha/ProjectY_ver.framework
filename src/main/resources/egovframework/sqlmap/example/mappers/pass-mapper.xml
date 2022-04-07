@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ybs.indicator.pass.service.impl.PassMapper">
-
+	
+	<select id ="selectPassGroup" parameterType="pVO" resultType="egovMap">
+	SELECT DISTINCT OWNER FROM 분석지역_CD 
+	WHERE 1=1
+	AND 운행일자 BETWEEN #{passDateStart} AND #{passDateEnd}
+	</select>
+	
 	<select id ="selectPassResultListPurpose" parameterType="pVO" resultType="egovMap">
 	SELECT ROWNUM, PASSDATE, PASSAREA, PASSAREA_KR, PASSTIME, PASSUSERTYPE, PASSCNT
 	FROM
@@ -55,10 +61,16 @@
 	ORDER BY ROWNUM
 	</select>
 	
-	<select id ="selectPassGroup" parameterType="pVO" resultType="egovMap">
-	SELECT DISTINCT 운행일자,OWNER FROM 분석지역_CD 
-	WHERE 1=1
-	AND 운행일자 BETWEEN #{passDateStart} AND #{passDateEnd}
+
+	<select id ="selectPassResultListRoute" parameterType="pVO" resultType="egovMap">
+	
+	
 	</select>
+	
+	<select id ="selectPassResultListStation" parameterType="pVO" resultType="egovMap">
+	
+	
+	</select>
+	
 	
 </mapper>

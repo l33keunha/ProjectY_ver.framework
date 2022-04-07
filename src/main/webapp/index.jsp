@@ -9,6 +9,7 @@
         <script src ="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<script type="text/javascript" src="js/pass_popUp.js" defer ></script>
     </head>
 
     <body>
@@ -39,7 +40,7 @@
      </div>
      <div class="ConEx"></div>
      
-     <form action="passTest.do" method="post">
+     <!-- <form action="passTest.do" method="post"> -->
      <div class="selectbox">
         <div class ="cell1">
             
@@ -220,7 +221,7 @@
                         <p>시간대</p>
                         <div class="cell5_01">
                             <label><input type="checkbox" name="passTime" value="allDay"> 1일</label>
-                            <select name="passTimeStart1">
+                            <select name="passTimeStart">
                                 <option value="00" >00</option>
                                 <option value="01" >01</option>
                                 <option value="02" >02</option>
@@ -248,7 +249,7 @@
             
             
                             </select> ~
-                            <select name="passTimeEnd1">
+                            <select name="passTimeEnd">
                                 <option value="00" >00</option>
                                 <option value="01" >01</option>
                                 <option value="02" >02</option>
@@ -280,18 +281,18 @@
                         <p>이용자유형</p>
                         <div class="cell6_01">
                             <div>
-                            <label><input type="checkbox" name="passUserType1" value="00"> 전체</label>
-                            <label><input type="checkbox" name="passUserType1" value="01"> 일반</label>
-                            <label><input type="checkbox" name="passUserType1" value="02"> 어린이</label>
-                            <label><input type="checkbox" name="passUserType1" value="03"> 청소년</label>
-                            <label><input type="checkbox" name="passUserType1" value="04"> 경로</label>
-                            <label><input type="checkbox" name="passUserType1" value="05"> 장애인</label>
-                            <label><input type="checkbox" name="passUserType1" value="06"> 국가유공자</label>
-                            <label><input type="checkbox" name="passUserType1" value="07"> 다자녀부모</label>
-                            <label><input type="checkbox" name="passUserType1" value="08"> 동반</label>
-                            <label><input type="checkbox" name="passUserType1" value="09"> 대학생</label>
-                            <label><input type="checkbox" name="passUserType1" value="10"> 복지</label>
-                            <label><input type="checkbox" name="passUserType1" value="11"> 기타</label>
+                            <label><input type="checkbox" name="passUserType" value="00"> 전체</label>
+                            <label><input type="checkbox" name="passUserType" value="01"> 일반</label>
+                            <label><input type="checkbox" name="passUserType" value="02"> 어린이</label>
+                            <label><input type="checkbox" name="passUserType" value="03"> 청소년</label>
+                            <label><input type="checkbox" name="passUserType" value="04"> 경로</label>
+                            <label><input type="checkbox" name="passUserType" value="05"> 장애인</label>
+                            <label><input type="checkbox" name="passUserType" value="06"> 국가유공자</label>
+                            <label><input type="checkbox" name="passUserType" value="07"> 다자녀부모</label>
+                            <label><input type="checkbox" name="passUserType" value="08"> 동반</label>
+                            <label><input type="checkbox" name="passUserType" value="09"> 대학생</label>
+                            <label><input type="checkbox" name="passUserType" value="10"> 복지</label>
+                            <label><input type="checkbox" name="passUserType" value="11"> 기타</label>
                             </div>
                         </div>
                     </div>
@@ -306,8 +307,8 @@
                     </div>
         </div>
    
-        <input class="submit" type="submit" value="조회" >
-    </form>
+        <input class="submit" type="submit" id="buttonTest" value="조회" >
+    <!-- </form> -->
     </body>
 	
 	<script>
