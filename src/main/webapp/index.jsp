@@ -47,8 +47,8 @@
                 <p>날짜</p>
             <div class = "cell1_01">
                 <label> 분석날짜</label>
-                <input type="date" id="PassDate" name="passDateStart" value='2021-11-22' onchange='chngDate()'>
-                <input type="date" id="PassDate" name="passDateEnd" value='2021-11-22' onchange='chngDate()'>
+                <input type="date" id="PassDate" name="passDateStart" value='2021-03-22' onchange='chngDate()'>
+                <input type="date" id="PassDate" name="passDateEnd" value='2021-03-22' onchange='chngDate()'>
              </div>
              <div class ="cell2">
                 <p>분석자료</p>
@@ -68,7 +68,10 @@
                 </select>
                 <select id="PassSigungu" name="passSigungu">
                     <option>시/군</option>
-                    <option value="31070">평택시</option>
+                    <option value="31011">수원시</option> <!-- 목적/수단 조건 -->
+                    <option value="31021">성남시</option> <!-- 목적/수단 조건 -->
+                    <option value="31070">평택시</option> <!-- 노선별통행조건 -->
+                    <option value="31080">동두천시</option> <!-- 정류장별통행조건 -->
                 </select>
              </div>
         </div>

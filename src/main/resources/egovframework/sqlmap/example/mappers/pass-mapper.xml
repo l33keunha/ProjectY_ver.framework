@@ -63,13 +63,47 @@
 	
 
 	<select id ="selectPassResultListRoute" parameterType="pVO" resultType="egovMap">
-	
-	
+		SELECT ROWNUM, PASSDATE, PASSOWNER, PASSAREA, 분석지역명 PASSAREA_KR, PASSROUTE, 노선명칭 PASSROUTE_KR, PASSTIME, PASSUSERTYPE, PASSTRANSPORT, PASSRTEBINCNT, PASSRTEBOUTCNT, PASSRTEBHSCNT, PASSRTETINCNT, PASSRTETOUTCNT, PASSRTETHSCNT
+		FROM
+			(SELECT * 
+			FROM 결과지표_노선별통행_KR
+			WHERE 1=1
+				AND PASSDATE BETWEEN #{passDateStart} AND #{passDateEnd}
+				AND PASSOWNER = #{passOwner}
+				AND PASSAREA = #{passSigungu}
+				<if test="passTime==null">
+					AND PASSTIME BETWEEN #{passTimeStart} AND #{passTimeEnd}
+				</if>
+				<if test="!passUserType[0].equals('00')">
+					AND PASSUSERTYPE IN
+					<foreach collection="passUserType" item="arr" index="i" separator="," open="(" close=")">
+						#{arr}
+					</foreach>
+				</if>
+			ORDER BY PASSDATE, PASSROUTE, PASSTIME, PASSUSERTYPE, PASSTRANSPORT)
+		ORDER BY ROWNUM
 	</select>
 	
 	<select id ="selectPassResultListStation" parameterType="pVO" resultType="egovMap">
-	
-	
+		SELECT ROWNUM, PASSDATE, PASSOWNER, PASSAREA, 분석지역명 PASSAREA_KR, PASSSTATION, 정류장명칭 PASSSTATION_KR, PASSTIME, PASSUSERTYPE, PASSTRANSPORT, PASSSTNBINCNT, PASSSTNBOUTCNT, PASSSTNBHSCNT, PASSSTNTINCNT, PASSSTNTOUTCNT, PASSSTNTHSCNT
+		FROM
+			(SELECT * 
+			FROM 결과지표_정류장별통행_KR
+			WHERE 1=1
+				AND PASSDATE BETWEEN #{passDateStart} AND #{passDateEnd}
+				AND PASSOWNER = #{passOwner}
+				AND PASSAREA = #{passSigungu}
+				<if test="passTime==null">
+					AND PASSTIME BETWEEN #{passTimeStart} AND #{passTimeEnd}
+				</if>
+				<if test="!passUserType[0].equals('00')">
+					AND PASSUSERTYPE IN
+					<foreach collection="passUserType" item="arr" index="i" separator="," open="(" close=")">
+						#{arr}
+					</foreach>
+				</if>
+			ORDER BY PASSDATE, PASSSTATION, PASSTIME, PASSUSERTYPE, PASSTRANSPORT)
+		ORDER BY ROWNUM
 	</select>
 	
 	
