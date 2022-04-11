@@ -1,5 +1,6 @@
 package com.ybs.indicator.pass.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -32,15 +33,45 @@ public class PassController {
 		pVO.setPassDateEnd(pVO.getPassDateEnd().replace("-", "").toString());
 		System.out.println(pVO.toString());
 		
-		List<EgovMap> passResultList = service.selectPassResultList(pVO); 
-
-		for(int i = 0; i < passResultList.size(); i++) {
-			System.out.println(passResultList.get(i).toString());
+		List<EgovMap> passResultList = new ArrayList<EgovMap>();  // 목적or수단 리스트
+		List<EgovMap> passResultListB = new ArrayList<EgovMap>(); // 노선별or정류장별 버스 리스트
+		List<EgovMap> passResultListT = new ArrayList<EgovMap>(); // 노선별or정류장별 지하철 리스트
+				
+		passResultList = service.selectPassResultList(pVO);  // 목적,수단 리스트
+		
+		if(pVO.getPassGroup().equals("passCnt")) {
+			if(pVO.getPassType().equals("passCnt_purpose")) {
+				passResultList = service.selectPassResultList(pVO); 
+			} else if (pVO.getPassType().equals("passCnt_method")) {
+				passResultList = service.selectPassResultList(pVO); 
+			} else if (pVO.getPassType().equals("passCnt_route")) {
+				passResultListB = service.selectPassResultListRouteB(pVO);
+				passResultListT = service.selectPassResultListRouteT(pVO); 
+			} else if (pVO.getPassType().equals("passCnt_station")) {
+				passResultListB = service.selectPassResultListStationB(pVO); 
+				passResultListT = service.selectPassResultListStationT(pVO); 
+			}
 		}
 		
-		mv.addObject("passResultList", passResultList);
+		if(passResultList.size() > 0) {
+			for(int i = 0; i < passResultList.size(); i++) {
+				System.out.println(passResultList.get(i).toString());
+			}
+			mv.addObject("passResultList", passResultList);
+		} else if (passResultListB.size() > 0 && passResultListT.size() > 0) {
+			for(int i = 0; i < passResultListB.size(); i++) {
+				System.out.println(passResultListB.get(i).toString());
+			}
+			
+			for(int i = 0; i < passResultListT.size(); i++) {
+				System.out.println(passResultListT.get(i).toString());
+			}
+			mv.addObject("passResultListB", passResultListB);
+			mv.addObject("passResultListT", passResultListT);
+		}
+		
 		mv.addObject("pVO", pVO);
-		mv.setViewName("indicator/pass_popUp");
+//		mv.setViewName("indicator/pass_popUp");
 				
 		return mv;
 	}

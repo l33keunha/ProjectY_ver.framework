@@ -21,23 +21,23 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 	
 	@Resource(name="passMapper")
 	private PassMapper mapper;
+	
+	@Override
+	public List<EgovMap> selectPassGroup(PassSearchVO pVO) {
+		List<EgovMap> passGroupList = new ArrayList<EgovMap>();
+		return passGroupList = mapper.selectPassGroup(pVO); 
+	}
 
 	@Override
 	public List<EgovMap> selectPassResultList(PassSearchVO pVO) {
 		List<EgovMap> passResultList = new ArrayList<EgovMap>();
 		
 		
-		if(pVO.getPassGroup().equals("passCnt")) {
-			switch(pVO.getPassType()) {
-			case "passCnt_purpose": 
-				passResultList = mapper.selectPassResultListPurpose(pVO); break;
-			case "passCnt_method":
-				passResultList = mapper.selectPassResultListMethod(pVO); break;
-			case "passCnt_route":
-				passResultList = mapper.selectPassResultListRoute(pVO); break;
-			case "passCnt_station":
-				passResultList = mapper.selectPassResultListStation(pVO); break;
-			}
+		switch(pVO.getPassType()) {
+		case "passCnt_purpose": 
+			passResultList = mapper.selectPassResultListPurpose(pVO); break;
+		case "passCnt_method":
+			passResultList = mapper.selectPassResultListMethod(pVO); break;
 		}
 		
 		return passResultList;
@@ -45,11 +45,27 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 
 
 	@Override
-	public List<EgovMap> selectPassGroup(PassSearchVO pVO) {
-		List<EgovMap> passGroupList = new ArrayList<EgovMap>();
-		return passGroupList = mapper.selectPassGroup(pVO); 
+	public List<EgovMap> selectPassResultListRouteB(PassSearchVO pVO) {
+		return mapper.selectPassResultListRouteB(pVO);
 	}
 
+
+	@Override
+	public List<EgovMap> selectPassResultListRouteT(PassSearchVO pVO) {
+		return mapper.selectPassResultListRouteT(pVO);
+	}
+
+
+	@Override
+	public List<EgovMap> selectPassResultListStationB(PassSearchVO pVO) {
+		return mapper.selectPassResultListStationB(pVO);
+	}
+
+
+	@Override
+	public List<EgovMap> selectPassResultListStationT(PassSearchVO pVO) {
+		return mapper.selectPassResultListStationT(pVO);
+	}
 
 
 	
