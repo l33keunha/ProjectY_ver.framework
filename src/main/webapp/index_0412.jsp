@@ -310,20 +310,17 @@
     </body>
 	
 	<script>
-		// cell1 조건찾기
-		
 		var passDateStart = $("input[name=passDateStart]").val();
 		var passDateEnd = $("input[name=passDateEnd]").val();
 		var passOwner = $("input[name=passOwner]").val();
+		var passSido;
+		var passSigungu;
 		
 		window.onload = function(){
 			selectPassOwner()
 		}
 		
 		function chngDate(){
-			$("input[name=passOwner]").prop("checked", false);
-			$("select[name=passSido]").children('option:not(:first)').remove();
-			$("select[name=passSigungu]").children('option:not(:first)').remove();
 			selectPassOwner()
 		}
 		
@@ -342,8 +339,8 @@
 					}
 				} 
 			}) 
-			
 		}
+		
 		
 		// 존재하는 시도찾기
 		function chngOwner(){
@@ -371,6 +368,8 @@
 			passSido = $("select[name=passSido]").val();
 			
 			if($("input[name=passOwner]").is(":checked")==true){
+				console.log(passOwner);
+				console.log(passSido);
 				
 			 	$.ajax({
 					url:'selectPassSearchAjax.do',
@@ -393,6 +392,15 @@
 			}
 		}
 		
+		function chngSigungu(){
+			passSido = $("select[name=passSido]").val();
+			passSigungu = $("select[name=passSigungu]").val();
+			console.log(passDateStart);
+			console.log(passDateEnd);
+			console.log(passOwner);
+			console.log(passSido);
+			console.log(passSigungu);
+		}
 		
 		
 	</script>

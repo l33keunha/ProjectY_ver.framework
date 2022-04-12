@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.ibatis.javassist.expr.NewArray;
 import org.egovframe.rte.psl.dataaccess.util.EgovMap;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -26,7 +27,29 @@ public class PassController {
 	@Resource(name = "beanValidator")
 	protected DefaultBeanValidator beanValidator;
 	
-	// 모든 조회는 form를 통해 해당 RequestMapping(value="/passTest.do")에 도착합니다.
+	// cell1. Ajax (날짜, 분석자료, 지역)
+	@ResponseBody
+	@RequestMapping(value="/selectPassSearchAjax.do")
+	public ModelAndView selectPassSearchAjax(@ModelAttribute PassSearchVO pVO) {
+		ModelAndView mv = new ModelAndView("jsonView");
+		List<EgovMap> passSearchList = new ArrayList<EgovMap>();
+		pVO.setPassDateStart(pVO.getPassDateStart().replace("-", "").toString());
+		pVO.setPassDateEnd(pVO.getPassDateEnd().replace("-", "").toString());
+		
+		System.out.println(pVO.toString());
+		
+		passSearchList = service.selectPassSearchAjax(pVO);
+		
+		for(int i = 0; i < passSearchList.size(); i++) {
+			System.out.println(passSearchList.get(i).toString());
+		}
+		
+		mv.addObject("passSearchList", passSearchList);
+		
+		return mv;
+	}
+	
+	// 모든 조회는 form를 통해 해당 RequestMapping(value="/passTest.do")에 도착.
 	@RequestMapping(value="/passTest.do")
 	public ModelAndView selectPassResultList(ModelAndView mv, @ModelAttribute PassSearchVO pVO) {
 		pVO.setPassDateStart(pVO.getPassDateStart().replace("-", "").toString());
@@ -71,25 +94,11 @@ public class PassController {
 		}
 		
 		mv.addObject("pVO", pVO);
-//		mv.setViewName("indicator/pass_popUp");
+		mv.setViewName("indicator/pass_popUp");
 				
 		return mv;
 	}
 	
-	// 분석날짜 선택시 분석자료를 보고싶다
-	@ResponseBody
-	@RequestMapping(value="/selectPassGroup.do")
-	public List<EgovMap> selectPassGroup(@ModelAttribute PassSearchVO pVO) {
-		pVO.setPassDateStart(pVO.getPassDateStart().replace("-", "").toString());
-		pVO.setPassDateEnd(pVO.getPassDateEnd().replace("-", "").toString());
-		
-		List<EgovMap> passGroupList = service.selectPassGroup(pVO);
-		
-		for(int i = 0; i < passGroupList.size(); i++) {
-			System.out.println(passGroupList.get(i).toString());
-		}
-		
-		return passGroupList;
-	}
+
 	
 }

@@ -6,8 +6,8 @@ import org.egovframe.rte.psl.dataaccess.util.EgovMap;
 
 public interface PassService {
 	
-	List<EgovMap> selectPassGroup(PassSearchVO pVO);
-
+	List<EgovMap> selectPassSearchAjax(PassSearchVO pVO);
+	
 	List<EgovMap> selectPassResultList(PassSearchVO pVO);
 
 	List<EgovMap> selectPassResultListRouteB(PassSearchVO pVO);

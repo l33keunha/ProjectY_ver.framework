@@ -51,8 +51,8 @@ $(document).ready(function () {
 $('input[id=buttonTest]').on('click', function () {
 	
 	var pushArray = [
-				[ "passDateStart", 	$("#PassDate").val()],
-				[ "passDateEnd", 	$("#PassDate").val()],
+				[ "passDateStart", 	$("input[name=passDateStart]")[0].value],
+				[ "passDateEnd", 	$("input[name=passDateEnd]")[0].value],
 				[ "passOwner", 		$("input[name=passOwner]:checked")[0].value],
 				[ "passSido",  		$("#PassSido").val()],
 				[ "passSigungu", 	$("#PassSigungu").val()],

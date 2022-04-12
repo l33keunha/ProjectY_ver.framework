@@ -9,7 +9,12 @@ import com.ybs.indicator.pass.service.PassSearchVO;
 
 @Mapper("passMapper")
 public interface PassMapper {
-	List<EgovMap> selectPassGroup(PassSearchVO pVO);
+	
+	List<EgovMap> selectPassSearchAjaxOwner(PassSearchVO pVO);
+
+	List<EgovMap> selectPassSearchAjaxSido(PassSearchVO pVO);
+
+	List<EgovMap> selectPassSearchAjaxSigungu(PassSearchVO pVO);
 
 	List<EgovMap> selectPassResultListPurpose(PassSearchVO pVO);
 

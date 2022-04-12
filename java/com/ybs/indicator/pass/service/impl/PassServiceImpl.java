@@ -23,15 +23,31 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 	private PassMapper mapper;
 	
 	@Override
-	public List<EgovMap> selectPassGroup(PassSearchVO pVO) {
-		List<EgovMap> passGroupList = new ArrayList<EgovMap>();
-		return passGroupList = mapper.selectPassGroup(pVO); 
+	public List<EgovMap> selectPassSearchAjax(PassSearchVO pVO) {
+		List<EgovMap> passSearchList = new ArrayList<EgovMap>();
+		
+		// 1. 받아오는 값이 날짜 뿐일 때, 존재하는 분석자료 찾기
+		if(pVO.getPassDateEnd() != null && pVO.getPassOwner() == null) {
+			System.out.println("1케이스에 도착");
+			passSearchList = mapper.selectPassSearchAjaxOwner(pVO);
+		} // 2. 받아오는 값에 분석자료가 있을 때, 존재하는 시도 찾기 
+		else if(pVO.getPassDateEnd() != null && pVO.getPassOwner() != null 
+				&& pVO.getPassSido() == null || pVO.getPassSido().equals("광역/도")) {
+			System.out.println("2케이스에 도착");
+			passSearchList = mapper.selectPassSearchAjaxSido(pVO);
+		} // 3. 받아오는 값에 시도가 있을 때, 존재하는 시군구찾기
+		else if(pVO.getPassDateEnd() != null && pVO.getPassOwner() != null && !pVO.getPassSido().equals("광역/도")) {
+			System.out.println("3케이스에 도착");
+			passSearchList = mapper.selectPassSearchAjaxSigungu(pVO);
+		}
+		
+		return passSearchList;
 	}
+
 
 	@Override
 	public List<EgovMap> selectPassResultList(PassSearchVO pVO) {
 		List<EgovMap> passResultList = new ArrayList<EgovMap>();
-		
 		
 		switch(pVO.getPassType()) {
 		case "passCnt_purpose": 
@@ -39,7 +55,6 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 		case "passCnt_method":
 			passResultList = mapper.selectPassResultListMethod(pVO); break;
 		}
-		
 		return passResultList;
 	}
 
@@ -66,7 +81,6 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 	public List<EgovMap> selectPassResultListStationT(PassSearchVO pVO) {
 		return mapper.selectPassResultListStationT(pVO);
 	}
-
 
 	
 }

@@ -2,10 +2,40 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ybs.indicator.pass.service.impl.PassMapper">
 	
-	<select id ="selectPassGroup" parameterType="pVO" resultType="egovMap">
+	<select id ="selectPassSearchAjaxOwner" parameterType="pVO" resultType="egovMap">
 	SELECT DISTINCT OWNER FROM 분석지역_CD 
 	WHERE 1=1
-	AND 운행일자 BETWEEN #{passDateStart} AND #{passDateEnd}
+		AND 운행일자 BETWEEN #{passDateStart} AND #{passDateEnd}
+		<![CDATA[
+		AND #{passDateStart} >= 운행일자
+		AND #{passDateEnd} <= 유효일자
+		]]>
+	ORDER BY OWNER
+	</select>
+	
+	<select id ="selectPassSearchAjaxSido" parameterType="pVO" resultType="egovMap">
+	SELECT DISTINCT 분석지역_CD, 분석지역명 FROM 분석지역_CD 
+	WHERE 1=1
+		AND 운행일자 BETWEEN #{passDateStart} AND #{passDateEnd}
+		<![CDATA[
+		AND #{passDateStart} >= 운행일자
+		AND #{passDateEnd} <= 유효일자
+		]]>
+		AND OWNER = #{passOwner}
+		AND 분석지역_CD LIKE '__'
+	ORDER BY 분석지역_CD
+	</select>
+	<select id ="selectPassSearchAjaxSigungu" parameterType="pVO" resultType="egovMap">
+	SELECT DISTINCT 분석지역_CD, 분석지역명 FROM 분석지역_CD 
+	WHERE 1=1
+		AND 운행일자 BETWEEN #{passDateStart} AND #{passDateEnd}
+		<![CDATA[
+		AND #{passDateStart} >= 운행일자
+		AND #{passDateEnd} <= 유효일자
+		]]>
+		AND OWNER = #{passOwner}
+		AND 분석지역_CD LIKE #{passSido} || '%'
+	ORDER BY 분석지역명
 	</select>
 	
 	<select id ="selectPassResultListPurpose" parameterType="pVO" resultType="egovMap">
@@ -66,7 +96,7 @@
 		SELECT ROWNUM, PASSDATE, PASSOWNER, PASSAREA, 분석지역명 PASSAREA_KR, PASSROUTE, 노선명칭 PASSROUTE_KR, PASSTIME, PASSUSERTYPE, PASSTRANSPORT, PASSRTEBINCNT, PASSRTEBOUTCNT, PASSRTEBHSCNT
 		FROM
 			(SELECT * 
-			FROM 결과지표_노선별통행_KR
+			FROM 결과지표_노선별통행
 			WHERE 1=1
 				AND PASSTRANSPORT = 'B'
 				AND PASSDATE BETWEEN #{passDateStart} AND #{passDateEnd}
@@ -89,7 +119,7 @@
 		SELECT ROWNUM, PASSDATE, PASSOWNER, PASSAREA, 분석지역명 PASSAREA_KR, PASSROUTE, 노선명칭 PASSROUTE_KR, PASSTIME, PASSUSERTYPE, PASSTRANSPORT, PASSRTETINCNT, PASSRTETOUTCNT, PASSRTETHSCNT
 		FROM
 			(SELECT * 
-			FROM 결과지표_노선별통행_KR
+			FROM 결과지표_노선별통행
 			WHERE 1=1
 				AND PASSTRANSPORT = 'T'
 				AND PASSDATE BETWEEN #{passDateStart} AND #{passDateEnd}
@@ -112,7 +142,7 @@
 		SELECT ROWNUM, PASSDATE, PASSOWNER, PASSAREA, 분석지역명 PASSAREA_KR, PASSSTATION, 정류장명칭 PASSSTATION_KR, PASSTIME, PASSUSERTYPE, PASSTRANSPORT, PASSSTNBINCNT, PASSSTNBOUTCNT, PASSSTNBHSCNT
 		FROM
 			(SELECT * 
-			FROM 결과지표_정류장별통행_KR
+			FROM 결과지표_정류장별통행
 			WHERE 1=1
 				AND PASSTRANSPORT = 'B'
 				AND PASSDATE BETWEEN #{passDateStart} AND #{passDateEnd}
@@ -135,7 +165,7 @@
 		SELECT ROWNUM, PASSDATE, PASSOWNER, PASSAREA, 분석지역명 PASSAREA_KR, PASSSTATION, 정류장명칭 PASSSTATION_KR, PASSTIME, PASSUSERTYPE, PASSTRANSPORT, PASSSTNTINCNT, PASSSTNTOUTCNT, PASSSTNTHSCNT
 		FROM
 			(SELECT * 
-			FROM 결과지표_정류장별통행_KR
+			FROM 결과지표_정류장별통행
 			WHERE 1=1
 				AND PASSTRANSPORT = 'T'
 				AND PASSDATE BETWEEN #{passDateStart} AND #{passDateEnd}
