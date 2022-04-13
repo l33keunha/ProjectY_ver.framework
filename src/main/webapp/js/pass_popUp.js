@@ -72,7 +72,7 @@ $('input[id=buttonTest]').on('click', function () {
 	
 	
 	
-	window.open("" ,"newForm", "toolbar=no, width=540, height=467, directories=no, status=no, scrollorbars=no, resizable=no"); 
+	window.open("" ,"newForm", "toolbar=no, width=1200, height=800, directories=no, status=no, scrollorbars=no, resizable=no"); 
 	
 	//set attribute (form) 
 	var newForm = $('<form></form>'); 
