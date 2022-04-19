@@ -44,7 +44,6 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 		return passSearchList;
 	}
 
-
 	@Override
 	public List<EgovMap> selectPassResultList(PassSearchVO pVO) {
 		List<EgovMap> passResultList = new ArrayList<EgovMap>();
