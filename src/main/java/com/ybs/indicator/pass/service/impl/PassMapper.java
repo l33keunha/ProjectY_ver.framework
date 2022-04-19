@@ -1,0 +1,43 @@
+package com.ybs.indicator.pass.service.impl;
+
+import java.util.List;
+
+import org.egovframe.rte.psl.dataaccess.mapper.Mapper;
+import org.egovframe.rte.psl.dataaccess.util.EgovMap;
+
+import com.ybs.indicator.pass.service.PassSearchVO;
+
+@Mapper("passMapper")
+public interface PassMapper {
+	
+	List<EgovMap> selectPassSearchAjaxOwner(PassSearchVO pVO);
+
+	List<EgovMap> selectPassSearchAjaxSido(PassSearchVO pVO);
+
+	List<EgovMap> selectPassSearchAjaxSigungu(PassSearchVO pVO);
+
+	List<EgovMap> selectPassResultListPurpose(PassSearchVO pVO);
+
+	List<EgovMap> selectPassResultListMethod(PassSearchVO pVO);
+
+	List<EgovMap> selectPassResultListRouteB(PassSearchVO pVO);
+
+	List<EgovMap> selectPassResultListRouteT(PassSearchVO pVO);
+
+	List<EgovMap> selectPassResultListStationB(PassSearchVO pVO);
+
+	List<EgovMap> selectPassResultListStationT(PassSearchVO pVO);
+
+	List<EgovMap> selectPassResultListAreaODPurpose(PassSearchVO pVO);
+
+	List<EgovMap> selectPassResultListAreaODMethod(PassSearchVO pVO);
+
+	List<EgovMap> selectPassResultListRouteOD(PassSearchVO pVO);
+
+	List<EgovMap> selectPassREsultListTopRoute(PassSearchVO pVO);
+
+	List<EgovMap> selectPassResultListTopStation(PassSearchVO pVO);
+
+
+	
+}
