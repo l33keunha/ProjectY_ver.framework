@@ -41,11 +41,11 @@
 	SELECT /*+ PARALLEL(8) */ ROWNUM, OPRAT_DATE ,ANAL_AREA_CD ,TM ,CD_NO ,USER_CNT_AGG
 	FROM
 		(SELECT OPRAT_DATE ,ANAL_AREA_CD ,TM ,CD_NO ,USER_CNT_AGG 
-		FROM 결과지표_목적통행_2
+		FROM 결과지표_목적통행
 			WHERE 1=1
 				AND SDATE BETWEEN #{dateStart} AND #{dateEnd}
 				AND PROVIDER = #{provider}
-				AND ANAL_AREA_CD = #{anal_area_cd_sido}
+				AND ANAL_AREA_CD = #{anal_area_cd}
 				<if test="tm==null">
 					AND TM BETWEEN #{tmStart} AND #{tmEnd}
 				</if>
@@ -63,11 +63,11 @@
 	SELECT ROWNUM, OPRAT_DATE ,ANAL_AREA_CD ,TM ,CD_NO, TFCMN, USER_CNT_AGG
 	FROM
 		(SELECT OPRAT_DATE ,ANAL_AREA_CD ,TM ,CD_NO, TFCMN, USER_CNT_AGG 
-		FROM 결과지표_수단통행_2
+		FROM 결과지표_수단통행
 		WHERE 1=1
 			AND SDATE BETWEEN #{dateStart} AND #{dateEnd}
 			AND PROVIDER = #{provider}
-			AND ANAL_AREA_CD = #{anal_area_cd_sido}
+			AND ANAL_AREA_CD = #{anal_area_cd}
 			<if test="tm==null">
 				AND TM BETWEEN #{tmStart} AND #{tmEnd}
 			</if>
@@ -86,11 +86,11 @@
 	SELECT ROWNUM, OPRAT_DATE, ANAL_AREA_CD, TFCMN, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END, TM, CD_NO, ROUTE_BUS_GIN_AGG, ROUTE_BUS_GFF_AGG, ROUTE_BUS_TRS_AGG
 	FROM
 		(SELECT OPRAT_DATE, ANAL_AREA_CD, TFCMN, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END, TM, CD_NO, ROUTE_BUS_GIN_AGG, ROUTE_BUS_GFF_AGG, ROUTE_BUS_TRS_AGG
-		FROM 결과지표_노선별통행_2
+		FROM 결과지표_노선별통행
 		WHERE 1=1
 			AND SDATE BETWEEN #{dateStart} AND #{dateEnd}
 			AND PROVIDER = #{provider}
-			AND ANAL_AREA_CD = #{anal_area_cd_sido}
+			AND ANAL_AREA_CD = #{anal_area_cd}
 			<if test="tm==null">
 				AND TM BETWEEN #{tmStart} AND #{tmEnd}
 			</if>
@@ -109,11 +109,11 @@
 	SELECT ROWNUM, OPRAT_DATE, ANAL_AREA_CD, TFCMN, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END, TM, CD_NO, ROUTE_TRAIN_GIN_AGG, ROUTE_TRAIN_GFF_AGG, ROUTE_TRAIN_TRS_AGG
 	FROM
 		(SELECT OPRAT_DATE, ANAL_AREA_CD, TFCMN, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END, TM, CD_NO, ROUTE_TRAIN_GIN_AGG, ROUTE_TRAIN_GFF_AGG, ROUTE_TRAIN_TRS_AGG
-		FROM 결과지표_노선별통행_2
+		FROM 결과지표_노선별통행
 		WHERE 1=1
 			AND SDATE BETWEEN #{dateStart} AND #{dateEnd}
 			AND PROVIDER = #{provider}
-			AND ANAL_AREA_CD = #{anal_area_cd_sido}
+			AND ANAL_AREA_CD = #{anal_area_cd}
 			<if test="tm==null">
 				AND TM BETWEEN #{tmStart} AND #{tmEnd}
 			</if>
@@ -129,17 +129,14 @@
 	</select>
 	
 	<select id ="selectPassResultListStationB" parameterType="sVO" resultType="egovMap">
-	SELECT ROWNUM, OPRAT_DATE, ANAL_AREA_CD, TFCMN, STTN_ID, STTN_NMA, STTN_HJD, TM, CD_NO, STTN_BUS_GIN_AGG, STTN_BUS_GFF_AGG, STTN_BUS_TRS_AGG
+	SELECT ROWNUM, OPRAT_DATE, ANAL_AREA_CD, TFCMN, STTN_ID, STTN_NMA, STTN_HJD, CD_NO, STTN_BUS_GIN_AGG, STTN_BUS_GFF_AGG, STTN_BUS_TRS_AGG
 	FROM
-		(SELECT OPRAT_DATE, ANAL_AREA_CD, TFCMN, STTN_ID, STTN_NMA, STTN_HJD, TM, CD_NO, STTN_BUS_GIN_AGG, STTN_BUS_GFF_AGG, STTN_BUS_TRS_AGG 
-		FROM 결과지표_정류장별통행_2
+		(SELECT OPRAT_DATE, ANAL_AREA_CD, TFCMN, STTN_ID, STTN_NMA, STTN_HJD, CD_NO, STTN_BUS_GIN_AGG, STTN_BUS_GFF_AGG, STTN_BUS_TRS_AGG 
+		FROM 결과지표_정류장별통행_일별
 		WHERE 1=1
-			AND SDATE BETWEEN #{dateStart} AND #{dateEnd}
+			AND SDATE = #{dateStart} 
 			AND PROVIDER = #{provider}
-			AND ANAL_AREA_CD = #{anal_area_cd_sido}
-			<if test="tm==null">
-				AND TM BETWEEN #{tmStart} AND #{tmEnd}
-			</if>
+			AND ANAL_AREA_CD = #{anal_area_cd}
 			<if test="!cd_no[0].equals('00')">
 				AND CD_NO IN
 				<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
@@ -147,22 +144,19 @@
 				</foreach>
 			</if>
 			AND TFCMN ='B'
-		ORDER BY OPRAT_DATE, STTN_ID, TM, CD_NO)
+		ORDER BY OPRAT_DATE, STTN_ID, CD_NO)
 	ORDER BY ROWNUM
 	</select>
 	
 	<select id ="selectPassResultListStationT" parameterType="sVO" resultType="egovMap">
-	SELECT ROWNUM, OPRAT_DATE, ANAL_AREA_CD, TFCMN, STTN_ID, STTN_NMA, STTN_HJD, TM, CD_NO, STTN_TRAIN_GIN_AGG, STTN_TRAIN_GFF_AGG, STTN_TRAIN_TRS_AGG
+	SELECT ROWNUM, OPRAT_DATE, ANAL_AREA_CD, TFCMN, STTN_ID, STTN_NMA, STTN_HJD, CD_NO, STTN_TRAIN_GIN_AGG, STTN_TRAIN_GFF_AGG, STTN_TRAIN_TRS_AGG
 	FROM
-		(SELECT OPRAT_DATE, ANAL_AREA_CD, TFCMN, STTN_ID, STTN_NMA, STTN_HJD, TM, CD_NO, STTN_TRAIN_GIN_AGG, STTN_TRAIN_GFF_AGG, STTN_TRAIN_TRS_AGG
-		FROM 결과지표_정류장별통행_2
+		(SELECT OPRAT_DATE, ANAL_AREA_CD, TFCMN, STTN_ID, STTN_NMA, STTN_HJD, CD_NO, STTN_TRAIN_GIN_AGG, STTN_TRAIN_GFF_AGG, STTN_TRAIN_TRS_AGG
+		FROM 결과지표_정류장별통행_일별
 		WHERE 1=1
-			AND SDATE BETWEEN #{dateStart} AND #{dateEnd}
+			AND SDATE = #{dateStart}
 			AND PROVIDER = #{provider}
-			AND ANAL_AREA_CD = #{anal_area_cd_sido}
-			<if test="tm==null">
-				AND TM BETWEEN #{tmStart} AND #{tmEnd}
-			</if>
+			AND ANAL_AREA_CD = #{anal_area_cd}
 			<if test="!cd_no[0].equals('00')">
 				AND CD_NO IN
 				<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
@@ -170,7 +164,7 @@
 				</foreach>
 			</if> 
 			AND TFCMN ='T'
-		ORDER BY OPRAT_DATE, STTN_ID, TM, CD_NO)
+		ORDER BY OPRAT_DATE, STTN_ID, CD_NO)
 	ORDER BY ROWNUM
 	</select>
 	

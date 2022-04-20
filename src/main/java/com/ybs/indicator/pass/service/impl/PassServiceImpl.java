@@ -52,10 +52,10 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 			if(sVO.getAnal_type()!=null) { // 분석유형이 있음 : 통행량, 행정동간OD
 				switch(sVO.getAnal_type()) {
 				case "passCnt_purpose": // 통행량_목적통행
-					System.out.println("목적통");
+					System.out.println("목적통행");
 					passResultList = mapper.selectPassResultListPurpose(sVO); break;
 				case "passCnt_method": // 통행량_수단통행
-					System.out.println("수단통");
+					System.out.println("수단통행");
 					passResultList = mapper.selectPassResultListMethod(sVO); break;
 				case "passAreaODCnt_purpose": // 행정동간OD_ 목적통행
 					System.out.println("행정동목적");

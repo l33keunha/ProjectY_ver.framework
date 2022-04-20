@@ -3,6 +3,7 @@ package com.ybs.indicator.pass.service;
 import java.util.List;
 
 import org.egovframe.rte.psl.dataaccess.util.EgovMap;
+import com.ybs.indicator.pass.service.SearchVO;
 
 public interface PassService {
 	
