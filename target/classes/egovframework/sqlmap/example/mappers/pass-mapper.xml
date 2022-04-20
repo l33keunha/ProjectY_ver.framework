@@ -2,210 +2,195 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ybs.indicator.pass.service.impl.PassMapper">
 	
-	<select id ="selectPassSearchAjaxOwner" parameterType="pVO" resultType="egovMap">
+	<select id ="selectPassSearchAjaxOwner" parameterType="sVO" resultType="egovMap">
 	SELECT DISTINCT OWNER FROM 분석지역_CD 
 	WHERE 1=1
-		AND 운행일자 BETWEEN #{passDateStart} AND #{passDateEnd}
+		AND 운행일자 BETWEEN #{dateStart} AND #{dateEnd}
 		<![CDATA[
-		AND #{passDateStart} >= 운행일자
-		AND #{passDateEnd} <= 유효일자
+		AND #{dateStart} >= 운행일자
+		AND #{dateEnd} <= 유효일자
 		]]>
 	ORDER BY OWNER
 	</select>
-	<select id ="selectPassSearchAjaxSido" parameterType="pVO" resultType="egovMap">
+	<select id ="selectPassSearchAjaxSido" parameterType="sVO" resultType="egovMap">
 	SELECT DISTINCT 분석지역_CD, 분석지역명 FROM 분석지역_CD 
 	WHERE 1=1
-		AND 운행일자 BETWEEN #{passDateStart} AND #{passDateEnd}
+		AND 운행일자 BETWEEN #{dateStart} AND #{dateEnd}
 		<![CDATA[
-		AND #{passDateStart} >= 운행일자
-		AND #{passDateEnd} <= 유효일자
+		AND #{dateStart} >= 운행일자
+		AND #{dateEnd} <= 유효일자
 		]]>
-		AND OWNER = #{passOwner}
+		AND OWNER = #{provider}
 		AND 분석지역_CD LIKE '__'
 	ORDER BY 분석지역_CD
 	</select>
-	<select id ="selectPassSearchAjaxSigungu" parameterType="pVO" resultType="egovMap">
+	<select id ="selectPassSearchAjaxSigungu" parameterType="sVO" resultType="egovMap">
 	SELECT DISTINCT 분석지역_CD, 분석지역명 FROM 분석지역_CD 
 	WHERE 1=1
-		AND 운행일자 BETWEEN #{passDateStart} AND #{passDateEnd}
+		AND 운행일자 BETWEEN #{dateStart} AND #{dateEnd}
 		<![CDATA[
-		AND #{passDateStart} >= 운행일자
-		AND #{passDateEnd} <= 유효일자
+		AND #{dateStart} >= 운행일자
+		AND #{dateEnd} <= 유효일자
 		]]>
-		AND OWNER = #{passOwner}
-		AND 분석지역_CD LIKE #{passSido} || '%'
+		AND OWNER = #{provider}
+		AND 분석지역_CD LIKE #{anal_area_cd} || '%'
 	ORDER BY 분석지역명
 	</select>
 	
-	<select id ="selectPassResultListPurpose" parameterType="pVO" resultType="egovMap">
-	SELECT ROWNUM, OPRAT_DATE, ANAL_AREA_CD, ANAL_AREA_CD_NM, TM, CD_NO, USER_CNT_AGG
+	<select id ="selectPassResultListPurpose" parameterType="sVO" resultType="egovMap">
+	SELECT /*+ PARALLEL(8) */ ROWNUM, OPRAT_DATE ,ANAL_AREA_CD ,TM ,CD_NO ,USER_CNT_AGG
 	FROM
-		(SELECT OPRAT_DATE, ANAL_AREA_CD, B.분석지역명 ANAL_AREA_CD_NM, TM, CD_NO, USER_CNT_AGG
-			FROM 결과지표_목적통행 A, 분석지역_CD B
+		(SELECT OPRAT_DATE ,ANAL_AREA_CD ,TM ,CD_NO ,USER_CNT_AGG 
+		FROM 결과지표_목적통행_2
 			WHERE 1=1
-				<![CDATA[
-				AND A.SDATE <= B.유효일자
-				AND A.OPRAT_DATE >= B.운행일자
-				]]>
-				AND A.PROVIDER = B.OWNER
-				AND A.ANAL_AREA_CD = B.분석지역_CD
-				AND OPRAT_DATE BETWEEN #{passDateStart} AND #{passDateEnd}
-				AND PROVIDER = #{passOwner}
-				AND ANAL_AREA_CD = #{passSigungu}
-				<if test="passTime==null">
-					AND TM BETWEEN #{passTimeStart} AND #{passTimeEnd}
+				AND SDATE BETWEEN #{dateStart} AND #{dateEnd}
+				AND PROVIDER = #{provider}
+				AND ANAL_AREA_CD = #{anal_area_cd_sido}
+				<if test="tm==null">
+					AND TM BETWEEN #{tmStart} AND #{tmEnd}
 				</if>
-				<if test="!passUserType[0].equals('00')">
+				<if test="!cd_no[0].equals('00')">
 					AND CD_NO IN
-					<foreach collection="passUserType" item="arr" index="i" separator="," open="(" close=")">
+					<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
 						#{arr}
 					</foreach>
 				</if>
-		ORDER BY OPRAT_DATE, ANAL_AREA_CD, TM, CD_NO)
+			ORDER BY OPRAT_DATE, TM, CD_NO)
 	ORDER BY ROWNUM
 	</select>
 	
-	<select id ="selectPassResultListMethod" parameterType="pVO" resultType="egovMap">
-	SELECT ROWNUM, OPRAT_DATE, ANAL_AREA_CD, ANAL_AREA_CD_NM, TM, CD_NO, TFCMN, USER_CNT_AGG
+	<select id ="selectPassResultListMethod" parameterType="sVO" resultType="egovMap">
+	SELECT ROWNUM, OPRAT_DATE ,ANAL_AREA_CD ,TM ,CD_NO, TFCMN, USER_CNT_AGG
 	FROM
-		(SELECT OPRAT_DATE, ANAL_AREA_CD, B.분석지역명 ANAL_AREA_CD_NM, TM, CD_NO, TFCMN, USER_CNT_AGG
-			FROM 결과지표_수단통행 A, 분석지역_CD B
-			WHERE 1=1
-				<![CDATA[
-				AND A.SDATE <= B.유효일자
-				AND A.OPRAT_DATE >= B.운행일자
-				]]>
-				AND A.PROVIDER = B.OWNER
-				AND A.ANAL_AREA_CD = B.분석지역_CD
-				AND OPRAT_DATE BETWEEN #{passDateStart} AND #{passDateEnd}
-				AND PROVIDER = #{passOwner}
-				AND ANAL_AREA_CD = #{passSigungu}
-				<if test="passTime==null">
-					AND TM BETWEEN #{passTimeStart} AND #{passTimeEnd}
-				</if>
-				<if test="!passUserType[0].equals('00')">
-					AND CD_NO IN
-					<foreach collection="passUserType" item="arr" index="i" separator="," open="(" close=")">
-						#{arr}
-					</foreach>
-				</if>
-				<if test="!passTransport.equals('00')">
-					AND TFCMN = #{passTransport}
-				</if>
-		ORDER BY OPRAT_DATE, ANAL_AREA_CD, TM, CD_NO, TFCMN)
+		(SELECT OPRAT_DATE ,ANAL_AREA_CD ,TM ,CD_NO, TFCMN, USER_CNT_AGG 
+		FROM 결과지표_수단통행_2
+		WHERE 1=1
+			AND SDATE BETWEEN #{dateStart} AND #{dateEnd}
+			AND PROVIDER = #{provider}
+			AND ANAL_AREA_CD = #{anal_area_cd_sido}
+			<if test="tm==null">
+				AND TM BETWEEN #{tmStart} AND #{tmEnd}
+			</if>
+			<if test="!cd_no[0].equals('00')">
+				AND CD_NO IN
+				<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+					#{arr}
+				</foreach>
+			</if>
+		ORDER BY OPRAT_DATE, TM, CD_NO, TFCMN)
 	ORDER BY ROWNUM
 	</select>
 	
 
-	<select id ="selectPassResultListRouteB" parameterType="pVO" resultType="egovMap">
-		SELECT ROWNUM, OPRAT_DATE, PROVIDER, ANAL_AREA_CD, ANAL_AREA_NM, ROUTE_ID, ROUTE_NMA, TM, CD_NO, TFCMN, ROUTE_BUS_GIN_AGG, ROUTE_BUS_GFF_AGG, ROUTE_BUS_TRS_AGG
-		FROM
-			(SELECT * 
-			FROM 결과지표_노선별통행
-			WHERE 1=1
-				AND TFCMN = 'B'
-				AND OPRAT_DATE BETWEEN #{passDateStart} AND #{passDateEnd}
-				AND PROVIDER = #{passOwner}
-				AND ANAL_AREA_CD = #{passSigungu}
-				<if test="passTime==null">
-					AND TM BETWEEN #{passTimeStart} AND #{passTimeEnd}
-				</if>
-				<if test="!passUserType[0].equals('00')">
-					AND CD_NO IN
-					<foreach collection="passUserType" item="arr" index="i" separator="," open="(" close=")">
-						#{arr}
-					</foreach>
-				</if>
-			ORDER BY OPRAT_DATE, ROUTE_ID, TM, CD_NO, TFCMN)
-		ORDER BY ROWNUM
+	<select id ="selectPassResultListRouteB" parameterType="sVO" resultType="egovMap">
+	SELECT ROWNUM, OPRAT_DATE, ANAL_AREA_CD, TFCMN, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END, TM, CD_NO, ROUTE_BUS_GIN_AGG, ROUTE_BUS_GFF_AGG, ROUTE_BUS_TRS_AGG
+	FROM
+		(SELECT OPRAT_DATE, ANAL_AREA_CD, TFCMN, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END, TM, CD_NO, ROUTE_BUS_GIN_AGG, ROUTE_BUS_GFF_AGG, ROUTE_BUS_TRS_AGG
+		FROM 결과지표_노선별통행_2
+		WHERE 1=1
+			AND SDATE BETWEEN #{dateStart} AND #{dateEnd}
+			AND PROVIDER = #{provider}
+			AND ANAL_AREA_CD = #{anal_area_cd_sido}
+			<if test="tm==null">
+				AND TM BETWEEN #{tmStart} AND #{tmEnd}
+			</if>
+			<if test="!cd_no[0].equals('00')">
+				AND CD_NO IN
+				<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+					#{arr}
+				</foreach>
+			</if>
+			AND TFCMN ='B'
+		ORDER BY OPRAT_DATE, ROUTE_ID, TM, CD_NO)
+	ORDER BY ROWNUM
 	</select>
 	
-	<select id ="selectPassResultListRouteT" parameterType="pVO" resultType="egovMap">
-		SELECT ROWNUM, OPRAT_DATE, PROVIDER, ANAL_AREA_CD, ANAL_AREA_NM, ROUTE_ID, ROUTE_NMA, TM, CD_NO, TFCMN, ROUTE_TRAIN_GIN_AGG, ROUTE_TRAIN_GFF_AGG, ROUTE_TRAIN_TRS_AGG
-		FROM
-			(SELECT * 
-			FROM 결과지표_노선별통행
-			WHERE 1=1
-				AND TFCMN = 'T'
-				AND OPRAT_DATE BETWEEN #{passDateStart} AND #{passDateEnd}
-				AND PROVIDER = #{passOwner}
-				AND ANAL_AREA_CD = #{passSigungu}
-				<if test="passTime==null">
-					AND TM BETWEEN #{passTimeStart} AND #{passTimeEnd}
-				</if>
-				<if test="!passUserType[0].equals('00')">
-					AND CD_NO IN
-					<foreach collection="passUserType" item="arr" index="i" separator="," open="(" close=")">
-						#{arr}
-					</foreach>
-				</if>
-			ORDER BY OPRAT_DATE, ROUTE_ID, TM, CD_NO, TFCMN)
-		ORDER BY ROWNUM
+	<select id ="selectPassResultListRouteT" parameterType="sVO" resultType="egovMap">
+	SELECT ROWNUM, OPRAT_DATE, ANAL_AREA_CD, TFCMN, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END, TM, CD_NO, ROUTE_TRAIN_GIN_AGG, ROUTE_TRAIN_GFF_AGG, ROUTE_TRAIN_TRS_AGG
+	FROM
+		(SELECT OPRAT_DATE, ANAL_AREA_CD, TFCMN, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END, TM, CD_NO, ROUTE_TRAIN_GIN_AGG, ROUTE_TRAIN_GFF_AGG, ROUTE_TRAIN_TRS_AGG
+		FROM 결과지표_노선별통행_2
+		WHERE 1=1
+			AND SDATE BETWEEN #{dateStart} AND #{dateEnd}
+			AND PROVIDER = #{provider}
+			AND ANAL_AREA_CD = #{anal_area_cd_sido}
+			<if test="tm==null">
+				AND TM BETWEEN #{tmStart} AND #{tmEnd}
+			</if>
+			<if test="!cd_no[0].equals('00')">
+				AND CD_NO IN
+				<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+					#{arr}
+				</foreach>
+			</if>
+			AND TFCMN ='T'
+		ORDER BY OPRAT_DATE, ROUTE_ID, TM, CD_NO)
+	ORDER BY ROWNUM
 	</select>
 	
-	<select id ="selectPassResultListStationB" parameterType="pVO" resultType="egovMap">
-		SELECT ROWNUM, OPRAT_DATE, PROVIDER, ANAL_AREA_CD, ANAL_AREA_NM, STTN_ID, STTN_NMA, TM, CD_NO, TFCMN, STTN_BUS_GIN_AGG, STTN_BUS_GFF_AGG, STTN_BUS_TRS_AGG
-		FROM
-			(SELECT *  
-			FROM 결과지표_정류장별통행
-			WHERE 1=1
-				AND TFCMN = 'B'
-				AND OPRAT_DATE BETWEEN #{passDateStart} AND #{passDateEnd}
-				AND PROVIDER = #{passOwner}
-				AND ANAL_AREA_CD = #{passSigungu}
-				<if test="passTime==null">
-					AND TM BETWEEN #{passTimeStart} AND #{passTimeEnd}
-				</if>
-				<if test="!passUserType[0].equals('00')">
-					AND CD_NO IN
-					<foreach collection="passUserType" item="arr" index="i" separator="," open="(" close=")">
-						#{arr}
-					</foreach>
-				</if>
-			ORDER BY OPRAT_DATE, STTN_ID, TM, CD_NO, TFCMN)
-		ORDER BY ROWNUM
+	<select id ="selectPassResultListStationB" parameterType="sVO" resultType="egovMap">
+	SELECT ROWNUM, OPRAT_DATE, ANAL_AREA_CD, TFCMN, STTN_ID, STTN_NMA, STTN_HJD, TM, CD_NO, STTN_BUS_GIN_AGG, STTN_BUS_GFF_AGG, STTN_BUS_TRS_AGG
+	FROM
+		(SELECT OPRAT_DATE, ANAL_AREA_CD, TFCMN, STTN_ID, STTN_NMA, STTN_HJD, TM, CD_NO, STTN_BUS_GIN_AGG, STTN_BUS_GFF_AGG, STTN_BUS_TRS_AGG 
+		FROM 결과지표_정류장별통행_2
+		WHERE 1=1
+			AND SDATE BETWEEN #{dateStart} AND #{dateEnd}
+			AND PROVIDER = #{provider}
+			AND ANAL_AREA_CD = #{anal_area_cd_sido}
+			<if test="tm==null">
+				AND TM BETWEEN #{tmStart} AND #{tmEnd}
+			</if>
+			<if test="!cd_no[0].equals('00')">
+				AND CD_NO IN
+				<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+					#{arr}
+				</foreach>
+			</if>
+			AND TFCMN ='B'
+		ORDER BY OPRAT_DATE, STTN_ID, TM, CD_NO)
+	ORDER BY ROWNUM
 	</select>
 	
-	<select id ="selectPassResultListStationT" parameterType="pVO" resultType="egovMap">
-		SELECT ROWNUM, OPRAT_DATE, PROVIDER, ANAL_AREA_CD, ANAL_AREA_NM, STTN_ID, STTN_NMA, TM, CD_NO, TFCMN, STTN_TRAIN_GIN_AGG, STTN_TRAIN_GFF_AGG, STTN_TRAIN_TRS_AGG
-		FROM
-			(SELECT *  
-			FROM 결과지표_정류장별통행
-			WHERE 1=1
-				AND TFCMN = 'T'
-				AND OPRAT_DATE BETWEEN #{passDateStart} AND #{passDateEnd}
-				AND PROVIDER = #{passOwner}
-				AND ANAL_AREA_CD = #{passSigungu}
-				<if test="passTime==null">
-					AND TM BETWEEN #{passTimeStart} AND #{passTimeEnd}
-				</if>
-				<if test="!passUserType[0].equals('00')">
-					AND CD_NO IN
-					<foreach collection="passUserType" item="arr" index="i" separator="," open="(" close=")">
-						#{arr}
-					</foreach>
-				</if>
-			ORDER BY OPRAT_DATE, STTN_ID, TM, CD_NO, TFCMN)
-		ORDER BY ROWNUM
+	<select id ="selectPassResultListStationT" parameterType="sVO" resultType="egovMap">
+	SELECT ROWNUM, OPRAT_DATE, ANAL_AREA_CD, TFCMN, STTN_ID, STTN_NMA, STTN_HJD, TM, CD_NO, STTN_TRAIN_GIN_AGG, STTN_TRAIN_GFF_AGG, STTN_TRAIN_TRS_AGG
+	FROM
+		(SELECT OPRAT_DATE, ANAL_AREA_CD, TFCMN, STTN_ID, STTN_NMA, STTN_HJD, TM, CD_NO, STTN_TRAIN_GIN_AGG, STTN_TRAIN_GFF_AGG, STTN_TRAIN_TRS_AGG
+		FROM 결과지표_정류장별통행_2
+		WHERE 1=1
+			AND SDATE BETWEEN #{dateStart} AND #{dateEnd}
+			AND PROVIDER = #{provider}
+			AND ANAL_AREA_CD = #{anal_area_cd_sido}
+			<if test="tm==null">
+				AND TM BETWEEN #{tmStart} AND #{tmEnd}
+			</if>
+			<if test="!cd_no[0].equals('00')">
+				AND CD_NO IN
+				<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+					#{arr}
+				</foreach>
+			</if> 
+			AND TFCMN ='T'
+		ORDER BY OPRAT_DATE, STTN_ID, TM, CD_NO)
+	ORDER BY ROWNUM
 	</select>
 	
-	<select id ="selectPassResultListAreaODPurpose" parameterType="pVO" resultType="egovMap">
+	<select id ="selectPassResultListAreaODPurpose" parameterType="sVO" resultType="egovMap">
 		SELECT '행정동간OD목적' FROM DUAL
 	</select>
 	
-	<select id ="selectPassResultListAreaODMethod" parameterType="pVO" resultType="egovMap">
+	<select id ="selectPassResultListAreaODMethod" parameterType="sVO" resultType="egovMap">
 		SELECT '행정동간OD수단' FROM DUAL
 	</select>
 	
-	<select id ="selectPassResultListRouteOD" parameterType="pVO" resultType="egovMap">
+	<select id ="selectPassResultListRouteOD" parameterType="sVO" resultType="egovMap">
 		SELECT '노선별OD' FROM DUAL
 	</select>
 	
-	<select id ="selectPassREsultListTopRoute" parameterType="pVO" resultType="egovMap">
+	<select id ="selectPassREsultListTopRoute" parameterType="sVO" resultType="egovMap">
 		SELECT '상위이용노선' FROM DUAL
 	</select>
 	
-	<select id ="selectPassResultListTopStation" parameterType="pVO" resultType="egovMap">
+	<select id ="selectPassResultListTopStation" parameterType="sVO" resultType="egovMap">
 		SELECT '상위이용정류장' FROM DUAL	
 	</select>
 	

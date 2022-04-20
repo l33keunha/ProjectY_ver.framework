@@ -43,30 +43,30 @@
     </div>
     <div class="ConEx"></div>
 
-    <form action="passTest.do" method="post">
+   
         <div class="selectbox">
-            <div class ="cell1">
+            <div class ="cell1" >
                 <p>분석지표</p>
                 <div class="cell1_01"> 
                     <div>
-                        <label><input type="checkbox" name="passGroup" value="passCnt"> 통행량</label>
+                        <label><input type="checkbox" name="anal_group" value="passCnt"> 통행량</label>
                     </div>
                 </div>
 
                 <div class="cell1_02">
                     <div>
                         <div class="OD">
-                            <label><input type="checkbox" name="passGroup" value="passRouteODCnt"> 노선별OD</label>
+                            <label><input type="checkbox" name="anal_group" value="passRouteODCnt"> 노선별OD</label>
                         </div>
-                        <label><input type="checkbox" name="passGroup" value="passAreaODCnt"> 행정동간OD</label>
+                        <label><input type="checkbox" name="anal_group" value="passAreaODCnt"> 행정동간OD</label>
                     </div>
                 </div>
 
                 <div class="cell1_03">
                     <div>
-                        <!-- <label><input type="checkbox" name="passGroup" value="passEtc"> 기타</label> -->
-                        <label><input type="checkbox" name="passGroup" value="passTopRotue"> 상위이용노선</label>
-                        <label><input type="checkbox" name="passGroup" value="passTopStation"> 상위이용정류장</label>
+                        <!-- <label><input type="checkbox" name="anal_group" value="passEtc"> 기타</label> -->
+                        <label><input type="checkbox" name="anal_group" value="passTopRotue"> 상위이용노선</label>
+                        <label><input type="checkbox" name="anal_group" value="passTopStation"> 상위이용정류장</label>
                     </div>
                 </div>
             </div>
@@ -74,16 +74,16 @@
                 <p>분석유형</p>
                 <div class="cell2_01">
                     <div>
-                        <label><input type="checkbox" name="passType" value="passCnt_purpose"> 목적통행</label>
-                        <label><input type="checkbox" name="passType" value="passCnt_method"> 수단통행</label>
-                        <label><input type="checkbox" name="passType" value="passCnt_route"> 노선별통행</label>
-                        <label><input type="checkbox" name="passType" value="passCnt_station"> 정류장별통행</label>
+                        <label><input type="checkbox" name="anal_type" value="passCnt_purpose"> 목적통행</label>
+                        <label><input type="checkbox" name="anal_type" value="passCnt_method"> 수단통행</label>
+                        <label><input type="checkbox" name="anal_type" value="passCnt_route"> 노선별통행</label>
+                        <label><input type="checkbox" name="anal_type" value="passCnt_station"> 정류장별통행</label>
                     </div>
                 </div>
                 <div class="cell2_02">
                     <div>
-                        <label><input type="checkbox" name="passType" value="passAreaODCnt_purpose"> 목적통행</label>
-                        <label><input type="checkbox" name="passType" value="passAreaODCnt_method"> 수단통행</label>
+                        <label><input type="checkbox" name="anal_type" value="passAreaODCnt_purpose"> 목적통행</label>
+                        <label><input type="checkbox" name="anal_type" value="passAreaODCnt_method"> 수단통행</label>
                     </div>
                 </div>
 
@@ -95,37 +95,37 @@
                 <div class="cell3_01">
                     <p>지역</p>
                     
-                    <select id="passSido" name="passSido" onchange="chngSido">
+                    <select id="anal_area_cd_sido" name="anal_area_cd_sido" onchange="chngSido">
                         <option>광역/도</option>
-                        <option value="31">경기도</option>
+                        <option value="11">서울특별시</option>
                     </select>
-                    <select id="passSigungu" name="passSigungu" onchange="chngSigungu">
+                    <select id="anal_area_cd" name="anal_area_cd" onchange="chngSigungu">
                         <option>시/군</option>
-                        <option value="31070">평택시</option>
+                        <option value="11">전체</option>
                     </select>
                 </div>
 
                 <div class ="cell3_02">
                     <p>분석자료</p>
                     <div>
-                        <label><input type="checkbox" name="passOwner" id="passOwner00" value="00"> 국토부</label>
-                        <label><input type="checkbox" name="passOwner" id="passOwner99" value="99"> 정산사</label>
+                        <label><input type="checkbox" name="provider" id="provider00" value="00"> 국토부</label>
+                        <label><input type="checkbox" name="provider" id="provider99" value="99"> 정산사</label>
                     </div>
                 </div>
 
                 <p>날짜</p>
                 <div class = "cell3_03"> 
-                    <label>시작일<input type="date" class="passDate" name="passDateStart" value='2021-03-22' onchange="chngDate"></label>
-                    <label>종료일<input type="date" class="passDate" name="passDateEnd" value='2021-03-22' onchange="chngDate"></label>
+                    <label>시작일<input type="date" class="date" name="dateStart" value='2021-03-22' onchange="chngDate"></label>
+                    <label>종료일<input type="date" class="date" name="dateEnd" value='2021-03-22' onchange="chngDate"></label>
                 </div>
             </div>
             <div class ="hcell1">
                 <div class ="cell4">
                     <p>시간대</p>
                     <div class="cell4_01">
-                        <label><input type="checkbox" name="passTime" value="allDay"> 1일</label>
-                        <select name="passTimeStart">
-                            <option value="00" >00</option>
+                        <label><input type="checkbox" name="tm" value="allDay"> 1일</label>
+                        <select name="tmStart">
+                            <option value="00" >00</option>		
                             <option value="01" >01</option>
                             <option value="02" >02</option>
                             <option value="03" >03</option>
@@ -150,7 +150,7 @@
                             <option value="22" >22</option>
                             <option value="23" >23</option>
                         </select> ~
-                        <select name="passTimeEnd">
+                        <select name="tmEnd">
                             <option value="00" >00</option>
                             <option value="01" >01</option>
                             <option value="02" >02</option>
@@ -183,18 +183,18 @@
                     <p>이용자유형</p>
                     <div class="cell5_01">
                         <div>
-                        <label><input type="checkbox" name="passUserType" value="00"> 전체</label>
-                        <label><input type="checkbox" name="passUserType" value="01"> 일반</label>
-                        <label><input type="checkbox" name="passUserType" value="02"> 어린이</label>
-                        <label><input type="checkbox" name="passUserType" value="03"> 청소년</label>
-                        <label><input type="checkbox" name="passUserType" value="04"> 경로</label>
-                        <label><input type="checkbox" name="passUserType" value="05"> 장애인</label>
-                        <label><input type="checkbox" name="passUserType" value="06"> 국가유공자</label>
-                        <label><input type="checkbox" name="passUserType" value="07"> 다자녀부모</label>
-                        <label><input type="checkbox" name="passUserType" value="08"> 동반</label>
-                        <label><input type="checkbox" name="passUserType" value="09"> 대학생</label>
-                        <label><input type="checkbox" name="passUserType" value="10"> 복지</label>
-                        <label><input type="checkbox" name="passUserType" value="11"> 기타</label>
+                        <label><input type="checkbox" name="cd_no" value="00"> 전체</label>
+                        <label><input type="checkbox" name="cd_no" value="01"> 일반</label>
+                        <label><input type="checkbox" name="cd_no" value="02"> 어린이</label>
+                        <label><input type="checkbox" name="cd_no" value="03"> 청소년</label>
+                        <label><input type="checkbox" name="cd_no" value="04"> 경로</label>
+                        <label><input type="checkbox" name="cd_no" value="05"> 장애인</label>
+                        <label><input type="checkbox" name="cd_no" value="06"> 국가유공자</label>
+                        <label><input type="checkbox" name="cd_no" value="07"> 다자녀부모</label>
+                        <label><input type="checkbox" name="cd_no" value="08"> 동반</label>
+                        <label><input type="checkbox" name="cd_no" value="09"> 대학생</label>
+                        <label><input type="checkbox" name="cd_no" value="10"> 복지</label>
+                        <label><input type="checkbox" name="cd_no" value="11"> 기타</label>
                     </div>
                     </div>
                 </div>
@@ -204,9 +204,9 @@
                     <div class="cell6_01">
                         <p>수단</p>
                         <div>
-                            <label><input type="checkbox" name="passTransport" value="00"> 전체</label>
-                            <label><input type="checkbox" name="passTransport" value="B"> 버스</label>
-                            <label><input type="checkbox" name="passTransport" value="T"> 지하철</label>
+                            <label><input type="checkbox" name="tfcmn" value="00"> 전체</label>
+                            <label><input type="checkbox" name="tfcmn" value="B"> 버스</label>
+                            <label><input type="checkbox" name="tfcmn" value="T"> 지하철</label>
                         </div>
                     </div>
 
@@ -231,70 +231,83 @@
 
         </div>
 
-        <input class="submit" type="submit" value="조회" >
-        </form>
+        <input class="submit" type="button" id="buttonTest" value="조회" >
+       
     </body>
 	
 	<script>
-	var passGroup = $("input[name=passGroup]");
-	var passType = $("input[name=passType]");
-	var passSido = $("select[name=passSido]");
-	var passSigungu = $("select[name=passSigungu]");
-	var passOwner = $("input[name=passOwner]");
-	var passDateStart = $("input[name=passDateStart]");
-	var passDateEnd = $("input[name=passDateEnd]");
-	var passTime = $("input[name=passTime]");
-	var passTimeStart = $("select[name=passTimeStart]");
-	var passTimeEnd = $("select[name=passTimeEnd]");
-	var passUserType = $("input[name=passUserType]");
-	var passTransport = $("input[name=passTransport]");
+	var anal_group = $("input[name=anal_group]");
+	var anal_type = $("input[name=anal_type]");
+	var anal_area_cd_sido = $("select[name=anal_area_cd_sido]");
+	var anal_area_cd = $("select[name=anal_area_cd]");
+	var provider = $("input[name=provider]");
+	var dateStart = $("input[name=dateStart]");
+	var dateEnd = $("input[name=dateEnd]");
+	var tm = $("input[name=tm]");
+	var tmStart = $("select[name=tmStart]");
+	var tmEnd = $("select[name=tmEnd]");
+	var cd_no = $("input[name=cd_no]");
+	var tfcmn = $("input[name=tfcmn]");
 	var searchpassRoute = $("input[name=searchpassRoute]");
 	var passRoute = $("input[name=passRoute]");
+	var date = new Date();
 	
+	//검색상자 활성화 
+
 	
 	// [1] 페이지 로드 시 비활성화로 시작
 	window.onload = function(){
-		/* passType.parent().css("opacity", 0.3);
-		passType.attr("disabled", true);
-		$(".cell3").css("opacity", 0.3);
-		$(".cell4").css("opacity", 0.3);
-		passTime.attr("disabled", true);
-		passTimeStart.attr("disabled", true);
-		passTimeEnd.attr("disabled", true);
+		$("input[name=anal_type]").attr("disabled", true);
+	    $(".cell2_01").css("opacity", 0.3);
+	    $(".cell2_02").css("opacity", 0.3);
+	    $(".cell3").css("opacity", 0.3);
+		$(".cell4").css("opacity", 0.3); 
+		$("input[name=tm]").attr("disabled", true);
+		$("select[name=tmStart]").attr("disabled", true);
+		$("select[name=tmEnd]").attr("disabled", true);
 		$(".cell5").css("opacity", 0.3);
-		passUserType.attr("disabled", true);
+		$("input[name=cd_no]").attr("disabled", true);
 		$(".cell6").css("opacity", 0.3);
-		passTransport.attr("disabled", true);
-		searchpassRoute.attr("disabled", true);
-		passRoute.attr("disabled", true); */
-	 
+		$("input[name=tfcmn]").attr("disabled", true);
+		$("input[name=searchpassRoute]").attr("disabled", true);
+		$("input[name=passRoute]").attr("disabled", true); 
+		
+		console.log(getFormatDate(date));
+	  	
 	}
 	// [--1]
 	
+	function getFormatDate(date){
+	    var year = date.getFullYear();              //yyyy
+	    var month = (1 + date.getMonth());          //M
+	    month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
+	    var day = date.getDate();                   //d
+	    day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
+	    return  year + '' + month + '' + day;       //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
+	}
+	
 	// [2] 값 받아서 다시 form에 담아 url에 보내줌
 	$('input[id=buttonTest]').on('click', function () {
-		
 		var pushArray = [
-					[ "passDateStart", 	passDateStart.val()],
-					[ "passDateEnd", 	passDateEnd.val()],
-					[ "passOwner", 		passOwner.val()],
-					[ "passSido",  		passSido.val()],
-					[ "passSigungu", 	passSigungu.val()],
-					[ "passGroup", 		passGroup.val()],
-					[ "passType", 		passType.val()],
-					[ "passTime", 	    passTime.val()],
-					[ "passTimeStart", 	passTimeStart.val()],
-					[ "passTimeEnd", 	passTimeEnd.val()]
+					[ "dateStart", 	$("input[name=dateStart]").val()],
+					[ "dateEnd", 	$("input[name=dateEnd]").val()],
+					/* [ "provider", 		$("input[name=provider]:checked").val()], */
+					[ "anal_area_cd_sido",  		$("select[name=anal_area_cd_sido]").val()],
+					[ "anal_area_cd", 	$("select[name=anal_area_cd]").val()],
+/* 					[ "anal_group", 		$("input[name=anal_group]:checked").val()],
+					[ "anal_type", 		$("input[name=anal_type]:checked").val()],		
+ 					[ "tm", 	    $("input[name=tm]").val()], */
+					[ "tmStart", 	$("select[name=tmStart]").val()],
+					[ "tmEnd", 	$("select[name=tmEnd]").val()]
 		]
 		
-		var checkType =  $("input[name=passType]:checked")[0].value;	//분석유형 체크값
-		var classType = showHiddenDivClass[checkType];					//분석유형의 해당 클래스값
+		var checkType =  $("input[name=anal_type]:checked")[0].value;	//분석유형 체크값
+		/* var classType = showHiddenDivClass[checkType];					//분석유형의 해당 클래스값 */
 
 		//해당 체크된 엘리먼트의 이름과 값을 배열에 넣어준다.
-		$("[class="+classType+"]").find("input:checked").each(function(index, item){
+		$("[class=selectbox]").find("input:checked").each(function(index, item){
 			pushArray.push([ $(item)[0].name, $(item)[0].value ] )
 		})
-		
 		
 		
 		window.open("" ,"newForm", "toolbar=no, width=1200, height=800, directories=no, status=no, scrollorbars=no, resizable=no"); 
@@ -325,19 +338,72 @@
 	
 	// [3] 원하는 결과에 따라 맞는 조회조건 활성화
 	$(document).ready(function(){
-		passGroup.change(function(){
-			if($("input:checkbox[name=passGroup]").val() == "passCnt"){
-				console.log($("input:checkbox[name=passGroup]").val());
+		// 1. 통행량 선택시
+		$('.cell1').change(function(){
+			if($("input[name=anal_group]:checked").val()=='passCnt'){
+				$(".cell2_01").css("opacity", 1);
+				$('.cell2_01').find('input').prop("disabled",false);
+				$('.cell2_01').find('label').css("opacity",1);
+				$('.cell2_01').change(function(){
+					disabledTrue()
+					if($("input[name=anal_type]:checked").val()=='passCnt_station'){
+						disabledTime()
+					}
+				})
+			} else if($("input[name=anal_group]:checked").val()=='passRouteODCnt'){
+				disabledTrue()
+				$('.cell6').css("opacity", 1);
+				$('.cell6_01').css("opacity", 0.3);
+				$("input[name=searchpassRoute]").attr("disabled", false);
+				$("input[name=passRoute]").attr("disabled", false); 
+				
+			} else if($("input[name=anal_group]:checked").val()=='passAreaODCnt'){
+				$(".cell2_02").css("opacity", 1);
+				$('.cell2_02').find('input').prop("disabled",false);
+				$('.cell2_02').find('label').css("opacity",1);
+				$('.cell2_02').change(function(){
+					disabledTrue()
+					disabledTime()
+				})
+			} else if($("input[name=anal_group]:checked").val()=='passTopRotue' || 'passTopStation'){
+				disabledTrue()
+				disabledTime()
 			}
-		})
-	})
+		});
+	});
 	
 	// [--3]
 	
+	// 지역, 자료, 날짜, 시간대, 이용자유형 활성화
+	function disabledTrue(){
+		$(".cell3").css("opacity", 1);
+		$(".cell4").css("opacity", 1); 
+		$("input[name=tm]").prop("disabled", false);
+		$("select[name=tmStart]").prop("disabled", false);
+		$("select[name=tmEnd]").prop("disabled", false);
+		$(".cell5").css("opacity", 1);
+		$("input[name=cd_no]").prop("disabled", false);
+	
+	}
+	
+	// 시간대 비활성화
+	function disabledTime(){
+		$(".cell4").css("opacity", 0.3); 
+		$("input[name=tm]").prop("disabled", true);
+		$("select[name=tmStart]").prop("disabled", true);
+		$("select[name=tmEnd]").prop("disabled", true);
+	}
 	// [4] 존재하는 조회조건 가져오기 (cell3 구역)
+	function chngSido(){
+		
+	}
+	
+	function chngSigungu(){
+		
+	}
 	// [--4] 
 		
-		
+	
 		
 		
 	</script>

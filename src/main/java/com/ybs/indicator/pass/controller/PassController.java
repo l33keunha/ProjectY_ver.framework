@@ -1,11 +1,11 @@
 package com.ybs.indicator.pass.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.ibatis.javassist.expr.NewArray;
 import org.egovframe.rte.psl.dataaccess.util.EgovMap;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springmodules.validation.commons.DefaultBeanValidator;
 
-import com.ybs.indicator.pass.service.PassSearchVO;
 import com.ybs.indicator.pass.service.PassService;
+import com.ybs.indicator.pass.service.SearchVO;
 
 @Controller
 public class PassController {
@@ -30,15 +30,13 @@ public class PassController {
 	// cell1. Ajax (날짜, 분석자료, 지역)
 	@ResponseBody
 	@RequestMapping(value="/selectPassSearchAjax.do")
-	public ModelAndView selectPassSearchList(@ModelAttribute PassSearchVO pVO) {
+	public ModelAndView selectPassSearchList(@ModelAttribute SearchVO sVO) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		List<EgovMap> passSearchList = new ArrayList<EgovMap>();
-		pVO.setPassDateStart(pVO.getPassDateStart().replace("-", "").toString());
-		pVO.setPassDateEnd(pVO.getPassDateEnd().replace("-", "").toString());
 		
-		System.out.println(pVO.toString());
+		System.out.println(sVO.toString());
 		
-		passSearchList = service.selectPassSearchList(pVO);
+		passSearchList = service.selectPassSearchList(sVO);
 		
 		for(int i = 0; i < passSearchList.size(); i++) {
 			System.out.println(passSearchList.get(i).toString());
@@ -50,28 +48,28 @@ public class PassController {
 	
 	// 모든 조회는 form를 통해 해당 RequestMapping(value="/passTest.do")에 도착.
 	@RequestMapping(value="/passTest.do")
-	public ModelAndView selectPassResultList(ModelAndView mv, @ModelAttribute PassSearchVO pVO) {
-		pVO.setPassDateStart(pVO.getPassDateStart().replace("-", "").toString());
-		pVO.setPassDateEnd(pVO.getPassDateEnd().replace("-", "").toString());
-		System.out.println(pVO.toString());
+	public ModelAndView selectPassResultList(ModelAndView mv, @ModelAttribute SearchVO sVO) {
+		System.out.println(sVO.getDateStart().toString());
+		System.out.println(sVO.toString());
+		
 		
 		List<EgovMap> passResultList = new ArrayList<EgovMap>();  // 목적or수단 리스트
 		List<EgovMap> passResultListB = new ArrayList<EgovMap>(); // 노선별or정류장별 버스 리스트
 		List<EgovMap> passResultListT = new ArrayList<EgovMap>(); // 노선별or정류장별 지하철 리스트
 				
 		// 분석지표에 따라 리스트 받아오기
-		if(pVO.getPassType()==null 
-			|| pVO.getPassType().equals("passCnt_purpose") 
-			|| pVO.getPassType().equals("passCnt_method")
-			|| pVO.getPassType().equals("passAreaODCnt_purpose")
-			|| pVO.getPassType().equals("passAreaODCnt_method")) {
-			passResultList = service.selectPassResultList(pVO);
+		if(sVO.getAnal_type()==null 
+			|| sVO.getAnal_type().equals("passCnt_purpose") 
+			|| sVO.getAnal_type().equals("passCnt_method")
+			|| sVO.getAnal_type().equals("passAreaODCnt_purpose")
+			|| sVO.getAnal_type().equals("passAreaODCnt_method")) {
+			passResultList = service.selectPassResultList(sVO);
 		}
-		else if(pVO.getPassType().equals("passCnt_route") 
-			|| pVO.getPassType().equals("passCnt_station")) {
+		else if(sVO.getAnal_type().equals("passCnt_route") 
+			|| sVO.getAnal_type().equals("passCnt_station")) {
 			System.out.println("아");
-			passResultListB = service.selectPassResultListB(pVO);
-			passResultListT = service.selectPassResultListT(pVO);
+			passResultListB = service.selectPassResultListB(sVO);
+			passResultListT = service.selectPassResultListT(sVO);
 		}
 		
 		// 값이 담긴 리스트에 맞춰 JSP에 보내주기
@@ -92,7 +90,7 @@ public class PassController {
 			mv.addObject("passResultListT", passResultListT);
 		}
 		
-		mv.addObject("pVO", pVO);
+		mv.addObject("sVO", sVO);
 //		mv.setViewName("indicator/pass_popUp");
 				
 		return mv;

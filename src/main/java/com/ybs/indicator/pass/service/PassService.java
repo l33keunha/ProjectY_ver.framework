@@ -6,13 +6,13 @@ import org.egovframe.rte.psl.dataaccess.util.EgovMap;
 
 public interface PassService {
 	
-	List<EgovMap> selectPassSearchList(PassSearchVO pVO);
+	List<EgovMap> selectPassSearchList(SearchVO sVO);
 	
-	List<EgovMap> selectPassResultList(PassSearchVO pVO);
+	List<EgovMap> selectPassResultList(SearchVO sVO);
 
-	List<EgovMap> selectPassResultListB(PassSearchVO pVO);
+	List<EgovMap> selectPassResultListB(SearchVO sVO);
 
-	List<EgovMap> selectPassResultListT(PassSearchVO pVO);
+	List<EgovMap> selectPassResultListT(SearchVO sVO);
 
 
 

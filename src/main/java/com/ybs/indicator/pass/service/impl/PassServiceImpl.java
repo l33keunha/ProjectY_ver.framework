@@ -10,104 +10,103 @@ import org.egovframe.rte.psl.dataaccess.util.EgovMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.ybs.indicator.pass.service.PassSearchVO;
+import com.ybs.indicator.pass.service.SearchVO;
 import com.ybs.indicator.pass.service.PassService;
 
 @Service("passService")
+@Transactional(rollbackFor = {Exception.class})
 public class PassServiceImpl extends EgovAbstractServiceImpl implements PassService{
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(PassServiceImpl.class);
 	
 	@Resource(name="passMapper")
 	private PassMapper mapper;
-	
+
 	@Override
-	public List<EgovMap> selectPassSearchList(PassSearchVO pVO) {
+	public List<EgovMap> selectPassSearchList(SearchVO sVO) {
 		List<EgovMap> passSearchList = new ArrayList<EgovMap>();
-		
 		// 1. 받아오는 값이 날짜 뿐일 때, 존재하는 분석자료 찾기
-		if(pVO.getPassDateEnd() != null && pVO.getPassOwner() == null) {
+		if(sVO.getDateEnd() != null && sVO.getProvider() == null) {
 			System.out.println("1케이스에 도착");
-			passSearchList = mapper.selectPassSearchAjaxOwner(pVO);
+			passSearchList = mapper.selectPassSearchAjaxOwner(sVO);
 		} // 2. 받아오는 값에 분석자료가 있을 때, 존재하는 시도 찾기 
-		else if(pVO.getPassDateEnd() != null && pVO.getPassOwner() != null 
-				&& pVO.getPassSido() == null || pVO.getPassSido().equals("광역/도")) {
+		else if(sVO.getDateEnd() != null && sVO.getProvider() != null 
+				&& sVO.getAnal_area_cd_sido() == null || sVO.getAnal_area_cd_sido().equals("광역/도")) {
 			System.out.println("2케이스에 도착");
-			passSearchList = mapper.selectPassSearchAjaxSido(pVO);
+			passSearchList = mapper.selectPassSearchAjaxSido(sVO);
 		} // 3. 받아오는 값에 시도가 있을 때, 존재하는 시군구찾기
-		else if(pVO.getPassDateEnd() != null && pVO.getPassOwner() != null && !pVO.getPassSido().equals("광역/도")) {
+		else if(sVO.getDateEnd() != null && sVO.getProvider() != null && !sVO.getAnal_area_cd_sido().equals("광역/도")) {
 			System.out.println("3케이스에 도착");
-			passSearchList = mapper.selectPassSearchAjaxSigungu(pVO);
+			passSearchList = mapper.selectPassSearchAjaxSigungu(sVO);
 		}
 		
 		return passSearchList;
 	}
 
 	@Override
-	public List<EgovMap> selectPassResultList(PassSearchVO pVO) {
-		List<EgovMap> passResultList = new ArrayList<EgovMap>();
-		
-		if(pVO.getPassType()!=null) { // 분석유형이 있음 : 통행량, 행정동간OD
-			switch(pVO.getPassType()) {
-			case "passCnt_purpose": // 통행량_목적통행
-				System.out.println("목적통");
-				passResultList = mapper.selectPassResultListPurpose(pVO); break;
-			case "passCnt_method": // 통행량_수단통행
-				System.out.println("수단통");
-				passResultList = mapper.selectPassResultListMethod(pVO); break;
-			case "passAreaODCnt_purpose": // 행정동간OD_ 목적통행
-				System.out.println("행정동목적");
-				passResultList = mapper.selectPassResultListAreaODPurpose(pVO); break;
-			case "passAreaODCnt_method": // 행정동간OD_ 수단통행
-				System.out.println("행정동수단");
-				passResultList = mapper.selectPassResultListAreaODMethod(pVO); break;
+	public List<EgovMap> selectPassResultList(SearchVO sVO) {
+	List<EgovMap> passResultList = new ArrayList<EgovMap>();
+			
+			if(sVO.getAnal_type()!=null) { // 분석유형이 있음 : 통행량, 행정동간OD
+				switch(sVO.getAnal_type()) {
+				case "passCnt_purpose": // 통행량_목적통행
+					System.out.println("목적통");
+					passResultList = mapper.selectPassResultListPurpose(sVO); break;
+				case "passCnt_method": // 통행량_수단통행
+					System.out.println("수단통");
+					passResultList = mapper.selectPassResultListMethod(sVO); break;
+				case "passAreaODCnt_purpose": // 행정동간OD_ 목적통행
+					System.out.println("행정동목적");
+					passResultList = mapper.selectPassResultListAreaODPurpose(sVO); break;
+				case "passAreaODCnt_method": // 행정동간OD_ 수단통행
+					System.out.println("행정동수단");
+					passResultList = mapper.selectPassResultListAreaODMethod(sVO); break;
+				}
+			} else if(sVO.getAnal_type()==null){ // 분석유형이 없음 : 노선별OD, 상위...
+				switch(sVO.getAnal_group()) {
+				case "passRouteODCnt": // 노선별OD
+					System.out.println("노선별od");
+					passResultList = mapper.selectPassResultListRouteOD(sVO); break;
+				case "passTopRotue": // 상위이용노선
+					System.out.println("상위이용노선");
+					passResultList = mapper.selectPassREsultListTopRoute(sVO); break;
+				case "passTopStation": // 상위이용정류장
+					System.out.println("상위이용정류장");
+					passResultList = mapper.selectPassResultListTopStation(sVO); break;
+				}
 			}
-		} else if(pVO.getPassType()==null){ // 분석유형이 없음 : 노선별OD, 상위...
-			switch(pVO.getPassGroup()) {
-			case "passRouteODCnt": // 노선별OD
-				System.out.println("노선별od");
-				passResultList = mapper.selectPassResultListRouteOD(pVO); break;
-			case "passTopRotue": // 상위이용노선
-				System.out.println("상위이용노선");
-				passResultList = mapper.selectPassREsultListTopRoute(pVO); break;
-			case "passTopStation": // 상위이용정류장
-				System.out.println("상위이용정류장");
-				passResultList = mapper.selectPassResultListTopStation(pVO); break;
-			}
-		}
-		return passResultList;
+			return passResultList;
 	}
 
-
 	@Override
-	public List<EgovMap> selectPassResultListB(PassSearchVO pVO) {
+	public List<EgovMap> selectPassResultListB(SearchVO sVO) {
 		List<EgovMap> passResultListB = new ArrayList<EgovMap>();
 		
-		switch(pVO.getPassType()) {
+		switch(sVO.getAnal_type()) {
 		case "passCnt_route":
-			passResultListB = mapper.selectPassResultListRouteB(pVO); break; //노선버스
+			passResultListB = mapper.selectPassResultListRouteB(sVO); break; //노선버스
 		case "passCnt_station":
-			passResultListB = mapper.selectPassResultListStationB(pVO); break; //정류장버스
+			passResultListB = mapper.selectPassResultListStationB(sVO); break; //정류장버스
 		}
 		return passResultListB;
 	}
 
-
 	@Override
-	public List<EgovMap> selectPassResultListT(PassSearchVO pVO) {
+	public List<EgovMap> selectPassResultListT(SearchVO sVO) {
 		List<EgovMap> passResultListT = new ArrayList<EgovMap>();
 		
-		switch(pVO.getPassType()) {
+		switch(sVO.getAnal_type()) {
 		case "passCnt_route":
-			passResultListT = mapper.selectPassResultListRouteT(pVO); break; //노선지하철
+			passResultListT = mapper.selectPassResultListRouteT(sVO); break; //노선지하철
 		case "passCnt_station":
-			passResultListT = mapper.selectPassResultListStationT(pVO); break; //정류장지하철
+			passResultListT = mapper.selectPassResultListStationT(sVO); break; //정류장지하철
 		}
 		return passResultListT;
 	}
-
-
+	
+	
 
 	
 }

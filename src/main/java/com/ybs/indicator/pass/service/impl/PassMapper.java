@@ -5,38 +5,38 @@ import java.util.List;
 import org.egovframe.rte.psl.dataaccess.mapper.Mapper;
 import org.egovframe.rte.psl.dataaccess.util.EgovMap;
 
-import com.ybs.indicator.pass.service.PassSearchVO;
+import com.ybs.indicator.pass.service.SearchVO;
 
 @Mapper("passMapper")
 public interface PassMapper {
 	
-	List<EgovMap> selectPassSearchAjaxOwner(PassSearchVO pVO);
+	List<EgovMap> selectPassSearchAjaxOwner(SearchVO sVO);
 
-	List<EgovMap> selectPassSearchAjaxSido(PassSearchVO pVO);
+	List<EgovMap> selectPassSearchAjaxSido(SearchVO sVO);
 
-	List<EgovMap> selectPassSearchAjaxSigungu(PassSearchVO pVO);
+	List<EgovMap> selectPassSearchAjaxSigungu(SearchVO sVO);
 
-	List<EgovMap> selectPassResultListPurpose(PassSearchVO pVO);
+	List<EgovMap> selectPassResultListPurpose(SearchVO sVO);
 
-	List<EgovMap> selectPassResultListMethod(PassSearchVO pVO);
+	List<EgovMap> selectPassResultListMethod(SearchVO sVO);
 
-	List<EgovMap> selectPassResultListRouteB(PassSearchVO pVO);
+	List<EgovMap> selectPassResultListRouteB(SearchVO sVO);
 
-	List<EgovMap> selectPassResultListRouteT(PassSearchVO pVO);
+	List<EgovMap> selectPassResultListRouteT(SearchVO sVO);
 
-	List<EgovMap> selectPassResultListStationB(PassSearchVO pVO);
+	List<EgovMap> selectPassResultListStationB(SearchVO sVO);
 
-	List<EgovMap> selectPassResultListStationT(PassSearchVO pVO);
+	List<EgovMap> selectPassResultListStationT(SearchVO sVO);
 
-	List<EgovMap> selectPassResultListAreaODPurpose(PassSearchVO pVO);
+	List<EgovMap> selectPassResultListAreaODPurpose(SearchVO sVO);
 
-	List<EgovMap> selectPassResultListAreaODMethod(PassSearchVO pVO);
+	List<EgovMap> selectPassResultListAreaODMethod(SearchVO sVO);
 
-	List<EgovMap> selectPassResultListRouteOD(PassSearchVO pVO);
+	List<EgovMap> selectPassResultListRouteOD(SearchVO sVO);
 
-	List<EgovMap> selectPassREsultListTopRoute(PassSearchVO pVO);
+	List<EgovMap> selectPassREsultListTopRoute(SearchVO sVO);
 
-	List<EgovMap> selectPassResultListTopStation(PassSearchVO pVO);
+	List<EgovMap> selectPassResultListTopStation(SearchVO sVO);
 
 
 	
