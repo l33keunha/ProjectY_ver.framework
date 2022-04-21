@@ -301,7 +301,7 @@
 					[ "tmEnd", 	$("select[name=tmEnd]").val()]
 		]
 		
-		var checkType =  $("input[name=anal_type]:checked")[0].value;	//분석유형 체크값
+		/* var checkType =  $("input[name=anal_type]:checked")[0].value;	//분석유형 체크값 */
 		/* var classType = showHiddenDivClass[checkType];					//분석유형의 해당 클래스값 */
 
 		//해당 체크된 엘리먼트의 이름과 값을 배열에 넣어준다.

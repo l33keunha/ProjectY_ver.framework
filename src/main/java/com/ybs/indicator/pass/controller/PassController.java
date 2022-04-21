@@ -67,23 +67,22 @@ public class PassController {
 		}
 		else if(sVO.getAnal_type().equals("passCnt_route") 
 			|| sVO.getAnal_type().equals("passCnt_station")) {
-			System.out.println("아");
 			passResultListB = service.selectPassResultListB(sVO);
 			passResultListT = service.selectPassResultListT(sVO);
 		}
 		
 		// 값이 담긴 리스트에 맞춰 JSP에 보내주기
 		if(passResultList.size() > 0) {
-			for(int i = 0; i < passResultList.size(); i++) {
+			for(int i = 0; i < 10; i++) {
 				System.out.println(passResultList.get(i).toString());
 			}
 			mv.addObject("passResultList", passResultList);
 		} else if (passResultListB.size() > 0 && passResultListT.size() > 0) {
-			for(int i = 0; i < passResultListB.size(); i++) {
+			for(int i = 0; i < 10; i++) {
 				System.out.println(passResultListB.get(i).toString());
 			}
 			
-			for(int i = 0; i < passResultListT.size(); i++) {
+			for(int i = 0; i < 10; i++) {
 				System.out.println(passResultListT.get(i).toString());
 			}
 			mv.addObject("passResultListB", passResultListB);
