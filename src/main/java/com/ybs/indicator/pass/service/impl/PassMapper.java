@@ -9,20 +9,27 @@ import com.ybs.indicator.pass.service.SearchVO;
 
 @Mapper("passMapper")
 public interface PassMapper {
+	List<EgovMap> selectPassSearchAjaxAnalAreaCd(SearchVO sVO);
 	
-	List<EgovMap> selectPassSearchAjaxOwner(SearchVO sVO);
-
-	List<EgovMap> selectPassSearchAjaxSido(SearchVO sVO);
-
-	List<EgovMap> selectPassSearchAjaxSigungu(SearchVO sVO);
+	List<EgovMap> selectPassSearchAjaxAnalArea(SearchVO sVO);
+	
+	List<EgovMap> selectPassSearchAjaxProvider(SearchVO sVO);
 
 	List<EgovMap> selectPassResultListPurpose(SearchVO sVO);
+	
+	List<EgovMap> selectPassResultListPurpose_d(SearchVO sVO);
 
 	List<EgovMap> selectPassResultListMethod(SearchVO sVO);
+	
+	List<EgovMap> selectPassResultListMethod_d(SearchVO sVO);
 
 	List<EgovMap> selectPassResultListRouteB(SearchVO sVO);
+	
+	List<EgovMap> selectPassResultListRouteB_d(SearchVO sVO);
 
 	List<EgovMap> selectPassResultListRouteT(SearchVO sVO);
+	
+	List<EgovMap> selectPassResultListRouteT_d(SearchVO sVO);
 
 	List<EgovMap> selectPassResultListStationB(SearchVO sVO);
 
@@ -37,6 +44,13 @@ public interface PassMapper {
 	List<EgovMap> selectPassREsultListTopRoute(SearchVO sVO);
 
 	List<EgovMap> selectPassResultListTopStation(SearchVO sVO);
+
+
+
+
+
+
+
 
 
 	

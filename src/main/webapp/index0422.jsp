@@ -95,11 +95,13 @@
                 <div class="cell3_01">
                     <p>지역</p>
                     
-                    <select id="anal_area_cd_sido" name="anal_area_cd_sido">
-                        <option>시/도</option>
+                    <select id="anal_area_cd_sido" name="anal_area_cd_sido" onchange="chngSido">
+                        <option>광역/도</option>
+                        <option value="11">서울특별시</option>
                     </select>
-                    <select id="anal_area_cd" name="anal_area_cd">
-                        <option>시/군/구</option>
+                    <select id="anal_area_cd" name="anal_area_cd" onchange="chngSigungu">
+                        <option>시/군</option>
+                        <option value="11">전체</option>
                     </select>
                 </div>
 
@@ -111,10 +113,10 @@
                     </div>
                 </div>
 
+                <p>날짜</p>
                 <div class = "cell3_03"> 
-                	<p>날짜</p>
-                    <label>시작일<input type="date" class="date" name="dateStart" value='2021-03-22'></label>
-                    <label>종료일<input type="date" class="date" name="dateEnd" value='2021-03-22'></label>
+                    <label>시작일<input type="date" class="date" name="dateStart" value='2021-03-22' onchange="chngDate"></label>
+                    <label>종료일<input type="date" class="date" name="dateEnd" value='2021-03-22' onchange="chngDate"></label>
                 </div>
             </div>
             <div class ="hcell1">
@@ -181,7 +183,7 @@
                     <p>이용자유형</p>
                     <div class="cell5_01">
                         <div>
-                        <label><input type="checkbox" name="cd_no" value="00" onclick="selectAllCd(this)"> 전체</label>
+                        <label><input type="checkbox" name="cd_no" value="00"> 전체</label>
                         <label><input type="checkbox" name="cd_no" value="01"> 일반</label>
                         <label><input type="checkbox" name="cd_no" value="02"> 어린이</label>
                         <label><input type="checkbox" name="cd_no" value="03"> 청소년</label>
@@ -234,7 +236,47 @@
     </body>
 	
 	<script>
-	// date 형 변환
+	var anal_group = $("input[name=anal_group]");
+	var anal_type = $("input[name=anal_type]");
+	var anal_area_cd_sido = $("select[name=anal_area_cd_sido]");
+	var anal_area_cd = $("select[name=anal_area_cd]");
+	var provider = $("input[name=provider]");
+	var dateStart = $("input[name=dateStart]");
+	var dateEnd = $("input[name=dateEnd]");
+	var tm = $("input[name=tm]");
+	var tmStart = $("select[name=tmStart]");
+	var tmEnd = $("select[name=tmEnd]");
+	var cd_no = $("input[name=cd_no]");
+	var tfcmn = $("input[name=tfcmn]");
+	var searchpassRoute = $("input[name=searchpassRoute]");
+	var passRoute = $("input[name=passRoute]");
+	var date = new Date();
+	
+	//검색상자 활성화 
+
+	
+	// [1] 페이지 로드 시 비활성화로 시작
+	window.onload = function(){
+		$("input[name=anal_type]").attr("disabled", true);
+	    $(".cell2_01").css("opacity", 0.3);
+	    $(".cell2_02").css("opacity", 0.3);
+	    $(".cell3").css("opacity", 0.3);
+		$(".cell4").css("opacity", 0.3); 
+		$("input[name=tm]").attr("disabled", true);
+		$("select[name=tmStart]").attr("disabled", true);
+		$("select[name=tmEnd]").attr("disabled", true);
+		$(".cell5").css("opacity", 0.3);
+		$("input[name=cd_no]").attr("disabled", true);
+		$(".cell6").css("opacity", 0.3);
+		$("input[name=tfcmn]").attr("disabled", true);
+		$("input[name=searchpassRoute]").attr("disabled", true);
+		$("input[name=passRoute]").attr("disabled", true); 
+		
+		console.log(getFormatDate(date));
+	  	
+	}
+	// [--1]
+	
 	function getFormatDate(date){
 	    var year = date.getFullYear();              //yyyy
 	    var month = (1 + date.getMonth());          //M
@@ -243,12 +285,6 @@
 	    day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
 	    return  year + '' + month + '' + day;       //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
 	}
-	
-	// [1] 페이지 로드 시 비활성화로 시작
-	window.onload = function(){
-		diabledFalseType()
-	}
-	// [--1]
 	
 	// [2] 값 받아서 다시 form에 담아 url에 보내줌
 	$('input[id=buttonTest]').on('click', function () {
@@ -262,11 +298,14 @@
 		]
 		
 
+
 		//해당 체크된 엘리먼트의 이름과 값을 배열에 넣어준다.
 		$("[class=selectbox]").find("input:checked").each(function(index, item){
 			pushArray.push([ $(item)[0].name, $(item)[0].value ] )
 		})
 
+		
+		
 		window.open("" ,"newForm", "toolbar=no, width=1200, height=800, directories=no, status=no, scrollorbars=no, resizable=no"); 
 		
 		//set attribute (form) 
@@ -275,6 +314,7 @@
 		newForm.attr("method","post"); 
 		newForm.attr("action","passTest.do"); 
 		newForm.attr("target","newForm"); 
+
 
 		// create element & set attribute (input) 
 		for(var i=0; i<pushArray.length; i++){
@@ -296,200 +336,39 @@
 	$(document).ready(function(){
 		// 1. 통행량 선택시
 		$('.cell1').change(function(){
-			
-			
 			if($("input[name=anal_group]:checked").val()=='passCnt'){
-				$(".cell2").css("opacity", 1);
+				$(".cell2_01").css("opacity", 1);
 				$('.cell2_01').find('input').prop("disabled",false);
-				$('.cell2_02').find('label').css("opacity",0.3);
-				
+				$('.cell2_01').find('label').css("opacity",1);
 				$('.cell2_01').change(function(){
-					searchAnal()
+					disabledTrue()
+					if($("input[name=anal_type]:checked").val()=='passCnt_station'){
+						disabledTime()
+					}
 				})
-			} else if($("input[name=anal_group]:checked").val()=='passAreaODCnt'){
-				$(".cell2").css("opacity", 1);
-				$('.cell2_02').find('input').prop("disabled",false);
-				$('.cell2_01').find('label').css("opacity",0.3);
+			} else if($("input[name=anal_group]:checked").val()=='passRouteODCnt'){
+				disabledTrue()
+				$('.cell6').css("opacity", 1);
+				$('.cell6_01').css("opacity", 0.3);
+				$("input[name=searchpassRoute]").attr("disabled", false);
+				$("input[name=passRoute]").attr("disabled", false); 
 				
+			} else if($("input[name=anal_group]:checked").val()=='passAreaODCnt'){
+				$(".cell2_02").css("opacity", 1);
+				$('.cell2_02').find('input').prop("disabled",false);
+				$('.cell2_02').find('label').css("opacity",1);
 				$('.cell2_02').change(function(){
-					searchAnal()
+					disabledTrue()
+					disabledTime()
 				})
-			} else if($("input[name=anal_group]:checked").val()=='passRouteODCnt' || 'passTopRotue' || 'passTopStation'){
-				searchAnal()
+			} else if($("input[name=anal_group]:checked").val()=='passTopRotue' || 'passTopStation'){
+				disabledTrue()
+				disabledTime()
 			}
 		});
 	});
+	
 	// [--3]
-	
-	// [4] 존재하는 조회조건 가져오기 (cell3 구역)
-	var jsonArray = {};
-	
-	function searchAnal(){
-		$(".cell3").css("opacity", 1);
-		$(".cell3_02").css("opacity", 0.3);
-		$(".cell3_03").css("opacity", 0.3);
-		$("select[name=anal_area_cd_sido]").prop("disabled", false);
-		
-		$("[class=selectbox]").find("input:checked").each(function(index, item){
-			jsonArray[$(item)[0].name] = $(item)[0].value;
-		})
-		
-		console.log(jsonArray);
-		// [4-1] 분석지표에 따른 조회 가능한 지역 가져오기
-		$.ajax({
-			url: 'searchAnal.do',
-			type: "post",
-			traditional: true,
-			data: jsonArray,
-			dataType: "json",
-			success: function (data){
-				for(var i in data.passSearchList){
-					$("select[name=anal_area_cd_sido]").append("<option value='" + data.passSearchList[i].analAreaCd + "'>" 
-																+ data.passSearchList[i].analareanm + "</option>");
-				}
-			}
-		})
-		
-	}
-	
-	$("select[name=anal_area_cd_sido]").change(function(){
-		disabledFalse()
-		$("select[name=anal_area_cd]").prop("disabled", false);
-		$("select[name=anal_area_cd]").children('option:not(:first)').remove();
-		$("input[name=provider]").prop("checked", false);
-		
-		$("[class=selectbox]").find("input:checked").each(function(index, item){
-			jsonArray[$(item)[0].name] = $(item)[0].value;
-		})
-		jsonArray["anal_area_cd_sido"] = $("select[name=anal_area_cd_sido]").val();
-		jsonArray["anal_area_cd"] = "null";
-		
-		$.ajax({
-			url: 'searchAnal.do',
-			type: "post",
-			traditional: true,
-			data: jsonArray,
-			dataType: "json",
-			success: function (data){
-				for(var i in data.passSearchList){
-					$("select[name=anal_area_cd]").append("<option value='" + data.passSearchList[i].analAreaCd + "'>" 
-																+ data.passSearchList[i].analareanm + "</option>");
-				}
-			}
-		})
-	})
-		
-	$("select[name=anal_area_cd]").change(function(){
-		$(".cell3_02").css("opacity", 1);
-		$("input[name=provider]").prop("disabled", false);
-		$("input[name=provider]").prop("checked", false);
-		
-		$("[class=selectbox]").find("input:checked").each(function(index, item){
-			jsonArray[$(item)[0].name] = $(item)[0].value;
-		})
-		jsonArray["anal_area_cd_sido"] = $("select[name=anal_area_cd_sido]").val();
-		jsonArray["anal_area_cd"] = $("select[name=anal_area_cd]").val();
-		
-		$.ajax({
-			url: 'searchAnal.do',
-			type: "post",
-			traditional: true,
-			data: jsonArray,
-			dataType: "json",
-			success: function (data){
-				if(data.passSearchList.length == 1 && data.passSearchList[0].provider == '00'){
-					$('#provider99').prop("disabled", true);
-				}
-			}
-		})
-		
-	})
-	
-	$("input[name=provider]").change(function(){
-		$(".cell3_03").css("opacity", 1);
-		$(".cell3_03").find("label").eq(1).css("opacity", 0.3);
-		$("input[name=dateStart]").prop("disabled", false);
-		
-		if($("input[name=anal_type]:checked").val() =='passCnt_purpose' 
-			|| $("input[name=anal_type]:checked").val() =='passCnt_method'
-			|| $("input[name=anal_type]:checked").val() =='passCnt_route'){
-				$(".cell3_03").find("label").eq(1).css("opacity", 1);
-				$("input[name=dateEnd]").prop("disabled", false);
-		}
-		
-		disabledTrue()
-		
-		if($("input[name=anal_type]:checked").val() =='passCnt_station'
-			|| $("input[name=anal_group]:checked").val() =='passAreaODCnt'
-			|| $("input[name=anal_group]:checked").val() =='passTopRotue'
-			|| $("input[name=anal_group]:checked").val() =='passTopStation'){
-			disabledTime()
-		}
-		
-		if($("input[name=anal_group]:checked").val() =='passRouteODCnt'){
-			$('.cell6').css("opacity", 1);
-			$('.cell6_01').css("opacity", 0.3);
-			$("input[name=searchpassRoute]").prop("disabled", false);
-			$("input[name=passRoute]").prop("disabled", false); 
-		}
-		
-		
-	})
-	// [--4]
-	
-	$("input[name=tm]").change(function(){
-		if($("input[name=tm]").is(":checked") == true){
-			$('.cell4').find('select').prop("disabled", true);
-		} else if($("input[name=tm]").is(":checked") == false){
-			$('.cell4').find('select').prop("disabled", false);
-		}
-	})
-	
-	function selectAllCd(selectAll){
-		  const checkboxes 
-	       = document.getElementsByName('cd_no');
-	  
-	 	 checkboxes.forEach((checkbox) => {
-	  	  checkbox.checked = selectAll.checked;
-	  })
-	}
-	
-	
-	
-	
-	
-	
-	
-	// 분석유형부터 초기화
-	function diabledFalseType(){
-	    $(".cell2").css("opacity", 0.3);
-		$("input[name=anal_type]").prop("disabled", true);
-	    
-	    $(".cell3").css("opacity", 0.3);
-	    $("select[name=anal_area_cd_sido]").prop("disabled", true);
-	    
-	    disabledFalse()
-	}
-	// 상세 조회조건 체크박스부터 초기화
-	function disabledFalse(){
-	    $("select[name=anal_area_cd]").prop("disabled", true);
-		$("input[name=provider]").prop("disabled", true);
-		$("input[name=dateStart]").prop("disabled", true);
-		$("input[name=dateEnd]").prop("disabled", true);
-	    
-		$(".cell4").css("opacity", 0.3); 
-		$("input[name=tm]").attr("disabled", true);
-		$("select[name=tmStart]").prop("disabled", true);
-		$("select[name=tmEnd]").prop("disabled", true);
-		
-		$(".cell5").css("opacity", 0.3);
-		$("input[name=cd_no]").prop("disabled", true);
-		
-		$(".cell6").css("opacity", 0.3);
-		$("input[name=tfcmn]").prop("disabled", true);
-		$("input[name=searchpassRoute]").prop("disabled", true);
-		$("input[name=passRoute]").prop("disabled", true); 
-	}
 	
 	// 지역, 자료, 날짜, 시간대, 이용자유형 활성화
 	function disabledTrue(){
@@ -510,8 +389,18 @@
 		$("select[name=tmStart]").prop("disabled", true);
 		$("select[name=tmEnd]").prop("disabled", true);
 	}
+	// [4] 존재하는 조회조건 가져오기 (cell3 구역)
+	function chngSido(){
+		
+	}
 	
+	function chngSigungu(){
+		
+	}
+	// [--4] 
+		
 	
+		
 		
 	</script>
 </html>

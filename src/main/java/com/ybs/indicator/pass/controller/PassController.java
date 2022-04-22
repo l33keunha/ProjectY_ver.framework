@@ -1,21 +1,26 @@
 package com.ybs.indicator.pass.controller;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.egovframe.rte.psl.dataaccess.util.EgovMap;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springmodules.validation.commons.DefaultBeanValidator;
 
 import com.ybs.indicator.pass.service.PassService;
 import com.ybs.indicator.pass.service.SearchVO;
+
+import net.sf.json.JSONArray;
 
 @Controller
 public class PassController {
@@ -29,11 +34,17 @@ public class PassController {
 	
 	// cell1. Ajax (날짜, 분석자료, 지역)
 	@ResponseBody
-	@RequestMapping(value="/selectPassSearchAjax.do")
+	@RequestMapping(value="/searchAnal.do")
 	public ModelAndView selectPassSearchList(@ModelAttribute SearchVO sVO) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		List<EgovMap> passSearchList = new ArrayList<EgovMap>();
 		
+		sVO.setAnal_fin(sVO.getAnal_type());
+		if(sVO.getAnal_group().equals("passRouteODCnt")
+			|| sVO.getAnal_group().equals("passTopRotue")
+			|| sVO.getAnal_group().equals("passTopStation")) {
+			sVO.setAnal_fin(sVO.getAnal_group());
+		}
 		System.out.println(sVO.toString());
 		
 		passSearchList = service.selectPassSearchList(sVO);
