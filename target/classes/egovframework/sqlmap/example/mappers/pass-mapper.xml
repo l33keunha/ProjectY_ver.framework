@@ -228,25 +228,22 @@
 	</select>
 	
 	<select id ="selectPassResultListStationB" parameterType="sVO" resultType="egovMap">
-		SELECT  /*+ PARALLEL(8) */ ROWNUM, OPRAT_DATE, ANAL_AREA_CD, TFCMN, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END, CD_NO, ROUTE_TRAIN_GIN_AGG, ROUTE_TRAIN_GFF_AGG, ROUTE_TRAIN_TRS_AGG
+		SELECT /*+ PARALLEL(8) */  ROWNUM, OPRAT_DATE, ANAL_AREA_CD, TFCMN, STTN_ID, STTN_NMA, STTN_HJD, CD_NO, STTN_BUS_GIN_AGG, STTN_BUS_GFF_AGG, STTN_BUS_TRS_AGG
 		FROM
-			(SELECT  /*+ PARALLEL(8) */ *
-			FROM 결과지표_노선별통행_일별
+			(SELECT /*+ PARALLEL(8) */  OPRAT_DATE, ANAL_AREA_CD, TFCMN, STTN_ID, STTN_NMA, STTN_HJD, CD_NO, STTN_BUS_GIN_AGG, STTN_BUS_GFF_AGG, STTN_BUS_TRS_AGG 
+			FROM 결과지표_정류장별통행_일별
 			WHERE 1=1
-				AND SDATE BETWEEN #{dateStart} AND #{dateEnd}
+				AND SDATE = #{dateStart}
 				AND ANAL_AREA_CD = #{anal_area_cd}
 				AND PROVIDER = #{provider}
-				<if test="tm==null">
-					AND TM BETWEEN #{tmStart} AND #{tmEnd}
-				</if>
 				<if test="!cd_no[0].equals('00')">
 					AND CD_NO IN
 					<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
 						#{arr}
 					</foreach>
-				</if>
-				AND TFCMN ='T'
-			ORDER BY OPRAT_DATE, ROUTE_ID, CD_NO)
+				</if> 
+				AND TFCMN ='B'
+			ORDER BY OPRAT_DATE, STTN_ID, CD_NO)
 		ORDER BY ROWNUM
 	</select>
 	
