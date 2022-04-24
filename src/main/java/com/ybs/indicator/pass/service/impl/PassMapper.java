@@ -14,6 +14,8 @@ public interface PassMapper {
 	List<EgovMap> selectPassSearchAjaxAnalArea(SearchVO sVO);
 	
 	List<EgovMap> selectPassSearchAjaxProvider(SearchVO sVO);
+	
+	List<EgovMap> selectPassRouteIdList(SearchVO sVO);
 
 	List<EgovMap> selectPassResultListPurpose(SearchVO sVO);
 	
@@ -44,13 +46,6 @@ public interface PassMapper {
 	List<EgovMap> selectPassREsultListTopRoute(SearchVO sVO);
 
 	List<EgovMap> selectPassResultListTopStation(SearchVO sVO);
-
-
-
-
-
-
-
 
 
 	

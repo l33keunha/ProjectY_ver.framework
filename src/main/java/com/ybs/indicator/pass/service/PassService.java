@@ -15,6 +15,8 @@ public interface PassService {
 
 	List<EgovMap> selectPassResultListT(SearchVO sVO);
 
+	List<EgovMap> selectPassRouteIdList(SearchVO sVO);
+
 
 
 }

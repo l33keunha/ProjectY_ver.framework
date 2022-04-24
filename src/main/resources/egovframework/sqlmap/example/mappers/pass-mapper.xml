@@ -39,6 +39,16 @@
 		ORDER BY ANAL_AREA_CD
 	</select>
 	
+	<select id ="selectPassRouteIdList" parameterType="sVO" resultType="egovMap">
+		SELECT /*+ PARALLEL(8) */ DISTINCT ROUTE_ID, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END 
+		FROM 노선별정류장간OD_주석_일별
+		WHERE 1=1
+		AND SDATE = #{dateStart}
+		AND ANAL_AREA_CD = #{anal_area_cd}
+		AND PROVIDER = #{provider}
+		ORDER BY ROUTE_NMA
+	</select>
+	
 	<select id ="selectPassResultListPurpose" parameterType="sVO" resultType="egovMap">
 		SELECT /*+ PARALLEL(4) */ ROWNUM, OPRAT_DATE ,ANAL_AREA_CD ,TM ,CD_NO ,USER_CNT_AGG
 		FROM

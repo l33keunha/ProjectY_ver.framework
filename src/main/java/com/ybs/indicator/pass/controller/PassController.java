@@ -2,25 +2,19 @@ package com.ybs.indicator.pass.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 import org.egovframe.rte.psl.dataaccess.util.EgovMap;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springmodules.validation.commons.DefaultBeanValidator;
 
 import com.ybs.indicator.pass.service.PassService;
 import com.ybs.indicator.pass.service.SearchVO;
-
-import net.sf.json.JSONArray;
 
 @Controller
 public class PassController {
@@ -57,6 +51,25 @@ public class PassController {
 		return mv;
 	}
 	
+	
+	@ResponseBody
+	@RequestMapping(value="/searchRouteId.do")
+	public ModelAndView selectPassRoutdIdList(@ModelAttribute SearchVO sVO) {
+		ModelAndView mv = new ModelAndView("jsonView");
+		System.out.println(sVO.toString());
+		List<EgovMap> passRouteIdList = new ArrayList<EgovMap>();
+		
+		passRouteIdList = service.selectPassRouteIdList(sVO);
+		
+		for(int i = 0; i < 10; i++) {
+			System.out.println(passRouteIdList.get(i).toString());
+		}
+		
+		mv.addObject("passRouteIdList", passRouteIdList);
+		
+		return mv;
+	}
+	
 	// 모든 조회는 form를 통해 해당 RequestMapping(value="/passTest.do")에 도착.
 	@RequestMapping(value="/passTest.do")
 	public ModelAndView selectPassResultList(ModelAndView mv, @ModelAttribute SearchVO sVO) {
@@ -67,7 +80,6 @@ public class PassController {
 		List<EgovMap> passResultList = new ArrayList<EgovMap>();  // 목적or수단 리스트
 		List<EgovMap> passResultListB = new ArrayList<EgovMap>(); // 노선별or정류장별 버스 리스트
 		List<EgovMap> passResultListT = new ArrayList<EgovMap>(); // 노선별or정류장별 지하철 리스트
-				
 		// 분석지표에 따라 리스트 받아오기
 		if(sVO.getAnal_type()==null 
 			|| sVO.getAnal_type().equals("passCnt_purpose") 

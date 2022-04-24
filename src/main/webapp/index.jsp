@@ -213,7 +213,21 @@
                         <div class="busname_wrap">
                             <div class="search">
                                 <div class="input-wrap">
-                                    <input placeholder="노선명 입력" type="text" name="searchpassRoute"></input>
+                                    <input type="checkbox" id="modalBtn" name="searchpassRoute">
+                                    <label for="modalBtn">노선번호 검색</label>
+                                    <!-- 노선번호 확인 modal -->
+							        <div class="modalContainer">
+										<div class="modalBox">
+											<div class="routeNotice">노선번호 검색</div>
+											<label for="modalBtn">x</label>
+											<div class="routeBox">
+												<input type="text" placeholder="검색..." name="searchRouteId">
+												<div class="routeListBox">
+												</div>
+												<input type="button" id="routeBtn" value="확인">
+											</div>
+										</div>        	
+							        </div> 
                                 </div>
                             </div>
 
@@ -225,24 +239,22 @@
                 </div>
             </div>
 
-                
-
         </div>
 
         <input class="submit" type="button" id="buttonTest" value="조회" >
-       
+        
     </body>
 	
 	<script>
 	// date 형 변환
-	function getFormatDate(date){
+/* 	function getFormatDate(date){
 	    var year = date.getFullYear();              //yyyy
 	    var month = (1 + date.getMonth());          //M
 	    month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
 	    var day = date.getDate();                   //d
 	    day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
 	    return  year + '' + month + '' + day;       //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
-	}
+	} */
 	
 	// [1] 페이지 로드 시 비활성화로 시작
 	window.onload = function(){
@@ -297,7 +309,6 @@
 		// 1. 통행량 선택시
 		$('.cell1').change(function(){
 			
-			
 			if($("input[name=anal_group]:checked").val()=='passCnt'){
 				$(".cell2").css("opacity", 1);
 				$('.cell2_01').find('input').prop("disabled",false);
@@ -318,7 +329,9 @@
 				searchAnal()
 			}
 		});
+		
 	});
+	
 	// [--3]
 	
 	// [4] 존재하는 조회조건 가져오기 (cell3 구역)
@@ -437,6 +450,50 @@
 	})
 	// [--4]
 	
+	// [5] 노선번호 조회 (Ajax)
+	$("input[name=searchpassRoute]").change(function(){
+		if($("input[name=searchpassRoute]").is(":checked")==true){
+			jsonArray["anal_area_cd"] = $("select[name=anal_area_cd]").val();
+			jsonArray["provider"] = $("input[name=provider]:checked").val();
+			jsonArray["dateStart"] = $("input[name=dateStart]").val();
+			
+			$.ajax({
+				url: "searchRouteId.do",
+				type: "post",
+				traditional: true,
+				data: jsonArray,
+				dataType: "json",
+				success: function(data){
+				
+					for(var i in data.passRouteIdList){
+						var list = data.passRouteIdList[i];
+						
+						var addHtml = "";
+						
+						addHtml += "<div class='routeList'>";
+						addHtml += "<div class='routeNm'><input type='radio' value='" + list.routeId + "' name='routeId'>" + list.routeNma + "</div>";
+						addHtml += "<div class='routeType'>" + list.routeType + "</div>";
+						addHtml += "<div class='routeStart'>" + list.routeStart + "</div>";
+						addHtml += "<div class='routeEnd'>" + list.routeEnd + "</div>";
+						addHtml += "</div>";
+								
+						$('.routeListBox').append(addHtml);
+					}
+				}
+				
+			})	
+		}
+	})
+	
+	$("#routeBtn").on('click',function(){
+		$("#modalBtn").prop("checked", false);
+		
+	})
+	
+	
+	
+	
+	// 1일 - 시간대 비활성화
 	$("input[name=tm]").change(function(){
 		if($("input[name=tm]").is(":checked") == true){
 			$('.cell4').find('select').prop("disabled", true);
@@ -445,6 +502,7 @@
 		}
 	})
 	
+	// 이용자유형 전체선택/해제
 	function selectAllCd(selectAll){
 		  const checkboxes 
 	       = document.getElementsByName('cd_no');
@@ -453,12 +511,6 @@
 	  	  checkbox.checked = selectAll.checked;
 	  })
 	}
-	
-	
-	
-	
-	
-	
 	
 	// 분석유형부터 초기화
 	function diabledFalseType(){

@@ -28,7 +28,6 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 	public List<EgovMap> selectPassSearchList(SearchVO sVO) {
 		List<EgovMap> passSearchList = new ArrayList<EgovMap>();
 		
-		// 1. 지역선택
 		if(sVO.getAnal_area_cd_sido() == null) {
 			passSearchList = mapper.selectPassSearchAjaxAnalAreaCd(sVO);
 		} else if(sVO.getAnal_area_cd().equals("null") || sVO.getAnal_area_cd() == null && !sVO.getAnal_area_cd_sido().equals("시/도")) {
@@ -37,25 +36,28 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 			passSearchList = mapper.selectPassSearchAjaxProvider(sVO);
 		}
 		
-		
 		return passSearchList;
+	}
+	
+	@Override
+	public List<EgovMap> selectPassRouteIdList(SearchVO sVO) {
+		return mapper.selectPassRouteIdList(sVO);
 	}
 
 	@Override
 	public List<EgovMap> selectPassResultList(SearchVO sVO) {
 	List<EgovMap> passResultList = new ArrayList<EgovMap>();
-			
 		if(sVO.getAnal_type()!=null) { // 분석유형이 있음 : 통행량, 행정동간OD
 			switch(sVO.getAnal_type()) {
 			case "passCnt_purpose": // 통행량_목적통행
 				System.out.println("목적통행");
-				if(sVO.getTm().equals("allDay")) {
+				if("allDay".equals((String)sVO.getTm())) {
 					passResultList = mapper.selectPassResultListPurpose_d(sVO); break;
 				} 
-				passResultList = mapper.selectPassResultListPurpose(sVO); break;
+					passResultList = mapper.selectPassResultListPurpose(sVO); break;
 			case "passCnt_method": // 통행량_수단통행
 				System.out.println("수단통행");
-				if(sVO.getTm().equals("allDay")) {
+				if("allDay".equals((String)sVO.getTm())) {
 					passResultList = mapper.selectPassResultListMethod_d(sVO); break;
 				}
 				passResultList = mapper.selectPassResultListMethod(sVO); break;
@@ -88,7 +90,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 		
 		switch(sVO.getAnal_type()) {
 		case "passCnt_route":
-			if(sVO.getTm().equals("allDay")) {
+			if("allDay".equals((String)sVO.getTm())) {
 				passResultListB = mapper.selectPassResultListRouteB_d(sVO); break;
 			}
 			passResultListB = mapper.selectPassResultListRouteB(sVO); break; //노선버스
@@ -104,7 +106,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 		
 		switch(sVO.getAnal_type()) {
 		case "passCnt_route":
-			if(sVO.getTm().equals("allDay")) {
+			if("allDay".equals((String)sVO.getTm())) {
 				passResultListT = mapper.selectPassResultListRouteT_d(sVO); break;
 			}
 			passResultListT = mapper.selectPassResultListRouteT(sVO); break; //노선지하철
@@ -113,7 +115,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 		}
 		return passResultListT;
 	}
-	
+
 	
 
 	
