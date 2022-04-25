@@ -5,17 +5,10 @@ import java.util.List;
 import org.egovframe.rte.psl.dataaccess.mapper.Mapper;
 import org.egovframe.rte.psl.dataaccess.util.EgovMap;
 
-import com.ybs.indicator.pass.service.SearchVO;
+import com.ybs.indicator.common.service.SearchVO;
 
 @Mapper("passMapper")
 public interface PassMapper {
-	List<EgovMap> selectPassSearchAjaxAnalAreaCd(SearchVO sVO);
-	
-	List<EgovMap> selectPassSearchAjaxAnalArea(SearchVO sVO);
-	
-	List<EgovMap> selectPassSearchAjaxProvider(SearchVO sVO);
-	
-	List<EgovMap> selectPassRouteIdList(SearchVO sVO);
 
 	List<EgovMap> selectPassResultListPurpose(SearchVO sVO);
 	
@@ -42,10 +35,17 @@ public interface PassMapper {
 	List<EgovMap> selectPassResultListAreaODMethod(SearchVO sVO);
 
 	List<EgovMap> selectPassResultListRouteOD(SearchVO sVO);
+	
+	List<EgovMap> selectPassResultListRouteOD_d(SearchVO sVO);
 
 	List<EgovMap> selectPassREsultListTopRoute(SearchVO sVO);
 
 	List<EgovMap> selectPassResultListTopStation(SearchVO sVO);
+
+	List<EgovMap> selectPassResultListPurposeCnt(SearchVO sVO);
+
+	List<EgovMap> selectPassResultListMethodCnt(SearchVO sVO);
+
 
 
 	

@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springmodules.validation.commons.DefaultBeanValidator;
 
+import com.ybs.indicator.common.service.SearchVO;
 import com.ybs.indicator.pass.service.PassService;
-import com.ybs.indicator.pass.service.SearchVO;
 
 @Controller
 public class PassController {
@@ -26,49 +26,7 @@ public class PassController {
 	@Resource(name = "beanValidator")
 	protected DefaultBeanValidator beanValidator;
 	
-	// cell1. Ajax (날짜, 분석자료, 지역)
-	@ResponseBody
-	@RequestMapping(value="/searchAnal.do")
-	public ModelAndView selectPassSearchList(@ModelAttribute SearchVO sVO) {
-		ModelAndView mv = new ModelAndView("jsonView");
-		List<EgovMap> passSearchList = new ArrayList<EgovMap>();
-		
-		sVO.setAnal_fin(sVO.getAnal_type());
-		if(sVO.getAnal_group().equals("passRouteODCnt")
-			|| sVO.getAnal_group().equals("passTopRotue")
-			|| sVO.getAnal_group().equals("passTopStation")) {
-			sVO.setAnal_fin(sVO.getAnal_group());
-		}
-		System.out.println(sVO.toString());
-		
-		passSearchList = service.selectPassSearchList(sVO);
-		
-		for(int i = 0; i < passSearchList.size(); i++) {
-			System.out.println(passSearchList.get(i).toString());
-		}
-		mv.addObject("passSearchList", passSearchList);
-		
-		return mv;
-	}
-	
-	
-	@ResponseBody
-	@RequestMapping(value="/searchRouteId.do")
-	public ModelAndView selectPassRoutdIdList(@ModelAttribute SearchVO sVO) {
-		ModelAndView mv = new ModelAndView("jsonView");
-		System.out.println(sVO.toString());
-		List<EgovMap> passRouteIdList = new ArrayList<EgovMap>();
-		
-		passRouteIdList = service.selectPassRouteIdList(sVO);
-		
-		for(int i = 0; i < 10; i++) {
-			System.out.println(passRouteIdList.get(i).toString());
-		}
-		
-		mv.addObject("passRouteIdList", passRouteIdList);
-		
-		return mv;
-	}
+
 	
 	// 모든 조회는 form를 통해 해당 RequestMapping(value="/passTest.do")에 도착.
 	@RequestMapping(value="/passTest.do")
@@ -80,6 +38,8 @@ public class PassController {
 		List<EgovMap> passResultList = new ArrayList<EgovMap>();  // 목적or수단 리스트
 		List<EgovMap> passResultListB = new ArrayList<EgovMap>(); // 노선별or정류장별 버스 리스트
 		List<EgovMap> passResultListT = new ArrayList<EgovMap>(); // 노선별or정류장별 지하철 리스트
+		List<EgovMap> passResultCntList = new ArrayList<EgovMap>(); // 합계리스트
+		
 		// 분석지표에 따라 리스트 받아오기
 		if(sVO.getAnal_type()==null 
 			|| sVO.getAnal_type().equals("passCnt_purpose") 
@@ -87,6 +47,9 @@ public class PassController {
 			|| sVO.getAnal_type().equals("passAreaODCnt_purpose")
 			|| sVO.getAnal_type().equals("passAreaODCnt_method")) {
 			passResultList = service.selectPassResultList(sVO);
+			if(sVO.getTm()==null) {
+				passResultCntList = service.selectPassResultCntList(sVO);
+			}
 		}
 		else if(sVO.getAnal_type().equals("passCnt_route") 
 			|| sVO.getAnal_type().equals("passCnt_station")) {
@@ -110,6 +73,13 @@ public class PassController {
 			}
 			mv.addObject("passResultListB", passResultListB);
 			mv.addObject("passResultListT", passResultListT);
+		} 
+		
+		if (passResultCntList.size() > 00) {
+			for(int i = 0; i < 10; i++) {
+				System.out.println(passResultCntList.get(i).toString());
+			}
+			mv.addObject("passResultCntList", passResultCntList);
 		}
 		
 		mv.addObject("sVO", sVO);

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ybs.indicator.common.service.impl.CommonMapper">
+		
+	<!-- Ajax: 분석지역 시도 조회 -->
+	<select id ="selectPassSearchAjaxAnalAreaCd" parameterType="sVO" resultType="egovMap">
+		SELECT DISTINCT A.* ,B.분석지역명 analAreaNm
+		FROM
+			(SELECT DISTINCT ANAL_FIN, SUBSTR(ANAL_AREA_CD,1,2) ANAL_AREA_CD 
+			FROM GUIDE_BOOK
+			WHERE 1=1
+				AND ANAL_FIN =#{anal_fin}
+			ORDER BY ANAL_AREA_CD) A, 분석지역_CD B
+		WHERE 1=1
+		AND A.ANAL_AREA_CD = B.분석지역_CD
+		ORDER BY ANAL_AREA_CD
+	</select>
+	
+	<!-- Ajax: 분석지역 시군구 조회 -->
+	<select id ="selectPassSearchAjaxAnalArea" parameterType="sVO" resultType="egovMap">
+		SELECT DISTINCT A.* ,CASE WHEN ANAL_AREA_CD LIKE '__' THEN '전체' ELSE B.분석지역명 END analAreaNm
+			FROM
+				(SELECT DISTINCT ANAL_FIN, ANAL_AREA_CD 
+				FROM GUIDE_BOOK
+				WHERE 1=1
+				AND ANAL_FIN = #{anal_fin}
+				AND ANAL_AREA_CD LIKE #{anal_area_cd_sido} || '%'
+				ORDER BY ANAL_AREA_CD) A, 분석지역_CD B
+			WHERE 1=1
+				AND A.ANAL_AREA_CD = B.분석지역_CD
+				AND A.ANAL_AREA_CD NOT IN ('31', '32', '34')
+		ORDER BY ANAL_AREA_CD
+	</select>
+
+	<!-- Ajax: 분석자료 조회 -->
+	<select id ="selectPassSearchAjaxProvider" parameterType="sVO" resultType="egovMap">
+		SELECT DISTINCT ANAL_FIN, PROVIDER
+		FROM GUIDE_BOOK
+		WHERE 1=1
+			AND ANAL_FIN = #{anal_fin}
+			AND ANAL_AREA_CD = #{anal_area_cd}
+		ORDER BY ANAL_AREA_CD
+	</select>
+	
+	<!-- Ajax: 분석 노선번호 조회 -->
+	<select id ="selectPassRouteIdList" parameterType="sVO" resultType="egovMap">
+		SELECT /*+ PARALLEL(8) */ DISTINCT ROUTE_ID, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END 
+		FROM 노선별정류장간OD_주석
+		WHERE 1=1
+		AND SDATE = #{dateStart}
+		AND ANAL_AREA_CD = #{anal_area_cd}
+		AND PROVIDER = #{provider}
+		ORDER BY ROUTE_NMA
+	</select>
+	
+</mapper>

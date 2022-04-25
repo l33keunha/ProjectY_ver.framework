@@ -1,7 +1,6 @@
-package com.ybs.indicator.pass.service;
+package com.ybs.indicator.common.service;
 
 import java.util.Arrays;
-import java.util.Date;
 
 public class SearchVO {
 	
@@ -162,5 +161,4 @@ public class SearchVO {
 				+ tmStart + ", tmEnd=" + tmEnd + ", cd_no=" + Arrays.toString(cd_no) + ", tfcmn=" + tfcmn + ", routeId="
 				+ routeId + "]";
 	}
-
 }

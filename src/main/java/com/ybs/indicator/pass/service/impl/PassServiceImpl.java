@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ybs.indicator.pass.service.SearchVO;
+import com.ybs.indicator.common.service.SearchVO;
 import com.ybs.indicator.pass.service.PassService;
 
 @Service("passService")
@@ -23,26 +23,6 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 	
 	@Resource(name="passMapper")
 	private PassMapper mapper;
-
-	@Override
-	public List<EgovMap> selectPassSearchList(SearchVO sVO) {
-		List<EgovMap> passSearchList = new ArrayList<EgovMap>();
-		
-		if(sVO.getAnal_area_cd_sido() == null) {
-			passSearchList = mapper.selectPassSearchAjaxAnalAreaCd(sVO);
-		} else if(sVO.getAnal_area_cd().equals("null") || sVO.getAnal_area_cd() == null && !sVO.getAnal_area_cd_sido().equals("시/도")) {
-			passSearchList = mapper.selectPassSearchAjaxAnalArea(sVO);
-		} else if(sVO.getProvider() == null && !sVO.getAnal_area_cd().equals("시/군/구")) {
-			passSearchList = mapper.selectPassSearchAjaxProvider(sVO);
-		}
-		
-		return passSearchList;
-	}
-	
-	@Override
-	public List<EgovMap> selectPassRouteIdList(SearchVO sVO) {
-		return mapper.selectPassRouteIdList(sVO);
-	}
 
 	@Override
 	public List<EgovMap> selectPassResultList(SearchVO sVO) {
@@ -71,7 +51,9 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 		} else if(sVO.getAnal_type()==null){ // 분석유형이 없음 : 노선별OD, 상위...
 			switch(sVO.getAnal_group()) {
 			case "passRouteODCnt": // 노선별OD
-				System.out.println("노선별od");
+				System.out.println("노선별od");if("allDay".equals((String)sVO.getTm())) {
+					passResultList = mapper.selectPassResultListRouteOD_d(sVO); break;
+				}
 				passResultList = mapper.selectPassResultListRouteOD(sVO); break;
 			case "passTopRotue": // 상위이용노선
 				System.out.println("상위이용노선");
@@ -114,6 +96,23 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 			passResultListT = mapper.selectPassResultListStationT(sVO); break; //정류장지하철
 		}
 		return passResultListT;
+	}
+
+	@Override
+	public List<EgovMap> selectPassResultCntList(SearchVO sVO) {
+		List<EgovMap> passSearchCntList = new ArrayList<EgovMap>();
+		
+		if(sVO.getAnal_type()!=null) { // 분석유형이 있음 : 통행량, 행정동간OD
+			switch(sVO.getAnal_type()) {
+			case "passCnt_purpose": // 통행량_목적통행
+				System.out.println("목적통행 합계");
+				passSearchCntList = mapper.selectPassResultListPurposeCnt(sVO); break;
+			case "passCnt_method": // 통행량_수단통행
+				System.out.println("수단통행 합계");
+				passSearchCntList = mapper.selectPassResultListMethodCnt(sVO); break;
+			}
+		}
+		return passSearchCntList;
 	}
 
 	

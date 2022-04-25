@@ -49,24 +49,24 @@
                 <p>분석지표</p>
                 <div class="cell1_01"> 
                     <div>
-                        <label><input type="checkbox" name="anal_group" value="passCnt"> 통행량</label>
+                        <label><input type="radio" name="anal_group" value="passCnt"> 통행량</label>
                     </div>
                 </div>
 
                 <div class="cell1_02">
                     <div>
                         <div class="OD">
-                            <label><input type="checkbox" name="anal_group" value="passRouteODCnt"> 노선별OD</label>
+                            <label><input type="radio" name="anal_group" value="passRouteODCnt"> 노선별OD</label>
                         </div>
-                        <label><input type="checkbox" name="anal_group" value="passAreaODCnt"> 행정동간OD</label>
+                        <label><input type="radio" name="anal_group" value="passAreaODCnt"> 행정동간OD</label>
                     </div>
                 </div>
 
                 <div class="cell1_03">
                     <div>
                         <!-- <label><input type="checkbox" name="anal_group" value="passEtc"> 기타</label> -->
-                        <label><input type="checkbox" name="anal_group" value="passTopRotue"> 상위이용노선</label>
-                        <label><input type="checkbox" name="anal_group" value="passTopStation"> 상위이용정류장</label>
+                        <label><input type="radio" name="anal_group" value="passTopRotue"> 상위이용노선</label>
+                        <label><input type="radio" name="anal_group" value="passTopStation"> 상위이용정류장</label>
                     </div>
                 </div>
             </div>
@@ -74,16 +74,16 @@
                 <p>분석유형</p>
                 <div class="cell2_01">
                     <div>
-                        <label><input type="checkbox" name="anal_type" value="passCnt_purpose"> 목적통행</label>
-                        <label><input type="checkbox" name="anal_type" value="passCnt_method"> 수단통행</label>
-                        <label><input type="checkbox" name="anal_type" value="passCnt_route"> 노선별통행</label>
-                        <label><input type="checkbox" name="anal_type" value="passCnt_station"> 정류장별통행</label>
+                        <label><input type="radio" name="anal_type" value="passCnt_purpose"> 목적통행</label>
+                        <label><input type="radio" name="anal_type" value="passCnt_method"> 수단통행</label>
+                        <label><input type="radio" name="anal_type" value="passCnt_route"> 노선별통행</label>
+                        <label><input type="radio" name="anal_type" value="passCnt_station"> 정류장별통행</label>
                     </div>
                 </div>
                 <div class="cell2_02">
                     <div>
-                        <label><input type="checkbox" name="anal_type" value="passAreaODCnt_purpose"> 목적통행</label>
-                        <label><input type="checkbox" name="anal_type" value="passAreaODCnt_method"> 수단통행</label>
+                        <label><input type="radio" name="anal_type" value="passAreaODCnt_purpose"> 목적통행</label>
+                        <label><input type="radio" name="anal_type" value="passAreaODCnt_method"> 수단통행</label>
                     </div>
                 </div>
 
@@ -221,8 +221,16 @@
 											<div class="routeNotice">노선번호 검색</div>
 											<label for="modalBtn">x</label>
 											<div class="routeBox">
-												<input type="text" placeholder="검색..." name="searchRouteId">
+												<input type="text" placeholder="(노선번호/노선유형/기점/종점) 검색..." id="searchRouteId">
 												<div class="routeListBox">
+													<div class='routeListTh' style='width:100%;'>
+														<p style="width: 21%; float:left;"> 노선명 </p>
+														<p style="width: 11%; float:left;margin-left: 23px;"> 노선유형 </p>
+														<p style="width: 7%; float:left;margin-left: 61px;"> 기점 </p>
+														<p style="width:30%; float:left;margin-left: 61px;"> 종점 </p>
+													</div>
+													<div class="routeLists">
+													</div>
 												</div>
 												<input type="button" id="routeBtn" value="확인">
 											</div>
@@ -231,14 +239,12 @@
                                 </div>
                             </div>
 
-                            <div class="search-con">
-                                <label><input type="checkbox" name="passRoute" value=""> 1</label>
+                       	    <div class="search-con">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
 
         <input class="submit" type="button" id="buttonTest" value="조회" >
@@ -246,19 +252,9 @@
     </body>
 	
 	<script>
-	// date 형 변환
-/* 	function getFormatDate(date){
-	    var year = date.getFullYear();              //yyyy
-	    var month = (1 + date.getMonth());          //M
-	    month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
-	    var day = date.getDate();                   //d
-	    day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
-	    return  year + '' + month + '' + day;       //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
-	} */
-	
 	// [1] 페이지 로드 시 비활성화로 시작
 	window.onload = function(){
-		diabledFalseType()
+		diabledFalseType(2)
 	}
 	// [--1]
 	
@@ -308,30 +304,30 @@
 	$(document).ready(function(){
 		// 1. 통행량 선택시
 		$('.cell1').change(function(){
+		diabledFalseType(2)
 			
 			if($("input[name=anal_group]:checked").val()=='passCnt'){
-				$(".cell2").css("opacity", 1);
+				$('.cell2').css("opacity", 1);
 				$('.cell2_01').find('input').prop("disabled",false);
-				$('.cell2_02').find('label').css("opacity",0.3);
-				
-				$('.cell2_01').change(function(){
-					searchAnal()
-				})
+				$('.cell2_01').find('label').css("opacity", 1);
+				$('.cell2_02').find('label').css("opacity", 0.3);
 			} else if($("input[name=anal_group]:checked").val()=='passAreaODCnt'){
-				$(".cell2").css("opacity", 1);
+				$('.cell2').css("opacity", 1);
 				$('.cell2_02').find('input').prop("disabled",false);
-				$('.cell2_01').find('label').css("opacity",0.3);
-				
-				$('.cell2_02').change(function(){
-					searchAnal()
-				})
+				$('.cell2_02').find('label').css("opacity", 1);
+				$('.cell2_01').find('label').css("opacity", 0.3);
 			} else if($("input[name=anal_group]:checked").val()=='passRouteODCnt' || 'passTopRotue' || 'passTopStation'){
 				searchAnal()
-			}
-		});
-		
-	});
+			} 
+		})
+	})
 	
+	$(document).ready(function(){
+		$('.cell2').change(function(){
+			diabledFalseType(3)
+			searchAnal()
+		})
+	})
 	// [--3]
 	
 	// [4] 존재하는 조회조건 가져오기 (cell3 구역)
@@ -362,14 +358,14 @@
 				}
 			}
 		})
-		
 	}
 	
 	$("select[name=anal_area_cd_sido]").change(function(){
 		disabledFalse()
 		$("select[name=anal_area_cd]").prop("disabled", false);
 		$("select[name=anal_area_cd]").children('option:not(:first)').remove();
-		$("input[name=provider]").prop("checked", false);
+		$('.cell3').find('input').prop("checked", false);
+		$('.cell3').find('input').prop("disabled", true);
 		
 		$("[class=selectbox]").find("input:checked").each(function(index, item){
 			jsonArray[$(item)[0].name] = $(item)[0].value;
@@ -443,7 +439,7 @@
 			$('.cell6').css("opacity", 1);
 			$('.cell6_01').css("opacity", 0.3);
 			$("input[name=searchpassRoute]").prop("disabled", false);
-			$("input[name=passRoute]").prop("disabled", false); 
+			$("label[for='modalBtn']").css("cursor","pointer");
 		}
 		
 		
@@ -451,7 +447,12 @@
 	// [--4]
 	
 	// [5] 노선번호 조회 (Ajax)
+	// 노선번호 검색 버튼 누르면 조건에 맞는 노선번호 리스트 가져옴
 	$("input[name=searchpassRoute]").change(function(){
+		$(".routeBox").find('input').prop("checked", false);
+		$(".routeBox").find('input').prop("disabled", false);
+		$("#searchRouteId").val("");
+		
 		if($("input[name=searchpassRoute]").is(":checked")==true){
 			jsonArray["anal_area_cd"] = $("select[name=anal_area_cd]").val();
 			jsonArray["provider"] = $("input[name=provider]:checked").val();
@@ -464,7 +465,6 @@
 				data: jsonArray,
 				dataType: "json",
 				success: function(data){
-				
 					for(var i in data.passRouteIdList){
 						var list = data.passRouteIdList[i];
 						
@@ -477,7 +477,7 @@
 						addHtml += "<div class='routeEnd'>" + list.routeEnd + "</div>";
 						addHtml += "</div>";
 								
-						$('.routeListBox').append(addHtml);
+						$('.routeLists').append(addHtml);
 					}
 				}
 				
@@ -485,14 +485,42 @@
 		}
 	})
 	
-	$("#routeBtn").on('click',function(){
-		$("#modalBtn").prop("checked", false);
-		
+	// 검색기능 : keyup때 마다 값이 포함된 리스트만 보여줌
+	$(document).ready(function(){
+		$("#searchRouteId").keyup(function(){
+			var k = $(this).val();
+			$(".routeList").hide();
+			var temp = $(".routeList:contains('" + k + "')");
+			$(temp).show();
+		})
 	})
 	
+	// 확인버튼 클릭 시, 라디오버튼이 선택된 값을 받아와 선택박스에 출력
+	$("#routeBtn").on('click',function(){
+		console.log($("input[name=routeId]:checked").val());
+		var routeNm = $("input[name=routeId]:checked").parent().parent().find('.routeNm').text();		
+		var routeType = $("input[name=routeId]:checked").parent().parent().find('.routeType').text();		
+		var routeStart = $("input[name=routeId]:checked").parent().parent().find('.routeStart').text();		
+		var routeEnd = $("input[name=routeId]:checked").parent().parent().find('.routeEnd').text();
+		
+		// 모달창 끄기
+		$("#modalBtn").prop("checked", false);
+		
+		// 선택박스 클리어
+		var addHtml = "";
+		$('.search-con').text("");
+		
+		addHtml += "<div> <p>노선명</p><span>" + routeNm + "</span></div>";
+		addHtml += "<div> <p>노선유형</p><span>" + routeType + "</span></div>";
+		addHtml += "<div> <p>기점</p><span>" + routeStart + "</span></div>";
+		addHtml += "<div> <p>종점</p><span>" + routeEnd + "</span></div>";
+		
+		$('.search-con').append(addHtml);
+
+	})
+	// [--5]
 	
-	
-	
+	// [6] 활성화/비활성화 모음
 	// 1일 - 시간대 비활성화
 	$("input[name=tm]").change(function(){
 		if($("input[name=tm]").is(":checked") == true){
@@ -513,56 +541,53 @@
 	}
 	
 	// 분석유형부터 초기화
-	function diabledFalseType(){
-	    $(".cell2").css("opacity", 0.3);
-		$("input[name=anal_type]").prop("disabled", true);
-	    
-	    $(".cell3").css("opacity", 0.3);
-	    $("select[name=anal_area_cd_sido]").prop("disabled", true);
-	    
-	    disabledFalse()
+	function diabledFalseType(num){
+		for(var i = num; i < 7; i++){
+			$(".cell" + [i]).css("opacity", 0.3);
+			$(".cell" + [i]).find('input').prop("disabled", true);
+			$(".cell" + [i]).find('input').prop("checked", false);
+			$(".cell" + [i]).find('select').prop("disabled", true);
+			$(".cell" + [i]).find('select option:selected').prop("selected", false);
+		}
+		$("select[name=anal_area_cd_sido]").children('option:not(:first)').remove();
+		$("select[name=anal_area_cd]").children('option:not(:first)').remove();
+ 	    jsonArray["anal_area_cd_sido"] = "null";
+	    jsonArray["anal_area_cd"] = "null"; 
+	    jsonArray["anal_type"] = "null"; 
+		
+		$(".search-con").children().remove();
 	}
+	
+	
 	// 상세 조회조건 체크박스부터 초기화
 	function disabledFalse(){
-	    $("select[name=anal_area_cd]").prop("disabled", true);
-		$("input[name=provider]").prop("disabled", true);
-		$("input[name=dateStart]").prop("disabled", true);
-		$("input[name=dateEnd]").prop("disabled", true);
-	    
-		$(".cell4").css("opacity", 0.3); 
-		$("input[name=tm]").attr("disabled", true);
-		$("select[name=tmStart]").prop("disabled", true);
-		$("select[name=tmEnd]").prop("disabled", true);
 		
-		$(".cell5").css("opacity", 0.3);
-		$("input[name=cd_no]").prop("disabled", true);
+		for(var i = 4; i < 7; i++){
+			$(".cell" + [i]).css("opacity", 0.3);
+			$(".cell" + [i]).find('input').prop("disabled", true);
+			$(".cell" + [i]).find('input').prop("checked", false);
+		}
 		
-		$(".cell6").css("opacity", 0.3);
-		$("input[name=tfcmn]").prop("disabled", true);
-		$("input[name=searchpassRoute]").prop("disabled", true);
-		$("input[name=passRoute]").prop("disabled", true); 
+		$(".search-con").children().remove();
 	}
 	
 	// 지역, 자료, 날짜, 시간대, 이용자유형 활성화
 	function disabledTrue(){
-		$(".cell3").css("opacity", 1);
-		$(".cell4").css("opacity", 1); 
-		$("input[name=tm]").prop("disabled", false);
-		$("select[name=tmStart]").prop("disabled", false);
-		$("select[name=tmEnd]").prop("disabled", false);
-		$(".cell5").css("opacity", 1);
-		$("input[name=cd_no]").prop("disabled", false);
-	
+		for(var i = 3; i < 6; i++){
+			$(".cell" + [i]).css("opacity", 1);
+			$(".cell" + [i]).find('input').prop("disabled", false);
+			$(".cell" + [i]).find('select').prop("disabled", false);
+		}
 	}
-	
+
 	// 시간대 비활성화
 	function disabledTime(){
 		$(".cell4").css("opacity", 0.3); 
-		$("input[name=tm]").prop("disabled", true);
-		$("select[name=tmStart]").prop("disabled", true);
-		$("select[name=tmEnd]").prop("disabled", true);
+		$(".cell4").find('input').prop("disabled", true);
+		$(".cell4").find('input').prop("checked", true);
+		$(".cell4").find('select').prop("disabled", true);
 	}
-	
+	// [--6]
 	
 		
 	</script>
