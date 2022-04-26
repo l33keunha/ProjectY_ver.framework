@@ -42,6 +42,9 @@ public class CommonServiceImpl extends EgovAbstractServiceImpl implements Common
 	
 	@Override
 	public List<EgovMap> selectPassRouteIdList(SearchVO sVO) {
+		// 문자열 길이 비교하기 위한 int변수 담기
+		sVO.setTmStart(sVO.getAnal_area_cd().length());
+		System.out.println(sVO.toString());
 		return mapper.selectPassRouteIdList(sVO);
 	}
 }

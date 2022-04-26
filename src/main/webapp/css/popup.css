@@ -21,7 +21,7 @@ html, body {
     font-weight: bold;
 }
 .dateform {
-    height: 41px;
+    height: 61px;
     padding: 7px 0;
     width: 100%;
     text-align: center;
@@ -93,9 +93,9 @@ padding: 5px 10px;
     text-align: center;
 }
 .tabletitle{
-    /* width: 2493px; */
+    /*width: 2493px; */
     border-collapse: collapse;
-    margin-top: 119px;
+    margin-top: 139px;
     margin-left: 0;
 }
 th{

@@ -266,7 +266,9 @@
 					[ "anal_area_cd_sido",  		$("select[name=anal_area_cd_sido]").val()],
 					[ "anal_area_cd", 	$("select[name=anal_area_cd]").val()],
 					[ "tmStart", 	$("select[name=tmStart]").val()],
-					[ "tmEnd", 	$("select[name=tmEnd]").val()]
+					[ "tmEnd", 	$("select[name=tmEnd]").val()],
+					[ "anal_area_cd_sido_text", 	$("[name=anal_area_cd_sido] option:selected").text()],
+					[ "anal_area_cd_text", 	$("select[name=anal_area_cd] option:selected").text()]
 		]
 		
 
@@ -452,6 +454,7 @@
 		$(".routeBox").find('input').prop("checked", false);
 		$(".routeBox").find('input').prop("disabled", false);
 		$("#searchRouteId").val("");
+		$('.routeLists').empty();
 		
 		if($("input[name=searchpassRoute]").is(":checked")==true){
 			jsonArray["anal_area_cd"] = $("select[name=anal_area_cd]").val();

@@ -31,16 +31,18 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 			switch(sVO.getAnal_type()) {
 			case "passCnt_purpose": // 통행량_목적통행
 				System.out.println("목적통행");
-				if("allDay".equals((String)sVO.getTm())) {
+				if("allDay".equals(sVO.getTm())) {
 					passResultList = mapper.selectPassResultListPurpose_d(sVO); break;
-				} 
+				} else {
 					passResultList = mapper.selectPassResultListPurpose(sVO); break;
+				}
 			case "passCnt_method": // 통행량_수단통행
 				System.out.println("수단통행");
-				if("allDay".equals((String)sVO.getTm())) {
+				if("allDay".equals(sVO.getTm())) {
 					passResultList = mapper.selectPassResultListMethod_d(sVO); break;
-				}
+				} else {
 				passResultList = mapper.selectPassResultListMethod(sVO); break;
+				}
 			case "passAreaODCnt_purpose": // 행정동간OD_ 목적통행
 				System.out.println("행정동목적");
 				passResultList = mapper.selectPassResultListAreaODPurpose(sVO); break;
@@ -72,10 +74,11 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 		
 		switch(sVO.getAnal_type()) {
 		case "passCnt_route":
-			if("allDay".equals((String)sVO.getTm())) {
+			if("allDay".equals(sVO.getTm())) {
 				passResultListB = mapper.selectPassResultListRouteB_d(sVO); break;
+			} else {
+				passResultListB = mapper.selectPassResultListRouteB(sVO); break; //노선버스
 			}
-			passResultListB = mapper.selectPassResultListRouteB(sVO); break; //노선버스
 		case "passCnt_station":
 			passResultListB = mapper.selectPassResultListStationB(sVO); break; //정류장버스
 		}
@@ -88,10 +91,11 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 		
 		switch(sVO.getAnal_type()) {
 		case "passCnt_route":
-			if("allDay".equals((String)sVO.getTm())) {
+			if("allDay".equals(sVO.getTm())) {
 				passResultListT = mapper.selectPassResultListRouteT_d(sVO); break;
+			} else {
+				passResultListT = mapper.selectPassResultListRouteT(sVO); break; //노선지하철
 			}
-			passResultListT = mapper.selectPassResultListRouteT(sVO); break; //노선지하철
 		case "passCnt_station":
 			passResultListT = mapper.selectPassResultListStationT(sVO); break; //정류장지하철
 		}

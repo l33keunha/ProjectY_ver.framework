@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.egovframe.rte.psl.dataaccess.util.EgovMap;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springmodules.validation.commons.DefaultBeanValidator;
 
@@ -30,7 +30,7 @@ public class PassController {
 	
 	// 모든 조회는 form를 통해 해당 RequestMapping(value="/passTest.do")에 도착.
 	@RequestMapping(value="/passTest.do")
-	public ModelAndView selectPassResultList(ModelAndView mv, @ModelAttribute SearchVO sVO) {
+	public ModelAndView selectPassResultList(ModelAndView mv, HttpServletRequest req, @ModelAttribute SearchVO sVO) {
 		System.out.println(sVO.getDateStart().toString());
 		System.out.println(sVO.toString());
 		
@@ -59,16 +59,16 @@ public class PassController {
 		
 		// 값이 담긴 리스트에 맞춰 JSP에 보내주기
 		if(passResultList.size() > 0) {
-			for(int i = 0; i < 10; i++) {
+			for(int i = 0; i < 2; i++) {
 				System.out.println(passResultList.get(i).toString());
 			}
 			mv.addObject("passResultList", passResultList);
 		} else if (passResultListB.size() > 0 && passResultListT.size() > 0) {
-			for(int i = 0; i < 10; i++) {
+			for(int i = 0; i < 2; i++) {
 				System.out.println(passResultListB.get(i).toString());
 			}
 			
-			for(int i = 0; i < 10; i++) {
+			for(int i = 0; i < 2; i++) {
 				System.out.println(passResultListT.get(i).toString());
 			}
 			mv.addObject("passResultListB", passResultListB);
@@ -76,18 +76,17 @@ public class PassController {
 		} 
 		
 		if (passResultCntList.size() > 00) {
-			for(int i = 0; i < 10; i++) {
+			for(int i = 0; i < 2; i++) {
 				System.out.println(passResultCntList.get(i).toString());
 			}
 			mv.addObject("passResultCntList", passResultCntList);
 		}
 		
 		mv.addObject("sVO", sVO);
-//		mv.setViewName("indicator/pass_popUp");
+		mv.addObject("req", req);
+		mv.setViewName("indicator/pass/pass_popUp");
 				
 		return mv;
 	}
-	
 
-	
 }

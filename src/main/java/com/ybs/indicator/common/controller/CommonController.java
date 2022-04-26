@@ -56,6 +56,7 @@ public class CommonController {
 	@RequestMapping(value="/searchRouteId.do")
 	public ModelAndView selectPassRoutdIdList(@ModelAttribute SearchVO sVO) {
 		ModelAndView mv = new ModelAndView("jsonView");
+		sVO.setDateStart(sVO.getDateStart().replaceAll("-", ""));
 		System.out.println(sVO.toString());
 		List<EgovMap> passRouteIdList = new ArrayList<EgovMap>();
 		

@@ -44,12 +44,21 @@
 	
 	<!-- Ajax: 분석 노선번호 조회 -->
 	<select id ="selectPassRouteIdList" parameterType="sVO" resultType="egovMap">
-		SELECT /*+ PARALLEL(8) */ DISTINCT ROUTE_ID, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END 
-		FROM 노선별정류장간OD_주석
+		SELECT DISTINCT 노선ID ROUTE_ID, 노선명칭 ROUTE_NMA, NVL(노선구분, '-') ROUTE_TYPE
+	 		,first_value(정류장명칭) OVER (PARTITION BY 정산사ID,노선ID ORDER BY 정류장순번
+	                                        ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) ROUTE_START
+	        ,last_value(정류장명칭) OVER (PARTITION BY 정산사ID,노선ID ORDER BY 정류장순번
+	                                        ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) ROUTE_END
+		FROM STDNN_BRS
 		WHERE 1=1
-		AND SDATE = #{dateStart}
-		AND ANAL_AREA_CD = #{anal_area_cd}
-		AND PROVIDER = #{provider}
+			AND 운행일자 =#{dateStart}
+			<if test="tmStart==2"> 
+				AND 인허가지역코드_시도 =#{anal_area_cd}
+			</if>
+			<if test="tmStart==5">
+				AND 인허가지역코드 =#{anal_area_cd}
+			</if> 
+			AND OWNER =#{provider}
 		ORDER BY ROUTE_NMA
 	</select>
 	
