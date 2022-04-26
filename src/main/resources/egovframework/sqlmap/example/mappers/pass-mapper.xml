@@ -92,11 +92,11 @@
 	
 	<!-- 수단통행 일별 -->
 	<select id ="selectPassResultListMethod_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-		SELECT ROWNUM, OPRAT_DATE,ANAL_AREA_CD, CD_NO, TFCMN, USER_CNT_AGG
-		FROM
-			(SELECT SDATE,OPRAT_DATE,ANAL_AREA_CD, CD_NO, TFCMN, USER_CNT_AGG
-				,SUM(USER_CNT_AGG)OVER(PARTITION BY OPRAT_DATE, CD_NO, TFCMN ORDER BY CD_NO) USER_CNT_AGG
-				,ROW_NUMBER() OVER(PARTITION BY OPRAT_DATE, CD_NO, TFCMN ORDER BY CD_NO) R1
+	SELECT OPRAT_DATE, ANAL_AREA_CD, CD_NO, TFCMN, USER_CNT_AGG
+	FROM
+			(SELECT OPRAT_DATE,ANAL_AREA_CD, CD_NO, TFCMN
+				,SUM(USER_CNT_AGG)OVER(PARTITION BY OPRAT_DATE, CD_NO ORDER BY CD_NO) USER_CNT_AGG
+				,ROW_NUMBER() OVER(PARTITION BY OPRAT_DATE, CD_NO ORDER BY CD_NO) R1
 			FROM 결과지표_수단통행
 			WHERE 1=1
 				AND SDATE BETWEEN #{dateStart} AND #{dateEnd}
@@ -111,10 +111,8 @@
 						#{arr}
 					</foreach>
 				</if>
-			ORDER BY SDATE, CD_NO
-				)
-			WHERE R1 =1
-		ORDER BY ROWNUM
+			ORDER BY SDATE, CD_NO, TFCMN)
+		WHERE R1 =1
 	</select>
 	
 	<!-- 수단통행 시간대별 합계 -->
@@ -384,8 +382,10 @@
 	
 	<!-- 상위이용정류장 -->
 	<select id ="selectPassResultListTopStation" parameterType="sVO" resultType="egovMap" fetchSize="2000">
-		SELECT /*+ PARALLEL(8) */ A.OPRAT_DATE, A.ANAL_AREA_CD, KT.R, TFCMN, A.STTN_ID, STTN_NMA, STTN_HJD, A.CD_NO, TFCMN
-			,STTN_BUS_GIN_AGG, STTN_BUS_GFF_AGG, STTN_BUS_TRS_AGG, STTN_SUM 
+	SELECT /*+ PARALLEL(8) */ A.OPRAT_DATE, A.ANAL_AREA_CD, KT.R, TFCMN, A.STTN_ID, STTN_NMA, STTN_HJD, A.CD_NO, TFCMN
+			,STTN_BUS_GIN_AGG, STTN_BUS_GFF_AGG, STTN_BUS_TRS_AGG
+			,STTN_TRAIN_GIN_AGG, STTN_TRAIN_GFF_AGG, STTN_TRAIN_TRS_AGG
+			,STTN_SUM 
 		FROM 결과지표_정류장별통행_일별 A,
 			(SELECT /*+ PARALLEL(8) */  ROWNUM R, STTN_ID, STTN_SUM
 			FROM
@@ -442,5 +442,82 @@
 		ORDER BY KT.R, A.CD_NO
 	</select>
 	
+	<!-- 상위이용정류장 버스 : 서울 선택만 -->
+	<select id ="selectPassResultListTopStationB" parameterType="sVO" resultType="egovMap" fetchSize="2000">
+		SELECT /*+ PARALLEL(8) */ A.OPRAT_DATE, A.ANAL_AREA_CD, KT.R, TFCMN, A.STTN_ID, STTN_NMA, STTN_HJD, A.CD_NO, TFCMN
+			,STTN_BUS_GIN_AGG, STTN_BUS_GFF_AGG, STTN_BUS_TRS_AGG, STTN_SUM 
+		FROM 결과지표_정류장별통행_일별 A,
+				(SELECT /*+ PARALLEL(8) */  ROWNUM R, STTN_ID, STTN_BUS_SUM STTN_SUM
+				FROM 
+					(SELECT /*+ PARALLEL(8) */   STTN_ID
+					 	   ,SUM(STTN_BUS_GIN_AGG) OVER (PARTITION BY STTN_ID) + SUM(STTN_BUS_GFF_AGG) OVER (PARTITION BY STTN_ID) STTN_BUS_SUM 
+					 	   ,ROW_NUMBER() OVER (PARTITION BY STTN_ID ORDER BY CD_NO) R1
+					FROM 결과지표_정류장별통행_일별
+					WHERE 1=1
+						AND SDATE = #{dateStart}
+						AND ANAL_AREA_CD = #{anal_area_cd}
+						AND PROVIDER = #{provider}
+						<if test="!cd_no[0].equals('00')">
+							AND CD_NO IN
+							<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+								#{arr}
+							</foreach>
+						</if> 
+						AND TFCMN = #{tfcmn}
+					ORDER BY STTN_BUS_SUM DESC, CD_NO ASC)
+					WHERE R1 = 1
+					AND ROWNUM <![CDATA[ < ]]> 101)KT
+			WHERE 1=1
+				AND A.SDATE = #{dateStart}
+				AND A.ANAL_AREA_CD = #{anal_area_cd}
+				AND A.PROVIDER = #{provider}
+				<if test="!cd_no[0].equals('00')">
+					AND CD_NO IN
+					<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+						#{arr}
+					</foreach>
+				</if> 
+				AND A.STTN_ID = KT.STTN_ID
+		ORDER BY KT.R, A.CD_NO
+	</select>
+	
+	<!-- 상위이용정류장 지하철 : 서울 선택만 -->
+	<select id ="selectPassResultListTopStationT" parameterType="sVO" resultType="egovMap" fetchSize="2000">
+		SELECT /*+ PARALLEL(8) */ A.OPRAT_DATE, A.ANAL_AREA_CD, KT.R, TFCMN, A.STTN_ID, STTN_NMA, STTN_HJD, A.CD_NO, TFCMN
+			,STTN_TRAIN_GIN_AGG, STTN_TRAIN_GFF_AGG, STTN_TRAIN_TRS_AGG, STTN_SUM 
+		FROM 결과지표_정류장별통행_일별 A,
+					(SELECT /*+ PARALLEL(8) */ ROWNUM R,  STTN_ID, STTN_TRAIN_SUM STTN_SUM
+					FROM 
+					(SELECT STTN_ID
+					 	   ,SUM(STTN_TRAIN_GIN_AGG) OVER (PARTITION BY STTN_ID) + SUM(STTN_TRAIN_GFF_AGG) OVER (PARTITION BY STTN_ID) STTN_TRAIN_SUM 
+					 	   ,ROW_NUMBER() OVER (PARTITION BY STTN_ID ORDER BY CD_NO) R1
+					FROM 결과지표_정류장별통행_일별
+					WHERE 1=1
+						AND SDATE = #{dateStart}
+						AND ANAL_AREA_CD = #{anal_area_cd}
+						AND PROVIDER = #{provider}
+						<if test="!cd_no[0].equals('00')">
+							AND CD_NO IN
+							<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+								#{arr}
+							</foreach>
+						</if> 
+						AND TFCMN = #{tfcmn}
+					ORDER BY STTN_TRAIN_SUM DESC, CD_NO ASC)
+				WHERE R1 = 1
+				AND ROWNUM <![CDATA[ < ]]> 101)KT
+		WHERE 1=1
+			AND A.SDATE = #{dateStart}
+			AND A.ANAL_AREA_CD = #{anal_area_cd}
+			AND A.PROVIDER = #{provider}
+			<if test="!cd_no[0].equals('00')">
+				AND CD_NO IN
+				<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+					#{arr}
+				</foreach>
+			</if> 
+			AND A.STTN_ID = KT.STTN_ID
+		ORDER BY KT.R, A.CD_NO
+	</select>
 	
 </mapper>

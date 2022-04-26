@@ -202,9 +202,9 @@
                     <div class="cell6_01">
                         <p>수단</p>
                         <div>
-                            <label><input type="checkbox" name="tfcmn" value="00"> 전체</label>
-                            <label><input type="checkbox" name="tfcmn" value="B"> 버스</label>
-                            <label><input type="checkbox" name="tfcmn" value="T"> 지하철</label>
+                            <label><input type="radio" name="tfcmn" value="00"> 전체</label>
+                            <label><input type="radio" name="tfcmn" value="B"> 버스</label>
+                            <label><input type="radio" name="tfcmn" value="T"> 지하철</label>
                         </div>
                     </div>
 
@@ -247,7 +247,7 @@
             </div>
         </div>
 
-        <input class="submit" type="button" id="buttonTest" value="조회" >
+        <input class="submit" type="button" id="buttonTest" value="조회" style="cursor: pointer;" >
         
     </body>
 	
@@ -416,35 +416,62 @@
 		
 	})
 	
+	// 정산사 선택 시, 조회 조건 활성화
 	$("input[name=provider]").change(function(){
 		$(".cell3_03").css("opacity", 1);
 		$(".cell3_03").find("label").eq(1).css("opacity", 0.3);
 		$("input[name=dateStart]").prop("disabled", false);
 		
+		// 목적통행, 수단통행은 시작~종료일 설정 가능
 		if($("input[name=anal_type]:checked").val() =='passCnt_purpose' 
-			|| $("input[name=anal_type]:checked").val() =='passCnt_method'
-			|| $("input[name=anal_type]:checked").val() =='passCnt_route'){
+			|| $("input[name=anal_type]:checked").val() =='passCnt_method'){
 				$(".cell3_03").find("label").eq(1).css("opacity", 1);
 				$("input[name=dateEnd]").prop("disabled", false);
 		}
 		
+		// cell4, cell5, cell6 활성화
 		disabledTrue()
 		
+		// 시간대 비활성화
 		if($("input[name=anal_type]:checked").val() =='passCnt_station'
 			|| $("input[name=anal_group]:checked").val() =='passAreaODCnt'
-			|| $("input[name=anal_group]:checked").val() =='passTopRotue'
-			|| $("input[name=anal_group]:checked").val() =='passTopStation'){
+			|| $("input[name=anal_group]:checked").val() =='passTopRotue'){
 			disabledTime()
 		}
 		
+		// 노선별OD 조회조건 : 시간대는 2시간씩만, 노선번호 검색 활성화
 		if($("input[name=anal_group]:checked").val() =='passRouteODCnt'){
 			$('.cell6').css("opacity", 1);
 			$('.cell6_01').css("opacity", 0.3);
 			$("input[name=searchpassRoute]").prop("disabled", false);
 			$("label[for='modalBtn']").css("cursor","pointer");
+			
+			// 노선별OD는 2시간씩만 선택가능하게끔
+			$("select[name=tmEnd] option:eq(2)").prop("selected", true);
+			
+			$("select[name=tmStart]").change(function(){
+				var index = $("select[name=tmStart] option").index($("select[name=tmStart] option:selected")) + 2;
+				console.log(index);
+				if((index == 24) || (index == 25)) $("select[name=tmEnd] option:eq(23)").prop("selected", true);
+				else $('select[name=tmEnd] option:eq('+ index + ')').prop("selected", true);
+			})
+			
+			$("select[name=tmEnd]").change(function(){
+				var index = $("select[name=tmEnd] option").index($("select[name=tmEnd] option:selected")) - 2;
+				if((index == -2) || (index == -1)) $("select[name=tmStart] option:eq(0)").prop("selected", true);
+				else $('select[name=tmStart] option:eq('+ index + ')').prop("selected", true);
+			})
 		}
 		
-		
+		// 상위이용정류장 조회조건 : 서울은 버스,지하철 다르게 표출
+		if($("input[name=anal_group]:checked").val() =='passTopStation'){
+			disabledTime()
+			if($("select[name=anal_area_cd] option:selected").val() =='11'){
+				$('.cell6').css("opacity", 1);
+				$('.cell6_02').css("opacity", 0.3);
+				$("input[name=tfcmn]").prop("disabled", false);
+			}
+		}
 	})
 	// [--4]
 	
@@ -535,7 +562,7 @@
 	
 	// 이용자유형 전체선택/해제
 	function selectAllCd(selectAll){
-		  const checkboxes 
+		 const checkboxes 
 	       = document.getElementsByName('cd_no');
 	  
 	 	 checkboxes.forEach((checkbox) => {

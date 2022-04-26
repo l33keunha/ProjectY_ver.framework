@@ -61,8 +61,16 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 				System.out.println("상위이용노선");
 				passResultList = mapper.selectPassREsultListTopRoute(sVO); break;
 			case "passTopStation": // 상위이용정류장
-				System.out.println("상위이용정류장");
-				passResultList = mapper.selectPassResultListTopStation(sVO); break;
+				if("B".equals(sVO.getTfcmn())) {
+					System.out.println("상위이용정류장 버스");
+					passResultList = mapper.selectPassResultListTopStationB(sVO); break;
+				} else if("T".equals(sVO.getTfcmn())){
+					System.out.println("상위이용정류장 지하철");
+					passResultList = mapper.selectPassResultListTopStationT(sVO); break;
+				} else {
+					System.out.println("상위이용정류장 전체");
+					passResultList = mapper.selectPassResultListTopStation(sVO); break;
+				}
 			}
 		}
 		return passResultList;

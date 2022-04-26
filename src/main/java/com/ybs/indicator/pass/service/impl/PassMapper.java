@@ -57,14 +57,18 @@ public interface PassMapper {
 
 	// 상위이용정류장 
 	List<EgovMap> selectPassResultListTopStation(SearchVO sVO);
+	
+	// 상위이용정류장 버스 : 서울 선택만
+	List<EgovMap> selectPassResultListTopStationB(SearchVO sVO);
+	
+	// 상위이용정류장 지하철 : 서울 선택만
+	List<EgovMap> selectPassResultListTopStationT(SearchVO sVO);
 
 	// 목적통행 시간대별 합계 
 	List<EgovMap> selectPassResultListPurposeCnt(SearchVO sVO);
 
 	// 수단통행 시간대별 합계 
 	List<EgovMap> selectPassResultListMethodCnt(SearchVO sVO);
-
-
 
 	
 }

@@ -90,13 +90,11 @@
 										<c:if test="${(j % forCnt) == 0}">	   
 											<td class="tg-c3ow" rowspan='${forCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div>${anal_area_cd_sido_text}</div></td>		<!-- 광역/도 -->
 											<td class="tg-0pky" rowspan='${forCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div>${anal_area_cd_text}</div></td>				<!-- 시/군 -->
-													
 										</c:if>				
-										<td class="tg-0pky"  style="width: 70px; min-width: 70px; max-width: 70px;">${passResultList[dateCnt*indexCnt*columnCnt].opratDate}</td>			<!-- 날짜 -->
-										
-										<c:if test="${(j % forCnt) == 0}">	   
+										<td class="tg-0pky"  style="width: 70px; min-width: 70px; max-width: 70px;">${passResultList[j*columnCnt].opratDate}</td>							<!-- 날짜 -->
+										<c:if test="${(j % forCnt) == 0}">	 
 											<td class="tg-0pky" rowspan='${forCnt}' style="width: 30px; min-width: 30px; max-width: 30px;">전체</td>											<!-- 시간 -->
-										</c:if>				
+										</c:if>
 										<c:set var = "indexCnt" value = "${indexCnt + 1}"/>				
 									</c:if>
 									
