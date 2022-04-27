@@ -33,9 +33,9 @@ public class CommonServiceImpl extends EgovAbstractServiceImpl implements Common
 			passSearchList = mapper.selectPassSearchAjaxAnalAreaCd(sVO);
 		} else if(sVO.getAnal_area_cd().equals("null") || sVO.getAnal_area_cd() == null && !sVO.getAnal_area_cd_sido().equals("시/도")) {
 			passSearchList = mapper.selectPassSearchAjaxAnalArea(sVO);
-		} else if(sVO.getProvider() == null && !sVO.getAnal_area_cd().equals("시/군/구")) {
+		} else if(sVO.getProvider().equals("null") || sVO.getProvider() == null && !sVO.getAnal_area_cd().equals("시/군/구")) {
 			passSearchList = mapper.selectPassSearchAjaxProvider(sVO);
-		} else if(sVO.getProvider() != null) {
+		} else if(sVO.getDateStart() == null) {
 			passSearchList = mapper.selectPassSearchAjaxDate(sVO);
 		}
 		

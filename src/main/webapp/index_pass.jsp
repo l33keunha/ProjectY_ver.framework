@@ -389,12 +389,16 @@
 		$("select[name=anal_area_cd]").children('option:not(:first)').remove();
 		$('.cell3').find('input').prop("checked", false);
 		$('.cell3').find('input').prop("disabled", true);
+		$( "#dateStart" ).datepicker("setDate" ,'2021-03-22');	
+		$( "#dateEnd" ).datepicker("setDate" ,'2021-03-22');
+	
 		
 		$("[class=selectbox]").find("input:checked").each(function(index, item){
 			jsonArray[$(item)[0].name] = $(item)[0].value;
 		})
 		jsonArray["anal_area_cd_sido"] = $("select[name=anal_area_cd_sido]").val();
 		jsonArray["anal_area_cd"] = "null";
+		jsonArray["provider"] = "null";
 		
 		$.ajax({
 			url: 'searchAnal.do',
@@ -421,6 +425,7 @@
 		})
 		jsonArray["anal_area_cd_sido"] = $("select[name=anal_area_cd_sido]").val();
 		jsonArray["anal_area_cd"] = $("select[name=anal_area_cd]").val();
+		jsonArray["provider"] = "null";
 		
 		$.ajax({
 			url: 'searchAnal.do',
@@ -672,7 +677,7 @@
 	
 	// 지역, 자료, 날짜, 시간대, 이용자유형 활성화
 	function disabledTrue(){
-		for(var i = 3; i < 6; i++){
+		for(var i = 4; i < 6; i++){
 			$(".cell" + [i]).css("opacity", 1);
 			$(".cell" + [i]).find('input').prop("disabled", false);
 			$(".cell" + [i]).find('select').prop("disabled", false);

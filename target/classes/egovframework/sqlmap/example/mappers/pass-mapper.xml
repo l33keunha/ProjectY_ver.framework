@@ -117,9 +117,10 @@
 	
 	<!-- 수단통행 시간대별 합계 -->
 	<select id ="selectPassResultListMethodCnt" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-		SELECT  /*+ PARALLEL(4) */ DISTINCT  OPRAT_DATE, TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD, CD_NO, SUMA
+		SELECT  /*+ PARALLEL(4) */ DISTINCT  OPRAT_DATE, TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD, CD_NO, TFCMN, SUMA
 			FROM
-				(SELECT  /*+ PARALLEL(4) */ OPRAT_DATE, SDATE, ANAL_AREA_CD ,TM ,CD_NO ,USER_CNT_AGG, SUM(USER_CNT_AGG) OVER (PARTITION BY OPRAT_DATE, CD_NO ORDER BY CD_NO) SUMA
+				(SELECT  /*+ PARALLEL(4) */ OPRAT_DATE, SDATE, ANAL_AREA_CD ,TM ,CD_NO, TFCMN
+				,SUM(USER_CNT_AGG) OVER (PARTITION BY OPRAT_DATE, CD_NO, TFCMN ORDER BY CD_NO) SUMA
 				FROM 결과지표_수단통행
 				WHERE 1=1
 					AND SDATE BETWEEN #{dateStart} AND #{dateEnd}
@@ -135,7 +136,7 @@
 						</foreach>
 					</if>
 					)
-		ORDER BY OPRAT_DATE, CD_NO
+		ORDER BY OPRAT_DATE, CD_NO, TFCMN
 	</select>
 	
 	<!-- 노선별통행 버스 시간대별-->

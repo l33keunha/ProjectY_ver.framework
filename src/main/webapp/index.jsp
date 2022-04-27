@@ -81,7 +81,7 @@
                     <div>
                         <label><input type="radio" name="anal_type" value="dlRoute_routeCnt"> 노선별통행</label>
                         <label><input type="radio" name="anal_type" value="dlRoute_routeODCnt"> 노선별 기종점통행</label>
-                        <label><input type="radio" name="anal_type" value=""> 노선별 재차인원</label>
+                        <label><input type="radio" name="anal_type" value="dlRoute_routeCBP"> 노선별 재차인원</label>
                     </div>
                 </div>
 
@@ -291,12 +291,15 @@
 		$("select[name=anal_area_cd]").children('option:not(:first)').remove();
 		$('.cell3').find('input').prop("checked", false);
 		$('.cell3').find('input').prop("disabled", true);
+		$( "#dateStart" ).datepicker("setDate" ,'2021-03-22');	
+		$( "#dateEnd" ).datepicker("setDate" ,'2021-03-22');
 		
 		$("[class=selectbox]").find("input:checked").each(function(index, item){
 			jsonArray[$(item)[0].name] = $(item)[0].value;
 		})
 		jsonArray["anal_area_cd_sido"] = $("select[name=anal_area_cd_sido]").val();
 		jsonArray["anal_area_cd"] = "null";
+		jsonArray["provider"] = "null";
 		
 		$.ajax({
 			url: 'searchAnal.do',
@@ -323,6 +326,7 @@
 		})
 		jsonArray["anal_area_cd_sido"] = $("select[name=anal_area_cd_sido]").val();
 		jsonArray["anal_area_cd"] = $("select[name=anal_area_cd]").val();
+		jsonArray["provider"] = "null";
 		
 		$.ajax({
 			url: 'searchAnal.do',
@@ -345,10 +349,6 @@
 		})
 		jsonArray["anal_area_cd_sido"] = $("select[name=anal_area_cd_sido]").val();
 		jsonArray["anal_area_cd"] = $("select[name=anal_area_cd]").val();
-		
-		if($("input[name=provider]").val() == '00'){
-			$('#provider99').prop("disabled", true);
-		}
 		
 		$.ajax({
 			url: 'searchAnal.do',
@@ -376,11 +376,10 @@
 				console.log(abledDays);
 				
 				function available(date) {
+					console.log('dk');
 				    ymd = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
-				    if ($.inArray(ymd, abledDays) >= 0) {
-				        return [true,""];
-				    } else {
-				        return [false,""];
+				    if ($.inArray(ymd, abledDays) = -1) {
+				    	return [false,""];
 				    }
 				}
 			}
@@ -394,6 +393,7 @@
 		disabledTrue()
 	})
 	// [--4]
+	
 	
 	// [5] 활성화/비활성화 모음
 	function diabledFalseType(num){

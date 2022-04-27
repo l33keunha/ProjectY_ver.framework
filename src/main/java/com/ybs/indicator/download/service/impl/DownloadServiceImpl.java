@@ -31,7 +31,8 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 		
 		switch(sVO.getAnal_type()) {
 		case "dlStation_stationCnt" : // 정류장별통행
-			System.out.println("정류장별통행"); break;
+			System.out.println("정류장별통행"); 
+			mapper.selectdownloadResultListStationCnt(sVO); break;
 		case "dlStation_station_purpose" : // 정류장간목적통행
 			System.out.println("정류장간목적통행"); break;
 		case "dlStation_station_method" : // 정류장간수단통행
