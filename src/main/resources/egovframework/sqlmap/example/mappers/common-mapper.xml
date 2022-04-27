@@ -42,6 +42,17 @@
 		ORDER BY ANAL_AREA_CD
 	</select>
 	
+	<!-- Ajax: 날짜 조회 -->
+	<select id ="selectPassSearchAjaxDate" parameterType="sVO" resultType="egovMap">
+		SELECT DISTINCT ANAL_FIN, OPRAT_DATE 
+		FROM GUIDE_BOOK
+		WHERE 1=1
+			AND ANAL_FIN = #{anal_fin}
+			AND ANAL_AREA_CD = #{anal_area_cd}
+			AND PROVIDER = #{provider}
+		ORDER BY OPRAT_DATE 
+	</select>
+	
 	<!-- Ajax: 분석 노선번호 조회 -->
 	<select id ="selectPassRouteIdList" parameterType="sVO" resultType="egovMap">
 		SELECT DISTINCT 노선ID ROUTE_ID, 노선명칭 ROUTE_NMA, NVL(노선구분, '-') ROUTE_TYPE

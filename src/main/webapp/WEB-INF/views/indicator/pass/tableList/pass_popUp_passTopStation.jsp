@@ -95,13 +95,24 @@
 								
 								<!-- 이용자 유형에 따라 유동적으로 적용 -->
 								<c:forEach var='i' begin='${st}' end='${ed-1}' >
-									<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;">${passResultList[i].sttnBusGinAgg}</td>		<!-- 이용자 유형 (승차) -->
-									<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;">${passResultList[i].sttnBusGffAgg}</td>		<!-- 이용자 유형 (하차) -->
-									<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;">${passResultList[i].sttnBusTrsAgg}</td>		<!-- 이용자 유형 (환승) -->
-								
-									<c:set var = "totalInSum" 	value = '${totalInSum + (passResultListB[i].sttnBusGinAgg)}'/>						<!-- 승차합 계산 -->
-									<c:set var = "totalOutSum" 	value = '${totalOutSum + (passResultListB[i].sttnBusGffAgg)}'/>						<!-- 하차합 계산 -->
-									<c:set var = "totalHsSum" 	value = '${totalHsSum + (passResultListB[i].sttnBusTrsAgg)}'/>						<!-- 환승합 계산 -->
+									<c:if test="${passResultList[j * columnCnt].tfcmn == 'B'}">
+										<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;">${passResultList[i].sttnBusGinAgg}</td>		<!-- 이용자 유형 (승차) -->
+										<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;">${passResultList[i].sttnBusGffAgg}</td>		<!-- 이용자 유형 (하차) -->
+										<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;">${passResultList[i].sttnBusTrsAgg}</td>		<!-- 이용자 유형 (환승) -->
+									
+										<c:set var = "totalInSum" 	value = '${totalInSum + (passResultList[i].sttnBusGinAgg)}'/>						<!-- 승차합 계산 -->
+										<c:set var = "totalOutSum" 	value = '${totalOutSum + (passResultList[i].sttnBusGffAgg)}'/>						<!-- 하차합 계산 -->
+										<c:set var = "totalHsSum" 	value = '${totalHsSum + (passResultList[i].sttnBusTrsAgg)}'/>						<!-- 환승합 계산 -->
+									</c:if>
+									<c:if test="${passResultList[j * columnCnt].tfcmn == 'T'}">
+										<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;">${passResultList[i].sttnTrainGinAgg}</td>		<!-- 이용자 유형 (승차) -->
+										<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;">${passResultList[i].sttnTrainGffAgg}</td>		<!-- 이용자 유형 (하차) -->
+										<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;">${passResultList[i].sttnTrainTrsAgg}</td>		<!-- 이용자 유형 (환승) -->
+									
+										<c:set var = "totalInSum" 	value = '${totalInSum + (passResultList[i].sttnTrainGinAgg)}'/>						<!-- 승차합 계산 -->
+										<c:set var = "totalOutSum" 	value = '${totalOutSum + (passResultList[i].sttnTrainGffAgg)}'/>						<!-- 하차합 계산 -->
+										<c:set var = "totalHsSum" 	value = '${totalHsSum + (passResultList[i].sttnTrainTrsAgg)}'/>						<!-- 환승합 계산 -->
+									</c:if>
 								</c:forEach>		
 									
 								<td class="tg-0pky" style="width: 100px; min-width: 100px; max-width: 100px;">${totalInSum}</td>					<!-- 승차소계 -->

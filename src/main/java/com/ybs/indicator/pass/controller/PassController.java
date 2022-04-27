@@ -31,7 +31,6 @@ public class PassController {
 	// 모든 조회는 form를 통해 해당 RequestMapping(value="/passTest.do")에 도착.
 	@RequestMapping(value="/passTest.do")
 	public ModelAndView selectPassResultList(ModelAndView mv, HttpServletRequest req, @ModelAttribute SearchVO sVO) {
-		System.out.println(sVO.getDateStart().toString());
 		System.out.println(sVO.toString());
 		
 		

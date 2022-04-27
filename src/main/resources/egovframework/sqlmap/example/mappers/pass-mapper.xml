@@ -4,7 +4,7 @@
 
 	<!-- 목적통행 시간대별 -->
 	<select id ="selectPassResultListPurpose" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-		SELECT /*+ PARALLEL(4) */  OPRAT_DATE ,ANAL_AREA_CD ,TM ,CD_NO ,USER_CNT_AGG 
+		SELECT /*+ PARALLEL(4) */  OPRAT_DATE,  TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD ,TM ,CD_NO ,USER_CNT_AGG 
 		FROM 결과지표_목적통행
 			WHERE 1=1
 				AND SDATE BETWEEN #{dateStart} AND #{dateEnd}
@@ -24,9 +24,9 @@
 	
 	<!-- 목적통행 일별 -->
 	<select id ="selectPassResultListPurpose_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-	SELECT OPRAT_DATE, ANAL_AREA_CD, CD_NO ,USER_CNT_AGG
+	SELECT OPRAT_DATE, TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD, CD_NO ,USER_CNT_AGG
 	FROM
-			(SELECT OPRAT_DATE,ANAL_AREA_CD, CD_NO
+			(SELECT OPRAT_DATE,SDATE, ANAL_AREA_CD, CD_NO
 				,SUM(USER_CNT_AGG)OVER(PARTITION BY OPRAT_DATE, CD_NO ORDER BY CD_NO) USER_CNT_AGG
 				,ROW_NUMBER() OVER(PARTITION BY OPRAT_DATE, CD_NO ORDER BY CD_NO) R1
 			FROM 결과지표_목적통행
@@ -49,9 +49,9 @@
 	
 	<!-- 목적통행 시간대별 합계 -->
 	<select id ="selectPassResultListPurposeCnt" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-		SELECT  /*+ PARALLEL(4) */ DISTINCT  OPRAT_DATE ,ANAL_AREA_CD, CD_NO, SUMA
+		SELECT  /*+ PARALLEL(4) */ DISTINCT  OPRAT_DATE, TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD, CD_NO, SUMA
 			FROM
-				(SELECT  /*+ PARALLEL(4) */ OPRAT_DATE ,ANAL_AREA_CD ,TM ,CD_NO ,USER_CNT_AGG, SUM(USER_CNT_AGG) OVER (PARTITION BY OPRAT_DATE, CD_NO ORDER BY CD_NO) SUMA
+				(SELECT  /*+ PARALLEL(4) */ OPRAT_DATE, SDATE, ANAL_AREA_CD ,TM ,CD_NO ,USER_CNT_AGG, SUM(USER_CNT_AGG) OVER (PARTITION BY OPRAT_DATE, CD_NO ORDER BY CD_NO) SUMA
 				FROM 결과지표_목적통행
 				WHERE 1=1
 					AND SDATE BETWEEN #{dateStart} AND #{dateEnd}
@@ -72,7 +72,7 @@
 	
 	<!-- 수단통행 시간대별 -->
 	<select id ="selectPassResultListMethod" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-		SELECT /*+ PARALLEL(4) */  OPRAT_DATE ,ANAL_AREA_CD ,TM ,CD_NO, TFCMN, USER_CNT_AGG 
+		SELECT /*+ PARALLEL(4) */  OPRAT_DATE, TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD ,TM ,CD_NO, TFCMN, USER_CNT_AGG 
 			FROM 결과지표_수단통행
 			WHERE 1=1
 				AND SDATE BETWEEN #{dateStart} AND #{dateEnd}
@@ -92,11 +92,11 @@
 	
 	<!-- 수단통행 일별 -->
 	<select id ="selectPassResultListMethod_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-	SELECT OPRAT_DATE, ANAL_AREA_CD, CD_NO, TFCMN, USER_CNT_AGG
-	FROM
-			(SELECT OPRAT_DATE,ANAL_AREA_CD, CD_NO, TFCMN
-				,SUM(USER_CNT_AGG)OVER(PARTITION BY OPRAT_DATE, CD_NO ORDER BY CD_NO) USER_CNT_AGG
-				,ROW_NUMBER() OVER(PARTITION BY OPRAT_DATE, CD_NO ORDER BY CD_NO) R1
+		SELECT OPRAT_DATE,TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD, CD_NO, TFCMN, USER_CNT_AGG
+		FROM
+			(SELECT OPRAT_DATE, SDATE, ANAL_AREA_CD, CD_NO, TFCMN
+				,SUM(USER_CNT_AGG)OVER(PARTITION BY OPRAT_DATE, CD_NO, TFCMN ORDER BY CD_NO) USER_CNT_AGG
+				,ROW_NUMBER() OVER(PARTITION BY OPRAT_DATE, CD_NO, TFCMN ORDER BY CD_NO) R1
 			FROM 결과지표_수단통행
 			WHERE 1=1
 				AND SDATE BETWEEN #{dateStart} AND #{dateEnd}
@@ -117,9 +117,9 @@
 	
 	<!-- 수단통행 시간대별 합계 -->
 	<select id ="selectPassResultListMethodCnt" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-		SELECT  /*+ PARALLEL(4) */ DISTINCT  OPRAT_DATE ,ANAL_AREA_CD, CD_NO, SUMA
+		SELECT  /*+ PARALLEL(4) */ DISTINCT  OPRAT_DATE, TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD, CD_NO, SUMA
 			FROM
-				(SELECT  /*+ PARALLEL(4) */ OPRAT_DATE ,ANAL_AREA_CD ,TM ,CD_NO ,USER_CNT_AGG, SUM(USER_CNT_AGG) OVER (PARTITION BY OPRAT_DATE, CD_NO ORDER BY CD_NO) SUMA
+				(SELECT  /*+ PARALLEL(4) */ OPRAT_DATE, SDATE, ANAL_AREA_CD ,TM ,CD_NO ,USER_CNT_AGG, SUM(USER_CNT_AGG) OVER (PARTITION BY OPRAT_DATE, CD_NO ORDER BY CD_NO) SUMA
 				FROM 결과지표_수단통행
 				WHERE 1=1
 					AND SDATE BETWEEN #{dateStart} AND #{dateEnd}
@@ -140,7 +140,7 @@
 	
 	<!-- 노선별통행 버스 시간대별-->
 	<select id ="selectPassResultListRouteB" parameterType="sVO" resultType="egovMap" fetchSize="2000">
-		SELECT /*+ PARALLEL(8) */ OPRAT_DATE, ANAL_AREA_CD, TFCMN, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END, TM, CD_NO, ROUTE_BUS_GIN_AGG, ROUTE_BUS_GFF_AGG, ROUTE_BUS_TRS_AGG
+		SELECT /*+ PARALLEL(8) */ OPRAT_DATE, TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD, TFCMN, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END, TM, CD_NO, ROUTE_BUS_GIN_AGG, ROUTE_BUS_GFF_AGG, ROUTE_BUS_TRS_AGG
 			FROM 결과지표_노선별통행
 			WHERE 1=1
 				AND SDATE BETWEEN #{dateStart} AND #{dateEnd}
@@ -161,7 +161,7 @@
 	
 	<!-- 노선별통행 버스 일별 -->
 	<select id ="selectPassResultListRouteB_d" parameterType="sVO" resultType="egovMap" fetchSize="2000">
-		SELECT /*+ PARALLEL(8) */ OPRAT_DATE, ANAL_AREA_CD, TFCMN, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END, CD_NO, ROUTE_BUS_GIN_AGG, ROUTE_BUS_GFF_AGG, ROUTE_BUS_TRS_AGG
+		SELECT /*+ PARALLEL(8) */ OPRAT_DATE, TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD, TFCMN, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END, CD_NO, ROUTE_BUS_GIN_AGG, ROUTE_BUS_GFF_AGG, ROUTE_BUS_TRS_AGG
 		FROM 결과지표_노선별통행_일별
 		WHERE 1=1
 			AND SDATE BETWEEN #{dateStart} AND #{dateEnd}
@@ -182,7 +182,7 @@
 	
 	<!-- 노선별통행 지하철 시간대별 -->
 	<select id ="selectPassResultListRouteT" parameterType="sVO" resultType="egovMap" fetchSize="2000">
-		SELECT /*+ PARALLEL(8) */ OPRAT_DATE, ANAL_AREA_CD, TFCMN, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END, TM, CD_NO, ROUTE_TRAIN_GIN_AGG, ROUTE_TRAIN_GFF_AGG, ROUTE_TRAIN_TRS_AGG
+		SELECT /*+ PARALLEL(8) */ OPRAT_DATE,TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD, TFCMN, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END, TM, CD_NO, ROUTE_TRAIN_GIN_AGG, ROUTE_TRAIN_GFF_AGG, ROUTE_TRAIN_TRS_AGG
 		FROM 결과지표_노선별통행
 		WHERE 1=1
 			AND SDATE BETWEEN #{dateStart} AND #{dateEnd}
@@ -203,7 +203,7 @@
 	
 	<!-- 노선별통행 지하철 일별 -->
 	<select id ="selectPassResultListRouteT_d" parameterType="sVO" resultType="egovMap" fetchSize="2000">
-		SELECT  /*+ PARALLEL(8) */ OPRAT_DATE, ANAL_AREA_CD, TFCMN, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END, CD_NO, ROUTE_TRAIN_GIN_AGG, ROUTE_TRAIN_GFF_AGG, ROUTE_TRAIN_TRS_AGG
+		SELECT  /*+ PARALLEL(8) */ OPRAT_DATE, TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD, TFCMN, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END, CD_NO, ROUTE_TRAIN_GIN_AGG, ROUTE_TRAIN_GFF_AGG, ROUTE_TRAIN_TRS_AGG
 		FROM 결과지표_노선별통행_일별
 		WHERE 1=1
 			AND SDATE BETWEEN #{dateStart} AND #{dateEnd}
@@ -224,7 +224,7 @@
 	
 	<!-- 정류장별통행 버스 일별 -->
 	<select id ="selectPassResultListStationB" parameterType="sVO" resultType="egovMap" fetchSize="2000">
-		SELECT /*+ PARALLEL(8) */  OPRAT_DATE, ANAL_AREA_CD, TFCMN, STTN_ID, STTN_NMA, STTN_HJD, CD_NO, STTN_BUS_GIN_AGG, STTN_BUS_GFF_AGG, STTN_BUS_TRS_AGG 
+		SELECT /*+ PARALLEL(8) */  OPRAT_DATE, TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD, TFCMN, STTN_ID, STTN_NMA, STTN_HJD, CD_NO, STTN_BUS_GIN_AGG, STTN_BUS_GFF_AGG, STTN_BUS_TRS_AGG 
 		FROM 결과지표_정류장별통행_일별
 		WHERE 1=1
 			AND SDATE = #{dateStart}
@@ -242,7 +242,7 @@
 	
 	<!-- 정류장별통행 지하철 일별 -->
 	<select id ="selectPassResultListStationT" parameterType="sVO" resultType="egovMap" fetchSize="2000">
-		SELECT /*+ PARALLEL(8) */ OPRAT_DATE, ANAL_AREA_CD, TFCMN, STTN_ID, STTN_NMA, STTN_HJD, CD_NO, STTN_TRAIN_GIN_AGG, STTN_TRAIN_GFF_AGG, STTN_TRAIN_TRS_AGG
+		SELECT /*+ PARALLEL(8) */ OPRAT_DATE,TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD, TFCMN, STTN_ID, STTN_NMA, STTN_HJD, CD_NO, STTN_TRAIN_GIN_AGG, STTN_TRAIN_GFF_AGG, STTN_TRAIN_TRS_AGG
 		FROM 결과지표_정류장별통행_일별
 		WHERE 1=1
 			AND SDATE = #{dateStart}
@@ -263,6 +263,7 @@
 		SELECT /*+ PARALLEL(16) */ 
 			ROWNUM
 			,OPRAT_DATE
+			,TO_CHAR(SDATE, 'DY') DY
 			,ANAL_AREA_CD
 			,TFCMN
 			,ROUTE_NMA
@@ -305,7 +306,7 @@
 	
 	<!-- 행정동간OD 목적통행 -->
 	<select id ="selectPassResultListAreaODPurpose" parameterType="sVO" resultType="egovMap"  fetchSize="2000">
-		SELECT /*+ PARALLEL(8) */ 운행일자 OPRAT_DATE, 분석지역_CD ANAL_AREA_CD, 승차내외부 GETINOUT, 승차지역명 GETINOUTNM, 하차내외부 OFFINOUT, 하차지역명 OFFINOUTNM, 코드번호 CD_NO, 정류장OD_통행량 CNT
+		SELECT /*+ PARALLEL(8) */ 운행일자 OPRAT_DATE, TO_CHAR(SDATE, 'DY') DY, 분석지역_CD ANAL_AREA_CD, 승차내외부 GETINOUT, 승차지역명 GETINOUTNM, 하차내외부 OFFINOUT, 하차지역명 OFFINOUTNM, 코드번호 CD_NO, 정류장OD_통행량 CNT
 		FROM 행정시군구별OD_목적통행_일별
 		WHERE 1=1
 		AND SDATE = #{dateStart}
@@ -322,7 +323,7 @@
 	
 	<!-- 행정동간OD 수단통행 -->
 	<select id ="selectPassResultListAreaODMethod" parameterType="sVO" resultType="egovMap" fetchSize="2000">
-		SELECT /*+ PARALLEL(8) */ 운행일자 OPRAT_DATE, 분석지역_CD ANAL_AREA_CD, 승차내외부 GETINOUT, 승차지역명 GETINOUTNM, 하차내외부 OFFINOUT, 하차지역명 OFFINOUTNM, 코드번호 CD_NO, 정류장OD_통행량 CNT
+		SELECT /*+ PARALLEL(8) */ 운행일자 OPRAT_DATE, TO_CHAR(SDATE, 'DY') DY, 분석지역_CD ANAL_AREA_CD, 승차내외부 GETINOUT, 승차지역명 GETINOUTNM, 하차내외부 OFFINOUT, 하차지역명 OFFINOUTNM, 코드번호 CD_NO, 정류장OD_통행량 CNT
 		FROM 행정시군구별OD_수단통행_일별
 		WHERE 1=1
 		AND SDATE = #{dateStart}
@@ -339,7 +340,7 @@
 	
 	<!-- 상위이용노선 -->
 	<select id ="selectPassREsultListTopRoute" parameterType="sVO" resultType="egovMap" fetchSize="2000">
-		SELECT /*+ PARALLEL(8) */  A.OPRAT_DATE, A.ANAL_AREA_CD, R, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END, A.CD_NO, TFCMN
+		SELECT /*+ PARALLEL(8) */  A.OPRAT_DATE, TO_CHAR(A.SDATE, 'DY') DY, A.ANAL_AREA_CD, R, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END, A.CD_NO, TFCMN
 			,ROUTE_BUS_GIN_AGG, ROUTE_BUS_GFF_AGG, ROUTE_BUS_TRS_AGG, ROUTE_BUS_SUM 
 		FROM 결과지표_노선별통행_일별 A,
 			(SELECT /*+ PARALLEL(8) */  R, ROUTE_ID, ROUTE_BUS_SUM
@@ -382,7 +383,7 @@
 	
 	<!-- 상위이용정류장 -->
 	<select id ="selectPassResultListTopStation" parameterType="sVO" resultType="egovMap" fetchSize="2000">
-	SELECT /*+ PARALLEL(8) */ A.OPRAT_DATE, A.ANAL_AREA_CD, KT.R, TFCMN, A.STTN_ID, STTN_NMA, STTN_HJD, A.CD_NO, TFCMN
+	SELECT /*+ PARALLEL(8) */ A.OPRAT_DATE,TO_CHAR(A.SDATE, 'DY') DY, A.ANAL_AREA_CD, KT.R, TFCMN, A.STTN_ID, STTN_NMA, STTN_HJD, A.CD_NO, TFCMN
 			,STTN_BUS_GIN_AGG, STTN_BUS_GFF_AGG, STTN_BUS_TRS_AGG
 			,STTN_TRAIN_GIN_AGG, STTN_TRAIN_GFF_AGG, STTN_TRAIN_TRS_AGG
 			,STTN_SUM 
@@ -444,7 +445,7 @@
 	
 	<!-- 상위이용정류장 버스 : 서울 선택만 -->
 	<select id ="selectPassResultListTopStationB" parameterType="sVO" resultType="egovMap" fetchSize="2000">
-		SELECT /*+ PARALLEL(8) */ A.OPRAT_DATE, A.ANAL_AREA_CD, KT.R, TFCMN, A.STTN_ID, STTN_NMA, STTN_HJD, A.CD_NO, TFCMN
+		SELECT /*+ PARALLEL(8) */ A.OPRAT_DATE, TO_CHAR(A.SDATE, 'DY') DY, A.ANAL_AREA_CD, KT.R, TFCMN, A.STTN_ID, STTN_NMA, STTN_HJD, A.CD_NO, TFCMN
 			,STTN_BUS_GIN_AGG, STTN_BUS_GFF_AGG, STTN_BUS_TRS_AGG, STTN_SUM 
 		FROM 결과지표_정류장별통행_일별 A,
 				(SELECT /*+ PARALLEL(8) */  ROWNUM R, STTN_ID, STTN_BUS_SUM STTN_SUM
@@ -483,7 +484,7 @@
 	
 	<!-- 상위이용정류장 지하철 : 서울 선택만 -->
 	<select id ="selectPassResultListTopStationT" parameterType="sVO" resultType="egovMap" fetchSize="2000">
-		SELECT /*+ PARALLEL(8) */ A.OPRAT_DATE, A.ANAL_AREA_CD, KT.R, TFCMN, A.STTN_ID, STTN_NMA, STTN_HJD, A.CD_NO, TFCMN
+		SELECT /*+ PARALLEL(8) */ A.OPRAT_DATE,TO_CHAR(A.SDATE, 'DY') DY, A.ANAL_AREA_CD, KT.R, TFCMN, A.STTN_ID, STTN_NMA, STTN_HJD, A.CD_NO, TFCMN
 			,STTN_TRAIN_GIN_AGG, STTN_TRAIN_GFF_AGG, STTN_TRAIN_TRS_AGG, STTN_SUM 
 		FROM 결과지표_정류장별통행_일별 A,
 					(SELECT /*+ PARALLEL(8) */ ROWNUM R,  STTN_ID, STTN_TRAIN_SUM STTN_SUM

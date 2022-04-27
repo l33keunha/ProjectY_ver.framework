@@ -25,6 +25,10 @@
 								<th class="tg-0pky" rowspan="2" style="width: 80px; min-width: 80px; max-width: 80px;">시/도</th>						<!-- 광역/도 -->
 								<th class="tg-0pky" rowspan="2" style="width: 80px; min-width: 80px; max-width: 80px;">시/군/구</th>					<!-- 시/군 -->
 								<th class="tg-0pky" rowspan="2" style="width: 70px; min-width: 70px; max-width: 70px;">날짜</th>						<!-- 날짜 -->
+								<!-- 시간대 : 1일 -->
+								<c:if test="${sVO.tm == 'allDay'}">
+									<th class="tg-0pky" rowspan="2" style="width: 30px; min-width: 30px; max-width: 30px;">요일</th>								<!-- 요일 -->								
+								</c:if>
 								<th class="tg-0pky" rowspan="2" style="width: 30px; min-width: 30px; max-width: 30px;">시간</th>						<!-- 시간 -->	
 								<c:forTokens  var="name" items="${cd_noText}" delims="_">
 									<th class="tg-0pky" colspan="3" style="width: 210px; min-width: 210px; max-width: 210px;">${name}</th>			<!-- 이용자 유형 -->
@@ -54,14 +58,14 @@
                			
                				<!-- 시간대 : 1일 -->
 	               			<c:if test ="${sVO.tm == 'allDay'}">
-	               					<c:set var = "forCnt" value = '${passResultList.size()/columnCnt/2}'/>						<!-- 컬럼갯수(이용자 유형)에 따른 총 반복횟수 -->	
-	               					<c:set var = "allDay" value = "2"/>															<!-- 시간대에 따른 연산 ( 시작시간 ~ 종료시간: 버스/지하철 * 2 ||  1일: 버스/지하철 * 1   )  -->
+	               					<c:set var = "forCnt" value = '${passResultList.size()/columnCnt/2}'/>				<!-- 컬럼갯수(이용자 유형)에 따른 총 반복횟수 -->	
+	               					<c:set var = "allDay" value = "2"/>													<!-- 시간대에 따른 연산 ( 시작시간 ~ 종료시간: 버스/지하철 * 2 ||  1일: 버스/지하철 * 1   )  -->
 	               			</c:if>
 	               			
 	               			<!-- 시간대 : 시작시간 ~ 끝시간 -->
 							<c:if test ="${sVO.tm == null}">
-	               					<c:set var = "forCnt" value = '${passResultList.size()/columnCnt/2}'/>						<!-- 컬럼갯수(이용자 유형)에 따른 총 반복횟수 -->	
-	               					<c:set var = "allDay" value = "2"/>															<!-- 시간대에 따른 연산 ( 시작시간 ~ 종료시간: 버스/지하철 * 2 ||  1일: 버스/지하철 * 1   )  -->
+	               					<c:set var = "forCnt" value = '${passResultList.size()/columnCnt/2}'/>				<!-- 컬럼갯수(이용자 유형)에 따른 총 반복횟수 -->	
+	               					<c:set var = "allDay" value = "2"/>													<!-- 시간대에 따른 연산 ( 시작시간 ~ 종료시간: 버스/지하철 * 2 ||  1일: 버스/지하철 * 1   )  -->
 	               			</c:if>
 							
 	    					<c:set var = "dateCnt" value = "${dateEnd - dateStart + 1}"/>								<!-- 날짜 종류 갯수 -->
@@ -91,10 +95,17 @@
 											<td class="tg-c3ow" rowspan='${forCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div>${anal_area_cd_sido_text}</div></td>		<!-- 광역/도 -->
 											<td class="tg-0pky" rowspan='${forCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div>${anal_area_cd_text}</div></td>				<!-- 시/군 -->
 										</c:if>				
+										
+										<!-- 요일 계산-->	
+										<fmt:parseDate value="${passResultList[j*columnCnt].opratDate}" var="dateFmt" pattern="yyyyMMdd"/>
+										<c:set var="todayStr"><fmt:formatDate value="${dateFmt}" pattern="E" /></c:set>		
+										
 										<td class="tg-0pky"  style="width: 70px; min-width: 70px; max-width: 70px;">${passResultList[j*columnCnt].opratDate}</td>							<!-- 날짜 -->
-										<c:if test="${(j % forCnt) == 0}">	 
+										<td class="tg-0pky"  style="width: 30px; min-width: 30px; max-width: 30px;">${todayStr}</td>														<!-- 요일 -->
+								
+										<c:if test="${(j % forCnt) == 0}">	   
 											<td class="tg-0pky" rowspan='${forCnt}' style="width: 30px; min-width: 30px; max-width: 30px;">전체</td>											<!-- 시간 -->
-										</c:if>
+										</c:if>				
 										<c:set var = "indexCnt" value = "${indexCnt + 1}"/>				
 									</c:if>
 									
