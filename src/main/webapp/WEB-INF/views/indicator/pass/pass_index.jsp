@@ -5,7 +5,8 @@
 <html lang="ko">
     <head>
         <title>통행지표</title>
-        <link rel="stylesheet" type="text/css" href="css/indexCSS.css"> 
+        <link rel="stylesheet" type="text/css" href="resources/css/indicator/pass_index.css"> 
+        <link rel="stylesheet" type="text/css" href="resources/css/indicator/jquery-ui.css"> 
  		<!-- <script type="text/javascript" src="js/pass_popUp.js" defer ></script> --> 
         <script src ="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -34,8 +35,7 @@
             <div><span>통행분석</span></div>
             <a href="#"><span>환승분석</span></a>
             <a href="#"><span>혼잡분석</span></a>
-            <a href="#"><span>시간분석</span></a>
-            <a href="#"><span>거리분석</span></a>
+            <a href="#"><span>시간/거리분석</span></a>
             <a href="#"><span>운행분석</span></a>
             <a href="#"><span>지도분석</span></a>
             <a href="#"><span>다운로드</span></a>
@@ -99,20 +99,20 @@
                         <option>시/도</option>
                     </select>
                     <select id="anal_area_cd" name="anal_area_cd">
-                        <option>시/군/구</option>
+                        <option>시/군</option>
                     </select>
                 </div>
 
                 <div class ="cell3_02">
-                    <p>분석자료</p>
+                    <p>자료</p>
                     <div>
-                        <label><input type="checkbox" name="provider" id="provider00" value="00"> 국토부</label>
-                        <label><input type="checkbox" name="provider" id="provider99" value="99"> 정산사</label>
+                        <label><input type="radio" name="provider" id="provider00" value="00"> 국토부</label>
+                        <label><input type="radio" name="provider" id="provider99" value="99"> 정산사</label>
                     </div>
                 </div>
 
                 <div class = "cell3_03"> 
-                	<p>날짜</p>
+                   <p>날짜</p>
                     <label>시작<input class="date" id="dateStart" name="dateStart"></label>
                     <label>종료<input class="date" id="dateEnd" name="dateEnd"></label>
                 </div>
@@ -123,7 +123,7 @@
                     <div class="cell4_01">
                         <label><input type="checkbox" name="tm" value="allDay"> 1일</label>
                         <select name="tmStart">
-                            <option value="00" >00</option>		
+                            <option value="00" >00</option>      
                             <option value="01" >01</option>
                             <option value="02" >02</option>
                             <option value="03" >03</option>
@@ -216,30 +216,30 @@
                                     <input type="checkbox" id="modalBtn" name="searchpassRoute">
                                     <label for="modalBtn">노선번호 검색</label>
                                     <!-- 노선번호 확인 modal -->
-							        <div class="modalContainer">
-										<div class="modalBox">
-											<div class="routeNotice">노선번호 검색</div>
-											<label for="modalBtn">x</label>
-											<div class="routeBox">
-												<input type="text" placeholder="(노선번호/노선유형/기점/종점) 검색..." id="searchRouteId">
-												<div class="routeListBox">
-													<div class='routeListTh' style='width:100%;'>
-														<p style="width: 21%; float:left;"> 노선명 </p>
-														<p style="width: 11%; float:left;margin-left: 23px;"> 노선유형 </p>
-														<p style="width: 7%; float:left;margin-left: 61px;"> 기점 </p>
-														<p style="width:30%; float:left;margin-left: 61px;"> 종점 </p>
-													</div>
-													<div class="routeLists">
-													</div>
-												</div>
-												<input type="button" id="routeBtn" value="확인">
-											</div>
-										</div>        	
-							        </div> 
+                             <div class="modalContainer">
+                              <div class="modalBox">
+                                 <div class="routeNotice">노선번호 검색</div>
+                                 <label for="modalBtn">x</label>
+                                 <div class="routeBox">
+                                    <input type="text" placeholder="(노선번호/노선유형/기점/종점) 검색..." id="searchRouteId">
+                                    <div class="routeListBox">
+                                       <div class='routeListTh' style='width:100%;'>
+                                          <p style="width: 21%; float:left;"> 노선명 </p>
+                                          <p style="width: 11%; float:left;margin-left: 23px;"> 노선유형 </p>
+                                          <p style="width: 7%; float:left;margin-left: 61px;"> 기점 </p>
+                                          <p style="width:30%; float:left;margin-left: 61px;"> 종점 </p>
+                                       </div>
+                                       <div class="routeLists">
+                                       </div>
+                                    </div>
+                                    <input type="button" id="routeBtn" value="확인">
+                                 </div>
+                              </div>           
+                             </div> 
                                 </div>
                             </div>
 
-                       	    <div class="search-con">
+                              <div class="search-con">
                             </div>
                         </div>
                     </div>
@@ -256,27 +256,6 @@
 	window.onload = function(){
 		diabledFalseType(2)
 	}
-	
-	
-	$(function(){
-	 	$('.date').datepicker({
-          	dateFormat: 'yy-mm-dd' //달력 날짜 형태
-             ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
-             ,showMonthAfterYear:true // 월- 년 순서가아닌 년도 - 월 순서
-             ,changeYear: true //option값 년 선택 가능
-             ,changeMonth: true //option값  월 선택 가능                
-             ,buttonText: "선택" //버튼 호버 텍스트              
-             ,yearSuffix: "년" //달력의 년도 부분 뒤 텍스트
-             ,monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 텍스트
-             ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip
-             ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 텍스트
-             ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 Tooltip
-             /* ,beforeShowDay: available */
- 	 })
-		
-		$( "#dateStart" ).datepicker("setDate" ,'2021-03-22');	
-		$( "#dateEnd" ).datepicker("setDate" ,'2021-03-22');	
-	})
 	// [--1]
 	
 	// [2] 값 받아서 다시 form에 담아 url에 보내줌
@@ -292,12 +271,10 @@
 					[ "anal_area_cd_text", 	$("select[name=anal_area_cd] option:selected").text()]
 		]
 		
-
 		//해당 체크된 엘리먼트의 이름과 값을 배열에 넣어준다.
 		$("[class=selectbox]").find("input:checked").each(function(index, item){
 			pushArray.push([ $(item)[0].name, $(item)[0].value ] )
 		})
-
 		window.open("" ,"newForm", "toolbar=no, width=1200, height=800, directories=no, status=no, scrollorbars=no, resizable=no"); 
 		
 		//set attribute (form) 
@@ -306,14 +283,12 @@
 		newForm.attr("method","post"); 
 		newForm.attr("action","passTest.do"); 
 		newForm.attr("target","newForm"); 
-
 		// create element & set attribute (input) 
 		for(var i=0; i<pushArray.length; i++){
 			newForm.append($('<input/>', {type: 'hidden', name: pushArray[i][0], value: pushArray[i][1] })); 
 			console.log("이름:"+ pushArray[i][0] +"    값:"+pushArray[i][1]);
 		}
 		console.log("---------------------------------------------------------------------------------------------");
-
 		// append form (to body) 
 		newForm.appendTo('body'); 
 		
@@ -389,12 +364,16 @@
 		$("select[name=anal_area_cd]").children('option:not(:first)').remove();
 		$('.cell3').find('input').prop("checked", false);
 		$('.cell3').find('input').prop("disabled", true);
+		$( "#dateStart" ).val('');	
+		$( "#dateEnd" ).val('');
+	
 		
 		$("[class=selectbox]").find("input:checked").each(function(index, item){
 			jsonArray[$(item)[0].name] = $(item)[0].value;
 		})
 		jsonArray["anal_area_cd_sido"] = $("select[name=anal_area_cd_sido]").val();
 		jsonArray["anal_area_cd"] = "null";
+		jsonArray["provider"] = "null";
 		
 		$.ajax({
 			url: 'searchAnal.do',
@@ -421,6 +400,7 @@
 		})
 		jsonArray["anal_area_cd_sido"] = $("select[name=anal_area_cd_sido]").val();
 		jsonArray["anal_area_cd"] = $("select[name=anal_area_cd]").val();
+		jsonArray["provider"] = "null";
 		
 		$.ajax({
 			url: 'searchAnal.do',
@@ -444,6 +424,10 @@
 		jsonArray["anal_area_cd_sido"] = $("select[name=anal_area_cd_sido]").val();
 		jsonArray["anal_area_cd"] = $("select[name=anal_area_cd]").val();
 		
+		if($("input[name=provider]").val() == '00'){
+			$('#provider99').prop("disabled", true);
+		}
+		
 		$.ajax({
 			url: 'searchAnal.do',
 			type: 'post',
@@ -451,32 +435,71 @@
 			data: jsonArray,
 			dataType: "json",
 			success: function (data){
-				var abledDays = [];
-	 			for(var i in data.passSearchList){
-	 				var date = new Date(data.passSearchList[i].opratDate.substr(0,4)
-							,data.passSearchList[i].opratDate.substr(4,2)-1
-							,data.passSearchList[i].opratDate.substr(6,2)); 
-					var date = data.passSearchList[i].opratDate.substr(0,4);
-					date    += '-';
-					date    += data.passSearchList[i].opratDate.substr(4,2);
-					date    += '-';
-					date    += data.passSearchList[i].opratDate.substr(6,2);
+				$(function(){
+					$(".date").datepicker({
+					   dateFormat: 'yy-mm-dd',
+					    prevText: '이전 달',
+					    nextText: '다음 달',
+					    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+					    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+					    dayNames: ['일','월','화','수','목','금','토'],
+					    dayNamesShort: ['일','월','화','수','목','금','토'],
+					    dayNamesMin: ['일','월','화','수','목','금','토'],
+					    showMonthAfterYear: true,
+					    changeMonth: true,
+					    changeYear: true,
+					    yearSuffix: '년',
+					    beforeShowDay: disableSomeDay
+					}); 
 					
-					abledDays.push(date);
-				} 
-				$('.date').datepicker({
-					beforeShowDay: available
-				})
-				console.log(abledDays);
+					$( "#dateStart" ).datepicker("setDate" ,'2021-03-22');
+						if($("input[name=anal_type]:checked").val() =='passCnt_purpose' 
+							|| $("input[name=anal_type]:checked").val() =='passCnt_method'
+							|| $("input[name=anal_type]:checked").val() =='passCnt_route'){
+							$( "#dateEnd" ).datepicker("setDate" ,'2021-03-22');
+						}
+					})
+						   
+					var abledDays = [];
 				
-				function available(date) {
-				    ymd = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
-				    if ($.inArray(ymd, abledDays) >= 0) {
-				        return [true,""];
-				    } else {
-				        return [false,""];
-				    }
-				}
+					for(var i in data.passSearchList){
+						var ymd; 
+						
+						var y = data.passSearchList[i].opratDate.substr(0,4);
+						var m;
+						console.log(data.passSearchList[i].opratDate.substr(4,2));
+						if(Number(data.passSearchList[i].opratDate.substr(4,2)) < 10){
+							m = data.passSearchList[i].opratDate.substr(5,1);
+						} else {
+							m = data.passSearchList[i].opratDate.substr(4,2);
+						}
+						var d;
+						if(Number(data.passSearchList[i].opratDate.substr(6,2)) < 10){
+							d = data.passSearchList[i].opratDate.substr(7,1);
+						} else {
+							d = data.passSearchList[i].opratDate.substr(6,2);
+						}
+						
+						ymd = y + "-" + m + "-" + d; 
+						abledDays.push(ymd);
+					}
+					
+					console.log(abledDays);
+					
+					function disableSomeDay(date) {
+					    var month = date.getMonth();
+					    var dates = date.getDate();
+					    var year = date.getFullYear();
+					    for (i = 0; i < abledDays.length; i++) {
+					        if($.inArray(year + '-' +(month+1) + '-' + dates,abledDays) != -1) {
+					            return [true];
+					        } else{
+					        	return [false];
+					        }
+					    }
+					    var noWeekend = jQuery.datepicker.noWeekends(date);
+					    return noWeekend[0] ? [true] : noWeekend;
+					}
 			}
 		})
 		
@@ -486,7 +509,8 @@
 		
 		// 목적통행, 수단통행은 시작~종료일 설정 가능
 		if($("input[name=anal_type]:checked").val() =='passCnt_purpose' 
-			|| $("input[name=anal_type]:checked").val() =='passCnt_method'){
+			|| $("input[name=anal_type]:checked").val() =='passCnt_method'
+			|| $("input[name=anal_type]:checked").val() =='passCnt_route'){
 				$(".cell3_03").find("label").eq(1).css("opacity", 1);
 				$("input[name=dateEnd]").prop("disabled", false);
 		}
@@ -608,7 +632,6 @@
 		addHtml += "<div> <p>종점</p><span>" + routeEnd + "</span></div>";
 		
 		$('.search-con').append(addHtml);
-
 	})
 	// [--5]
 	
@@ -647,8 +670,8 @@
 	    jsonArray["anal_area_cd"] = "null"; 
 	    jsonArray["anal_type"] = "null"; 
 	    
-	    $( "#dateStart" ).datepicker("setDate" ,'2021-03-22');	
-		$( "#dateEnd" ).datepicker("setDate" ,'2021-03-22');	
+	    $( "#dateStart" ).val('');	
+		$( "#dateEnd" ).val('');	
 	    
 		$(".search-con").children().remove();
 	}
@@ -668,13 +691,12 @@
 	
 	// 지역, 자료, 날짜, 시간대, 이용자유형 활성화
 	function disabledTrue(){
-		for(var i = 3; i < 6; i++){
+		for(var i = 4; i < 6; i++){
 			$(".cell" + [i]).css("opacity", 1);
 			$(".cell" + [i]).find('input').prop("disabled", false);
 			$(".cell" + [i]).find('select').prop("disabled", false);
 		}
 	}
-
 	// 시간대 비활성화
 	function disabledTime(){
 		$(".cell4").css("opacity", 0.3); 

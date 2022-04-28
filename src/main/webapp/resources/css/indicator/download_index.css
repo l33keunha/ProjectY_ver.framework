@@ -87,7 +87,7 @@ a{
 }
 .contents{
     text-align: center;
-    width: 1551px;
+    width: 1528px;
     height: 42px;
 }
 .contents a{
@@ -95,30 +95,28 @@ a{
     color: #000;
     float: left;
     font-size: 23px;
-    margin-left: 11px;
-    width: 159px;
-    /* padding: 5px; */
-    text-align: center;
-    /* background: aquamarine;*/
+    margin-left: 26px;
+    width: 165px;
+    /* padding: 5px;*/
 }
 .contents span{
     float: left;
     font-size: 23px;
-    margin-left: 11px;
-    width: 159px;
-    padding: 5px 0;
+    margin-left: 26px;
+    width: 165px;
+    padding: 5px;
 }
 .contents div{
     background-color: #5C7D9A;
-    width: 159px;
+    width: 170px;
     float: left;
-    margin-left: 11px;
+    margin-left: 26px;
     height: 43px;
 }
 .contents :first-child{
     margin-left: 0;
 }
-.contents :nth-child(9){
+.contents :nth-child(8){
     background-color: #5C7D9A;
     color: white;
 }
@@ -280,6 +278,9 @@ a{
     display: inline-block;
     width: 202px;
 }
+input.date {
+    margin-left: 10px;
+}
 
 #passDate {
     margin-left: 15px;
@@ -403,10 +404,10 @@ a{
 
 
 .submit{
-    margin-top: 34px;
+    margin-top: 11px;
     text-align: center;
     display: block;
-    width: 92px;
+    width: 145px;
     height: 49px;
     font-size: 25px;
     background-color: #5c7d9a;
@@ -417,4 +418,13 @@ a{
 a{
     text-decoration-line: none;
 
+}
+
+div#ui-datepicker-div{
+    position: absolute;
+    top: 754px;
+    left: 709.969px;
+    z-index: 1;
+    background-color: #fff;
+    width: 223px;
 }

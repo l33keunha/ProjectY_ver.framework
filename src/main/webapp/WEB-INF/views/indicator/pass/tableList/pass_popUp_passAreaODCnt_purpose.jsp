@@ -20,10 +20,10 @@
 				</c:choose>
 				
 				<tr>
-					<th class="tg-0pky" style="width: 80px; min-width: 80px; max-width: 80px;">시/도</th>					<!-- 광역/도 -->
-					<th class="tg-0pky" style="width: 80px; min-width: 80px; max-width: 80px;">시/군/구</th>				<!-- 시/군 -->
+					<th class="tg-0pky" style="width: 80px; min-width: 80px; max-width: 80px;">시/도</th>				<!-- 광역/도 -->
+					<th class="tg-0pky" style="width: 80px; min-width: 80px; max-width: 80px;">시/군/구</th>			<!-- 시/군 -->
 					<th class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;">분석일자</th>			<!-- 분석일자 -->
-					
+					<th class="tg-0pky"  style="width: 30px; min-width: 30px; max-width: 30px;">요일</th>				<!-- 요일 -->					
 					<th class="tg-0pky"  style="width: 80px; min-width: 80px; max-width: 80px;">출발존</th>			<!-- 출발존 -->
 					<th class="tg-0pky"  style="width: 80px; min-width: 80px; max-width: 80px;">출발행정동</th>		<!-- 출발행정동 -->
 					<th class="tg-0pky"  style="width: 80px; min-width: 80px; max-width: 80px;">도착존</th>			<!-- 도착존 -->
@@ -47,7 +47,7 @@
                			<c:set var = "forCnt" value = '${passResultList.size()/columnCnt}'/>						<!-- 컬럼갯수(이용자 유형)에 따른 총 반복횟수 -->
 						<fmt:parseNumber var = "forCnt" value = "${forCnt}"  />	
 					
-						<c:set var = "totalTotalSum" value = "0"/>												<!-- 승차소계 합계변수 -->	
+						<c:set var = "totalTotalSum" value = "0"/>													<!-- 승차소계 합계변수 -->	
 				
 					
 						<c:forEach var='j' begin='0' end='${forCnt-1}'>
@@ -56,13 +56,14 @@
 							<%-- 	<c:if test="${j == 0}">
 									<!-- 시간 * 날짜수  -->	   	
 									<td class="tg-0pky" rowspan='${forCnt+1}' style="width: 70px; min-width: 70px; max-width: 70px;"><div>${passResultList[0].opratDate}</div></td>	<!-- 분석일자 --> 
-									<td class="tg-0pky" rowspan='${forCnt+1}' style="width: 80px; min-width: 80px; max-width: 80px;"><div>${anal_area_cd_sido_text}</div></td>								<!-- 광역/도 -->
-									<td class="tg-0pky" rowspan='${forCnt+1}' style="width: 80px; min-width: 80px; max-width: 80px;"><div>${anal_area_cd_text}</div></td>								<!-- 시/군 -->
+									<td class="tg-0pky" rowspan='${forCnt+1}' style="width: 80px; min-width: 80px; max-width: 80px;"><div>${anal_area_cd_sido_text}</div></td>		<!-- 광역/도 -->
+									<td class="tg-0pky" rowspan='${forCnt+1}' style="width: 80px; min-width: 80px; max-width: 80px;"><div>${anal_area_cd_text}</div></td>			<!-- 시/군 -->
 								</c:if> --%>
 							
-									<td class="tg-0pky" style="width: 80px; min-width: 80px; max-width: 80px;"><div>${anal_area_cd_sido_text}</div></td>								<!-- 광역/도 -->
-									<td class="tg-0pky" style="width: 80px; min-width: 80px; max-width: 80px;"><div>${anal_area_cd_text}</div></td>								<!-- 시/군 -->
-									<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;"><div>${passResultList[0].opratDate}</div></td>	<!-- 분석일자 --> 
+									<td class="tg-0pky" style="width: 80px; min-width: 80px; max-width: 80px;"><div>${anal_area_cd_sido_text}</div></td>							<!-- 광역/도 -->
+									<td class="tg-0pky" style="width: 80px; min-width: 80px; max-width: 80px;"><div>${anal_area_cd_text}</div></td>									<!-- 시/군 -->
+									<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;"><div>${passResultList[0].opratDate}</div></td>						<!-- 분석일자 --> 
+									<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;"><div>${passResultList[0].dy}</div></td>								<!-- 요일 --> 
 							
 								<td class="tg-0pky" style="width: 80px; min-width: 80px; max-width: 80px;">${passResultList[j * columnCnt].getinout}</td>							<!-- 출발존 -->
 								<td class="tg-0pky" style="width: 80px; min-width: 80px; max-width: 80px;">${passResultList[j * columnCnt].getinoutnm}</td>							<!-- 출발행정동 -->
@@ -81,7 +82,7 @@
 								<c:forEach var='i' begin='${st}' end='${ed-1}' >
 									<td class="tg-0pky" style="width: 80px; min-width: 80px; max-width: 80px;">${passResultList[i].cnt}</td>		<!-- 이용자 유형 -->
 								
-									<c:set var = "totalSum" 	value = '${totalSum + (passResultList[i].cnt)}'/>							<!-- 합계 계산 -->
+									<c:set var = "totalSum" 	value = '${totalSum + (passResultList[i].cnt)}'/>									<!-- 합계 계산 -->
 								</c:forEach>
 								
 								<td class="tg-0pky" style="width: 100px; min-width: 100px; max-width: 100px;">${totalSum}</td>						<!-- 합계 -->

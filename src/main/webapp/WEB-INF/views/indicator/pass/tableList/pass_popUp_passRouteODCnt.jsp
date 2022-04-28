@@ -23,6 +23,7 @@
 					<th class="tg-0pky" style="width: 80px; min-width: 80px; max-width: 80px;">시/도</th>				<!-- 광역/도 -->
 					<th class="tg-0pky" style="width: 80px; min-width: 80px; max-width: 80px;">시/군/구</th>			<!-- 시/군 -->
 					<th class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;">분석일자</th>			<!-- 분석일자 -->
+					<th class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;">요일</th>				<!-- 요일 -->
 					
 					<th class="tg-0pky"  style="width: 80px; min-width: 80px; max-width: 80px;">노선구분</th>			<!-- 노선구분 -->
 					<th class="tg-0pky"  style="width: 80px; min-width: 80px; max-width: 80px;">노선명</th>			<!-- 노선명 -->
@@ -84,6 +85,7 @@
 										<td class="tg-0pky" rowspan='${dateCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div>${anal_area_cd_sido_text}</div></td>									<!-- 광역/도 -->
 										<td class="tg-0pky" rowspan='${dateCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div>${anal_area_cd_text}</div></td>										<!-- 시/군 -->
 										<td class="tg-0pky" rowspan='${dateCnt}' style="width: 70px; min-width: 70px; max-width: 70px;"><div>${passResultList[0].opratDate }</div></td>								<!-- 분석일자 --> 
+										<td class="tg-0pky" rowspan='${dateCnt}' style="width: 30px; min-width: 30px; max-width: 30px;"><div>${passResultList[0].dy }</div></td>									<!-- 요일 --> 
 										
 											<c:if test="${passResultList[0].tfcmn == 'B'}">
 												<c:set var="t_b_name" value='버스' />
@@ -118,6 +120,7 @@
 											<td class="tg-0pky" rowspan='${dateCnt+totalSumAdd}' style="width: 80px; min-width: 80px; max-width: 80px;"><div>${anal_area_cd_sido_text}</div></td>									<!-- 광역/도 -->
 											<td class="tg-0pky" rowspan='${dateCnt+totalSumAdd}' style="width: 80px; min-width: 80px; max-width: 80px;"><div>${anal_area_cd_text}</div></td>										<!-- 시/군 -->
 											<td class="tg-0pky" rowspan='${dateCnt+totalSumAdd}' style="width: 70px; min-width: 70px; max-width: 70px;"><div>${passResultList[dateCnt*indexCnt*columnCnt].opratDate }</div></td>	<!-- 분석일자 --> 
+											<td class="tg-0pky" rowspan='${dateCnt+totalSumAdd}' style="width: 30px; min-width: 30px; max-width: 30px;"><div>${passResultList[dateCnt*indexCnt*columnCnt].dy }</div></td>			<!-- 요일 --> 
 											
 												<c:if test="${passResultList[0].tfcmn == 'B'}">
 													<c:set var="t_b_name" value='버스' />

@@ -4,29 +4,29 @@
 		
 	<!-- Ajax: 분석지역 시도 조회 -->
 	<select id ="selectdownloadResultListStationCnt" parameterType="sVO" resultType="egovMap">
-	SELECT /*+ PARALLEL(8) */ *
-	FROM 
-		(
-			SELECT /*+ PARALLEL(8) */ * 
-			FROM 결과지표_정류장별통행
-			WHERE 1=1
-			AND SDATE ='20210322'
-			AND ANAL_AREA_CD ='31080'
-			AND PROVIDER ='00'
-		)
-	PIVOT
-		(
-			SUM(STTN_BUS_GIN_AGG) STTN_BUS_GIN_AGG
-			,SUM(STTN_BUS_GFF_AGG) STTN_BUS_GFF_AGG 
-			,SUM(STTN_BUS_TRS_AGG) STTN_BUS_TRS_AGG 
-			,SUM(STTN_TRAIN_GIN_AGG) STTN_TRAIN_GIN_AGG 
-			,SUM(STTN_TRAIN_GFF_AGG) STTN_TRAIN_GFF_AGG 
-			,SUM(STTN_TRAIN_TRS_AGG) STTN_TRAIN_TRS_AGG 
-			FOR CD_NO IN ('01'일반 , '02'어린이, '03'청소년, '04'경로
-								,'05'장애인 , '06' 국가유공자, '07' 다자녀부모, '08' 동반
-								,'09' 대학생 , '10' 복지 , '11' 기타)
-		)
-	ORDER BY STTN_NMA, TM
+		SELECT /*+ PARALLEL(8) */ *
+		FROM 
+			(
+				SELECT /*+ PARALLEL(8) */ * 
+				FROM 결과지표_정류장별통행
+				WHERE 1=1
+				AND SDATE ='20210322'
+				AND ANAL_AREA_CD ='31080'
+				AND PROVIDER ='00'
+			)
+		PIVOT
+			(
+				SUM(STTN_BUS_GIN_AGG) STTN_BUS_GIN_AGG
+				,SUM(STTN_BUS_GFF_AGG) STTN_BUS_GFF_AGG 
+				,SUM(STTN_BUS_TRS_AGG) STTN_BUS_TRS_AGG 
+				,SUM(STTN_TRAIN_GIN_AGG) STTN_TRAIN_GIN_AGG 
+				,SUM(STTN_TRAIN_GFF_AGG) STTN_TRAIN_GFF_AGG 
+				,SUM(STTN_TRAIN_TRS_AGG) STTN_TRAIN_TRS_AGG 
+				FOR CD_NO IN ('01'일반 , '02'어린이, '03'청소년, '04'경로
+									,'05'장애인 , '06' 국가유공자, '07' 다자녀부모, '08' 동반
+									,'09' 대학생 , '10' 복지 , '11' 기타)
+			)
+		ORDER BY STTN_NMA, TM
 	</select>
 	
 </mapper>

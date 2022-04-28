@@ -23,6 +23,7 @@
 					<th class="tg-0pky" style="width: 80px; min-width: 80px; max-width: 80px;">시/도</th>				<!-- 광역/도 -->
 					<th class="tg-0pky" style="width: 80px; min-width: 80px; max-width: 80px;">시/군/구</th>			<!-- 시/군 -->
 					<th class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;">분석일자</th>			<!-- 분석일자 -->
+					<th class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;">요일</th>				<!-- 요일 -->
 					
 					<th class="tg-0pky"  style="width: 80px; min-width: 80px; max-width: 80px;">출발존</th>			<!-- 출발존 -->
 					<th class="tg-0pky"  style="width: 80px; min-width: 80px; max-width: 80px;">출발행정동</th>		<!-- 출발행정동 -->
@@ -63,7 +64,8 @@
 							 
 								<td class="tg-0pky" style="width: 80px; min-width: 80px; max-width: 80px;"><div>${anal_area_cd_sido_text}</div></td>								<!-- 광역/도 -->
 								<td class="tg-0pky" style="width: 80px; min-width: 80px; max-width: 80px;"><div>${anal_area_cd_text}</div></td>					
-							 	<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;"><div>${passResultList[0].opratDate}</div></td>	<!-- 분석일자 --> 
+							 	<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;"><div>${passResultList[0].opratDate}</div></td>							<!-- 분석일자 --> 
+							 	<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div>${passResultList[0].dy}</div></td>									<!-- 요일 --> 
 								
 								<td class="tg-0pky" style="width: 80px; min-width: 80px; max-width: 80px;">${passResultList[j * columnCnt].getinout}</td>							<!-- 출발존 -->
 								<td class="tg-0pky" style="width: 80px; min-width: 80px; max-width: 80px;">${passResultList[j * columnCnt].getinoutnm}</td>							<!-- 출발행정동 -->

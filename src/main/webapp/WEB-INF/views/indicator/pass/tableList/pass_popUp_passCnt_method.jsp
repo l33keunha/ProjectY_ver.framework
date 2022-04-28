@@ -25,10 +25,7 @@
 								<th class="tg-0pky" rowspan="2" style="width: 80px; min-width: 80px; max-width: 80px;">시/도</th>						<!-- 광역/도 -->
 								<th class="tg-0pky" rowspan="2" style="width: 80px; min-width: 80px; max-width: 80px;">시/군/구</th>					<!-- 시/군 -->
 								<th class="tg-0pky" rowspan="2" style="width: 70px; min-width: 70px; max-width: 70px;">날짜</th>						<!-- 날짜 -->
-								<!-- 시간대 : 1일 -->
-								<c:if test="${sVO.tm == 'allDay'}">
-									<th class="tg-0pky" rowspan="2" style="width: 30px; min-width: 30px; max-width: 30px;">요일</th>								<!-- 요일 -->								
-								</c:if>
+								<th class="tg-0pky" rowspan="2" style="width: 30px; min-width: 30px; max-width: 30px;">요일</th>						<!-- 요일 -->								
 								<th class="tg-0pky" rowspan="2" style="width: 30px; min-width: 30px; max-width: 30px;">시간</th>						<!-- 시간 -->	
 								<c:forTokens  var="name" items="${cd_noText}" delims="_">
 									<th class="tg-0pky" colspan="3" style="width: 210px; min-width: 210px; max-width: 210px;">${name}</th>			<!-- 이용자 유형 -->
@@ -96,12 +93,8 @@
 											<td class="tg-0pky" rowspan='${forCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div>${anal_area_cd_text}</div></td>				<!-- 시/군 -->
 										</c:if>				
 										
-										<!-- 요일 계산-->	
-										<fmt:parseDate value="${passResultList[j*columnCnt].opratDate}" var="dateFmt" pattern="yyyyMMdd"/>
-										<c:set var="todayStr"><fmt:formatDate value="${dateFmt}" pattern="E" /></c:set>		
-										
-										<td class="tg-0pky"  style="width: 70px; min-width: 70px; max-width: 70px;">${passResultList[j*columnCnt].opratDate}</td>							<!-- 날짜 -->
-										<td class="tg-0pky"  style="width: 30px; min-width: 30px; max-width: 30px;">${todayStr}</td>														<!-- 요일 -->
+										<td class="tg-0pky"  style="width: 70px; min-width: 70px; max-width: 70px;">${passResultList[j*columnCnt*2].opratDate}</td>							<!-- 날짜 -->
+										<td class="tg-0pky"  style="width: 30px; min-width: 30px; max-width: 30px;">${passResultList[j*columnCnt*2].dy}</td>								<!-- 요일 -->
 								
 										<c:if test="${(j % forCnt) == 0}">	   
 											<td class="tg-0pky" rowspan='${forCnt}' style="width: 30px; min-width: 30px; max-width: 30px;">전체</td>											<!-- 시간 -->
@@ -120,6 +113,7 @@
 												<td class="tg-0pky" rowspan='${forCnt+totalSumAdd}'	 	style="width: 80px; min-width: 80px; max-width: 80px;"><div>${anal_area_cd_text}</div></td>						<!-- 시/군 -->												
 											</c:if>
 											<td class="tg-0pky" rowspan='${timeCnt+1}' 	style="width: 70px; min-width: 70px; max-width: 70px;"><div>${passResultList[dateCnt*indexCnt*columnCnt*2].opratDate}</div></td>	<!-- 날짜 -->
+											<td class="tg-0pky" rowspan='${timeCnt+1}' 	style="width: 30px; min-width: 30px; max-width: 30px;"><div>${passResultList[dateCnt*indexCnt*columnCnt*2].dy}</div></td>			<!-- 요일 -->
 											<c:set var = "indexCnt" value = "${indexCnt + 1}"/>
 										</c:if>
 										<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;">${passResultList[j*columnCnt*2].tm}</td>		<!-- 시간 -->
@@ -161,8 +155,8 @@
 											
 											<c:forEach var='k' begin='0' end='${columnCnt-1}' >	    
 												<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;">${passResultCntList[(columnCnt*totalTotalIndexCnt)+k].suma}</td>					<!-- 이용자유형 버스 합계-->
-												<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;">${passResultCntList[(columnCnt*totalTotalIndexCnt)+k].suma}</td>					<!-- 이용자유형 지하철 합계-->
-												<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;">${passResultCntList[(columnCnt*totalTotalIndexCnt)+k].suma}</td>					<!-- 소계의 합계-->
+												<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;">${passResultCntList[(columnCnt*totalTotalIndexCnt)+k+1].suma}</td>					<!-- 이용자유형 지하철 합계-->
+												<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;">${passResultCntList[(columnCnt*totalTotalIndexCnt)+k].suma + passResultCntList[(columnCnt*totalTotalIndexCnt)+k+1].suma}</td>					<!-- 소계의 합계-->
 											</c:forEach>
 										
 											<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;">${busTotalSum}</td>											<!-- 버스 총 소계-->

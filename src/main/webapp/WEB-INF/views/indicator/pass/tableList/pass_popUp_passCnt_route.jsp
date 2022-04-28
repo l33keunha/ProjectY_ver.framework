@@ -24,7 +24,7 @@
 					<th class="tg-0pky" rowspan="2" style="width: 80px; min-width: 80px; max-width: 80px;">시/군/구</th>			<!-- 시/군 -->
 					<th class="tg-0pky" rowspan="2" style="width: 80px; min-width: 80px; max-width: 80px;">노선구분</th>			<!-- 노선구분 -->
 					<th class="tg-0pky" rowspan="2" style="width: 70px; min-width: 70px; max-width: 70px;">분석일자</th>			<!-- 분석일자 -->
-					
+					<th class="tg-0pky" rowspan="2" style="width: 30px; min-width: 30px; max-width: 30px;">요일</th>				<!-- 요일 -->
 					<th class="tg-0pky" rowspan="2" style="width: 80px; min-width: 80px; max-width: 80px;">노선명</th>			<!-- 노선명 -->
 					<th class="tg-0pky" rowspan="2" style="width: 80px; min-width: 80px; max-width: 80px;">노선유형</th>			<!-- 노선유형 -->
 					<th class="tg-0pky" rowspan="2" style="width: 80px; min-width: 80px; max-width: 80px;">기점</th>				<!-- 기점 -->
@@ -122,7 +122,8 @@
 											<td class="tg-0pky" rowspan='${forCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div>${t_b_name}</div></td>				<!-- 노선구분 -->
 										</c:if> 
 									   	<!-- 시간 * 날짜수  -->
-										<td class="tg-0pky"   rowspan='${dateCnt}' style="width: 70px; min-width: 70px; max-width: 70px;"><div>${passResultListB[j*columnCnt].opratDate }</div></td>			<!-- 분석일자 --> 
+										<td class="tg-0pky"   rowspan='${dateCnt}' style="width: 70px; min-width: 70px; max-width: 70px;"><div>${passResultListB[j*columnCnt].opratDate }</div></td>	<!-- 분석일자 --> 
+										<td class="tg-0pky"   rowspan='${dateCnt}' style="width: 30px; min-width: 30px; max-width: 30px;"><div>${passResultListB[j*columnCnt].dy }</div></td>			<!-- 요일 --> 
 									</c:if>
 								
 								
@@ -169,6 +170,7 @@
 										
 										<!-- 시간 * 날짜수  -->	
 										<td class="tg-0pky" rowspan='${dateCnt+totalTimeSumAdd}' style="width: 70px; min-width: 70px; max-width: 70px;"><div>${passResultListB[dateCnt*indexCnt*columnCnt].opratDate }</div></td>	<!-- 분석일자 --> 
+										<td class="tg-0pky" rowspan='${dateCnt+totalTimeSumAdd}' style="width: 30px; min-width: 30px; max-width: 30px;"><div>${passResultListB[dateCnt*indexCnt*columnCnt].dy }</div></td>			<!-- 요일 --> 
 										<c:set var = "indexCnt" value = "${indexCnt + 1}"/>
 									</c:if>
 								

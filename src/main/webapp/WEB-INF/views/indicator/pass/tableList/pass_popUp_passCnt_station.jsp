@@ -23,6 +23,7 @@
 					<th class="tg-0pky" rowspan="2" style="width: 80px; min-width: 80px; max-width: 80px;">시/도</th>				<!-- 광역/도 -->
 					<th class="tg-0pky" rowspan="2" style="width: 80px; min-width: 80px; max-width: 80px;">시/군/구</th>			<!-- 시/군 -->
 					<th class="tg-0pky" rowspan="2" style="width: 70px; min-width: 70px; max-width: 70px;">분석일자</th>			<!-- 분석일자 -->
+					<th class="tg-0pky" rowspan="2" style="width: 30px; min-width: 30px; max-width: 30px;">요일</th>				<!-- 요일 -->
 					<th class="tg-0pky" rowspan="2" style="width: 80px; min-width: 80px; max-width: 80px;">정류장구분</th>			<!-- 정류장구분 -->
 					<th class="tg-0pky" rowspan="2" style="width: 80px; min-width: 80px; max-width: 80px;">정류장ID</th>			<!-- 정류장ID -->
 					<th class="tg-0pky" rowspan="2" style="width: 80px; min-width: 80px; max-width: 80px;">정류장명</th>			<!-- 정류장명 -->
@@ -66,6 +67,7 @@
 									<td class="tg-0pky" rowspan='${forCnt+1}' style="width: 80px; min-width: 80px; max-width: 80px;"><div>${anal_area_cd_sido_text}</div></td>				<!-- 광역/도 -->
 									<td class="tg-0pky" rowspan='${forCnt+1}' style="width: 80px; min-width: 80px; max-width: 80px;"><div>${anal_area_cd_text}</div></td>					<!-- 시/군 -->
 									<td class="tg-0pky" rowspan='${forCnt+1}' style="width: 70px; min-width: 70px; max-width: 70px;"><div>${passResultListB[0].opratDate}</div></td>		<!-- 분석일자 --> 
+									<td class="tg-0pky" rowspan='${forCnt+1}' style="width: 30px; min-width: 30px; max-width: 30px;"><div>${passResultListB[0].dy}</div></td>				<!-- 요일 --> 
 									
 									<c:if test="${passResultListB[0].tfcmn == 'B'}">
 										<c:set var="t_b_name" value='버스' />
@@ -160,6 +162,7 @@
 									<td class="tg-0pky" rowspan='${forCnt+1}' style="width: 80px; min-width: 80px; max-width: 80px;"><div>${anal_area_cd_sido_text}</div></td>				<!-- 광역/도 -->
 									<td class="tg-0pky" rowspan='${forCnt+1}' style="width: 80px; min-width: 80px; max-width: 80px;"><div>${anal_area_cd_text}</div></td>					<!-- 시/군 -->
 									<td class="tg-0pky" rowspan='${forCnt+1}' style="width: 70px; min-width: 70px; max-width: 70px;"><div>${passResultListT[0].opratDate}</div></td>		<!-- 분석일자 --> 
+									<td class="tg-0pky" rowspan='${forCnt+1}' style="width: 30px; min-width: 30px; max-width: 30px;"><div>${passResultListT[0].dy}</div></td>				<!-- 요일 --> 
 									
 									<c:if test="${passResultListT[0].tfcmn == 'B'}">
 										<c:set var="t_b_name" value='버스' />
@@ -210,7 +213,7 @@
 							<!-- 최종 열의 합 -->
 							<c:if test="${ j == (forCnt-1)}">
 								<tr>
-									<td class="tg-0pky" colspan="3" style="width: 210px; min-width: 210px; max-width: 210px;">합계</td>	
+									<td class="tg-0pky" colspan="4" style="width: 240px; min-width: 240px; max-width: 240px;">합계</td>	
 									
 									<c:forEach var='k' begin='0' end='${columnCnt-1}' >	    
 										<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;">${(columnCnt*totalTotalIndexCnt)+k}</td>					<!-- 승차 합계-->
@@ -228,8 +231,6 @@
 									<c:set var = "totalTotalOutSum" value = "0"/>
 									<c:set var = "totalTotalHsSum" value = "0"/>
 									<c:set var = "totalTotalIndexCnt" value = '${totalTotalIndexCnt + 1}'/>
-								
-									
 								</tr>
 							</c:if>
 							

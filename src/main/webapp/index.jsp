@@ -4,12 +4,13 @@
 <!DOCTYPE html>
 <html lang="ko">
     <head>
-        <title>다운로드</title>
-        <link rel="stylesheet" type="text/css" href="css/download_indexCSS.css"> 
-       <!-- <script type="text/javascript" src="js/pass_popUp.js" defer ></script>-->
+        <title>통행지표</title>
+        <link rel="stylesheet" type="text/css" href="resources/css/indicator/pass_index.css"> 
+        <link rel="stylesheet" type="text/css" href="resources/css/indicator/jquery-ui.css"> 
+ 		<!-- <script type="text/javascript" src="js/pass_popUp.js" defer ></script> --> 
         <script src ="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     </head>
 
     <body>
@@ -31,14 +32,13 @@
     <div class="ConName">
         <div class="contents">
             <a href="#"><span>이용분석</span></a>
-            <a href="#"><span>통행분석</span></a>
+            <div><span>통행분석</span></div>
             <a href="#"><span>환승분석</span></a>
             <a href="#"><span>혼잡분석</span></a>
             <a href="#"><span>시간/거리분석</span></a>
-            <a href="#"><span>거리분석</span></a>
             <a href="#"><span>운행분석</span></a>
             <a href="#"><span>지도분석</span></a>
-            <div><span>다운로드</span></div>
+            <a href="#"><span>다운로드</span></a>
         </div>
     </div>
     <div class="ConEx"></div>
@@ -49,47 +49,45 @@
                 <p>분석지표</p>
                 <div class="cell1_01"> 
                     <div>
-                        <label><input type="radio" name="anal_group" value="dlStation"> 정류장</label>
+                        <label><input type="radio" name="anal_group" value="passCnt"> 통행량</label>
                     </div>
                 </div>
 
                 <div class="cell1_02">
                     <div>
-                        <label><input type="radio" name="anal_group" value="dlRoute"> 노선</label>
+                        <div class="OD">
+                            <label><input type="radio" name="anal_group" value="passRouteODCnt"> 노선별OD</label>
+                        </div>
+                        <label><input type="radio" name="anal_group" value="passAreaODCnt"> 행정동간OD</label>
                     </div>
                 </div>
 
                 <div class="cell1_03">
                     <div>
-                        <label><input type="radio" name="anal_group" value="dlArea"> 행정동</label>
+                        <!-- <label><input type="checkbox" name="anal_group" value="passEtc"> 기타</label> -->
+                        <label><input type="radio" name="anal_group" value="passTopRotue"> 상위이용노선</label>
+                        <label><input type="radio" name="anal_group" value="passTopStation"> 상위이용정류장</label>
                     </div>
                 </div>
             </div>
-
             <div class ="cell2">
                 <p>분석유형</p>
                 <div class="cell2_01">
                     <div>
-                        <label><input type="radio" name="anal_type" value="dlStation_stationCnt"> 정류장별 통행</label>
-                        <label><input type="radio" name="anal_type" value="dlStation_station_purpose"> 정류장간 목적통행</label>
-                        <label><input type="radio" name="anal_type" value="dlStation_station_method"> 정류장간 수단통행</label>
-                        <label><input type="radio" name="anal_type" value="dlStation_station_run"> 정류장별 운행지표</label>
-                        <label><input type="radio" name="anal_type" value="dlStation_station_runCongestion"> 정류장간 운행/혼잡지표</label>
+                        <label><input type="radio" name="anal_type" value="passCnt_purpose"> 목적통행</label>
+                        <label><input type="radio" name="anal_type" value="passCnt_method"> 수단통행</label>
+                        <label><input type="radio" name="anal_type" value="passCnt_route"> 노선별통행</label>
+                        <label><input type="radio" name="anal_type" value="passCnt_station"> 정류장별통행</label>
                     </div>
                 </div>
                 <div class="cell2_02">
                     <div>
-                        <label><input type="radio" name="anal_type" value="dlRoute_routeCnt"> 노선별통행</label>
-                        <label><input type="radio" name="anal_type" value="dlRoute_routeODCnt"> 노선별 기종점통행</label>
-                        <label><input type="radio" name="anal_type" value="dlRoute_routeCBP"> 노선별 재차인원</label>
+                        <label><input type="radio" name="anal_type" value="passAreaODCnt_purpose"> 목적통행</label>
+                        <label><input type="radio" name="anal_type" value="passAreaODCnt_method"> 수단통행</label>
                     </div>
                 </div>
 
                 <div class="cell2_03">
-                    <div>
-                        <label><input type="radio" name="anal_type" value="dlArea_areaOD_purpose"> 행정동간 목적통행</label>
-                        <label><input type="radio" name="anal_type" value="dlArea_areaOD_method"> 행정동간 수단통행</label>
-                    </div>
                 </div>
             </div>
             
@@ -98,12 +96,10 @@
                     <p>지역</p>
                     
                     <select id="anal_area_cd_sido" name="anal_area_cd_sido">
-                        <option>광역/도</option>
-                        <option value="11">서울특별시</option>
+                        <option>시/도</option>
                     </select>
                     <select id="anal_area_cd" name="anal_area_cd">
                         <option>시/군</option>
-                        <option value="11">전체</option>
                     </select>
                 </div>
 
@@ -116,91 +112,183 @@
                 </div>
 
                 <div class = "cell3_03"> 
-                	<p>날짜</p>
-                    <label>날짜<input class="date" id="dateStart" name="dateStart"></label>
+                   <p>날짜</p>
+                    <label>시작<input class="date" id="dateStart" name="dateStart"></label>
+                    <label>종료<input class="date" id="dateEnd" name="dateEnd"></label>
                 </div>
             </div>
             <div class ="hcell1">
                 <div class ="cell4">
-                    <p>제공 자료</p>
+                    <p>시간대</p>
                     <div class="cell4_01">
+                        <label><input type="checkbox" name="tm" value="allDay"> 1일</label>
+                        <select name="tmStart">
+                            <option value="00" >00</option>      
+                            <option value="01" >01</option>
+                            <option value="02" >02</option>
+                            <option value="03" >03</option>
+                            <option value="04" >04</option>
+                            <option value="05" >05</option>
+                            <option value="06" >06</option>
+                            <option value="07" >07</option>
+                            <option value="08" >08</option>
+                            <option value="09" >09</option>
+                            <option value="10" >10</option>
+                            <option value="11" >11</option>
+                            <option value="12" >12</option>
+                            <option value="13" >13</option>
+                            <option value="14" >14</option>
+                            <option value="15" >15</option>
+                            <option value="16" >16</option>
+                            <option value="17" >17</option>
+                            <option value="18" >18</option>
+                            <option value="19" >19</option>
+                            <option value="20" >20</option>
+                            <option value="21" >21</option>
+                            <option value="22" >22</option>
+                            <option value="23" >23</option>
+                        </select> ~
+                        <select name="tmEnd">
+                            <option value="00" >00</option>
+                            <option value="01" >01</option>
+                            <option value="02" >02</option>
+                            <option value="03" >03</option>
+                            <option value="04" >04</option>
+                            <option value="05" >05</option>
+                            <option value="06" >06</option>
+                            <option value="07" >07</option>
+                            <option value="08" >08</option>
+                            <option value="09" >09</option>
+                            <option value="10" >10</option>
+                            <option value="11" >11</option>
+                            <option value="12" >12</option>
+                            <option value="13" >13</option>
+                            <option value="14" >14</option>
+                            <option value="15" >15</option>
+                            <option value="16" >16</option>
+                            <option value="17" >17</option>
+                            <option value="18" >18</option>
+                            <option value="19" >19</option>
+                            <option value="20" >20</option>
+                            <option value="21" >21</option>
+                            <option value="22" >22</option>
+                            <option value="23" >23</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class ="cell5">
+                    <p>이용자유형</p>
+                    <div class="cell5_01">
                         <div>
-                            <p>자료설명:</p>
-                            
-                            <span>test</span>
+                        <label><input type="checkbox" name="cd_no" value="00" onclick="selectAllCd(this)"> 전체</label>
+                        <label><input type="checkbox" name="cd_no" value="01"> 일반</label>
+                        <label><input type="checkbox" name="cd_no" value="02"> 어린이</label>
+                        <label><input type="checkbox" name="cd_no" value="03"> 청소년</label>
+                        <label><input type="checkbox" name="cd_no" value="04"> 경로</label>
+                        <label><input type="checkbox" name="cd_no" value="05"> 장애인</label>
+                        <label><input type="checkbox" name="cd_no" value="06"> 국가유공자</label>
+                        <label><input type="checkbox" name="cd_no" value="07"> 다자녀부모</label>
+                        <label><input type="checkbox" name="cd_no" value="08"> 동반</label>
+                        <label><input type="checkbox" name="cd_no" value="09"> 대학생</label>
+                        <label><input type="checkbox" name="cd_no" value="10"> 복지</label>
+                        <label><input type="checkbox" name="cd_no" value="11"> 기타</label>
+                    </div>
+                    </div>
+                </div>
+
+                <div class ="cell6">
+                    <p>교통 수단/노선</p>
+                    <div class="cell6_01">
+                        <p>수단</p>
+                        <div>
+                            <label><input type="radio" name="tfcmn" value="00"> 전체</label>
+                            <label><input type="radio" name="tfcmn" value="B"> 버스</label>
+                            <label><input type="radio" name="tfcmn" value="T"> 지하철</label>
                         </div>
                     </div>
-                    <div class="cell4_02">
-                        <div>
-                            <p>데이터 컬럼명:</p>
-                            <span>test</span>
+
+                    <div class="cell6_02">
+                        <p>노선</p>
+                        <div class="busname_wrap">
+                            <div class="search">
+                                <div class="input-wrap">
+                                    <input type="checkbox" id="modalBtn" name="searchpassRoute">
+                                    <label for="modalBtn">노선번호 검색</label>
+                                    <!-- 노선번호 확인 modal -->
+                             <div class="modalContainer">
+                              <div class="modalBox">
+                                 <div class="routeNotice">노선번호 검색</div>
+                                 <label for="modalBtn">x</label>
+                                 <div class="routeBox">
+                                    <input type="text" placeholder="(노선번호/노선유형/기점/종점) 검색..." id="searchRouteId">
+                                    <div class="routeListBox">
+                                       <div class='routeListTh' style='width:100%;'>
+                                          <p style="width: 21%; float:left;"> 노선명 </p>
+                                          <p style="width: 11%; float:left;margin-left: 23px;"> 노선유형 </p>
+                                          <p style="width: 7%; float:left;margin-left: 61px;"> 기점 </p>
+                                          <p style="width:30%; float:left;margin-left: 61px;"> 종점 </p>
+                                       </div>
+                                       <div class="routeLists">
+                                       </div>
+                                    </div>
+                                    <input type="button" id="routeBtn" value="확인">
+                                 </div>
+                              </div>           
+                             </div> 
+                                </div>
+                            </div>
+
+                              <div class="search-con">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <input class="submit" type="button" id="buttonTest" value="다운로드" style="cursor: pointer;" >
+        <input class="submit" type="button" id="buttonTest" value="조회" style="cursor: pointer;" >
         
     </body>
-
+	
 	<script>
 	// [1] 페이지 로드 시 비활성화로 시작
 	window.onload = function(){
 		diabledFalseType(2)
 	}
-	
-	$(function(){
-	 	$('.date').datepicker({
-          	dateFormat: 'yy-mm-dd' //달력 날짜 형태
-             ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
-             ,showMonthAfterYear:true // 월- 년 순서가아닌 년도 - 월 순서
-             ,changeYear: true //option값 년 선택 가능
-             ,changeMonth: true //option값  월 선택 가능                
-             ,buttonText: "선택" //버튼 호버 텍스트              
-             ,yearSuffix: "년" //달력의 년도 부분 뒤 텍스트
-             ,monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 텍스트
-             ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip
-             ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 텍스트
-             ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 Tooltip
-             /* ,beforeShowDay: available */
- 	 })
-		
-		$( "#dateStart" ).datepicker("setDate" ,'2021-03-22');	
-	})
 	// [--1]
 	
 	// [2] 값 받아서 다시 form에 담아 url에 보내줌
 	$('input[id=buttonTest]').on('click', function () {
 		var pushArray = [
 					[ "dateStart", 	$("input[name=dateStart]").val()],
+					[ "dateEnd", 	$("input[name=dateEnd]").val()],
 					[ "anal_area_cd_sido",  		$("select[name=anal_area_cd_sido]").val()],
 					[ "anal_area_cd", 	$("select[name=anal_area_cd]").val()],
+					[ "tmStart", 	$("select[name=tmStart]").val()],
+					[ "tmEnd", 	$("select[name=tmEnd]").val()],
 					[ "anal_area_cd_sido_text", 	$("[name=anal_area_cd_sido] option:selected").text()],
 					[ "anal_area_cd_text", 	$("select[name=anal_area_cd] option:selected").text()]
 		]
-
+		
 		//해당 체크된 엘리먼트의 이름과 값을 배열에 넣어준다.
 		$("[class=selectbox]").find("input:checked").each(function(index, item){
 			pushArray.push([ $(item)[0].name, $(item)[0].value ] )
 		})
-
 		window.open("" ,"newForm", "toolbar=no, width=1200, height=800, directories=no, status=no, scrollorbars=no, resizable=no"); 
 		
 		//set attribute (form) 
 		var newForm = $('<form></form>'); 
 		newForm.attr("name","newForm"); 
 		newForm.attr("method","post"); 
-		newForm.attr("action","downloadTest.do"); 
+		newForm.attr("action","passTest.do"); 
 		newForm.attr("target","newForm"); 
-
 		// create element & set attribute (input) 
 		for(var i=0; i<pushArray.length; i++){
 			newForm.append($('<input/>', {type: 'hidden', name: pushArray[i][0], value: pushArray[i][1] })); 
 			console.log("이름:"+ pushArray[i][0] +"    값:"+pushArray[i][1]);
 		}
 		console.log("---------------------------------------------------------------------------------------------");
-
 		// append form (to body) 
 		newForm.appendTo('body'); 
 		
@@ -209,40 +297,25 @@
 	});
 	// [--2]
 	
+	
 	// [3] 원하는 결과에 따라 맞는 조회조건 활성화
 	$(document).ready(function(){
 		// 1. 통행량 선택시
 		$('.cell1').change(function(){
 		diabledFalseType(2)
 			
-			if($("input[name=anal_group]:checked").val()=='dlStation'){
+			if($("input[name=anal_group]:checked").val()=='passCnt'){
 				$('.cell2').css("opacity", 1);
 				$('.cell2_01').find('input').prop("disabled",false);
 				$('.cell2_01').find('label').css("opacity", 1);
 				$('.cell2_02').find('label').css("opacity", 0.3);
-				$('.cell2_03').find('label').css("opacity", 0.3);
-				
-				// 환승&혼잡 지표 하기 전
-				$('.cell2_01').find('input').eq(3).prop("disabled",true);
-				$('.cell2_01').find('label').eq(3).css("opacity", 0.3);
-				$('.cell2_01').find('input').eq(4).prop("disabled",true);
-				$('.cell2_01').find('label').eq(4).css("opacity", 0.3);
-			} else if($("input[name=anal_group]:checked").val()=='dlRoute'){
+			} else if($("input[name=anal_group]:checked").val()=='passAreaODCnt'){
 				$('.cell2').css("opacity", 1);
 				$('.cell2_02').find('input').prop("disabled",false);
 				$('.cell2_02').find('label').css("opacity", 1);
 				$('.cell2_01').find('label').css("opacity", 0.3);
-				$('.cell2_03').find('label').css("opacity", 0.3);
-				
-				// 환승&혼잡 지표 하기 전
-				$('.cell2_02').find('input').eq(2).prop("disabled",true);
-				$('.cell2_02').find('label').eq(2).css("opacity", 0.3);
-			} else if($("input[name=anal_group]:checked").val()=='dlArea'){
-				$('.cell2').css("opacity", 1);
-				$('.cell2_03').find('input').prop("disabled",false);
-				$('.cell2_03').find('label').css("opacity", 1);
-				$('.cell2_01').find('label').css("opacity", 0.3);
-				$('.cell2_02').find('label').css("opacity", 0.3);
+			} else if($("input[name=anal_group]:checked").val()=='passRouteODCnt' || 'passTopRotue' || 'passTopStation'){
+				searchAnal()
 			} 
 		})
 	})
@@ -291,8 +364,9 @@
 		$("select[name=anal_area_cd]").children('option:not(:first)').remove();
 		$('.cell3').find('input').prop("checked", false);
 		$('.cell3').find('input').prop("disabled", true);
-		$( "#dateStart" ).datepicker("setDate" ,'2021-03-22');	
-		$( "#dateEnd" ).datepicker("setDate" ,'2021-03-22');
+		$( "#dateStart" ).val('');	
+		$( "#dateEnd" ).val('');
+	
 		
 		$("[class=selectbox]").find("input:checked").each(function(index, item){
 			jsonArray[$(item)[0].name] = $(item)[0].value;
@@ -350,6 +424,10 @@
 		jsonArray["anal_area_cd_sido"] = $("select[name=anal_area_cd_sido]").val();
 		jsonArray["anal_area_cd"] = $("select[name=anal_area_cd]").val();
 		
+		if($("input[name=provider]").val() == '00'){
+			$('#provider99').prop("disabled", true);
+		}
+		
 		$.ajax({
 			url: 'searchAnal.do',
 			type: 'post',
@@ -357,31 +435,71 @@
 			data: jsonArray,
 			dataType: "json",
 			success: function (data){
-				var abledDays = [];
-	 			for(var i in data.passSearchList){
-	 				var date = new Date(data.passSearchList[i].opratDate.substr(0,4)
-							,data.passSearchList[i].opratDate.substr(4,2)-1
-							,data.passSearchList[i].opratDate.substr(6,2)); 
-					var date = data.passSearchList[i].opratDate.substr(0,4);
-					date    += '-';
-					date    += data.passSearchList[i].opratDate.substr(4,2);
-					date    += '-';
-					date    += data.passSearchList[i].opratDate.substr(6,2);
+				$(function(){
+					$(".date").datepicker({
+					   dateFormat: 'yy-mm-dd',
+					    prevText: '이전 달',
+					    nextText: '다음 달',
+					    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+					    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+					    dayNames: ['일','월','화','수','목','금','토'],
+					    dayNamesShort: ['일','월','화','수','목','금','토'],
+					    dayNamesMin: ['일','월','화','수','목','금','토'],
+					    showMonthAfterYear: true,
+					    changeMonth: true,
+					    changeYear: true,
+					    yearSuffix: '년',
+					    beforeShowDay: disableSomeDay
+					}); 
 					
-					abledDays.push(date);
-				} 
-				$('.date').datepicker({
-					beforeShowDay: available
-				})
-				console.log(abledDays);
+					$( "#dateStart" ).datepicker("setDate" ,'2021-03-22');
+						if($("input[name=anal_type]:checked").val() =='passCnt_purpose' 
+							|| $("input[name=anal_type]:checked").val() =='passCnt_method'
+							|| $("input[name=anal_type]:checked").val() =='passCnt_route'){
+							$( "#dateEnd" ).datepicker("setDate" ,'2021-03-22');
+						}
+					})
+						   
+					var abledDays = [];
 				
-				function available(date) {
-					console.log('dk');
-				    ymd = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
-				    if ($.inArray(ymd, abledDays) = -1) {
-				    	return [false,""];
-				    }
-				}
+					for(var i in data.passSearchList){
+						var ymd; 
+						
+						var y = data.passSearchList[i].opratDate.substr(0,4);
+						var m;
+						console.log(data.passSearchList[i].opratDate.substr(4,2));
+						if(Number(data.passSearchList[i].opratDate.substr(4,2)) < 10){
+							m = data.passSearchList[i].opratDate.substr(5,1);
+						} else {
+							m = data.passSearchList[i].opratDate.substr(4,2);
+						}
+						var d;
+						if(Number(data.passSearchList[i].opratDate.substr(6,2)) < 10){
+							d = data.passSearchList[i].opratDate.substr(7,1);
+						} else {
+							d = data.passSearchList[i].opratDate.substr(6,2);
+						}
+						
+						ymd = y + "-" + m + "-" + d; 
+						abledDays.push(ymd);
+					}
+					
+					console.log(abledDays);
+					
+					function disableSomeDay(date) {
+					    var month = date.getMonth();
+					    var dates = date.getDate();
+					    var year = date.getFullYear();
+					    for (i = 0; i < abledDays.length; i++) {
+					        if($.inArray(year + '-' +(month+1) + '-' + dates,abledDays) != -1) {
+					            return [true];
+					        } else{
+					        	return [false];
+					        }
+					    }
+					    var noWeekend = jQuery.datepicker.noWeekends(date);
+					    return noWeekend[0] ? [true] : noWeekend;
+					}
 			}
 		})
 		
@@ -389,15 +507,157 @@
 		$(".cell3_03").find("label").eq(1).css("opacity", 0.3);
 		$("input[name=dateStart]").prop("disabled", false);
 		
-		// cell4
+		// 목적통행, 수단통행은 시작~종료일 설정 가능
+		if($("input[name=anal_type]:checked").val() =='passCnt_purpose' 
+			|| $("input[name=anal_type]:checked").val() =='passCnt_method'
+			|| $("input[name=anal_type]:checked").val() =='passCnt_route'){
+				$(".cell3_03").find("label").eq(1).css("opacity", 1);
+				$("input[name=dateEnd]").prop("disabled", false);
+		}
+		
+		// cell4, cell5, cell6 활성화
 		disabledTrue()
+		
+		// 시간대 비활성화
+		if($("input[name=anal_type]:checked").val() =='passCnt_station'
+			|| $("input[name=anal_group]:checked").val() =='passAreaODCnt'
+			|| $("input[name=anal_group]:checked").val() =='passTopRotue'){
+			disabledTime()
+		}
+		
+		// 노선별OD 조회조건 : 시간대는 2시간씩만, 노선번호 검색 활성화
+		if($("input[name=anal_group]:checked").val() =='passRouteODCnt'){
+			$('.cell6').css("opacity", 1);
+			$('.cell6_01').css("opacity", 0.3);
+			$("input[name=searchpassRoute]").prop("disabled", false);
+			$("label[for='modalBtn']").css("cursor","pointer");
+			
+			// 노선별OD는 2시간씩만 선택가능하게끔
+			$("select[name=tmEnd] option:eq(2)").prop("selected", true);
+			
+			$("select[name=tmStart]").change(function(){
+				var index = $("select[name=tmStart] option").index($("select[name=tmStart] option:selected")) + 2;
+				console.log(index);
+				if((index == 24) || (index == 25)) $("select[name=tmEnd] option:eq(23)").prop("selected", true);
+				else $('select[name=tmEnd] option:eq('+ index + ')').prop("selected", true);
+			})
+			
+			$("select[name=tmEnd]").change(function(){
+				var index = $("select[name=tmEnd] option").index($("select[name=tmEnd] option:selected")) - 2;
+				if((index == -2) || (index == -1)) $("select[name=tmStart] option:eq(0)").prop("selected", true);
+				else $('select[name=tmStart] option:eq('+ index + ')').prop("selected", true);
+			})
+		}
+		
+		// 상위이용정류장 조회조건 : 서울은 버스,지하철 다르게 표출
+		if($("input[name=anal_group]:checked").val() =='passTopStation'){
+			disabledTime()
+			if($("select[name=anal_area_cd] option:selected").val() =='11'){
+				$('.cell6').css("opacity", 1);
+				$('.cell6_02').css("opacity", 0.3);
+				$("input[name=tfcmn]").prop("disabled", false);
+			}
+		}
 	})
 	// [--4]
 	
+	// [5] 노선번호 조회 (Ajax)
+	// 노선번호 검색 버튼 누르면 조건에 맞는 노선번호 리스트 가져옴
+	$("input[name=searchpassRoute]").change(function(){
+		$(".routeBox").find('input').prop("checked", false);
+		$(".routeBox").find('input').prop("disabled", false);
+		$("#searchRouteId").val("");
+		$('.routeLists').empty();
+		
+		if($("input[name=searchpassRoute]").is(":checked")==true){
+			jsonArray["anal_area_cd"] = $("select[name=anal_area_cd]").val();
+			jsonArray["provider"] = $("input[name=provider]:checked").val();
+			jsonArray["dateStart"] = $("input[name=dateStart]").val();
+			
+			$.ajax({
+				url: "searchRouteId.do",
+				type: "post",
+				traditional: true,
+				data: jsonArray,
+				dataType: "json",
+				success: function(data){
+					for(var i in data.passRouteIdList){
+						var list = data.passRouteIdList[i];
+						
+						var addHtml = "";
+						
+						addHtml += "<div class='routeList'>";
+						addHtml += "<div class='routeNm'><input type='radio' value='" + list.routeId + "' name='routeId'>" + list.routeNma + "</div>";
+						addHtml += "<div class='routeType'>" + list.routeType + "</div>";
+						addHtml += "<div class='routeStart'>" + list.routeStart + "</div>";
+						addHtml += "<div class='routeEnd'>" + list.routeEnd + "</div>";
+						addHtml += "</div>";
+								
+						$('.routeLists').append(addHtml);
+					}
+				}
+				
+			})	
+		}
+	})
 	
-	// [5] 활성화/비활성화 모음
+	// 검색기능 : keyup때 마다 값이 포함된 리스트만 보여줌
+	$(document).ready(function(){
+		$("#searchRouteId").keyup(function(){
+			var k = $(this).val();
+			$(".routeList").hide();
+			var temp = $(".routeList:contains('" + k + "')");
+			$(temp).show();
+		})
+	})
+	
+	// 확인버튼 클릭 시, 라디오버튼이 선택된 값을 받아와 선택박스에 출력
+	$("#routeBtn").on('click',function(){
+		console.log($("input[name=routeId]:checked").val());
+		var routeNm = $("input[name=routeId]:checked").parent().parent().find('.routeNm').text();		
+		var routeType = $("input[name=routeId]:checked").parent().parent().find('.routeType').text();		
+		var routeStart = $("input[name=routeId]:checked").parent().parent().find('.routeStart').text();		
+		var routeEnd = $("input[name=routeId]:checked").parent().parent().find('.routeEnd').text();
+		
+		// 모달창 끄기
+		$("#modalBtn").prop("checked", false);
+		
+		// 선택박스 클리어
+		var addHtml = "";
+		$('.search-con').text("");
+		
+		addHtml += "<div> <p>노선명</p><span>" + routeNm + "</span></div>";
+		addHtml += "<div> <p>노선유형</p><span>" + routeType + "</span></div>";
+		addHtml += "<div> <p>기점</p><span>" + routeStart + "</span></div>";
+		addHtml += "<div> <p>종점</p><span>" + routeEnd + "</span></div>";
+		
+		$('.search-con').append(addHtml);
+	})
+	// [--5]
+	
+	// [6] 활성화/비활성화 모음
+	// 1일 - 시간대 비활성화
+	$("input[name=tm]").change(function(){
+		if($("input[name=tm]").is(":checked") == true){
+			$('.cell4').find('select').prop("disabled", true);
+		} else if($("input[name=tm]").is(":checked") == false){
+			$('.cell4').find('select').prop("disabled", false);
+		}
+	})
+	
+	// 이용자유형 전체선택/해제
+	function selectAllCd(selectAll){
+		 const checkboxes 
+	       = document.getElementsByName('cd_no');
+	  
+	 	 checkboxes.forEach((checkbox) => {
+	  	  checkbox.checked = selectAll.checked;
+	  })
+	}
+	
+	// 분석유형부터 초기화
 	function diabledFalseType(num){
-		for(var i = num; i < 5; i++){
+		for(var i = num; i < 7; i++){
 			$(".cell" + [i]).css("opacity", 0.3);
 			$(".cell" + [i]).find('input').prop("disabled", true);
 			$(".cell" + [i]).find('input').prop("checked", false);
@@ -410,11 +670,12 @@
 	    jsonArray["anal_area_cd"] = "null"; 
 	    jsonArray["anal_type"] = "null"; 
 	    
-	    $( "#dateStart" ).datepicker("setDate" ,'2021-03-22');	
-		$( "#dateEnd" ).datepicker("setDate" ,'2021-03-22');	
+	    $( "#dateStart" ).val('');	
+		$( "#dateEnd" ).val('');	
 	    
 		$(".search-con").children().remove();
 	}
+	
 	
 	// 상세 조회조건 체크박스부터 초기화
 	function disabledFalse(){
@@ -428,13 +689,23 @@
 		$(".search-con").children().remove();
 	}
 	
-	// 오른쪽박스
+	// 지역, 자료, 날짜, 시간대, 이용자유형 활성화
 	function disabledTrue(){
-		$(".cell4").css("opacity", 1);
+		for(var i = 4; i < 6; i++){
+			$(".cell" + [i]).css("opacity", 1);
+			$(".cell" + [i]).find('input').prop("disabled", false);
+			$(".cell" + [i]).find('select').prop("disabled", false);
+		}
 	}
-	// [--5]
+	// 시간대 비활성화
+	function disabledTime(){
+		$(".cell4").css("opacity", 0.3); 
+		$(".cell4").find('input').prop("disabled", true);
+		$(".cell4").find('input').prop("checked", true);
+		$(".cell4").find('select').prop("disabled", true);
+	}
+	// [--6]
 	
-	
+		
 	</script>
-
 </html>
