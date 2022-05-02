@@ -33,7 +33,6 @@ public class PassController {
 	public ModelAndView selectPassResultList(ModelAndView mv, HttpServletRequest req, @ModelAttribute SearchVO sVO) {
 		System.out.println(sVO.toString());
 		
-		
 		List<EgovMap> passResultList = new ArrayList<EgovMap>();  // 목적or수단 리스트
 		List<EgovMap> passResultListB = new ArrayList<EgovMap>(); // 노선별or정류장별 버스 리스트
 		List<EgovMap> passResultListT = new ArrayList<EgovMap>(); // 노선별or정류장별 지하철 리스트

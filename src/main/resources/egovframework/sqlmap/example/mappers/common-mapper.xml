@@ -4,53 +4,43 @@
 		
 	<!-- Ajax: 분석지역 시도 조회 -->
 	<select id ="selectPassSearchAjaxAnalAreaCd" parameterType="sVO" resultType="egovMap">
-		SELECT DISTINCT A.* ,B.분석지역명 analAreaNm
-		FROM
-			(SELECT DISTINCT ANAL_FIN, SUBSTR(ANAL_AREA_CD,1,2) ANAL_AREA_CD 
-			FROM GUIDE_BOOK
-			WHERE 1=1
-				AND ANAL_FIN =#{anal_fin}
-			ORDER BY ANAL_AREA_CD) A, 분석지역_CD B
-		WHERE 1=1
-		AND A.ANAL_AREA_CD = B.분석지역_CD
-		ORDER BY ANAL_AREA_CD
+		SELECT DISTINCT 분석지역_CD_시도 ANAL_AREA_CD_SIDO
+          ,CASE WHEN 분석지역_CD_시도 = '31' THEN  '경기도'
+                WHEN 분석지역_CD_시도 = '32' THEN  '강원도'
+                WHEN 분석지역_CD_시도 = '34' THEN  '충청남도'
+               ELSE 분석지역명
+               END  ANAL_AREA_NM
+		FROM 분석지역_CD
+		ORDER BY 분석지역_CD_시도
 	</select>
 	
 	<!-- Ajax: 분석지역 시군구 조회 -->
 	<select id ="selectPassSearchAjaxAnalArea" parameterType="sVO" resultType="egovMap">
-		SELECT DISTINCT A.* ,CASE WHEN ANAL_AREA_CD LIKE '__' THEN '전체' ELSE B.분석지역명 END analAreaNm
-			FROM
-				(SELECT DISTINCT ANAL_FIN, ANAL_AREA_CD 
-				FROM GUIDE_BOOK
-				WHERE 1=1
-				AND ANAL_FIN = #{anal_fin}
-				AND ANAL_AREA_CD LIKE #{anal_area_cd_sido} || '%'
-				ORDER BY ANAL_AREA_CD) A, 분석지역_CD B
-			WHERE 1=1
-				AND A.ANAL_AREA_CD = B.분석지역_CD
-				AND A.ANAL_AREA_CD NOT IN ('31', '32', '34')
-		ORDER BY ANAL_AREA_CD
+		SELECT DISTINCT 분석지역_CD ANAL_AREA_CD
+		  ,CASE WHEN 분석지역_CD LIKE '__' THEN '전체' ELSE 분석지역명 END analAreaNm
+		FROM 분석지역_CD 
+		WHERE 1=1
+		AND 분석지역_CD LIKE #{anal_area_cd_sido} || '%'
+		ORDER BY 분석지역_CD
 	</select>
 
 	<!-- Ajax: 분석자료 조회 -->
 	<select id ="selectPassSearchAjaxProvider" parameterType="sVO" resultType="egovMap">
-		SELECT DISTINCT ANAL_FIN, PROVIDER
-		FROM GUIDE_BOOK
+		SELECT DISTINCT OWNER PROVIDER
+		FROM 분석지역_CD
 		WHERE 1=1
-			AND ANAL_FIN = #{anal_fin}
-			AND ANAL_AREA_CD = #{anal_area_cd}
-		ORDER BY ANAL_AREA_CD
+			AND 분석지역_CD = #{anal_area_cd}
+		ORDER BY OWNER
 	</select>
 	
 	<!-- Ajax: 날짜 조회 -->
 	<select id ="selectPassSearchAjaxDate" parameterType="sVO" resultType="egovMap">
-		SELECT DISTINCT ANAL_FIN, OPRAT_DATE 
-		FROM GUIDE_BOOK
+		SELECT DISTINCT 운행일자 OPRAT_DATE, 유효일자 SDATE
+		FROM 분석지역_CD
 		WHERE 1=1
-			AND ANAL_FIN = #{anal_fin}
-			AND ANAL_AREA_CD = #{anal_area_cd}
-			AND PROVIDER = #{provider}
-		ORDER BY OPRAT_DATE 
+			AND 분석지역_CD = #{anal_area_cd}
+			AND OWNER = #{provider}
+		ORDER BY 운행일자
 	</select>
 	
 	<!-- Ajax: 분석 노선번호 조회 -->

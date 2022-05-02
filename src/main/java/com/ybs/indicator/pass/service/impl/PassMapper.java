@@ -39,18 +39,18 @@ public interface PassMapper {
 
 	// 정류장별통행 지하철 일별 
 	List<EgovMap> selectPassResultListStationT(SearchVO sVO);
-
-	// 노선별 정류장간 OD 
-	List<EgovMap> selectPassResultListAreaODPurpose(SearchVO sVO);
-
-	// 노선별 정류장간 OD 일별 
-	List<EgovMap> selectPassResultListAreaODMethod(SearchVO sVO);
-
-	// 행정동간OD 목적통행 
+	
+	// 노선별 정류장간OD 시간대별 
 	List<EgovMap> selectPassResultListRouteOD(SearchVO sVO);
 	
-	// 행정동간OD 수단통행 
+	// 노선별 정류장간OD 일별 
 	List<EgovMap> selectPassResultListRouteOD_d(SearchVO sVO);
+
+	// 행정동간OD 목적통행 
+	List<EgovMap> selectPassResultListAreaODPurpose(SearchVO sVO);
+
+	// 행정동간OD 수단통행 
+	List<EgovMap> selectPassResultListAreaODMethod(SearchVO sVO);
 
 	// 상위이용노선 
 	List<EgovMap> selectPassREsultListTopRoute(SearchVO sVO);

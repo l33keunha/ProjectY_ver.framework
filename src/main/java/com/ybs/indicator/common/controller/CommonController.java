@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.egovframe.rte.psl.dataaccess.util.EgovMap;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,6 +27,18 @@ public class CommonController {
 	@Resource(name = "beanValidator")
 	protected DefaultBeanValidator beanValidator;
 	
+	@RequestMapping(value="/goPassIndex.do")
+	public ModelAndView goPassIndex (ModelAndView mv) {
+		mv.setViewName("indicator/pass/pass_index");
+		return mv;
+	}
+	
+	@RequestMapping(value="/goDownloadIndex.do")
+	public ModelAndView goDownloadIndex (ModelAndView mv) {
+		mv.setViewName("indicator/download/download_index");
+		return mv;
+	}
+		
 	// cell1. Ajax (날짜, 분석자료, 지역)
 	@ResponseBody
 	@RequestMapping(value="/searchAnal.do")
@@ -33,13 +46,8 @@ public class CommonController {
 		ModelAndView mv = new ModelAndView("jsonView");
 		List<EgovMap> passSearchList = new ArrayList<EgovMap>();
 		
-		sVO.setAnal_fin(sVO.getAnal_type());
-		if(sVO.getAnal_group().equals("passRouteODCnt")
-			|| sVO.getAnal_group().equals("passTopRotue")
-			|| sVO.getAnal_group().equals("passTopStation")) {
-			sVO.setAnal_fin(sVO.getAnal_group());
-		}
 		System.out.println(sVO.toString());
+		
 		
 		passSearchList = service.selectPassSearchList(sVO);
 		

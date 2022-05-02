@@ -79,7 +79,7 @@ a{
   
   .dropdown:hover .dropbtn {background-color: #c6dcf0;}
 .ConName{
-    height: 43px;
+    height: 41px;
     width: 1920px;
     /* margin-top: 15px; */
     /* margin-bottom: 10px; */
@@ -106,12 +106,11 @@ a{
     width: 165px;
     padding: 5px;
 }
-.contents div{
+#passCate span{
     background-color: #5C7D9A;
-    width: 170px;
+    width: 100px;
     float: left;
     margin-left: 26px;
-    height: 43px;
 }
 .contents :first-child{
     margin-left: 0;

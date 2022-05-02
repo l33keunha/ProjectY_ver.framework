@@ -7,7 +7,7 @@
 		SELECT /*+ PARALLEL(4) */  OPRAT_DATE,  TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD ,TM ,CD_NO ,USER_CNT_AGG 
 		FROM 결과지표_목적통행
 			WHERE 1=1
-				AND SDATE BETWEEN #{dateStart} AND #{dateEnd}
+				AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
 				AND ANAL_AREA_CD = #{anal_area_cd}
 				AND PROVIDER = #{provider}
 				<if test="tm==null">
@@ -31,7 +31,7 @@
 				,ROW_NUMBER() OVER(PARTITION BY OPRAT_DATE, CD_NO ORDER BY CD_NO) R1
 			FROM 결과지표_목적통행
 			WHERE 1=1
-				AND SDATE BETWEEN #{dateStart} AND #{dateEnd}
+				AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
 				AND ANAL_AREA_CD = #{anal_area_cd}
 				AND PROVIDER = #{provider}
 				<if test="tm==null">
@@ -54,7 +54,7 @@
 				(SELECT  /*+ PARALLEL(4) */ OPRAT_DATE, SDATE, ANAL_AREA_CD ,TM ,CD_NO ,USER_CNT_AGG, SUM(USER_CNT_AGG) OVER (PARTITION BY OPRAT_DATE, CD_NO ORDER BY CD_NO) SUMA
 				FROM 결과지표_목적통행
 				WHERE 1=1
-					AND SDATE BETWEEN #{dateStart} AND #{dateEnd}
+					AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
 					AND ANAL_AREA_CD = #{anal_area_cd}
 					AND PROVIDER = #{provider}
 					<if test="tm==null">
@@ -75,7 +75,7 @@
 		SELECT /*+ PARALLEL(4) */  OPRAT_DATE, TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD ,TM ,CD_NO, TFCMN, USER_CNT_AGG 
 			FROM 결과지표_수단통행
 			WHERE 1=1
-				AND SDATE BETWEEN #{dateStart} AND #{dateEnd}
+				AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
 				AND ANAL_AREA_CD = #{anal_area_cd}
 				AND PROVIDER = #{provider}
 				<if test="tm==null">
@@ -99,7 +99,7 @@
 				,ROW_NUMBER() OVER(PARTITION BY OPRAT_DATE, CD_NO, TFCMN ORDER BY CD_NO) R1
 			FROM 결과지표_수단통행
 			WHERE 1=1
-				AND SDATE BETWEEN #{dateStart} AND #{dateEnd}
+				AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
 				AND ANAL_AREA_CD = #{anal_area_cd}
 				AND PROVIDER = #{provider}
 				<if test="tm==null">
@@ -123,7 +123,7 @@
 				,SUM(USER_CNT_AGG) OVER (PARTITION BY OPRAT_DATE, CD_NO, TFCMN ORDER BY CD_NO) SUMA
 				FROM 결과지표_수단통행
 				WHERE 1=1
-					AND SDATE BETWEEN #{dateStart} AND #{dateEnd}
+					AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
 					AND ANAL_AREA_CD = #{anal_area_cd}
 					AND PROVIDER = #{provider}
 					<if test="tm==null">
@@ -144,9 +144,8 @@
 		SELECT /*+ PARALLEL(8) */ OPRAT_DATE, TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD, TFCMN, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END, TM, CD_NO, ROUTE_BUS_GIN_AGG, ROUTE_BUS_GFF_AGG, ROUTE_BUS_TRS_AGG
 			FROM 결과지표_노선별통행
 			WHERE 1=1
-				AND SDATE BETWEEN #{dateStart} AND #{dateEnd}
-				AND ANAL_AREA_CD = #{anal_area_cd}
-				AND PROVIDER = #{provider}
+				AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
+				AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
 				<if test="tm==null">
 					AND TM BETWEEN #{tmStart} AND #{tmEnd}
 				</if>
@@ -165,9 +164,8 @@
 		SELECT /*+ PARALLEL(8) */ OPRAT_DATE, TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD, TFCMN, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END, CD_NO, ROUTE_BUS_GIN_AGG, ROUTE_BUS_GFF_AGG, ROUTE_BUS_TRS_AGG
 		FROM 결과지표_노선별통행_일별
 		WHERE 1=1
-			AND SDATE BETWEEN #{dateStart} AND #{dateEnd}
-			AND ANAL_AREA_CD = #{anal_area_cd}
-			AND PROVIDER = #{provider}
+			AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
+			AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
 			<if test="tm==null">
 				AND TM BETWEEN #{tmStart} AND #{tmEnd}
 			</if>
@@ -186,9 +184,8 @@
 		SELECT /*+ PARALLEL(8) */ OPRAT_DATE,TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD, TFCMN, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END, TM, CD_NO, ROUTE_TRAIN_GIN_AGG, ROUTE_TRAIN_GFF_AGG, ROUTE_TRAIN_TRS_AGG
 		FROM 결과지표_노선별통행
 		WHERE 1=1
-			AND SDATE BETWEEN #{dateStart} AND #{dateEnd}
-			AND ANAL_AREA_CD = #{anal_area_cd}
-			AND PROVIDER = #{provider}
+			AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
+			AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
 			<if test="tm==null">
 				AND TM BETWEEN #{tmStart} AND #{tmEnd}
 			</if>
@@ -207,9 +204,8 @@
 		SELECT  /*+ PARALLEL(8) */ OPRAT_DATE, TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD, TFCMN, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END, CD_NO, ROUTE_TRAIN_GIN_AGG, ROUTE_TRAIN_GFF_AGG, ROUTE_TRAIN_TRS_AGG
 		FROM 결과지표_노선별통행_일별
 		WHERE 1=1
-			AND SDATE BETWEEN #{dateStart} AND #{dateEnd}
-			AND ANAL_AREA_CD = #{anal_area_cd}
-			AND PROVIDER = #{provider}
+			AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
+			AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
 			<if test="tm==null">
 				AND TM BETWEEN #{tmStart} AND #{tmEnd}
 			</if>
@@ -228,9 +224,8 @@
 		SELECT /*+ PARALLEL(8) */  OPRAT_DATE, TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD, TFCMN, STTN_ID, STTN_NMA, STTN_HJD, CD_NO, STTN_BUS_GIN_AGG, STTN_BUS_GFF_AGG, STTN_BUS_TRS_AGG 
 		FROM 결과지표_정류장별통행_일별
 		WHERE 1=1
-			AND SDATE = #{dateStart}
-			AND ANAL_AREA_CD = #{anal_area_cd}
-			AND PROVIDER = #{provider}
+			AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
+			AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
 			<if test="!cd_no[0].equals('00')">
 				AND CD_NO IN
 				<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
@@ -246,9 +241,8 @@
 		SELECT /*+ PARALLEL(8) */ OPRAT_DATE,TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD, TFCMN, STTN_ID, STTN_NMA, STTN_HJD, CD_NO, STTN_TRAIN_GIN_AGG, STTN_TRAIN_GFF_AGG, STTN_TRAIN_TRS_AGG
 		FROM 결과지표_정류장별통행_일별
 		WHERE 1=1
-			AND SDATE = #{dateStart}
-			AND ANAL_AREA_CD = #{anal_area_cd}
-			AND PROVIDER = #{provider}
+			AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
+			AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
 			<if test="!cd_no[0].equals('00')">
 				AND CD_NO IN
 				<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
@@ -282,11 +276,10 @@
 			,정류장OD_통행량 CNT
 		FROM
 			(SELECT /*+ PARALLEL(16) */ *
-			FROM 노선별정류장간OD_주석_REV
+			FROM 노선별정류장간OD_주석
 			WHERE 1=1
-				AND SDATE = #{dateStart}
-				AND ANAL_AREA_CD = #{anal_area_cd}
-				AND PROVIDER = #{provider}
+				AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
+				AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
 				AND ROUTE_ID =#{routeId}
 				<if test="tm==null">
 					AND TM BETWEEN #{tmStart} AND #{tmEnd}
@@ -310,9 +303,8 @@
 		SELECT /*+ PARALLEL(8) */ 운행일자 OPRAT_DATE, TO_CHAR(SDATE, 'DY') DY, 분석지역_CD ANAL_AREA_CD, 승차내외부 GETINOUT, 승차지역명 GETINOUTNM, 하차내외부 OFFINOUT, 하차지역명 OFFINOUTNM, 코드번호 CD_NO, 정류장OD_통행량 CNT
 		FROM 행정시군구별OD_목적통행_일별
 		WHERE 1=1
-		AND SDATE = #{dateStart}
-		AND 분석지역_CD = #{anal_area_cd}
-		AND OWNER = #{provider}
+		AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
+		AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
 		<if test="!cd_no[0].equals('00')">
 				AND 코드번호 IN
 				<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
@@ -327,9 +319,8 @@
 		SELECT /*+ PARALLEL(8) */ 운행일자 OPRAT_DATE, TO_CHAR(SDATE, 'DY') DY, 분석지역_CD ANAL_AREA_CD, 승차내외부 GETINOUT, 승차지역명 GETINOUTNM, 하차내외부 OFFINOUT, 하차지역명 OFFINOUTNM, 코드번호 CD_NO, 정류장OD_통행량 CNT
 		FROM 행정시군구별OD_수단통행_일별
 		WHERE 1=1
-		AND SDATE = #{dateStart}
-		AND 분석지역_CD = #{anal_area_cd}
-		AND OWNER = #{provider}
+		AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
+		AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
 		<if test="!cd_no[0].equals('00')">
 				AND 코드번호 IN
 				<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
@@ -353,9 +344,8 @@
 				 	   ,ROW_NUMBER() OVER (PARTITION BY ROUTE_ID ORDER BY CD_NO) R1
 				FROM 결과지표_노선별통행_일별
 				WHERE 1=1
-				AND SDATE = #{dateStart}
-				AND ANAL_AREA_CD  = #{anal_area_cd}
-				AND PROVIDER  = #{provider}
+				AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
+				AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
 				<if test="!cd_no[0].equals('00')">
 					AND CD_NO IN
 					<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
@@ -368,9 +358,8 @@
 				)
 			WHERE R <![CDATA[ < ]]> 51) KT
 		WHERE 1=1
-			AND A.SDATE = #{dateStart}
-			AND A.ANAL_AREA_CD = #{anal_area_cd}
-			AND A.PROVIDER = #{provider}
+			AND A.SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
+			AND A.PART_KEY = #{provider} || '_' || #{anal_area_cd}
 			<if test="!cd_no[0].equals('00')">
 				AND CD_NO IN
 				<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
@@ -398,9 +387,8 @@
 					 	   ,ROW_NUMBER() OVER (PARTITION BY STTN_ID ORDER BY CD_NO) R1
 					FROM 결과지표_정류장별통행_일별
 					WHERE 1=1
-						AND SDATE = #{dateStart}
-						AND ANAL_AREA_CD  = #{anal_area_cd}
-						AND PROVIDER  = #{provider}
+						AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
+						AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
 						<if test="!cd_no[0].equals('00')">
 							AND CD_NO IN
 							<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
@@ -417,9 +405,8 @@
 					 	   ,ROW_NUMBER() OVER (PARTITION BY STTN_ID ORDER BY CD_NO) R1
 					FROM 결과지표_정류장별통행_일별
 					WHERE 1=1
-						AND SDATE = #{dateStart}
-						AND ANAL_AREA_CD = #{anal_area_cd}
-						AND PROVIDER = #{provider}
+						AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
+						AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
 						<if test="!cd_no[0].equals('00')">
 							AND CD_NO IN
 							<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
@@ -431,9 +418,8 @@
 				ORDER BY STTN_SUM DESC)
 			WHERE ROWNUM <![CDATA[ < ]]> 101)KT
 		WHERE 1=1
-			AND A.SDATE = #{dateStart}
-			AND A.ANAL_AREA_CD = #{anal_area_cd}
-			AND A.PROVIDER = #{provider}
+			AND A.SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
+			AND A.PART_KEY = #{provider} || '_' || #{anal_area_cd}
 			<if test="!cd_no[0].equals('00')">
 				AND CD_NO IN
 				<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
@@ -456,9 +442,8 @@
 					 	   ,ROW_NUMBER() OVER (PARTITION BY STTN_ID ORDER BY CD_NO) R1
 					FROM 결과지표_정류장별통행_일별
 					WHERE 1=1
-						AND SDATE = #{dateStart}
-						AND ANAL_AREA_CD = #{anal_area_cd}
-						AND PROVIDER = #{provider}
+						AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
+						AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
 						<if test="!cd_no[0].equals('00')">
 							AND CD_NO IN
 							<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
@@ -470,9 +455,8 @@
 					WHERE R1 = 1
 					AND ROWNUM <![CDATA[ < ]]> 101)KT
 			WHERE 1=1
-				AND A.SDATE = #{dateStart}
-				AND A.ANAL_AREA_CD = #{anal_area_cd}
-				AND A.PROVIDER = #{provider}
+				AND A.SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
+				AND A.PART_KEY = #{provider} || '_' || #{anal_area_cd}
 				<if test="!cd_no[0].equals('00')">
 					AND CD_NO IN
 					<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
@@ -495,9 +479,8 @@
 					 	   ,ROW_NUMBER() OVER (PARTITION BY STTN_ID ORDER BY CD_NO) R1
 					FROM 결과지표_정류장별통행_일별
 					WHERE 1=1
-						AND SDATE = #{dateStart}
-						AND ANAL_AREA_CD = #{anal_area_cd}
-						AND PROVIDER = #{provider}
+						AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
+						AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
 						<if test="!cd_no[0].equals('00')">
 							AND CD_NO IN
 							<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
@@ -509,9 +492,8 @@
 				WHERE R1 = 1
 				AND ROWNUM <![CDATA[ < ]]> 101)KT
 		WHERE 1=1
-			AND A.SDATE = #{dateStart}
-			AND A.ANAL_AREA_CD = #{anal_area_cd}
-			AND A.PROVIDER = #{provider}
+			AND A.SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
+			AND A.PART_KEY = #{provider} || '_' || #{anal_area_cd}
 			<if test="!cd_no[0].equals('00')">
 				AND CD_NO IN
 				<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">

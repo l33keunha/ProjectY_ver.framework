@@ -154,9 +154,11 @@
 											<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;">합계</td>	
 											
 											<c:forEach var='k' begin='0' end='${columnCnt-1}' >	    
-												<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;">${passResultCntList[(columnCnt*totalTotalIndexCnt)+k].suma}</td>					<!-- 이용자유형 버스 합계-->
-												<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;">${passResultCntList[(columnCnt*totalTotalIndexCnt)+k+1].suma}</td>					<!-- 이용자유형 지하철 합계-->
-												<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;">${passResultCntList[(columnCnt*totalTotalIndexCnt)+k].suma + passResultCntList[(columnCnt*totalTotalIndexCnt)+k+1].suma}</td>					<!-- 소계의 합계-->
+												<c:set var="sumCnt" value="${((columnCnt*totalTotalIndexCnt)+k)*2}" /> 
+												<fmt:parseNumber var = "sumCnt" value = "${sumCnt}"  />		
+												<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;">${passResultCntList[sumCnt].suma}</td>					<!-- 이용자유형 버스 합계-->
+												<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;">${passResultCntList[sumCnt+1].suma}</td>				<!-- 이용자유형 지하철 합계-->
+												<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;">${passResultCntList[sumCnt].suma + passResultCntList[sumCnt+1].suma}</td>	<!-- 소계의 합계-->
 											</c:forEach>
 										
 											<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;">${busTotalSum}</td>											<!-- 버스 총 소계-->

@@ -11,7 +11,7 @@
 <html>
     <head>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-        <link rel="stylesheet" type="text/css" href="css/popup.css">
+        <link rel="stylesheet" type="text/css" href="resources/css/indicator/pass_popup.css">
     </head>
     
     <!-- 세로 스크롤에 따른 text 이동 -->
