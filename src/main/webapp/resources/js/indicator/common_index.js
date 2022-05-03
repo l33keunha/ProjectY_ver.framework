@@ -32,10 +32,10 @@
 		if($(this).attr('id') == 'passBtn'){
 			newForm.attr("action","passTest.do"); 
 		} else if ($(this).attr('id') == 'downloadBtn'){
-			console.log('도착');
 			pushArray.splice(4,2);
-			console.log(pushArray);
 			newForm.attr("action","downloadTest.do");
+		} else if($(this).attr('id') == 'transferBtn'){
+			newForm.attr("action","transferTest.do");
 		}
 		
 		newForm.attr("target","newForm"); 
@@ -163,7 +163,6 @@
 						    showMonthAfterYear: true,
 						    changeMonth: true,
 						    changeYear: true,
-						    yearSuffix: '년',
 							beforeShowDay: disableSomeDay
 						})
 						
@@ -260,7 +259,7 @@
 		$('.submit').css("opacity", 0.3);
 		$('.submit').css("cursor", "auto");
 		
-		if(num == 2){
+		if(num == 2 || num ==3){
 			$("select[name=anal_area_cd_sido]").children('option:not(:first)').remove();
 		    jsonArray["anal_area_cd_sido"] = "null";
 		    jsonArray["anal_area_cd"] = "null"; 

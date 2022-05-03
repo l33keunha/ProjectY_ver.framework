@@ -39,6 +39,12 @@ public class CommonController {
 		return mv;
 	}
 		
+	@RequestMapping(value="/goTransferIndex.do")
+	public ModelAndView goTransferIndex (ModelAndView mv) {
+		mv.setViewName("indicator/transfer/transfer_index");
+		return mv;
+	}
+	
 	// cell1. Ajax (날짜, 분석자료, 지역)
 	@ResponseBody
 	@RequestMapping(value="/searchAnal.do")

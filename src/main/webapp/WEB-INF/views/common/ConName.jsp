@@ -12,7 +12,7 @@
         <div class="contents">
             <a href="#"><span>이용분석</span></a>
             <a onclick="location.href='goPassIndex.do'" id="passCate" style="cursor: pointer;"><span>통행분석</span></a>
-            <a href="#"><span>환승분석</span></a>
+            <a onclick="location.href='goTransferIndex.do'" id="transferCate" style="cursor: pointer;"><span>환승분석</span></a>
             <a href="#"><span>혼잡분석</span></a>
             <a href="#"><span>시간/거리분석</span></a>
             <a href="#"><span>운행분석</span></a>

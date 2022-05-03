@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ybs.indicator.pass.service.impl.PassMapper">
 
-	<!-- 목적통행 시간대별 -->
+	<!-- 목적통행 시간대별 (시간대 합계있음) -->
 	<select id ="selectPassResultListPurpose" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-		SELECT /*+ PARALLEL(4) */  OPRAT_DATE,  TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD ,TM ,CD_NO ,USER_CNT_AGG 
+		SELECT /*+ PARALLEL(4) */  OPRAT_DATE,  TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD, NVL(TM,'합계'), CD_NO, SUM(USER_CNT_AGG) 
 		FROM 결과지표_목적통행
 			WHERE 1=1
 				AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
@@ -19,6 +19,7 @@
 						#{arr}
 					</foreach>
 				</if>
+				GROUP BY OPRAT_DATE,  TO_CHAR(SDATE, 'DY') ,ANAL_AREA_CD ,CD_NO, ROLLUP(TM)
 			ORDER BY OPRAT_DATE, TM, CD_NO
 	</select>
 	
@@ -70,9 +71,9 @@
 		ORDER BY OPRAT_DATE, CD_NO
 	</select>
 	
-	<!-- 수단통행 시간대별 -->
+	<!-- 수단통행 시간대별 (시간대 합계있음) -->
 	<select id ="selectPassResultListMethod" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-		SELECT /*+ PARALLEL(4) */  OPRAT_DATE, TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD ,TM ,CD_NO, TFCMN, USER_CNT_AGG 
+		SELECT /*+ PARALLEL(4) */  OPRAT_DATE, TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD, NVL(TM,'합계') ,CD_NO, TFCMN, SUM(USER_CNT_AGG) 
 			FROM 결과지표_수단통행
 			WHERE 1=1
 				AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
@@ -87,7 +88,8 @@
 						#{arr}
 					</foreach>
 				</if>
-			ORDER BY OPRAT_DATE, TM, CD_NO, TFCMN
+			GROUP BY OPRAT_DATE,  TO_CHAR(SDATE, 'DY') ,ANAL_AREA_CD ,CD_NO,TFCMN, ROLLUP(TM)
+		ORDER BY OPRAT_DATE, TM, CD_NO, TFCMN
 	</select>
 	
 	<!-- 수단통행 일별 -->
@@ -139,9 +141,10 @@
 		ORDER BY OPRAT_DATE, CD_NO, TFCMN
 	</select>
 	
-	<!-- 노선별통행 버스 시간대별-->
+	<!-- 노선별통행 버스 시간대별 (시간대 합계있음)-->
 	<select id ="selectPassResultListRouteB" parameterType="sVO" resultType="egovMap" fetchSize="2000">
-		SELECT /*+ PARALLEL(8) */ OPRAT_DATE, TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD, TFCMN, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END, TM, CD_NO, ROUTE_BUS_GIN_AGG, ROUTE_BUS_GFF_AGG, ROUTE_BUS_TRS_AGG
+		SELECT /*+ PARALLEL(8) */ OPRAT_DATE, TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD, TFCMN, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END, NVL(TM,'합계'), CD_NO
+									,SUM(ROUTE_BUS_GIN_AGG), SUM(ROUTE_BUS_GFF_AGG), SUM(ROUTE_BUS_TRS_AGG)
 			FROM 결과지표_노선별통행
 			WHERE 1=1
 				AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
@@ -156,7 +159,8 @@
 					</foreach>
 				</if>
 				AND TFCMN ='B'
-			ORDER BY OPRAT_DATE, ROUTE_ID, TM, CD_NO
+			GROUP BY  OPRAT_DATE, TO_CHAR(SDATE, 'DY'), ANAL_AREA_CD, TFCMN, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END, CD_NO, ROLLUP (TM)
+		ORDER BY OPRAT_DATE, ROUTE_NMA, TM, CD_NO
 	</select>
 	
 	<!-- 노선별통행 버스 일별 -->
@@ -179,9 +183,10 @@
 		ORDER BY OPRAT_DATE, ROUTE_ID, CD_NO
 	</select>
 	
-	<!-- 노선별통행 지하철 시간대별 -->
+	<!-- 노선별통행 지하철 시간대별 (시간대 합계있음) -->
 	<select id ="selectPassResultListRouteT" parameterType="sVO" resultType="egovMap" fetchSize="2000">
-		SELECT /*+ PARALLEL(8) */ OPRAT_DATE,TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD, TFCMN, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END, TM, CD_NO, ROUTE_TRAIN_GIN_AGG, ROUTE_TRAIN_GFF_AGG, ROUTE_TRAIN_TRS_AGG
+		SELECT /*+ PARALLEL(8) */ OPRAT_DATE,TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD, TFCMN, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END, NVL(TM,'합계'), CD_NO
+								,SUM(ROUTE_TRAIN_GIN_AGG), SUM(ROUTE_TRAIN_GFF_AGG), SUM(ROUTE_TRAIN_TRS_AGG)
 		FROM 결과지표_노선별통행
 		WHERE 1=1
 			AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
@@ -196,7 +201,8 @@
 				</foreach>
 			</if>
 			AND TFCMN ='T'
-		ORDER BY OPRAT_DATE, ROUTE_ID, TM, CD_NO
+		GROUP BY  OPRAT_DATE, TO_CHAR(SDATE, 'DY'), ANAL_AREA_CD, TFCMN, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END, CD_NO, ROLLUP (TM)
+		ORDER BY OPRAT_DATE, ROUTE_NMA, TM, CD_NO
 	</select>
 	
 	<!-- 노선별통행 지하철 일별 -->

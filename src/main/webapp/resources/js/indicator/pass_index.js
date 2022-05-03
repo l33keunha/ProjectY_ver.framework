@@ -1,4 +1,4 @@
-// [1] 분석지표 change
+	// [1] 분석지표 change
 	$('.cell1').change(function(){
 		disabledTrue(2)
 		
