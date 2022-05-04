@@ -14,7 +14,7 @@
 			$('.cell2_02').find('label').css("opacity", 1);
 			$('.cell2_01').find('label').css("opacity", 0.3);
 			$('.cell2_03').find('label').css("opacity", 0.3);
-		} else if($("input[name=anal_group]:checked").val()=='transferDist'){
+		} else if($("input[name=anal_group]:checked").val()=='transferDistn'){
 			$('.cell2').css("opacity", 1);
 			$('.cell2_03').find('input').prop("disabled",false);
 			$('.cell2_03').find('label').css("opacity", 1);
@@ -38,8 +38,8 @@
 		 || jsonArray['anal_type'] == 'transferCnt_num'
 	     || jsonArray['anal_type'] == 'transferTime_method'
          || jsonArray['anal_type'] == 'transferTime_num'
-	  	 || jsonArray['anal_type'] == 'transferDist_methjod'
-		 || jsonArray['anal_type'] == 'transferDist_num'){
+	  	 || jsonArray['anal_type'] == 'transferDistn_method'
+		 || jsonArray['anal_type'] == 'transferDistn_num'){
 			var addHtml = '';
 			addHtml += "<label>시작<input class='date' id='dateStart' name='dateStart'></label>";
 			addHtml += "<label>종료<input class='date' id='dateEnd' name='dateEnd'></label>";

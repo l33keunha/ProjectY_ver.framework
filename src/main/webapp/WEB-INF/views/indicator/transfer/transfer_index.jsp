@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="ko">
     <head>
-        <title>환승지표</title>
+        <title>환승분석</title>
         <link rel="stylesheet" type="text/css" href="resources/css/indicator/transfer_index.css"> 
         <link rel="stylesheet" type="text/css" href="resources/css/indicator/jquery-ui.css"> 
         <script type="text/javascript" src="resources/js/indicator/common_index.js" defer ></script> 
@@ -48,7 +48,7 @@
 
                 <div class="cell1_03">
                     <div>
-                        <label><input type="radio" name="anal_group" value="transferDist"> 환승통행거리</label>
+                        <label><input type="radio" name="anal_group" value="transferDistn"> 환승통행거리</label>
                     </div>
                 </div>
             </div>
@@ -71,8 +71,8 @@
 
                 <div class="cell2_03">
                     <div>
-                        <label><input type="radio" name="anal_type" value="transferDist_methjod"> 수단별 환승통행거리</label>
-                        <label><input type="radio" name="anal_type" value="transferDist_num"> 횟수별 환승통행거리</label>
+                        <label><input type="radio" name="anal_type" value="transferDistn_method"> 수단별 환승통행거리</label>
+                        <label><input type="radio" name="anal_type" value="transferDistn_num"> 횟수별 환승통행거리</label>
                     </div>
                 </div>
             </div>

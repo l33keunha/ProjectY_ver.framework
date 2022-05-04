@@ -1,5 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ybs.indicator.transfer.service.impl.TransferMapper">
-		
+
+	<!-- 환승 수단별통행 -->
+	<select id ="selectTransferResultListMethod" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+	</select>
+	
+	<!-- 환승 수단별통행 일별 -->
+	<select id ="selectTransferResultListMethod_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+	</select>
+	
+	<!-- 환승 정류장별통행 -->
+	<select id ="selectTransferResultListStation" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+	</select>
+	
+	<!-- 환승 노선별통행 -->
+	<select id ="selectTransferResultListRoute" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+	</select>
+	
+	<!-- 환승 노선별통행 일별 -->
+	<select id ="selectTransferResultListRoute_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+	</select>
+	
+	<!-- 환승 횟수별통행 -->
+	<select id ="selectTransferResultListNum" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+	</select>
+	
+	<!-- 환승 횟수별통행 일별 -->
+	<select id ="selectTransferResultListNum_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+	</select>
+	
+	<!-- 환승 수단별 환승통행시간 -->
+	<select id ="selectTransferResultListTimeMethod" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+	</select>
+	
+	<!-- 환승 수단별 환승통행시간 일별 -->
+	<select id ="selectTransferResultListTimeMethod_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+	</select>
+	
+	<!-- 환승 횟수별 환승통행시간 -->
+	<select id ="selectTransferResultListTimeNum" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+	</select>
+	
+	<!-- 환승 횟수별 환승통행시간 일별-->
+	<select id ="selectTransferResultListTimeNum_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+	</select>
+	
+	<!-- 환승 수단별 환승통행거리 -->
+	<select id ="selectTransferResultListDistMethod" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+	</select>
+	
+	<!-- 환승 수단별 환승통행거리 일별 -->
+	<select id ="selectTransferResultListDistMethod_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+	</select>
+	
+	<!-- 환승 횟수별 환승통행거리 -->
+	<select id ="selectTransferResultListDistNum" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+	</select>
+	
+	<!-- 환승 횟수별 환승통행거리 일별-->
+	<select id ="selectTransferResultListDistNum_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+	</select>
+	
 </mapper>

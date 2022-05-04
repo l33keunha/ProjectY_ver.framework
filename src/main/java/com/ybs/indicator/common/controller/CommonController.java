@@ -45,6 +45,18 @@ public class CommonController {
 		return mv;
 	}
 	
+	@RequestMapping(value="/goCongestionIndex.do")
+	public ModelAndView goCongestionIndex (ModelAndView mv) {
+		mv.setViewName("indicator/congestion/congestion_index");
+		return mv;
+	}
+	
+	@RequestMapping(value="/goTimeDistnIndex.do")
+	public ModelAndView goTimeDistnIndex (ModelAndView mv) {
+		mv.setViewName("indicator/timeDistn/timeDistn_index");
+		return mv;
+	}
+	
 	// cell1. Ajax (날짜, 분석자료, 지역)
 	@ResponseBody
 	@RequestMapping(value="/searchAnal.do")

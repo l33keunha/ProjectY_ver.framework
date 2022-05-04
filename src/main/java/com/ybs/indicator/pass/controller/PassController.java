@@ -33,10 +33,9 @@ public class PassController {
 	public ModelAndView selectPassResultList(ModelAndView mv, HttpServletRequest req, @ModelAttribute SearchVO sVO) {
 		System.out.println(sVO.toString());
 		
-		List<EgovMap> passResultList = new ArrayList<EgovMap>();  // 목적or수단 리스트
-		List<EgovMap> passResultListB = new ArrayList<EgovMap>(); // 노선별or정류장별 버스 리스트
-		List<EgovMap> passResultListT = new ArrayList<EgovMap>(); // 노선별or정류장별 지하철 리스트
-		List<EgovMap> passResultCntList = new ArrayList<EgovMap>(); // 합계리스트
+		List<EgovMap> passResultList = new ArrayList<EgovMap>(); 		 // 목적or수단 리스트
+		List<EgovMap> passResultListB = new ArrayList<EgovMap>(); 		 // 노선별or정류장별 버스 리스트
+		List<EgovMap> passResultListT = new ArrayList<EgovMap>(); 		 // 노선별or정류장별 지하철 리스트
 		
 		// 분석지표에 따라 리스트 받아오기
 		if(sVO.getAnal_type()==null 
@@ -45,9 +44,6 @@ public class PassController {
 			|| sVO.getAnal_type().equals("passAreaODCnt_purpose")
 			|| sVO.getAnal_type().equals("passAreaODCnt_method")) {
 			passResultList = service.selectPassResultList(sVO);
-			if(sVO.getTm()==null) {
-				passResultCntList = service.selectPassResultCntList(sVO);
-			}
 		}
 		else if(sVO.getAnal_type().equals("passCnt_route") 
 			|| sVO.getAnal_type().equals("passCnt_station")) {
@@ -72,13 +68,6 @@ public class PassController {
 			mv.addObject("passResultListB", passResultListB);
 			mv.addObject("passResultListT", passResultListT);
 		} 
-		
-		if (passResultCntList.size() > 00) {
-			for(int i = 0; i < 2; i++) {
-				System.out.println(passResultCntList.get(i).toString());
-			}
-			mv.addObject("passResultCntList", passResultCntList);
-		}
 		
 		mv.addObject("sVO", sVO);
 		mv.addObject("req", req);

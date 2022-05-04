@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ybs.indicator.congestion.service.impl.CongestionMapper">
+		
+	<!-- 노선별 재차인원 및 혼잡도 -->
+	<select id ="selectCongestionResultListRouteCBP" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+	</select>
+	
+	<!-- 노선별 상위 5개 최대 및 평균 혼잡구 -->
+	<select id ="selectCongestionResultListTopRouteOD" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+	</select>
+	
+	<!-- 정류장간 상위 100개 최대 및 평균 혼잡도 -->
+	<select id ="selectCongestionResultListTopStationOD" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+	</select>
+	
+</mapper>

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="ko">
     <head>
-        <title>통행지표</title>
+        <title>통행분석</title>
         <link rel="stylesheet" type="text/css" href="resources/css/indicator/pass_index.css"> 
         <link rel="stylesheet" type="text/css" href="resources/css/indicator/jquery-ui.css"> 
  		<script type="text/javascript" src="resources/js/indicator/common_index.js" defer ></script> 

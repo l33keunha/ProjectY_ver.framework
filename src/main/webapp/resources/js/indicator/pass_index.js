@@ -27,8 +27,7 @@
 	function selectBoxOpen(jsonArray){
 		// 통행분석 선택박스 case 1
 		if(jsonArray['anal_type'] == 'passCnt_purpose'
-	     || jsonArray['anal_type'] == 'passCnt_method'
-	     || jsonArray['anal_type'] == 'passCnt_route'){
+	     || jsonArray['anal_type'] == 'passCnt_method'){
 			var addHtml = '';
 			addHtml += "<label>시작<input class='date' id='dateStart' name='dateStart'></label>";
 			addHtml += "<label>종료<input class='date' id='dateEnd' name='dateEnd'></label>";
@@ -38,7 +37,8 @@
 		}
 		
 		// 통행분석 선택박스 case 2
-		if(jsonArray['anal_type'] == 'passCnt_station'
+		if(jsonArray['anal_type'] == 'passCnt_route'
+		 ||jsonArray['anal_type'] == 'passCnt_station'
 		 || jsonArray['anal_type'] == 'passAreaODCnt_purpose'
 		 || jsonArray['anal_type'] == 'passAreaODCnt_method'
 		 || jsonArray['anal_group'] == 'passTopRotue'){
