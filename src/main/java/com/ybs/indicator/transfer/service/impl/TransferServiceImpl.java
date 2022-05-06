@@ -31,10 +31,11 @@ public class TransferServiceImpl extends EgovAbstractServiceImpl implements Tran
 		
 		switch(sVO.getAnal_type()) {
 		case "transferCnt_method" :
-			System.out.println("환승_수단별통행");
 			if("allDay".equals(sVO.getTm())) {
+				System.out.println("환승_수단별통행_일별");
 				transferResultList = mapper.selectTransferResultListMethod_d(sVO); break;
 			} else {
+				System.out.println("환승_수단별통행");
 				transferResultList = mapper.selectTransferResultListMethod(sVO); break;
 			}
 			
@@ -43,50 +44,56 @@ public class TransferServiceImpl extends EgovAbstractServiceImpl implements Tran
 			transferResultList = mapper.selectTransferResultListStation(sVO);break;
 			
 		case "transferCnt_route" :
-			System.out.println("환승_노선별통행");
 			if("allDay".equals(sVO.getTm())) {
+				System.out.println("환승_노선별통행_일별");
 				transferResultList = mapper.selectTransferResultListRoute_d(sVO); break;
 			} else {
+				System.out.println("환승_노선별통행");
 				transferResultList = mapper.selectTransferResultListRoute(sVO); break;
 			}	
 			
 		case "transferCnt_num" :
-			System.out.println("환승_횟수별통행");
 			if("allDay".equals(sVO.getTm())) {
+				System.out.println("환승_횟수별통행_일별");
 				transferResultList = mapper.selectTransferResultListNum_d(sVO); break;
 			} else {
+				System.out.println("환승_횟수별통행");
 				transferResultList = mapper.selectTransferResultListNum(sVO); break;
 			}
 			
 		case "transferTime_method" :
-			System.out.println("환승_수단별 환승통행시간");
 			if("allDay".equals(sVO.getTm())) {
+				System.out.println("환승_수단별 환승통행시간_일별");
 				transferResultList = mapper.selectTransferResultListTimeMethod_d(sVO); break;
 			} else {
+				System.out.println("환승_수단별 환승통행시간");
 				transferResultList = mapper.selectTransferResultListTimeMethod(sVO); break;
 			}
 			
 		case "transferTime_num" :
-			System.out.println("환승_횟수별 환승통행시간");
 			if("allDay".equals(sVO.getTm())) {
+				System.out.println("환승_횟수별 환승통행시간_일별");
 				transferResultList = mapper.selectTransferResultListTimeNum_d(sVO); break;
 			} else {
+				System.out.println("환승_횟수별 환승통행시간");
 				transferResultList = mapper.selectTransferResultListTimeNum(sVO); break;
 			}
 			
 		case "transferDistn_method" :
-			System.out.println("환승_수단별 환승통행거리");
 			if("allDay".equals(sVO.getTm())) {
+				System.out.println("환승_수단별 환승통행거리_일별");
 				transferResultList = mapper.selectTransferResultListDistnMethod_d(sVO); break;
 			} else {
+				System.out.println("환승_수단별 환승통행거리");
 				transferResultList = mapper.selectTransferResultListDistnMethod(sVO); break;
 			}
 			
 		case "transferDistn_num" :
-			System.out.println("환승_횟수별 환승통행거리");
 			if("allDay".equals(sVO.getTm())) {
+				System.out.println("환승_횟수별 환승통행거리_일별");
 				transferResultList = mapper.selectTransferResultListDistnNum_d(sVO); break;
 			} else {
+				System.out.println("환승_횟수별 환승통행거리");
 				transferResultList = mapper.selectTransferResultListDistnNum(sVO); break;
 			}
 			

@@ -21,12 +21,12 @@ html, body {
     font-weight: bold;
 }
 .dateform {
-    height: 61px;
+    height: 45px;
     padding: 7px 0;
     width: 100%;
     text-align: center;
-    background-color: #c5e4ff;
-    position: fixed;
+    /* background-color: #c5e4ff; */
+    /* position: fixed; */
     top: 64px;
 }
 
@@ -34,46 +34,133 @@ html, body {
 .dateform > *{
     font-size: 15px;
 }
+.dateform div :first-child {
+    width: 17%;
+    /* background: aliceblue; */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-left: 8%;
+}
+
+.dateform div :nth-child(2){
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 17%;
+}
+.dateform div :nth-child(3){
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 40%;
+}
+.dateform div :nth-child(4) {
+    width: 10%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 .dateform p{
     width: 25%;
     float: left;
+    text-align: left;
+    /* padding-left: 12px; */
+    /* background: antiquewhite; */
+    margin-left: 0%;
+}
+.infowrap {
+    width: 92.4vw;
+    /* background-color: aquamarine; */
+}
+.info{
+        /* position: relative; */
+    /* top: 5.5vh; */
+    /* display: inline-block; */
+    /* left: 88vw; */
+    float: right;
 }
 .date {
     float: left;
     margin-left: 7px;
     width: 63px;
 }
-.button{
+.button {
     float: right;
-    margin-right: 5px;
-    margin-top: -13px;
+    margin-right: 4vw;
+    margin-top: 7px;
+}
 
+.button >.g{
+    background: #82b0d9 url(../../images/indicator/icon03.png) no-repeat 4px 7.5px;
+    width: 104px;
 }
-.button button{
-background-color: #5C7D9A;
-color: white;
-padding: 5px 10px;
+.button >.g button {
+    width: 72px;
 }
-.button :last-child{
-    background-color: #912020;
-    margin-left: 25px;
+.button >.d{    
+    background: #82b0d9 url(../../images/indicator/icon01.png) no-repeat 4px 7.5px;
+    margin-left: 10px;
+    width: 128px;
+}
+.button > .e {
+    background: #d98282 url(../../images/indicator/icon02.png) no-repeat 4px 5.5px;
+    margin-left: 42px;
+    width: 84px;;
+}
+.button > .e button {
+    width: 52px;
+}
+
+.button  div{
+    /* background: #82b0d9 url(./icon01.png) no-repeat 4px 3.5px; */
+    width: 129px;
+    height: 32px;
+    float: left;
+    cursor: pointer;
+}
+
+.button  div button{
+    border: none;
+    background: none;
+    color: #ffffff;
+    margin-left: 31px;
+    text-align: left;
+    font-size: 17px;
+    width: 95px;
+    height: 32px;
+    cursor: pointer;
 }
 .header{    
-    height: 61px;
+    height: 79px;
     border-bottom: 4px solid #5C7D9A;
     width: 100%;
-    position: fixed;
+}
+.test{
+    width: 92vw;
+    height: 80vmin;
+    border: 1px solid #9c9c9c;
 }
 .content_wrap{
-    /* width: 4199px; */
+    width: 92vw;
+    height: 80Vmin;
     flex: 1;
-    overflow-y: scroll;
-    overflow-x: clip;
     margin-left: 0;
+    background-color: white;
+    overflow: auto;
+    margin-bottom: 10vmin;
+}
+.con_head{
+    background-color: aqua;
+    /* overflow-y: auto; */
 }
 .content{
+    width: 192vw;
+    height: 75Vh;
     text-align: center;
     margin-left: 0;
+    overflow-y: scroll;
+    overflow-x: clip;
 }
 
 .content .tg {
@@ -81,30 +168,88 @@ padding: 5px 10px;
     border-collapse: collapse;
     margin-left: 0;
 }
-.tg td{
+td {
     border-color: #1f2958;
     border-style: solid;
     border-width: 1px;
-    font-size: 13px;
+    font-weight: bold;
+    font-size: 15px;
     padding: 10px 5px;
-    /* overflow:hidden; */
-
-    background-color: white;
+    background-color: #ffffff;
     text-align: center;
+    height: 20px;
 }
 .tabletitle{
-    /*width: 2493px; */
-    border-collapse: collapse;
-    margin-top: 139px;
-    margin-left: 0;
+        /* width: 2493px; */
+        border-collapse: collapse;
+        margin-left: 0;
+        margin-top: 0;
 }
 th{
-    border-color:#1f2958;
-    border-style:solid;
-    border-width:1px;
-    font-weight:bold;
+    border-color: #1f2958;
+    border-style: solid;
+    border-width: 1px;
+    font-weight: bold;
     font-size: 13px;
-    overflow:hidden;
-    padding:10px 5px;
-    background-color: #a5c0d8;
+    overflow: hidden;
+    padding: 10px 5px;
+    background-color: #c5e4ff;
+}
+
+
+.table1 {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.table-left {
+	float: left;
+	margin-left: 0;
+	position: sticky;
+	left: 0;
+	z-index: 10000000;
+}
+
+.lavel-2 {
+    position: sticky;
+    top: 92px;
+}
+.table2 tr {
+    vertical-align: top;
+}
+.tableright01 {
+    position: sticky;
+    top: 0;
+}
+
+.lavel-1{
+		white-space: nowrap;
+   		overflow: hidden;
+    	text-overflow: ellipsis;
+}
+.lavel-1 div{
+		white-space: nowrap;
+   		overflow: hidden;
+    	text-overflow: ellipsis;                          
+}
+
+@supports (position: sticky) or (position: -webkit-sticky) {
+    .table1 {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+    .lavel-2 {
+        position: sticky;
+        top: 92px;
+    }
+
+    .tableright01 {
+        
+        position: sticky;
+        top: 0;
+    }
 }

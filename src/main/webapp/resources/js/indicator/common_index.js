@@ -21,7 +21,7 @@
 		$("[class=selectbox]").find("input:checked").each(function(index, item){
 			pushArray.push([ $(item)[0].name, $(item)[0].value ] )
 		})
-		window.open("" ,"newForm", "toolbar=no, width=1200, height=800, directories=no, status=no, scrollorbars=no, resizable=no"); 
+		window.open("" ,"newForm", "toolbar=no, width=1800, height=1000, directories=no, status=no, scrollorbars=no, resizable=no"); 
 		
 		//set attribute (form) 
 		var newForm = $('<form></form>'); 
@@ -36,6 +36,10 @@
 			newForm.attr("action","downloadTest.do");
 		} else if($(this).attr('id') == 'transferBtn'){
 			newForm.attr("action","transferTest.do");
+		} else if($(this).attr('id') == 'congestionBtn'){
+			newForm.attr("action","congestionTest.do");
+		} else if($(this).attr('id') == 'timeDistnBtn'){
+			newForm.attr("action","timeDistnTest.do");
 		}
 		
 		newForm.attr("target","newForm"); 
@@ -336,12 +340,26 @@
 	}
 	
 	// 시간대 비활성화
-		function disabledTime(){
-			$(".cell4").css("opacity", 0.3); 
-			$(".cell4").find('input').prop("disabled", true);
-			$(".cell4").find('input').prop("checked", true);
-			$(".cell4").find('select').prop("disabled", true);
-		}
+	function disabledTime(){
+		$(".cell4").css("opacity", 0.3); 
+		$(".cell4").find('input').prop("disabled", true);
+		$(".cell4").find('input').prop("checked", true);
+		$(".cell4").find('select').prop("disabled", true);
+	}
+	// 시간대 활성화 : 혼잡에만 해당 1일선택x
+	function abledTime(){
+		$(".cell4").css("opacity", 1); 
+		$(".cell4_01").find('label').css("opacity", 0.3); 
+		$(".cell4").find('select').prop("disabled", false);
+		$('select[name=tmEnd] option:eq(23)').prop("selected", true);
+	}
+	
+	// 조회버튼 활성화
+	function abledBtn(){
+		$('.submit').prop("disabled",false);
+		$('.submit').css("opacity", 1);
+		$('.submit').css("cursor", "pointer");
+	}
 		
 		
 	// [--4]

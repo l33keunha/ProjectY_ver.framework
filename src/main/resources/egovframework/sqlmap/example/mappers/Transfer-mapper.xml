@@ -47,19 +47,19 @@
 	</select>
 	
 	<!-- 환승 수단별 환승통행거리 -->
-	<select id ="selectTransferResultListDistMethod" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+	<select id ="selectTransferResultListDistnMethod" parameterType="sVO" resultType="egovMap" fetchSize="1000">
 	</select>
 	
 	<!-- 환승 수단별 환승통행거리 일별 -->
-	<select id ="selectTransferResultListDistMethod_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+	<select id ="selectTransferResultListDistnMethod_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
 	</select>
 	
 	<!-- 환승 횟수별 환승통행거리 -->
-	<select id ="selectTransferResultListDistNum" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+	<select id ="selectTransferResultListDistnNum" parameterType="sVO" resultType="egovMap" fetchSize="1000">
 	</select>
 	
 	<!-- 환승 횟수별 환승통행거리 일별-->
-	<select id ="selectTransferResultListDistNum_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+	<select id ="selectTransferResultListDistnNum_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
 	</select>
 	
 </mapper>

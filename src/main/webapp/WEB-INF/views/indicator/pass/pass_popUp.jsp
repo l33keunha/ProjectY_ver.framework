@@ -10,21 +10,13 @@
 <!DOCTYPE html>
 <html>
     <head>
+    	<meta charset="UTF-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
         <link rel="stylesheet" type="text/css" href="resources/css/indicator/pass_popup.css">
     </head>
     
-    <!-- 세로 스크롤에 따른 text 이동 -->
-    <style>
-    	.level-2 [rowspan] {
-		    vertical-align: top;
-		}
-		.level-2 [rowspan] div {
-		    position: sticky;
-		    top: 40px;
-		}
-    </style>
-    
+ 
     <!-- 코드 텍스트 매칭 -->
     <%@ include file="pass_popUp_codeNameMatch.jsp" %>
   
@@ -33,10 +25,9 @@
 	        <div class="header">
 	            <p>통행 분석 지표</p>
 	            <div class="button">
-	                <button type="button">그래프</button>
-	                <button type="button">다운로드</button>
-	                <button type="button">닫기</button>
-	
+	                <div class="g"><button type="button">그래프</button></div>
+	                <div class="d"><button type="button">다운로드</button></div>
+	                <div class="e"><button type="button">닫기</button></div>
 	            </div>
 	        </div>
 	        
@@ -54,48 +45,52 @@
 	          <p>교통수단 : 전체</p>
 	          </div>
 	      	</div>
+	      	
+	      	<div class="infowrap">
+				<span class="info">단위 : 통행량</span>
+		    </div>
 	     	
-	     	<c:if test = "${anal_typeText == '목적통행'}">
-	     		<%@ include file="tableList/pass_popUp_passCnt_purpose.jsp" %>
-	     	</c:if> 
-	      
-	     	<c:if test = "${anal_typeText == '수단통행'}">
-	     		<%@ include file="tableList/pass_popUp_passCnt_method.jsp" %>
-	     	</c:if> 
-	     	
-	     	<c:if test = "${anal_typeText == '노선별통행'}">
-	     		<%@ include file="tableList/pass_popUp_passCnt_route.jsp" %>
-	     	</c:if> 
-	     	
-	     	<c:if test = "${anal_typeText == '정류장별통행'}">
-	     		<%@ include file="tableList/pass_popUp_passCnt_station.jsp" %>
-	     	</c:if> 
-	     	
-	     	<c:if test = "${anal_typeText == '행정동목적'}">
-	     		<%@ include file="tableList/pass_popUp_passAreaODCnt_purpose.jsp" %>
-	     	</c:if> 
-	     	
-	     	<c:if test = "${anal_typeText == '행정동수단'}">
-	     		<%@ include file="tableList/pass_popUp_passAreaODCnt_method.jsp" %>
-	     	</c:if> 
-	     	
-	     	<c:if test = "${anal_groupText == '노선별OD' && anal_typeText == ''}">
-	     		<%@ include file="tableList/pass_popUp_passRouteODCnt.jsp" %>
-	     	</c:if> 
-	     	
-	     	<c:if test = "${anal_groupText == '상위이용노선' && anal_typeText == ''}">
-	     		<%@ include file="tableList/pass_popUp_passTopRotue.jsp" %>
-	     	</c:if> 
-	     	
-	     	<c:if test = "${anal_groupText == '상위이용정류장' && anal_typeText == ''}">
-	     		<%@ include file="tableList/pass_popUp_passTopStation.jsp" %>
-	     	</c:if> 
-	     	
+	     	<div class="test">
+		     
+		     	<div class="content_wrap">
+			     	<c:if test = "${anal_typeText == '목적통행'}">
+			     		<%@ include file="tableList/pass_popUp_passCnt_purpose.jsp" %>
+			     	</c:if> 
+			      
+			     	<c:if test = "${anal_typeText == '수단통행'}">
+			     		<%@ include file="tableList/pass_popUp_passCnt_method.jsp" %>
+			     	</c:if> 
+			     	
+			     	<c:if test = "${anal_typeText == '노선별통행'}">
+			     		<%@ include file="tableList/pass_popUp_passCnt_route.jsp" %>
+			     	</c:if> 
+			     	
+			     	<c:if test = "${anal_typeText == '정류장별통행'}">
+			     		<%@ include file="tableList/pass_popUp_passCnt_station.jsp" %>
+			     	</c:if> 
+			     	
+			     	<c:if test = "${anal_groupText == '노선별OD' && anal_typeText == ''}">
+			     		<%@ include file="tableList/pass_popUp_passRouteODCnt.jsp" %>
+			     	</c:if> 
+			     	
+			     	<c:if test = "${anal_typeText == '행정동목적'}">
+			     		<%@ include file="tableList/pass_popUp_passAreaODCnt_purpose.jsp" %>
+			     	</c:if> 
+			     	
+			     	<c:if test = "${anal_typeText == '행정동수단'}">
+			     		<%@ include file="tableList/pass_popUp_passAreaODCnt_method.jsp" %>
+			     	</c:if> 
+			     	
+			     	<c:if test = "${anal_groupText == '상위이용노선' && anal_typeText == ''}">
+			     		<%@ include file="tableList/pass_popUp_passTopRotue.jsp" %>
+			     	</c:if> 
+			     	
+			     	<c:if test = "${anal_groupText == '상위이용정류장' && anal_typeText == ''}">
+			     		<%@ include file="tableList/pass_popUp_passTopStation.jsp" %>
+			     	</c:if> 
+		     	</div>
+		     </div>
 		</div>
-    </body>
-    
-    
-    
-    
-    
+		
+    </body> 
 </html>

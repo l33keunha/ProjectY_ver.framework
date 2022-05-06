@@ -29,36 +29,40 @@ public class TimeDistnServiceImpl extends EgovAbstractServiceImpl implements Tim
 	public List<EgovMap> selectTimeDistnResultListT(SearchVO sVO) {
 		List<EgovMap> transferResultListT = new ArrayList<EgovMap>();
 		
-		switch(sVO.getAnal_type()) {
+		switch(sVO.getAnal_group()) {
 		case "timeDistn_avg_day" :
-			System.out.println("1일 평균 통행시간");
 			if("allDay".equals(sVO.getTm())) {
+				System.out.println("1일 평균 통행시간_일별");
 				transferResultListT = mapper.selectTimeDistnResultListDayTime_d(sVO); break;
 			} else {
+				System.out.println("1일 평균 통행시간");
 				transferResultListT = mapper.selectTimeDistnResultListDayTime(sVO); break;
 			}
 			
 		case "timeDistn_avg_purpose" :
-			System.out.println("목적통행 평균 통행시간");
 			if("allDay".equals(sVO.getTm())) {
+				System.out.println("목적통행 평균 통행시간_일별");
 				transferResultListT = mapper.selectTimeDistnResultListPurposeTime_d(sVO); break;
 			} else {
+				System.out.println("목적통행 평균 통행시간");
 				transferResultListT = mapper.selectTimeDistnResultListPurposeTime(sVO); break;
 			}
 			
 		case "timeDistn_avg_method" :
-			System.out.println("수단통행 평균 통행시간");
 			if("allDay".equals(sVO.getTm())) {
+				System.out.println("수단통행 평균 통행시간_일별");
 				transferResultListT = mapper.selectTimeDistnResultListMethodTime_d(sVO); break;
 			} else {
+				System.out.println("수단통행 평균 통행시간");
 				transferResultListT = mapper.selectTimeDistnResultListMethodTime(sVO); break;
 			}
 			
 		case "timeDistn_avg_route" :
-			System.out.println("노선별 평균 통행시간");
 			if("allDay".equals(sVO.getTm())) {
+				System.out.println("노선별 평균 통행시간_일별");
 				transferResultListT = mapper.selectTimeDistnResultListRouteTime_d(sVO); break;
 			} else {
+				System.out.println("노선별 평균 통행시간");
 				transferResultListT = mapper.selectTimeDistnResultListRouteTime(sVO); break;
 			}
 		}
@@ -69,36 +73,40 @@ public class TimeDistnServiceImpl extends EgovAbstractServiceImpl implements Tim
 	public List<EgovMap> selectTimeDistnResultListD(SearchVO sVO) {
 		List<EgovMap> transferResultListD = new ArrayList<EgovMap>();
 		
-		switch(sVO.getAnal_type()) {
+		switch(sVO.getAnal_group()) {
 		case "timeDistn_avg_day" :
-			System.out.println("1일 평균 통행거리");
 			if("allDay".equals(sVO.getTm())) {
+				System.out.println("1일 평균 통행거리_일별");
 				transferResultListD = mapper.selectTimeDistnResultListDayDistn_d(sVO); break;
 			} else {
+				System.out.println("1일 평균 통행거리");
 				transferResultListD = mapper.selectTimeDistnResultListDayDistn(sVO); break;
 			}
 			
 		case "timeDistn_avg_purpose" :
-			System.out.println("목적통행 평균 통행거리");
 			if("allDay".equals(sVO.getTm())) {
+				System.out.println("목적통행 평균 통행거리 일별");
 				transferResultListD = mapper.selectTimeDistnResultListPurposeDistn_d(sVO); break;
 			} else {
+				System.out.println("목적통행 평균 통행거리");
 				transferResultListD = mapper.selectTimeDistnResultListPurposeDistn(sVO); break;
 			}
 			
 		case "timeDistn_avg_method" :
-			System.out.println("수단통행 평균 통행거리");
 			if("allDay".equals(sVO.getTm())) {
+				System.out.println("수단통행 평균 통행거리 일별");
 				transferResultListD = mapper.selectTimeDistnResultListMethodDistn_d(sVO); break;
 			} else {
+				System.out.println("수단통행 평균 통행거리");
 				transferResultListD = mapper.selectTimeDistnResultListMethodDistn(sVO); break;
 			}
 			
 		case "timeDistn_avg_route" :
-			System.out.println("노선별 평균 통행거리");
 			if("allDay".equals(sVO.getTm())) {
+				System.out.println("노선별 평균 통행거리 일별");
 				transferResultListD = mapper.selectTimeDistnResultListRouteDistn_d(sVO); break;
 			} else {
+				System.out.println("노선별 평균 통행거리");
 				transferResultListD = mapper.selectTimeDistnResultListRouteDistn(sVO); break;
 			}
 		}

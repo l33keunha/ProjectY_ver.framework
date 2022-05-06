@@ -183,14 +183,30 @@
     	<c:set var = "tmText" value = "1일"/>
     	<c:set var = "dateText" value = "${sVO.dateStart}"/>
     </c:if>
-    <c:if test="${anal_typeText == '상위이용노선'}">
+    <c:if test="${anal_groupText == '상위이용노선'}">
     	<c:set var = "tmText" value = "1일"/>
     	<c:set var = "dateText" value = "${sVO.dateStart}"/>
     </c:if>
-    <c:if test="${anal_typeText == '상위이용정류장'}">
+    <c:if test="${anal_groupText == '상위이용정류장'}">
+    	<c:set var = "tmText" value = "1일"/>
+    	<c:set var = "dateText" value = "${sVO.dateStart}"/>
+    </c:if>
+    <c:if test="${anal_groupText == '노선별OD'}">
     	<c:set var = "tmText" value = "1일"/>
     	<c:set var = "dateText" value = "${sVO.dateStart}"/>
     </c:if>
     
+    
+	<!-- 이용자 유형 컬럼 갯수 -->
+	<c:choose>
+		<c:when test="${sVO.cd_no[0] =='00'}">
+			<c:set var = "columnCnt" value = '11'/>						
+		</c:when>
+		<c:otherwise>
+			<c:set var = "columnCnt" value = '${fn:length(sVO.cd_no)}'/>		
+		</c:otherwise>
+	</c:choose>
+	
+	
             
         <!-- ▲ 코드 텍스트 매칭 끝 -->

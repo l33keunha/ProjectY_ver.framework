@@ -8,7 +8,9 @@ public class SearchVO {
 	private String dateStart;
 	private String dateEnd;
 	private String anal_area_cd_sido;
+	private String anal_area_cd_sido_text;
 	private String anal_area_cd;
+	private String anal_area_cd_text;
 	private String provider;
 	private String anal_group;
 	private String anal_type;
@@ -21,15 +23,18 @@ public class SearchVO {
 	
 	public SearchVO() {}
 
-	public SearchVO(String anal_fin, String dateStart, String dateEnd, String anal_area_cd_sido, String anal_area_cd,
-			String provider, String anal_group, String anal_type, String tm, int tmStart, int tmEnd, String[] cd_no,
-			String tfcmn, String routeId) {
+	public SearchVO(String anal_fin, String dateStart, String dateEnd, String anal_area_cd_sido,
+			String anal_area_cd_sido_text, String anal_area_cd, String anal_area_cd_text, String provider,
+			String anal_group, String anal_type, String tm, int tmStart, int tmEnd, String[] cd_no, String tfcmn,
+			String routeId) {
 		super();
 		this.anal_fin = anal_fin;
 		this.dateStart = dateStart;
 		this.dateEnd = dateEnd;
 		this.anal_area_cd_sido = anal_area_cd_sido;
+		this.anal_area_cd_sido_text = anal_area_cd_sido_text;
 		this.anal_area_cd = anal_area_cd;
+		this.anal_area_cd_text = anal_area_cd_text;
 		this.provider = provider;
 		this.anal_group = anal_group;
 		this.anal_type = anal_type;
@@ -73,12 +78,28 @@ public class SearchVO {
 		this.anal_area_cd_sido = anal_area_cd_sido;
 	}
 
+	public String getAnal_area_cd_sido_text() {
+		return anal_area_cd_sido_text;
+	}
+
+	public void setAnal_area_cd_sido_text(String anal_area_cd_sido_text) {
+		this.anal_area_cd_sido_text = anal_area_cd_sido_text;
+	}
+
 	public String getAnal_area_cd() {
 		return anal_area_cd;
 	}
 
 	public void setAnal_area_cd(String anal_area_cd) {
 		this.anal_area_cd = anal_area_cd;
+	}
+
+	public String getAnal_area_cd_text() {
+		return anal_area_cd_text;
+	}
+
+	public void setAnal_area_cd_text(String anal_area_cd_text) {
+		this.anal_area_cd_text = anal_area_cd_text;
 	}
 
 	public String getProvider() {
@@ -156,9 +177,11 @@ public class SearchVO {
 	@Override
 	public String toString() {
 		return "SearchVO [anal_fin=" + anal_fin + ", dateStart=" + dateStart + ", dateEnd=" + dateEnd
-				+ ", anal_area_cd_sido=" + anal_area_cd_sido + ", anal_area_cd=" + anal_area_cd + ", provider="
+				+ ", anal_area_cd_sido=" + anal_area_cd_sido + ", anal_area_cd_sido_text=" + anal_area_cd_sido_text
+				+ ", anal_area_cd=" + anal_area_cd + ", anal_area_cd_text=" + anal_area_cd_text + ", provider="
 				+ provider + ", anal_group=" + anal_group + ", anal_type=" + anal_type + ", tm=" + tm + ", tmStart="
 				+ tmStart + ", tmEnd=" + tmEnd + ", cd_no=" + Arrays.toString(cd_no) + ", tfcmn=" + tfcmn + ", routeId="
 				+ routeId + "]";
 	}
+	
 }

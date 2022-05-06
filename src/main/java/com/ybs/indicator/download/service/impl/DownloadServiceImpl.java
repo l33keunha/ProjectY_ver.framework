@@ -59,7 +59,7 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 			downloadResultList = mapper.selectdownloadResultListAreaOD_method(sVO); break;
 		}
 		
-		for(int i = 0; i < downloadResultList.size(); i++) {
+		for(int i = 0; i < 10; i++) {
 			System.out.println(downloadResultList.get(i).toString());
 		}
 	}

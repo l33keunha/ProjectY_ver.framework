@@ -165,7 +165,7 @@
                     <p>이용자유형</p>
                     <div class="cell5_01">
                         <div>
-                        <label><input type="checkbox" name="cd_no" value="00"> 전체</label>
+                        <label><input type="checkbox" name="cd_no" value="00" onclick="selectAllCd(this)"> 전체</label>
                         <label><input type="checkbox" name="cd_no" value="01"> 일반</label>
                         <label><input type="checkbox" name="cd_no" value="02"> 어린이</label>
                         <label><input type="checkbox" name="cd_no" value="03"> 청소년</label>

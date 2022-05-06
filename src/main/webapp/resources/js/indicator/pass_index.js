@@ -46,57 +46,15 @@
 			addHtml += "<label>날짜<input class='date' id='dateStart' name='dateStart'></label>";
 			$('.cell3_03').append(addHtml);
 			
-			disabledFalse(5);
+			disabledFalse(4);
+			
+			if(jsonArray['anal_type'] != 'passCnt_route'){
+				disabledTime()
+			}
+			
 			validationCd_no();
 			
 		}
-		
-		// 통행분석 선택박스 case 4 : 상위이용정류장 조회조건 - 서울은 버스,지하철 다르게 표출
-		if(jsonArray['anal_group'] == 'passTopStation'){
-			var addHtml = '';
-			addHtml += "<label>날짜<input class='date' id='dateStart' name='dateStart'></label>";
-			$('.cell3_03').append(addHtml);
-			
-			disabledFalse(5);
-			
-			if(jsonArray['anal_area_cd'] == 11){
-				$('.cell6').css("opacity", 1);
-				$('.cell6_01').css("opacity", 1);
-				$('.cell6_02').css("opacity", 0.3);
-				$("input[name=tfcmn]").prop("disabled", false);
-				
-				// 유효성검사 2. 서울일 경우, 교통수단도 선택해야 조회가능
-				$('input:checkbox[name="cd_no"]').change(function(){
-					if($('input:checkbox[name="cd_no"]').is(":checked") ==  true
-					  && $('input:radio[name="tfcmn"]').is(":checked") ==  true){
-						$('.submit').prop("disabled",false);
-						$('.submit').css("opacity", 1);
-						$('.submit').css("cursor", "pointer");
-					} else{
-						$('.submit').prop("disabled",true);
-						$('.submit').css("opacity", 0.3);
-						$('.submit').css("cursor", "auto");
-					}
-				})
-				$('input:radio[name="tfcmn"]').change(function(){
-					if($('input:checkbox[name="cd_no"]').is(":checked") ==  true
-					  && $('input:radio[name="tfcmn"]').is(":checked") ==  true){
-						$('.submit').prop("disabled",false);
-						$('.submit').css("opacity", 1);
-						$('.submit').css("cursor", "pointer");
-					} else{
-						$('.submit').prop("disabled",true);
-						$('.submit').css("opacity", 0.3);
-						$('.submit').css("cursor", "auto");
-					}
-				})
-			} else {
-				validationCd_no();
-			}
-			
-		}
-			
-			
 		
 		// 통행분석 선택박스 case 3
 		if(jsonArray['anal_group'] == 'passRouteODCnt'){
@@ -153,6 +111,52 @@
 				else $('select[name=tmStart] option:eq('+ index + ')').prop("selected", true);
 			})
 		}
+		
+		// 통행분석 선택박스 case 4 : 상위이용정류장 조회조건 - 서울은 버스,지하철 다르게 표출
+		if(jsonArray['anal_group'] == 'passTopStation'){
+			var addHtml = '';
+			addHtml += "<label>날짜<input class='date' id='dateStart' name='dateStart'></label>";
+			$('.cell3_03').append(addHtml);
+			
+			disabledFalse(5);
+			
+			if(jsonArray['anal_area_cd'] == 11){
+				$('.cell6').css("opacity", 1);
+				$('.cell6_01').css("opacity", 1);
+				$('.cell6_02').css("opacity", 0.3);
+				$("input[name=tfcmn]").prop("disabled", false);
+				
+				// 유효성검사 2. 서울일 경우, 교통수단도 선택해야 조회가능
+				$('input:checkbox[name="cd_no"]').change(function(){
+					if($('input:checkbox[name="cd_no"]').is(":checked") ==  true
+					  && $('input:radio[name="tfcmn"]').is(":checked") ==  true){
+						$('.submit').prop("disabled",false);
+						$('.submit').css("opacity", 1);
+						$('.submit').css("cursor", "pointer");
+					} else{
+						$('.submit').prop("disabled",true);
+						$('.submit').css("opacity", 0.3);
+						$('.submit').css("cursor", "auto");
+					}
+				})
+				$('input:radio[name="tfcmn"]').change(function(){
+					if($('input:checkbox[name="cd_no"]').is(":checked") ==  true
+					  && $('input:radio[name="tfcmn"]').is(":checked") ==  true){
+						$('.submit').prop("disabled",false);
+						$('.submit').css("opacity", 1);
+						$('.submit').css("cursor", "pointer");
+					} else{
+						$('.submit').prop("disabled",true);
+						$('.submit').css("opacity", 0.3);
+						$('.submit').css("cursor", "auto");
+					}
+				})
+			} else {
+				validationCd_no();
+			}
+			
+		}
+			
 	}
 	
 	/* 노선번호 검색 선택 */

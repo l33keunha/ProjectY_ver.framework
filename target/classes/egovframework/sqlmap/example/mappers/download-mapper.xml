@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ybs.indicator.common.service.impl.DownloadMapper">
+<mapper namespace="com.ybs.indicator.download.service.impl.DownloadMapper">
 		
 	<!-- 정류장별 통행 -->
 	<select id ="selectdownloadResultListStationCnt" parameterType="sVO" resultType="egovMap">
 		SELECT 
 			ANAL_AREA_CD
-			,CASE WHEN PROVIDER = '00' THEN '국토부' ELSE '정산사' END 분석자료
+			,#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
+			,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
+			,CASE WHEN PROVIDER = '00' THEN '국토부' ELSE '정산사' END PROVIDER
 			,OPRAT_DATE
 			,TFCMN
 			,STTN_ID
@@ -89,8 +91,10 @@
 	<!-- 정류장간OD 목적통행 -->
 	<select id ="selectdownloadResultListStationOD_purpose" parameterType="sVO" resultType="egovMap">
 		SELECT /*+ PARALLEL(4) */
-			분석지역명
-			,CASE WHEN OWNER = '00' THEN '국토부' ELSE '정산사' END 분석자료
+			분석지역_CD
+			,#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
+			,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
+			,CASE WHEN OWNER = '00' THEN '국토부' ELSE '정산사' END PROVIDER
 			,운행일자
 			,승차내외부
 			,승차역ID
@@ -120,8 +124,10 @@
 	<!-- 정류장간OD 수단통행 -->
 	<select id ="selectdownloadResultListStationOD_method" parameterType="sVO" resultType="egovMap">
 		SELECT /*+ PARALLEL(4) */
-			분석지역명
-			,CASE WHEN OWNER = '00' THEN '국토부' ELSE '정산사' END 분석자료
+			분석지역_CD
+			,#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
+			,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
+			,CASE WHEN OWNER = '00' THEN '국토부' ELSE '정산사' END PROVIDER
 			,운행일자
 			,승차내외부
 			,승차역ID
@@ -152,7 +158,9 @@
 	<select id ="selectdownloadResultListRouteCnt" parameterType="sVO" resultType="egovMap">
 		SELECT /*+ PARALLEL(4) */ 
 			ANAL_AREA_CD
-			,CASE WHEN PROVIDER = '00' THEN '국토부' ELSE '정산사' END 분석자료
+			,#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
+			,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
+			,CASE WHEN PROVIDER = '00' THEN '국토부' ELSE '정산사' END PROVIDER
 			,OPRAT_DATE
 			,TFCMN
 			,ROUTE_ID 
@@ -238,7 +246,9 @@
 	<select id ="selectdownloadResultListRouteOD" parameterType="sVO" resultType="egovMap">
 		SELECT  /*+ PARALLEL(4) */
 			ANAL_AREA_CD
-			,CASE WHEN PROVIDER = '00' THEN '국토부' ELSE '정산사' END 분석자료
+			,#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
+			,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
+			,CASE WHEN PROVIDER = '00' THEN '국토부' ELSE '정산사' END PROVIDER
 			,OPRAT_DATE
 			,TFCMN
 			,ROUTE_ID
@@ -270,15 +280,17 @@
 		WHERE 1=1
 			AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 			AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
-		ORDER BY ROUTE_ID, TM;
+		ORDER BY ROUTE_ID, TM
 	</select>
 	
 	<!-- 행정동간OD 목적통행 -->
 	<select id ="selectdownloadResultListAreaOD_purpose" parameterType="sVO" resultType="egovMap">
 		SELECT 
-			분석지역명
+			분석지역_CD
+			,#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
+			,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
+			,CASE WHEN OWNER = '00' THEN '국토부' ELSE '정산사' END PROVIDER
 			,운행일자
-			,CASE WHEN OWNER = '00' THEN '국토부' ELSE '정산사' END 분석자료
 			,승차내외부
 			,승차지역코드
 			,승차지역명
@@ -307,9 +319,11 @@
 	<!-- 행정동간OD 수단통행 -->
 	<select id ="selectdownloadResultListAreaOD_method" parameterType="sVO" resultType="egovMap">
 		SELECT 
-			분석지역명
+			분석지역_CD
+			,#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
+			,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
+			,CASE WHEN OWNER = '00' THEN '국토부' ELSE '정산사' END PROVIDER
 			,운행일자
-			,CASE WHEN OWNER = '00' THEN '국토부' ELSE '정산사' END 분석자료
 			,승차내외부
 			,승차지역코드
 			,승차지역명
