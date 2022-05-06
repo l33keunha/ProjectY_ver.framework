@@ -2,92 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ybs.indicator.download.service.impl.DownloadMapper">
 		
-	<!-- 정류장별 통행 -->
-	<select id ="selectdownloadResultListStationCnt" parameterType="sVO" resultType="egovMap">
-		SELECT 
-			ANAL_AREA_CD
-			,#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
-			,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
-			,CASE WHEN PROVIDER = '00' THEN '국토부' ELSE '정산사' END PROVIDER
-			,OPRAT_DATE
-			,TFCMN
-			,STTN_ID
-			,STTN_NMA
-			,STTN_HJD
-			,TM
-			,일반_STTN_BUS_GIN_AGG
-			,일반_STTN_BUS_GFF_AGG
-			,일반_STTN_BUS_TRS_AGG
-			,일반_STTN_TRAIN_GIN_AGG
-			,일반_STTN_TRAIN_GFF_AGG
-			,일반_STTN_TRAIN_TRS_AGG
-			,어린이_STTN_BUS_GIN_AGG
-			,어린이_STTN_BUS_GFF_AGG
-			,어린이_STTN_BUS_TRS_AGG
-			,어린이_STTN_TRAIN_GIN_AGG
-			,어린이_STTN_TRAIN_GFF_AGG
-			,어린이_STTN_TRAIN_TRS_AGG
-			,청소년_STTN_BUS_GIN_AGG
-			,청소년_STTN_BUS_GFF_AGG
-			,청소년_STTN_BUS_TRS_AGG
-			,청소년_STTN_TRAIN_GIN_AGG
-			,청소년_STTN_TRAIN_GFF_AGG
-			,청소년_STTN_TRAIN_TRS_AGG
-			,경로_STTN_BUS_GIN_AGG
-			,경로_STTN_BUS_GFF_AGG
-			,경로_STTN_BUS_TRS_AGG
-			,경로_STTN_TRAIN_GIN_AGG
-			,경로_STTN_TRAIN_GFF_AGG
-			,경로_STTN_TRAIN_TRS_AGG
-			,장애인_STTN_BUS_GIN_AGG
-			,장애인_STTN_BUS_GFF_AGG
-			,장애인_STTN_BUS_TRS_AGG
-			,장애인_STTN_TRAIN_GIN_AGG
-			,장애인_STTN_TRAIN_GFF_AGG
-			,장애인_STTN_TRAIN_TRS_AGG
-			,국가유공자_STTN_BUS_GIN_AGG
-			,국가유공자_STTN_BUS_GFF_AGG
-			,국가유공자_STTN_BUS_TRS_AGG
-			,국가유공자_STTN_TRAIN_GIN_AGG
-			,국가유공자_STTN_TRAIN_GFF_AGG
-			,국가유공자_STTN_TRAIN_TRS_AGG
-			,다자녀부모_STTN_BUS_GIN_AGG
-			,다자녀부모_STTN_BUS_GFF_AGG
-			,다자녀부모_STTN_BUS_TRS_AGG
-			,다자녀부모_STTN_TRAIN_GIN_AGG
-			,다자녀부모_STTN_TRAIN_GFF_AGG
-			,다자녀부모_STTN_TRAIN_TRS_AGG
-			,동반_STTN_BUS_GIN_AGG
-			,동반_STTN_BUS_GFF_AGG
-			,동반_STTN_BUS_TRS_AGG
-			,동반_STTN_TRAIN_GIN_AGG
-			,동반_STTN_TRAIN_GFF_AGG
-			,동반_STTN_TRAIN_TRS_AGG
-			,대학생_STTN_BUS_GIN_AGG
-			,대학생_STTN_BUS_GFF_AGG
-			,대학생_STTN_BUS_TRS_AGG
-			,대학생_STTN_TRAIN_GIN_AGG
-			,대학생_STTN_TRAIN_GFF_AGG
-			,대학생_STTN_TRAIN_TRS_AGG
-			,복지_STTN_BUS_GIN_AGG
-			,복지_STTN_BUS_GFF_AGG
-			,복지_STTN_BUS_TRS_AGG
-			,복지_STTN_TRAIN_GIN_AGG
-			,복지_STTN_TRAIN_GFF_AGG
-			,복지_STTN_TRAIN_TRS_AGG
-			,기타_STTN_BUS_GIN_AGG
-			,기타_STTN_BUS_GFF_AGG
-			,기타_STTN_BUS_TRS_AGG
-			,기타_STTN_TRAIN_GIN_AGG
-			,기타_STTN_TRAIN_GFF_AGG
-			,기타_STTN_TRAIN_TRS_AGG
-		FROM PIVOT_정류장별통행
-		WHERE 1=1
-			AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
-			AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
-		ORDER BY STTN_ID, TM
-	</select>
-	
 	<!-- 정류장간OD 목적통행 -->
 	<select id ="selectdownloadResultListStationOD_purpose" parameterType="sVO" resultType="egovMap">
 		SELECT /*+ PARALLEL(4) */
@@ -152,94 +66,6 @@
 			AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 			AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
 		ORDER BY 승차내외부, 승차역ID, 하차내외부, 하차역ID, 시간
-	</select>
-	
-	<!-- 노선별 통행 -->
-	<select id ="selectdownloadResultListRouteCnt" parameterType="sVO" resultType="egovMap">
-		SELECT /*+ PARALLEL(4) */ 
-			ANAL_AREA_CD
-			,#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
-			,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
-			,CASE WHEN PROVIDER = '00' THEN '국토부' ELSE '정산사' END PROVIDER
-			,OPRAT_DATE
-			,TFCMN
-			,ROUTE_ID 
-			,ROUTE_NMA 
-			,ROUTE_TYPE
-			,ROUTE_START 
-			,ROUTE_END 
-			,TM
-			,일반_ROUTE_BUS_GIN_AGG
-			,일반_ROUTE_BUS_GFF_AGG
-			,일반_ROUTE_BUS_TRS_AGG
-			,일반_ROUTE_TRAIN_GIN_AGG
-			,일반_ROUTE_TRAIN_GFF_AGG
-			,일반_ROUTE_TRAIN_TRS_AGG
-			,어린이_ROUTE_BUS_GIN_AGG
-			,어린이_ROUTE_BUS_GFF_AGG
-			,어린이_ROUTE_BUS_TRS_AGG
-			,어린이_ROUTE_TRAIN_GIN_AGG
-			,어린이_ROUTE_TRAIN_GFF_AGG
-			,어린이_ROUTE_TRAIN_TRS_AGG
-			,청소년_ROUTE_BUS_GIN_AGG
-			,청소년_ROUTE_BUS_GFF_AGG
-			,청소년_ROUTE_BUS_TRS_AGG
-			,청소년_ROUTE_TRAIN_GIN_AGG
-			,청소년_ROUTE_TRAIN_GFF_AGG
-			,청소년_ROUTE_TRAIN_TRS_AGG
-			,경로_ROUTE_BUS_GIN_AGG
-			,경로_ROUTE_BUS_GFF_AGG
-			,경로_ROUTE_BUS_TRS_AGG
-			,경로_ROUTE_TRAIN_GIN_AGG
-			,경로_ROUTE_TRAIN_GFF_AGG
-			,경로_ROUTE_TRAIN_TRS_AGG
-			,장애인_ROUTE_BUS_GIN_AGG
-			,장애인_ROUTE_BUS_GFF_AGG
-			,장애인_ROUTE_BUS_TRS_AGG
-			,장애인_ROUTE_TRAIN_GIN_AGG
-			,장애인_ROUTE_TRAIN_GFF_AGG
-			,장애인_ROUTE_TRAIN_TRS_AGG
-			,국가유공자_ROUTE_BUS_GIN_AGG
-			,국가유공자_ROUTE_BUS_GFF_AGG
-			,국가유공자_ROUTE_BUS_TRS_AGG
-			,국가유공자_ROUTE_TRAIN_GIN_AGG
-			,국가유공자_ROUTE_TRAIN_GFF_AGG
-			,국가유공자_ROUTE_TRAIN_TRS_AGG
-			,다자녀부모_ROUTE_BUS_GIN_AGG
-			,다자녀부모_ROUTE_BUS_GFF_AGG
-			,다자녀부모_ROUTE_BUS_TRS_AGG
-			,다자녀부모_ROUTE_TRAIN_GIN_AGG
-			,다자녀부모_ROUTE_TRAIN_GFF_AGG
-			,다자녀부모_ROUTE_TRAIN_TRS_AGG
-			,동반_ROUTE_BUS_GIN_AGG
-			,동반_ROUTE_BUS_GFF_AGG
-			,동반_ROUTE_BUS_TRS_AGG
-			,동반_ROUTE_TRAIN_GIN_AGG
-			,동반_ROUTE_TRAIN_GFF_AGG
-			,동반_ROUTE_TRAIN_TRS_AGG
-			,대학생_ROUTE_BUS_GIN_AGG
-			,대학생_ROUTE_BUS_GFF_AGG
-			,대학생_ROUTE_BUS_TRS_AGG
-			,대학생_ROUTE_TRAIN_GIN_AGG
-			,대학생_ROUTE_TRAIN_GFF_AGG
-			,대학생_ROUTE_TRAIN_TRS_AGG
-			,복지_ROUTE_BUS_GIN_AGG
-			,복지_ROUTE_BUS_GFF_AGG
-			,복지_ROUTE_BUS_TRS_AGG
-			,복지_ROUTE_TRAIN_GIN_AGG
-			,복지_ROUTE_TRAIN_GFF_AGG
-			,복지_ROUTE_TRAIN_TRS_AGG
-			,기타_ROUTE_BUS_GIN_AGG
-			,기타_ROUTE_BUS_GFF_AGG
-			,기타_ROUTE_BUS_TRS_AGG
-			,기타_ROUTE_TRAIN_GIN_AGG
-			,기타_ROUTE_TRAIN_GFF_AGG
-			,기타_ROUTE_TRAIN_TRS_AGG
-			FROM PIVOT_노선별통행
-			WHERE 1=1
-				AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
-				AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
-			ORDER BY ROUTE_ID, TM
 	</select>
 	
 	<!-- 노선별 정류장간OD -->
@@ -349,5 +175,219 @@
 		ORDER BY 승차내외부, 승차지역코드, 하차내외부, 하차지역코드, STIME
 	</select>
 	
+	<!-- 정류장별통행 버스 -->
+	<select id ="selectdownloadResultListStationCntB" parameterType="sVO" resultType="egovMap">
+		SELECT 
+			ANAL_AREA_CD
+			,#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
+			,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
+			,CASE WHEN PROVIDER = '00' THEN '국토부' ELSE '정산사' END PROVIDER
+			,OPRAT_DATE
+			,TFCMN
+			,STTN_ID
+			,STTN_NMA
+			,STTN_HJD
+			,TM
+			,일반_STTN_BUS_GIN_AGG
+			,일반_STTN_BUS_GFF_AGG
+			,일반_STTN_BUS_TRS_AGG
+			,어린이_STTN_BUS_GIN_AGG
+			,어린이_STTN_BUS_GFF_AGG
+			,어린이_STTN_BUS_TRS_AGG
+			,청소년_STTN_BUS_GIN_AGG
+			,청소년_STTN_BUS_GFF_AGG
+			,청소년_STTN_BUS_TRS_AGG
+			,경로_STTN_BUS_GIN_AGG
+			,경로_STTN_BUS_GFF_AGG
+			,경로_STTN_BUS_TRS_AGG
+			,장애인_STTN_BUS_GIN_AGG
+			,장애인_STTN_BUS_GFF_AGG
+			,장애인_STTN_BUS_TRS_AGG
+			,국가유공자_STTN_BUS_GIN_AGG
+			,국가유공자_STTN_BUS_GFF_AGG
+			,국가유공자_STTN_BUS_TRS_AGG
+			,다자녀부모_STTN_BUS_GIN_AGG
+			,다자녀부모_STTN_BUS_GFF_AGG
+			,다자녀부모_STTN_BUS_TRS_AGG
+			,동반_STTN_BUS_GIN_AGG
+			,동반_STTN_BUS_GFF_AGG
+			,동반_STTN_BUS_TRS_AGG
+			,대학생_STTN_BUS_GIN_AGG
+			,대학생_STTN_BUS_GFF_AGG
+			,대학생_STTN_BUS_TRS_AGG
+			,복지_STTN_BUS_GIN_AGG
+			,복지_STTN_BUS_GFF_AGG
+			,복지_STTN_BUS_TRS_AGG
+			,기타_STTN_BUS_GIN_AGG
+			,기타_STTN_BUS_GFF_AGG
+			,기타_STTN_BUS_TRS_AGG
+		FROM PIVOT_정류장별통행
+		WHERE 1=1
+			AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
+			AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
+			AND TFCMN = 'B'
+		ORDER BY STTN_ID, TM
+	</select>
 	
+	<!-- 정류장별통행 지하철 -->
+	<select id ="selectdownloadResultListStationCntT" parameterType="sVO" resultType="egovMap">
+		SELECT 
+			ANAL_AREA_CD
+			,#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
+			,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
+			,CASE WHEN PROVIDER = '00' THEN '국토부' ELSE '정산사' END PROVIDER
+			,OPRAT_DATE
+			,TFCMN
+			,STTN_ID
+			,STTN_NMA
+			,STTN_HJD
+			,TM
+			,일반_STTN_TRAIN_GIN_AGG
+			,일반_STTN_TRAIN_GFF_AGG
+			,일반_STTN_TRAIN_TRS_AGG
+			,어린이_STTN_TRAIN_GIN_AGG
+			,어린이_STTN_TRAIN_GFF_AGG
+			,어린이_STTN_TRAIN_TRS_AGG
+			,청소년_STTN_TRAIN_GIN_AGG
+			,청소년_STTN_TRAIN_GFF_AGG
+			,청소년_STTN_TRAIN_TRS_AGG
+			,경로_STTN_TRAIN_GIN_AGG
+			,경로_STTN_TRAIN_GFF_AGG
+			,경로_STTN_TRAIN_TRS_AGG
+			,장애인_STTN_TRAIN_GIN_AGG
+			,장애인_STTN_TRAIN_GFF_AGG
+			,장애인_STTN_TRAIN_TRS_AGG
+			,국가유공자_STTN_TRAIN_GIN_AGG
+			,국가유공자_STTN_TRAIN_GFF_AGG
+			,국가유공자_STTN_TRAIN_TRS_AGG
+			,다자녀부모_STTN_TRAIN_GIN_AGG
+			,다자녀부모_STTN_TRAIN_GFF_AGG
+			,다자녀부모_STTN_TRAIN_TRS_AGG
+			,동반_STTN_TRAIN_GIN_AGG
+			,동반_STTN_TRAIN_GFF_AGG
+			,동반_STTN_TRAIN_TRS_AGG
+			,대학생_STTN_TRAIN_GIN_AGG
+			,대학생_STTN_TRAIN_GFF_AGG
+			,대학생_STTN_TRAIN_TRS_AGG
+			,복지_STTN_TRAIN_GIN_AGG
+			,복지_STTN_TRAIN_GFF_AGG
+			,복지_STTN_TRAIN_TRS_AGG
+			,기타_STTN_TRAIN_GIN_AGG
+			,기타_STTN_TRAIN_GFF_AGG
+			,기타_STTN_TRAIN_TRS_AGG
+		FROM PIVOT_정류장별통행
+		WHERE 1=1
+			AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
+			AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
+			AND TFCMN = 'T'
+		ORDER BY STTN_ID, TM
+	</select>
+	
+	<!-- 노선별통행 버스 -->
+	<select id ="selectdownloadResultListRouteCntB" parameterType="sVO" resultType="egovMap">
+		SELECT 
+			ANAL_AREA_CD
+			,#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
+			,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
+			,CASE WHEN PROVIDER = '00' THEN '국토부' ELSE '정산사' END PROVIDER
+			,OPRAT_DATE
+			,TFCMN
+			,STTN_ID
+			,STTN_NMA
+			,STTN_HJD
+			,TM
+			,일반_ROUTE_BUS_GIN_AGG
+			,일반_ROUTE_BUS_GFF_AGG
+			,일반_ROUTE_BUS_TRS_AGG
+			,어린이_ROUTE_BUS_GIN_AGG
+			,어린이_ROUTE_BUS_GFF_AGG
+			,어린이_ROUTE_BUS_TRS_AGG
+			,청소년_ROUTE_BUS_GIN_AGG
+			,청소년_ROUTE_BUS_GFF_AGG
+			,청소년_ROUTE_BUS_TRS_AGG
+			,경로_ROUTE_BUS_GIN_AGG
+			,경로_ROUTE_BUS_GFF_AGG
+			,경로_ROUTE_BUS_TRS_AGG
+			,장애인_ROUTE_BUS_GIN_AGG
+			,장애인_ROUTE_BUS_GFF_AGG
+			,장애인_ROUTE_BUS_TRS_AGG
+			,국가유공자_ROUTE_BUS_GIN_AGG
+			,국가유공자_ROUTE_BUS_GFF_AGG
+			,국가유공자_ROUTE_BUS_TRS_AGG
+			,다자녀부모_ROUTE_BUS_GIN_AGG
+			,다자녀부모_ROUTE_BUS_GFF_AGG
+			,다자녀부모_ROUTE_BUS_TRS_AGG
+			,동반_ROUTE_BUS_GIN_AGG
+			,동반_ROUTE_BUS_GFF_AGG
+			,동반_ROUTE_BUS_TRS_AGG
+			,대학생_ROUTE_BUS_GIN_AGG
+			,대학생_ROUTE_BUS_GFF_AGG
+			,대학생_ROUTE_BUS_TRS_AGG
+			,복지_ROUTE_BUS_GIN_AGG
+			,복지_ROUTE_BUS_GFF_AGG
+			,복지_ROUTE_BUS_TRS_AGG
+			,기타_ROUTE_BUS_GIN_AGG
+			,기타_ROUTE_BUS_GFF_AGG
+			,기타_ROUTE_BUS_TRS_AGG
+		FROM PIVOT_노선별통행
+		WHERE 1=1
+			AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
+			AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
+			AND TFCMN = 'B'
+		ORDER BY STTN_ID, TM
+	</select>
+	
+	<!-- 노선별통행 지하철 -->
+	<select id ="selectdownloadResultListRouteCntT" parameterType="sVO" resultType="egovMap">
+		SELECT 
+			ANAL_AREA_CD
+			,#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
+			,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
+			,CASE WHEN PROVIDER = '00' THEN '국토부' ELSE '정산사' END PROVIDER
+			,OPRAT_DATE
+			,TFCMN
+			,STTN_ID
+			,STTN_NMA
+			,STTN_HJD
+			,TM
+			,일반_ROUTE_TRAIN_GIN_AGG
+			,일반_ROUTE_TRAIN_GFF_AGG
+			,일반_ROUTE_TRAIN_TRS_AGG
+			,어린이_ROUTE_TRAIN_GIN_AGG
+			,어린이_ROUTE_TRAIN_GFF_AGG
+			,어린이_ROUTE_TRAIN_TRS_AGG
+			,청소년_ROUTE_TRAIN_GIN_AGG
+			,청소년_ROUTE_TRAIN_GFF_AGG
+			,청소년_ROUTE_TRAIN_TRS_AGG
+			,경로_ROUTE_TRAIN_GIN_AGG
+			,경로_ROUTE_TRAIN_GFF_AGG
+			,경로_ROUTE_TRAIN_TRS_AGG
+			,장애인_ROUTE_TRAIN_GIN_AGG
+			,장애인_ROUTE_TRAIN_GFF_AGG
+			,장애인_ROUTE_TRAIN_TRS_AGG
+			,국가유공자_ROUTE_TRAIN_GIN_AGG
+			,국가유공자_ROUTE_TRAIN_GFF_AGG
+			,국가유공자_ROUTE_TRAIN_TRS_AGG
+			,다자녀부모_ROUTE_TRAIN_GIN_AGG
+			,다자녀부모_ROUTE_TRAIN_GFF_AGG
+			,다자녀부모_ROUTE_TRAIN_TRS_AGG
+			,동반_ROUTE_TRAIN_GIN_AGG
+			,동반_ROUTE_TRAIN_GFF_AGG
+			,동반_ROUTE_TRAIN_TRS_AGG
+			,대학생_ROUTE_TRAIN_GIN_AGG
+			,대학생_ROUTE_TRAIN_GFF_AGG
+			,대학생_ROUTE_TRAIN_TRS_AGG
+			,복지_ROUTE_TRAIN_GIN_AGG
+			,복지_ROUTE_TRAIN_GFF_AGG
+			,복지_ROUTE_TRAIN_TRS_AGG
+			,기타_ROUTE_TRAIN_GIN_AGG
+			,기타_ROUTE_TRAIN_GFF_AGG
+			,기타_ROUTE_TRAIN_TRS_AGG
+		FROM PIVOT_노선별통행
+		WHERE 1=1
+			AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
+			AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
+			AND TFCMN = 'T'
+		ORDER BY STTN_ID, TM
+	</select>
 </mapper>

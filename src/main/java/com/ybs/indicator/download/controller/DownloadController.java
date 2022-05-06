@@ -24,11 +24,17 @@ public class DownloadController {
 	@RequestMapping(value="/downloadTest.do")
 	public ModelAndView selectPassResultList(ModelAndView mv, HttpServletRequest req, @ModelAttribute SearchVO sVO) {
 		System.out.println(sVO.toString());
-		
-		service.selectdownloadResultList(sVO);
+		if(sVO.getAnal_type().equals("dlStation_stationCnt")
+			|| sVO.getAnal_type().equals("dlRoute_routeCnt")) {
+			service.selectdownloadResultListB(sVO);
+			service.selectdownloadResultListT(sVO);
+		} else{
+			service.selectdownloadResultList(sVO);
+		}
 		
 		mv.addObject("sVO", sVO);
 		mv.addObject("req", req);
 		return mv;
 	}
+	
 }

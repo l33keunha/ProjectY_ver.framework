@@ -6,9 +6,7 @@
 	
 	// 분석지표 및 유형에 따른 선택박스 활성화
 	function selectBoxOpen(jsonArray){
-		var addHtml = '';
-		addHtml += "<label>날짜<input class='date' id='dateStart' name='dateStart'></label>";
-		$('.cell3_03').append(addHtml);
+		abledDateStart();
 		abledTime();
 		abledBtn();
 	}

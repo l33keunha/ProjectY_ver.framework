@@ -45,11 +45,9 @@
 	
 	<!-- Ajax: 분석 노선번호 조회 -->
 	<select id ="selectPassRouteIdList" parameterType="sVO" resultType="egovMap">
-		SELECT DISTINCT 노선ID ROUTE_ID, 노선명칭 ROUTE_NMA, NVL(노선구분, '-') ROUTE_TYPE
-	 		,first_value(정류장명칭) OVER (PARTITION BY 정산사ID,노선ID ORDER BY 정류장순번
-	                                        ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) ROUTE_START
-	        ,last_value(정류장명칭) OVER (PARTITION BY 정산사ID,노선ID ORDER BY 정류장순번
-	                                        ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) ROUTE_END
+		SELECT DISTINCT 노선ID ROUTE_ID, 노선명칭 ROUTE_NMA, NVL(유형, '-') ROUTE_TYPE
+	 		,기점 ROUTE_START
+	        ,종점 ROUTE_END
 		FROM STDNN_BRS
 		WHERE 1=1
 			AND 운행일자 =#{dateStart}

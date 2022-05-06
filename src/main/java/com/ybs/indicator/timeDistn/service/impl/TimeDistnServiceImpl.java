@@ -66,6 +66,7 @@ public class TimeDistnServiceImpl extends EgovAbstractServiceImpl implements Tim
 				transferResultListT = mapper.selectTimeDistnResultListRouteTime(sVO); break;
 			}
 		}
+		
 		return transferResultListT;
 	}
 

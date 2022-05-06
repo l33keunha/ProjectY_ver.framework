@@ -38,9 +38,9 @@
 					<!--thead 시작▼-->
 					<thead>
 						 <tr>
-							<th class="tg-0pky" rowspan="2" style="width: 80px; min-width: 80px; max-width: 80px; height: 55px;">시/도</th>	<!-- 광역/도 -->
-							<th class="tg-0pky" rowspan="2" style="width: 80px; min-width: 80px; max-width: 80px;">시/군/구</th>				<!-- 시/군 -->
-							<th class="tg-0pky" rowspan="2" style="width: 70px; min-width: 70px; max-width: 70px;">분석일자</th>				<!-- 분석일자 -->
+							<th class="tg-0pky" rowspan="2" style="width: 80px; min-width: 80px; max-width: 80px; height: 55px;">광역/도</th>	<!-- 광역/도 -->
+							<th class="tg-0pky" rowspan="2" style="width: 80px; min-width: 80px; max-width: 80px;">시/군</th>				<!-- 시/군 -->
+							<th class="tg-0pky" rowspan="2" style="width: 70px; min-width: 70px; max-width: 70px;">날짜</th>				<!-- 분석일자 -->
 							<th class="tg-0pky" rowspan="2" style="width: 30px; min-width: 30px; max-width: 30px;">요일</th>					<!-- 요일 -->
 							<th class="tg-0pky" rowspan="2" style="width: 65px; min-width: 65px; max-width: 65px;">정류장구분</th>				<!-- 정류장구분 -->
 							<th class="tg-0pky" rowspan="2" style="width: 80px; min-width: 80px; max-width: 80px;">정류장ID</th>				<!-- 정류장ID -->

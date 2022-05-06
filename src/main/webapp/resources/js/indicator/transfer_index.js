@@ -40,20 +40,14 @@
          || jsonArray['anal_type'] == 'transferTime_num'
 	  	 || jsonArray['anal_type'] == 'transferDistn_method'
 		 || jsonArray['anal_type'] == 'transferDistn_num'){
-			var addHtml = '';
-			addHtml += "<label>시작<input class='date' id='dateStart' name='dateStart'></label>";
-			addHtml += "<label>종료<input class='date' id='dateEnd' name='dateEnd'></label>";
-			$('.cell3_03').append(addHtml);
+			abledDateStart_End();
 			disabledFalse(4);
 			validationCd_no();
 		}
 		
 		// 환승분석 선택박스 case 2
 		if(jsonArray['anal_type'] == 'transferCnt_station'){
-			var addHtml = '';
-			addHtml += "<label>날짜<input class='date' id='dateStart' name='dateStart'></label>";
-			$('.cell3_03').append(addHtml);
-			
+			abledDateStart();
 			disabledFalse(5);
 			validationCd_no();
 		}

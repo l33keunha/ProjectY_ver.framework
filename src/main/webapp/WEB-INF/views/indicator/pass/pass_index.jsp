@@ -4,9 +4,10 @@
 <!DOCTYPE html>
 <html lang="ko">
     <head>
-        <title>통행분석</title>
+        <title>통행분석</title> 
+        <link rel="stylesheet" type="text/css" href="resources/css/indicator/jquery-ui.css">
+        <link rel="stylesheet" type="text/css" href="resources/css/indicator/common_index.css"> 
         <link rel="stylesheet" type="text/css" href="resources/css/indicator/pass_index.css"> 
-        <link rel="stylesheet" type="text/css" href="resources/css/indicator/jquery-ui.css"> 
  		<script type="text/javascript" src="resources/js/indicator/common_index.js" defer ></script> 
  		<script type="text/javascript" src="resources/js/indicator/pass_index.js" defer ></script> 
         <script src ="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -96,7 +97,7 @@
                     <p>자료</p>
                     <div>
                         <label><input type="radio" name="provider" id="provider00" value="00"> 국토부</label>
-                        <label><input type="radio" name="provider" id="provider99" value="99"> 정산사</label>
+                        <label><input type="radio" name="provider" id="provider99" > 정산사</label>
                     </div>
                 </div>
 

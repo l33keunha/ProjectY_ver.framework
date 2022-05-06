@@ -1,140 +1,7 @@
-*{
-    margin: 0 auto;
-    padding: 0 auto;
-    font-family: 'Nanum Gothic', sans-serif;
-    font-size: 12px;
-}
-a{
-    text-decoration: none;
-    color: #000;
-}
-.header {
-    width: 100%;
-    height: 69px;
-    border-bottom: 3px solid #1f2958;
-    padding-bottom: 5px;
-    position: relative;
-}
 
-.logo{
-    float: left;
-    width: 156px;
-    height: 57px;
-    /* border: 1px solid red; */
-    margin-left: 14px;
-    margin-top: 10px;
-}
-.logo02{
-    float: left;
-    color: #1f2958;
-    font-size: 35px;
-    padding: 10px 0;
-    font-weight: bold;
-}
-.mtap{
-    position: absolute;
-    float: right;
-    bottom: 0;
-    right: 20px;
-    
-  }
-  .mtap p{
-      float: left;
-      font-size: 17px;
-      padding: 0 6px;
-  }
-  
-/* 드롭다운 베뉴 */
-.dropdown {
-    position: relative;
-    display: inline-block;
-  }
-  .dropbtn {
-    background-color: #ffffff;
-    color: black;
-    /* padding: 16px; */
-    font-size: 16px;
-    border: none;
-  }
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #c6dcf0;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgb(0 0 0 / 20%);
-    z-index: 1;
-    right: 1px;
-  }
-  
-  .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-  }
-  
-  .dropdown-content a:hover {background-color: #b3d3f0;}
-  
-  .dropdown:hover .dropdown-content {display: block;}
-  
-  .dropdown:hover .dropbtn {background-color: #c6dcf0;}
-.ConName{
-    height: 43px;
-    width: 1920px;
-    /* margin-top: 15px; */
-    /* margin-bottom: 10px; */
-    border-bottom: 3px solid #5C7D9A;
-}
-.contents{
-    text-align: center;
-    width: 1528px;
-    height: 42px;
-}
-.contents a{
-    text-decoration: none;
-    color: #000;
-    float: left;
-    font-size: 23px;
-    margin-left: 26px;
-    width: 165px;
-    /* padding: 5px;*/
-}
-.contents span{
-    float: left;
-    font-size: 23px;
-    margin-left: 26px;
-    width: 165px;
-    padding: 5px;
-}
-.contents div{
-    background-color: #5C7D9A;
-    width: 170px;
-    float: left;
-    margin-left: 26px;
-    height: 43px;
-}
-.contents :first-child{
-    margin-left: 0;
-}
 .contents :nth-child(4){
     background-color: #5C7D9A;
     color: white;
-}
-.ConEx{
-    width: 1920px;
-    height: 190px;
-    background-color: #555555;
-}
-.selectbox{
-    height: 555px;
-    width: 1920px;
-    /* border: 1px solid red; */
-}
-.selectbox >*{ 
-    float: left;
-    width: calc(100% / 6);
-    height: 555px;
-    /* border-left: 1px solid rgb(189, 189, 189); */
 }
 
 
@@ -161,28 +28,10 @@ a{
 .cell1_01{
     margin-top: 14px;
     height: 163px;
-    /* border-bottom: 1px solid gray; */
 }
 .cell1_01 div{
     width: 505px;
 }
-/* .cell1_02{
-    height: 164px;
-    border-bottom: 1px solid gray;
-}
-.cell1_02 div{
-    width: 643px;
-}
-.cell1_02 div label {
-    height: 82px;
-    margin-left: 82px;
-}
-.cell1_03{
-    height: 106px;
-}
-.cell1_03 div{
-    width: 239px;
-} */
 
 .cell2{
     background: #ccdded;
@@ -212,7 +61,6 @@ a{
 .cell2_02{
     height: 162px;
     border-bottom: 1px solid gray;
-    /* border-top: 1px solid gray; */
     margin-top: 15px;
 }
 .cell2_02 div{
@@ -231,7 +79,6 @@ a{
 
 .cell3{
     width: calc(100% / 6 * 1.5);
-    /* background: #ccdded; */
     background: #ccdded;
 }
 .cell3_01{}
@@ -266,7 +113,6 @@ a{
 }
 .cell3_02 span{
     font-size: 20px;
-    /* float: left; */
 }
 .cell3_03 {
     width: 294px;
@@ -307,37 +153,26 @@ a{
 
 /* hcell1 */
 .hcell1{
-    /* display: none; */
     float: left;
     height: 555px;
     width: calc(100% / 2);
-    /* border: 1px solid red; */
 }
 .hcell1 >*{ 
     float: left;
     width: calc(100% / 3);
     height: 555px;
-    /* border-left: 1px solid rgb(189, 189, 189); */
 }
 .hcell1 > .cell4{}
 .hcell1 > .cell4 p{}
 .hcell1 > .cell4 > .cell4_01{
     width: 257px;
 }
-.hcell1 > .cell5{}
-.hcell1 > .cell5 p {}
-.hcell1 >.cell5 > .cell5_01 div{}
-/* .hcell1 > .cell6{width: calc(100% / 2);} */
-.hcell1 > .cell6 p {}
 .hcell1 >.cell6 > .cell6_01 div{
     margin-top: -60px;
     margin-left: 83px;}
 
 /* hcell 요소 */
 
-.cell4{
-    /* background: #ccdded; */
-}
 .cell4 p {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -355,16 +190,12 @@ a{
 .cell4_01{
     margin-top: 14px;
     height: 163px;
-    /* border-bottom: 1px solid gray; */
 }
 .cell4 select{
     font-size: 15px;
     margin-left: 10px;
     width: 110px;
 }
-
-
-/* .cell5{background: #ccdded;} */
 .cell5 p {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -382,14 +213,10 @@ a{
 .cell5_01{
     margin-top: 14px;
     height: 163px;
-    /* border-bottom: 1px solid gray; */
 }
 .cell5_01 div{
     width: 179px;
 }
-
-
-/* .cell6{background-color: #e8f4ff;} */
 .cell6 p {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -407,7 +234,6 @@ a{
 .cell6_01{
     margin-top: 14px;
     height: 161px;
-    /* border-bottom: 1px solid gray; */
 }
 .cell6_01 div{
     width: 179px;
@@ -416,7 +242,6 @@ a{
     display: inline-block;
     font-size: 20px;
     border: none;
-    /* background-color: #ccdded; */
     width: 87px;
     line-height: 50px;
     height: 50px;
@@ -424,7 +249,6 @@ a{
 .cell6_02{
     margin-top: 14px;
     height: 71px;
-    /* border-bottom: 1px solid gray; */
 }
 .cell6_02 p {
     display: inline-block;
@@ -436,23 +260,19 @@ a{
 }
 /* -----노선명----- */
 .busname_wrap{
-    /* border: 2px solid #518ec6; */
     width: 217px;
     height: 222px;
-    /* overflow: hidden; */
     border-radius: 14px;
     margin-left: 93px;
     margin-top: -43px;
 }
 .search{
     height: 52px;
-    /* background-color: #90bde8; */
     border-radius: 10px;
 }
 .input-wrap{
     margin: 8px 8px;
     width: 181px;
-    /* background-color: aqua; */
     float: left;
 }
 .input-wrap input{
@@ -465,9 +285,7 @@ a{
 .button-wrap{
     width: 150px;
     width: 41px;
-    /* background-color: aqua; */
     float: left;
-    /* height: 26px; */
     margin: 5px 0;
 }
 .button-wrap button{
@@ -478,7 +296,6 @@ a{
 }
 
 .search-con{
-    /* background: bisque; */
     height: 227px;
     overflow-y: scroll;
     margin-left: 7px;
@@ -489,26 +306,12 @@ a{
 }
 
 .submit{
-    margin-top: 11px;
-    text-align: center;
-    display: block;
     width: 92px;
     height: 49px;
-    font-size: 25px;
-    background-color: #5c7d9a;
-    color: white;
-    font-weight: bold;
-    border-radius: 20px;
-}
-a{
-    text-decoration-line: none;
-
 }
 
 .search-con{
-    /* background: bisque; */
     height: 227px;
-    /* overflow-y: scroll; */
     margin-left: -57px;
     width: 282px;
 }

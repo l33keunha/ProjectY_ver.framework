@@ -44,10 +44,7 @@
 	})
 	
 	function selectBoxOpen(jsonArray){
-		var addHtml = '';
-		addHtml += "<label>날짜<input class='date' id='dateStart' name='dateStart'></label>";
-		$('.cell3_03').append(addHtml);
-		
+		abledDateStart();
 		disabledFalse(4);
 		
 		$('.submit').prop("disabled",false);

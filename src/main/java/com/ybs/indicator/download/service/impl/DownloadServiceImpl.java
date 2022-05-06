@@ -30,9 +30,6 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 		List<EgovMap> downloadResultList = new ArrayList<EgovMap>();
 		
 		switch(sVO.getAnal_type()) {
-		case "dlStation_stationCnt" : // 정류장별통행
-			System.out.println("정류장별통행"); 
-			downloadResultList = mapper.selectdownloadResultListStationCnt(sVO); break;
 		case "dlStation_station_purpose" : // 정류장간목적통행
 			System.out.println("정류장간목적통행"); 
 			downloadResultList = mapper.selectdownloadResultListStationOD_purpose(sVO); break;
@@ -43,9 +40,6 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 			System.out.println("정류장간운행지표 (x)"); break;
 		case "dlStation_station_runCongestion" : // 정류장간운행/혼잡지표 (x)
 			System.out.println("정류장간운행/혼잡지표 (x)"); break;
-		case "dlRoute_routeCnt" : // 노선별통행
-			System.out.println("노선별통행"); 
-			downloadResultList = mapper.selectdownloadResultListRouteCnt(sVO); break;
 		case "dlRoute_routeODCnt" : // 노선별기종점통행
 			System.out.println("노선별기종점통행"); 
 			downloadResultList = mapper.selectdownloadResultListRouteOD(sVO); break;
@@ -62,6 +56,42 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 		for(int i = 0; i < 10; i++) {
 			System.out.println(downloadResultList.get(i).toString());
 		}
+	}
+
+	@Override
+	public void selectdownloadResultListB(SearchVO sVO) {
+		List<EgovMap> downloadResultListB = new ArrayList<EgovMap>();
+		switch(sVO.getAnal_type()) {
+		case "dlStation_stationCnt" : // 정류장별통행
+			System.out.println("정류장별통행_B"); 
+			downloadResultListB = mapper.selectdownloadResultListStationCntB(sVO); break;
+		case "dlRoute_routeCnt" : // 노선별통행
+			System.out.println("노선별통행_B"); 
+			downloadResultListB = mapper.selectdownloadResultListRouteCntB(sVO); break;
+		}
+		
+		for(int i = 0; i < 10; i++) {
+			System.out.println(downloadResultListB.get(i).toString());
+		}
+		
+	}
+
+	@Override
+	public void selectdownloadResultListT(SearchVO sVO) {
+		List<EgovMap> downloadResultListT = new ArrayList<EgovMap>();
+		switch(sVO.getAnal_type()) {
+		case "dlStation_stationCnt" : // 정류장별통행
+			System.out.println("정류장별통행_T"); 
+			downloadResultListT = mapper.selectdownloadResultListStationCntT(sVO); break;
+		case "dlRoute_routeCnt" : // 노선별통행
+			System.out.println("노선별통행_T"); 
+			downloadResultListT = mapper.selectdownloadResultListRouteCntT(sVO); break;
+		}
+		
+		for(int i = 0; i < 10; i++) {
+			System.out.println(downloadResultListT.get(i).toString());
+		}
+		
 	}
 
 }

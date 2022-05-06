@@ -130,6 +130,10 @@
 		success: function (data){
 				if(data.passSearchList.length == 1 && data.passSearchList[0].provider == '00'){
 					$('#provider99').prop("disabled", true);
+				} else{
+					console.log(data.passSearchList[1].provider);
+					 $("#provider99").val(data.passSearchList[1].provider);    
+					console.log($("#provider99").val());
 				}
 			}
 		})
@@ -229,7 +233,7 @@
 						    var noWeekend = jQuery.datepicker.noWeekends(date);
 						    return noWeekend[0] ? [true] : noWeekend;
 						}
-					$('.date').datepicker("setDate",'2021-3-22');					
+					$('.date').datepicker("setDate",abledDays[0]);					
 				})
 			}
 		})
@@ -320,6 +324,22 @@
 	
 	
 	/* 공통 */
+	// 시작~종료일 나타내기
+	function abledDateStart_End(){
+		$('.cell3_03').empty();
+		var addHtml = '';
+		addHtml += "<label>시작<input class='date' id='dateStart' name='dateStart'></label>";
+		addHtml += "<label>종료<input class='date' id='dateEnd' name='dateEnd'></label>";
+		$('.cell3_03').append(addHtml);
+	}
+	// 날짜만 나타내기
+	function abledDateStart(){
+		$('.cell3_03').empty();
+		var addHtml = '';
+		addHtml += "<label>날짜<input class='date' id='dateStart' name='dateStart'></label>";
+		$('.cell3_03').append(addHtml);
+	}
+	
 	// 1일 - 시간대 비활성화
 		$("input[name=tm]").change(function(){
 			if($("input[name=tm]").is(":checked") == true){
@@ -360,6 +380,7 @@
 		$('.submit').css("opacity", 1);
 		$('.submit').css("cursor", "pointer");
 	}
+	
 		
 		
 	// [--4]

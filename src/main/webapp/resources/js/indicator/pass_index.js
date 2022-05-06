@@ -28,10 +28,7 @@
 		// 통행분석 선택박스 case 1
 		if(jsonArray['anal_type'] == 'passCnt_purpose'
 	     || jsonArray['anal_type'] == 'passCnt_method'){
-			var addHtml = '';
-			addHtml += "<label>시작<input class='date' id='dateStart' name='dateStart'></label>";
-			addHtml += "<label>종료<input class='date' id='dateEnd' name='dateEnd'></label>";
-			$('.cell3_03').append(addHtml);
+			abledDateStart_End();
 			disabledFalse(4);
 			validationCd_no();
 		}
@@ -42,10 +39,7 @@
 		 || jsonArray['anal_type'] == 'passAreaODCnt_purpose'
 		 || jsonArray['anal_type'] == 'passAreaODCnt_method'
 		 || jsonArray['anal_group'] == 'passTopRotue'){
-			var addHtml = '';
-			addHtml += "<label>날짜<input class='date' id='dateStart' name='dateStart'></label>";
-			$('.cell3_03').append(addHtml);
-			
+			abledDateStart();
 			disabledFalse(4);
 			
 			if(jsonArray['anal_type'] != 'passCnt_route'){
@@ -58,10 +52,7 @@
 		
 		// 통행분석 선택박스 case 3
 		if(jsonArray['anal_group'] == 'passRouteODCnt'){
-			var addHtml = '';
-			addHtml += "<label>날짜<input class='date' id='dateStart' name='dateStart'></label>";
-			$('.cell3_03').append(addHtml);
-			
+			abledDateStart();
 			disabledFalse(4);
 			
 			$('.cell6').css("opacity", 1);
@@ -114,10 +105,7 @@
 		
 		// 통행분석 선택박스 case 4 : 상위이용정류장 조회조건 - 서울은 버스,지하철 다르게 표출
 		if(jsonArray['anal_group'] == 'passTopStation'){
-			var addHtml = '';
-			addHtml += "<label>날짜<input class='date' id='dateStart' name='dateStart'></label>";
-			$('.cell3_03').append(addHtml);
-			
+			abledDateStart();
 			disabledFalse(5);
 			
 			if(jsonArray['anal_area_cd'] == 11){

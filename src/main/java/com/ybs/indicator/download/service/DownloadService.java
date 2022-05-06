@@ -6,4 +6,8 @@ public interface DownloadService {
 
 	void selectdownloadResultList(SearchVO sVO);
 
+	void selectdownloadResultListB(SearchVO sVO);
+
+	void selectdownloadResultListT(SearchVO sVO);
+
 }

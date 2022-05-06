@@ -32,7 +32,6 @@ public class TimeDistnController {
 		
 		List<EgovMap> timeDistnResultListT = new ArrayList<EgovMap>();
 		List<EgovMap> timeDistnResultListD = new ArrayList<EgovMap>();
-
 		
 		timeDistnResultListT = service.selectTimeDistnResultListT(sVO);
 		timeDistnResultListD = service.selectTimeDistnResultListD(sVO);

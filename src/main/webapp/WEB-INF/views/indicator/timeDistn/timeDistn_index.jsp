@@ -5,6 +5,7 @@
 <html lang="ko">
     <head>
         <title>시간거리분석</title>
+        <link rel="stylesheet" type="text/css" href="resources/css/indicator/common_index.css"> 
         <link rel="stylesheet" type="text/css" href="resources/css/indicator/timeDistn_index.css"> 
         <link rel="stylesheet" type="text/css" href="resources/css/indicator/jquery-ui.css"> 
  		<script type="text/javascript" src="resources/js/indicator/common_index.js" defer ></script> 

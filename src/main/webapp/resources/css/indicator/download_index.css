@@ -1,141 +1,8 @@
-*{
-    margin: 0 auto;
-    padding: 0 auto;
-    font-family: 'Nanum Gothic', sans-serif;
-    font-size: 12px;
-}
-a{
-    text-decoration: none;
-    color: #000;
-}
-.header {
-    width: 100%;
-    height: 69px;
-    border-bottom: 3px solid #1f2958;
-    padding-bottom: 5px;
-    position: relative;
-}
 
-.logo{
-    float: left;
-    width: 156px;
-    height: 57px;
-    /* border: 1px solid red; */
-    margin-left: 14px;
-    margin-top: 10px;
-}
-.logo02{
-    float: left;
-    color: #1f2958;
-    font-size: 35px;
-    padding: 10px 0;
-    font-weight: bold;
-}
-.mtap{
-    position: absolute;
-    float: right;
-    bottom: 0;
-    right: 20px;
-    
-  }
-  .mtap p{
-      float: left;
-      font-size: 17px;
-      padding: 0 6px;
-  }
-  
-/* 드롭다운 베뉴 */
-.dropdown {
-    position: relative;
-    display: inline-block;
-  }
-  .dropbtn {
-    background-color: #ffffff;
-    color: black;
-    /* padding: 16px; */
-    font-size: 16px;
-    border: none;
-  }
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #c6dcf0;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgb(0 0 0 / 20%);
-    z-index: 1;
-    right: 1px;
-  }
-  
-  .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-  }
-  
-  .dropdown-content a:hover {background-color: #b3d3f0;}
-  
-  .dropdown:hover .dropdown-content {display: block;}
-  
-  .dropdown:hover .dropbtn {background-color: #c6dcf0;}
-.ConName{
-    height: 41px;
-    width: 1920px;
-    /* margin-top: 15px; */
-    /* margin-bottom: 10px; */
-    border-bottom: 3px solid #5C7D9A;
-}
-.contents{
-    text-align: center;
-    width: 1528px;
-    height: 42px;
-}
-.contents a{
-    text-decoration: none;
-    color: #000;
-    float: left;
-    font-size: 23px;
-    margin-left: 26px;
-    width: 165px;
-    /* padding: 5px;*/
-}
-.contents span{
-    float: left;
-    font-size: 23px;
-    margin-left: 26px;
-    width: 165px;
-    padding: 5px;
-}
-#downloadCate span{
-    background-color: #5C7D9A;
-    width: 100px;
-    float: left;
-    margin-left: 26px;
-}
-.contents :first-child{
-    margin-left: 0;
-}
 .contents :nth-child(8){
     background-color: #5C7D9A;
     color: white;
 }
-.ConEx{
-    width: 1920px;
-    height: 190px;
-    background-color: #555555;
-}
-.selectbox{
-    height: 555px;
-    width: 1920px;
-    /* border: 1px solid red; */
-}
-.selectbox >*{ 
-    float: left;
-    width: calc(100% / 6);
-    height: 555px;
-    /* border-left: 1px solid rgb(189, 189, 189); */
-}
-
 
 
 .cell1{
@@ -301,37 +168,21 @@ input.date {
 
 /* hcell1 */
 .hcell1{
-    /* display: none; */
     float: left;
     height: 555px;
     width: calc(100% / 2);
-    /* border: 1px solid red; */
 }
 .hcell1 >*{ 
     float: left;
     width: 100%;
     height: 555px;
-    /* border-left: 1px solid rgb(189, 189, 189); */
 }
-.hcell1 > .cell4{}
-.hcell1 > .cell4 p{}
-.hcell1 > .cell4 > .cell4_01{
-    /* width: 257px; */
-}
-.hcell1 > .cell5{}
-.hcell1 > .cell5 p {}
-.hcell1 >.cell5 > .cell5_01 div{}
-/* .hcell1 > .cell6{width: calc(100% / 2);} */
-.hcell1 > .cell6 p {}
 .hcell1 >.cell6 > .cell6_01 div{
     margin-top: -60px;
     margin-left: 83px;}
 
 /* hcell 요소 */
 
-.cell4{
-    /* background: #ccdded; */
-}
 .cell4 p {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -348,7 +199,6 @@ input.date {
 }
 .cell4_01{
     margin-top: 46px;
-    /* border-bottom: 1px solid gray; */
 }
 .cell4_01 div{
     border: 1px solid #407cb1;
@@ -361,7 +211,6 @@ input.date {
     border: none;
     font-weight: normal;
     width: 88px;
-    /* background: aliceblue; */
     display: inline;
     margin-left: 10px;
 }
@@ -370,7 +219,6 @@ input.date {
     border: none;
     font-weight: normal;
     width: 88px;
-    /* background: aliceblue; */
     display: inline;
     margin-left: 10px;
 }
@@ -387,7 +235,6 @@ input.date {
     border: none;
     font-weight: normal;
     width: 88px;
-    /* background: aliceblue; */
     display: inline;
     margin-left: 10px;
 }
@@ -395,35 +242,10 @@ input.date {
     font-size: 20px;
     border: none;
     width: 88px;
-    /* background: aliceblue; */
     margin-left: 10px;
 }
 
-
-
-
 .submit{
-    margin-top: 11px;
-    text-align: center;
-    display: block;
     width: 145px;
     height: 49px;
-    font-size: 25px;
-    background-color: #5c7d9a;
-    color: white;
-    font-weight: bold;
-    border-radius: 20px;
-}
-a{
-    text-decoration-line: none;
-
-}
-
-div#ui-datepicker-div{
-    position: absolute;
-    top: 754px;
-    left: 709.969px;
-    z-index: 1;
-    background-color: #fff;
-    width: 223px;
 }
