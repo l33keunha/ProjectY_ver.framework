@@ -147,6 +147,7 @@
 		
 		jsonArray["anal_area_cd_sido"] = $("select[name=anal_area_cd_sido]").val();
 		jsonArray["anal_area_cd"] = $("select[name=anal_area_cd]").val();
+		jsonArray["dateStart"] = "null";
 		
 		selectProvider()
 		

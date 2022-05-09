@@ -156,9 +156,9 @@
 										<c:set var="tdSize" value="${100}" />
 									</c:if>
 									
-									<td class="tg-0pky" style="width: ${tdSize}px; min-width: ${tdSize}px; max-width: ${tdSize}px;">${passResultList[i*2].userCntAgg}</td>												<!-- 버스-->
-									<td class="tg-0pky" style="width: ${tdSize}px; min-width: ${tdSize}px; max-width: ${tdSize}px;">${passResultList[(i*2)+1].userCntAgg}</td>											<!-- 지하철-->
-									<td class="tg-0pky" style="width: ${tdSize}px; min-width: ${tdSize}px; max-width: ${tdSize}px;">${passResultList[(i*2)].userCntAgg + passResultList[(i*2)+1].userCntAgg}</td>		<!-- 소계(버스+지하철) -->	
+									<td class="tg-0pky" style="width: ${tdSize}px; min-width: ${tdSize}px; max-width: ${tdSize}px;"><fmt:formatNumber type="number" value="${passResultList[i*2].userCntAgg}"/></td>												<!-- 버스-->
+									<td class="tg-0pky" style="width: ${tdSize}px; min-width: ${tdSize}px; max-width: ${tdSize}px;"><fmt:formatNumber type="number" value="${passResultList[(i*2)+1].userCntAgg}"/></td>											<!-- 지하철-->
+									<td class="tg-0pky" style="width: ${tdSize}px; min-width: ${tdSize}px; max-width: ${tdSize}px;"><fmt:formatNumber type="number" value="${passResultList[(i*2)].userCntAgg + passResultList[(i*2)+1].userCntAgg}"/></td>		<!-- 소계(버스+지하철) -->	
 									
 								</c:forEach>
 								

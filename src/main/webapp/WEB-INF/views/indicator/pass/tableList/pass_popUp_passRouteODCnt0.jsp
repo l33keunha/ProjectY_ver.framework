@@ -21,7 +21,6 @@
 		<fmt:parseNumber var = "timeCnt" value = "${timeCnt}"  />									
 	
 		<c:set var = "indexCnt" value = "0"/>														<!-- 날짜 index count -->
-	
  	
 		<!-- ● 노선별OD -->
 		<div class="table-left">
@@ -31,16 +30,6 @@
 					<!--thead 시작▼-->
 					<thead>
 						<tr>
-							<th class="tg-0pky" style="width: 80px; min-width: 80px; max-width: 80px; height: 34px;">광역/도</th>				<!-- 광역/도 -->
-							<th class="tg-0pky" style="width: 80px; min-width: 80px; max-width: 80px;">시/군</th>			<!-- 시/군 -->
-							<th class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;">날짜</th>			<!-- 분석일자 -->
-							<th class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;">요일</th>				<!-- 요일 -->
-							
-							<th class="tg-0pky"  style="width: 80px; min-width: 80px; max-width: 80px;">노선구분</th>			<!-- 노선구분 -->
-							<th class="tg-0pky"  style="width: 80px; min-width: 80px; max-width: 80px;">노선명</th>			<!-- 노선명 -->
-							<th class="tg-0pky"  style="width: 80px; min-width: 80px; max-width: 80px;">노선유형</th>			<!-- 노선유형 -->
-							<th class="tg-0pky"  style="width: 80px; min-width: 80px; max-width: 80px;">기점</th>				<!-- 기점 -->
-							<th class="tg-0pky"  style="width: 80px; min-width: 80px; max-width: 80px;">종점</th>				<!-- 종점 -->
 							
 							<th class="tg-0pky"  style="width: 80px; min-width: 80px; max-width: 80px;">출발정류장ID</th>		<!-- 출발정류장ID -->
 							<th class="tg-0pky"  style="width: 120px; min-width: 120px; max-width: 120px;">출발정류장명</th>	<!-- 출발정류장명 -->
@@ -70,26 +59,6 @@
 								<!-- 시간대 : 1일 -->
 								<c:if test="${sVO.tm == 'allDay'}">
 									<!-- 날짜 그룹이 시작될 때마다 실행-->
-									<c:if test="${(j % dateCnt) == 0}">
-										<!-- 시간 * 날짜수  -->	   	
-										<td class="tg-0pky" rowspan='${dateCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${anal_area_cd_sido_text}</div></td>									<!-- 광역/도 -->
-										<td class="tg-0pky" rowspan='${dateCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${anal_area_cd_text}</div></td>										<!-- 시/군 -->
-										<td class="tg-0pky" rowspan='${dateCnt}' style="width: 70px; min-width: 70px; max-width: 70px;"><div class="lavel-2">${passResultList[0].opratDate }</div></td>								<!-- 분석일자 --> 
-										<td class="tg-0pky" rowspan='${dateCnt}' style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2">${passResultList[0].dy }</div></td>									<!-- 요일 --> 
-										
-											<c:if test="${passResultList[0].tfcmn == 'B'}">
-												<c:set var="t_b_name" value='버스' />
-											</c:if>
-											<c:if test="${passResultList[0].tfcmn == 'T'}">
-												<c:set var="t_b_name" value='지하철' />
-											</c:if>
-										<td class="tg-0pky" rowspan='${dateCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2 lavel-1">${t_b_name}</div></td>													<!-- 노선구분 -->
-										<td class="tg-0pky" rowspan='${dateCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2 lavel-1">${passResultList[0].routeNma}</div></td>								<!-- 노선명 -->
-										<td class="tg-0pky" rowspan='${dateCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2 lavel-1">${passResultList[0].routeType}</div></td>								<!-- 노선유형 -->
-										<td class="tg-0pky" rowspan='${dateCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${passResultList[0].routeStart}</div></td>										<!-- 기점 -->
-										<td class="tg-0pky" rowspan='${dateCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${passResultList[0].routeEnd}</div></td>										<!-- 종점 -->
-										<c:set var = "indexCnt" value = "${indexCnt + 1}"/>
-									</c:if>
 								
 									<!-- 출발정류장ID 그룹이 시작될 때마다 실행 -->
 									<td class="tg-0pky" style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2 lavel-1">${passResultList[j*columnCnt].getStnId}</div></td>					<!-- 출발정류장ID -->
@@ -109,26 +78,6 @@
 								<!-- 시간대 : 시작시간 ~ 끝시간 -->
 								<c:if test="${sVO.tm == null}">
 										<!-- 날짜 그룹이 시작될 때마다 실행-->
-										<c:if test="${(j % dateCnt) == 0}">
-											<!-- 시간 * 날짜수  -->	   	
-											<td class="tg-0pky" rowspan='${dateCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${anal_area_cd_sido_text}</div></td>									<!-- 광역/도 -->
-											<td class="tg-0pky" rowspan='${dateCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${anal_area_cd_text}</div></td>										<!-- 시/군 -->
-											<td class="tg-0pky" rowspan='${dateCnt}' style="width: 70px; min-width: 70px; max-width: 70px;"><div class="lavel-2">${passResultList[dateCnt*indexCnt*columnCnt].opratDate }</div></td>	<!-- 분석일자 --> 
-											<td class="tg-0pky" rowspan='${dateCnt}' style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2">${passResultList[dateCnt*indexCnt*columnCnt].dy }</div></td>			<!-- 요일 --> 
-											
-												<c:if test="${passResultList[0].tfcmn == 'B'}">
-													<c:set var="t_b_name" value='버스' />
-												</c:if>
-												<c:if test="${passResultList[0].tfcmn == 'T'}">
-													<c:set var="t_b_name" value='지하철' />
-												</c:if>
-											<td class="tg-0pky" rowspan='${dateCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${t_b_name}</div></td>													<!-- 노선구분 -->
-											<td class="tg-0pky" rowspan='${dateCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${passResultList[0].routeNma}</div></td>								<!-- 노선명 -->
-											<td class="tg-0pky" rowspan='${dateCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${passResultList[0].routeType}</div></td>								<!-- 노선유형 -->
-											<td class="tg-0pky" rowspan='${dateCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${passResultList[0].routeStart}</div></td>								<!-- 기점 -->
-											<td class="tg-0pky" rowspan='${dateCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${passResultList[0].routeEnd}</div></td>								<!-- 종점 -->
-											<c:set var = "indexCnt" value = "${indexCnt + 1}"/>
-										</c:if>
 									
 										<!-- 출발정류장ID 그룹이 시작될 때마다 실행 -->
 										<c:if test="${(j % timeCnt) == 0}">	   	
@@ -207,7 +156,7 @@
 										<c:set var="tdSize" value="${100}" />
 									</c:if>
 									
-									<td class="tg-0pky" style="width: ${tdSize}px; min-width: ${tdSize}px; max-width: ${tdSize}px;">${passResultList[i].cnt}</td>		<!-- 이용자 유형 -->
+									<td class="tg-0pky" style="width: ${tdSize}px; min-width: ${tdSize}px; max-width: ${tdSize}px;"><fmt:formatNumber type="number" value="${passResultList[i].cnt}"/></td>		<!-- 이용자 유형 -->
 									
 								</c:forEach>
 							
@@ -225,7 +174,7 @@
 		</div>
 
 			
-			
+		
 		
       
  

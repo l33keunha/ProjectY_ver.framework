@@ -19,29 +19,8 @@
  
     <!-- 코드 텍스트 매칭 -->
     <%@ include file="pass_popUp_codeNameMatch.jsp" %>
-    
   
-    <body onload="showPage();">
-	<script>
-         function showPage() {
-         	document.getElementById("lds-spinner").style.display = "none";
-         }
-     </script>
-     <div id="lds-spinner">
-         <div></div>
-         <div></div>
-         <div></div>
-         <div></div>
-         <div></div>
-         <div></div>
-         <div></div>
-         <div></div>
-         <div></div>
-         <div></div>
-         <div></div>
-         <div></div>
-     </div> 
-     
+    <body>
       	<div class="wrap">
 	        <div class="header">
 	            <p>통행 분석 지표</p>
@@ -67,46 +46,9 @@
 	          </div>
 	      	</div>
 	      	
-	      	<c:if test = "${anal_groupText == '노선별OD' && anal_typeText == ''}">
-	      		<div class="routeOD_box" style="border">
-					<div class="routeOD_header" style="font-size: 18px;font-weight: bold;text-align: center;">[조회 조건 및 노선 정보]</div>
-					<div class="routeOD_body">
-						<table>
-							<tr>
-								<th>광역/도</th>
-								<th>시/군</th>
-								<th>날짜</th>
-								<th>요일</th>
-								<th>노선구분</th>
-								<th>노선명</th>
-								<th>노선유형</th>
-								<th>기점</th>
-								<th>종점</th>
-							</tr>
-							<tr>
-								<td>${anal_area_cd_sido_text}</td>
-								<td>${anal_area_cd_text}</td>
-								<td>${passResultList[0].opratDate}</td>
-								<td>${passResultList[0].dy}</td>
-								<td>${passResultList[0].t_b_name}</td>
-								<c:if test="${passResultList[0].tfcmn == 'B'}">
-									<c:set var="t_b_name" value='버스' />
-								</c:if>
-								<c:if test="${passResultList[0].tfcmn == 'T'}">
-									<c:set var="t_b_name" value='지하철' />
-								</c:if>
-								<td>${passResultList[0].routeNma}</td>
-								<td>${passResultList[0].routeType}</td>
-								<td>${passResultList[0].routeStart}</td>
-								<td>${passResultList[0].routeEnd}</td>
-							</tr>
-						</table>
-					</div>
-	      		</div>
-	      	</c:if>
 	      	
 	      	<div class="infowrap">
-				<span class="info">(단위 : 통행량)</span>
+				<span class="info">단위 : 통행량</span>
 		    </div>
 	     	
 	     	<div class="test">
@@ -130,7 +72,6 @@
 			     	
 			     	<c:if test = "${anal_groupText == '노선별OD' && anal_typeText == ''}">
 			     		<%@ include file="tableList/pass_popUp_passRouteODCnt.jsp" %>
-			     		
 			     	</c:if> 
 			     	
 			     	<c:if test = "${anal_typeText == '행정동목적'}">

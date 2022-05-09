@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+	<!ENTITY ns_extend "http://ns.adobe.com/Extensibility/1.0/">
+	<!ENTITY ns_ai "http://ns.adobe.com/AdobeIllustrator/10.0/">
+	<!ENTITY ns_graphs "http://ns.adobe.com/Graphs/1.0/">
+	<!ENTITY ns_vars "http://ns.adobe.com/Variables/1.0/">
+	<!ENTITY ns_imrep "http://ns.adobe.com/ImageReplacement/1.0/">
+	<!ENTITY ns_sfw "http://ns.adobe.com/SaveForWeb/1.0/">
+	<!ENTITY ns_custom "http://ns.adobe.com/GenericCustomNamespace/1.0/">
+	<!ENTITY ns_adobe_xpath "http://ns.adobe.com/XPath/1.0/">
+]>
+<svg version="1.1" id="레이어_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1920 1080"
+	 style="enable-background:new 0 0 1920 1080;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#E0E0E0;}
+	.st1{fill:#B9B9B9;}
+	.st2{fill:#5F5F5F;}
+	.st3{fill:#B9B9B9;stroke:#A4A4A4;stroke-width:3.3889;stroke-miterlimit:10;}
+	.st4{fill:#FFFFFF;stroke:#E35452;stroke-width:8;stroke-miterlimit:10;}
+	.st5{fill:none;stroke:#E35452;stroke-width:13.2463;stroke-miterlimit:10;}
+	.st6{fill:#E35452;}
+	.st7{fill:#A4A4A4;}
+	.st8{fill:#FFFFFF;}
+	.st9{font-family:'NanumGothicExtraBold';}
+	.st10{font-size:153.3481px;}
+	.st11{fill:#333333;}
+	.st12{font-size:65.562px;}
+	.st13{fill:#666666;}
+	.st14{font-family:'NanumGothic';}
+	.st15{font-size:25px;}
+</style>
+<metadata>
+	<sfw  xmlns="&ns_sfw;">
+		<slices></slices>
+		<sliceSourceBounds  bottomLeftOrigin="true" height="1080" width="1920" x="-2.3" y="-1080"></sliceSourceBounds>
+	</sfw>
+</metadata>
+<rect x="-2.3" class="st0" width="1920" height="1080"/>
+<circle class="st1" cx="957.7" cy="226.4" r="6"/>
+<g>
+	<ellipse class="st2" cx="957.7" cy="795.6" rx="137.9" ry="29.4"/>
+	<rect x="946.5" y="564.9" class="st3" width="24.7" height="257.9"/>
+	<path class="st4" d="M1036.2,196H879.7L772.4,303.2v153.1l107.2,105.2h159.2l104-102V300.6L1036.2,196z M1125.8,452l-94.4,92.6
+		H886.9l-97.3-95.5V310.1l97.3-97.3h142.1l96.8,94.9V452z"/>
+	<polygon class="st5" points="1125.8,307.8 1125.8,452 1031.4,544.5 886.9,544.5 789.6,449.1 789.6,310.1 886.9,212.9 1028.9,212.9 
+			"/>
+	<polygon class="st6" points="1125.8,307.8 1125.8,452 1031.4,544.5 886.9,544.5 789.6,449.1 789.6,310.1 886.9,212.9 1028.9,212.9 
+			"/>
+	<circle class="st1" cx="957.7" cy="531.6" r="6"/>
+	<path class="st7" d="M951.9,810.1h-1.8c-0.2,0-0.4-0.2-0.4-0.4V569.5c0-0.2,0.2-0.4,0.4-0.4h1.8c0.2,0,0.4,0.2,0.4,0.4v240.2
+		C952.3,809.9,952.1,810.1,951.9,810.1z"/>
+	<path class="st7" d="M964.5,819.7h2.8c0.3,0,0.6-0.3,0.6-0.6V586.3c0-0.3-0.3-0.6-0.6-0.6h-2.8c-0.3,0-0.6,0.3-0.6,0.6v232.9
+		C964,819.5,964.2,819.7,964.5,819.7z"/>
+	<path class="st1" d="M948.2,821v3.8c0,0,9.1,0.3,21.3,0l0-3.8H948.2z"/>
+	<path class="st7" d="M944.8,824.4v0.4c0,0,2.6,0.1,3.4,0.1v-0.5L944.8,824.4L944.8,824.4z"/>
+	<path class="st7" d="M969.6,824.4l0,0.4c0,0,2.1,0,3.4,0V824h-3.3L969.6,824.4z"/>
+	<text transform="matrix(1 0 0 1 818.2729 419.0015)" class="st8 st9 st10">404</text>
+</g>
+<text transform="matrix(1 0 0 1 581.2457 132.1934)" class="st11 st9 st12">페이지를 찾을 수 없습니다.</text>
+<text transform="matrix(1 0 0 1 775.3792 930.6641)"><tspan x="0" y="0" class="st13 st14 st15">원하시는 결과를 찾을 수 없습니다.</tspan><tspan x="-365.5" y="30" class="st13 st14 st15">조회 조건을 올바르게 선택하였는지 확인하세요. 자세한 내용은 사이트 소유자에게 문의하시기 바랍니다.</tspan></text>
+</svg>

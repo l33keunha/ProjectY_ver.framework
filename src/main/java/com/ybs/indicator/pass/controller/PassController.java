@@ -57,7 +57,7 @@ public class PassController {
 				System.out.println(passResultList.get(i).toString());
 			}
 			mv.addObject("passResultList", passResultList);
-		} else if (passResultListB.size() > 0 && passResultListT.size() > 0) {
+		} else if (passResultListB.size() >= 0 && passResultListT.size() >= 0) {
 			for(int i = 0; i < 2; i++) {
 				System.out.println(passResultListB.get(i).toString());
 			}

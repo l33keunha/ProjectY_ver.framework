@@ -186,12 +186,12 @@
 										<c:set var="tdSize" value="${100}" />
 									</c:if>
 									
-								 	<td class="tg-0pky" style="width: ${tdSize}px; min-width: ${tdSize}px; max-width: ${tdSize}px;">${passResultListB[i].sttnBusGinAgg}</td>	<!-- 승차 -->
-									<td class="tg-0pky" style="width: ${tdSize}px; min-width: ${tdSize}px; max-width: ${tdSize}px;">${passResultListB[i].sttnBusGffAgg}</td>	<!-- 하차 -->
-									<td class="tg-0pky" style="width: ${tdSize}px; min-width: ${tdSize}px; max-width: ${tdSize}px;">${passResultListB[i].sttnBusTrsAgg}</td>	<!-- 환승 -->
+								 	<td class="tg-0pky" style="width: ${tdSize}px; min-width: ${tdSize}px; max-width: ${tdSize}px;"><fmt:formatNumber type="number" value="${passResultListB[i].sttnBusGinAgg}"/></td>	<!-- 승차 -->
+									<td class="tg-0pky" style="width: ${tdSize}px; min-width: ${tdSize}px; max-width: ${tdSize}px;"><fmt:formatNumber type="number" value="${passResultListB[i].sttnBusGffAgg}"/></td>	<!-- 하차 -->
+									<td class="tg-0pky" style="width: ${tdSize}px; min-width: ${tdSize}px; max-width: ${tdSize}px;"><fmt:formatNumber type="number" value="${passResultListB[i].sttnBusTrsAgg}"/></td>	<!-- 환승 -->
 									
 									<c:if test="${i == (ed-1)}">
-										<td class="tg-0pky" style="width: 100px; min-width: 100px; max-width: 100px;">${passResultListB[i].ginGffSum}</td>	<!-- 합계(승차+하차) -->
+										<td class="tg-0pky" style="width: 100px; min-width: 100px; max-width: 100px;"><fmt:formatNumber type="number" value="${passResultListB[i].ginGffSum}"/></td>	<!-- 합계(승차+하차) -->
 									</c:if>
 								</c:forEach>
 							
@@ -215,11 +215,11 @@
 											
 								<!-- 이용자 유형에 따라 유동적으로 적용 -->
 								<c:forEach var='i' begin='${st}' end='${ed-1}' >
-									<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;">${passResultListT[i].sttnTrainGinAgg}</td>	<!-- 승차 -->
-									<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;">${passResultListT[i].sttnTrainGffAgg}</td>	<!-- 하차 -->
-									<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;">${passResultListT[i].sttnTrainTrsAgg}</td>	<!-- 환승 -->
+									<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;"><fmt:formatNumber type="number" value="${passResultListT[i].sttnTrainGinAgg}"/></td>	<!-- 승차 -->
+									<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;"><fmt:formatNumber type="number" value="${passResultListT[i].sttnTrainGffAgg}"/></td>	<!-- 하차 -->
+									<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;"><fmt:formatNumber type="number" value="${passResultListT[i].sttnTrainTrsAgg}"/></td>	<!-- 환승 -->
 									<c:if test="${i == (ed-1)}">
-										<td class="tg-0pky" style="width: 100px; min-width: 100px; max-width: 100px;">${passResultListT[i].ginGffSum}</td>	<!-- 합계(승차+하차) -->
+										<td class="tg-0pky" style="width: 100px; min-width: 100px; max-width: 100px;"><fmt:formatNumber type="number" value="${passResultListT[i].ginGffSum}"/></td>	<!-- 합계(승차+하차) -->
 									</c:if>
 								</c:forEach>
 								

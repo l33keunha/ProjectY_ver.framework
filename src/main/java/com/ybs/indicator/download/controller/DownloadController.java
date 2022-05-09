@@ -2,6 +2,7 @@ package com.ybs.indicator.download.controller;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,19 +23,20 @@ public class DownloadController {
 	protected DefaultBeanValidator beanValidator;
 	
 	@RequestMapping(value="/downloadTest.do")
-	public ModelAndView selectPassResultList(ModelAndView mv, HttpServletRequest req, @ModelAttribute SearchVO sVO) {
-		System.out.println(sVO.toString());
-		if(sVO.getAnal_type().equals("dlStation_stationCnt")
-			|| sVO.getAnal_type().equals("dlRoute_routeCnt")) {
-			service.selectdownloadResultListB(sVO);
-			service.selectdownloadResultListT(sVO);
-		} else{
-			service.selectdownloadResultList(sVO);
-		}
-		
-		mv.addObject("sVO", sVO);
-		mv.addObject("req", req);
-		return mv;
+	public void selectPassResultList(ModelAndView mv, HttpServletRequest req, HttpServletResponse res, @ModelAttribute SearchVO sVO) {
+      System.out.println(sVO.toString());
+      
+	  if(sVO.getAnal_type().equals("dlStation_stationCnt")
+			  || sVO.getAnal_type().equals("dlRoute_routeCnt")) {
+	     service.selectdownloadResultListBT(sVO, req, res);
+	 
+	  } else{
+	     service.selectdownloadResultList(sVO, req, res);
+	  }
+	  
+	  mv.addObject("sVO", sVO);
+	  mv.addObject("req", req);
+	    
 	}
 	
 }

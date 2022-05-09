@@ -136,8 +136,7 @@
 									<c:if test="${i == (ed-1)}">
 										<c:set var="tdSize" value="${100}" />
 									</c:if>
-								
-									<td class="tg-0pky" style="width: ${tdSize}px; min-width: ${tdSize}px; max-width: ${tdSize}px;">${passResultList[i].userCntAgg}</td>				<!-- 이용자유형-->
+									<td class="tg-0pky" style="width: ${tdSize}px; min-width: ${tdSize}px; max-width: ${tdSize}px;"><fmt:formatNumber type="number" value="${passResultList[i].userCntAgg}"/></td>				<!-- 이용자유형-->
 								</c:forEach>
 								
 								

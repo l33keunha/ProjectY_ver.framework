@@ -55,6 +55,11 @@
 			abledDateStart();
 			disabledFalse(4);
 			
+			// 국토부-정산사 재선택시 전에 선택했던 노선박스 비우고 체크박스 해제 + 조회버튼 유효성검사
+			$('.search-con').text("");
+			$('input:radio[name="routeId"]').prop("checked", false);
+			overlapCode();
+			
 			$('.cell6').css("opacity", 1);
 			$('.cell6_01').css("opacity", 0.3);
 			$("input[name=searchpassRoute]").prop("disabled", false);
@@ -62,18 +67,14 @@
 			
 			// 유효성검사 3. 노선번호 선택해야 조회가능
 			$('input:checkbox[name="cd_no"]').change(function(){
-				if($('input:checkbox[name="cd_no"]').is(":checked") ==  true
-				  && $('input:radio[name="routeId"]').is(":checked") ==  true){
-					$('.submit').prop("disabled",false);
-					$('.submit').css("opacity", 1);
-					$('.submit').css("cursor", "pointer");
-				} else{
-					$('.submit').prop("disabled",true);
-					$('.submit').css("opacity", 0.3);
-					$('.submit').css("cursor", "auto");
-				}
+				overlapCode();
 			})
 			$('#routeBtn').click(function(){
+				overlapCode();
+			})
+			
+			// 중복코드_1
+			function overlapCode(){
 				if($('input:checkbox[name="cd_no"]').is(":checked") ==  true
 				  && $('input:radio[name="routeId"]').is(":checked") ==  true){
 					$('.submit').prop("disabled",false);
@@ -84,14 +85,13 @@
 					$('.submit').css("opacity", 0.3);
 					$('.submit').css("cursor", "auto");
 				}
-			})
+			}
 			
 			// 노선별OD는 2시간씩만 선택가능하게끔
-			$("select[name=tmEnd] option:eq(2)").prop("selected", true);
+			/*$("select[name=tmEnd] option:eq(2)").prop("selected", true);*/
 			
 			$("select[name=tmStart]").change(function(){
 				var index = $("select[name=tmStart] option").index($("select[name=tmStart] option:selected")) + 2;
-				console.log(index);
 				if((index == 24) || (index == 25)) $("select[name=tmEnd] option:eq(23)").prop("selected", true);
 				else $('select[name=tmEnd] option:eq('+ index + ')').prop("selected", true);
 			})
@@ -167,6 +167,8 @@
 				data: jsonArray,
 				dataType: "json",
 				success: function(data){
+			         document.getElementById("lds-spinner").style.display = "none";
+
 					for(var i in data.passRouteIdList){
 						var list = data.passRouteIdList[i];
 						

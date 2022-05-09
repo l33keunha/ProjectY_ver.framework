@@ -1,0 +1,43 @@
+*{
+    margin: 0 auto;
+    padding: 0 auto;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 15px;
+}
+html, body {
+    height: 100%;
+}
+
+.wrap{}
+.img {
+    background: url(../../images/common/error.svg) 50% no-repeat;
+    background-size: cover;
+    height: 98vmin;
+    width: 99vw;
+    margin-top: -3vh;
+}
+
+.e {
+    /* background: #d98282 url() no-repeat 4px 5.5px; */
+    background: #d98282 url(../../images/indicator/icon02.png) no-repeat 4px 5.5px;
+    margin-left: 42px;
+    width: 84px;
+    position: sticky;
+    left: 95.5vw;
+    margin-top: 0.5vh;
+    margin-right: 3px;
+}
+.e button {
+    width: 52px;
+}
+button{
+    border: none;
+    background: none;
+    color: #ffffff;
+    margin-left: 31px;
+    text-align: left;
+    font-size: 17px;
+    width: 95px;
+    height: 30px;
+    cursor: pointer;
+}

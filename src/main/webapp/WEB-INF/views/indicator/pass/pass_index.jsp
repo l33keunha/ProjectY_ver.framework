@@ -211,6 +211,20 @@
                                  <div class="routeNotice">노선번호 검색</div>
                                  <label for="modalBtn">x</label>
                                  <div class="routeBox">
+	                                 <div id="lds-spinner">
+	                                        <div></div>
+	                                        <div></div>
+	                                        <div></div>
+	                                        <div></div>
+	                                        <div></div>
+	                                        <div></div>
+	                                        <div></div>
+	                                        <div></div>
+	                                        <div></div>
+	                                        <div></div>
+	                                        <div></div>
+	                                        <div></div>
+	                                    </div>
                                     <input type="text" placeholder="(노선번호/노선유형/기점/종점) 검색..." id="searchRouteId">
                                     <div class="routeListBox">
                                        <div class='routeListTh' style='width:100%;'>
