@@ -45,7 +45,7 @@
 							<th class="tg-0pky" rowspan="2" style="width: 65px; min-width: 65px; max-width: 65px;">정류장구분</th>				<!-- 정류장구분 -->
 							<th class="tg-0pky" rowspan="2" style="width: 80px; min-width: 80px; max-width: 80px;">정류장ID</th>				<!-- 정류장ID -->
 							<th class="tg-0pky" rowspan="2" style="width: 151px; min-width: 151px; max-width: 151px;">정류장명</th>			<!-- 정류장명 -->
-							<th class="tg-0pky" rowspan="2" style="width: 194px; min-width: 194px; max-width: 194px;">행정동</th>				<!-- 행정동 -->
+							<th class="tg-0pky" rowspan="2" style="width: 255px; min-width: 255px; max-width: 255px;">행정동</th>				<!-- 행정동 -->
 						</tr>
 					</thead>
 					<!--thead 끝▲-->
@@ -85,7 +85,7 @@
 								
 								<td class="tg-0pky" style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2 lavel-1">${passResultListB[j * columnCnt].sttnId}</div></td>						<!-- 정류장ID -->
 								<td class="tg-0pky" style="width: 151px; min-width: 151px; max-width: 151px;"><div class="lavel-2 lavel-1">${passResultListB[j * columnCnt].sttnNma}</div></td>					<!-- 정류장명 -->
-								<td class="tg-0pky" style="width: 194px; min-width: 194px; max-width: 194px;"><div class="lavel-2 lavel-1">${passResultListB[j * columnCnt].sttnHjd}</div></td>					<!-- 행정동 -->
+								<td class="tg-0pky" style="width: 255px; min-width: 255px; max-width: 255px;"><div class="lavel-2 lavel-1">${passResultListB[j * columnCnt].sttnHjd}</div></td>					<!-- 행정동 -->
 							</tr>
 					
 						
@@ -94,33 +94,34 @@
 						
 						
 						<!-- 지하철 -->	
-						<c:forEach var='j' begin='0' end='${forCnt2-1}'>
-							<tr>
-								<!-- 날짜 하루 조회므로 첫 시작때만 표출 -->
-								<c:if test="${j == 0}">
-									<!-- 시간 * 날짜수  -->	   	
-									<td class="tg-0pky" rowspan='${forCnt2}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${anal_area_cd_sido_text}</div></td>				<!-- 광역/도 -->
-									<td class="tg-0pky" rowspan='${forCnt2}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${anal_area_cd_text}</div></td>					<!-- 시/군 -->
-									<td class="tg-0pky" rowspan='${forCnt2}' style="width: 70px; min-width: 70px; max-width: 70px;"><div class="lavel-2">${passResultListT[0].opratDate}</div></td>			<!-- 분석일자 --> 
-									<td class="tg-0pky" rowspan='${forCnt2}' style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2">${passResultListT[0].dy}</div></td>				<!-- 요일 --> 
-									
-									<c:if test="${passResultListT[0].tfcmn == 'B'}">
-										<c:set var="t_b_name" value='버스' />
-									</c:if>
-									<c:if test="${passResultListT[0].tfcmn == 'T'}">
-										<c:set var="t_b_name" value='지하철' />
-									</c:if>
-							
-									<td class="tg-0pky" rowspan='${forCnt2}' style="width: 65px; min-width: 65px; max-width: 65px;"><div class="lavel-2">${t_b_name}</div></td>										<!-- 정류장구분 -->
-								</c:if>
+						<c:if test="${passResultListT.size() > 0} ">
+							<c:forEach var='j' begin='0' end='${forCnt2-1}'>
+								<tr>
+									<!-- 날짜 하루 조회므로 첫 시작때만 표출 -->
+									<c:if test="${j == 0}">
+										<!-- 시간 * 날짜수  -->	   	
+										<td class="tg-0pky" rowspan='${forCnt2}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${anal_area_cd_sido_text}</div></td>				<!-- 광역/도 -->
+										<td class="tg-0pky" rowspan='${forCnt2}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${anal_area_cd_text}</div></td>					<!-- 시/군 -->
+										<td class="tg-0pky" rowspan='${forCnt2}' style="width: 70px; min-width: 70px; max-width: 70px;"><div class="lavel-2">${passResultListT[0].opratDate}</div></td>			<!-- 분석일자 --> 
+										<td class="tg-0pky" rowspan='${forCnt2}' style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2">${passResultListT[0].dy}</div></td>				<!-- 요일 --> 
+										
+										<c:if test="${passResultListT[0].tfcmn == 'B'}">
+											<c:set var="t_b_name" value='버스' />
+										</c:if>
+										<c:if test="${passResultListT[0].tfcmn == 'T'}">
+											<c:set var="t_b_name" value='지하철' />
+										</c:if>
 								
-								<td class="tg-0pky" style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2 lavel-1">${passResultListT[j * columnCnt].sttnId}</div></td>							<!-- 정류장ID -->
-								<td class="tg-0pky" style="width: 151px; min-width: 151px; max-width: 151px;"><div class="lavel-2 lavel-1">${passResultListT[j * columnCnt].sttnNma}</div></td>						<!-- 정류장명 -->
-								<td class="tg-0pky" style="width: 194px; min-width: 194px; max-width: 194px;"><div class="lavel-2 lavel-1">${passResultListT[j * columnCnt].sttnHjd}</div></td>						<!-- 행정동 -->
-							</tr>
-						
-						</c:forEach>
-						
+										<td class="tg-0pky" rowspan='${forCnt2}' style="width: 65px; min-width: 65px; max-width: 65px;"><div class="lavel-2">${t_b_name}</div></td>										<!-- 정류장구분 -->
+									</c:if>
+									
+									<td class="tg-0pky" style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2 lavel-1">${passResultListT[j * columnCnt].sttnId}</div></td>							<!-- 정류장ID -->
+									<td class="tg-0pky" style="width: 151px; min-width: 151px; max-width: 151px;"><div class="lavel-2 lavel-1">${passResultListT[j * columnCnt].sttnNma}</div></td>						<!-- 정류장명 -->
+									<td class="tg-0pky" style="width: 255px; min-width: 255px; max-width: 255px;"><div class="lavel-2 lavel-1">${passResultListT[j * columnCnt].sttnHjd}</div></td>						<!-- 행정동 -->
+								</tr>
+							
+							</c:forEach>
+						</c:if>
 					</tbody>
 					<!--tbody 끝▲-->	
 					
@@ -202,31 +203,33 @@
 						
 						
 						<!-- 지하철 -->	
-						<c:forEach var='j' begin='0' end='${forCnt2-1}'>
-							<tr>
-								
-								<!-- 이용자 유형 갯수에 맞춰 실행 -->
-								<c:set var = "st" value = '${j*columnCnt}'/>	<!-- 시작 index -->
-								<c:set var = "ed" value = '${st+columnCnt}'/>	<!-- 끝 index -->
-								
-								<c:set var = "totalInSum" value = "0"/>			<!-- 승차합 변수 -->	
-								<c:set var = "totalOutSum" value = "0"/>		<!-- 하차합 변수 -->	
-								<c:set var = "totalHsSum" value = "0"/>			<!-- 환승합 변수 -->	
-											
-								<!-- 이용자 유형에 따라 유동적으로 적용 -->
-								<c:forEach var='i' begin='${st}' end='${ed-1}' >
-									<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;"><fmt:formatNumber type="number" value="${passResultListT[i].sttnTrainGinAgg}"/></td>	<!-- 승차 -->
-									<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;"><fmt:formatNumber type="number" value="${passResultListT[i].sttnTrainGffAgg}"/></td>	<!-- 하차 -->
-									<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;"><fmt:formatNumber type="number" value="${passResultListT[i].sttnTrainTrsAgg}"/></td>	<!-- 환승 -->
-									<c:if test="${i == (ed-1)}">
-										<td class="tg-0pky" style="width: 100px; min-width: 100px; max-width: 100px;"><fmt:formatNumber type="number" value="${passResultListT[i].ginGffSum}"/></td>	<!-- 합계(승차+하차) -->
-									</c:if>
-								</c:forEach>
-								
-							</tr>
-					
-						</c:forEach>
+						<c:if test="${passResultListT.size() > 0} ">
+							<c:forEach var='j' begin='0' end='${forCnt2-1}'>
+								<tr>
+									
+									<!-- 이용자 유형 갯수에 맞춰 실행 -->
+									<c:set var = "st" value = '${j*columnCnt}'/>	<!-- 시작 index -->
+									<c:set var = "ed" value = '${st+columnCnt}'/>	<!-- 끝 index -->
+									
+									<c:set var = "totalInSum" value = "0"/>			<!-- 승차합 변수 -->	
+									<c:set var = "totalOutSum" value = "0"/>		<!-- 하차합 변수 -->	
+									<c:set var = "totalHsSum" value = "0"/>			<!-- 환승합 변수 -->	
+												
+									<!-- 이용자 유형에 따라 유동적으로 적용 -->
+									<c:forEach var='i' begin='${st}' end='${ed-1}' >
+										<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;"><fmt:formatNumber type="number" value="${passResultListT[i].sttnTrainGinAgg}"/></td>	<!-- 승차 -->
+										<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;"><fmt:formatNumber type="number" value="${passResultListT[i].sttnTrainGffAgg}"/></td>	<!-- 하차 -->
+										<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;"><fmt:formatNumber type="number" value="${passResultListT[i].sttnTrainTrsAgg}"/></td>	<!-- 환승 -->
+										<c:if test="${i == (ed-1)}">
+											<td class="tg-0pky" style="width: 100px; min-width: 100px; max-width: 100px;"><fmt:formatNumber type="number" value="${passResultListT[i].ginGffSum}"/></td>	<!-- 합계(승차+하차) -->
+										</c:if>
+									</c:forEach>
+									
+								</tr>
 						
+							</c:forEach>
+						</c:if> 
+							
 						
 					</tbody>
 					<!--바디 끝▲-->

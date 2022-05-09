@@ -20,7 +20,27 @@
     <!-- 코드 텍스트 매칭 -->
     <%@ include file="pass_popUp_codeNameMatch.jsp" %>
   
-    <body>
+    <body onload="showPage();">
+	<script>
+         function showPage() {
+         	document.getElementById("lds-spinner").style.display = "none";
+         }
+     </script>
+     <div id="lds-spinner">
+         <div></div>
+         <div></div>
+         <div></div>
+         <div></div>
+         <div></div>
+         <div></div>
+         <div></div>
+         <div></div>
+         <div></div>
+         <div></div>
+         <div></div>
+         <div></div>
+     </div> 
+     
       	<div class="wrap">
 	        <div class="header">
 	            <p>통행 분석 지표</p>
@@ -48,7 +68,7 @@
 	      	
 	      	
 	      	<div class="infowrap">
-				<span class="info">단위 : 통행량</span>
+				<span class="info">(단위 : 통행량)</span>
 		    </div>
 	     	
 	     	<div class="test">

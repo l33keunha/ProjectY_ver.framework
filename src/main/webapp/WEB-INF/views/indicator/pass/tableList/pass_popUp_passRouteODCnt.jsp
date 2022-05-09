@@ -21,7 +21,6 @@
 		<fmt:parseNumber var = "timeCnt" value = "${timeCnt}"  />									
 	
 		<c:set var = "indexCnt" value = "0"/>														<!-- 날짜 index count -->
-	
  	
 		<!-- ● 노선별OD -->
 		<div class="table-left">
@@ -57,11 +56,18 @@
 				</table>	
 			</div>
 			  
+			  
 			<div class="table2">
 				<table style="border-collapse: collapse;">
 					
 					<!--tbody 시작▼-->	
 					<tbody>
+					
+					<c:if test="${passResultList.size() < 0}">
+						<script>
+							location.href="goError.do";
+						</script>
+					</c:if>
 					
 						<!-- 데이터 뿌려주는 부분 -->
 						<c:forEach var='j' begin='0' end='${forCnt-1}'>
@@ -150,7 +156,6 @@
 						
 						
 						</c:forEach>
-						
 							
 								
 
@@ -221,7 +226,6 @@
 				
 				</table>
 			</div>
-	
 		</div>
 
 			

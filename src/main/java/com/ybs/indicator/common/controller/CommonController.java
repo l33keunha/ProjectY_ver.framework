@@ -27,6 +27,12 @@ public class CommonController {
 	@Resource(name = "beanValidator")
 	protected DefaultBeanValidator beanValidator;
 	
+	@RequestMapping(value="/goError.do")
+	public ModelAndView goError (ModelAndView mv) {
+		mv.setViewName("common/error");
+		return mv;
+	}
+	
 	@RequestMapping(value="/goPassIndex.do")
 	public ModelAndView goPassIndex (ModelAndView mv) {
 		mv.setViewName("indicator/pass/pass_index");

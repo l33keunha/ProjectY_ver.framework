@@ -25,6 +25,7 @@
 	
 	// 분석지표 및 유형에 따른 선택박스 활성화
 	function selectBoxOpen(jsonArray){
+		console.log(jsonArray);
 		// 통행분석 선택박스 case 1
 		if(jsonArray['anal_type'] == 'passCnt_purpose'
 	     || jsonArray['anal_type'] == 'passCnt_method'){

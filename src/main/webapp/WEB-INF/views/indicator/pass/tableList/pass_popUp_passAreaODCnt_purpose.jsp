@@ -28,9 +28,9 @@
 							<th class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;">날짜</th>			<!-- 분석일자 -->
 							<th class="tg-0pky"  style="width: 30px; min-width: 30px; max-width: 30px;">요일</th>				<!-- 요일 -->					
 							<th class="tg-0pky"  style="width: 40px; min-width: 40px; max-width: 40px;">출발존</th>			<!-- 출발존 -->
-							<th class="tg-0pky"  style="width: 200px; min-width: 200px; max-width: 200px;">출발행정동</th>		<!-- 출발행정동 -->
+							<th class="tg-0pky"  style="width: 255px; min-width: 255px; max-width: 255px;">출발행정동</th>		<!-- 출발행정동 -->
 							<th class="tg-0pky"  style="width: 40px; min-width: 40px; max-width: 40px;">도착존</th>			<!-- 도착존 -->
-							<th class="tg-0pky"  style="width: 200px; min-width: 200px; max-width: 200px;">도착행정동</th>		<!-- 도착행정동 -->
+							<th class="tg-0pky"  style="width: 255px; min-width: 255px; max-width: 255px;">도착행정동</th>		<!-- 도착행정동 -->
 						</tr>
 						
 					</thead>
@@ -77,9 +77,9 @@
 									--%>
 									
 									<td class="tg-0pky" style="width: 40px; min-width: 40px; max-width: 40px;"><div class="lavel-2">${passResultList[j * columnCnt].getinout}</div></td>								<!-- 출발존 -->
-									<td class="tg-0pky" style="width: 200px; min-width: 200px; max-width: 200px;"><div class="lavel-2 lavel-1">${passResultList[j * columnCnt].getinoutnm}</div></td>					<!-- 출발행정동 -->
+									<td class="tg-0pky" style="width: 255px; min-width: 255px; max-width: 255px;"><div class="lavel-2 lavel-1">${passResultList[j * columnCnt].getinoutnm}</div></td>					<!-- 출발행정동 -->
 									<td class="tg-0pky" style="width: 40px; min-width: 40px; max-width: 40px;"><div  class="lavel-2">${passResultList[j * columnCnt].offinout}</div></td>								<!-- 도착존 -->
-									<td class="tg-0pky" style="width: 200px; min-width: 200px; max-width: 200px;"><div class="lavel-2 lavel-1">${passResultList[j * columnCnt].offinoutnm}</div></td>					<!-- 도착행정동 -->
+									<td class="tg-0pky" style="width: 255px; min-width: 255px; max-width: 255px;"><div class="lavel-2 lavel-1">${passResultList[j * columnCnt].offinoutnm}</div></td>					<!-- 도착행정동 -->
 								</tr>
 					
 						</c:forEach>

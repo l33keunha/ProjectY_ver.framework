@@ -44,30 +44,41 @@ public class PassController {
 			|| sVO.getAnal_type().equals("passAreaODCnt_purpose")
 			|| sVO.getAnal_type().equals("passAreaODCnt_method")) {
 			passResultList = service.selectPassResultList(sVO);
+			// 값이 담긴 리스트에 맞춰 JSP에 보내주기 - 리스트
+			if(passResultList.size() > 0) {
+				for(int i = 0; i < 2; i++) {
+					System.out.println(passResultList.get(i).toString());
+				}
+				mv.addObject("passResultList", passResultList);
+			}else {
+				System.out.println("리스트 존재하지않음");
+			}
 		}
 		else if(sVO.getAnal_type().equals("passCnt_route") 
 			|| sVO.getAnal_type().equals("passCnt_station")) {
 			passResultListB = service.selectPassResultListB(sVO);
-			passResultListT = service.selectPassResultListT(sVO);
-		}
-		
-		// 값이 담긴 리스트에 맞춰 JSP에 보내주기
-		if(passResultList.size() > 0) {
-			for(int i = 0; i < 2; i++) {
-				System.out.println(passResultList.get(i).toString());
-			}
-			mv.addObject("passResultList", passResultList);
-		} else if (passResultListB.size() >= 0 && passResultListT.size() >= 0) {
-			for(int i = 0; i < 2; i++) {
-				System.out.println(passResultListB.get(i).toString());
+			// 값이 담긴 리스트에 맞춰 JSP에 보내주기 - 버스리스트
+			if (passResultListB.size() > 0) {
+				for(int i = 0; i < 2; i++) {
+					System.out.println(passResultListB.get(i).toString());
+				}
+				mv.addObject("passResultListB", passResultListB);
+			}else {
+				System.out.println("버스 리스트 존재하지않음");
 			}
 			
-			for(int i = 0; i < 2; i++) {
-				System.out.println(passResultListT.get(i).toString());
+			passResultListT = service.selectPassResultListT(sVO);
+			// 값이 담긴 리스트에 맞춰 JSP에 보내주기 - 지하철리스트
+			if (passResultListT.size() > 0) {
+				for(int i = 0; i < 2; i++) {
+					System.out.println(passResultListT.get(i).toString());
+				}
+				mv.addObject("passResultListT", passResultListT);
+			}else {
+				System.out.println("지하철 리스트 존재하지않음");
 			}
-			mv.addObject("passResultListB", passResultListB);
-			mv.addObject("passResultListT", passResultListT);
-		} 
+		}
+		
 		
 		mv.addObject("sVO", sVO);
 		mv.addObject("req", req);
