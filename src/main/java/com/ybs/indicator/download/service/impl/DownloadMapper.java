@@ -10,6 +10,11 @@ import com.ybs.indicator.common.service.SearchVO;
 @Mapper("DownloadMapper")
 public interface DownloadMapper {
 	
+
+	int selectdownloadResultListColumnCnt(String tableNm);
+
+	List<EgovMap> selectdownloadResultListColumn(String tableNm);
+	
 	// 정류장간OD 목적통행
 	List<EgovMap> selectdownloadResultListStationOD_purpose(SearchVO sVO);
 	
@@ -36,5 +41,6 @@ public interface DownloadMapper {
 
 	// 노선별통행 지하철
 	List<EgovMap> selectdownloadResultListRouteCntT(SearchVO sVO);
+
 
 }

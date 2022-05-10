@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ybs.indicator.download.service.impl.DownloadMapper">
-		
+
+	<!-- 컬럼갯수가져오기 -->
+	<select id ="selectdownloadResultListColumnCnt" parameterType="String" resultType="int">
+		select COUNT(column_name) CNT from user_tab_columns where table_name = upper(#{tableNm})
+	</select>
+	
+	<!-- 컬럼가져오기 -->
+	<select id ="selectdownloadResultListColumn" parameterType="String" resultType="egovMap">
+		select column_name from user_tab_columns where table_name = upper(#{tableNm})
+		ORDER BY COLUMN_ID
+	</select>
+	
 	<!-- 정류장간OD 목적통행 -->
-	<select id ="selectdownloadResultListStationOD_purpose" parameterType="sVO" resultType="egovMap">
+	<select id ="selectdownloadResultListStationOD_purpose" parameterType="sVO" resultType="egovMap" fetchSize="2000">
 		SELECT /*+ PARALLEL(4) */
 			분석지역_CD
 			,#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
@@ -36,7 +47,7 @@
 	</select>
 	
 	<!-- 정류장간OD 수단통행 -->
-	<select id ="selectdownloadResultListStationOD_method" parameterType="sVO" resultType="egovMap">
+	<select id ="selectdownloadResultListStationOD_method" parameterType="sVO" resultType="egovMap" fetchSize="2000">
 		SELECT /*+ PARALLEL(4) */
 			분석지역_CD
 			,#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
@@ -69,7 +80,7 @@
 	</select>
 	
 	<!-- 노선별 정류장간OD -->
-	<select id ="selectdownloadResultListRouteOD" parameterType="sVO" resultType="egovMap">
+	<select id ="selectdownloadResultListRouteOD" parameterType="sVO" resultType="egovMap" fetchSize="2000">
 		SELECT  /*+ PARALLEL(4) */
 			ANAL_AREA_CD
 			,#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
@@ -110,7 +121,7 @@
 	</select>
 	
 	<!-- 행정동간OD 목적통행 -->
-	<select id ="selectdownloadResultListAreaOD_purpose" parameterType="sVO" resultType="egovMap">
+	<select id ="selectdownloadResultListAreaOD_purpose" parameterType="sVO" resultType="egovMap" fetchSize="2000">
 		SELECT 
 			분석지역_CD
 			,#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
@@ -143,7 +154,7 @@
 	</select>
 	
 	<!-- 행정동간OD 수단통행 -->
-	<select id ="selectdownloadResultListAreaOD_method" parameterType="sVO" resultType="egovMap">
+	<select id ="selectdownloadResultListAreaOD_method" parameterType="sVO" resultType="egovMap" fetchSize="2000">
 		SELECT 
 			분석지역_CD
 			,#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
@@ -176,7 +187,7 @@
 	</select>
 	
 	<!-- 정류장별통행 버스 -->
-	<select id ="selectdownloadResultListStationCntB" parameterType="sVO" resultType="egovMap">
+	<select id ="selectdownloadResultListStationCntB" parameterType="sVO" resultType="egovMap" fetchSize="2000">
 		SELECT 
 			ANAL_AREA_CD
 			,#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
@@ -230,7 +241,7 @@
 	</select>
 	
 	<!-- 정류장별통행 지하철 -->
-	<select id ="selectdownloadResultListStationCntT" parameterType="sVO" resultType="egovMap">
+	<select id ="selectdownloadResultListStationCntT" parameterType="sVO" resultType="egovMap" fetchSize="2000">
 		SELECT 
 			ANAL_AREA_CD
 			,#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
@@ -284,7 +295,7 @@
 	</select>
 	
 	<!-- 노선별통행 버스 -->
-	<select id ="selectdownloadResultListRouteCntB" parameterType="sVO" resultType="egovMap">
+	<select id ="selectdownloadResultListRouteCntB" parameterType="sVO" resultType="egovMap" fetchSize="2000">
 		SELECT 
 			ANAL_AREA_CD
 			,#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
@@ -340,7 +351,7 @@
 	</select>
 	
 	<!-- 노선별통행 지하철 -->
-	<select id ="selectdownloadResultListRouteCntT" parameterType="sVO" resultType="egovMap">
+	<select id ="selectdownloadResultListRouteCntT" parameterType="sVO" resultType="egovMap" fetchSize="2000">
 		SELECT 
 			ANAL_AREA_CD
 			,#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT

@@ -45,12 +45,15 @@
 	
 	<!-- Ajax: 분석 노선번호 조회 -->
 	<select id ="selectPassRouteIdList" parameterType="sVO" resultType="egovMap">
-		SELECT DISTINCT 노선ID ROUTE_ID, 노선명칭 ROUTE_NMA, NVL(유형, '-') ROUTE_TYPE
+		SELECT /*+ PARALLEL(8) */ DISTINCT 노선ID ROUTE_ID, 노선명칭 ROUTE_NMA, NVL(유형, '-') ROUTE_TYPE
 	 		,기점 ROUTE_START
 	        ,종점 ROUTE_END
 		FROM STDNN_BRS
 		WHERE 1=1
-			AND 운행일자 =#{dateStart}
+		<![CDATA[
+			AND 운행일자 <=#{dateStart}
+			AND 유효일자 >=#{dateStart}
+		]]>
 			<if test="tmStart==2"> 
 				AND 인허가지역코드_시도 =#{anal_area_cd}
 			</if>
