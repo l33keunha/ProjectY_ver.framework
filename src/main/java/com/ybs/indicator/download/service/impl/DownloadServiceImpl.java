@@ -49,7 +49,7 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 		switch(sVO.getAnal_type()) {
 		case "dlRoute_routeCnt" : 
 			tableNm = "PIVOT_노선별통행";
-			downloadResultList = mapper.selectdownloadResultListRouteCntB(sVO);
+			downloadResultList = mapper.selectdownloadResultListRouteCnt(sVO);
 			CreateCSV(date_SidoText, tableNm, downloadResultList);
 			break;
 		}

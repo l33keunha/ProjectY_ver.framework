@@ -4,7 +4,13 @@
 
 	<!-- 목적통행 시간대별 (시간대 합계있음) -->
 	<select id ="selectPassResultListPurpose" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-		SELECT OPRAT_DATE,  TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD, NVL(TM,'합계') TM, NVL(CD_NO,'합계') CD_NO, SUM(USER_CNT_AGG) USER_CNT_AGG
+		SELECT 
+            OPRAT_DATE
+            ,TO_CHAR(SDATE, 'DY') DY
+            ,ANAL_AREA_CD
+            ,NVL(TM,'합계') TM
+            ,NVL(CD_NO,'합계') CD_NO
+            ,SUM(USER_CNT_AGG) USER_CNT_AGG
 		FROM 결과지표_목적통행
 		WHERE 1=1
 			AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
@@ -25,33 +31,47 @@
 	
 	<!-- 목적통행 일별 -->
 	<select id ="selectPassResultListPurpose_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-		SELECT OPRAT_DATE, TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD, NVL(CD_NO,'합계') CD_NO ,SUM(USER_CNT_AGG) USER_CNT_AGG
+		SELECT 
+            OPRAT_DATE
+            ,TO_CHAR(SDATE, 'DY') DY
+            ,ANAL_AREA_CD, NVL(CD_NO,'합계') CD_NO 
+            ,SUM(USER_CNT_AGG) USER_CNT_AGG
 		FROM
-			(SELECT OPRAT_DATE,SDATE, ANAL_AREA_CD, CD_NO
-				,SUM(USER_CNT_AGG)OVER(PARTITION BY OPRAT_DATE, CD_NO ORDER BY CD_NO) USER_CNT_AGG
-				,ROW_NUMBER() OVER(PARTITION BY OPRAT_DATE, CD_NO ORDER BY CD_NO) R1
-			FROM 결과지표_목적통행
-			WHERE 1=1
-				AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
-				AND ANAL_AREA_CD = #{anal_area_cd}
-				AND PROVIDER = #{provider}
-				<if test="tm==null">
-					AND TM BETWEEN #{tmStart} AND #{tmEnd}
-				</if>
-				<if test="!cd_no[0].equals('00')">
-					AND CD_NO IN
-					<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
-						#{arr}
-					</foreach>
-				</if>
-			ORDER BY SDATE, CD_NO)
+			(
+                SELECT 
+                    OPRAT_DATE,SDATE
+                    ,ANAL_AREA_CD, CD_NO
+                    ,SUM(USER_CNT_AGG)OVER(PARTITION BY OPRAT_DATE, CD_NO ORDER BY CD_NO) USER_CNT_AGG
+                    ,ROW_NUMBER() OVER(PARTITION BY OPRAT_DATE, CD_NO ORDER BY CD_NO) R1
+                FROM 결과지표_목적통행
+                WHERE 1=1
+                    AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
+                    AND ANAL_AREA_CD = #{anal_area_cd}
+                    AND PROVIDER = #{provider}
+                    <if test="tm==null">
+                        AND TM BETWEEN #{tmStart} AND #{tmEnd}
+                    </if>
+                    <if test="!cd_no[0].equals('00')">
+                        AND CD_NO IN
+                        <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+                            #{arr}
+                        </foreach>
+                    </if>
+                ORDER BY SDATE, CD_NO
+            )
 		WHERE R1 =1
 		GROUP BY OPRAT_DATE, TO_CHAR(SDATE, 'DY'), ANAL_AREA_CD, ROLLUP(CD_NO) 
 	</select>
 	
 	<!-- 수단통행 시간대별 (시간대 합계있음) -->
 	<select id ="selectPassResultListMethod" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-		SELECT OPRAT_DATE, TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD, NVL(TM,'합계') TM, NVL(CD_NO,'합계') CD_NO, TFCMN, SUM(USER_CNT_AGG) USER_CNT_AGG
+		SELECT 
+            OPRAT_DATE
+            ,TO_CHAR(SDATE, 'DY') DY
+            ,ANAL_AREA_CD, NVL(TM,'합계') TM
+            ,NVL(CD_NO,'합계') CD_NO
+            ,TFCMN
+            ,SUM(USER_CNT_AGG) USER_CNT_AGG
 		FROM 결과지표_수단통행
 		WHERE 1=1
 			AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
@@ -66,43 +86,75 @@
 					#{arr}
 				</foreach>
 			</if>
-		GROUP BY OPRAT_DATE,  TO_CHAR(SDATE, 'DY') ,ANAL_AREA_CD ,TFCMN, CUBE(TM, CD_NO)
+		GROUP BY OPRAT_DATE
+                ,TO_CHAR(SDATE, 'DY') 
+                ,ANAL_AREA_CD 
+                ,TFCMN
+                ,CUBE(TM, CD_NO)
 		ORDER BY OPRAT_DATE, TM, CD_NO, TFCMN
 	</select>
 	
 	<!-- 수단통행 일별 -->
 	<select id ="selectPassResultListMethod_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-		SELECT OPRAT_DATE,TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD, NVL(CD_NO,'합계') CD_NO, TFCMN, SUM(USER_CNT_AGG) USER_CNT_AGG
+		SELECT 
+            OPRAT_DATE
+            ,TO_CHAR(SDATE, 'DY') DY
+            ,ANAL_AREA_CD
+            ,NVL(CD_NO,'합계') CD_NO
+            ,TFCMN
+            ,SUM(USER_CNT_AGG) USER_CNT_AGG
 		FROM
-			(SELECT OPRAT_DATE, SDATE, ANAL_AREA_CD, CD_NO, TFCMN
-				,SUM(USER_CNT_AGG)OVER(PARTITION BY OPRAT_DATE, CD_NO, TFCMN ORDER BY CD_NO) USER_CNT_AGG
-				,ROW_NUMBER() OVER(PARTITION BY OPRAT_DATE, CD_NO, TFCMN ORDER BY CD_NO) R1
-			FROM 결과지표_수단통행
-			WHERE 1=1
-				AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
-				AND ANAL_AREA_CD = #{anal_area_cd}
-				AND PROVIDER = #{provider}
-				<if test="tm==null">
-					AND TM BETWEEN #{tmStart} AND #{tmEnd}
-				</if>
-				<if test="!cd_no[0].equals('00')">
-					AND CD_NO IN
-					<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
-						#{arr}
-					</foreach>
-				</if>
-			ORDER BY SDATE, CD_NO, TFCMN)
+			(
+                SELECT 
+                    OPRAT_DATE
+                    ,SDATE
+                    ,ANAL_AREA_CD
+                    ,CD_NO
+                    ,TFCMN
+                    ,SUM(USER_CNT_AGG)OVER(PARTITION BY OPRAT_DATE, CD_NO, TFCMN ORDER BY CD_NO) USER_CNT_AGG
+                    ,ROW_NUMBER() OVER(PARTITION BY OPRAT_DATE, CD_NO, TFCMN ORDER BY CD_NO) R1
+                FROM 결과지표_수단통행
+                WHERE 1=1
+                    AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
+                    AND ANAL_AREA_CD = #{anal_area_cd}
+                    AND PROVIDER = #{provider}
+                    <if test="tm==null">
+                        AND TM BETWEEN #{tmStart} AND #{tmEnd}
+                    </if>
+                    <if test="!cd_no[0].equals('00')">
+                        AND CD_NO IN
+                        <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+                            #{arr}
+                        </foreach>
+                    </if>
+                ORDER BY SDATE, CD_NO, TFCMN
+            )
 		WHERE R1 =1
-		GROUP BY OPRAT_DATE,TO_CHAR(SDATE, 'DY'), ANAL_AREA_CD, TFCMN, ROLLUP(CD_NO)
+		GROUP BY 
+            OPRAT_DATE
+            ,TO_CHAR(SDATE, 'DY')
+            ,ANAL_AREA_CD
+            ,TFCMN
+            ,ROLLUP(CD_NO)
+        ORDER BY OPRAT_DATE, CD_NO, TFCMN
 	</select>
 	
 
 	<!-- 노선별통행 버스 시간대별 (시간대 합계있음)-->
 	<select id ="selectPassResultListRouteB" parameterType="sVO" resultType="egovMap" fetchSize="2000">
-		SELECT OPRAT_DATE, TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD, TFCMN, ROUTE_ID, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END
-				  ,NVL(TM,'합계') TM ,NVL(CD_NO,'합계') CD_NO
-				  ,SUM(ROUTE_BUS_GIN_AGG) ROUTE_BUS_GIN_AGG ,SUM(ROUTE_BUS_GFF_AGG) ROUTE_BUS_GFF_AGG ,SUM(ROUTE_BUS_TRS_AGG) ROUTE_BUS_TRS_AGG
-				  ,SUM(ROUTE_BUS_GIN_AGG) + SUM(ROUTE_BUS_GFF_AGG) GIN_GFF_SUM
+		SELECT 
+            OPRAT_DATE
+            ,TO_CHAR(SDATE, 'DY') DY
+            ,ANAL_AREA_CD
+            ,TFCMN
+            ,ROUTE_ID
+            ,ROUTE_NMA
+            ,ROUTE_TYPE
+            ,ROUTE_START
+            ,ROUTE_END
+            ,NVL(TM,'합계') TM ,NVL(CD_NO,'합계') CD_NO
+            ,SUM(ROUTE_BUS_GIN_AGG) ROUTE_BUS_GIN_AGG ,SUM(ROUTE_BUS_GFF_AGG) ROUTE_BUS_GFF_AGG ,SUM(ROUTE_BUS_TRS_AGG) ROUTE_BUS_TRS_AGG
+            ,SUM(ROUTE_BUS_GIN_AGG) + SUM(ROUTE_BUS_GFF_AGG) GIN_GFF_SUM
 		FROM 결과지표_노선별통행
 		WHERE 1=1
 			AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
@@ -117,16 +169,35 @@
 				</foreach>
 			</if>
 			AND TFCMN ='B'
-		GROUP BY OPRAT_DATE, TO_CHAR(SDATE, 'DY'), ANAL_AREA_CD, TFCMN, ROUTE_ID, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END, CUBE (TM, CD_NO)
+		GROUP BY 
+            OPRAT_DATE
+            ,TO_CHAR(SDATE, 'DY')
+            ,ANAL_AREA_CD
+            ,TFCMN
+            ,ROUTE_ID
+            ,ROUTE_NMA
+            ,ROUTE_TYPE
+            ,ROUTE_START
+            ,ROUTE_END
+            ,CUBE (TM, CD_NO)
 		ORDER BY OPRAT_DATE, ROUTE_NMA, ROUTE_ID, TM, CD_NO
 	</select>
 	
 	<!-- 노선별통행 버스 일별 -->
 	<select id ="selectPassResultListRouteB_d" parameterType="sVO" resultType="egovMap" fetchSize="2000">
-		SELECT OPRAT_DATE, TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD, TFCMN, ROUTE_ID, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END
-				,NVL(CD_NO,'합계') CD_NO
-				,SUM(ROUTE_BUS_GIN_AGG) ROUTE_BUS_GIN_AGG ,SUM(ROUTE_BUS_GFF_AGG) ROUTE_BUS_GFF_AGG ,SUM(ROUTE_BUS_TRS_AGG) ROUTE_BUS_TRS_AGG
-				,SUM(ROUTE_BUS_GIN_AGG) + SUM(ROUTE_BUS_GFF_AGG) GIN_GFF_SUM
+		SELECT 
+            OPRAT_DATE
+            ,TO_CHAR(SDATE, 'DY') DY
+            ,ANAL_AREA_CD
+            ,TFCMN
+            ,ROUTE_ID
+            ,ROUTE_NMA
+            ,ROUTE_TYPE
+            ,ROUTE_START
+            ,ROUTE_END
+            ,NVL(CD_NO,'합계') CD_NO
+            ,SUM(ROUTE_BUS_GIN_AGG) ROUTE_BUS_GIN_AGG ,SUM(ROUTE_BUS_GFF_AGG) ROUTE_BUS_GFF_AGG ,SUM(ROUTE_BUS_TRS_AGG) ROUTE_BUS_TRS_AGG
+            ,SUM(ROUTE_BUS_GIN_AGG) + SUM(ROUTE_BUS_GFF_AGG) GIN_GFF_SUM
 		FROM 결과지표_노선별통행_일별
 		WHERE 1=1
 			AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
@@ -141,16 +212,34 @@
 				</foreach>
 			</if>
 			AND TFCMN ='B'
-		GROUP BY OPRAT_DATE, TO_CHAR(SDATE, 'DY'), ANAL_AREA_CD, TFCMN, ROUTE_ID, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END, ROLLUP(CD_NO)
+		GROUP BY 
+            OPRAT_DATE
+            ,TO_CHAR(SDATE, 'DY')
+            ,ANAL_AREA_CD, TFCMN
+            ,ROUTE_ID
+            ,ROUTE_NMA
+            ,ROUTE_TYPE
+            ,ROUTE_START
+            ,ROUTE_END
+            ,ROLLUP(CD_NO)
 		ORDER BY OPRAT_DATE, ROUTE_NMA, ROUTE_ID, CD_NO
 	</select>
 	
 	<!-- 노선별통행 지하철 시간대별 (시간대 합계있음) -->
 	<select id ="selectPassResultListRouteT" parameterType="sVO" resultType="egovMap" fetchSize="2000">
-		SELECT OPRAT_DATE, TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD, TFCMN, ROUTE_ID, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END
-				  ,NVL(TM,'합계') TM ,NVL(CD_NO,'합계') CD_NO
-				  ,SUM(ROUTE_TRAIN_GIN_AGG) ROUTE_TRAIN_GIN_AGG ,SUM(ROUTE_TRAIN_GFF_AGG) ROUTE_TRAIN_GFF_AGG ,SUM(ROUTE_TRAIN_TRS_AGG) ROUTE_TRAIN_TRS_AGG
-				  ,SUM(ROUTE_TRAIN_GIN_AGG) + SUM(ROUTE_TRAIN_GFF_AGG) GIN_GFF_SUM
+		SELECT 
+            OPRAT_DATE
+            ,TO_CHAR(SDATE, 'DY') DY
+            ,ANAL_AREA_CD
+            ,TFCMN
+            ,ROUTE_ID
+            ,ROUTE_NMA
+            ,ROUTE_TYPE
+            ,ROUTE_START
+            ,ROUTE_END
+            ,NVL(TM,'합계') TM ,NVL(CD_NO,'합계') CD_NO
+            ,SUM(ROUTE_TRAIN_GIN_AGG) ROUTE_TRAIN_GIN_AGG ,SUM(ROUTE_TRAIN_GFF_AGG) ROUTE_TRAIN_GFF_AGG ,SUM(ROUTE_TRAIN_TRS_AGG) ROUTE_TRAIN_TRS_AGG
+            ,SUM(ROUTE_TRAIN_GIN_AGG) + SUM(ROUTE_TRAIN_GFF_AGG) GIN_GFF_SUM
 		FROM 결과지표_노선별통행
 		WHERE 1=1
 			AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
@@ -165,16 +254,35 @@
 				</foreach>
 			</if>
 			AND TFCMN ='T'
-		GROUP BY OPRAT_DATE, TO_CHAR(SDATE, 'DY'), ANAL_AREA_CD, TFCMN, ROUTE_ID, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END, CUBE (TM, CD_NO)
+		GROUP BY 
+            OPRAT_DATE
+            ,TO_CHAR(SDATE, 'DY')
+            ,ANAL_AREA_CD
+            ,TFCMN
+            ,ROUTE_ID
+            ,ROUTE_NMA
+            ,ROUTE_TYPE
+            ,ROUTE_START
+            ,ROUTE_END
+            ,CUBE (TM, CD_NO)
 		ORDER BY OPRAT_DATE, ROUTE_NMA, ROUTE_ID, TM, CD_NO
 	</select>
 	
 	<!-- 노선별통행 지하철 일별 -->
 	<select id ="selectPassResultListRouteT_d" parameterType="sVO" resultType="egovMap" fetchSize="2000">
-		SELECT OPRAT_DATE, TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD, TFCMN, ROUTE_ID, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END
-				,NVL(CD_NO,'합계') CD_NO
-				,SUM(ROUTE_TRAIN_GIN_AGG) ROUTE_TRAIN_GIN_AGG ,SUM(ROUTE_TRAIN_GFF_AGG) ROUTE_TRAIN_GFF_AGG ,SUM(ROUTE_TRAIN_TRS_AGG) ROUTE_TRAIN_TRS_AGG
-				  ,SUM(ROUTE_TRAIN_GIN_AGG) + SUM(ROUTE_TRAIN_GFF_AGG) GIN_GFF_SUM
+		SELECT 
+            OPRAT_DATE
+            ,TO_CHAR(SDATE, 'DY') DY
+            ,ANAL_AREA_CD
+            ,TFCMN
+            ,ROUTE_ID
+            ,ROUTE_NMA
+            ,ROUTE_TYPE
+            ,ROUTE_START
+            ,ROUTE_END
+            ,NVL(CD_NO,'합계') CD_NO
+            ,SUM(ROUTE_TRAIN_GIN_AGG) ROUTE_TRAIN_GIN_AGG ,SUM(ROUTE_TRAIN_GFF_AGG) ROUTE_TRAIN_GFF_AGG ,SUM(ROUTE_TRAIN_TRS_AGG) ROUTE_TRAIN_TRS_AGG
+            ,SUM(ROUTE_TRAIN_GIN_AGG) + SUM(ROUTE_TRAIN_GFF_AGG) GIN_GFF_SUM
 		FROM 결과지표_노선별통행_일별
 		WHERE 1=1
 			AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
@@ -189,16 +297,32 @@
 				</foreach>
 			</if>
 			AND TFCMN ='T'
-		GROUP BY OPRAT_DATE, TO_CHAR(SDATE, 'DY'), ANAL_AREA_CD, TFCMN, ROUTE_ID, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END, ROLLUP(CD_NO)
+		GROUP BY 
+            OPRAT_DATE
+            ,TO_CHAR(SDATE, 'DY')
+            ,ANAL_AREA_CD
+            ,TFCMN
+            ,ROUTE_ID
+            ,ROUTE_NMA
+            ,ROUTE_TYPE
+            ,ROUTE_START
+            ,ROUTE_END
+            ,ROLLUP(CD_NO)
 		ORDER BY OPRAT_DATE, ROUTE_NMA, ROUTE_ID, CD_NO
 	</select>
 	
 	<!-- 정류장별통행 버스 일별 -->
 	<select id ="selectPassResultListStationB" parameterType="sVO" resultType="egovMap" fetchSize="2000">
-		SELECT OPRAT_DATE, TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD, TFCMN, STTN_ID, STTN_NMA, STTN_HJD
-				,NVL(CD_NO,'합계') CD_NO
-				,SUM(STTN_BUS_GIN_AGG) STTN_BUS_GIN_AGG, SUM(STTN_BUS_GFF_AGG) STTN_BUS_GFF_AGG, SUM(STTN_BUS_TRS_AGG) STTN_BUS_TRS_AGG
-				,SUM(STTN_BUS_GIN_AGG) + SUM(STTN_BUS_GFF_AGG) GIN_GFF_SUM 
+		SELECT 
+            OPRAT_DATE
+            ,TO_CHAR(SDATE, 'DY') DY
+            ,ANAL_AREA_CD, TFCMN
+            ,STTN_ID
+            ,STTN_NMA
+            ,STTN_HJD
+            ,NVL(CD_NO,'합계') CD_NO
+            ,SUM(STTN_BUS_GIN_AGG) STTN_BUS_GIN_AGG, SUM(STTN_BUS_GFF_AGG) STTN_BUS_GFF_AGG, SUM(STTN_BUS_TRS_AGG) STTN_BUS_TRS_AGG
+            ,SUM(STTN_BUS_GIN_AGG) + SUM(STTN_BUS_GFF_AGG) GIN_GFF_SUM 
 		FROM 결과지표_정류장별통행_일별
 		WHERE 1=1
 			AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
@@ -210,16 +334,30 @@
 				</foreach>
 			</if> 
 			AND TFCMN ='B'
-		GROUP BY OPRAT_DATE, TO_CHAR(SDATE, 'DY'), ANAL_AREA_CD, TFCMN, STTN_ID, STTN_NMA, STTN_HJD , ROLLUP(CD_NO)
+		GROUP BY 
+            OPRAT_DATE
+            ,TO_CHAR(SDATE, 'DY')
+            ,ANAL_AREA_CD
+            ,TFCMN
+            ,STTN_ID
+            ,STTN_NMA
+            ,STTN_HJD 
+            ,ROLLUP(CD_NO)
 		ORDER BY OPRAT_DATE, STTN_NMA, STTN_ID, CD_NO
 	</select>
 	
 	<!-- 정류장별통행 지하철 일별 -->
 	<select id ="selectPassResultListStationT" parameterType="sVO" resultType="egovMap" fetchSize="2000">
-		SELECT OPRAT_DATE, TO_CHAR(SDATE, 'DY') DY, ANAL_AREA_CD, TFCMN, STTN_ID, STTN_NMA, STTN_HJD
-				,NVL(CD_NO,'합계') CD_NO
-				,SUM(STTN_TRAIN_GIN_AGG) STTN_TRAIN_GIN_AGG, SUM(STTN_TRAIN_GFF_AGG) STTN_TRAIN_GFF_AGG, SUM(STTN_TRAIN_TRS_AGG) STTN_TRAIN_TRS_AGG
-				,SUM(STTN_TRAIN_GIN_AGG) + SUM(STTN_TRAIN_GFF_AGG) GIN_GFF_SUM 
+		SELECT 
+            OPRAT_DATE
+            ,TO_CHAR(SDATE, 'DY') DY
+            ,ANAL_AREA_CD, TFCMN
+            ,STTN_ID
+            ,STTN_NMA
+            ,STTN_HJD
+            ,NVL(CD_NO,'합계') CD_NO
+            ,SUM(STTN_TRAIN_GIN_AGG) STTN_TRAIN_GIN_AGG, SUM(STTN_TRAIN_GFF_AGG) STTN_TRAIN_GFF_AGG, SUM(STTN_TRAIN_TRS_AGG) STTN_TRAIN_TRS_AGG
+            ,SUM(STTN_TRAIN_GIN_AGG) + SUM(STTN_TRAIN_GFF_AGG) GIN_GFF_SUM 
 		FROM 결과지표_정류장별통행_일별
 		WHERE 1=1
 			AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
@@ -231,7 +369,15 @@
 				</foreach>
 			</if> 
 			AND TFCMN ='T'
-		GROUP BY OPRAT_DATE, TO_CHAR(SDATE, 'DY'), ANAL_AREA_CD, TFCMN, STTN_ID, STTN_NMA, STTN_HJD , ROLLUP(CD_NO)
+		GROUP BY 
+            OPRAT_DATE
+            ,TO_CHAR(SDATE, 'DY')
+            ,ANAL_AREA_CD
+            ,TFCMN
+            ,STTN_ID
+            ,STTN_NMA
+            ,STTN_HJD
+            ,ROLLUP(CD_NO)
 		ORDER BY OPRAT_DATE, STTN_NMA, STTN_ID, CD_NO
 	</select>
 	
@@ -271,23 +417,24 @@
 						#{arr}
 					</foreach>
 				</if> 
-			GROUP BY 	OPRAT_DATE
-						,TO_CHAR(SDATE, 'DY')
-						,ANAL_AREA_CD
-						,TFCMN
-						,ROUTE_NMA
-						,ROUTE_TYPE
-						,ROUTE_START
-						,ROUTE_END
-						,출발정류장순번
-						,출발정류장ID
-						,출발정류장명 
-						,출발정류장행정동 
-						,도착정류장순번
-						,도착정류장ID
-						,도착정류장명 
-						,도착정류장행정동 
-						,CUBE(TM, CD_NO)
+			GROUP BY 	
+                OPRAT_DATE
+                ,TO_CHAR(SDATE, 'DY')
+                ,ANAL_AREA_CD
+                ,TFCMN
+                ,ROUTE_NMA
+                ,ROUTE_TYPE
+                ,ROUTE_START
+                ,ROUTE_END
+                ,출발정류장순번
+                ,출발정류장ID
+                ,출발정류장명 
+                ,출발정류장행정동 
+                ,도착정류장순번
+                ,도착정류장ID
+                ,도착정류장명 
+                ,도착정류장행정동 
+                ,CUBE(TM, CD_NO)
 		ORDER BY 출발정류장순번, 도착정류장순번, TM, CD_NO
 	</select>
 	
@@ -324,249 +471,471 @@
 						#{arr}
 					</foreach>
 				</if>
-			GROUP BY 	OPRAT_DATE
-						,TO_CHAR(SDATE, 'DY') 
-						,ANAL_AREA_CD
-						,TFCMN
-						,ROUTE_ID 
-						,ROUTE_NMA
-						,ROUTE_TYPE
-						,ROUTE_START
-						,ROUTE_END
-						,출발정류장순번
-						,출발정류장ID
-						,출발정류장명
-						,출발정류장행정동
-						,도착정류장순번
-						,도착정류장ID
-						,도착정류장명
-						,도착정류장행정동
-						,ROLLUP(CD_NO)
+			GROUP BY 	
+                OPRAT_DATE
+                ,TO_CHAR(SDATE, 'DY') 
+                ,ANAL_AREA_CD
+                ,TFCMN
+                ,ROUTE_ID 
+                ,ROUTE_NMA
+                ,ROUTE_TYPE
+                ,ROUTE_START
+                ,ROUTE_END
+                ,출발정류장순번
+                ,출발정류장ID
+                ,출발정류장명
+                ,출발정류장행정동
+                ,도착정류장순번
+                ,도착정류장ID
+                ,도착정류장명
+                ,도착정류장행정동
+                ,ROLLUP(CD_NO)
 		ORDER BY 출발정류장순번, 도착정류장순번, CD_NO
 	</select>
 	
 	<!-- 행정동간OD 목적통행 -->
 	<select id ="selectPassResultListAreaODPurpose" parameterType="sVO" resultType="egovMap"  fetchSize="2000">
-		SELECT /*+ PARALLEL(8) */ 운행일자 OPRAT_DATE, TO_CHAR(SDATE, 'DY') DY, 분석지역_CD ANAL_AREA_CD, 승차내외부 GETINOUT, 승차지역명 GETINOUTNM, 하차내외부 OFFINOUT, 하차지역명 OFFINOUTNM
-			   ,NVL(코드번호,'합계') CD_NO, SUM(정류장OD_통행량) CNT
+		SELECT /*+ PARALLEL(8) */ 
+            운행일자 OPRAT_DATE
+            ,TO_CHAR(SDATE, 'DY') DY
+            ,분석지역_CD ANAL_AREA_CD
+            ,승차내외부 GETINOUT
+            ,승차지역명 GETINOUTNM
+            ,하차내외부 OFFINOUT
+            ,하차지역명 OFFINOUTNM
+            ,NVL(코드번호,'합계') CD_NO, SUM(정류장OD_통행량) CNT
 		FROM 행정시군구별OD_목적통행_일별
 		WHERE 1=1
 			AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 			AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
 			<if test="!cd_no[0].equals('00')">
-					AND 코드번호 IN
-					<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
-						#{arr}
-					</foreach>
+                AND 코드번호 IN
+                <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+                    #{arr}
+                </foreach>
 			</if> 
-		GROUP BY 운행일자, TO_CHAR(SDATE, 'DY'), 분석지역_CD, 승차내외부, 승차지역명, 하차내외부, 하차지역명, ROLLUP(코드번호)
+		GROUP BY 
+            운행일자
+            ,TO_CHAR(SDATE, 'DY')
+            ,분석지역_CD
+            ,승차내외부
+            ,승차지역명
+            ,하차내외부
+            ,하차지역명
+            ,ROLLUP(코드번호)
 		ORDER BY 승차내외부, 하차내외부, 승차지역명, 하차지역명, 코드번호
 	</select>
 	
 	<!-- 행정동간OD 수단통행 -->
 	<select id ="selectPassResultListAreaODMethod" parameterType="sVO" resultType="egovMap" fetchSize="2000">
-		SELECT /*+ PARALLEL(8) */ 운행일자 OPRAT_DATE, TO_CHAR(SDATE, 'DY') DY, 분석지역_CD ANAL_AREA_CD, 승차내외부 GETINOUT, 승차지역명 GETINOUTNM, 하차내외부 OFFINOUT, 하차지역명 OFFINOUTNM
-			   ,NVL(코드번호,'합계') CD_NO, SUM(정류장OD_통행량) CNT
+		SELECT /*+ PARALLEL(8) */ 
+            운행일자 OPRAT_DATE, TO_CHAR(SDATE, 'DY') DY
+            ,분석지역_CD ANAL_AREA_CD
+            ,승차내외부 GETINOUT
+            ,승차지역명 GETINOUTNM
+            ,하차내외부 OFFINOUT
+            ,하차지역명 OFFINOUTNM
+            ,NVL(코드번호,'합계') CD_NO, SUM(정류장OD_통행량) CNT
 		FROM 행정시군구별OD_수단통행_일별
 		WHERE 1=1
 			AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 			AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
 			<if test="!cd_no[0].equals('00')">
-					AND 코드번호 IN
-					<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
-						#{arr}
-					</foreach>
+                AND 코드번호 IN
+                <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+                    #{arr}
+                </foreach>
 			</if> 
-		GROUP BY 운행일자, TO_CHAR(SDATE, 'DY'), 분석지역_CD, 승차내외부, 승차지역명, 하차내외부, 하차지역명, ROLLUP(코드번호)
+		GROUP BY 
+            운행일자
+            ,TO_CHAR(SDATE, 'DY')
+            ,분석지역_CD
+            ,승차내외부
+            ,승차지역명
+            ,하차내외부
+            ,하차지역명
+            ,ROLLUP(코드번호)
 		ORDER BY 승차내외부, 하차내외부, 승차지역명, 하차지역명, 코드번호
 	</select>
 	
 	<!-- 상위이용노선 -->
 	<select id ="selectPassREsultListTopRoute" parameterType="sVO" resultType="egovMap" fetchSize="2000">
-		SELECT  /*+ PARALLEL(8) */ A.OPRAT_DATE, TO_CHAR(A.SDATE, 'DY') DY, A.ANAL_AREA_CD, R, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END, NVL(A.CD_NO,'합계') CD_NO
-				,SUM(ROUTE_BUS_GIN_AGG) ROUTE_BUS_GIN_AGG, SUM(ROUTE_BUS_GFF_AGG) ROUTE_BUS_GFF_AGG, SUM(ROUTE_BUS_TRS_AGG) ROUTE_BUS_TRS_AGG, ROUTE_BUS_SUM
-		FROM 결과지표_노선별통행_일별 A,
-			(SELECT /*+ PARALLEL(8) */ R, ROUTE_ID, ROUTE_BUS_SUM
-			FROM
-				(SELECT /*+ PARALLEL(8) */ ROWNUM R, ROUTE_ID, ROUTE_BUS_SUM
-				FROM 
-					(SELECT /*+ PARALLEL(8) */ ROUTE_ID
-					 	   ,SUM(ROUTE_BUS_GIN_AGG) OVER (PARTITION BY ROUTE_ID) + SUM(ROUTE_BUS_GFF_AGG) OVER (PARTITION BY ROUTE_ID) ROUTE_BUS_SUM 
-					 	   ,ROW_NUMBER() OVER (PARTITION BY ROUTE_ID ORDER BY CD_NO) R1
-					FROM 결과지표_노선별통행_일별
-					WHERE 1=1
-					AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
-					AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
-					<if test="!cd_no[0].equals('00')">
-						AND CD_NO IN
-						<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
-							#{arr}
-						</foreach>
-					</if> 
-					AND TFCMN ='B'
-					ORDER BY ROUTE_BUS_SUM DESC, CD_NO ASC
-					)
-				WHERE R1 = 1
-				)
-			WHERE R <![CDATA[ < ]]> 51
-			) KT
-		WHERE 1=1
-			AND A.SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
-			AND A.PART_KEY = #{provider} || '_' || #{anal_area_cd}
-			<if test="!cd_no[0].equals('00')">
-				AND CD_NO IN
-				<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
-					#{arr}
-				</foreach>
-			</if> 
-			AND TFCMN ='B'
-			AND A.ROUTE_ID = KT.ROUTE_ID
-		GROUP BY A.OPRAT_DATE, TO_CHAR(A.SDATE, 'DY'), A.ANAL_AREA_CD, R, ROUTE_NMA, ROUTE_TYPE, ROUTE_START, ROUTE_END , ROUTE_BUS_SUM, ROLLUP(CD_NO)
-		ORDER BY KT.R, A.CD_NO
+	    SELECT 
+            OPRAT_DATE
+            ,DY
+            ,R 
+            ,A.ROUTE_ID
+            ,ROUTE_NMA
+            ,ROUTE_TYPE
+            ,ROUTE_START
+            ,ROUTE_END
+            ,NVL(CD_NO,'합계') CD_NO
+            ,SUM(ROUTE_BUS_GIN_AGG) ROUTE_BUS_GIN_AGG
+            ,SUM(ROUTE_BUS_GFF_AGG) ROUTE_BUS_GFF_AGG
+            ,SUM(ROUTE_BUS_TRS_AGG) ROUTE_BUS_TRS_AGG
+            ,SUM(GIN_GFF_SUM) GIN_GFF_SUM
+            ,ROUTE_BUS_SUM
+        FROM
+            (
+                SELECT   
+                    OPRAT_DATE
+                    ,TO_CHAR(SDATE,'DY') DY
+                    ,ROUTE_ID
+                    ,ROUTE_NMA
+                    ,ROUTE_TYPE
+                    ,ROUTE_START
+                    ,ROUTE_END
+                    ,CD_NO
+                    ,ROUTE_BUS_GIN_AGG
+                    ,ROUTE_BUS_GFF_AGG
+                    ,ROUTE_BUS_TRS_AGG
+                    ,ROUTE_BUS_GIN_AGG  + ROUTE_BUS_GFF_AGG GIN_GFF_SUM
+                    ,PART_KEY
+                    ,SDATE
+                FROM 결과지표_노선별통행_일별
+                WHERE 1=1
+                    AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
+                    AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
+                    <if test="!cd_no[0].equals('00')">
+                        AND 코드번호 IN
+                        <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+                            #{arr}
+                        </foreach>
+                    </if> 
+                    AND TFCMN ='B'
+            ) A,
+            (
+                SELECT  
+                    ROWNUM R
+                    ,ROUTE_ID
+                    ,ROUTE_BUS_SUM
+                FROM 
+                    (
+                        SELECT  
+                            ROUTE_ID
+                            ,SUM(ROUTE_BUS_GIN_AGG) OVER (PARTITION BY ROUTE_ID) + SUM(ROUTE_BUS_GFF_AGG) OVER (PARTITION BY ROUTE_ID) ROUTE_BUS_SUM 
+                            ,ROW_NUMBER() OVER (PARTITION BY ROUTE_ID ORDER BY CD_NO) R1
+                        FROM 결과지표_노선별통행_일별
+                        WHERE 1=1
+                            AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
+                            AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
+                            <if test="!cd_no[0].equals('00')">
+                                AND 코드번호 IN
+                                <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+                                    #{arr}
+                                </foreach>
+                            </if> 
+                            AND TFCMN ='B'
+                        ORDER BY ROUTE_BUS_SUM DESC, CD_NO ASC
+                    )
+                WHERE 1=1
+                AND R1 = 1
+                AND ROWNUM <![CDATA[ < ]]> 51
+            ) KT
+            WHERE 1=1
+                AND A.ROUTE_ID = KT.ROUTE_ID
+        GROUP BY 
+            OPRAT_DATE
+            ,DY
+            ,R
+            ,A.ROUTE_ID
+            ,ROUTE_NMA
+            ,ROUTE_TYPE
+            ,ROUTE_START
+            ,ROUTE_END
+            ,ROUTE_BUS_SUM
+            ,ROLLUP (CD_NO)
+        ORDER BY R , CD_NO
 	</select>
 	
 	<!-- 상위이용정류장 -->
 	<select id ="selectPassResultListTopStation" parameterType="sVO" resultType="egovMap" fetchSize="2000">
-		SELECT /*+ PARALLEL(8) */ A.OPRAT_DATE,TO_CHAR(A.SDATE, 'DY') DY, A.ANAL_AREA_CD, KT.R, TFCMN, A.STTN_ID, STTN_NMA, STTN_HJD, NVL(A.CD_NO,'합계') CD_NO
-			,SUM(STTN_BUS_GIN_AGG) STTN_BUS_GIN_AGG, SUM(STTN_BUS_GFF_AGG) STTN_BUS_GFF_AGG, SUM(STTN_BUS_TRS_AGG) STTN_BUS_TRS_AGG
-			,SUM(STTN_TRAIN_GIN_AGG) STTN_TRAIN_GIN_AGG, SUM(STTN_TRAIN_GFF_AGG) STTN_TRAIN_GFF_AGG, SUM(STTN_TRAIN_TRS_AGG) STTN_TRAIN_TRS_AGG, STTN_SUM
-		FROM 결과지표_정류장별통행_일별 A,
-			(SELECT /*+ PARALLEL(8) */ ROWNUM R, STTN_ID, STTN_SUM
-			FROM
-				(SELECT /*+ PARALLEL(8) */ STTN_ID, STTN_BUS_SUM STTN_SUM
-				FROM 
-					(SELECT /*+ PARALLEL(8) */   STTN_ID
-					 	   ,SUM(STTN_BUS_GIN_AGG) OVER (PARTITION BY STTN_ID) + SUM(STTN_BUS_GFF_AGG) OVER (PARTITION BY STTN_ID) STTN_BUS_SUM 
-					 	   ,ROW_NUMBER() OVER (PARTITION BY STTN_ID ORDER BY CD_NO) R1
-					FROM 결과지표_정류장별통행_일별
-					WHERE 1=1
-						AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
-						AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
-						<if test="!cd_no[0].equals('00')">
-							AND CD_NO IN
-							<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
-								#{arr}
-							</foreach>
-						</if> 
-					ORDER BY STTN_BUS_SUM DESC, CD_NO ASC
-					)
-					WHERE R1 = 1
-					UNION ALL
-					SELECT /*+ PARALLEL(8) */STTN_ID, STTN_TRAIN_SUM STTN_SUM
-					FROM 
-					(SELECT /*+ PARALLEL(8) */ STTN_ID
-					 	   ,SUM(STTN_TRAIN_GIN_AGG) OVER (PARTITION BY STTN_ID) + SUM(STTN_TRAIN_GFF_AGG) OVER (PARTITION BY STTN_ID) STTN_TRAIN_SUM 
-					 	   ,ROW_NUMBER() OVER (PARTITION BY STTN_ID ORDER BY CD_NO) R1
-					FROM 결과지표_정류장별통행_일별
-					WHERE 1=1
-						AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
-						AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
-						<if test="!cd_no[0].equals('00')">
-							AND CD_NO IN
-							<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
-								#{arr}
-							</foreach>
-						</if> 
-					ORDER BY STTN_TRAIN_SUM DESC, CD_NO ASC
-					)
-				WHERE R1 = 1
-				ORDER BY STTN_SUM DESC)
-			WHERE ROWNUM <![CDATA[ < ]]> 101
-			)KT
-		WHERE 1=1
-			AND A.SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
-			AND A.PART_KEY = #{provider} || '_' || #{anal_area_cd}
-			<if test="!cd_no[0].equals('00')">
-				AND CD_NO IN
-				<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
-					#{arr}
-				</foreach>
-			</if> 
-			AND A.STTN_ID = KT.STTN_ID
-		GROUP BY  A.OPRAT_DATE,TO_CHAR(A.SDATE, 'DY') , A.ANAL_AREA_CD, KT.R, TFCMN, A.STTN_ID, STTN_NMA, STTN_HJD, STTN_SUM,ROLLUP(A.CD_NO)
-		ORDER BY KT.R, A.CD_NO	
+		SELECT 
+            OPRAT_DATE
+            ,DY
+            ,TFCMN
+            ,R 
+            ,A.STTN_ID
+            ,STTN_NMA
+            ,STTN_HJD 
+            ,NVL(CD_NO,'합계') CD_NO
+            ,SUM(GIN_AGG) GIN_AGG
+            ,SUM(GFF_AGG) GFF_AGG
+            ,SUM(TRS_AGG) TRS_AGG
+            ,SUM(GIN_GFF_SUM) GIN_GFF_SUM
+            ,STTN_SUM
+        FROM            
+            (
+                SELECT  
+                    OPRAT_DATE
+                    ,TO_CHAR(SDATE,'DY') DY
+                    ,TFCMN 
+                    , STTN_ID
+                    , STTN_NMA
+                    , STTN_HJD 
+                    , CD_NO
+                    , CASE WHEN TFCMN = 'B' THEN STTN_BUS_GIN_AGG ELSE STTN_TRAIN_GIN_AGG END GIN_AGG
+                    , CASE WHEN TFCMN = 'B' THEN STTN_BUS_GFF_AGG ELSE STTN_TRAIN_GFF_AGG END GFF_AGG
+                    , CASE WHEN TFCMN = 'B' THEN STTN_BUS_TRS_AGG ELSE STTN_TRAIN_TRS_AGG END TRS_AGG
+                    , CASE WHEN TFCMN = 'B' THEN STTN_BUS_GIN_AGG + STTN_BUS_GFF_AGG ELSE STTN_TRAIN_GIN_AGG + STTN_TRAIN_GFF_AGG END GIN_GFF_SUM
+                    ,PART_KEY
+                    ,SDATE
+                FROM 결과지표_정류장별통행_일별
+                WHERE 1=1
+                    AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
+                    AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
+                    <if test="!cd_no[0].equals('00')">
+                        AND CD_NO IN
+                        <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+                            #{arr}
+                        </foreach>
+                    </if>
+            ) A,
+            (
+                SELECT 
+                    ROWNUM R
+                    ,STTN_ID
+                    ,STTN_SUM
+                FROM
+                    (
+                        SELECT  
+                            STTN_ID
+                            ,STTN_BUS_SUM STTN_SUM
+                        FROM 
+                            (
+                                SELECT   
+                                    STTN_ID
+                                    ,SUM(STTN_BUS_GIN_AGG) OVER (PARTITION BY STTN_ID) + SUM(STTN_BUS_GFF_AGG) OVER (PARTITION BY STTN_ID) STTN_BUS_SUM 
+                                    ,ROW_NUMBER() OVER (PARTITION BY STTN_ID ORDER BY CD_NO) R1
+                                FROM 결과지표_정류장별통행_일별
+                                WHERE 1=1
+                                    AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
+                                    AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
+                                    <if test="!cd_no[0].equals('00')">
+                                        AND CD_NO IN
+                                        <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+                                            #{arr}
+                                        </foreach>
+                                    </if>
+                                    AND TFCMN ='B'
+                                ORDER BY STTN_BUS_SUM DESC, CD_NO ASC
+                            )
+                        WHERE R1 = 1
+                        UNION ALL
+                        SELECT 
+                            STTN_ID
+                            ,STTN_TRAIN_SUM STTN_SUM
+                        FROM 
+                            (   
+                                SELECT /*+ PARALLEL(8) */ 
+                                    STTN_ID
+                                    ,SUM(STTN_TRAIN_GIN_AGG) OVER (PARTITION BY STTN_ID) + SUM(STTN_TRAIN_GFF_AGG) OVER (PARTITION BY STTN_ID) STTN_TRAIN_SUM 
+                                    ,ROW_NUMBER() OVER (PARTITION BY STTN_ID ORDER BY CD_NO) R1
+                                FROM 결과지표_정류장별통행_일별
+                                WHERE 1=1
+                                    AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
+                                    AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
+                                    <if test="!cd_no[0].equals('00')">
+                                        AND CD_NO IN
+                                        <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+                                            #{arr}
+                                        </foreach>
+                                    </if>
+                                    AND TFCMN ='T'
+                                ORDER BY STTN_TRAIN_SUM DESC, CD_NO ASC
+                            )
+                        WHERE R1 = 1
+                        ORDER BY STTN_SUM DESC
+                    )
+                WHERE ROWNUM  <![CDATA[ < ]]> 101
+            ) KT
+        WHERE 1=1
+            AND A.STTN_ID = KT.STTN_ID
+        GROUP BY 
+            OPRAT_DATE
+            ,DY
+            ,TFCMN
+            ,R
+            ,A.STTN_ID
+            ,STTN_NMA
+            ,STTN_HJD 
+            ,STTN_SUM
+            ,ROLLUP(CD_NO)
+        ORDER BY R, CD_NO
 	</select>
 	
 	<!-- 상위이용정류장 버스 : 서울 선택만 -->
 	<select id ="selectPassResultListTopStationB" parameterType="sVO" resultType="egovMap" fetchSize="2000">
-		SELECT /*+ PARALLEL(8) */ A.OPRAT_DATE, TO_CHAR(A.SDATE, 'DY') DY, A.ANAL_AREA_CD, KT.R, TFCMN, A.STTN_ID, A.STTN_NMA, A.STTN_HJD, NVL(A.CD_NO,'합계') CD_NO
-			,SUM(STTN_BUS_GIN_AGG) STTN_BUS_GIN_AGG, SUM(STTN_BUS_GFF_AGG) STTN_BUS_GFF_AGG, SUM(STTN_BUS_TRS_AGG) STTN_BUS_TRS_AGG, STTN_SUM
-		FROM 결과지표_정류장별통행_일별 A,
-				(SELECT /*+ PARALLEL(8) */ROWNUM R, STTN_ID, STTN_BUS_SUM STTN_SUM
-				FROM 
-					(SELECT /*+ PARALLEL(8) */ STTN_ID
-					 	   ,SUM(STTN_BUS_GIN_AGG) OVER (PARTITION BY STTN_ID) + SUM(STTN_BUS_GFF_AGG) OVER (PARTITION BY STTN_ID) STTN_BUS_SUM 
-					 	   ,ROW_NUMBER() OVER (PARTITION BY STTN_ID ORDER BY CD_NO) R1
-					FROM 결과지표_정류장별통행_일별
-					WHERE 1=1
-						AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
-						AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
-						<if test="!cd_no[0].equals('00')">
-							AND CD_NO IN
-							<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
-								#{arr}
-							</foreach>
-						</if> 
-						AND TFCMN ='B'
-					ORDER BY STTN_BUS_SUM DESC, CD_NO ASC
-					)
-				WHERE R1 = 1
-					AND ROWNUM <![CDATA[ < ]]> 101
-				)KT
-			WHERE 1=1
-				AND A.SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
-				AND A.PART_KEY = #{provider} || '_' || #{anal_area_cd}
-				<if test="!cd_no[0].equals('00')">
-					AND CD_NO IN
-					<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
-						#{arr}
-					</foreach>
-				</if> 
-				AND TFCMN ='B'
-				AND A.STTN_ID = KT.STTN_ID
-		GROUP BY  A.OPRAT_DATE,TO_CHAR(A.SDATE, 'DY') , A.ANAL_AREA_CD, KT.R, TFCMN, A.STTN_ID, STTN_NMA, STTN_HJD, STTN_SUM,ROLLUP(A.CD_NO)
-		ORDER BY KT.R, A.CD_NO
+		SELECT 
+            OPRAT_DATE
+            ,DY
+            ,TFCMN
+            ,R 순위
+            ,A.STTN_ID
+            ,STTN_NMA
+            ,STTN_HJD 
+            ,NVL(CD_NO,'합계') CD_NO
+            ,SUM(STTN_BUS_GIN_AGG) STTN_BUS_GIN_AGG
+            ,SUM(STTN_BUS_GFF_AGG) STTN_BUS_GFF_AGG
+            ,SUM(STTN_BUS_TRS_AGG) STTN_BUS_TRS_AGG
+            ,SUM(GIN_GFF_SUM) GIN_GFF_SUM
+            ,STTN_SUM
+        FROM            
+            (
+                SELECT  
+                    OPRAT_DATE
+                    ,TO_CHAR(SDATE,'DY') DY
+                    ,TFCMN
+                    , STTN_ID
+                    , STTN_NMA
+                    , STTN_HJD 
+                    , CD_NO
+                    , STTN_BUS_GIN_AGG 
+                    ,STTN_BUS_GFF_AGG
+                    ,STTN_BUS_TRS_AGG
+                    , STTN_BUS_GIN_AGG  + STTN_BUS_GFF_AGG GIN_GFF_SUM
+                    ,PART_KEY
+                    ,SDATE
+                FROM 결과지표_정류장별통행_일별
+                WHERE 1=1
+                    AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
+                    AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
+                    <if test="!cd_no[0].equals('00')">
+                        AND CD_NO IN
+                        <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+                            #{arr}
+                        </foreach>
+                    </if>
+                    AND TFCMN='B'
+            ) A,
+            (
+                SELECT /*+ PARALLEL(8) */ 
+                        ROWNUM R
+                    ,STTN_ID
+                    ,STTN_BUS_SUM STTN_SUM
+                FROM 
+                    (
+                        SELECT /*+ PARALLEL(8) */   
+                                STTN_ID
+                            ,SUM(STTN_BUS_GIN_AGG) OVER (PARTITION BY STTN_ID) + SUM(STTN_BUS_GFF_AGG) OVER (PARTITION BY STTN_ID) STTN_BUS_SUM 
+                            ,ROW_NUMBER() OVER (PARTITION BY STTN_ID ORDER BY CD_NO) R1
+                        FROM 결과지표_정류장별통행_일별
+                        WHERE 1=1
+                            AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
+                            AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
+                            <if test="!cd_no[0].equals('00')">
+                                AND CD_NO IN
+                                <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+                                    #{arr}
+                                </foreach>
+                            </if>
+                            AND TFCMN ='B'
+                        ORDER BY STTN_BUS_SUM DESC, CD_NO ASC
+                    )
+                WHERE 1=1
+                    AND R1 = 1
+                    AND ROWNUM <![CDATA[ < ]]> 101
+            ) KT
+            WHERE 1=1
+                AND A.STTN_ID = KT.STTN_ID
+            GROUP BY 
+                OPRAT_DATE
+                ,DY
+                ,TFCMN
+                ,R
+                ,A.STTN_ID
+                ,STTN_NMA
+                ,STTN_HJD 
+                ,STTN_SUM
+                ,ROLLUP(CD_NO)
+        ORDER BY R, CD_NO
 	</select>
 	
 	<!-- 상위이용정류장 지하철 : 서울 선택만 -->
 	<select id ="selectPassResultListTopStationT" parameterType="sVO" resultType="egovMap" fetchSize="2000">
-		SELECT /*+ PARALLEL(8) */ A.OPRAT_DATE, TO_CHAR(A.SDATE, 'DY') DY, A.ANAL_AREA_CD, KT.R, TFCMN, A.STTN_ID, A.STTN_NMA, A.STTN_HJD, NVL(A.CD_NO,'합계') CD_NO
-			,SUM(STTN_TRAIN_GIN_AGG) STTN_TRAIN_GIN_AGG, SUM(STTN_TRAIN_GFF_AGG) STTN_TRAIN_GFF_AGG, SUM(STTN_TRAIN_TRS_AGG) STTN_TRAIN_TRS_AGG, STTN_SUM
-		FROM 결과지표_정류장별통행_일별 A,
-				(SELECT /*+ PARALLEL(8) */ ROWNUM R, STTN_ID, STTN_TRAIN_SUM STTN_SUM
-				FROM 
-					(SELECT /*+ PARALLEL(8) */ STTN_ID
-					 	   ,SUM(STTN_TRAIN_GIN_AGG) OVER (PARTITION BY STTN_ID) + SUM(STTN_TRAIN_GFF_AGG) OVER (PARTITION BY STTN_ID) STTN_TRAIN_SUM 
-					 	   ,ROW_NUMBER() OVER (PARTITION BY STTN_ID ORDER BY CD_NO) R1
-					FROM 결과지표_정류장별통행_일별
-					WHERE 1=1
-						AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
-						AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
-						<if test="!cd_no[0].equals('00')">
-							AND CD_NO IN
-							<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
-								#{arr}
-							</foreach>
-						</if> 
-						AND TFCMN ='T'
-					ORDER BY STTN_TRAIN_SUM DESC, CD_NO ASC
-					)
-				WHERE R1 = 1
-					AND ROWNUM <![CDATA[ < ]]> 101
-				)KT
-			WHERE 1=1
-				AND A.SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
-				AND A.PART_KEY = #{provider} || '_' || #{anal_area_cd}
-				<if test="!cd_no[0].equals('00')">
-					AND CD_NO IN
-					<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
-						#{arr}
-					</foreach>
-				</if> 
-				AND TFCMN ='T'
-				AND A.STTN_ID = KT.STTN_ID
-		GROUP BY  A.OPRAT_DATE,TO_CHAR(A.SDATE, 'DY') , A.ANAL_AREA_CD, KT.R, TFCMN, A.STTN_ID, STTN_NMA, STTN_HJD, STTN_SUM,ROLLUP(A.CD_NO)
-		ORDER BY KT.R, A.CD_NO
+				SELECT 
+            OPRAT_DATE
+            ,DY
+            ,TFCMN
+            ,R 순위
+            ,A.STTN_ID
+            ,STTN_NMA
+            ,STTN_HJD 
+            ,NVL(CD_NO,'합계') CD_NO
+            ,SUM(STTN_TRAIN_GIN_AGG) STTN_TRAIN_GIN_AGG
+            ,SUM(STTN_TRAIN_GFF_AGG) STTN_TRAIN_GFF_AGG
+            ,SUM(STTN_TRAIN_TRS_AGG) STTN_TRAIN_TRS_AGG
+            ,SUM(GIN_GFF_SUM) GIN_GFF_SUM
+            ,STTN_SUM
+        FROM            
+            (
+                SELECT  
+                    OPRAT_DATE
+                    ,TO_CHAR(SDATE,'DY') DY
+                    ,TFCMN
+                    , STTN_ID
+                    , STTN_NMA
+                    , STTN_HJD 
+                    , CD_NO
+                    , STTN_TRAIN_GIN_AGG 
+                    ,STTN_TRAIN_GFF_AGG
+                    ,STTN_TRAIN_TRS_AGG
+                    , STTN_TRAIN_GIN_AGG  + STTN_TRAIN_GFF_AGG GIN_GFF_SUM
+                    ,PART_KEY
+                    ,SDATE
+                FROM 결과지표_정류장별통행_일별
+                WHERE 1=1
+                    AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
+                    AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
+                    <if test="!cd_no[0].equals('00')">
+                        AND CD_NO IN
+                        <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+                            #{arr}
+                        </foreach>
+                    </if>
+                    AND TFCMN='T'
+            ) A,
+            (
+                SELECT /*+ PARALLEL(8) */ 
+                        ROWNUM R
+                    ,STTN_ID
+                    ,STTN_TRAIN_SUM STTN_SUM
+                FROM 
+                    (
+                        SELECT /*+ PARALLEL(8) */   
+                                STTN_ID
+                            ,SUM(STTN_TRAIN_GIN_AGG) OVER (PARTITION BY STTN_ID) + SUM(STTN_TRAIN_GFF_AGG) OVER (PARTITION BY STTN_ID) STTN_TRAIN_SUM 
+                            ,ROW_NUMBER() OVER (PARTITION BY STTN_ID ORDER BY CD_NO) R1
+                        FROM 결과지표_정류장별통행_일별
+                        WHERE 1=1
+                            AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
+                            AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
+                            <if test="!cd_no[0].equals('00')">
+                                AND CD_NO IN
+                                <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+                                    #{arr}
+                                </foreach>
+                            </if>
+                            AND TFCMN ='T'
+                        ORDER BY STTN_TRAIN_SUM DESC, CD_NO ASC
+                    )
+                WHERE 1=1
+                    AND R1 = 1
+                    AND ROWNUM <![CDATA[ < ]]> 101
+            ) KT
+            WHERE 1=1
+                AND A.STTN_ID = KT.STTN_ID
+            GROUP BY 
+                OPRAT_DATE
+                ,DY
+                ,TFCMN
+                ,R
+                ,A.STTN_ID
+                ,STTN_NMA
+                ,STTN_HJD 
+                ,STTN_SUM
+                ,ROLLUP(CD_NO)
+        ORDER BY R, CD_NO
 	</select>
 	
 </mapper>

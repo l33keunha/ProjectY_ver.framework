@@ -12,6 +12,7 @@ public class SearchVO {
 	private String anal_area_cd;
 	private String anal_area_cd_text;
 	private String provider;
+	private String provider_text;
 	private String anal_group;
 	private String anal_type;
 	private String tm;
@@ -25,8 +26,8 @@ public class SearchVO {
 
 	public SearchVO(String anal_fin, String dateStart, String dateEnd, String anal_area_cd_sido,
 			String anal_area_cd_sido_text, String anal_area_cd, String anal_area_cd_text, String provider,
-			String anal_group, String anal_type, String tm, int tmStart, int tmEnd, String[] cd_no, String tfcmn,
-			String routeId) {
+			String provider_text, String anal_group, String anal_type, String tm, int tmStart, int tmEnd,
+			String[] cd_no, String tfcmn, String routeId) {
 		super();
 		this.anal_fin = anal_fin;
 		this.dateStart = dateStart;
@@ -36,6 +37,7 @@ public class SearchVO {
 		this.anal_area_cd = anal_area_cd;
 		this.anal_area_cd_text = anal_area_cd_text;
 		this.provider = provider;
+		this.provider_text = provider_text;
 		this.anal_group = anal_group;
 		this.anal_type = anal_type;
 		this.tm = tm;
@@ -110,6 +112,14 @@ public class SearchVO {
 		this.provider = provider;
 	}
 
+	public String getProvider_text() {
+		return provider_text;
+	}
+
+	public void setProvider_text(String provider_text) {
+		this.provider_text = provider_text;
+	}
+
 	public String getAnal_group() {
 		return anal_group;
 	}
@@ -179,9 +189,9 @@ public class SearchVO {
 		return "SearchVO [anal_fin=" + anal_fin + ", dateStart=" + dateStart + ", dateEnd=" + dateEnd
 				+ ", anal_area_cd_sido=" + anal_area_cd_sido + ", anal_area_cd_sido_text=" + anal_area_cd_sido_text
 				+ ", anal_area_cd=" + anal_area_cd + ", anal_area_cd_text=" + anal_area_cd_text + ", provider="
-				+ provider + ", anal_group=" + anal_group + ", anal_type=" + anal_type + ", tm=" + tm + ", tmStart="
-				+ tmStart + ", tmEnd=" + tmEnd + ", cd_no=" + Arrays.toString(cd_no) + ", tfcmn=" + tfcmn + ", routeId="
-				+ routeId + "]";
+				+ provider + ", provider_text=" + provider_text + ", anal_group=" + anal_group + ", anal_type="
+				+ anal_type + ", tm=" + tm + ", tmStart=" + tmStart + ", tmEnd=" + tmEnd + ", cd_no="
+				+ Arrays.toString(cd_no) + ", tfcmn=" + tfcmn + ", routeId=" + routeId + "]";
 	}
-	
+
 }
