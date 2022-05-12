@@ -770,14 +770,14 @@
             OPRAT_DATE
             ,DY
             ,TFCMN
-            ,R 순위
+            ,R 
             ,A.STTN_ID
             ,STTN_NMA
             ,STTN_HJD 
             ,NVL(CD_NO,'합계') CD_NO
-            ,SUM(STTN_BUS_GIN_AGG) STTN_BUS_GIN_AGG
-            ,SUM(STTN_BUS_GFF_AGG) STTN_BUS_GFF_AGG
-            ,SUM(STTN_BUS_TRS_AGG) STTN_BUS_TRS_AGG
+            ,SUM(STTN_BUS_GIN_AGG) GIN_AGG
+            ,SUM(STTN_BUS_GFF_AGG) GFF_AGG
+            ,SUM(STTN_BUS_TRS_AGG) TRS_AGG
             ,SUM(GIN_GFF_SUM) GIN_GFF_SUM
             ,STTN_SUM
         FROM            
@@ -857,14 +857,14 @@
             OPRAT_DATE
             ,DY
             ,TFCMN
-            ,R 순위
+            ,R 
             ,A.STTN_ID
             ,STTN_NMA
             ,STTN_HJD 
             ,NVL(CD_NO,'합계') CD_NO
-            ,SUM(STTN_TRAIN_GIN_AGG) STTN_TRAIN_GIN_AGG
-            ,SUM(STTN_TRAIN_GFF_AGG) STTN_TRAIN_GFF_AGG
-            ,SUM(STTN_TRAIN_TRS_AGG) STTN_TRAIN_TRS_AGG
+            ,SUM(STTN_TRAIN_GIN_AGG) GIN_AGG
+            ,SUM(STTN_TRAIN_GFF_AGG) GFF_AGG
+            ,SUM(STTN_TRAIN_TRS_AGG) TRS_AGG
             ,SUM(GIN_GFF_SUM) GIN_GFF_SUM
             ,STTN_SUM
         FROM            

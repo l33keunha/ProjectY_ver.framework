@@ -94,8 +94,8 @@
                 <div class ="cell3_02">
                     <p>자료</p>
                     <div>
-                        <label><input type="radio" name="provider" id="provider00" value="00"> 국토부</label>
-                        <label><input type="radio" name="provider" id="provider99" value="99"> 정산사</label>
+                        <label><input type="radio" name="provider" id="provider00" value="00" text2="국토부"> 국토부</label>
+                        <label><input type="radio" name="provider" id="provider99" value="99" text2="정산사"> 정산사</label>
                     </div>
                 </div>
                 <div class = "cell3_03">
