@@ -245,7 +245,24 @@ input.date {
     margin-left: 10px;
 }
 
-.submit{
+.submit2{
     width: 145px;
     height: 49px;
+    float: left;
+    margin-left: 21%;
+}
+
+.submit{
+    margin-top: 11px;
+    text-align: center;
+    display: block;
+    width: 145px;
+    height: 49px;
+    font-size: 25px;
+    background-color: #5c7d9a;
+    color: white;
+    font-weight: bold;
+    border-radius: 20px;
+    float: left;
+    margin-left: 46%;
 }

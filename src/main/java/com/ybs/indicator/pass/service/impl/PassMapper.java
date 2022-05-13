@@ -64,4 +64,54 @@ public interface PassMapper {
 	// 상위이용정류장 지하철 : 서울 선택만
 	List<EgovMap> selectPassResultListTopStationT(SearchVO sVO);
 
+	
+	/********************** 화면용 다운로드 **********************/
+	
+	// PIVOT 목적통행 일별 
+	List<EgovMap> downloadPassResultListPurpose_d(SearchVO sVO);
+
+	// PIVOT 목적통행 시간대별 
+	List<EgovMap> downloadPassResultListPurpose(SearchVO sVO);
+
+	// PIVOT 수단통행 일별 
+	List<EgovMap> downloadPassResultListMethod_d(SearchVO sVO);
+
+	// PIVOT 수단통행 시간대 
+	List<EgovMap> downloadPassResultListMethod(SearchVO sVO);
+	
+	// PIVOT 노선별통행 일별
+	List<EgovMap> downloadPassResultListRoute_d(SearchVO sVO);
+
+	// PIVOT 노선별통행 시간대
+	List<EgovMap> downloadPassResultListRoute(SearchVO sVO);
+
+	// PIVOT 정류장별통행 일별
+	List<EgovMap> downloadPassResultListStation(SearchVO sVO);
+
+	// PIVOT 행정동간OD 목적통행
+	List<EgovMap> downloadPassResultListAreaODPurpose(SearchVO sVO);
+
+	// PIVOT 행정동간OD 수단통행
+	List<EgovMap> downloadPassResultListAreaODMethod(SearchVO sVO);
+
+	// PIVOT 노선별 정류장간OD 일별
+	List<EgovMap> downloadPassResultListRouteOD_d(SearchVO sVO);
+
+	// PIVOT 노선별 정류장간OD 시간대별 
+	List<EgovMap> downloadPassResultListRouteOD(SearchVO sVO);
+
+	// PIVOT 상위이용노선 
+	List<EgovMap> downloadPassREsultListTopRoute(SearchVO sVO);
+
+	// PIVOT 상위이용정류장 버스 : 서울 선택
+	List<EgovMap> downloadPassResultListTopStationB(SearchVO sVO);
+
+	// PIVOT 상위이용정류장 지하철 : 서울 선택만
+	List<EgovMap> downloadPassResultListTopStationT(SearchVO sVO);
+
+	// PIVOT 상위이용정류장 
+	List<EgovMap> downloadPassResultListTopStation(SearchVO sVO);
+
+
+
 }

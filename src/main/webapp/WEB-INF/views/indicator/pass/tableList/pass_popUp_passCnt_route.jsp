@@ -196,7 +196,7 @@
 		
 		
 						<!-- 지하철 -->
-						<c:if test="${passResultListT.size() > 0} ">
+						<c:if test="${passResultListT.size() > 0 }">
 						<c:set var="indexCnt" value="0" />
 							<c:forEach var='j' begin='0' end='${forCnt2-1}'>
 								<tr>
@@ -372,7 +372,7 @@
 		
 		
 						<!-- 지하철 -->
-						<c:if test="${passResultListT.size() > 0} ">
+						<c:if test="${passResultListT.size() > 0}">
 							<c:forEach var='j' begin='0' end='${forCnt2-1}'>
 								<tr>
 			

@@ -99,7 +99,7 @@
                 <div class ="cell3_02">
                     <p>자료</p>
                     <div>
-                        <label><input type="radio" name="provider" id="provider00" value="00" text2 ="국토부"> 국토부</label>
+                        <label><input type="radio" name="provider" id="provider00" value="00" text2 ="지자체"> 지자체</label>
                         <label><input type="radio" name="provider" id="provider99" value="99" text2 ="정산사"> 정산사</label>
                     </div>
                 </div>
@@ -127,7 +127,8 @@
                 </div>
             </div>
         </div>
-
+        
+		<input class="submit2" type="button" id="nextBtn" value="조회" style="cursor: pointer;" >
         <input class="submit" type="button" id="downloadBtn" value="다운로드" style="cursor: pointer;" >
         
     </body>

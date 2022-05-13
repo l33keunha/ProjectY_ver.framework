@@ -5,11 +5,13 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.egovframe.rte.psl.dataaccess.util.EgovMap;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springmodules.validation.commons.DefaultBeanValidator;
 
@@ -86,5 +88,13 @@ public class PassController {
 				
 		return mv;
 	}
-
+	
+	@RequestMapping(value="/passDownload.do")
+	public void downloadPassResultList(@ModelAttribute SearchVO sVO, HttpServletRequest req, HttpServletResponse res) {
+		ModelAndView mv = new ModelAndView("jsonView");
+		System.out.println(sVO.toString());
+		
+		service.downloadPassResultList(sVO, req, res);
+		
+	}
 }

@@ -18,7 +18,7 @@
 		SELECT 
 			 #{anal_area_cd_sido_text} 분석지역_광역도
 			,#{anal_area_cd_text} 분석지역_시군
-			,#{provider_tex} PROVIDER
+			,#{provider_text} PROVIDER
 			,OPRAT_DATE
 			,CASE WHEN TFCMN  ='B' THEN '버스' ELSE '지하철' END TFCMN
 			,ROUTE_ID 

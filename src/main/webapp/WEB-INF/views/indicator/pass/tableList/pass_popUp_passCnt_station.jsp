@@ -94,7 +94,7 @@
 						
 						
 						<!-- 지하철 -->	
-						<c:if test="${passResultListT.size() > 0} ">
+						<c:if test="${passResultListT.size() > 0}">
 							<c:forEach var='j' begin='0' end='${forCnt2-1}'>
 								<tr>
 									<!-- 날짜 하루 조회므로 첫 시작때만 표출 -->
@@ -203,7 +203,7 @@
 						
 						
 						<!-- 지하철 -->	
-						<c:if test="${passResultListT.size() > 0} ">
+						<c:if test="${passResultListT.size() > 0}">
 							<c:forEach var='j' begin='0' end='${forCnt2-1}'>
 								<tr>
 									

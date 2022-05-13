@@ -22,7 +22,6 @@
 		$("[class=selectbox]").find("input:checked").each(function(index, item){
 			pushArray.push([ $(item)[0].name, $(item)[0].value ] )
 		})
-		window.open("" ,"newForm", "toolbar=no, width=1800, height=1000, directories=no, status=no, scrollorbars=no, resizable=no"); 
 		
 		//set attribute (form) 
 		var newForm = $('<form></form>'); 
@@ -31,8 +30,10 @@
 		
 		console.log($(this).attr('id'));
 		if($(this).attr('id') == 'passBtn'){
+			window.open("" ,"newForm", "toolbar=no, width=1800, height=1000, directories=no, status=no, scrollorbars=no, resizable=no");
 			newForm.attr("action","passTest.do"); 
 		} else if ($(this).attr('id') == 'downloadBtn'){
+			newForm.attr("target", "_parent");
 			pushArray.splice(4,2);
 			newForm.attr("action","downloadTest.do");
 		} else if($(this).attr('id') == 'transferBtn'){
@@ -41,7 +42,7 @@
 			newForm.attr("action","congestionTest.do");
 		} else if($(this).attr('id') == 'timeDistnBtn'){
 			newForm.attr("action","timeDistnTest.do");
-		}
+		} 
 		
 		newForm.attr("target","newForm"); 
 		// create element & set attribute (input) 
@@ -240,6 +241,8 @@
 			}
 		})
 	})
+	
+	
 	
 	
 	
