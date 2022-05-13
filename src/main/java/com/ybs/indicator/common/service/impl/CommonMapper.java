@@ -24,4 +24,7 @@ public interface CommonMapper {
 	// Ajax: 분석 노선번호 조회 
 	List<EgovMap> selectPassRouteIdList(SearchVO sVO);
 
+	// Ajax: 이용자유형 리스트 조회
+	List<EgovMap> selectCdNoList(SearchVO sVO);
+
 }

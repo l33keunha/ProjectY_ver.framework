@@ -245,14 +245,14 @@ input.date {
     margin-left: 10px;
 }
 
-.submit2{
+.submit{
     width: 145px;
     height: 49px;
     float: left;
-    margin-left: 21%;
+    margin-left: 46%;
 }
 
-.submit{
+.submit2{
     margin-top: 11px;
     text-align: center;
     display: block;
@@ -264,5 +264,5 @@ input.date {
     font-weight: bold;
     border-radius: 20px;
     float: left;
-    margin-left: 46%;
+    margin-left: 21%;
 }

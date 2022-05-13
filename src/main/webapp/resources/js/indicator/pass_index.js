@@ -25,11 +25,10 @@
 	
 	// 분석지표 및 유형에 따른 선택박스 활성화
 	function selectBoxOpen(jsonArray){
-		console.log(jsonArray);
 		// 통행분석 선택박스 case 1
 		if(jsonArray['anal_type'] == 'passCnt_purpose'
 	     || jsonArray['anal_type'] == 'passCnt_method'){
-			abledDateStart_End();
+			abledDateStart_End(); 
 			disabledFalse(4);
 			validationCd_no();
 		}
@@ -90,6 +89,11 @@
 			
 			// 노선별OD는 2시간씩만 선택가능하게끔
 			/*$("select[name=tmEnd] option:eq(2)").prop("selected", true);*/
+			var addHtml = "<div style='width:250px; background:rgb(253 240 240); height:34px; margin:10px 0px 0px 8px; text-align:center; border-radius:5px;'>";
+			addHtml += "<span style='color:red; font-size:20px; font-weight: bolder;'> ! </span>";
+			addHtml += "<span> 노선별OD는 2시간씩 조회가 가능합니다. </span>";
+			addHtml += "</div>";
+			$('.timeNotice').append(addHtml);
 			
 			$("select[name=tmStart]").change(function(){
 				var index = $("select[name=tmStart] option").index($("select[name=tmStart] option:selected")) + 2;

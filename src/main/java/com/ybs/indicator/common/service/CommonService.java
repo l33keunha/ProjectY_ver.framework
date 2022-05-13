@@ -9,4 +9,6 @@ public interface CommonService {
 	List<EgovMap> selectPassSearchList(SearchVO sVO);
 	
 	List<EgovMap> selectPassRouteIdList(SearchVO sVO);
+
+	List<EgovMap> selectCdNoList(SearchVO sVO);
 }

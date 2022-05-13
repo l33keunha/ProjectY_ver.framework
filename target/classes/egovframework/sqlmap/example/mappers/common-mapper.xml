@@ -64,4 +64,14 @@
 		ORDER BY ROUTE_NMA
 	</select>
 	
+	<!-- Ajax: 이용자유형 리스트 조회 -->
+	<select id="selectCdNoList" parameterType="sVO" resultType="egovMap">
+		SELECT DISTINCT 코드번호 cdNo, 이용자유형분류 cdNoNm
+		FROM CMM_USERTYPE 
+		WHERE 1=1
+			AND OWNER =#{provider}
+			AND 코드번호 IS NOT NULL
+		ORDER BY 코드번호
+	</select>
+	
 </mapper>

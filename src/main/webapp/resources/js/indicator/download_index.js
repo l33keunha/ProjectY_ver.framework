@@ -43,11 +43,20 @@
 		})
 	})
 	
+	// 날짜 오픈 및 조회버튼 활성화
 	function selectBoxOpen(jsonArray){
 		abledDateStart();
+		
+		$('.submit2').prop("disabled",false);
+		$('.submit2').css("opacity", 1);
+		$('.submit2').css("cursor", "pointer");
+	}
+	
+	// 제공 자료 오픈 후 다운로드 가능
+	$('.submit2').on('click',function(){
 		disabledFalse(4);
 		
 		$('.submit').prop("disabled",false);
 		$('.submit').css("opacity", 1);
 		$('.submit').css("cursor", "pointer");
-	}
+	})

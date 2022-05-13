@@ -29,6 +29,59 @@
 		<fmt:parseNumber var = "totalSumAdd" value = "${totalSumAdd}"  />							
 	 	
  	
+ 		<!-- 보여줄 row 개수 -->
+ 		<c:set var = "rowShow" value ="500" />													
+ 
+		<script>
+			
+			var cnt = 1;
+			var check = false;
+			
+			function moreList(){
+				 $(".show_"+cnt).show();
+				 cnt++;
+			}
+			
+		    function showPage() {
+	         	document.getElementById("lds-spinner").style.display = "none";
+	        }
+		 
+		    
+		    $(".content_wrap").scroll(function() {
+		      
+		    	if(check== true){
+		    		return;
+		    	}
+		    	
+		        var scrolltop = $(".content_wrap").scrollTop();
+		        var height = $(".table-left").height();
+		        var height_win = $(".content_wrap").height();
+		        var calculation = height - height_win;
+		    
+		     	//퍼센트 구하기 
+		     	var percent = (scrolltop / calculation) *100
+		     	
+		     	
+		     	//if (Math.round(scrolltop/100) ==  Math.round(calculation/100)) {
+		       	//	moreList();
+		    	//} 
+		    	
+		     	//99% 이상 일때 스크롤 출력
+		    	 if(percent >= 99 && check== false){
+		    		check = true;
+		    		//	document.getElementById("lds-spinner").style.display = "";
+		    		//	setTimeout("showPage()", 10);
+		    	 }
+		    	
+		    	//90% 이상 일때 스크롤 출력
+		    	 if(check){
+		    	 	moreList();
+		    	 	check = false;
+		    	 }
+		    })
+			
+		</script>
+ 	
  	
 		<!-- ● 수단통행 -->
 		<div class="table-left">
@@ -59,7 +112,17 @@
 						<!-- 데이터 뿌려주는 부분 -->
 						<c:forEach var='j' begin='0' end='${forCnt-1}'>
 								
-							<tr>
+							<!-- 스크롤 시, 데이터 보여주는 부분 로직-->
+							<c:if test="${j == 0}">
+								<c:set var="showScroll" value="0" />	
+								<c:set var="scroll_display_none" value="" />
+							</c:if>
+			           		<c:if test="${(j%rowShow == 0) && (j > 0)}">
+			           			<c:set var="scroll_display_none" value="display: none;"/>
+								<c:set var="showScroll" value="${showScroll+1}" />	
+							</c:if>
+				    
+							<tr style="${scroll_display_none}" class= "show_${showScroll}">
 								
 								<!-- 시간대 : 1일 -->
 								<c:if test="${sVO.tm == 'allDay'}">
@@ -143,7 +206,18 @@
 						<!-- 데이터 뿌려주는 부분 -->
 						<c:forEach var='j' begin='0' end='${forCnt-1}'>
 						
-							<tr>
+							<!-- 스크롤 시, 데이터 보여주는 부분 로직-->
+							<c:if test="${j == 0}">
+								<c:set var="showScroll" value="0" />	
+								<c:set var="scroll_display_none" value="" />
+							</c:if>
+			           		<c:if test="${(j%rowShow == 0) && (j > 0)}">
+			           			<c:set var="scroll_display_none" value="display: none;"/>
+								<c:set var="showScroll" value="${showScroll+1}" />	
+							</c:if>
+				    
+							<tr style="${scroll_display_none}" class= "show_${showScroll}">
+							
 								<!-- 컬럼 갯수대로 실행 -->
 								<c:set var = "st" value = '${j*columnCnt}'/>	<!-- 시작 index -->
 								<c:set var = "ed" value = '${st+columnCnt}'/>	<!-- 끝 index -->

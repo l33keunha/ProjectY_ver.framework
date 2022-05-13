@@ -1,4 +1,4 @@
-	// [ 1 ] 페이지 로드 시 비활성화로 시작
+// [ 1 ] 페이지 로드 시 비활성화로 시작
 	window.onload = function(){
 		disabledTrue(2)
 	}
@@ -151,6 +151,8 @@
 		jsonArray["anal_area_cd"] = $("select[name=anal_area_cd]").val();
 		jsonArray["dateStart"] = "null";
 		
+		$('.cell3_03').empty();
+		$('.cell3_03').append("<p>날짜</p>");
 		selectProvider()
 		
 		$.ajax({
@@ -158,6 +160,7 @@
 				type: 'post',
 				traditional: true,
 				data: jsonArray,
+				async: false,
 				dataType: "json",
 				success: function (data){
 					selectBoxOpen(jsonArray)
@@ -236,10 +239,32 @@
 						    var noWeekend = jQuery.datepicker.noWeekends(date);
 						    return noWeekend[0] ? [true] : noWeekend;
 						}
-					$('.date').datepicker("setDate",abledDays[0]);					
+					$('.date').datepicker("setDate",'2021-03-22');					
 				})
 			}
 		})
+		
+		$.ajax({
+				url: 'searchCdNo.do',
+				type: 'post',
+				traditional: true,
+				data: jsonArray,
+				dataType: "json",
+				success: function (data){
+					var addHtml = "";
+					$('.cell5_01').empty();
+					
+					addHtml += "<div>";
+					addHtml += "<label><input type='checkbox' name='cd_no' value='00' onclick='selectAllCd(this)'> 전체</label>";
+					for(var i in data.cdNoList){
+						addHtml += "<label><input type='checkbox' name='cd_no' value='" + data.cdNoList[i].cdno + "'>" + " " + data.cdNoList[i].cdnonm + "</label>";
+					}
+					addHtml += "</div>";
+					
+					$('.cell5_01').append(addHtml);
+				}
+			})
+			
 	})
 	
 	
@@ -265,9 +290,24 @@
 			$(".cell" + [i]).find('select option:selected').prop("selected", false);
 		}
 		
-		$('.cell3_03').find('label').remove();
+		// 날짜 초기화
+		$('.cell3_03').empty();
+		$('.cell3_03').append("<p>날짜</p>");
+		
+		// 노선번호 초기화
 		$(".search-con").children().remove();
 		
+		// 시간대 초기화
+		$(".timeNotice").empty();
+		$("select[name=tmEnd]").off();
+		$("select[name=tmStart]").off();
+		
+		// 다운로드 카테고리 조회 버튼
+		$('.submit2').prop("disabled",true);
+		$('.submit2').css("opacity", 0.3);
+		$('.submit2').css("cursor", "auto");
+		
+		// 전 카테고리 조회 & 다운로드 카테고리 다운로드 버튼
 		$('.submit').prop("disabled",true);
 		$('.submit').css("opacity", 0.3);
 		$('.submit').css("cursor", "auto");
@@ -331,7 +371,7 @@
 	/* 공통 */
 	// 시작~종료일 나타내기
 	function abledDateStart_End(){
-		$('.cell3_03').empty();
+		$('.cell3_03').find('label').empty();
 		var addHtml = '';
 		addHtml += "<label>시작<input class='date' id='dateStart' name='dateStart'></label>";
 		addHtml += "<label>종료<input class='date' id='dateEnd' name='dateEnd'></label>";
@@ -339,7 +379,7 @@
 	}
 	// 날짜만 나타내기
 	function abledDateStart(){
-		$('.cell3_03').empty();
+		$('.cell3_03').find('label').empty();
 		var addHtml = '';
 		addHtml += "<label>날짜<input class='date' id='dateStart' name='dateStart'></label>";
 		$('.cell3_03').append(addHtml);

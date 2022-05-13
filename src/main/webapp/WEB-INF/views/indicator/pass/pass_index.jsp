@@ -103,8 +103,6 @@
 
                 <div class = "cell3_03"> 
                    <p>날짜</p>
-                    <!-- <label>날짜<input class="date" id="dateStart" name="dateStart"></label> -->
-                    <!-- <label>종료<input class="date" id="dateEnd" name="dateEnd"></label> -->
                 </div>
             </div>
             <div class ="hcell1">
@@ -164,6 +162,7 @@
                             <option value="22" >22</option>
                             <option value="23" >23</option>
                         </select>
+                        <div class="timeNotice"></div>
                     </div>
                 </div>
 

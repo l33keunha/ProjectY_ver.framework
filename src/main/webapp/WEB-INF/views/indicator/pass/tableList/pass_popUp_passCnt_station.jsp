@@ -14,21 +14,62 @@
 		
 		<!-- 버스 -->
 		<c:set var = "forCnt" value = '${passResultListB.size()/columnCnt}'/>						<!-- 컬럼갯수(이용자 유형)에 따른 총 반복횟수 -->
-		<c:set var = "totalTotalIndexCnt" value = "0"/>												<!-- 합계의 합계 index count -->
-		<c:set var = "totalTotalInSum" value = "0"/>												<!-- 승차소계 합계변수 -->	
-		<c:set var = "totalTotalOutSum" value = "0"/>												<!-- 하차소계 합계변수 -->	
-		<c:set var = "totalTotalHsSum" value = "0"/>												<!-- 환승소계의 합계변수 -->	
 
- 	
 		<!-- 지하철 -->
 		<c:set var = "forCnt2" value = '${passResultListT.size()/columnCnt}'/>						<!-- 컬럼갯수(이용자 유형)에 따른 총 반복횟수 -->
-		<c:set var = "totalTotalIndexCnt2" value = "0"/>											<!-- 합계의 합계 index count -->
-		<c:set var = "totalTotalInSum2" value = "0"/>												<!-- 승차소계 합계변수 -->	
-		<c:set var = "totalTotalOutSum2" value = "0"/>												<!-- 하차소계 합계변수 -->	
-		<c:set var = "totalTotalHsSum2" value = "0"/>												<!-- 환승소계의 합계변수 -->	
-
- 	
- 	
+	
+		<!-- 보여줄 row 개수 -->
+ 		<c:set var = "rowShow" value ="500" />													
+ 
+		<script>
+			
+			var cnt = 1;
+			var check = false;
+			
+			function moreList(){
+				 $(".show_"+cnt).show();
+				 cnt++;
+			}
+			
+		    function showPage() {
+	         	document.getElementById("lds-spinner").style.display = "none";
+	        }
+		 
+		    
+		    $(".content_wrap").scroll(function() {
+		      
+		    	if(check== true){
+		    		return;
+		    	}
+		    	
+		        var scrolltop = $(".content_wrap").scrollTop();
+		        var height = $(".table-left").height();
+		        var height_win = $(".content_wrap").height();
+		        var calculation = height - height_win;
+		    
+		     	//퍼센트 구하기 
+		     	var percent = (scrolltop / calculation) *100
+		     	
+		     	
+		     	//if (Math.round(scrolltop/100) ==  Math.round(calculation/100)) {
+		       	//	moreList();
+		    	//} 
+		    	
+		     	//80% 이상 일때 스크롤 출력
+		    	 if(percent >= 80 && check== false){
+		    		check = true;
+		    		//	document.getElementById("lds-spinner").style.display = "";
+		    		//	setTimeout("showPage()", 10);
+		    	 }
+		    	
+		    	//90% 이상 일때 스크롤 출력
+		    	 if(check){
+		    	 	moreList();
+		    	 	check = false;
+		    	 }
+		    })
+			
+		</script>
  	
 		<!-- ● 정류장별통행 -->
 		<div class="table-left">
@@ -63,7 +104,17 @@
 						<!-- 버스 -->
 						<c:forEach var='j' begin='0' end='${forCnt-1}'>
 							
-							<tr>	
+							<!-- 스크롤 시, 데이터 보여주는 부분 로직-->
+							<c:if test="${j == 0}">
+								<c:set var="showScroll" value="0" />	
+								<c:set var="scroll_display_none" value="" />
+							</c:if>
+			           		<c:if test="${(j%rowShow == 0) && (j > 0)}">
+			           			<c:set var="scroll_display_none" value="display: none;"/>
+								<c:set var="showScroll" value="${showScroll+1}" />	
+							</c:if>
+				    
+							<tr style="${scroll_display_none}" class= "show_${showScroll}">	
 								<!-- 날짜 하루 조회므로 첫 시작때만 표출 -->
 								<c:if test="${j == 0}">
 									
@@ -96,7 +147,13 @@
 						<!-- 지하철 -->	
 						<c:if test="${passResultListT.size() > 0}">
 							<c:forEach var='j' begin='0' end='${forCnt2-1}'>
-								<tr>
+									
+								<!-- 스크롤 시, 데이터 보여주는 부분 로직-->
+			           			<c:if test="${(j%rowShow == 0)}">
+									<c:set var="showScroll" value="${showScroll+1}" />	
+								</c:if>
+								
+								<tr style="display: none;" class="show_${showScroll}">
 									<!-- 날짜 하루 조회므로 첫 시작때만 표출 -->
 									<c:if test="${j == 0}">
 										<!-- 시간 * 날짜수  -->	   	
@@ -167,16 +224,21 @@
 						<!-- 데이터 뿌려주는 부분 -->
 						<!-- 버스 -->
 						<c:forEach var='j' begin='0' end='${forCnt-1}'>
-							<tr>
 							
+							<!-- 스크롤 시, 데이터 보여주는 부분 로직-->
+							<c:if test="${j == 0}">
+								<c:set var="showScroll" value="0" />	
+								<c:set var="scroll_display_none" value="" />
+							</c:if>
+			           		<c:if test="${(j%rowShow == 0) && (j > 0)}">
+			           			<c:set var = "scroll_display_none" value="display: none;"/>
+								<c:set var="showScroll" value="${showScroll+1}" />	
+							</c:if>
+				    
+							<tr style="${scroll_display_none}" class= "show_${showScroll}">	
 								<!-- 이용자 유형 갯수에 맞춰 실행 -->
 								<c:set var = "st" value = '${j*columnCnt}'/>	<!-- 시작 index -->
 								<c:set var = "ed" value = '${st+columnCnt}'/>	<!-- 끝 index -->
-								
-								<c:set var = "totalInSum" value = "0"/>			<!-- 승차합 변수 -->	
-								<c:set var = "totalOutSum" value = "0"/>		<!-- 하차합 변수 -->	
-								<c:set var = "totalHsSum" value = "0"/>			<!-- 환승합 변수 -->	
-						
 								
 								<!-- 이용자 유형에 따라 유동적으로 적용 -->
 								<c:forEach var='i' begin='${st}' end='${ed-1}' >
@@ -205,16 +267,18 @@
 						<!-- 지하철 -->	
 						<c:if test="${passResultListT.size() > 0}">
 							<c:forEach var='j' begin='0' end='${forCnt2-1}'>
-								<tr>
+							
+								<!-- 스크롤 시, 데이터 보여주는 부분 로직-->
+			           			<c:if test="${(j%rowShow == 0)}">
+									<c:set var="showScroll" value="${showScroll+1}" />	
+								</c:if>
+								
+								<tr style="display: none;" class="show_${showScroll}">
 									
 									<!-- 이용자 유형 갯수에 맞춰 실행 -->
 									<c:set var = "st" value = '${j*columnCnt}'/>	<!-- 시작 index -->
 									<c:set var = "ed" value = '${st+columnCnt}'/>	<!-- 끝 index -->
 									
-									<c:set var = "totalInSum" value = "0"/>			<!-- 승차합 변수 -->	
-									<c:set var = "totalOutSum" value = "0"/>		<!-- 하차합 변수 -->	
-									<c:set var = "totalHsSum" value = "0"/>			<!-- 환승합 변수 -->	
-												
 									<!-- 이용자 유형에 따라 유동적으로 적용 -->
 									<c:forEach var='i' begin='${st}' end='${ed-1}' >
 										<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;"><fmt:formatNumber type="number" value="${passResultListT[i].sttnTrainGinAgg}"/></td>	<!-- 승차 -->

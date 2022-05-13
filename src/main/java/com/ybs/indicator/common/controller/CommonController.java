@@ -63,7 +63,7 @@ public class CommonController {
 		return mv;
 	}
 	
-	// cell1. Ajax (날짜, 분석자료, 지역)
+	
 	@ResponseBody
 	@RequestMapping(value="/searchAnal.do")
 	public ModelAndView selectPassSearchList(@ModelAttribute SearchVO sVO) {
@@ -71,7 +71,6 @@ public class CommonController {
 		List<EgovMap> passSearchList = new ArrayList<EgovMap>();
 		
 		System.out.println(sVO.toString());
-		
 		
 		passSearchList = service.selectPassSearchList(sVO);
 		
@@ -99,6 +98,25 @@ public class CommonController {
 		}
 		
 		mv.addObject("passRouteIdList", passRouteIdList);
+		
+		return mv;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/searchCdNo.do")
+	public ModelAndView selectCdNoList(@ModelAttribute SearchVO sVO) {
+		ModelAndView mv = new ModelAndView("jsonView");
+		sVO.setDateStart(sVO.getDateStart().replaceAll("-", ""));
+		System.out.println("이용자유형 Ajax:" + sVO.toString());
+		List<EgovMap> cdNoList = new ArrayList<EgovMap>();
+		
+		cdNoList = service.selectCdNoList(sVO);
+		
+		for(int i = 0; i < 2; i++) {
+			System.out.println(cdNoList.get(i).toString());
+		}
+		
+		mv.addObject("cdNoList", cdNoList);
 		
 		return mv;
 	}

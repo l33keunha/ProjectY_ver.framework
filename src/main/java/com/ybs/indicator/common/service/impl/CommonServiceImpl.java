@@ -48,4 +48,9 @@ public class CommonServiceImpl extends EgovAbstractServiceImpl implements Common
 		System.out.println(sVO.toString());
 		return mapper.selectPassRouteIdList(sVO);
 	}
+
+	@Override
+	public List<EgovMap> selectCdNoList(SearchVO sVO) {
+		return mapper.selectCdNoList(sVO);
+	}
 }
