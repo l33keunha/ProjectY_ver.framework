@@ -1,4 +1,4 @@
-	// [1] 분석지표 change
+	// ※ [1] 분석지표 change
 	$('.cell1').change(function(){
 		disabledTrue(2)
 		
@@ -24,17 +24,16 @@
 		
 	})
 	
-	// [2] 분석유형 change
+	// ※ [2] 분석유형 change
 	$('.cell2').change(function(){
 		disabledTrue(3)
 		searchAnal()
 	})
 	
-	// 분석지표 및 유형에 따른 선택박스 활성화
+	// ※ 매개변수에 따른 박스오픈
 	function selectBoxOpen(jsonArray){
 		// 환승분석 선택박스 case 1
 		if(jsonArray['anal_type'] == 'transferCnt_method'
-	     || jsonArray['anal_type'] == 'transferCnt_route'
 		 || jsonArray['anal_type'] == 'transferCnt_num'
 	     || jsonArray['anal_type'] == 'transferTime_method'
          || jsonArray['anal_type'] == 'transferTime_num'
@@ -46,10 +45,16 @@
 		}
 		
 		// 환승분석 선택박스 case 2
-		if(jsonArray['anal_type'] == 'transferCnt_station'){
+		if(jsonArray['anal_type'] == 'transferCnt_station'
+		|| jsonArray['anal_type'] == 'transferCnt_route'){
 			abledDateStart();
 			disabledFalse(5);
 			validationCd_no();
 		}
+	}
+	
+	// ※ 매개변수에 따른 유효성검사
+	function validation(jsonArray){
+		validationCd_no()
 	}
 	

@@ -54,5 +54,53 @@ public interface TransferMapper {
 	
 	// 환승 횟수별 환승통행거리 일별
 	List<EgovMap> selectTransferResultListDistnNum_d(SearchVO sVO);
+	
+	
+	/********************** 화면용 다운로드 **********************/
+
+	// PIVOT 환승 수단별통행
+	List<EgovMap> downloadTransferResultListMethod(SearchVO sVO);
+
+	// PIVOT 환승 수단별통행 일별
+	List<EgovMap> downloadTransferResultListMethod_d(SearchVO sVO);
+
+	// PIVOT 환승 정류장별통행
+	List<EgovMap> downloadTransferResultListStation(SearchVO sVO);
+
+	// PIVOT 환승 노선별통행
+	List<EgovMap> downloadTransferResultListRoute(SearchVO sVO);
+
+	// PIVOT 환승 노선별통행 일별
+	List<EgovMap> downloadTransferResultListRoute_d(SearchVO sVO);
+
+	// PIVOT 환승 횟수별통행
+	List<EgovMap> downloadTransferResultListNum(SearchVO sVO);
+
+	// PIVOT 환승 횟수별통행 일별
+	List<EgovMap> downloadTransferResultListNum_d(SearchVO sVO);
+
+	// PIVOT 환승 수단별 환승통행시간 
+	List<EgovMap> downloadTransferResultListTimeMethod(SearchVO sVO);
+
+	// PIVOT 환승 수단별 환승통행시간 일별
+	List<EgovMap> downloadTransferResultListTimeMethod_d(SearchVO sVO);
+
+	// PIVOT 환승 횟수별 환승통행시간
+	List<EgovMap> downloadTransferResultListTimeNum(SearchVO sVO);
+
+	// PIVOT 환승 횟수별 환승통행시간 일별
+	List<EgovMap> downloadTransferResultListTimeNum_d(SearchVO sVO);
+
+	// PIVOT 환승 수단별 환승통행거리
+	List<EgovMap> downloadTransferResultListDistnMethod(SearchVO sVO);
+
+	// PIVOT 환승 수단별 환승통행거리 일별
+	List<EgovMap> downloadTransferResultListDistnMethod_d(SearchVO sVO);
+
+	// PIVOT 환승 횟수별 환승통행거리
+	List<EgovMap> downloadTransferResultListDistnNum(SearchVO sVO);
+
+	// PIVOT 환승 횟수별 환승통행거리 일별
+	List<EgovMap> downloadTransferResultListDistnNum_d(SearchVO sVO);
 
 }

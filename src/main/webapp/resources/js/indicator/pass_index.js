@@ -1,4 +1,4 @@
-	// [1] 분석지표 change
+	// ※ [1] 분석지표 change
 	$('.cell1').change(function(){
 		disabledTrue(2)
 		
@@ -17,20 +17,19 @@
 		} 
 	})
 	
-	// [2] 분석유형 change
+	// ※ [2] 분석유형 change
 	$('.cell2').change(function(){
 		disabledTrue(3)
 		searchAnal()
 	})
 	
-	// 분석지표 및 유형에 따른 선택박스 활성화
+	// ※ [3] 매개변수에 따른 박스오픈
 	function selectBoxOpen(jsonArray){
 		// 통행분석 선택박스 case 1
 		if(jsonArray['anal_type'] == 'passCnt_purpose'
 	     || jsonArray['anal_type'] == 'passCnt_method'){
 			abledDateStart_End(); 
 			disabledFalse(4);
-			validationCd_no();
 		}
 		
 		// 통행분석 선택박스 case 2
@@ -45,9 +44,6 @@
 			if(jsonArray['anal_type'] != 'passCnt_route'){
 				disabledTime()
 			}
-			
-			validationCd_no();
-			
 		}
 		
 		// 통행분석 선택박스 case 3
@@ -58,34 +54,12 @@
 			// 국토부-정산사 재선택시 전에 선택했던 노선박스 비우고 체크박스 해제 + 조회버튼 유효성검사
 			$('.search-con').text("");
 			$('input:radio[name="routeId"]').prop("checked", false);
-			overlapCode();
+			/*overlapCode();*/
 			
 			$('.cell6').css("opacity", 1);
 			$('.cell6_01').css("opacity", 0.3);
 			$("input[name=searchpassRoute]").prop("disabled", false);
 			$("label[for='modalBtn']").css("cursor","pointer");
-			
-			// 유효성검사 3. 노선번호 선택해야 조회가능
-			$('input:checkbox[name="cd_no"]').change(function(){
-				overlapCode();
-			})
-			$('#routeBtn').click(function(){
-				overlapCode();
-			})
-			
-			// 중복코드_1
-			function overlapCode(){
-				if($('input:checkbox[name="cd_no"]').is(":checked") ==  true
-				  && $('input:radio[name="routeId"]').is(":checked") ==  true){
-					$('.submit').prop("disabled",false);
-					$('.submit').css("opacity", 1);
-					$('.submit').css("cursor", "pointer");
-				} else{
-					$('.submit').prop("disabled",true);
-					$('.submit').css("opacity", 0.3);
-					$('.submit').css("cursor", "auto");
-				}
-			}
 			
 			// 노선별OD는 2시간씩만 선택가능하게끔
 			/*$("select[name=tmEnd] option:eq(2)").prop("selected", true);*/
@@ -118,9 +92,43 @@
 				$('.cell6_01').css("opacity", 1);
 				$('.cell6_02').css("opacity", 0.3);
 				$("input[name=tfcmn]").prop("disabled", false);
-				
-				// 유효성검사 2. 서울일 경우, 교통수단도 선택해야 조회가능
-				$('input:checkbox[name="cd_no"]').change(function(){
+			} 
+		}
+	}
+	
+	
+	// ※ [4] 매개변수에 따른 유효성검사
+	function validation(jsonArray){
+		// 1. 노선별OD 선택 시
+		if(jsonArray['anal_group'] == 'passRouteODCnt'){
+			$(document).on("change", "input:checkbox[name='cd_no']",function(){
+				if($('input:checkbox[name="cd_no"]').is(":checked") ==  true
+				  && $('input:radio[name="routeId"]').is(":checked") ==  true){
+					$('.submit').prop("disabled",false);
+					$('.submit').css("opacity", 1);
+					$('.submit').css("cursor", "pointer");
+				} else{
+					$('.submit').prop("disabled",true);
+					$('.submit').css("opacity", 0.3);
+					$('.submit').css("cursor", "auto");
+				}
+			})
+			
+			$('#routeBtn').click(function(){
+				if($('input:checkbox[name="cd_no"]').is(":checked") ==  true
+				  && $('input:radio[name="routeId"]').is(":checked") ==  true){
+					$('.submit').prop("disabled",false);
+					$('.submit').css("opacity", 1);
+					$('.submit').css("cursor", "pointer");
+				} else{
+					$('.submit').prop("disabled",true);
+					$('.submit').css("opacity", 0.3);
+					$('.submit').css("cursor", "auto");
+				}
+			})
+		} else if(jsonArray['anal_group'] == 'passTopStation'){
+			if(jsonArray['anal_area_cd'] == 11){
+				$(document).on("change", "input:checkbox[name='cd_no']",function(){
 					if($('input:checkbox[name="cd_no"]').is(":checked") ==  true
 					  && $('input:radio[name="tfcmn"]').is(":checked") ==  true){
 						$('.submit').prop("disabled",false);
@@ -130,8 +138,9 @@
 						$('.submit').prop("disabled",true);
 						$('.submit').css("opacity", 0.3);
 						$('.submit').css("cursor", "auto");
-					}
+					}	
 				})
+				
 				$('input:radio[name="tfcmn"]').change(function(){
 					if($('input:checkbox[name="cd_no"]').is(":checked") ==  true
 					  && $('input:radio[name="tfcmn"]').is(":checked") ==  true){
@@ -144,13 +153,17 @@
 						$('.submit').css("cursor", "auto");
 					}
 				})
-			} else {
-				validationCd_no();
+			} else{
+				validationCd_no()
 			}
-			
+		} else{
+			validationCd_no()
 		}
-			
+		
 	}
+	
+	
+	
 	
 	/* 노선번호 검색 선택 */
 	// 노선번호 검색 버튼 누르면 조건에 맞는 노선번호 리스트 가져옴

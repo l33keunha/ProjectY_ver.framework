@@ -21,6 +21,6 @@ public interface PassService {
 
 	/********************** 화면용 다운로드  **********************/
 	
-	void downloadPassResultList(SearchVO sVO, HttpServletRequest req, HttpServletResponse res);
+	void downloadPassResultList(SearchVO sVO, HttpServletResponse res);
 
 }

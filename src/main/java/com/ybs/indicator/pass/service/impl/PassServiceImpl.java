@@ -135,7 +135,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 	
 	
 	@Override
-	public void downloadPassResultList(SearchVO sVO, HttpServletRequest req, HttpServletResponse res) {
+	public void downloadPassResultList(SearchVO sVO, HttpServletResponse res) {
 		List<EgovMap> passResultList = new ArrayList<EgovMap>();
 		
 		String headerListSt = "";

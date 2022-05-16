@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.egovframe.rte.psl.dataaccess.util.EgovMap;
 import org.springframework.stereotype.Controller;
@@ -46,6 +47,12 @@ public class TransferController {
 		mv.setViewName("indicator/transfer/transfer_popUp");
 		
 		return mv;
+	}
+	
+	@RequestMapping(value="/transferDownload.do")
+	public void donwloadTransferResultList(@ModelAttribute SearchVO sVO, HttpServletRequest req, HttpServletResponse res) {
+		System.out.println(sVO.toString());
+		service.downloadTransferResultList(sVO, res);
 	}
 
 }

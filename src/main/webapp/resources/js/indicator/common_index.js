@@ -163,7 +163,6 @@
 				async: false,
 				dataType: "json",
 				success: function (data){
-					selectBoxOpen(jsonArray)
 					$(function(){
 						$(".date").datepicker({
 						   dateFormat: 'yy-mm-dd',
@@ -265,12 +264,11 @@
 				}
 			})
 			
+			
+		selectBoxOpen(jsonArray) // 매개변수에 따른 박스오픈
+		validation(jsonArray)    // 매개변수에 따른 유효성검사
+		
 	})
-	
-	
-	
-	
-	
 	
 	
 	
@@ -350,6 +348,8 @@
 		$(".cell3_03").css("opacity", 1); 
 		$("input[name=dateStart]").prop("disabled", false); 
 		$("input[name=dateEnd]").prop("disabled", false); 
+		// 노선별OD공지 지우기
+		$('.timeNotice').empty();
 	}
 	
 	/* 날짜 비활성화 및 이후 초기화 */
@@ -433,7 +433,7 @@
 	// [5] 유효성 검사
 	function validationCd_no(){
 		// 유효성검사 1 . 이용자유형만 선택하면 조회가능
-		$('input:checkbox[name="cd_no"]').change(function(){
+		$(document).on("change", "input:checkbox[name='cd_no']",function(){
 			if($('input:checkbox[name="cd_no"]').is(":checked") ==  true){
 				$('.submit').prop("disabled",false);
 				$('.submit').css("opacity", 1);

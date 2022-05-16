@@ -6,21 +6,7 @@
 
 
    <!-- ▼ 코드 텍스트 매칭 -->
-        
-    <!-- 분석자료 -->
-    <c:set var = "providerText" value = "${sVO.provider}"/>
-    <c:choose>     
-         <c:when test = "${providerText == '00'}">
-           	 <c:set var = "providerText" value = "국토부"/>
-         </c:when>
-         <c:when test = "${providerText == '09'}">
-           	 <c:set var = "providerText" value = "정산사"/>
-         </c:when>
-    
-         <c:otherwise>
-           		<c:set var = "providerText" value = ""/>
-         </c:otherwise>
-    </c:choose>     
+   
          
     <!-- 분석지표 -->
     <c:set var = "anal_groupText" value = "${sVO.anal_group}"/>
@@ -28,14 +14,11 @@
          <c:when test = "${anal_groupText == 'passCnt'}">
            	 <c:set var = "anal_groupText" value = "통행량"/>
          </c:when>
-         <c:when test = "${anal_groupText == 'passODCnt'}">
-           	 <c:set var = "anal_groupText" value = "기종점통행량"/>
-         </c:when>
-    	 <c:when test = "${anal_groupText == 'passEtc'}">
-           	 <c:set var = "anal_groupText" value = "기타"/>
-         </c:when>
-    	 <c:when test = "${anal_groupText == 'passRouteODCnt'}">
+         <c:when test = "${anal_groupText == 'passRouteODCnt'}">
            	 <c:set var = "anal_groupText" value = "노선별OD"/>
+         </c:when>
+         <c:when test = "${anal_groupText == 'passAreaODCnt'}">
+           	 <c:set var = "anal_groupText" value = "행정동간OD"/>
          </c:when>
     	 <c:when test = "${anal_groupText == 'passTopRotue'}">
            	 <c:set var = "anal_groupText" value = "상위이용노선"/>
@@ -43,7 +26,10 @@
     	 <c:when test = "${anal_groupText == 'passTopStation'}">
            	 <c:set var = "anal_groupText" value = "상위이용정류장"/>
          </c:when>
-         
+         <c:when test = "${anal_groupText == 'passEtc'}">
+           	 <c:set var = "anal_groupText" value = "기타"/>
+         </c:when>
+    	
          <c:otherwise>
            		<c:set var = "anal_groupText" value = ""/>
          </c:otherwise>
@@ -66,10 +52,10 @@
            	 <c:set var = "anal_typeText" value = "정류장별통행"/>
          </c:when>
     	 <c:when test = "${anal_typeText == 'passAreaODCnt_purpose'}">
-           	 <c:set var = "anal_typeText" value = "행정동목적"/>
+           	 <c:set var = "anal_typeText" value = "목적통행"/>
          </c:when>
     	 <c:when test = "${anal_typeText == 'passAreaODCnt_method'}">
-           	 <c:set var = "anal_typeText" value = "행정동수단"/>
+           	 <c:set var = "anal_typeText" value = "수단통행"/>
          </c:when>
     
          <c:otherwise>
@@ -77,6 +63,7 @@
          </c:otherwise>
 	</c:choose>
 	
+
 	
 	<!-- 이용자유형 -->  
     <c:set var = "cd_noText" value = ""/>
@@ -128,6 +115,7 @@
     </c:forEach>
 	<c:set var = "cd_noTextLength" value = "${fn:length(cd_noText)}"/>	     
 	<c:set var = "cd_noText" value = "${fn:substring(cd_noText,1,cd_noTextLength) }"/>
+	<c:set var = "cd_noText_slash" value = "${fn:replace(cd_noText, '_' ,'/')}"/>
    
     
     <!-- 버스 or 지하철 -->
@@ -164,6 +152,9 @@
     <c:if test="${tmText == null}">
     	<c:set var = "tmText" value = "${sVO.tmStart}시 ~ ${sVO.tmEnd}시"/>
     </c:if>
+  
+  
+	
     
     <!-- 날짜 -->
     <c:set var = "dateText" value = "${sVO.dateStart} ~ ${sVO.dateEnd}"/>
@@ -171,31 +162,7 @@
     	<c:set var = "dateText" value = "${sVO.dateStart}"/>
     </c:if>
     
-    <c:if test="${anal_typeText == '정류장별통행'}">
-    	<c:set var = "tmText" value = "1일"/>
-    	<c:set var = "dateText" value = "${sVO.dateStart}"/>
-    </c:if>
-    <c:if test="${anal_typeText == '행정동목적'}">
-    	<c:set var = "tmText" value = "1일"/>
-    	<c:set var = "dateText" value = "${sVO.dateStart}"/>
-    </c:if>         
-    <c:if test="${anal_typeText == '행정동수단'}">
-    	<c:set var = "tmText" value = "1일"/>
-    	<c:set var = "dateText" value = "${sVO.dateStart}"/>
-    </c:if>
-    <c:if test="${anal_groupText == '상위이용노선'}">
-    	<c:set var = "tmText" value = "1일"/>
-    	<c:set var = "dateText" value = "${sVO.dateStart}"/>
-    </c:if>
-    <c:if test="${anal_groupText == '상위이용정류장'}">
-    	<c:set var = "tmText" value = "1일"/>
-    	<c:set var = "dateText" value = "${sVO.dateStart}"/>
-    </c:if>
-    <c:if test="${anal_groupText == '노선별OD'}">
-    	<c:set var = "tmText" value = "1일"/>
-    	<c:set var = "dateText" value = "${sVO.dateStart}"/>
-    </c:if>
-    
+  
     
 	<!-- 이용자 유형 컬럼 갯수 -->
 	<c:choose>
@@ -208,5 +175,75 @@
 	</c:choose>
 	
 	
-            
+	
+	<!-- 분석유형 상단 표출 용-->
+    <c:set var = "anal_typeText_titleDraw" value = ""/>
+    <c:set var = "tfcmn_titleDraw" value = ""/>
+    
+    <c:if test = "${anal_groupText == '통행량'}">
+   		
+   		<c:if test = "${anal_typeText == '목적통행'}">
+   			<c:set var = "anal_typeText_titleDraw" value = "분석유형 : 목적통행"/>
+   		</c:if>
+   		
+   		<c:if test = "${anal_typeText == '수단통행'}">
+   			<c:set var = "anal_typeText_titleDraw" value = "분석유형 : 수단통행"/>
+   		</c:if>
+   		
+   		<c:if test = "${anal_typeText == '노선별통행'}">
+   			<c:set var = "anal_typeText_titleDraw" value = "분석유형 : 노선별통행"/>
+   		</c:if>
+   		
+   		<c:if test = "${anal_typeText == '정류장별통행'}">
+   			<c:set var = "anal_typeText_titleDraw" value = "분석유형 : 정류장별통행"/>
+		   	<c:set var = "tmText" value = "1일"/>
+		    <c:set var = "dateText" value = "${sVO.dateStart}"/>
+   		</c:if>
+   		
+   	</c:if> 
+   	
+   	
+   	<c:if test = "${anal_groupText == '노선별OD' && anal_typeText == ''}">
+   		<c:set var = "anal_typeText_titleDraw" value = ""/>
+   		<c:set var = "tmText" value = "1일"/>
+    	<c:set var = "dateText" value = "${sVO.dateStart}"/>
+   	</c:if> 
+   	
+   	
+   	<c:if test = "${anal_groupText == '행정동간OD'}">
+   		
+   		<c:if test = "${anal_typeText == '목적통행'}">
+   			<c:set var = "anal_typeText_titleDraw" value = "분석유형 : 목적통행"/>
+	   		<c:set var = "tmText" value = "1일"/>
+	    	<c:set var = "dateText" value = "${sVO.dateStart}"/>
+   		</c:if>
+   		
+   		<c:if test = "${anal_typeText == '수단통행'}">
+   			<c:set var = "anal_typeText_titleDraw" value = "분석유형 : 수단통행"/>
+	   		<c:set var = "tmText" value = "1일"/>
+	    	<c:set var = "dateText" value = "${sVO.dateStart}"/>
+   		</c:if>
+   		 	
+   	</c:if> 
+  
+   	
+   	<c:if test = "${anal_groupText == '상위이용노선' && anal_typeText == ''}">
+   		<c:set var = "anal_typeText_titleDraw" value = ""/>
+   		<c:set var = "tmText" value = "1일"/>
+    	<c:set var = "dateText" value = "${sVO.dateStart}"/>
+   	</c:if> 
+   	
+   	
+   	<c:if test = "${anal_groupText == '상위이용정류장' && anal_typeText == ''}">
+   		<c:set var = "anal_typeText_titleDraw" value = ""/>
+   		<c:set var = "tmText" value = "1일"/>
+    	<c:set var = "dateText" value = "${sVO.dateStart}"/>
+
+    	<c:if test="${anal_area_cd_sido_text == '서울특별시'}">
+    		<c:set var = "tfcmn_titleDraw" value = "교통수단 : ${tfcmnText}"/>
+    	</c:if>
+   	</c:if> 
+    
+	
+	
         <!-- ▲ 코드 텍스트 매칭 끝 -->

@@ -54,27 +54,6 @@
 
   
     <body>
-	<!-- <script>
-         function showPage() {
-         	document.getElementById("lds-spinner").style.display = "none";
-         }
-     </script>
-     <div id="lds-spinner">
-         <div></div>
-         <div></div>
-         <div></div>
-         <div></div>
-         <div></div>
-         <div></div>
-         <div></div>
-         <div></div>
-         <div></div>
-         <div></div>
-         <div></div>
-         <div></div>
-     </div>  -->
-     
-     	
       	<div class="wrap">
 	        <div class="header">
 	            <p>통행 분석 지표</p>
@@ -87,16 +66,16 @@
 	        
 	        <div class="dateform">
 	          <div>
-	          <p>분석날짜 : ${dateText}</p>
-	          <p>분석자료 : ${providerText}</p>
+	          <p>&nbsp;분석날짜 : ${dateText}</p>
+	          <p>분석자료 : ${sVO.provider_text}</p>
 	          <p>분석지역 : ${anal_area_cd_sido_text} ${anal_area_cd_text}</p>
-	          <p>분석지표 : ${anal_groupText}</p>
+	          <p>&nbsp;분석지표 : ${anal_groupText}</p>
 	          </div>
 	          <div>
-	          <p>분석유형 : ${anal_typeText}</p>
+	          <p>&nbsp;${anal_typeText_titleDraw}</p>
 	          <p>시간대 : ${tmText}</p> 
-	          <p>이용자유형 : ${cd_noText}</p>
-	          <p>교통수단 : 전체</p>
+	          <p>이용자유형 : ${cd_noText_slash}</p>
+	          <p>&nbsp;${tfcmn_titleDraw}</p>
 	          </div>
 	      	</div>
 	      	
@@ -145,20 +124,20 @@
 	     	
 	     	<div class="test">
 		     
-		     	<div class="content_wrap">
-			     	<c:if test = "${anal_typeText == '목적통행'}">
+		     			     	<div class="content_wrap">
+			     	<c:if test = "${anal_groupText == '통행량' && anal_typeText == '목적통행'}">
 			     		<%@ include file="tableList/pass_popUp_passCnt_purpose.jsp" %>
 			     	</c:if> 
 			      
-			     	<c:if test = "${anal_typeText == '수단통행'}">
+			     	<c:if test = "${anal_groupText == '통행량' && anal_typeText == '수단통행'}">
 			     		<%@ include file="tableList/pass_popUp_passCnt_method.jsp" %>
 			     	</c:if> 
 			     	
-			     	<c:if test = "${anal_typeText == '노선별통행'}">
+			     	<c:if test = "${anal_groupText == '통행량' && anal_typeText == '노선별통행'}">
 			     		<%@ include file="tableList/pass_popUp_passCnt_route.jsp" %>
 			     	</c:if> 
 			     	
-			     	<c:if test = "${anal_typeText == '정류장별통행'}">
+			     	<c:if test = "${anal_groupText == '통행량' && anal_typeText == '정류장별통행'}">
 			     		<%@ include file="tableList/pass_popUp_passCnt_station.jsp" %>
 			     	</c:if> 
 			     	
@@ -170,11 +149,11 @@
 			     		</script>
 			     	</c:if> 
 			     	
-			     	<c:if test = "${anal_typeText == '행정동목적'}">
+			     	<c:if test = "${anal_groupText == '행정동간OD' && anal_typeText == '목적통행'}">
 			     		<%@ include file="tableList/pass_popUp_passAreaODCnt_purpose.jsp" %>
 			     	</c:if> 
 			     	
-			     	<c:if test = "${anal_typeText == '행정동수단'}">
+			     	<c:if test = "${anal_groupText == '행정동간OD' && anal_typeText == '수단통행'}">
 			     		<%@ include file="tableList/pass_popUp_passAreaODCnt_method.jsp" %>
 			     	</c:if> 
 			     	

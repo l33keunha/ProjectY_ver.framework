@@ -90,11 +90,8 @@ public class PassController {
 	}
 	
 	@RequestMapping(value="/passDownload.do")
-	public void downloadPassResultList(@ModelAttribute SearchVO sVO, HttpServletRequest req, HttpServletResponse res) {
-		ModelAndView mv = new ModelAndView("jsonView");
+	public void downloadPassResultList(@ModelAttribute SearchVO sVO, HttpServletResponse res) {
 		System.out.println(sVO.toString());
-		
-		service.downloadPassResultList(sVO, req, res);
-		
+		service.downloadPassResultList(sVO, res);
 	}
 }
