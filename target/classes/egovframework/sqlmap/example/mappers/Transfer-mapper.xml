@@ -569,7 +569,7 @@
                                     ,'05'장애인 , '06' 국가유공자, '07' 다자녀부모, '08' 동반
                                     ,'09' 대학생 , '10' 복지 , '11' 기타, '합계' 합계)
             )
-        ORDER BY  OPRAT_DATE, DECODE(TFCMN, '버스_버스','1', '버스_지하철','2' ,'지하철_지하철','3', '지하철_버스','4');
+        ORDER BY  OPRAT_DATE, DECODE(TFCMN, '버스_버스','1', '버스_지하철','2' ,'지하철_지하철','3', '지하철_버스','4')
 	</select>
 	
 	<!-- PIVOT 환승 정류장별통행 -->
@@ -631,7 +631,7 @@
 	
 	<!-- PIVOT 환승 횟수별통행 일별 -->
 	<select id ="downloadTransferResultListNum_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-S       ELECT *
+		SELECT *
         FROM 	
             (
                 SELECT 

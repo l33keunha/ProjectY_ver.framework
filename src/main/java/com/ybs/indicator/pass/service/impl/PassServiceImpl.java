@@ -157,8 +157,8 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 		cdnoMatch.put("11","기타");
 
 		
-		String cdnoSt = "";			// get컬럼 리스트
-		String cdnoStLong = "";     // get컬럼 리스트 (노선별, 정류장별)
+		String cdnoStr = "";			// get컬럼 리스트
+		String cdnoStrLong = "";     // get컬럼 리스트 (노선별, 정류장별)
 		
 		// get컬럼 리스트
 		for(int i=0; i<sVO.getCd_no().length; i++) {
@@ -166,7 +166,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 				continue;
 			}
 			cdnoMatch.get(sVO.getCd_no()[i]);
-			cdnoSt += ","+cdnoMatch.get(sVO.getCd_no()[i]);
+			cdnoStr += ","+cdnoMatch.get(sVO.getCd_no()[i]);
 		}
 		
 		// get컬럼 리스트 (노선별, 정류장별)
@@ -175,10 +175,10 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 				continue;
 			}
 			cdnoMatch.get(sVO.getCd_no()[i]);
-			cdnoStLong += "," + cdnoMatch.get(sVO.getCd_no()[i]) + "승차";
-			cdnoStLong += "," + cdnoMatch.get(sVO.getCd_no()[i]) + "하차";
-			cdnoStLong += "," + cdnoMatch.get(sVO.getCd_no()[i]) + "환승";
-			cdnoStLong += "," + cdnoMatch.get(sVO.getCd_no()[i]) + "승하차합계";
+			cdnoStrLong += "," + cdnoMatch.get(sVO.getCd_no()[i]) + "승차";
+			cdnoStrLong += "," + cdnoMatch.get(sVO.getCd_no()[i]) + "하차";
+			cdnoStrLong += "," + cdnoMatch.get(sVO.getCd_no()[i]) + "환승";
+			cdnoStrLong += "," + cdnoMatch.get(sVO.getCd_no()[i]) + "승하차합계";
 		}
 		
 		String date_SidoText = sVO.getAnal_area_cd_sido_text()+sVO.getAnal_area_cd_text()+"_"+(sVO.getDateStart().replaceAll("-", ""));
@@ -206,7 +206,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 									+",분석자료"
 									+",운행일자"
 									+",요일"
-									+ cdnoSt 
+									+ cdnoStr 
 									+",합계";
 					
 					// ● 인자값 : 컬럼명
@@ -215,7 +215,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 									+",provider"
 									+",opratDate"
 									+",dy"
-									+ cdnoSt 
+									+ cdnoStr 
 									+",합계";
 					
 					break;
@@ -237,7 +237,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 									+",운행일자"
 									+",요일"
 									+",시간"
-									+ cdnoSt 
+									+ cdnoStr 
 									+",합계";
 			
 					// ● 인자값 : 컬럼명
@@ -247,7 +247,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 									+",opratDate"
 									+",dy"
 									+",tm"
-									+ cdnoSt 
+									+ cdnoStr 
 									+",합계";
 					
 					break;
@@ -272,7 +272,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 									+",운행일자"
 									+",요일"
 									+",교통수단"
-									+ cdnoSt 
+									+ cdnoStr 
 									+",합계";
 					
 					// ● 인자값 : 컬럼명
@@ -282,7 +282,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 									+",opratDate"
 									+",dy"
 									+",tfcmn"
-									+ cdnoSt 
+									+ cdnoStr 
 									+",합계";
 					
 					break;
@@ -305,7 +305,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 									+",요일"
 									+",교통수단"
 									+",시간"
-									+ cdnoSt 
+									+ cdnoStr 
 									+",합계";
 					
 					// ● 인자값 : 컬럼명
@@ -316,7 +316,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 									+",dy"
 									+",tfcmn"
 									+",tm"
-									+ cdnoSt 
+									+ cdnoStr 
 									+",합계";
 					
 					break;
@@ -345,7 +345,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 									+",노선유형"
 									+",기점"
 									+",종점"
-									+ cdnoStLong
+									+ cdnoStrLong
 									+",전체승차"
 									+",전체하차"
 									+",전체환승"
@@ -363,7 +363,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 									+",routeType"
 									+",routeStart"
 									+",routeEnd"
-									+ cdnoStLong
+									+ cdnoStrLong
 									+",전체승차"
 									+",전체하차"
 									+",전체환승"
@@ -393,7 +393,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 									+",노선유형"
 									+",기점"
 									+",종점"
-									+ cdnoStLong
+									+ cdnoStrLong
 									+",전체승차"
 									+",전체하차"
 									+",전체환승"
@@ -412,7 +412,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 									+",routeType"
 									+",routeStart"
 									+",routeEnd"
-									+ cdnoStLong
+									+ cdnoStrLong
 									+",전체승차"
 									+",전체하차"
 									+",전체환승"
@@ -441,7 +441,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 								+",정류장ID"
 								+",정류장명"
 								+",행정동"
-								+ cdnoStLong
+								+ cdnoStrLong
 								+",전체승차"
 								+",전체하차"
 								+",전체환승"
@@ -457,7 +457,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 								+",sttnId"
 								+",sttnNma"
 								+",sttnHjd"
-								+ cdnoStLong
+								+ cdnoStrLong
 								+",전체승차"
 								+",전체하차"
 								+",전체환승"
@@ -486,7 +486,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 								+",출발행정동"
 								+",도착존"
 								+",도착행정동"
-								+ cdnoSt
+								+ cdnoStr
 								+",합계";
 				
 				// ● 인자값 : 컬럼명
@@ -499,7 +499,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 								+",getinoutnm"
 								+",offinout"
 								+",offinoutnm"
-								+ cdnoSt
+								+ cdnoStr
 								+",합계";
 				
 				break;
@@ -524,7 +524,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 								+",출발행정동"
 								+",도착존"
 								+",도착행정동"
-								+ cdnoSt
+								+ cdnoStr
 								+",합계";
 				
 				// ● 인자값 : 컬럼명
@@ -537,7 +537,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 								+",getinoutnm"
 								+",offinout"
 								+",offinoutnm"
-								+ cdnoSt
+								+ cdnoStr
 								+",합계";
 				
 				break;
@@ -574,7 +574,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 									+",도착정류장ID"
 									+",도착정류장명"
 									+",도착행정동"
-									+ cdnoSt
+									+ cdnoStr
 									+",합계";
 					
 					// ● 인자값 : 컬럼명
@@ -594,7 +594,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 									+",offStnId"
 									+",offStnNm"
 									+",offStnArea"
-									+ cdnoSt
+									+ cdnoStr
 									+",합계";
 					
 					break;
@@ -627,7 +627,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 									+",도착정류장명"
 									+",도착행정동"
 									+",시간"
-									+ cdnoSt
+									+ cdnoStr
 									+",합계";
 					
 					// ● 인자값 : 컬럼명
@@ -648,7 +648,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 									+",offStnNm"
 									+",offStnArea"
 									+",tm"
-									+ cdnoSt
+									+ cdnoStr
 									+",합계"; 
 					
 					break;
@@ -677,7 +677,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 								+",노선유형"
 								+",기점"
 								+",종점"
-								+ cdnoStLong
+								+ cdnoStrLong
 								+",전체승차"
 								+",전체하차"
 								+",전체환승"
@@ -694,7 +694,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 								+",routeType"
 								+",routeStart"
 								+",routeEnd"
-								+ cdnoStLong
+								+ cdnoStrLong
 								+",전체승차"
 								+",전체하차"
 								+",전체환승"
@@ -725,7 +725,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 									+",정류장ID"
 									+",정류장명"
 									+",행정동"
-									+ cdnoStLong
+									+ cdnoStrLong
 									+",전체승차"
 									+",전체하차"
 									+",전체환승"
@@ -742,7 +742,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 									+",sttnId"
 									+",sttnNma"
 									+",sttnHjd"
-									+ cdnoStLong
+									+ cdnoStrLong
 									+",전체승차"
 									+",전체하차"
 									+",전체환승"
@@ -771,7 +771,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 									+",정류장ID"
 									+",정류장명"
 									+",행정동"
-									+ cdnoStLong
+									+ cdnoStrLong
 									+",전체승차"
 									+",전체하차"
 									+",전체환승"
@@ -788,7 +788,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 									+",sttnId"
 									+",sttnNma"
 									+",sttnHjd"
-									+ cdnoStLong
+									+ cdnoStrLong
 									+",전체승차"
 									+",전체하차"
 									+",전체환승"
@@ -818,7 +818,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 									+",정류장ID"
 									+",정류장명"
 									+",행정동"
-									+ cdnoStLong
+									+ cdnoStrLong
 									+",전체승차"
 									+",전체하차"
 									+",전체환승"
@@ -835,7 +835,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 									+",sttnId"
 									+",sttnNma"
 									+",sttnHjd"
-									+ cdnoStLong
+									+ cdnoStrLong
 									+",전체승차"
 									+",전체하차"
 									+",전체환승"

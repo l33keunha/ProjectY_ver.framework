@@ -163,8 +163,6 @@
 	}
 	
 	
-	
-	
 	/* 노선번호 검색 선택 */
 	// 노선번호 검색 버튼 누르면 조건에 맞는 노선번호 리스트 가져옴
 	$("input[name=searchpassRoute]").change(function(){

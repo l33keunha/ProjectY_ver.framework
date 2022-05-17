@@ -238,7 +238,7 @@
 						    var noWeekend = jQuery.datepicker.noWeekends(date);
 						    return noWeekend[0] ? [true] : noWeekend;
 						}
-					$('.date').datepicker("setDate",'2021-03-22');					
+					$('.date').datepicker("setDate",abledDays[0]);					
 				})
 			}
 		})
@@ -403,6 +403,20 @@
 	  	  checkbox.checked = selectAll.checked;
 	  })
 	}
+	
+	// 이용자유형 전체선택/해제(개별)
+	$(document).on("click", "input[name=cd_no]", function(){
+	      if(this.checked == false){
+	         $("[name=cd_no]:eq(0)").prop("checked", false); 
+	      }
+	      
+	      var total = $("input[name=cd_no]").length-1;
+	      var checked = $("input[name=cd_no]:checked").length;
+	      
+	      if(total == checked) {
+	         $("[name=cd_no]:eq(0)").prop("checked", true); 
+	      }
+    })
 	
 	// 시간대 비활성화
 	function disabledTime(){
