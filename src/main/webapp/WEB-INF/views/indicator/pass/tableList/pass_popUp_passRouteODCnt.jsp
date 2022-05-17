@@ -86,10 +86,10 @@
 						<tr>
 							
 							<th class="tg-0pky"  style="width: 80px; min-width: 80px; max-width: 80px;">출발정류장ID</th>		<!-- 출발정류장ID -->
-							<th class="tg-0pky"  style="width: 120px; min-width: 120px; max-width: 120px;">출발정류장명</th>	<!-- 출발정류장명 -->
+							<th class="tg-0pky"  style="width: 150px; min-width: 150px; max-width: 150px;">출발정류장명</th>	<!-- 출발정류장명 -->
 							<th class="tg-0pky"  style="width: 80px; min-width: 80px; max-width: 80px;">출발정류장행정동</th>	<!-- 출발정류장행정동 -->
 							<th class="tg-0pky"  style="width: 80px; min-width: 80px; max-width: 80px;">도착정류장ID</th>		<!-- 도착정류장ID -->
-							<th class="tg-0pky"  style="width: 120px; min-width: 120px; max-width: 120px;">도착정류장명</th>	<!-- 도착정류장명 -->
+							<th class="tg-0pky"  style="width: 150px; min-width: 150px; max-width: 150px;">도착정류장명</th>	<!-- 도착정류장명 -->
 							<th class="tg-0pky"  style="width: 80px; min-width: 80px; max-width: 80px;">도착정류장행정동</th>	<!-- 도착정류장행정동 -->
 							
 							<th class="tg-0pky"  style="width: 30px; min-width: 30px; max-width: 30px;">시간</th>				<!-- 시간 -->
@@ -127,10 +127,10 @@
 								
 									<!-- 출발정류장ID 그룹이 시작될 때마다 실행 -->
 									<td class="tg-0pky" style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2 lavel-1">${passResultList[j*columnCnt].getStnId}</div></td>					<!-- 출발정류장ID -->
-									<td class="tg-0pky" style="width: 120px; min-width: 120px; max-width: 120px;"><div class="lavel-2 lavel-1">${passResultList[j*columnCnt].getStnNm}</div></td>				<!-- 출발정류장명 -->
+									<td class="tg-0pky" style="width: 150px; min-width: 150px; max-width: 150px;"><div class="lavel-2 lavel-1">${passResultList[j*columnCnt].getStnNm}</div></td>				<!-- 출발정류장명 -->
 									<td class="tg-0pky" style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2 lavel-1">${passResultList[j*columnCnt].getStnArea}</div></td>				<!-- 출발정류장행정동 -->
 									<td class="tg-0pky" style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2 lavel-1">${passResultList[j*columnCnt].offStnId}</div></td>					<!-- 도착정류장ID -->
-									<td class="tg-0pky" style="width: 120px; min-width: 120px; max-width: 120px;"><div class="lavel-2 lavel-1">${passResultList[j*columnCnt].offStnNm}</div></td>				<!-- 도착정류장명 -->
+									<td class="tg-0pky" style="width: 150px; min-width: 150px; max-width: 150px;"><div class="lavel-2 lavel-1">${passResultList[j*columnCnt].offStnNm}</div></td>				<!-- 도착정류장명 -->
 									<td class="tg-0pky" style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2 lavel-1">${passResultList[j*columnCnt].offStnArea}</div></td>				<!-- 도착정류장행정동 -->
 									
 									<c:if test="${(j % dateCnt) == 0}">
@@ -147,10 +147,10 @@
 										<!-- 출발정류장ID 그룹이 시작될 때마다 실행 -->
 										<c:if test="${(j % timeCnt) == 0}">	   	
 											<td class="tg-0pky" rowspan='${timeCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${passResultList[j * columnCnt].getStnId}</div></td>				<!-- 출발정류장ID -->
-											<td class="tg-0pky" rowspan='${timeCnt}' style="width: 120px; min-width: 120px; max-width: 120px;"><div class="lavel-2">${passResultList[j * columnCnt].getStnNm}</div></td>				<!-- 출발정류장명 -->
+											<td class="tg-0pky" rowspan='${timeCnt}' style="width: 150px; min-width: 150px; max-width: 150px;"><div class="lavel-2">${passResultList[j * columnCnt].getStnNm}</div></td>				<!-- 출발정류장명 -->
 											<td class="tg-0pky" rowspan='${timeCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${passResultList[j * columnCnt].getStnArea}</div></td>				<!-- 출발정류장행정동 -->
 											<td class="tg-0pky" rowspan='${timeCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${passResultList[j * columnCnt].offStnId}</div></td>				<!-- 도착정류장ID -->
-											<td class="tg-0pky" rowspan='${timeCnt}' style="width: 120px; min-width: 120px; max-width: 120px;"><div class="lavel-2">${passResultList[j * columnCnt].offStnNm}</div></td>				<!-- 도착정류장명 -->
+											<td class="tg-0pky" rowspan='${timeCnt}' style="width: 150px; min-width: 150px; max-width: 150px;"><div class="lavel-2">${passResultList[j * columnCnt].offStnNm}</div></td>				<!-- 도착정류장명 -->
 											<td class="tg-0pky" rowspan='${timeCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${passResultList[j * columnCnt].offStnArea}</div></td>				<!-- 도착정류장행정동 -->
 										</c:if>
 										<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;">${passResultList[j * columnCnt].tm}</td>			<!-- 시간 -->

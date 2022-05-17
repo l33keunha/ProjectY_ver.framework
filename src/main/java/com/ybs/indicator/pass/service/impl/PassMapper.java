@@ -53,7 +53,7 @@ public interface PassMapper {
 	List<EgovMap> selectPassResultListAreaODMethod(SearchVO sVO);
 
 	// 상위이용노선 
-	List<EgovMap> selectPassREsultListTopRoute(SearchVO sVO);
+	List<EgovMap> selectPassResultListTopRoute(SearchVO sVO);
 
 	// 상위이용정류장 
 	List<EgovMap> selectPassResultListTopStation(SearchVO sVO);

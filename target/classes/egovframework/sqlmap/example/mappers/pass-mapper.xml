@@ -559,7 +559,7 @@
 	</select>
 	
 	<!-- 상위이용노선 -->
-	<select id ="selectPassREsultListTopRoute" parameterType="sVO" resultType="egovMap" fetchSize="2000">
+	<select id ="selectPassResultListTopRoute" parameterType="sVO" resultType="egovMap" fetchSize="2000">
 	    SELECT 
             OPRAT_DATE
             ,DY
@@ -597,7 +597,7 @@
                     AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
                     AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
                     <if test="!cd_no[0].equals('00')">
-                        AND 코드번호 IN
+                        AND CD_NO IN
                         <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
                             #{arr}
                         </foreach>
@@ -620,7 +620,7 @@
                             AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
                             AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
                             <if test="!cd_no[0].equals('00')">
-                                AND 코드번호 IN
+                                AND CD_NO IN
                                 <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
                                     #{arr}
                                 </foreach>
@@ -1902,7 +1902,7 @@
 	                AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 	                AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
 	                <if test="!cd_no[0].equals('00')">
-	                    AND CD_NO IN
+	                    AND 코드번호 IN
 	                    <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
 	                        #{arr}
 	                    </foreach>
@@ -1938,7 +1938,7 @@
 	                AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 	                AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
 	                <if test="!cd_no[0].equals('00')">
-	                    AND CD_NO IN
+	                    AND 코드번호 IN
 	                    <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
 	                        #{arr}
 	                    </foreach>

@@ -70,7 +70,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 				
 			case "passTopRotue":                                                                // 상위이용노선
 				System.out.println("상위이용노선");
-				passResultList = mapper.selectPassREsultListTopRoute(sVO); break;
+				passResultList = mapper.selectPassResultListTopRoute(sVO); break;
 				
 			case "passTopStation":                                                              // 상위이용정류장
 				if("B".equals(sVO.getTfcmn())) {
@@ -690,6 +690,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 								+",opratDate"
 								+",dy"
 								+",순위"
+								+",routeId"
 								+",routeNma"
 								+",routeType"
 								+",routeStart"

@@ -238,7 +238,11 @@
 						    var noWeekend = jQuery.datepicker.noWeekends(date);
 						    return noWeekend[0] ? [true] : noWeekend;
 						}
-					$('.date').datepicker("setDate",abledDays[0]);					
+					if(jsonArray['provider'] == '00'){
+						$('.date').datepicker("setDate",'2021-03-22');
+					} else{
+						$('.date').datepicker("setDate",abledDays[0]);
+					}					
 				})
 			}
 		})
@@ -407,7 +411,8 @@
 	// 이용자유형 전체선택/해제(개별)
 	$(document).on("click", "input[name=cd_no]", function(){
 	      if(this.checked == false){
-	         $("[name=cd_no]:eq(0)").prop("checked", false); 
+	        $("[name=cd_no]:eq(0)").prop("checked", false); 
+			return;
 	      }
 	      
 	      var total = $("input[name=cd_no]").length-1;

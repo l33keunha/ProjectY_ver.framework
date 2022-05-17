@@ -69,11 +69,13 @@
     <c:set var = "cd_noText" value = ""/>
     <c:set var = "cd_noLength" value = '${fn:length(sVO.cd_no)}'/>		
     <c:forEach var='j' begin='0' end='${cd_noLength-1}' >	 
-	    <c:if test="${sVO.cd_no[0] =='00'}">
+	<%--     
+		<c:if test="${sVO.cd_no[0] =='00'}">
 			<c:set var = "cd_noText" value = "_일반_어린이_청소년_경로_장애인_국가유공자_다자녀부모_동반_대학생_복지_기타"/>			
-		</c:if>
-		<c:if test="${sVO.cd_no[0] !='00'}">
-			 <c:choose>
+		</c:if> 
+	--%>
+	<%-- 	<c:if test="${sVO.cd_no[0] !='00'}"> --%>
+			<c:choose>
 		         <c:when test = "${sVO.cd_no[j] == '01'}">
 		           	 <c:set var = "cd_noText" value = "${cd_noText}_일반"/>
 		         </c:when>
@@ -111,7 +113,7 @@
 		           		<c:set var = "cd_noText" value = ""/>
 		         </c:otherwise>
 	   		 </c:choose>  
-		</c:if>   
+		<%-- </c:if>    --%>
     </c:forEach>
 	<c:set var = "cd_noTextLength" value = "${fn:length(cd_noText)}"/>	     
 	<c:set var = "cd_noText" value = "${fn:substring(cd_noText,1,cd_noTextLength) }"/>
@@ -167,7 +169,7 @@
 	<!-- 이용자 유형 컬럼 갯수 -->
 	<c:choose>
 		<c:when test="${sVO.cd_no[0] =='00'}">
-			<c:set var = "columnCnt" value = '11'/>						
+			<c:set var = "columnCnt" value = '${fn:length(sVO.cd_no)-1}'/>				
 		</c:when>
 		<c:otherwise>
 			<c:set var = "columnCnt" value = '${fn:length(sVO.cd_no)}'/>		
@@ -244,6 +246,5 @@
     	</c:if>
    	</c:if> 
     
-	
 	
         <!-- ▲ 코드 텍스트 매칭 끝 -->
