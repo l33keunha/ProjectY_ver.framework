@@ -87,16 +87,220 @@
 	    ORDER BY  SDATE, DECODE(TFCMN, '버스_버스','1', '버스_지하철','2' ,'지하철_지하철','3', '지하철_버스','4'), CD_NO
 	</select>
 	
-	<!-- 환승 정류장별통행 -->
-	<select id ="selectTransferResultListStation" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+    <!-- 환승 정류장별통행 버스 -->
+	<select id ="selectTransferResultListStationB" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+        SELECT 
+            OPRAT_DATE
+            ,TFCMN
+            ,STTN_ID
+            ,STTN_NMA
+            ,STTN_HJD
+            ,NVL(CD_NO,'합계') CD_NO
+            ,SUM(USER_CNT_AGG) USER_CNT_AGG
+        FROM 환승_정류장별통행_일별
+        WHERE 1=1
+            AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
+            AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
+            <if test="!cd_no[0].equals('00')">
+                AND CD_NO IN
+                <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+                    #{arr}
+                </foreach>
+            </if>
+            AND TFCMN ='B'
+        GROUP BY             
+        	OPRAT_DATE
+            ,TFCMN
+            ,STTN_ID
+            ,STTN_NMA
+            ,STTN_HJD
+            ,CUBE(CD_NO)
+        ORDER BY STTN_ID, STTN_NMA, CD_NO
+	</select>
+
+    <!-- 환승 정류장별통행 지하철 -->
+	<select id ="selectTransferResultListStationT" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+        SELECT 
+            OPRAT_DATE
+            ,TFCMN
+            ,STTN_ID
+            ,STTN_NMA
+            ,STTN_HJD
+            ,NVL(CD_NO,'합계') CD_NO
+            ,SUM(USER_CNT_AGG) USER_CNT_AGG
+        FROM 환승_정류장별통행_일별
+        WHERE 1=1
+            AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
+            AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
+            <if test="!cd_no[0].equals('00')">
+                AND CD_NO IN
+                <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+                    #{arr}
+                </foreach>
+            </if>
+            AND TFCMN ='T'
+        GROUP BY             
+        	OPRAT_DATE
+            ,TFCMN
+            ,STTN_ID
+            ,STTN_NMA
+            ,STTN_HJD
+            ,CUBE(CD_NO)
+        ORDER BY STTN_ID, STTN_NMA, CD_NO
 	</select>
 	
-	<!-- 환승 노선별통행 -->
-	<select id ="selectTransferResultListRoute" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+	<!-- 환승 노선별통행 버스 -->
+	<select id ="selectTransferResultListRouteB" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+        SELECT 
+            OPRAT_DATE
+            ,ANAL_AREA_CD
+            ,TFCMN
+            ,ROUTE_ID
+            ,ROUTE_NMA
+            ,ROUTE_TYPE
+            ,ROUTE_START
+            ,ROUTE_END
+            ,NVL(TM,'합계') TM
+            ,NVL(CD_NO, '합계') CD_NO
+            ,SUM(USER_CNT_AGG) USER_CNT_AGG
+        FROM 환승_노선별통행
+        WHERE 1=1
+            AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
+            AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
+            <if test="tm==null">
+                AND TM BETWEEN #{tmStart} AND #{tmEnd}
+            </if>
+            <if test="!cd_no[0].equals('00')">
+                AND CD_NO IN
+                <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+                    #{arr}
+                </foreach>
+            </if>
+        AND TFCMN = 'B'
+        GROUP BY OPRAT_DATE
+                ,ANAL_AREA_CD
+                ,TFCMN
+                ,ROUTE_ID
+                ,ROUTE_NMA
+                ,ROUTE_TYPE
+                ,ROUTE_START
+                ,ROUTE_END
+                ,CUBE(TM, CD_NO)
+        ORDER BY ROUTE_ID, ROUTE_NMA, TM, CD_NO
+	</select>
+
+    <!-- 환승 노선별통행 지하철 -->
+	<select id ="selectTransferResultListRouteT" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+        SELECT 
+            OPRAT_DATE
+            ,ANAL_AREA_CD
+            ,TFCMN
+            ,ROUTE_ID
+            ,ROUTE_NMA
+            ,ROUTE_TYPE
+            ,ROUTE_START
+            ,ROUTE_END
+            ,NVL(TM,'합계') TM
+            ,NVL(CD_NO, '합계') CD_NO
+            ,SUM(USER_CNT_AGG) USER_CNT_AGG
+        FROM 환승_노선별통행
+        WHERE 1=1
+            AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
+            AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
+            <if test="tm==null">
+                AND TM BETWEEN #{tmStart} AND #{tmEnd}
+            </if>
+            <if test="!cd_no[0].equals('00')">
+                AND CD_NO IN
+                <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+                    #{arr}
+                </foreach>
+            </if>
+        AND TFCMN = 'T'
+        GROUP BY OPRAT_DATE
+                ,ANAL_AREA_CD
+                ,TFCMN
+                ,ROUTE_ID
+                ,ROUTE_NMA
+                ,ROUTE_TYPE
+                ,ROUTE_START
+                ,ROUTE_END
+                ,CUBE(TM, CD_NO)
+        ORDER BY ROUTE_ID, ROUTE_NMA, TM, CD_NO
 	</select>
 	
-	<!-- 환승 노선별통행 일별 -->
-	<select id ="selectTransferResultListRoute_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+	<!-- 환승 노선별통행  버스 일별 -->
+	<select id ="selectTransferResultListRouteB_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+        SELECT 
+            OPRAT_DATE
+            ,ANAL_AREA_CD
+            ,TFCMN
+            ,ROUTE_ID
+            ,ROUTE_NMA
+            ,ROUTE_TYPE
+            ,ROUTE_START
+            ,ROUTE_END
+            ,NVL(CD_NO, '합계') CD_NO
+            ,SUM(USER_CNT_AGG) USER_CNT_AGG
+        FROM 환승_노선별통행_일별
+        WHERE 1=1
+            AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
+            AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
+            <if test="!cd_no[0].equals('00')">
+                AND CD_NO IN
+                <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+                    #{arr}
+                </foreach>
+            </if>
+            AND TFCMN ='B'
+        GROUP BY
+                OPRAT_DATE
+                ,ANAL_AREA_CD
+                ,TFCMN
+                ,ROUTE_ID
+                ,ROUTE_NMA
+                ,ROUTE_TYPE
+                ,ROUTE_START
+                ,ROUTE_END
+                ,ROLLUP(CD_NO)
+        ORDER BY ROUTE_ID, ROUTE_NMA, CD_NO
+	</select>
+
+    <!-- 환승 노선별통행 지하철 일별 -->
+	<select id ="selectTransferResultListRouteT_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+        SELECT 
+            OPRAT_DATE
+            ,ANAL_AREA_CD
+            ,TFCMN
+            ,ROUTE_ID
+            ,ROUTE_NMA
+            ,ROUTE_TYPE
+            ,ROUTE_START
+            ,ROUTE_END
+            ,NVL(CD_NO, '합계') CD_NO
+            ,SUM(USER_CNT_AGG) USER_CNT_AGG
+        FROM 환승_노선별통행_일별
+        WHERE 1=1
+            AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
+            AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
+            <if test="!cd_no[0].equals('00')">
+                AND CD_NO IN
+                <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+                    #{arr}
+                </foreach>
+            </if>
+            AND TFCMN ='T'
+        GROUP BY
+                OPRAT_DATE
+                ,ANAL_AREA_CD
+                ,TFCMN
+                ,ROUTE_ID
+                ,ROUTE_NMA
+                ,ROUTE_TYPE
+                ,ROUTE_START
+                ,ROUTE_END
+                ,ROLLUP(CD_NO)
+        ORDER BY ROUTE_ID, ROUTE_NMA, CD_NO
 	</select>
 	
 	<!-- 환승 횟수별통행 -->
@@ -528,7 +732,7 @@
                             AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
                             AND ANAL_AREA_CD = #{anal_area_cd}
                             AND PROVIDER = #{provider}
-                            <if test="tm==null">
+                            <if test="tm==null || tm.equals('')">
                                 AND TM BETWEEN #{tmStart} AND #{tmEnd}
                             </if>
                             <if test="!cd_no[0].equals('00')">
@@ -611,14 +815,149 @@
 	
 	<!-- PIVOT 환승 정류장별통행 -->
 	<select id ="downloadTransferResultListStation" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+        SELECT *
+        FROM
+            (
+                SELECT 
+                        #{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
+                        ,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
+                        ,#{provider_text} PROVIDER
+                        ,OPRAT_DATE
+                        ,TO_CHAR(SDATE,'DY') DY
+                        ,CASE WHEN TFCMN = 'B' THEN '버스' ELSE  '지하철' END TFCMN
+                        ,STTN_ID
+                        ,STTN_NMA
+                        ,STTN_HJD
+                        ,NVL(CD_NO,'합계') CD_NO
+                        ,SUM(USER_CNT_AGG) USER_CNT_AGG
+                FROM 환승_정류장별통행_일별
+                WHERE 1=1
+                    AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
+                    AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
+                    <if test="tm==null || tm.equals('')">
+                        AND TM BETWEEN #{tmStart} AND #{tmEnd}
+                    </if>
+                    <if test="!cd_no[0].equals('00')">
+                        AND CD_NO IN
+                        <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+                            #{arr}
+                        </foreach>
+                    </if>
+                GROUP BY OPRAT_DATE
+                        ,TO_CHAR(SDATE,'DY')
+                        ,TFCMN
+                        ,STTN_ID
+                        ,STTN_NMA
+                        ,STTN_HJD
+                        ,ROLLUP(CD_NO)
+            )
+        PIVOT
+            (
+                SUM(USER_CNT_AGG)
+                FOR CD_NO IN ('01'일반 , '02'어린이, '03'청소년, '04'경로
+                                ,'05'장애인 , '06' 국가유공자, '07' 다자녀부모, '08' 동반
+                                ,'09' 대학생 , '10' 복지 , '11' 기타, '합계' 합계)
+            )
+        ORDER BY TFCMN, STTN_ID, STTN_NMA
 	</select>
 	
 	<!-- PIVOT 환승 노선별통행 -->
 	<select id ="downloadTransferResultListRoute" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+        SELECT *
+        FROM 
+            (
+                SELECT 
+                    '경기도'ANAL_AREA_SIDO_CD_TEXT
+                    ,'평택시' ANAL_AREA_CD_TEXT
+                    ,'국토부' PROVIDER
+                    ,OPRAT_DATE
+                    ,TO_CHAR(SDATE,'DY') DY
+                    ,CASE WHEN TFCMN = 'B' THEN '버스' ELSE  '지하철' END TFCMN
+                    ,ROUTE_ID
+                    ,ROUTE_NMA
+                    ,ROUTE_TYPE
+                    ,ROUTE_START
+                    ,ROUTE_END
+                    ,NVL(TM,'합계') TM
+                    ,NVL(CD_NO, '합계') CD_NO
+                    ,SUM(USER_CNT_AGG) USER_CNT_AGG
+                FROM 환승_노선별통행
+                WHERE 1=1
+                    AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
+                    AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
+                    <if test="!cd_no[0].equals('00')">
+                        AND CD_NO IN
+                        <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+                            #{arr}
+                        </foreach>
+                    </if>
+                GROUP BY OPRAT_DATE
+                        ,TO_CHAR(SDATE,'DY')
+                        ,TFCMN
+                        ,ROUTE_ID
+                        ,ROUTE_NMA
+                        ,ROUTE_TYPE
+                        ,ROUTE_START
+                        ,ROUTE_END
+                        ,CUBE(TM, CD_NO)
+            )
+        PIVOT
+            (
+                SUM(USER_CNT_AGG)
+                FOR CD_NO IN ('01'일반 , '02'어린이, '03'청소년, '04'경로
+                                ,'05'장애인 , '06' 국가유공자, '07' 다자녀부모, '08' 동반
+                                ,'09' 대학생 , '10' 복지 , '11' 기타, '합계' 합계)
+            )
+        ORDER BY TFCMN, ROUTE_ID, ROUTE_NMA, TM
 	</select>
 	
 	<!-- PIVOT 환승 노선별통행 일별 -->
 	<select id ="downloadTransferResultListRoute_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+        SELECT *
+        FROM 
+            (
+                SELECT 
+                    #{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
+                    ,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
+                    ,#{provider_text} PROVIDER
+                    ,OPRAT_DATE
+                    ,TO_CHAR(SDATE,'DY') DY
+                    ,CASE WHEN TFCMN = 'B' THEN '버스' ELSE  '지하철' END TFCMN
+                    ,ROUTE_ID
+                    ,ROUTE_NMA
+                    ,ROUTE_TYPE
+                    ,ROUTE_START
+                    ,ROUTE_END
+                    ,NVL(CD_NO, '합계') CD_NO
+                    ,SUM(USER_CNT_AGG) USER_CNT_AGG
+                FROM 환승_노선별통행_일별
+                WHERE 1=1
+                    AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
+                    AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
+                    <if test="!cd_no[0].equals('00')">
+                        AND CD_NO IN
+                        <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+                            #{arr}
+                        </foreach>
+                    </if>
+                GROUP BY OPRAT_DATE
+                        ,TO_CHAR(SDATE,'DY')
+                        ,TFCMN
+                        ,ROUTE_ID
+                        ,ROUTE_NMA
+                        ,ROUTE_TYPE
+                        ,ROUTE_START
+                        ,ROUTE_END
+                        ,ROLLUP(CD_NO)
+            )
+        PIVOT
+            (
+                SUM(USER_CNT_AGG)
+                FOR CD_NO IN ('01'일반 , '02'어린이, '03'청소년, '04'경로
+                                ,'05'장애인 , '06' 국가유공자, '07' 다자녀부모, '08' 동반
+                                ,'09' 대학생 , '10' 복지 , '11' 기타, '합계' 합계)
+            )
+        ORDER BY TFCMN, ROUTE_ID, ROUTE_NMA
 	</select>
 	
 	<!-- PIVOT 환승 횟수별통행 -->
@@ -641,7 +980,7 @@
                 AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
                 AND ANAL_AREA_CD = #{anal_area_cd}
                 AND PROVIDER = #{provider}
-                <if test="tm==null">
+                <if test="tm==null || tm.equals('')">
                     AND TM BETWEEN #{tmStart} AND #{tmEnd}
                 </if>
                 <if test="!cd_no[0].equals('00')">
@@ -740,7 +1079,7 @@
                         AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
                         AND ANAL_AREA_CD = #{anal_area_cd}
                         AND PROVIDER = #{provider}
-                        <if test="tm==null">
+                        <if test="tm==null || tm.equals('')">
                             AND TM BETWEEN #{tmStart} AND #{tmEnd}
                         </if>
                         <if test="!cd_no[0].equals('00')">
@@ -851,7 +1190,7 @@
                         AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
                         AND ANAL_AREA_CD = #{anal_area_cd}
                         AND PROVIDER = #{provider}
-                        <if test="tm==null">
+                        <if test="tm==null || tm.equals('')">
                             AND TM BETWEEN #{tmStart} AND #{tmEnd}
                         </if>
                         <if test="!cd_no[0].equals('00')">
@@ -966,7 +1305,7 @@
                         AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
                         AND ANAL_AREA_CD = #{anal_area_cd}
                         AND PROVIDER = #{provider}
-                        <if test="tm==null">
+                        <if test="tm==null || tm.equals('')">
                             AND TM BETWEEN #{tmStart} AND #{tmEnd}
                         </if>
                         <if test="!cd_no[0].equals('00')">
@@ -1077,7 +1416,7 @@
 	                        AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
 	                        AND ANAL_AREA_CD = #{anal_area_cd}
 	                        AND PROVIDER = #{provider}
-	                        <if test="tm==null">
+	                        <if test="tm==null || tm.equals('')">
 	                            AND TM BETWEEN #{tmStart} AND #{tmEnd}
 	                        </if>
 	                        <if test="!cd_no[0].equals('00')">

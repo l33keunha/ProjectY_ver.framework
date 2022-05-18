@@ -48,7 +48,11 @@
 		if(jsonArray['anal_type'] == 'transferCnt_station'
 		|| jsonArray['anal_type'] == 'transferCnt_route'){
 			abledDateStart();
-			disabledFalse(5);
+			if(jsonArray['anal_type'] == 'transferCnt_route'){
+				disabledFalse(4);
+			} else{
+				disabledFalse(5);
+			}
 			validationCd_no();
 		}
 	}

@@ -12,6 +12,12 @@ public interface TransferService {
 
 	List<EgovMap> selectTransferResultList(SearchVO sVO);
 
+	List<EgovMap> selectTransferResultListB(SearchVO sVO);
+	
+	List<EgovMap> selectTransferResultListT(SearchVO sVO);
+	
 	void downloadTransferResultList(SearchVO sVO, HttpServletResponse res);
+
+
 
 }

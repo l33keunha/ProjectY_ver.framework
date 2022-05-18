@@ -16,14 +16,23 @@ public interface TransferMapper {
 	// 환승 수단별통행 일별
 	List<EgovMap> selectTransferResultListMethod_d(SearchVO sVO);
 
-	// 환승 정류장별통행
-	List<EgovMap> selectTransferResultListStation(SearchVO sVO);
+	// 환승 정류장별통행 버스
+	List<EgovMap> selectTransferResultListStationB(SearchVO sVO);
+	
+	// 환승 정류장별통행 지하철
+	List<EgovMap> selectTransferResultListStationT(SearchVO sVO);
 
-	// 환승 노선별통행
-	List<EgovMap> selectTransferResultListRoute(SearchVO sVO);
+	// 환승 노선별통행 버스
+	List<EgovMap> selectTransferResultListRouteB(SearchVO sVO);
+	
+	// 환승 노선별통행 지하철
+	List<EgovMap> selectTransferResultListRouteT(SearchVO sVO);
+	
+	// 환승 노선별통행 버스 일별
+	List<EgovMap> selectTransferResultListRouteB_d(SearchVO sVO);
 
-	// 환승 노선별통행 일별
-	List<EgovMap> selectTransferResultListRoute_d(SearchVO sVO);
+	// 환승 노선별통행 지하철 일별
+	List<EgovMap> selectTransferResultListRouteT_d(SearchVO sVO);
 	
 	// 환승 횟수별통행
 	List<EgovMap> selectTransferResultListNum(SearchVO sVO);

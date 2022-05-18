@@ -32,6 +32,27 @@ public class TransferController {
 		System.out.println(sVO.toString());
 		
 		List<EgovMap> transferResultList = new ArrayList<EgovMap>();
+		List<EgovMap> transferResultListB = new ArrayList<EgovMap>(); 		 // 노선별or정류장별 버스 리스트
+		List<EgovMap> transferResultListT = new ArrayList<EgovMap>(); 		 // 노선별or정류장별 지하철 리스트
+		
+		if(sVO.getAnal_type().equals("transferCnt_station")
+			|| sVO.getAnal_type().equals("transferCnt_route")) {
+			transferResultListB = service.selectTransferResultListB(sVO);
+			if(transferResultListB.size() > 0) {
+				for(int i = 0; i < 2; i++) {
+					System.out.println(transferResultListB.get(i).toString());
+				}
+				mv.addObject("transferResultListB", transferResultListB);
+			}
+			
+			transferResultListT = service.selectTransferResultListT(sVO);
+			if(transferResultListT.size() > 0) {
+				for(int i = 0; i < 2; i++) {
+					System.out.println(transferResultListT.get(i).toString());
+				}
+				mv.addObject("transferResultListT", transferResultListT);
+			}
+		}
 		
 		transferResultList = service.selectTransferResultList(sVO);
 		

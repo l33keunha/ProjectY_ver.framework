@@ -54,7 +54,6 @@
 			// 국토부-정산사 재선택시 전에 선택했던 노선박스 비우고 체크박스 해제 + 조회버튼 유효성검사
 			$('.search-con').text("");
 			$('input:radio[name="routeId"]').prop("checked", false);
-			/*overlapCode();*/
 			
 			$('.cell6').css("opacity", 1);
 			$('.cell6_01').css("opacity", 0.3);
@@ -69,17 +68,50 @@
 			addHtml += "</div>";
 			$('.timeNotice').append(addHtml);
 			
-			$("select[name=tmStart]").change(function(){
-				var index = $("select[name=tmStart] option").index($("select[name=tmStart] option:selected")) + 2;
-				if((index == 24) || (index == 25)) $("select[name=tmEnd] option:eq(23)").prop("selected", true);
-				else $('select[name=tmEnd] option:eq('+ index + ')').prop("selected", true);
+			// 디폴트 값 설정
+			$("select[name=tmEnd]").empty();
+			$("select[name=tmEnd]").append("<option value='00'> 00 </option>");
+			$("select[name=tmEnd]").append("<option value='01'> 01 </option>");
+			$("select[name=tmEnd]").append("<option value='02'> 02 </option>");
+			$("select[name=tmEnd] option:last").prop("selected",true);
+			
+			// tmStart 누를 때마다 tmEnd 2시간 간격으로 변경하기
+			$("select[name=tmStart]").on('change',function(){
+				var Html = [];
+				var value = "";
+				var index = $("select[name=tmStart] option").index($("select[name=tmStart] option:selected"));
+				if(index == 22){
+					for(var i = index; i < index + 2; i++){
+						if(i<10){
+							value = "0" + i ;
+						} else {
+							value = i ;
+						}
+						Html[i] = "<option value="+value+">"+value+"</option>";
+					}
+				} else if(index == 23){
+					for(var i = index; i < index + 1; i++){
+						if(i<10){
+							value = "0" + i ;
+						} else {
+							value = i ;
+						}
+						tml[i] = "<option value="+value+">"+value+"</option>";
+					}
+				}else {
+					for(var i = index; i < index + 3; i++){
+						if(i<10){
+							value = "0" + i ;
+						} else {
+							value = i ;
+						}
+						Html[i] = "<option value="+value+">"+value+"</option>";
+					}
+				}
+				$("select[name=tmEnd]").find("option").remove().end().append(Html);
+				$("select[name=tmEnd] option:last").prop("selected",true);
 			})
 			
-			$("select[name=tmEnd]").change(function(){
-				var index = $("select[name=tmEnd] option").index($("select[name=tmEnd] option:selected")) - 2;
-				if((index == -2) || (index == -1)) $("select[name=tmStart] option:eq(0)").prop("selected", true);
-				else $('select[name=tmStart] option:eq('+ index + ')').prop("selected", true);
-			})
 		}
 		
 		// 통행분석 선택박스 case 4 : 상위이용정류장 조회조건 - 서울은 버스,지하철 다르게 표출

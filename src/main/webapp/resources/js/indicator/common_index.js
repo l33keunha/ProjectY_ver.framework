@@ -296,18 +296,31 @@
 		$('.cell3_03').empty();
 		$('.cell3_03').append("<p>날짜</p>");
 		
-		// 노선번호 초기화
+		// 노선번호 초기화 및 노선버튼 비활성화
 		$(".search-con").children().remove();
+		$("label[for=modalBtn]").css("cursor","default");
 		
 		// 시간대 초기화
 		$(".timeNotice").empty();
 		$("select[name=tmEnd]").off();
+		var Html = [];
+		var value = "";
+		for(var i = 0; i < 24; i++){
+			if(i<10){
+				value = "0" + i ;
+			} else {
+				value = i ;
+			}
+			Html[i] = "<option value="+value+">"+value+"</option>";
+		}
+		$("select[name=tmEnd]").find("option").remove().end().append(Html);
+		$("select[name=tmEnd] option:first").prop("selected",true);
 		$("select[name=tmStart]").off();
 		
-		// 다운로드 카테고리 조회 버튼
+		// 다운로드 카테고리(만 적용됨) 조회 버튼
 		$('.submit2').prop("disabled",true);
 		$('.submit2').css("opacity", 0.3);
-		$('.submit2').css("cursor", "auto");
+		$('.submit2').css("cursor", "default");
 		
 		// 전 카테고리 조회 & 다운로드 카테고리 다운로드 버튼
 		$('.submit').prop("disabled",true);
@@ -368,6 +381,9 @@
 			$(".cell" + [i]).css("opacity", 1); 
 			$(".cell" + [i]).find('input').prop("disabled", false);
 			$(".cell" + [i]).find('select').prop("disabled", false);
+		}
+		if(num == 4){
+			fluidTime();
 		}
 	}
 	
@@ -437,6 +453,25 @@
 		$(".cell4").find('select').prop("disabled", false);
 		$('select[name=tmEnd] option:eq(23)').prop("selected", true);
 	}
+	// 시작 시간에 따른 종료시간 설정
+	function fluidTime(){
+		$("select[name=tmStart]").on('change',function(){
+			var Html = [];
+			var value = "";
+			var index = $("select[name=tmStart] option").index($("select[name=tmStart] option:selected"));
+				for(var i = index; i < 24; i++){
+					if(i<10){
+						value = "0" + i ;
+					} else {
+						value = i ;
+					}
+					Html[i] = "<option value="+value+">"+value+"</option>";
+				}
+				$("select[name=tmEnd]").find("option").remove().end().append(Html);
+				$("select[name=tmEnd] option:first").prop("selected",true);
+			})
+	}
+	
 	
 	// 조회버튼 활성화
 	function abledBtn(){
