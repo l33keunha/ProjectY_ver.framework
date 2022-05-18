@@ -945,6 +945,12 @@
 	
 	
 	<!-- ********************** 화면용 다운로드 **********************  -->
+	
+	
+	
+	
+	
+	
 	<!-- PIVOT  목적통행 시간대별 (시간대 합계있음) -->
 	<select id ="downloadPassResultListPurpose" parameterType="sVO" resultType="egovMap" fetchSize="1000">
 	    SELECT *
@@ -2426,4 +2432,41 @@
 	    ORDER BY 순위
 	</select>
 
+
+	<!-- ********************** 노선별OD 매트릭스 **********************  -->
+	<select id ="selectStationNmList" parameterType="sVO" resultType="egovMap">
+		SELECT 정류장명칭 sttnNma
+		FROM STDNN_BRS
+		WHERE 1=1
+			AND 운행일자 = #{dateStart}
+			AND OWNER = #{provider}
+			AND 정산사ID = #{tcboId}
+			AND 인허가지역코드 = #{anal_area_cd}
+			AND 노선ID = #{routeId}
+		ORDER BY 정류장순번
+	</select>
+	
+	<select id ="selectStatioCnt" parameterType="sVO" resultType="_int">
+		SELECT count(*) sttncnt
+		FROM STDNN_BRS
+		WHERE 1=1
+			AND 운행일자 = #{dateStart}
+			AND OWNER = #{provider}
+			AND 정산사ID = #{tcboId}
+			AND 인허가지역코드 = #{anal_area_cd}
+			AND 노선ID = #{routeId}
+		ORDER BY 정류장순번
+	</select>
+	
+	<select id ="selectRouteOD" parameterType="sVO" resultType="egovMap">
+		SELECT *
+		FROM 노선별정류장OD
+		WHERE 1=1
+		AND 운행일자 = #{dateStart}
+		AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
+		AND 노선ID = #{routeId}
+		ORDER BY 정류장순번
+	</select>
+	
+	
 </mapper>

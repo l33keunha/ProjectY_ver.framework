@@ -22,5 +22,11 @@ public interface PassService {
 	/********************** 화면용 다운로드  **********************/
 	
 	void downloadPassResultList(SearchVO sVO, HttpServletResponse res);
+	
+	/********************** 노선별OD 매트릭스  **********************/
+
+	List<EgovMap> selectStationNmList(SearchVO sVO);
+
+	List<EgovMap> selectRouteOD(SearchVO sVO);
 
 }

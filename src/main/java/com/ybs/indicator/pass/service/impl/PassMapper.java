@@ -111,6 +111,14 @@ public interface PassMapper {
 
 	// PIVOT 상위이용정류장 
 	List<EgovMap> downloadPassResultListTopStation(SearchVO sVO);
+	
+	/********************** 노선별OD 매트릭스 **********************/
+
+	List<EgovMap> selectStationNmList(SearchVO sVO);
+
+	int selectStatioCnt(SearchVO sVO);
+
+	List<EgovMap> selectRouteOD(SearchVO sVO);
 
 
 

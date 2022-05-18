@@ -227,6 +227,7 @@
 						addHtml += "<div class='routeType'>" + list.routeType + "</div>";
 						addHtml += "<div class='routeStart'>" + list.routeStart + "</div>";
 						addHtml += "<div class='routeEnd'>" + list.routeEnd + "</div>";
+						addHtml += "<input type='hidden' name='tcboId' value='" + list.tcboId + "'</>";
 						addHtml += "</div>";
 								
 						$('.routeLists').append(addHtml);

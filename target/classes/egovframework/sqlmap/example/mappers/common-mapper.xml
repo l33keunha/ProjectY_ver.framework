@@ -45,7 +45,7 @@
 	
 	<!-- Ajax: 분석 노선번호 조회 -->
 	<select id ="selectPassRouteIdList" parameterType="sVO" resultType="egovMap">
-		SELECT /*+ PARALLEL(8) */ DISTINCT 노선ID ROUTE_ID, 노선명칭 ROUTE_NMA, NVL(유형, '-') ROUTE_TYPE
+		SELECT /*+ PARALLEL(8) */ DISTINCT 정산사ID TCBO_ID, 노선ID ROUTE_ID, 노선명칭 ROUTE_NMA, NVL(유형, '-') ROUTE_TYPE
 	 		,기점 ROUTE_START
 	        ,종점 ROUTE_END
 		FROM STDNN_BRS

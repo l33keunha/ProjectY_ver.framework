@@ -918,6 +918,33 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 			e.printStackTrace();
 		}
 	}
+	
+	
+	
+	
+	
+	/********************** 노선별OD 매트릭스  **********************/
+	
+	
+	
+	
+
+	@Override
+	public List<EgovMap> selectStationNmList(SearchVO sVO) {
+		List<EgovMap> stationNmList = new ArrayList<EgovMap>(); // 정류장명칭 리스트
+		System.out.println("서비스도착");
+		stationNmList = mapper.selectStationNmList(sVO);
+		return stationNmList;
+	}
+
+	@Override
+	public List<EgovMap> selectRouteOD(SearchVO sVO) {
+		List<EgovMap> routeOD = new ArrayList<EgovMap>(); // routeOD
+		int stCnt = mapper.selectStatioCnt(sVO);
+		System.out.println(stCnt);
+		routeOD = mapper.selectRouteOD(sVO);
+		return routeOD;
+	}
 
 	
 }

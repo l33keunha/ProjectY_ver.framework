@@ -15,7 +15,8 @@
 					[ "tmEnd", 	$("select[name=tmEnd]").val()],
 					[ "anal_area_cd_sido_text", 	$("[name=anal_area_cd_sido] option:selected").text()],
 					[ "anal_area_cd_text", 	$("select[name=anal_area_cd] option:selected").text()],
-					[ "provider_text", 	$("input[name=provider]:checked").attr("text2")]
+					[ "provider_text", 	$("input[name=provider]:checked").attr("text2")],
+					[ "tcboId", 	$("input[name=tcboId]").val()]
 		]
 		
 		//해당 체크된 엘리먼트의 이름과 값을 배열에 넣어준다.
