@@ -96,12 +96,12 @@ public class PassController {
 	}
 	
 	@RequestMapping(value="/routeOD.do")
-	public ModelAndView selectRouteOD(ModelAndView mv, @ModelAttribute SearchVO sVO, HttpServletResponse res) {
+	public ModelAndView selectRouteOD(ModelAndView mv, @ModelAttribute SearchVO sVO, HttpServletRequest req, HttpServletResponse res) {
 		sVO.setDateStart(sVO.getDateStart().replaceAll("-", ""));
 		System.out.println(sVO.toString());
 		
 		List<EgovMap> stationNmList = new ArrayList<EgovMap>(); // 정류장명칭 리스트
-		List<EgovMap> routeOD = new ArrayList<EgovMap>(); // routeOD
+		ArrayList<ArrayList<Object>> routeOD = new ArrayList<ArrayList<Object>>(); // routeOD
 		
 		stationNmList = service.selectStationNmList(sVO);
 		if (stationNmList.size() > 0) {
@@ -118,6 +118,10 @@ public class PassController {
 			}
 			mv.addObject("routeOD", routeOD);
 		}
+		
+		mv.addObject("sVO", sVO);
+		mv.addObject("req", req);
+		mv.setViewName("indicator/pass/tableList/pass_popUp_passRouteODmatrix");
 		
 		return mv;
 	}

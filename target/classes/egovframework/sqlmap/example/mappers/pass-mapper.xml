@@ -2435,7 +2435,7 @@
 
 	<!-- ********************** 노선별OD 매트릭스 **********************  -->
 	<select id ="selectStationNmList" parameterType="sVO" resultType="egovMap">
-		SELECT 정류장명칭 sttnNma
+		SELECT 정류장명칭 STTN_NMA, 정류장ID STTN_ID
 		FROM STDNN_BRS
 		WHERE 1=1
 			AND 운행일자 = #{dateStart}
@@ -2447,7 +2447,7 @@
 	</select>
 	
 	<select id ="selectStatioCnt" parameterType="sVO" resultType="_int">
-		SELECT count(*) sttncnt
+		SELECT count(*) STTN_CNT
 		FROM STDNN_BRS
 		WHERE 1=1
 			AND 운행일자 = #{dateStart}

@@ -1,5 +1,6 @@
 package com.ybs.indicator.pass.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +28,6 @@ public interface PassService {
 
 	List<EgovMap> selectStationNmList(SearchVO sVO);
 
-	List<EgovMap> selectRouteOD(SearchVO sVO);
+	ArrayList<ArrayList<Object>> selectRouteOD(SearchVO sVO);
 
 }

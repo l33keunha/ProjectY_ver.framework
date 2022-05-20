@@ -168,6 +168,13 @@ html, body {
     border-collapse: collapse;
     margin-left: 0;
 }
+
+.table2 td {
+    background: #f4faff;
+}
+.tableright01 th {
+    background: #f4faff;
+}
 td {
     border-color: #1f2958;
     border-style: solid;
@@ -213,7 +220,10 @@ table{
 	left: 0;
 	z-index: 10000000;
 }
-
+.tableright01{
+	position: sticky;
+    top: 0;
+}
 .lavel-2 {
     position: sticky;
     top: 92px;

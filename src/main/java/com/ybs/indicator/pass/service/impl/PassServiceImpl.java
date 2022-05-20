@@ -938,12 +938,26 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 	}
 
 	@Override
-	public List<EgovMap> selectRouteOD(SearchVO sVO) {
+	public ArrayList<ArrayList<Object>> selectRouteOD(SearchVO sVO) {
 		List<EgovMap> routeOD = new ArrayList<EgovMap>(); // routeOD
+		ArrayList<Object> routeODarr = new ArrayList<Object>();
+		ArrayList<ArrayList<Object>> routeODList = new ArrayList<ArrayList<Object>>(); // routeOD
+		
 		int stCnt = mapper.selectStatioCnt(sVO);
 		System.out.println(stCnt);
+		
+		Object dataValue = null;
 		routeOD = mapper.selectRouteOD(sVO);
-		return routeOD;
+		for (int i = 0; i < routeOD.size(); i++) {
+			routeODarr = new ArrayList<Object>();
+			for(int j = 0; j < routeOD.size(); j++) {
+				dataValue = routeOD.get(i).get(j+"번정류장");
+				routeODarr.add(dataValue);
+			}
+			routeODList.add(routeODarr);
+		}
+		
+		return routeODList;
 	}
 
 	

@@ -37,19 +37,46 @@
    
         <div class="selectbox">
             <div class ="cell1" >
-                <p>분석지표</p>
+               <p>분석지표</p>
                 <div class="cell1_01"> 
                     <div>
-                        <label><input type="radio" name="anal_group" value="congestion_route_CBP"> 노선별 재차인원 및 혼잡도</label>
-                        <label><input type="radio" name="anal_group" value="congestion_TopRouteOD"> 노선별 상위 5개 최대 및 평균 혼잡구</label>
-                        <label><input type="radio" name="anal_group" value="congestion_TopStationOD"> 정류장간 상위 100개 최대 및 평균 혼잡도</label>
+                        <label><input type="radio" name="anal_group" value="congestionRoute"> 노선별</label>
                     </div>
                 </div>
 
                 <div class="cell1_02">
+                    <div>
+                        <label><input type="radio" name="anal_group" value="congestionTopRouteOD"> 노선별 상위 5개</label>
+                    </div>
                 </div>
 
                 <div class="cell1_03">
+                    <div>
+                        <label><input type="radio" name="anal_group" value="congestionTopStationOD"> 정류장간 상위 100개</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class ="cell2">
+                <p>분석유형</p>
+                <div class="cell2_01">
+                    <div>
+                        <label><input type="radio" name="anal_type" value="congestionRoute_CBP"> 평균재차인원</label>
+                        <label><input type="radio" name="anal_type" value="congestionRoute_DOC"> 평균혼잡도</label>
+                    </div>
+                </div>
+                <div class="cell2_02">
+                    <div>
+                        <label><input type="radio" name="anal_type" value="congestionTopRouteOD_DOC_max"> 최대혼잡구</label>
+                        <label><input type="radio" name="anal_type" value="congestionTopRouteOD_DOC_avg"> 평균혼잡구</label>
+                    </div>
+                </div>
+
+                <div class="cell2_03">
+                    <div>
+                        <label><input type="radio" name="anal_type" value="congestionTopStationOD_DOC_max"> 최대혼잡도</label>
+                        <label><input type="radio" name="anal_type" value="congestionTopStationOD_DOC_avg"> 평균혼잡도</label>
+                    </div>
                 </div>
             </div>
             

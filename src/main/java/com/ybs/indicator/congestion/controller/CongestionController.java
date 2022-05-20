@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.egovframe.rte.psl.dataaccess.util.EgovMap;
 import org.springframework.stereotype.Controller;
@@ -43,11 +44,17 @@ public class CongestionController {
 		
 		mv.addObject("sVO", sVO);
 		mv.addObject("req", req);
-//		mv.setViewName("indicator/congestion/congestion_popUp");
+		mv.setViewName("indicator/congestion/congestion_popUp");
 		
 		return mv;
 	}
-
+		
+	@RequestMapping(value="/congestionDownload.do")
+	public void downloadCongestionResultList(@ModelAttribute SearchVO sVO, HttpServletResponse res) {
+		System.out.println(sVO.toString());
+		service.downloadCongestionResultList(sVO, res);
+	}
+		
 	
 
 }

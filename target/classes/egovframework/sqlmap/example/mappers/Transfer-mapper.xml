@@ -5,9 +5,10 @@
 
 	<!-- 환승 수단별통행 -->
 	<select id ="selectTransferResultListMethod" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-	    SELECT 	SDATE
+	    SELECT SDATE
 	            ,OPRAT_DATE
 	            ,ANAL_AREA_CD
+				,DY
 	            ,CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) TFCMN
 	            ,NVL(TM,'합계') TM
 	            ,NVL(CD_NO,'합계') CD_NO
@@ -17,6 +18,7 @@
 	            SELECT 
 	                SDATE
 	                ,OPRAT_DATE
+					,TO_CHAR(SDATE, 'DY') DY
 	                ,ANAL_AREA_CD
 	                ,CASE WHEN TFCMN_START ='B' THEN '버스' ELSE '지하철' END TFCMN_START
 	                ,CASE WHEN TFCMN_END ='B' THEN '버스' ELSE '지하철' END TFCMN_END
@@ -41,16 +43,18 @@
 	        )
 	    GROUP BY SDATE
 	            ,OPRAT_DATE
+				,DY
 	            ,ANAL_AREA_CD
 	            ,CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END))
 	            ,CUBE (TM,CD_NO)
-	    ORDER BY  SDATE, DECODE(TFCMN, '버스_버스','1', '버스_지하철','2' ,'지하철_지하철','3', '지하철_버스','4'), CD_NO
+	    ORDER BY  SDATE, DECODE(TFCMN, '버스_버스','1', '버스_지하철','2' ,'지하철_지하철','3', '지하철_버스','4'), TM,  CD_NO 
 	</select>
 		
 	<!-- 환승 수단별통행 일별 -->
 	<select id ="selectTransferResultListMethod_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-	    SELECT 	SDATE
+ 	    SELECT 	SDATE
 	            ,OPRAT_DATE
+				,DY
 	            ,ANAL_AREA_CD
 	            ,CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) TFCMN
 	            ,NVL(CD_NO,'합계') CD_NO
@@ -60,6 +64,7 @@
 	            SELECT 
 	                SDATE
 	                ,OPRAT_DATE
+					,TO_CHAR(SDATE, 'DY') DY
 	                ,ANAL_AREA_CD
 	                ,CASE WHEN TFCMN_START ='B' THEN '버스' ELSE '지하철' END TFCMN_START
 	                ,CASE WHEN TFCMN_END ='B' THEN '버스' ELSE '지하철' END TFCMN_END
@@ -81,6 +86,7 @@
 	        )
 	    GROUP BY SDATE
 	            ,OPRAT_DATE
+				,DY
 	            ,ANAL_AREA_CD
 	            ,CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END))
 	            ,ROLLUP (CD_NO)
@@ -91,6 +97,7 @@
 	<select id ="selectTransferResultListStationB" parameterType="sVO" resultType="egovMap" fetchSize="1000">
         SELECT 
             OPRAT_DATE
+			,TO_CHAR(SDATE, 'DY') DY
             ,TFCMN
             ,STTN_ID
             ,STTN_NMA
@@ -110,6 +117,7 @@
             AND TFCMN ='B'
         GROUP BY             
         	OPRAT_DATE
+			,TO_CHAR(SDATE, 'DY')
             ,TFCMN
             ,STTN_ID
             ,STTN_NMA
@@ -122,6 +130,7 @@
 	<select id ="selectTransferResultListStationT" parameterType="sVO" resultType="egovMap" fetchSize="1000">
         SELECT 
             OPRAT_DATE
+			,TO_CHAR(SDATE, 'DY') DY
             ,TFCMN
             ,STTN_ID
             ,STTN_NMA
@@ -141,6 +150,7 @@
             AND TFCMN ='T'
         GROUP BY             
         	OPRAT_DATE
+			,TO_CHAR(SDATE, 'DY')
             ,TFCMN
             ,STTN_ID
             ,STTN_NMA
@@ -153,6 +163,7 @@
 	<select id ="selectTransferResultListRouteB" parameterType="sVO" resultType="egovMap" fetchSize="1000">
         SELECT 
             OPRAT_DATE
+			,TO_CHAR(SDATE, 'DY') DY
             ,ANAL_AREA_CD
             ,TFCMN
             ,ROUTE_ID
@@ -178,6 +189,7 @@
             </if>
         AND TFCMN = 'B'
         GROUP BY OPRAT_DATE
+				,TO_CHAR(SDATE, 'DY')
                 ,ANAL_AREA_CD
                 ,TFCMN
                 ,ROUTE_ID
@@ -193,6 +205,7 @@
 	<select id ="selectTransferResultListRouteT" parameterType="sVO" resultType="egovMap" fetchSize="1000">
         SELECT 
             OPRAT_DATE
+			,TO_CHAR(SDATE, 'DY') DY
             ,ANAL_AREA_CD
             ,TFCMN
             ,ROUTE_ID
@@ -218,6 +231,7 @@
             </if>
         AND TFCMN = 'T'
         GROUP BY OPRAT_DATE
+				,TO_CHAR(SDATE, 'DY')		
                 ,ANAL_AREA_CD
                 ,TFCMN
                 ,ROUTE_ID
@@ -233,6 +247,7 @@
 	<select id ="selectTransferResultListRouteB_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
         SELECT 
             OPRAT_DATE
+			,TO_CHAR(SDATE, 'DY') DY
             ,ANAL_AREA_CD
             ,TFCMN
             ,ROUTE_ID
@@ -255,6 +270,7 @@
             AND TFCMN ='B'
         GROUP BY
                 OPRAT_DATE
+				,TO_CHAR(SDATE, 'DY')
                 ,ANAL_AREA_CD
                 ,TFCMN
                 ,ROUTE_ID
@@ -270,6 +286,7 @@
 	<select id ="selectTransferResultListRouteT_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
         SELECT 
             OPRAT_DATE
+			,TO_CHAR(SDATE, 'DY') DY
             ,ANAL_AREA_CD
             ,TFCMN
             ,ROUTE_ID
@@ -292,6 +309,7 @@
             AND TFCMN ='T'
         GROUP BY
                 OPRAT_DATE
+				,TO_CHAR(SDATE, 'DY')
                 ,ANAL_AREA_CD
                 ,TFCMN
                 ,ROUTE_ID
@@ -308,6 +326,7 @@
 	    SELECT 
 	            SDATE
 	            ,OPRAT_DATE
+				,TO_CHAR(SDATE, 'DY') DY
 	            ,ANAL_AREA_CD
 	            ,TRANSFER_NUM
 	            ,NVL(TM,'합계') TM
@@ -329,6 +348,7 @@
 	        </if>
 	    GROUP BY SDATE
 	            ,OPRAT_DATE
+				,TO_CHAR(SDATE, 'DY')
 	            ,ANAL_AREA_CD
 	            ,TRANSFER_NUM
 	            ,CUBE (TM,CD_NO)
@@ -340,6 +360,7 @@
 	    SELECT 
 	            SDATE
 	            ,OPRAT_DATE
+				,TO_CHAR(SDATE, 'DY') DY
 	            ,ANAL_AREA_CD
 	            ,TRANSFER_NUM
 	            ,NVL(CD_NO,'합계') CD_NO
@@ -357,6 +378,7 @@
 	        </if>
 	    GROUP BY SDATE
 	            ,OPRAT_DATE
+				,TO_CHAR(SDATE, 'DY')
 	            ,ANAL_AREA_CD
 	            ,TRANSFER_NUM
 	            ,ROLLUP (CD_NO)
@@ -367,6 +389,7 @@
 	<select id ="selectTransferResultListTimeMethod" parameterType="sVO" resultType="egovMap" fetchSize="1000">
 	    SELECT 	SDATE
 	            ,OPRAT_DATE
+				,DY
 	            ,ANAL_AREA_CD
 	            ,CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) TFCMN
 	            ,NVL(TM,'평균') TM
@@ -377,6 +400,7 @@
 	            SELECT 
 	                SDATE
 	                ,OPRAT_DATE
+					,TO_CHAR(SDATE, 'DY') DY
 	                ,ANAL_AREA_CD
 	                ,CASE WHEN TFCMN_START ='B' THEN '버스' ELSE '지하철' END TFCMN_START
 	                ,CASE WHEN TFCMN_END ='B' THEN '버스' ELSE '지하철' END TFCMN_END
@@ -401,6 +425,7 @@
 	        )
 	    GROUP BY SDATE
 	            ,OPRAT_DATE
+				,DY
 	            ,ANAL_AREA_CD
 	            ,CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END))
 	            ,CUBE (TM,CD_NO)
@@ -411,6 +436,7 @@
 	<select id ="selectTransferResultListTimeMethod_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
 	    SELECT 	SDATE
 	            ,OPRAT_DATE
+				,DY
 	            ,ANAL_AREA_CD
 	            ,CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) TFCMN
 	            ,NVL(CD_NO,'평균') CD_NO
@@ -420,6 +446,7 @@
 	            SELECT 
 	                SDATE
 	                ,OPRAT_DATE
+					,TO_CHAR(SDATE, 'DY') DY
 	                ,ANAL_AREA_CD
 	                ,CASE WHEN TFCMN_START ='B' THEN '버스' ELSE '지하철' END TFCMN_START
 	                ,CASE WHEN TFCMN_END ='B' THEN '버스' ELSE '지하철' END TFCMN_END
@@ -440,6 +467,7 @@
 	        )
 	    GROUP BY SDATE
 	            ,OPRAT_DATE
+				,DY
 	            ,ANAL_AREA_CD
 	            ,CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END))
 	            ,ROLLUP (CD_NO)
@@ -451,6 +479,7 @@
 	    SELECT 
 	            SDATE
 	            ,OPRAT_DATE
+				,DY
 	            ,ANAL_AREA_CD
 	            ,TRANSFER_NUM
 	            ,NVL(TM,'평균') TM
@@ -461,6 +490,7 @@
 	            SELECT 
 	                SDATE
 	                ,OPRAT_DATE
+					,TO_CHAR(SDATE, 'DY') DY
 	                ,ANAL_AREA_CD
 	                ,TRANSFER_NUM
 	                ,TM
@@ -483,6 +513,7 @@
 	        )
 	    GROUP BY SDATE
 	            ,OPRAT_DATE
+				,DY
 	            ,ANAL_AREA_CD
 	            ,TRANSFER_NUM
 	            ,CUBE(TM, CD_NO)
@@ -494,6 +525,7 @@
 	    SELECT 
 	        SDATE
 	        ,OPRAT_DATE
+			,DY
 	        ,ANAL_AREA_CD
 	        ,TRANSFER_NUM
 	        ,NVL(CD_NO,'평균') CD_NO
@@ -503,10 +535,11 @@
 	            SELECT 
 	                SDATE
 	                ,OPRAT_DATE
+					,TO_CHAR(SDATE, 'DY') DY
 	                ,ANAL_AREA_CD
 	                ,TRANSFER_NUM
 	                ,CD_NO
-	                ,SUM(CASE WHEN USER_TIME_AVG = 0 THEN NULL ELSE USER_TIME_AVG END) OVER (PARTITION BY CD_NO,TRANSFER_NUM) USER_TIME_AVG
+	                ,AVG(CASE WHEN USER_TIME_AVG = 0 THEN NULL ELSE USER_TIME_AVG END) OVER (PARTITION BY OPRAT_DATE, CD_NO,TRANSFER_NUM) USER_TIME_AVG
 	            FROM 환승_횟수별_환승통행시간
 	            WHERE 1=1
 	                AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
@@ -521,6 +554,7 @@
 	        )
 	    GROUP BY SDATE
 	            ,OPRAT_DATE
+				,DY
 	            ,ANAL_AREA_CD
 	            ,TRANSFER_NUM
 	            ,ROLLUP(CD_NO)
@@ -531,6 +565,7 @@
 	<select id ="selectTransferResultListDistnMethod" parameterType="sVO" resultType="egovMap" fetchSize="1000">
 	    SELECT 	SDATE
 	            ,OPRAT_DATE
+				,DY
 	            ,ANAL_AREA_CD
 	            ,CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) TFCMN
 	            ,NVL(TM,'평균') TM
@@ -541,6 +576,7 @@
 	            SELECT 
 	                SDATE
 	                ,OPRAT_DATE
+					,TO_CHAR(SDATE, 'DY') DY
 	                ,ANAL_AREA_CD
 	                ,CASE WHEN TFCMN_START ='B' THEN '버스' ELSE '지하철' END TFCMN_START
 	                ,CASE WHEN TFCMN_END ='B' THEN '버스' ELSE '지하철' END TFCMN_END
@@ -565,6 +601,7 @@
 	        )
 	    GROUP BY SDATE
 	            ,OPRAT_DATE
+				,DY
 	            ,ANAL_AREA_CD
 	            ,CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END))
 	            ,CUBE(TM, CD_NO)
@@ -575,6 +612,7 @@
 	<select id ="selectTransferResultListDistnMethod_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
 	    SELECT 	SDATE
 	            ,OPRAT_DATE
+				,DY
 	            ,ANAL_AREA_CD
 	            ,CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) TFCMN
 	            ,NVL(CD_NO,'평균') CD_NO
@@ -584,11 +622,12 @@
 	            SELECT 
 	                SDATE
 	                ,OPRAT_DATE
+					,TO_CHAR(SDATE, 'DY') DY
 	                ,ANAL_AREA_CD
 	                ,CASE WHEN TFCMN_START ='B' THEN '버스' ELSE '지하철' END TFCMN_START
 	                ,CASE WHEN TFCMN_END ='B' THEN '버스' ELSE '지하철' END TFCMN_END
 	                ,CD_NO
-	                ,SUM(CASE WHEN USER_DIST_AVG = '0' THEN NULL ELSE USER_DIST_AVG END) OVER (PARTITION BY CD_NO, TFCMN_START, TFCMN_END) USER_DIST_AVG
+	                ,AVG(CASE WHEN USER_DIST_AVG = '0' THEN NULL ELSE USER_DIST_AVG END) OVER (PARTITION BY OPRAT_DATE, CD_NO, TFCMN_START, TFCMN_END) USER_DIST_AVG
 	                ,PROVIDER 
 	            FROM 환승_수단별_환승통행거리
 	            WHERE 1=1
@@ -604,6 +643,7 @@
 	        )
 	    GROUP BY SDATE
 	            ,OPRAT_DATE
+				,DY
 	            ,ANAL_AREA_CD
 	            ,CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END))
 	            ,ROLLUP (CD_NO)
@@ -615,6 +655,7 @@
 	    SELECT 
 	        SDATE
 	        ,OPRAT_DATE
+			,DY
 	        ,ANAL_AREA_CD
 	        ,TRANSFER_NUM
 	        ,NVL(TM,'합계') TM
@@ -625,6 +666,7 @@
 	            SELECT 
 	                SDATE
 	                ,OPRAT_DATE
+					,TO_CHAR(SDATE, 'DY') DY
 	                ,ANAL_AREA_CD
 	                ,TRANSFER_NUM
 	                ,TM
@@ -647,6 +689,7 @@
 	        )
 	    GROUP BY SDATE
 	            ,OPRAT_DATE
+				,DY
 	            ,ANAL_AREA_CD
 	            ,TRANSFER_NUM
 	            ,CUBE(TM, CD_NO)
@@ -658,6 +701,7 @@
 	    SELECT 
 	        SDATE
 	        ,OPRAT_DATE
+			,DY
 	        ,ANAL_AREA_CD
 	        ,TRANSFER_NUM
 	        ,NVL(CD_NO,'평균') CD_NO
@@ -667,10 +711,11 @@
 	            SELECT 
 	                SDATE
 	                ,OPRAT_DATE
+					,TO_CHAR(SDATE, 'DY') DY
 	                ,ANAL_AREA_CD
 	                ,TRANSFER_NUM
 	                ,CD_NO
-	                ,SUM(CASE WHEN USER_DIST_AVG = 0 THEN NULL ELSE USER_DIST_AVG END) OVER (PARTITION BY CD_NO, TRANSFER_NUM)  USER_DIST_AVG
+	                ,AVG(CASE WHEN USER_DIST_AVG = 0 THEN NULL ELSE USER_DIST_AVG END) OVER (PARTITION BY OPRAT_DATE, CD_NO, TRANSFER_NUM)  USER_DIST_AVG
 	            FROM 환승_횟수별_환승통행거리
 	            WHERE 1=1
 	                AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
@@ -685,6 +730,7 @@
 	        )
 	    GROUP BY SDATE
 	            ,OPRAT_DATE
+				,DY
 	            ,ANAL_AREA_CD
 	            ,TRANSFER_NUM
 	            ,ROLLUP(CD_NO)
@@ -834,9 +880,6 @@
                 WHERE 1=1
                     AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
                     AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
-                    <if test="tm==null || tm.equals('')">
-                        AND TM BETWEEN #{tmStart} AND #{tmEnd}
-                    </if>
                     <if test="!cd_no[0].equals('00')">
                         AND CD_NO IN
                         <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
@@ -885,6 +928,9 @@
                 WHERE 1=1
                     AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
                     AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
+                    <if test="tm==null || tm.equals('')">
+                        AND TM BETWEEN #{tmStart} AND #{tmEnd}
+                    </if>
                     <if test="!cd_no[0].equals('00')">
                         AND CD_NO IN
                         <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
@@ -1129,7 +1175,7 @@
                         ,CASE WHEN TFCMN_START ='B' THEN '버스' ELSE '지하철' END TFCMN_START
                         ,CASE WHEN TFCMN_END ='B' THEN '버스' ELSE '지하철' END TFCMN_END
                         ,CD_NO
-                        ,SUM(CASE WHEN USER_TIME_AVG = 0 THEN NULL ELSE USER_TIME_AVG END) OVER (PARTITION BY CD_NO, TFCMN_START,TFCMN_END) USER_TIME_AVG
+                        ,AVG(CASE WHEN USER_TIME_AVG = 0 THEN NULL ELSE USER_TIME_AVG END) OVER (PARTITION BY OPRAT_DATE, CD_NO, TFCMN_START,TFCMN_END) USER_TIME_AVG
                         ,PROVIDER 
                     FROM 환승_수단별_환승통행시간
                     WHERE 1=1
@@ -1242,7 +1288,7 @@
                             ,TRANSFER_NUM
                             ,TM
                             ,CD_NO
-                            ,SUM(CASE WHEN USER_TIME_AVG = 0 THEN NULL ELSE USER_TIME_AVG END) OVER (PARTITION BY CD_NO,TRANSFER_NUM) USER_TIME_AVG
+                            ,AVG(CASE WHEN USER_TIME_AVG = 0 THEN NULL ELSE USER_TIME_AVG END) OVER (PARTITION BY OPRAT_DATE, CD_NO,TRANSFER_NUM) USER_TIME_AVG
                         FROM 환승_횟수별_환승통행시간
                         WHERE 1=1
 	                        AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
@@ -1355,7 +1401,7 @@
                         ,CASE WHEN TFCMN_START ='B' THEN '버스' ELSE '지하철' END TFCMN_START
                         ,CASE WHEN TFCMN_END ='B' THEN '버스' ELSE '지하철' END TFCMN_END
                         ,CD_NO
-                        ,SUM(CASE WHEN USER_DIST_AVG = '0' THEN NULL ELSE USER_DIST_AVG END) OVER (PARTITION BY CD_NO, TFCMN_START, TFCMN_END) USER_DIST_AVG
+                        ,AVG(CASE WHEN USER_DIST_AVG = '0' THEN NULL ELSE USER_DIST_AVG END) OVER (PARTITION BY OPRAT_DATE, CD_NO, TFCMN_START, TFCMN_END) USER_DIST_AVG
                         ,PROVIDER 
                     FROM 환승_수단별_환승통행거리
                     WHERE 1=1
@@ -1466,7 +1512,7 @@
                             ,TO_CHAR(SDATE,'DY') DY
                             ,TRANSFER_NUM
                             ,CD_NO
-                            ,SUM(CASE WHEN USER_DIST_AVG = 0 THEN NULL ELSE USER_DIST_AVG END) OVER (PARTITION BY CD_NO, TRANSFER_NUM)  USER_DIST_AVG
+                            ,AVG(CASE WHEN USER_DIST_AVG = 0 THEN NULL ELSE USER_DIST_AVG END) OVER (PARTITION BY OPRAT_DATE, CD_NO, TRANSFER_NUM)  USER_DIST_AVG
                         FROM 환승_횟수별_환승통행거리
                         WHERE 1=1
 	                        AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')

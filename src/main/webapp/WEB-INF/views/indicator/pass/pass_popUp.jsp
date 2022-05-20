@@ -124,7 +124,7 @@
 	      		</div>
 	      		
 	      		<!-- 노선별OD 매트릭스 -->
-	      		<form id="routeODForm" action="routeOD.do" target="excelDown">
+	      		<form id="routeODForm" action="routeOD.do" target="itsme">
 					<div class= "sVOvalue">
 						<input name="dateStart" type="hidden" id="dateStartJS" value="${sVO.dateStart}"/>
 						<input name="dateEnd" type="hidden" id="dateEndJS" value="${sVO.dateEnd}"/>
@@ -142,6 +142,7 @@
 						<input name="tfcmn" type="hidden" id="tfcmnJS" value="${sVO.tfcmn}"/>
 						<input name="tcboId" type="hidden" id="tcboIdJS" value="${sVO.tcboId}"/>
 						<input name="routeId" type="hidden" id="routeIdJS" value="${sVO.routeId}"/>
+						<input name="anal_fin" type="hidden" id="routeIdJS" value="routeODmatrix"/>
 					</div>
 					<!-- 이용자유형 코드 -->
 					<div class="sVOvalue_cd_no">
@@ -159,7 +160,7 @@
 	     	
 	     	<div class="test">
 		     
-		     			     	<div class="content_wrap">
+		     	<div class="content_wrap">
 			     	<c:if test = "${anal_groupText == '통행량' && anal_typeText == '목적통행'}">
 			     		<%@ include file="tableList/pass_popUp_passCnt_purpose.jsp" %>
 			     	</c:if> 
@@ -183,7 +184,6 @@
 			     			$(".content_wrap").css("height", "682px");
 			     		</script>
 			     	</c:if> 
-			     	
 			     	<c:if test = "${anal_groupText == '행정동간OD' && anal_typeText == '목적통행'}">
 			     		<%@ include file="tableList/pass_popUp_passAreaODCnt_purpose.jsp" %>
 			     	</c:if> 

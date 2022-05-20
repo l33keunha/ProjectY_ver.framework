@@ -18,12 +18,12 @@
     </head>
     
     <!-- 코드 텍스트 매칭 -->
-    <%@ include file="transfer_popUp_codeNameMatch.jsp" %>
+    <%@ include file="congestion_popUp_codeNameMatch.jsp" %>
     
     <iframe id="excelDown" name="excelDown" width="0" height="0"></iframe>
     
 	<!-- 다운로드 조회조건 -->
-	<form id="downloadForm" action="transferDownload.do" target="excelDown">
+	<form id="downloadForm" action="congestionDownload.do" target="excelDown">
 		<div class= "sVOvalue">
 			<input name="anal_fin" type="hidden" id="anal_finJS" value="${sVO.anal_fin}"/>
 			<input name="dateStart" type="hidden" id="dateStartJS" value="${sVO.dateStart}"/>
@@ -41,12 +41,6 @@
 			<input name="tmEnd" type="hidden" id="tmEndJS" value="${sVO.tmEnd}"/>
 			<input name="tfcmn" type="hidden" id="tfcmnJS" value="${sVO.tfcmn}"/>
 			<input name="routeId" type="hidden" id="routeIdJS" value="${sVO.routeId}"/>
-		</div>
-			<!-- 이용자유형 코드 -->
-		<div class="sVOvalue_cd_no">
-		    <c:forEach var='j' begin='0' end='${fn:length(sVO.cd_no)-1}' >
-				<input name="cd_no" type="hidden"  value="${sVO.cd_no[j]}"/>
-		    </c:forEach>
 		</div>
 		<input type="submit" id="downloadSubmitBtn" style="display: none;"/>
 	</form>
@@ -74,59 +68,44 @@
 	          <div>
 	          <p>&nbsp;${anal_typeText_titleDraw}</p>
 	          <p>시간대 : ${tmText}</p> 
-	          <p>이용자유형 : ${cd_noText_slash}</p>
 	          <p>&nbsp;${tfcmn_titleDraw}</p>
 	          </div>
 	      	</div>
 	      		
       		<div class="infowrap">
-      			<c:if test = "${anal_groupText == '환승통행'}">
-		     		<span class="info">(단위 : 통행량)</span>
-		     	</c:if> 
-		      
-		     	<c:if test = "${anal_groupText == '환승통행시간'}">
-		     		<span class="info">(단위 : 분)</span>
-		     	</c:if> 
-		     	
-		     	<c:if test = "${anal_groupText == '환승통행거리'}">
-		     		<span class="info">(단위 : km)</span>
-		     	</c:if> 
+	     		<span class="info">(단위 : 통행량)</span>
 		    </div>
 	     	
 	     	<div class="test">
 		     
 		     	<div class="content_wrap">
-			     	<c:if test = "${anal_typeText == '수단별통행'}">
-			     		<%@ include file="tableList/transfer_popUp_method.jsp" %>
-			     	</c:if> 
-			      
-			     	<c:if test = "${anal_typeText == '정류장별통행'}">
-			     		<%@ include file="tableList/transfer_popUp_station.jsp" %>
-			     	</c:if> 
-			     	
-			     	<c:if test = "${anal_typeText == '노선별통행'}">
-			     		<%@ include file="tableList/transfer_popUp_route.jsp" %>
-			     	</c:if> 
-			     	
-			     	<c:if test = "${anal_typeText == '횟수별통행'}">
-			     		<%@ include file="tableList/transfer_popUp_num.jsp" %>
-			     	</c:if> 
-			     	
-		     		<c:if test = "${anal_typeText == '수단별 환승통행시간'}">
-			     		<%@ include file="tableList/transfer_popUp_method.jsp" %>
-			     	</c:if> 
-			     	
-		     		<c:if test = "${anal_typeText == '횟수별 환승통행시간'}">
-			     		<%@ include file="tableList/transfer_popUp_num.jsp" %>
-			     	</c:if> 
-			     	
-		     		<c:if test = "${anal_typeText == '수단별 환승통행거리'}">
-			     		<%@ include file="tableList/transfer_popUp_method.jsp" %>
-			     	</c:if> 
-			     	
-		     		<c:if test = "${anal_typeText == '횟수별 환승통행거리'}">
-			     		<%@ include file="tableList/transfer_popUp_num.jsp" %>
-			     	</c:if> 
+		     	
+		     	<c:if test = "${anal_groupText == '노선별'}">
+			   		<c:if test = "${anal_typeText == '평균 재차인원'}">
+			   			<%@ include file="tableList/congestion_popUp_route.jsp" %>
+			   		</c:if>
+			   		<c:if test = "${anal_typeText == '평균 혼잡도'}">
+			   			<%@ include file="tableList/congestion_popUp_route.jsp" %>
+			   		</c:if>
+			   	</c:if> 
+		   	
+		    	<c:if test = "${anal_groupText == '노선별 상위 5개'}">
+			   		<c:if test = "${anal_typeText == '최대 혼잡구'}">
+			   			<%@ include file="tableList/congestion_popUp_routeOD.jsp" %>
+			   		</c:if>
+			   		<c:if test = "${anal_typeText == '평균 혼잡구'}">
+			   			<%@ include file="tableList/congestion_popUp_routeOD.jsp" %>
+			   		</c:if>
+			   	</c:if> 
+		   	
+		   		<c:if test = "${anal_groupText == '정류장간 상위 100개'}">
+			   		<c:if test = "${anal_typeText == '최대 혼잡도'}">
+			   			<%@ include file="tableList/congestion_popUp_stationOD.jsp" %>
+			   		</c:if>
+			   		<c:if test = "${anal_typeText == '평균 혼잡도'}">
+			   			<%@ include file="tableList/congestion_popUp_stationOD.jsp" %>
+			   		</c:if>
+			   	</c:if>
 		     	</div>
 		     </div>
 		</div>
