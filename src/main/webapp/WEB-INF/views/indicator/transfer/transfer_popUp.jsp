@@ -132,5 +132,12 @@
 		</div>
 		
     </body> 
+    
+  	<script>
+		$('.lavel-1').each(function () {
+			if (this.offsetWidth < this.scrollWidth)
+			    $(this).attr('title', $(this).text());
+		});
+   	</script> 
   
 </html>

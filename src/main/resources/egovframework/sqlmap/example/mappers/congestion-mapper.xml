@@ -342,13 +342,13 @@
 			,MAX22
 			,MAX23
 			,USER_CNT_MAX
-			,RANKING
+			,STTN_RANK
 		FROM 혼잡_노선별_최대평균혼잡도 
 		WHERE 1=1
 			AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
 			AND ANAL_AREA_CD = #{anal_area_cd_sido}
 			AND PROVIDER = #{provider}
-		ORDER BY ROUTE_ID, ROUTE_NMA, ST_STTN_ID
+		ORDER BY ROUTE_ID, ROUTE_NMA, STTN_RANK
 	</select>
 	
 	<!-- PIVOT 노선별 평균 혼잡구 -->
@@ -396,13 +396,13 @@
 			,AVG22
 			,AVG23
 			,USER_CNT_AVG
-			,RANKING
+			,STTN_RANK
 		FROM 혼잡_노선별_최대평균혼잡도 
 		WHERE 1=1
 			AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
 			AND ANAL_AREA_CD = #{anal_area_cd_sido}
 			AND PROVIDER = #{provider}
-		ORDER BY ROUTE_ID, ROUTE_NMA, ST_STTN_ID
+		ORDER BY ROUTE_ID, ROUTE_NMA, STTN_RANK
 	</select>
 	
 	<!-- PIVOT 정류장간 최대 혼잡도 -->

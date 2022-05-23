@@ -30,8 +30,8 @@ public interface PassService {
 
 	ArrayList<ArrayList<Object>> selectRouteOD(SearchVO sVO);
 	
-	/********************** 그래프 쿼리  **********************/
+	/********************** 그래프 쿼리 **********************/
 
-	void graphPassResultList(SearchVO sVO, HttpServletResponse res);
+	List<EgovMap> graphPassResultList(SearchVO sVO, HttpServletResponse res);
 
 }

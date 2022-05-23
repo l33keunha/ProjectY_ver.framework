@@ -963,12 +963,12 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 
 	
 	
-	/********************** 그래프 쿼리  **********************/
+	/********************** 그래프 쿼리 **********************/
 	
 	
 	
 	@Override
-	public void graphPassResultList(SearchVO sVO, HttpServletResponse res) {
+	public List<EgovMap> graphPassResultList(SearchVO sVO, HttpServletResponse res) {
 		List<EgovMap> passResultList = new ArrayList<EgovMap>();
 		switch(sVO.getAnal_type()) {
 		case "passCnt_purpose": 														    // 통행량_목적통행
@@ -996,6 +996,8 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 			}
 			
 		}
+		
+		return passResultList;
 		
 	}
 

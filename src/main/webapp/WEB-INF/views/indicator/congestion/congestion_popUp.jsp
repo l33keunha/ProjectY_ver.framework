@@ -62,8 +62,8 @@
 	          <div>
 	          <p>&nbsp;분석날짜 : ${dateText}</p>
 	          <p>분석자료 : ${sVO.provider_text}</p>
-	          <p>분석지역 : ${anal_area_cd_sido_text} ${anal_area_cd_text}</p>
-	          <p>&nbsp;분석지표 : ${anal_groupText}</p>
+	          <p style="width:500px;">분석지역 : ${anal_area_cd_sido_text} ${anal_area_cd_text}</p>
+	          <p style="width:500px;">&nbsp;분석지표 : ${anal_groupText}</p>
 	          </div>
 	          <div>
 	          <p>&nbsp;${anal_typeText_titleDraw}</p>
@@ -73,7 +73,7 @@
 	      	</div>
 	      		
       		<div class="infowrap">
-	     		<span class="info">(단위 : 통행량)</span>
+	     		<span class="info">(단위 : 명)</span>
 		    </div>
 	     	
 	     	<div class="test">
@@ -112,4 +112,10 @@
 		
     </body> 
   
+  	<script>
+		$('.lavel-1').each(function () {
+			if (this.offsetWidth < this.scrollWidth)
+			    $(this).attr('title', $(this).text());
+		});
+    </script> 
 </html>

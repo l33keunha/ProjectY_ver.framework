@@ -91,8 +91,8 @@
 										</c:if>
 										
 										<c:if test="${(j % dateCnt) == 0}">	   
-											<td class="tg-0pky" rowspan='${timeCnt*4}' 	style="width: 70px; min-width: 70px; max-width: 70px;"><div class="lavel-2">${transferResultList[j*columnCnt].opratDate}</div></td>			<!-- 날짜 -->
-											<td class="tg-0pky" rowspan='${timeCnt*4}' 	style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2">${transferResultList[j*columnCnt].dy}</div></td>					<!-- 요일 -->
+											<td class="tg-0pky" rowspan='${timeCnt*3}' 	style="width: 70px; min-width: 70px; max-width: 70px;"><div class="lavel-2">${transferResultList[j*columnCnt].opratDate}</div></td>			<!-- 날짜 -->
+											<td class="tg-0pky" rowspan='${timeCnt*3}' 	style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2">${transferResultList[j*columnCnt].dy}</div></td>					<!-- 요일 -->
 										</c:if>
 										
 										<td class="tg-0pky" rowspan='${timeCnt}' 	style="width: 100px; min-width: 100px; max-width: 100px;"><div class="lavel-2">${transferResultList[j*columnCnt].tfcmn}</div></td>				<!-- 수단 -->

@@ -19,8 +19,8 @@
 		<c:set var = "timeCnt" value = "${(sVO.tmEnd - sVO.tmStart + 2)}"/>							<!-- 시간 반복 갯수-->
 		<fmt:parseNumber var = "timeCnt" value = "${timeCnt}"  />									<!-- 시간 출력 갯수 -->
 		
-		<c:set var = "numCnt" value = "${dateCnt/timeCnt}"/>											<!-- 횟수 반복 갯수-->
-		<fmt:parseNumber var = "dateCnt" value = "${numCnt}"  />							<!-- 날짜 출력 갯수 -->
+		<c:set var = "numCnt" value = "${dateCnt/timeCnt}"/>										<!-- 횟수 반복 갯수-->
+		<fmt:parseNumber var = "dateCnt" value = "${numCnt}"  />									<!-- 날짜 출력 갯수 -->
 		
 		<c:set var = "indexCnt" value = "0"/>														<!-- 날짜 index count -->
 
@@ -95,11 +95,11 @@
 										</c:if>
 										
 										<c:if test="${(j % dateCnt) == 0}">	   
-											<td class="tg-0pky" rowspan='${timeCnt*numCnt}' 	style="width: 70px; min-width: 70px; max-width: 70px;"><div class="lavel-2">${transferResultList[j*columnCnt].opratDate}</div></td>			<!-- 날짜 -->
-											<td class="tg-0pky" rowspan='${timeCnt*numCnt}' 	style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2">${transferResultList[j*columnCnt].dy}</div></td>					<!-- 요일 -->
+											<td class="tg-0pky" rowspan='${timeCnt*5}' 	style="width: 70px; min-width: 70px; max-width: 70px;"><div class="lavel-2">${transferResultList[j*columnCnt].opratDate}</div></td>			<!-- 날짜 -->
+											<td class="tg-0pky" rowspan='${timeCnt*5}' 	style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2">${transferResultList[j*columnCnt].dy}</div></td>					<!-- 요일 -->
 										</c:if>
 										
-										<td class="tg-0pky" rowspan='${timeCnt}' 	style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2">${transferResultList[j*columnCnt].transferNum}</div></td>				<!-- 수단 -->
+										<td class="tg-0pky" rowspan='${timeCnt}' 	style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2">${transferResultList[j*columnCnt].transferNum}</div></td>				<!-- 횟수 -->
 										 
 										<c:set var = "indexCnt" value = "${indexCnt + 1}"/>
 									</c:if>

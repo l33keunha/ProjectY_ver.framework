@@ -41,6 +41,7 @@
 	                    </foreach>
 	                </if>
 	        )
+	    WHERE CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) != '지하철_지하철'
 	    GROUP BY SDATE
 	            ,OPRAT_DATE
 				,DY
@@ -84,6 +85,7 @@
 	                    </foreach>
 	                </if>
 	        )
+	    WHERE CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) != '지하철_지하철'
 	    GROUP BY SDATE
 	            ,OPRAT_DATE
 				,DY
@@ -423,6 +425,7 @@
 	                    </foreach>
 	                </if>
 	        )
+	    WHERE CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) != '지하철_지하철'
 	    GROUP BY SDATE
 	            ,OPRAT_DATE
 				,DY
@@ -465,6 +468,7 @@
 	                    </foreach>
 	                </if>
 	        )
+	    WHERE CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) != '지하철_지하철'
 	    GROUP BY SDATE
 	            ,OPRAT_DATE
 				,DY
@@ -599,6 +603,7 @@
 	                    </foreach>
 	                </if>
 	        )
+	    WHERE CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) != '지하철_지하철'
 	    GROUP BY SDATE
 	            ,OPRAT_DATE
 				,DY
@@ -641,6 +646,7 @@
 	                    </foreach>
 	                </if>
 	        )
+	 	WHERE CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) != '지하철_지하철'
 	    GROUP BY SDATE
 	            ,OPRAT_DATE
 				,DY
@@ -788,6 +794,7 @@
                                 </foreach>
                             </if>
                     )
+                WHERE CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) != '지하철_지하철'
                 GROUP BY 
                         OPRAT_DATE
                         ,DY
@@ -843,6 +850,7 @@
                             </foreach>
                         </if>
                 )
+            WHERE CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) != '지하철_지하철'
             GROUP BY 
                     OPRAT_DATE
                     ,DY
@@ -1135,6 +1143,7 @@
                             </foreach>
                         </if>
                 )
+            WHERE CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) != '지하철_지하철'
             GROUP BY 
                     OPRAT_DATE
                     ,DY
@@ -1189,6 +1198,7 @@
                             </foreach>
                         </if>
                 )
+            WHERE CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) != '지하철_지하철'
             GROUP BY 
                     OPRAT_DATE
                     ,DY
@@ -1361,6 +1371,7 @@
                             </foreach>
                         </if>
                 )
+            WHERE CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) != '지하철_지하철'
             GROUP BY 
                     OPRAT_DATE
                     ,DY
@@ -1415,6 +1426,7 @@
                             </foreach>
                         </if>
                 )
+           	WHERE CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) != '지하철_지하철'
             GROUP BY 
                     OPRAT_DATE
                     ,DY
@@ -1541,7 +1553,6 @@
             )
         ORDER BY  OPRAT_DATE, TRANSFER_NUM
 	</select>
-	
 	
 	
 </mapper>

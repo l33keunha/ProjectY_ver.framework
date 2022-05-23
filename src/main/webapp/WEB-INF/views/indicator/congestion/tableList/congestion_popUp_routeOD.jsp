@@ -76,7 +76,7 @@
 					<!--thead 시작▼-->
 					<thead>
 						<tr>
-							<!-- 
+							<%-- 
 							<th class="tg-0pky" rowspan="2" style="width: 80px; min-width: 80px; max-width: 80px; height: 55px;">광역/도</th>
 							광역/도
 							<th class="tg-0pky" rowspan="2" style="width: 80px; min-width: 80px; max-width: 80px;">시/군</th>
@@ -85,6 +85,7 @@
 							분석일자
 							<th class="tg-0pky" rowspan="2" style="width: 30px; min-width: 30px; max-width: 30px;">요일</th>
 							<!-- 요일 -->
+							--%>
 							
 							<th class="tg-0pky" rowspan="2" style="width: 122px; min-width: 122px; max-width: 122px; height: 55px;">노선명</th>
 							<!-- 노선명 -->
@@ -146,8 +147,11 @@
 								</c:if> 
 								--%>
 								
-								<td class="tg-0pky" style="width: 122px; min-width: 122px; max-width: 122px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].routeNma}</div></td>
-								<!-- 노선명 -->
+								<c:if test="${j%5 == 0}">
+									<td class="tg-0pky" rowspan='5' style="width: 122px; min-width: 122px; max-width: 122px;"><div class="lavel-2">${congestionResultList[j * columnCnt].routeNma}</div></td>
+									<!-- 노선명 -->
+								</c:if>
+								
 								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].sttnRank}</div></td>
 								<!-- 순위 -->
 								<td class="tg-0pky" style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].stSttnId}</div></td>

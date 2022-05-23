@@ -38,10 +38,13 @@
 			pushArray.splice(4,2);
 			newForm.attr("action","downloadTest.do");
 		} else if($(this).attr('id') == 'transferBtn'){
+			window.open("" ,"newForm", "toolbar=no, width=1800, height=1000, directories=no, status=no, scrollorbars=no, resizable=no");
 			newForm.attr("action","transferTest.do");
 		} else if($(this).attr('id') == 'congestionBtn'){
+			window.open("" ,"newForm", "toolbar=no, width=1800, height=1000, directories=no, status=no, scrollorbars=no, resizable=no");
 			newForm.attr("action","congestionTest.do");
 		} else if($(this).attr('id') == 'timeDistnBtn'){
+			window.open("" ,"newForm", "toolbar=no, width=1800, height=1000, directories=no, status=no, scrollorbars=no, resizable=no");
 			newForm.attr("action","timeDistnTest.do");
 		} 
 		

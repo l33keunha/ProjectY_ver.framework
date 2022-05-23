@@ -2444,7 +2444,12 @@
 			AND 운행일자 = #{dateStart}
 			AND OWNER = #{provider}
 			AND 정산사ID = #{tcboId}
-			AND 인허가지역코드 = #{anal_area_cd}
+			<if test="tmStart==2"> 
+				AND 인허가지역코드_시도 =#{anal_area_cd}
+			</if>
+			<if test="tmStart==5">
+				AND 인허가지역코드 =#{anal_area_cd}
+			</if> 
 			AND 노선ID = #{routeId}
 		ORDER BY 정류장순번
 	</select>
@@ -2456,7 +2461,12 @@
 			AND 운행일자 = #{dateStart}
 			AND OWNER = #{provider}
 			AND 정산사ID = #{tcboId}
-			AND 인허가지역코드 = #{anal_area_cd}
+			<if test="tmStart==2"> 
+				AND 인허가지역코드_시도 =#{anal_area_cd}
+			</if>
+			<if test="tmStart==5">
+				AND 인허가지역코드 =#{anal_area_cd}
+			</if> 
 			AND 노선ID = #{routeId}
 		ORDER BY 정류장순번
 	</select>

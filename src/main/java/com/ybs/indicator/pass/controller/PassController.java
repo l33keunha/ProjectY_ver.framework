@@ -97,6 +97,9 @@ public class PassController {
 	
 	@RequestMapping(value="/routeOD.do")
 	public ModelAndView selectRouteOD(ModelAndView mv, @ModelAttribute SearchVO sVO, HttpServletRequest req, HttpServletResponse res) {
+		// 문자열 길이 비교하기 위한 int변수 담기
+		sVO.setTmStart(sVO.getAnal_area_cd().length());
+		// 운행일자 형식에 맞게 변환
 		sVO.setDateStart(sVO.getDateStart().replaceAll("-", ""));
 		System.out.println(sVO.toString());
 		
@@ -129,8 +132,9 @@ public class PassController {
 	
 	@RequestMapping(value="/passGraph.do")
 	public ModelAndView graphPassResultList(ModelAndView mv, @ModelAttribute SearchVO sVO, HttpServletRequest req, HttpServletResponse res) {
+		List<EgovMap> passResultList = new ArrayList<EgovMap>(); // 정류장명칭 리스트
 		System.out.println(sVO.toString());
-		service.graphPassResultList(sVO, res);
+		passResultList = service.graphPassResultList(sVO, res);
 		return mv;
 	}
 	
