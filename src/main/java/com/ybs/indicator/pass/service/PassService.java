@@ -29,5 +29,9 @@ public interface PassService {
 	List<EgovMap> selectStationNmList(SearchVO sVO);
 
 	ArrayList<ArrayList<Object>> selectRouteOD(SearchVO sVO);
+	
+	/********************** 그래프 쿼리  **********************/
+
+	void graphPassResultList(SearchVO sVO, HttpServletResponse res);
 
 }

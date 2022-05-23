@@ -264,7 +264,7 @@ public class CongestionServiceImpl extends EgovAbstractServiceImpl implements Co
 							+",opratDate"
 							+",dy"
 							+",routeNma"
-							+",ranking"
+							+",sttnRank"
 							+",stSttnId"
 							+",stSttnNma"
 							+",stSttnHjd"
@@ -307,7 +307,7 @@ public class CongestionServiceImpl extends EgovAbstractServiceImpl implements Co
 							+",opratDate"
 							+",dy"
 							+",routeNma"
-							+",ranking"
+							+",sttnRank"
 							+",stSttnId"
 							+",stSttnNma"
 							+",stSttnHjd"
@@ -319,12 +319,84 @@ public class CongestionServiceImpl extends EgovAbstractServiceImpl implements Co
 			break;
 		case "congestionTopStationOD_DOC_max" :
 			System.out.println("PIVOT 정류장간 최대 혼잡도");
-			congestionResultList = mapper.downloadCongestionResultListStationDOC_max(sVO); break;
+			congestionResultList = mapper.downloadCongestionResultListStationDOC_max(sVO); 
+			System.out.println("query 조회 시간 : " + ((System.currentTimeMillis() - sdt) / 1000));
 			
+			// ● 인자값 : 시트명
+			excelName = "정류장간_상위100개_최대혼잡도_"+date_SidoText;
+			
+			// ● 인자값 : 헤더명
+			headerListSt = "분석지역광역도"
+							+",분석지역시군"
+							+",분석자료"
+							+",운행일자"
+							+",요일"
+							+",순위"
+							+",출발정류장ID"
+							+",출발정류장명"
+							+",출발행정동"
+							+",도착정류장ID"
+							+",도착정류장명"
+							+",도착행정동"
+							+ headerStr
+							+",최대";
+			
+			// ● 인자값 : 컬럼명
+			columnListSt = "analAreaSidoCdText"
+							+",analAreaCdText"
+							+",provider"
+							+",opratDate"
+							+",dy"
+							+",sttnRank"
+							+",stSttnId"
+							+",stSttnNma"
+							+",stSttnHjd"
+							+",edSttnId"
+							+",edSttnNma"
+							+",edSttnHjd"
+							+ maxStr
+							+",userCntMax";
+			break;
 		case "congestionTopStationOD_DOC_avg" :
 			System.out.println("PIVOT 정류장간 평균 혼잡도");
-			congestionResultList = mapper.downloadCongestionResultListStationDOC_avg(sVO); break;
+			congestionResultList = mapper.downloadCongestionResultListStationDOC_avg(sVO); 
+			System.out.println("query 조회 시간 : " + ((System.currentTimeMillis() - sdt) / 1000));
 			
+			// ● 인자값 : 시트명
+			excelName = "정류장간_상위100개_최대혼잡도_"+date_SidoText;
+			
+			// ● 인자값 : 헤더명
+			headerListSt = "분석지역광역도"
+							+",분석지역시군"
+							+",분석자료"
+							+",운행일자"
+							+",요일"
+							+",순위"
+							+",출발정류장ID"
+							+",출발정류장명"
+							+",출발행정동"
+							+",도착정류장ID"
+							+",도착정류장명"
+							+",도착행정동"
+							+ headerStr
+							+",최대";
+			
+			// ● 인자값 : 컬럼명
+			columnListSt = "analAreaSidoCdText"
+							+",analAreaCdText"
+							+",provider"
+							+",opratDate"
+							+",dy"
+							+",sttnRank"
+							+",stSttnId"
+							+",stSttnNma"
+							+",stSttnHjd"
+							+",edSttnId"
+							+",edSttnNma"
+							+",edSttnHjd"
+							+ avgStr
+							+",userCntAvg";
+			break;
 		}
 		
 		writeCsvOutput(res, congestionResultList, excelName, headerListSt, columnListSt);

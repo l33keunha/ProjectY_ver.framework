@@ -960,5 +960,44 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 		return routeODList;
 	}
 
+
+	
+	
+	/********************** 그래프 쿼리  **********************/
+	
+	
+	
+	@Override
+	public void graphPassResultList(SearchVO sVO, HttpServletResponse res) {
+		List<EgovMap> passResultList = new ArrayList<EgovMap>();
+		switch(sVO.getAnal_type()) {
+		case "passCnt_purpose": 														    // 통행량_목적통행
+			System.out.println("목적통행_그래프");
+			if("allDay".equals(sVO.getTm())) {
+				passResultList = mapper.graphPassResultListPurpose_d(sVO); break;
+			} else {
+				passResultList = mapper.graphPassResultListPurpose(sVO); break;
+			}
+			
+		case "passCnt_method":                                                              // 통행량_수단통행
+			System.out.println("수단통행_그래프");
+			if("allDay".equals(sVO.getTm())) {
+				passResultList = mapper.graphPassResultListMethod_d(sVO); break;
+			} else {
+			passResultList = mapper.graphPassResultListMethod(sVO); break;
+			}
+			
+		case "passCnt_route":                                                       		// 통행량_노선별통행
+			System.out.println("노선별통행_그래프");
+			if("allDay".equals(sVO.getTm())) {
+				passResultList = mapper.graphPassResultListRoute_d(sVO); break;
+			} else {
+				passResultList = mapper.graphPassResultListRoute(sVO); break;
+			}
+			
+		}
+		
+	}
+
 	
 }

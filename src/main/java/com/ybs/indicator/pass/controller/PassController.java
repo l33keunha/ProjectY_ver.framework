@@ -125,4 +125,14 @@ public class PassController {
 		
 		return mv;
 	}
+	
+	
+	@RequestMapping(value="/passGraph.do")
+	public ModelAndView graphPassResultList(ModelAndView mv, @ModelAttribute SearchVO sVO, HttpServletRequest req, HttpServletResponse res) {
+		System.out.println(sVO.toString());
+		service.graphPassResultList(sVO, res);
+		return mv;
+	}
+	
+	
 }

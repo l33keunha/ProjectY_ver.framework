@@ -120,6 +120,26 @@ public interface PassMapper {
 
 	List<EgovMap> selectRouteOD(SearchVO sVO);
 
-
+	/********************** 그래프 쿼리 **********************/
+	
+	//  목적통행 그래프 시간대별 
+	List<EgovMap> graphPassResultListPurpose(SearchVO sVO);
+	
+	//  목적통행 그래프 일별 
+	List<EgovMap> graphPassResultListPurpose_d(SearchVO sVO);
+	
+	//  수단통행 그래프 시간대별 
+	List<EgovMap> graphPassResultListMethod(SearchVO sVO);
+	
+	//  수단통행 그래프 일별 
+	List<EgovMap> graphPassResultListMethod_d(SearchVO sVO);
+	
+	//  노선별통행 그래프  시간대별
+	List<EgovMap> graphPassResultListRoute(SearchVO sVO);
+	
+	//  노선별통행 그래프  일별
+	List<EgovMap> graphPassResultListRoute_d(SearchVO sVO);
+	
+	
 
 }

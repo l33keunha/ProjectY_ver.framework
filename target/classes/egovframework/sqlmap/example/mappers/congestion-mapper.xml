@@ -91,13 +91,12 @@
 			,MAX22
 			,MAX23
 			,USER_CNT_MAX
-			,RANKING
 		FROM 혼잡_노선별_최대평균혼잡도 
 		WHERE 1=1
 			AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
 			AND ANAL_AREA_CD = #{anal_area_cd_sido}
 			AND PROVIDER = #{provider}
-		ORDER BY ROUTE_ID, ROUTE_NMA, ST_STTN_ID
+		ORDER BY ROUTE_ID, ROUTE_NMA, STTN_RANK
 	</select>
 	
 	<!-- 노선별 평균 혼잡구 -->
@@ -142,21 +141,102 @@
 			,AVG22
 			,AVG23
 			,USER_CNT_AVG
-			,RANKING
 		FROM 혼잡_노선별_최대평균혼잡도 
 		WHERE 1=1
 			AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
 			AND ANAL_AREA_CD = #{anal_area_cd_sido}
 			AND PROVIDER = #{provider}
-		ORDER BY ROUTE_ID, ROUTE_NMA, ST_STTN_ID
+		ORDER BY ROUTE_ID, ROUTE_NMA, STTN_RANK
 	</select>
 	
 	<!-- 정류장간 최대 혼잡도 -->
 	<select id ="selectCongestionResultListStationDOC_max" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+		SELECT 
+			OPRAT_DATE
+			,TO_CHAR(SDATE,'DY') DY
+			,STTN_RANK
+			,ST_STTN_ID
+			,ST_STTN_NMA
+			,ST_STTN_HJD
+			,ED_STTN_ID
+			,ED_STTN_NMA
+			,ED_STTN_HJD
+			,MAX00
+			,MAX01
+			,MAX02
+			,MAX03
+			,MAX04
+			,MAX05
+			,MAX06
+			,MAX07
+			,MAX08
+			,MAX09
+			,MAX10
+			,MAX11
+			,MAX12
+			,MAX13
+			,MAX14
+			,MAX15
+			,MAX16
+			,MAX17
+			,MAX18
+			,MAX19
+			,MAX20
+			,MAX21
+			,MAX22
+			,MAX23
+			,USER_CNT_MAX
+		FROM 혼잡_정류장간_최대평균혼잡도 
+		WHERE 1=1
+			AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
+			AND ANAL_AREA_CD = #{anal_area_cd_sido}
+			AND PROVIDER = #{provider}
+		ORDER BY STTN_RANK
 	</select>
 	
 	<!-- 정류장간 평균 혼잡도 -->
 	<select id ="selectCongestionResultListStationDOC_avg" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+		SELECT 
+			OPRAT_DATE
+			,TO_CHAR(SDATE,'DY') DY
+			,STTN_RANK
+			,ST_STTN_ID
+			,ST_STTN_NMA
+			,ST_STTN_HJD
+			,ED_STTN_ID
+			,ED_STTN_NMA
+			,ED_STTN_HJD
+			,AVG00
+			,AVG01
+			,AVG02
+			,AVG03
+			,AVG04
+			,AVG05
+			,AVG06
+			,AVG07
+			,AVG08
+			,AVG09
+			,AVG10
+			,AVG11
+			,AVG12
+			,AVG13
+			,AVG14
+			,AVG15
+			,AVG16
+			,AVG17
+			,AVG18
+			,AVG19
+			,AVG20
+			,AVG21
+			,AVG22
+			,AVG23
+			,USER_CNT_AVG
+		FROM 혼잡_정류장간_최대평균혼잡도 
+		WHERE 1=1
+			AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
+			AND ANAL_AREA_CD = #{anal_area_cd_sido}
+			AND PROVIDER = #{provider}
+		ORDER BY STTN_RANK
 	</select>
 	
 	
@@ -327,10 +407,98 @@
 	
 	<!-- PIVOT 정류장간 최대 혼잡도 -->
 	<select id ="downloadCongestionResultListStationDOC_max" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+		SELECT 
+			#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
+            ,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
+            ,#{provider_text} PROVIDER
+			,OPRAT_DATE
+			,TO_CHAR(SDATE,'DY') DY
+			,STTN_RANK
+			,ST_STTN_ID
+			,ST_STTN_NMA
+			,ST_STTN_HJD
+			,ED_STTN_ID
+			,ED_STTN_NMA
+			,ED_STTN_HJD
+			,MAX00
+			,MAX01
+			,MAX02
+			,MAX03
+			,MAX04
+			,MAX05
+			,MAX06
+			,MAX07
+			,MAX08
+			,MAX09
+			,MAX10
+			,MAX11
+			,MAX12
+			,MAX13
+			,MAX14
+			,MAX15
+			,MAX16
+			,MAX17
+			,MAX18
+			,MAX19
+			,MAX20
+			,MAX21
+			,MAX22
+			,MAX23
+			,USER_CNT_MAX
+		FROM 혼잡_정류장간_최대평균혼잡도 
+		WHERE 1=1
+			AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
+			AND ANAL_AREA_CD = #{anal_area_cd_sido}
+			AND PROVIDER = #{provider}
+		ORDER BY STTN_RANK
 	</select>
 	
 	<!-- PIVOT 정류장간 평균 혼잡도 -->
 	<select id ="downloadCongestionResultListStationDOC_avg" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+		SELECT 
+			#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
+            ,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
+            ,#{provider_text} PROVIDER
+			,OPRAT_DATE
+			,TO_CHAR(SDATE,'DY') DY
+			,STTN_RANK
+			,ST_STTN_ID
+			,ST_STTN_NMA
+			,ST_STTN_HJD
+			,ED_STTN_ID
+			,ED_STTN_NMA
+			,ED_STTN_HJD
+			,AVG00
+			,AVG01
+			,AVG02
+			,AVG03
+			,AVG04
+			,AVG05
+			,AVG06
+			,AVG07
+			,AVG08
+			,AVG09
+			,AVG10
+			,AVG11
+			,AVG12
+			,AVG13
+			,AVG14
+			,AVG15
+			,AVG16
+			,AVG17
+			,AVG18
+			,AVG19
+			,AVG20
+			,AVG21
+			,AVG22
+			,AVG23
+			,USER_CNT_AVG
+		FROM 혼잡_정류장간_최대평균혼잡도 
+		WHERE 1=1
+			AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
+			AND ANAL_AREA_CD = #{anal_area_cd_sido}
+			AND PROVIDER = #{provider}
+		ORDER BY STTN_RANK
 	</select>
 	
 	
