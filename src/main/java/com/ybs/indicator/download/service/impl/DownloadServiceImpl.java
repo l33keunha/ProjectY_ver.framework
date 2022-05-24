@@ -288,10 +288,9 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 							+",분석자료"
 							+",opratDate"
 							+",tfcmn"
-							+",routeId"
 							+",routeNma"
 							+",routeType"
-							+",routeStar"
+							+",routeStart"
 							+",routeEnd"
 							+",출발정류장순번"
 							+",출발정류장id"
@@ -317,7 +316,87 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 			break;
 
 		case "dlRoute_routeCBP": // 노선별 재차인원 (x)
-			System.out.println("dlRoute_routeCBP (x)");
+			System.out.println("dlRoute_routeCBP");
+			
+			// ● 인자값 : 데이터 리스트
+			downloadResultList = mapper.selectdownloadResultListRouteCBP(sVO);
+			System.out.println("query 조회 시간 : " + ((System.currentTimeMillis() - sdt) / 1000));
+	
+			// ● 인자값 : 시트명
+			excelName = "노선별재차인원_"+date_SidoText;
+	
+			// ● 인자값 : 헤더명
+			headerListSt = "분석지역광역도"
+							+",분석지역시군"
+							+",분석자료"
+							+",운행일자"
+							+",요일"
+							+",노선명"
+							+",노선유형"
+							+",기점"
+							+",종점"
+							+",00시"
+							+",01시"
+							+",02시"
+							+",03시"
+							+",04시"
+							+",05시"
+							+",06시"
+							+",07시"
+							+",08시"
+							+",09시"
+							+",10시"
+							+",11시"
+							+",12시"
+							+",13시"
+							+",14시"
+							+",15시"
+							+",16시"
+							+",17시"
+							+",18시"
+							+",19시"
+							+",20시"
+							+",21시"
+							+",22시"
+							+",23시"
+							+",평균";
+
+			// ● 인자값 : 컬럼명
+			columnListSt = "analAreaSidoCdText"
+							+",analAreaCdText"
+							+",provider"
+							+",opratDate"
+							+",dy"
+							+",routeNma"
+							+",routeType"
+							+",routeStart"
+							+",routeEnd"
+							+",tm00"
+							+",tm01"
+							+",tm02"
+							+",tm03"
+							+",tm04"
+							+",tm05"
+							+",tm06"
+							+",tm07"
+							+",tm08"
+							+",tm09"
+							+",tm10"
+							+",tm11"
+							+",tm12"
+							+",tm13"
+							+",tm14"
+							+",tm15"
+							+",tm16"
+							+",tm17"
+							+",tm18"
+							+",tm19"
+							+",tm20"
+							+",tm21"
+							+",tm22"
+							+",tm23"
+							+",userCntAvg";
+			
 			break;
 		case "dlArea_areaOD_purpose": // 행정동간목적통행
 			System.out.println("행정동간목적통행");

@@ -174,7 +174,7 @@
 										<td class="tg-0pky" style="width: ${tdSize}px; min-width: ${tdSize}px; max-width: ${tdSize}px;"><fmt:formatNumber type="number" value="${transferResultList[i].userTimeAvg}"/></td>				<!-- 이용자유형-->
 									</c:if>
 									<c:if test="${sVO.anal_type == 'transferDistn_num'}">
-										<td class="tg-0pky" style="width: ${tdSize}px; min-width: ${tdSize}px; max-width: ${tdSize}px;"><fmt:formatNumber type="number" value="${transferResultList[i].userDistAvg}"/></td>				<!-- 이용자유형-->
+										<td class="tg-0pky" style="width: ${tdSize}px; min-width: ${tdSize}px; max-width: ${tdSize}px;"><fmt:formatNumber type="number" value="${transferResultList[i].userDistnAvg}"/></td>				<!-- 이용자유형-->
 									</c:if>
 								</c:forEach>
 							</tr>

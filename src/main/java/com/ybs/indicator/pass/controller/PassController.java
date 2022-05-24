@@ -79,7 +79,7 @@ public class PassController {
 			}else {
 				System.out.println("지하철 리스트 존재하지않음");
 			}
-		}
+		} 
 		
 		
 		mv.addObject("sVO", sVO);
@@ -135,6 +135,14 @@ public class PassController {
 		List<EgovMap> passResultList = new ArrayList<EgovMap>(); // 정류장명칭 리스트
 		System.out.println(sVO.toString());
 		passResultList = service.graphPassResultList(sVO, res);
+		if (passResultList.size() > 0) {
+			for(int i = 0; i < 2; i++) {
+				System.out.println(passResultList.get(i).toString());
+			}
+			mv.addObject("passResultList", passResultList);
+		}
+		
+//		mv.setViewName("indicator/pass/pass_popUp");
 		return mv;
 	}
 	

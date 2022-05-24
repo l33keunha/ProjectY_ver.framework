@@ -112,4 +112,30 @@ public interface TransferMapper {
 	// PIVOT 환승 횟수별 환승통행거리 일별
 	List<EgovMap> downloadTransferResultListDistnNum_d(SearchVO sVO);
 
+	
+	/********************** 그래프 쿼리 **********************/
+	
+	
+	// graph 환승 수단별통행
+	List<EgovMap> graphTransferResultListMethod(SearchVO sVO);
+
+	// graph 환승 노선별통행
+	List<EgovMap> graphTransferResultListRoute(SearchVO sVO);
+
+	// graph 환승 횟수별통행
+	List<EgovMap> graphTransferResultListNum(SearchVO sVO);
+
+	// graph 환승 수단별 환승통행시간 
+	List<EgovMap> graphTransferResultListTimeMethod(SearchVO sVO);
+
+	// graph 환승 횟수별 환승통행시간
+	List<EgovMap> graphTransferResultListTimeNum(SearchVO sVO);
+
+	// graph 환승 수단별 환승통행거리
+	List<EgovMap> graphTransferResultListDistnMethod(SearchVO sVO);
+
+	// graph 환승 횟수별 환승통행거리
+	List<EgovMap> graphTransferResultListDistnNum(SearchVO sVO);
+
+
 }

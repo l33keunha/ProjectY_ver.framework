@@ -54,7 +54,7 @@
 	            <div class="button">
 	                <div class="g"><button type="button" id="graph">그래프</button></div>
 	                <div class="d"><button type="button" id="download">다운로드</button></div>
-	                <div class="e"><button type="button" id="exit">닫기</button></div>
+	                <div class="e"><button type="button" id="exit" onClick="window.open('','_self').close();">닫기</button></div>
 	            </div> 
 	        </div>
 	        

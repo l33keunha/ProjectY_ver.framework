@@ -76,4 +76,20 @@ public class TransferController {
 		service.downloadTransferResultList(sVO, res);
 	}
 
+	
+	@RequestMapping(value="/transferGraph.do")
+	public ModelAndView graphPassResultList(ModelAndView mv, @ModelAttribute SearchVO sVO, HttpServletRequest req, HttpServletResponse res) {
+		List<EgovMap> transferResultList = new ArrayList<EgovMap>(); // 정류장명칭 리스트
+		System.out.println(sVO.toString());
+		transferResultList = service.graphTransferResultList(sVO, res);
+		if (transferResultList.size() > 0) {
+			for(int i = 0; i < 2; i++) {
+				System.out.println(transferResultList.get(i).toString());
+			}
+			mv.addObject("transferResultList", transferResultList);
+		}
+		
+//		mv.setViewName("indicator/transfer/trnasfer_popUp");
+		return mv;
+	}
 }

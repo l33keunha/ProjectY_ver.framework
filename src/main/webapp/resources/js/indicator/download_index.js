@@ -22,10 +22,6 @@
 				$('.cell2_02').find('label').css("opacity", 1);
 				$('.cell2_01').find('label').css("opacity", 0.3);
 				$('.cell2_03').find('label').css("opacity", 0.3);
-				
-				// 환승&혼잡 지표 하기 전
-				$('.cell2_02').find('input').eq(2).prop("disabled",true);
-				$('.cell2_02').find('label').eq(2).css("opacity", 0.3);
 			} else if($("input[name=anal_group]:checked").val()=='dlArea'){
 				$('.cell2').css("opacity", 1);
 				$('.cell2_03').find('input').prop("disabled",false);

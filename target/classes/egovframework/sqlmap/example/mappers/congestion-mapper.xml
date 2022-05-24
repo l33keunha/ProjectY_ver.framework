@@ -47,6 +47,45 @@
 	
 	<!-- 노선별 혼잡도 -->
 	<select id ="selectCongestionResultListRouteDOC" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+		SELECT 
+			OPRAT_DATE
+			,TO_CHAR(SDATE,'DY') DY
+			,ROUTE_ID
+			,ROUTE_NMA
+			,ROUTE_TYPE
+			,ROUTE_START
+			,ROUTE_END
+			,TM00
+			,TM01
+			,TM02
+			,TM03
+			,TM04
+			,TM05
+			,TM06
+			,TM07
+			,TM08
+			,TM09
+			,TM10
+			,TM11
+			,TM12
+			,TM13
+			,TM14
+			,TM15
+			,TM16
+			,TM17
+			,TM18
+			,TM19
+			,TM20
+			,TM21
+			,TM22
+			,TM23
+			,USER_CNT_AVG
+		FROM 혼잡_노선별_혼잡도
+		WHERE 1=1
+			AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
+			AND ANAL_AREA_CD = #{anal_area_cd_sido}
+			AND PROVIDER = #{provider}
+		ORDER BY ROUTE_ID, ROUTE_NMA
 	</select>
 	
 	<!-- 노선별 최대 혼잡구 -->
@@ -294,6 +333,48 @@
 	
 	<!-- PIVOT 노선별 혼잡도 -->
 	<select id ="downloadCongestionResultListRouteDOC" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+		SELECT 
+		 	#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
+            ,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
+            ,#{provider_text} PROVIDER
+			,OPRAT_DATE
+			,TO_CHAR(SDATE,'DY') DY
+			,ROUTE_ID
+			,ROUTE_NMA
+			,ROUTE_TYPE
+			,ROUTE_START
+			,ROUTE_END
+			,TM00
+			,TM01
+			,TM02
+			,TM03
+			,TM04
+			,TM05
+			,TM06
+			,TM07
+			,TM08
+			,TM09
+			,TM10
+			,TM11
+			,TM12
+			,TM13
+			,TM14
+			,TM15
+			,TM16
+			,TM17
+			,TM18
+			,TM19
+			,TM20
+			,TM21
+			,TM22
+			,TM23
+			,USER_CNT_AVG
+		FROM 혼잡_노선별_혼잡도
+		WHERE 1=1
+			AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
+			AND ANAL_AREA_CD = #{anal_area_cd_sido}
+			AND PROVIDER = #{provider}
+		ORDER BY ROUTE_ID, ROUTE_NMA
 		
 	</select>
 	

@@ -224,11 +224,42 @@ public class CongestionServiceImpl extends EgovAbstractServiceImpl implements Co
 							+",routeEnd"
 							+ timeStr
 							+",userCntAvg";
+			
 			break;
 		case "congestionRoute_DOC" :
 			System.out.println("PIVOT 노선별 혼잡도");
-			congestionResultList = mapper.downloadCongestionResultListRouteDOC(sVO); 
+			congestionResultList = mapper.downloadCongestionResultListRouteDOC(sVO);
 
+			System.out.println("query 조회 시간 : " + ((System.currentTimeMillis() - sdt) / 1000));
+			
+			// ● 인자값 : 시트명
+			excelName = "노선별_혼잡도_"+date_SidoText;
+			
+			// ● 인자값 : 헤더명
+			headerListSt = "분석지역광역도"
+							+",분석지역시군"
+							+",분석자료"
+							+",운행일자"
+							+",요일"
+							+",노선명"
+							+",노선유형"
+							+",기점"
+							+",종점"
+							+ headerStr
+							+",평균";
+			
+			// ● 인자값 : 컬럼명
+			columnListSt = "analAreaSidoCdText"
+							+",analAreaCdText"
+							+",provider"
+							+",opratDate"
+							+",dy"
+							+",routeNma"
+							+",routeType"
+							+",routeStart"
+							+",routeEnd"
+							+ timeStr
+							+",userCntAvg";
 			
 			break;
 		case "congestionTopRouteOD_DOC_max" :

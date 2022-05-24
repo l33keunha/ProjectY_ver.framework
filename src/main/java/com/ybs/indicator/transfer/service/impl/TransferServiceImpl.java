@@ -100,15 +100,15 @@ public class TransferServiceImpl extends EgovAbstractServiceImpl implements Tran
 		List<EgovMap> transferResultListB = new ArrayList<EgovMap>();
 		switch(sVO.getAnal_type()) {
 		case "transferCnt_station" :
-			System.out.println("환승_정류장별통행");
+			System.out.println("환승_정류장별통행_B");
 			transferResultListB = mapper.selectTransferResultListStationB(sVO);break;
 			
 		case "transferCnt_route" :
 			if("allDay".equals(sVO.getTm())) {
-				System.out.println("환승_노선별통행_일별");
+				System.out.println("환승_노선별통행_일별_B");
 				transferResultListB = mapper.selectTransferResultListRouteB_d(sVO); break;
 			} else {
-				System.out.println("환승_노선별통행");
+				System.out.println("환승_노선별통행_B");
 				transferResultListB = mapper.selectTransferResultListRouteB(sVO); break;
 			}	
 		}
@@ -124,15 +124,15 @@ public class TransferServiceImpl extends EgovAbstractServiceImpl implements Tran
 		List<EgovMap> transferResultListT = new ArrayList<EgovMap>();
 		switch(sVO.getAnal_type()) {
 		case "transferCnt_station" :
-			System.out.println("환승_정류장별통행");
+			System.out.println("환승_정류장별통행_T");
 			transferResultListT = mapper.selectTransferResultListStationT(sVO);break;
 			
 		case "transferCnt_route" :
 			if("allDay".equals(sVO.getTm())) {
-				System.out.println("환승_노선별통행_일별");
+				System.out.println("환승_노선별통행_일별_T");
 				transferResultListT = mapper.selectTransferResultListRouteT_d(sVO); break;
 			} else {
-				System.out.println("환승_노선별통행");
+				System.out.println("환승_노선별통행_T");
 				transferResultListT = mapper.selectTransferResultListRouteT(sVO); break;
 			}	
 		}
@@ -677,7 +677,48 @@ public class TransferServiceImpl extends EgovAbstractServiceImpl implements Tran
 		}
 	}
 
+	
+	/********************** 그래프 쿼리 **********************/
+	
+	
+	@Override
+	public List<EgovMap> graphTransferResultList(SearchVO sVO, HttpServletResponse res) {
+		List<EgovMap> transferResultList = new ArrayList<EgovMap>();
+		
+		
+		switch(sVO.getAnal_type()) {
+		case "transferCnt_method" :
+				System.out.println("환승_수단별통행_그래프");
+				transferResultList = mapper.graphTransferResultListMethod(sVO); break;
+				
+		case "transferCnt_route" :
+				System.out.println("환승_노선별통행_그래프");
+				transferResultList = mapper.graphTransferResultListRoute(sVO); break;
+			
+		case "transferCnt_num" :
+				System.out.println("환승_횟수별통행_그래프");
+				transferResultList = mapper.graphTransferResultListNum(sVO); break;
+			
+		case "transferTime_method" :
+				System.out.println("환승_수단별 환승통행시간_그래프");
+				transferResultList = mapper.graphTransferResultListTimeMethod(sVO); break;
+			
+		case "transferTime_num" :
+				System.out.println("환승_횟수별 환승통행시간_그래프");
+				transferResultList = mapper.graphTransferResultListTimeNum(sVO); break;
+			
+		case "transferDistn_method" :
+				System.out.println("환승_수단별 환승통행거리_그래프");
+				transferResultList = mapper.graphTransferResultListDistnMethod(sVO); break;
+			
+		case "transferDistn_num" :
+				System.out.println("환승_횟수별 환승통행거리_그래프");
+				transferResultList = mapper.graphTransferResultListDistnNum(sVO); break;
+		}
+		
+		return transferResultList;
+	}
 
-
+	
 
 }

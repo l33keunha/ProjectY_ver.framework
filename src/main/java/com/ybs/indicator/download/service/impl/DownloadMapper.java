@@ -36,5 +36,8 @@ public interface DownloadMapper {
 	// 노선별 정류장간OD
 	List<EgovMap> selectdownloadResultListRouteOD(SearchVO sVO);
 
+	// 노선별 재차인원
+	List<EgovMap> selectdownloadResultListRouteCBP(SearchVO sVO);
+
 
 }

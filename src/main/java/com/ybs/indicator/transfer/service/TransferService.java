@@ -16,7 +16,13 @@ public interface TransferService {
 	
 	List<EgovMap> selectTransferResultListT(SearchVO sVO);
 	
+	/********************** 화면용 다운로드 **********************/
+	
 	void downloadTransferResultList(SearchVO sVO, HttpServletResponse res);
+	
+	/********************** 그래프용 쿼리 **********************/
+
+	List<EgovMap> graphTransferResultList(SearchVO sVO, HttpServletResponse res);
 
 
 
