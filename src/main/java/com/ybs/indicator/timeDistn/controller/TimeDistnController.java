@@ -28,31 +28,32 @@ public class TimeDistnController {
 	
 	@RequestMapping(value="/timeDistnTest.do")
 	public ModelAndView selectTimeDistnResultList(ModelAndView mv, HttpServletRequest req, @ModelAttribute SearchVO sVO) {
+		sVO.setDateStart(sVO.getDateStart().replaceAll("-", ""));
 		System.out.println(sVO.toString());
 		
-		List<EgovMap> timeDistnResultListT = new ArrayList<EgovMap>();
-		List<EgovMap> timeDistnResultListD = new ArrayList<EgovMap>();
+		List<EgovMap> timeDistnResultList = new ArrayList<EgovMap>();
+//		List<EgovMap> timeDistnResultListD = new ArrayList<EgovMap>();
 		
-		timeDistnResultListT = service.selectTimeDistnResultListT(sVO);
-		timeDistnResultListD = service.selectTimeDistnResultListD(sVO);
+		timeDistnResultList = service.selectTimeDistnResultListT(sVO);
+//		timeDistnResultListD = service.selectTimeDistnResultListD(sVO);
 		
-		if(timeDistnResultListT.size() > 0) {
+		if(timeDistnResultList.size() > 0) {
 			for(int i = 0; i < 2; i++) {
-				System.out.println(timeDistnResultListT.get(i).toString());
+				System.out.println(timeDistnResultList.get(i).toString());
 			}
-			mv.addObject("timeDistnResultListT", timeDistnResultListT);
+			mv.addObject("timeDistnResultList", timeDistnResultList);
 		} 
 		
-		if(timeDistnResultListD.size() > 0) {
-			for(int i = 0; i < 2; i++) {
-				System.out.println(timeDistnResultListD.get(i).toString());
-			}
-			mv.addObject("timeDistnResultListD", timeDistnResultListD);
-		} 
+//		if(timeDistnResultListD.size() > 0) {
+//			for(int i = 0; i < 2; i++) {
+//				System.out.println(timeDistnResultListD.get(i).toString());
+//			}
+//			mv.addObject("timeDistnResultListD", timeDistnResultListD);
+//		} 
 		
 		mv.addObject("sVO", sVO);
 		mv.addObject("req", req);
-//		mv.setViewName("indicator/timeDistn/timeDistn_popUp");
+		mv.setViewName("indicator/timeDistn/timeDistn_popUp");
 		
 		return mv;
 	}

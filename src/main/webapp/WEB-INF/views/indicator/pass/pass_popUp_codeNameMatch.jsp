@@ -151,11 +151,9 @@
     <c:if test="${tmText == 'allDay'}">
     	<c:set var = "tmText" value = "1일"/>
     </c:if>
-    <c:if test="${tmText == null}">
+    <c:if test="${tmText == null || tmText == ''}">
     	<c:set var = "tmText" value = "${sVO.tmStart}시 ~ ${sVO.tmEnd}시"/>
     </c:if>
-  
-  
 	
     
     <!-- 날짜 -->

@@ -11,14 +11,17 @@
     <!-- 분석지표 -->
     <c:set var = "anal_groupText" value = "${sVO.anal_group}"/>
     <c:choose>    
-         <c:when test = "${anal_groupText == 'transferCnt'}">
-           	 <c:set var = "anal_groupText" value = "환승통행"/>
+         <c:when test = "${anal_groupText == 'timeDistn_avg_day'}">
+           	 <c:set var = "anal_groupText" value = "1일 평균 통행시간/거리"/>
          </c:when>
-         <c:when test = "${anal_groupText == 'transferTime'}">
-           	 <c:set var = "anal_groupText" value = "환승통행시간"/>
+         <c:when test = "${anal_groupText == 'timeDistn_avg_purpose'}">
+           	 <c:set var = "anal_groupText" value = "목적통행 평균 통행시간/거리"/>
          </c:when>
-         <c:when test = "${anal_groupText == 'transferDistn'}">
-           	 <c:set var = "anal_groupText" value = "환승통행거리"/>
+         <c:when test = "${anal_groupText == 'timeDistn_avg_method'}">
+           	 <c:set var = "anal_groupText" value = "수단통행 평균 통행시간/거리"/>
+         </c:when>
+         <c:when test = "${anal_groupText == 'timeDistn_avg_route'}">
+           	 <c:set var = "anal_groupText" value = "노선별 평균 통행시간/거리"/>
          </c:when>
     	
          <c:otherwise>
@@ -26,41 +29,6 @@
          </c:otherwise>
 	</c:choose>   
 	
-	
-	<!-- 분석유형 -->
-    <c:set var = "anal_typeText" value = "${sVO.anal_type}"/>
-    <c:choose>    
-         <c:when test = "${anal_typeText == 'transferCnt_method'}">
-           	 <c:set var = "anal_typeText" value = "수단별통행"/>
-         </c:when>
-         <c:when test = "${anal_typeText == 'transferCnt_station'}">
-           	 <c:set var = "anal_typeText" value = "정류장별통행"/>
-         </c:when>
-    	 <c:when test = "${anal_typeText == 'transferCnt_route'}">
-           	 <c:set var = "anal_typeText" value = "노선별통행"/>
-         </c:when>
-    	 <c:when test = "${anal_typeText == 'transferCnt_num'}">
-           	 <c:set var = "anal_typeText" value = "횟수별통행"/>
-         </c:when>
-    	 <c:when test = "${anal_typeText == 'transferTime_method'}">
-           	 <c:set var = "anal_typeText" value = "수단별 환승통행시간"/>
-         </c:when>
-    	 <c:when test = "${anal_typeText == 'transferTime_num'}">
-           	 <c:set var = "anal_typeText" value = "횟수별 환승통행시간"/>
-         </c:when>
-    	 <c:when test = "${anal_typeText == 'transferDistn_method'}">
-           	 <c:set var = "anal_typeText" value = "수단별 환승통행거리"/>
-         </c:when>
-    	 <c:when test = "${anal_typeText == 'transferDistn_num'}">
-           	 <c:set var = "anal_typeText" value = "횟수별 환승통행거리"/>
-         </c:when>
-    
-         <c:otherwise>
-           		<c:set var = "anal_typeText" value = ""/>
-         </c:otherwise>
-	</c:choose>
-	
-
 	
 	<!-- 이용자유형 -->  
     <c:set var = "cd_noText" value = ""/>
@@ -141,7 +109,7 @@
     <c:if test="${tmText == 'allDay'}">
     	<c:set var = "tmText" value = "1일"/>
     </c:if>
-    <c:if test="${tmText == null || tmText == ''}">
+    <c:if test="${tmText == null}">
     	<c:set var = "tmText" value = "${sVO.tmStart}시 ~ ${sVO.tmEnd}시"/>
     </c:if>
   
@@ -172,52 +140,18 @@
     <c:set var = "anal_typeText_titleDraw" value = ""/>
     <c:set var = "tfcmn_titleDraw" value = ""/>
     
-    <c:if test = "${anal_groupText == '환승통행'}">
-   		
-   		<c:if test = "${anal_typeText == '수단별통행'}">
-   			<c:set var = "anal_typeText_titleDraw" value = "분석유형 : 수단별통행"/>
-   		</c:if>
-   		
-   		<c:if test = "${anal_typeText == '정류장별통행'}">
-   			<c:set var = "anal_typeText_titleDraw" value = "분석유형 : 정류장별통행"/>
-		   	<c:set var = "tmText" value = "1일"/>
-		    <c:set var = "dateText" value = "${sVO.dateStart}"/>
-   		</c:if>
-   		
-   		<c:if test = "${anal_typeText == '노선별통행'}">
-   			<c:set var = "anal_typeText_titleDraw" value = "분석유형 : 노선별통행"/>
-   		</c:if>
-   		
-   		<c:if test = "${anal_typeText == '횟수별통행'}">
-   			<c:set var = "anal_typeText_titleDraw" value = "분석유형 : 횟수별통행"/>
-   		</c:if>
-   		
-   	</c:if> 
-   	
-   	<c:if test = "${anal_groupText == '환승통행시간'}">
-   		
-   		<c:if test = "${anal_typeText == '수단별 환승통행시간'}">
-   			<c:set var = "anal_typeText_titleDraw" value = "분석유형 : 수단별 환승통행시간"/>
-   		</c:if>
-   		
-   		<c:if test = "${anal_typeText == '횟수별 환승통행시간'}">
-   			<c:set var = "anal_typeText_titleDraw" value = "분석유형 : 횟수별 환승통행시간"/>
-   		</c:if>
-   		 	
-   	</c:if> 
-   	
-   	<c:if test = "${anal_groupText == '환승통행거리'}">
-   		
-   		<c:if test = "${anal_typeText == '수단별 환승통행거리'}">
-   			<c:set var = "anal_typeText_titleDraw" value = "분석유형 : 수단별 환승통행거리"/>
-   		</c:if>
-   		
-   		<c:if test = "${anal_typeText == '횟수별 환승통행거리'}">
-   			<c:set var = "anal_typeText_titleDraw" value = "분석유형 : 횟수별 환승통행거리"/>
-   		</c:if>
-   		 	
-   	</c:if> 
-  
+    <c:if test = "${anal_groupText == '1일 평균 통행시간/거리'}">
+   		<c:set var = "anal_typeText_titleDraw" value = ""/>
+   	</c:if>
+    <c:if test = "${anal_groupText == '목적통행 평균 통행시간/거리'}">
+   		<c:set var = "anal_typeText_titleDraw" value = ""/>
+   	</c:if>
+    <c:if test = "${anal_groupText == '수단통행 평균 통행시간/거리'}">
+   		<c:set var = "anal_typeText_titleDraw" value = ""/>
+   	</c:if>
+    <c:if test = "${anal_groupText == '노선별 평균 통행시간/거리'}">
+   		<c:set var = "anal_typeText_titleDraw" value = ""/>
+   	</c:if>
    	
     
 	

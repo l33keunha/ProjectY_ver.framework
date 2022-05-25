@@ -40,11 +40,13 @@ public class CongestionController {
 				System.out.println(congestionResultList.get(i).toString());
 			}
 			mv.addObject("congestionResultList", congestionResultList);
+			mv.setViewName("indicator/congestion/congestion_popUp");
+		} else {
+			mv.setViewName("common/error");
 		}
 		
 		mv.addObject("sVO", sVO);
 		mv.addObject("req", req);
-		mv.setViewName("indicator/congestion/congestion_popUp");
 		
 		return mv;
 	}

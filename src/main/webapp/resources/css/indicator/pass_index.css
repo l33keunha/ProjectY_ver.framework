@@ -318,7 +318,7 @@ input.date {
     float: left;
 }
 .input-wrap input{
-    width: 189px;
+    /* width: 189px; */
     height: 26px;
     /* border: none; */
     padding: 5px;
@@ -516,8 +516,8 @@ input[id=modalBtn] + label {
 }
 
 input[name=routeId]{
-	width: 15px;
-    margin: 0px 30px;
+	/*width: 15px;*/
+    margin: 0px 20px;
 }
 
 .routeNm{
@@ -637,3 +637,11 @@ input[name=routeId]{
       opacity: 0;
     }
   }
+  
+  .lavel-1{
+  white-space: nowrap;
+   		overflow: hidden;
+    	text-overflow: ellipsis;
+    	width: 138px;
+    	text-align: left;
+    	}

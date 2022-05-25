@@ -223,7 +223,7 @@
 						var addHtml = "";
 						
 						addHtml += "<div class='routeList'>";
-						addHtml += "<div class='routeNm'><input type='radio' value='" + list.routeId + "' name='routeId'>" + list.routeNma + "</div>";
+						addHtml += "<div class='routeNm'><input type='radio' value='" + list.routeId + "' name='routeId'><span class='lavel-1'>" + list.routeNma + "</span></div>";
 						addHtml += "<div class='routeType'>" + list.routeType + "</div>";
 						addHtml += "<div class='routeStart'>" + list.routeStart + "</div>";
 						addHtml += "<div class='routeEnd'>" + list.routeEnd + "</div>";
@@ -237,6 +237,16 @@
 			})	
 		}
 	})
+	
+	
+	
+	// 노선명 말줄임표
+	$('.lavel-1').each(function () {
+		if (this.offsetWidth < this.scrollWidth)
+		    $(this).attr('title', $(this).text());
+	});
+
+	
 	
 	// 검색기능 : keyup때 마다 값이 포함된 리스트만 보여줌
 	$(document).ready(function(){
@@ -269,4 +279,9 @@
 		
 		$('.search-con').append(addHtml);
 	})
+	
+	
+	
+	
+	
 	

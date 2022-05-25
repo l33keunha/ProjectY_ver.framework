@@ -52,6 +52,35 @@
 		</div>
 		<input type="submit" id="downloadSubmitBtn" style="display: none;"/>
 	</form>
+	
+	<!-- 그래프 조회조건 -->
+	<form id="graphForm" action="passGraph.do" target="graph" method="post">
+		
+		<input name="anal_fin" type="hidden" id="anal_finJS" value="${sVO.anal_fin}"/>
+		<input name="dateStart" type="hidden" id="dateStartJS" value="${sVO.dateStart}"/>
+		<input name="dateEnd" type="hidden" id="dateEndJS" value="${sVO.dateEnd}"/>
+		<input name="anal_area_cd_sido" type="hidden" id="anal_area_cd_sidoJS" value="${sVO.anal_area_cd_sido}"/>
+		<input name="anal_area_cd_sido_text" type="hidden" id="anal_area_cd_sido_textJS" value="${sVO.anal_area_cd_sido_text}"/>
+		<input name="anal_area_cd" type="hidden" id="anal_area_cdJS" value="${sVO.anal_area_cd}"/>
+		<input name="anal_area_cd_text" type="hidden" id="anal_area_cd_textJS" value="${sVO.anal_area_cd_text}"/>
+		<input name="provider" type="hidden" id="providerJS" value="${sVO.provider}"/>
+		<input name="provider_text" type="hidden" id="provider_textJS" value="${sVO.provider_text}"/>
+		<input name="anal_group" type="hidden" id="anal_groupJS" value="${sVO.anal_group}"/>
+		<input name="anal_type" type="hidden" id="anal_typeJS" value="${sVO.anal_type}"/>
+		<input name="tm" type="hidden" id="tm" value="${sVO.tm}"/>
+		<input name="tmStart" type="hidden" id="tmStartJS" value="${sVO.tmStart}"/>
+		<input name="tmEnd" type="hidden" id="tmEndJS" value="${sVO.tmEnd}"/>
+		<input name="tfcmn" type="hidden" id="tfcmnJS" value="${sVO.tfcmn}"/>
+		<input name="routeId" type="hidden" id="routeIdJS" value="${sVO.routeId}"/>
+		
+	    <c:forEach var='j' begin='0' end='${cd_noLength-1}' >
+			<input name="cd_no" type="hidden"  value="${sVO.cd_no[j]}"/>
+	    </c:forEach>
+		
+		<input name="cd_noText" id="cd_noText" type="hidden"  value="${cd_noText}"/>
+
+		<input type="submit" id="graphSubmitBtn" style="display: none;"/>
+	</form>
 
   
     <body>
@@ -63,7 +92,7 @@
 	                	<div class="g"><button type="button" id="graph">그래프</button></div>
 	                </c:if>
 	                <c:if test = "${anal_groupText == '노선별OD' && anal_typeText == ''}">
-		                <div class="g"><button type="button" id="matrix">OD매트릭스</button></div>
+		                <div class="g" style="width: 145px;"><button type="button" id="matrix" style="width: 109px;">OD매트릭스</button></div>
 	                </c:if>
 	                <div class="d"><button type="button" id="download">다운로드</button></div>
 	                <div class="e"><button type="button" id="exit" onClick="window.open('','_self').close();">닫기</button></div>

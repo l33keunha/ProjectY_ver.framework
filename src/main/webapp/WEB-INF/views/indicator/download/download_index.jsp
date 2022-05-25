@@ -8,7 +8,7 @@
         <link rel="stylesheet" type="text/css" href="resources/css/indicator/common_index.css"> 
         <link rel="stylesheet" type="text/css" href="resources/css/indicator/download_index.css"> 
         <link rel="stylesheet" type="text/css" href="resources/css/indicator/jquery-ui.css"> 
-        <script type="text/javascript" src="resources/js/indicator/common_index.js" defer ></script>
+        <!-- <script type="text/javascript" src="resources/js/indicator/common_index.js" defer ></script> --> 
         <script type="text/javascript" src="resources/js/indicator/download_index.js" defer ></script>
         <script src ="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -112,18 +112,212 @@
                 <div class ="cell4">
                     <p>제공 자료</p>
                     <div class="cell4_01">
-                        <div>
-                            <p>자료설명:</p>
-                            
-                            <span>test</span>
-                        </div>
-                    </div>
-                    <div class="cell4_02">
-                        <div>
-                            <p>데이터 컬럼명:</p>
-                            <span>test</span>
-                        </div>
-                    </div>
+	                    <div class="cell4_01_01">
+	                        <div>
+	                            <span>파일명 : </span> 
+	                            <p>정류장별_통행_서울특별시_전체_20210322</p>
+	                        </div>
+	                    </div>
+	                    <div class="cell4_01_02">
+	                        <div>
+	                            <span>파일설명 : </span>
+	                            <p>분석지역 내에 존재하는 정류장별의 통행량입니다.</p>
+	                        </div>
+	                    </div>
+	                    <div class="cell4_01_03">
+	                        <div id="cell4_01_03_01">
+                            	<span>※ 다운로드 파일의 예시 내용입니다.</span>
+	                        </div>
+                            <div id="cell4_01_03_02">
+	                            <table>
+	                            <colgroup>
+		                            <col width="50px"/>
+	                            </colgroup>
+									<tr>	
+										<th>광역/도</th>
+										<th>시/군</th>
+										<th>분석자료</th>
+										<th>분석일자</th>
+										<th>정류장구분</th>
+										<th>정류장ID</th>
+										<th>정류장명</th>
+										<th>행정동</th>
+										<th>시간</th>
+										<th>일반_승차</th>
+										<th>일반_하차</th>
+										<th>일반_환승</th>
+										<th>어린이_승차</th>
+										<th>어린이_하차</th>
+										<th>어린이_환승</th>
+										<th>청소년_승차</th>
+										<th>청소년_하차</th>
+										<th>청소년_환승</th>
+										<th>경로_승차</th>
+										<th>경로_하차</th>
+										<th>경로_환승</th>
+										<th>장애인_승차</th>
+										<th>장애인_하차</th>
+										<th>장애인_환승</th>
+										<th>국가유공자_승차</th>
+										<th>국가유공자_하차</th>
+										<th>국가유공자_환승</th>
+										<th>다자녀부모_승차</th>
+										<th>다자녀부모_하차</th>
+										<th>다자녀부모_환승</th>
+										<th>동반_승차</th>
+										<th>동반_하차</th>
+										<th>동반_환승</th>
+										<th>대학생_승차</th>
+										<th>대학생_하차</th>
+										<th>대학생_환승</th>
+										<th>복지_승차</th>
+										<th>복지_하차</th>
+										<th>복지_환승</th>
+										<th>기타_승차</th>
+										<th>기타_하차</th>
+										<th>기타_환승</th>
+									</tr>	      
+									<tr>
+										<td>경기도</td>
+										<td>의정부시</td>
+										<td>지자체</td>
+										<td>20210322</td>
+										<td>버스</td>
+										<td>8108</td>
+										<td>대원여객</td>
+										<td>경기도 의정부시 가능동</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+									</tr>      
+									<tr>
+										<td>경기도</td>
+										<td>의정부시</td>
+										<td>지자체</td>
+										<td>20210322</td>
+										<td>버스</td>
+										<td>8108</td>
+										<td>대원여객</td>
+										<td>경기도 의정부시 가능동</td>
+										<td>1</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+									</tr>          
+									<tr>
+										<td>경기도</td>
+										<td>의정부시</td>
+										<td>지자체</td>
+										<td>20210322</td>
+										<td>버스</td>
+										<td>8108</td>
+										<td>대원여객</td>
+										<td>경기도 의정부시 가능동</td>
+										<td>2</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+									</tr>      
+	                            </table>
+                        	</div>
+	                    </div>
+                    </div> 
+                  <!--   <div class="cell4_02">
+                   		<span>!</span>
+                   		<p>조회하고자 하시는 지역은 대용량 자료로 인해 웹 다운로드가 불가합니다. 
+							다운받기를 원하시는 경우 관리자에게 문의해주세요.</p>
+                    </div> -->
                 </div>
             </div>
         </div>

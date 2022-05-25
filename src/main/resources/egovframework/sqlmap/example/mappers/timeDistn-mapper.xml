@@ -4,6 +4,22 @@
 
 	<!-- 1일 평균 통행시간 -->
 	<select id ="selectTimeDistnResultListDayTime" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+		SELECT *
+		FROM 시간거리_평균통행
+		WHERE 1=1
+			AND OPRAT_DATE = #{dateStart}
+			AND ANAL_AREA_CD = #{anal_area_cd}
+			AND PROVIDER = #{provider}
+			<if test="tm==null">
+				AND TM BETWEEN #{tmStart} AND #{tmEnd}
+			</if>
+			<if test="!cd_no[0].equals('00')">
+				AND CD_NO IN
+				<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+					#{arr}
+				</foreach>
+			</if>
+		ORDER BY OPRAT_DATE, FLAG DESC, TM, CD_NO
 	</select>
 	
 	<!-- 1일 평균 통행시간 일별 -->

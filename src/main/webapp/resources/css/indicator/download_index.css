@@ -199,51 +199,92 @@ input.date {
 }
 .cell4_01{
     margin-top: 46px;
-}
-.cell4_01 div{
-    border: 1px solid #407cb1;
-    width: 877px;   
-    height: 46px;
-    line-height: 46px;
-}
-.cell4_01 div p{
-    font-size: 20px;
-    border: none;
-    font-weight: normal;
-    width: 88px;
-    display: inline;
-    margin-left: 10px;
-}
-.cell4_01 div span{
-    font-size: 20px;
-    border: none;
-    font-weight: normal;
-    width: 88px;
-    display: inline;
-    margin-left: 10px;
+    background: #80808017;
+    width: 836px;
+    height: 405px;
+    padding: 30px;
 }
 
-.cell4_02 div{
-    border: 1px solid #407cb1;
-    margin-top: 12px;
-    width: 877px;
-    height: 111px;
-    line-height: 111px;
+.cell4_01 span{
+    font-size: 19px;
+    font-weight: bold;
 }
-.cell4_02 div p{
-    font-size: 20px;
-    border: none;
-    font-weight: normal;
-    width: 88px;
-    display: inline;
-    margin-left: 10px;
+
+.cell4_01 p{
+    font-size: 18px;
+    font-weight: inherit;
+    text-align: inherit;
+    margin: auto;
+    width: 80%;
+    border-bottom: none;
 }
-.cell4_02 div span{
-    font-size: 20px;
-    border: none;
-    width: 88px;
-    margin-left: 10px;
+
+.cell4_01_01 div{
+	display: flex;
 }
+
+.cell4_01_02 div{
+	display: flex;
+}
+
+.cell4_01_03{
+	background: white;
+    margin-top: 50px;
+    border-radius: 12px;
+}
+
+#cell4_01_03_01{
+	background: #ccdded;
+    width: 777px;
+    height: 20px;
+    color: #424242;
+    padding: 30px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+#cell4_01_03_01 span{
+	font-size: 20px;
+}
+
+#cell4_01_03_02{
+    overflow: auto;
+    height: 200px;
+}
+
+
+table, th, td{
+	border: 1px solid black;
+}
+
+th{
+	width: 100px;
+}
+
+
+.cell4_02{
+	background: white;
+    width: 700px;
+    height: 200px;
+    margin-top: 122px;
+    border-radius: 5px;
+}
+
+.cell4_02 span{
+    font-size: 56px;
+    margin-left: 30px;
+    color: red;
+    font-weight: bold;
+}
+
+.cell4_02 p{
+    font-size: 17px;
+    border-bottom: none;
+    width: 583px;
+    text-align: left;
+}
+
+
 
 .submit{
     width: 145px;

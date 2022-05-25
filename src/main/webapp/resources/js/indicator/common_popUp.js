@@ -9,6 +9,7 @@
 	})
 	
 	$("#graph").on('click',function(){
+		window.open("" ,"graph", "toolbar=no, width=1800, height=1000, directories=no, status=no, scrollorbars=no, resizable=no");
 		$('#graphSubmitBtn').click();
 	})
 	

@@ -1,0 +1,232 @@
+
+*{
+    margin: 0 auto;
+    padding: 0 auto;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 15px;
+}
+html, body {
+    height: 100%;
+  }
+.wrap{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.header p{
+    text-align: center;
+    font-size: 30px;
+    color:#1f2958;
+    font-weight: bold;
+}
+.dateform {
+    height: 45px;
+    padding: 7px 0;
+    width: 100%;
+    text-align: center;
+    /* background-color: #c5e4ff; */
+    /* position: fixed; */
+    top: 64px;
+}
+
+
+.dateform > *{
+    font-size: 15px;
+}
+.dateform div :first-child {
+    width: 17%;
+    /* background: aliceblue; */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-left: 8%;
+}
+
+.dateform div :nth-child(2){
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 17%;
+}
+.dateform div :nth-child(3){
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 40%;
+}
+.dateform div :nth-child(4) {
+    width: 10%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.dateform p{
+    width: 25%;
+    float: left;
+    text-align: left;
+    /* padding-left: 12px; */
+    /* background: antiquewhite; */
+    margin-left: 0%;
+}
+.infowrap {
+    width: 92.4vw;
+    /* background-color: aquamarine; */
+}
+.info{
+        /* position: relative; */
+    /* top: 5.5vh; */
+    /* display: inline-block; */
+    /* left: 88vw; */
+    float: right;
+}
+.date {
+    float: left;
+    margin-left: 7px;
+    width: 63px;
+}
+.button {
+    float: right;
+    margin-right: 4vw;
+    margin-top: 7px;
+}
+
+
+.button > .e {
+    background: #d98282 url(./icon02.png) no-repeat 4px 5.5px;
+    margin-left: 42px;
+    width: 84px;;
+}
+.button > .e button {
+    width: 52px;
+}
+
+.button  div{
+    /* background: #82b0d9 url(./icon01.png) no-repeat 4px 3.5px; */
+    width: 129px;
+    height: 32px;
+    float: left;
+    cursor: pointer;
+}
+
+.button  div button{
+    border: none;
+    background: none;
+    color: #ffffff;
+    margin-left: 31px;
+    text-align: left;
+    font-size: 17px;
+    width: 95px;
+    height: 32px;
+    cursor: pointer;
+}
+.header{    
+    height: 79px;
+    border-bottom: 4px solid #5C7D9A;
+    width: 100%;
+}
+
+.option{
+    width: 92vw;
+    margin-top: 2vh;
+}
+
+button#resetZoomChart {
+    border: 2px solid #4a7295;
+    background-color: #b7d3eb;
+    font-size: 17px;
+    font-weight: bold;
+    color: #1f2958;
+    padding: 3px 6px;
+}
+#resetZoomChart:hover {
+    cursor: pointer;
+    box-shadow: 0px 2px 5px #607d8b;
+    font-weight: bold;
+}
+
+label {
+    margin-left: 1%;
+    margin-top: -2%;
+    width: 60px;
+    border: 2px solid #4a7295;
+    background-color: #b7d3eb;
+    font-size: 17px;
+    font-weight: bold;
+    color: #1f2958;
+    padding: 3px 6px;
+    display: inline-block;
+}
+input#legend {
+    border: none;
+    margin-right: 5px;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+p.date01 {
+    margin-top: 0.5vh;
+    font-size: 15px;
+}
+p.date01 span {
+    font-size: 15px;
+}
+
+
+.Icon {
+	display: inline;
+    cursor: pointer;
+    float: right;
+}
+.Icon_01{
+	font-size: 20px;
+    font-weight: bold;
+    line-height: 23px;
+    text-align: center;
+    color: #215a8d;
+    border-radius: 100%;
+    border: 4px solid #215a8d;
+    width: 25px;
+    height: 25px;
+    position: relative;
+    display: inline-block;
+}
+/* 모달 */
+.modal{
+	display: none;
+    width: 450px;
+    height: 97px;
+    background: #8cb6db;
+    position: absolute;
+    margin-top: 7px;
+    margin-left: -484px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 13px 3px #00000087;
+    padding: 18px 30px 57px 30px;
+    color: #1c2e3e;
+}
+
+.modal.active{
+	display: block;
+}
+
+.modal-title{
+	font-size: 30px;
+	font-weight: bold;	
+	margin-bottom: 10px;
+}
+.modal-content{
+	line-height: 25px;
+}
+.modal-content ul li {
+    list-style: none;
+}
+
+
+.chart01{
+    width: 92vw;
+    height: 70vmin;
+    border: 1px solid #9c9c9c;
+    margin-bottom: 2vh;
+}
