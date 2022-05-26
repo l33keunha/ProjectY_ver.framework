@@ -198,10 +198,10 @@ input.date {
     display: block;
 }
 .cell4_01{
-    margin-top: 46px;
+    margin-top: 88px;
     background: #80808017;
     width: 836px;
-    height: 405px;
+    height: 306px;
     padding: 30px;
 }
 
@@ -249,7 +249,7 @@ input.date {
 
 #cell4_01_03_02{
     overflow: auto;
-    height: 200px;
+    height: 94px;
 }
 
 

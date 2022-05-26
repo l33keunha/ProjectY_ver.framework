@@ -24,7 +24,7 @@
     <iframe id="excelDown" name="excelDown" width="0" height="0"></iframe>
     
 	<!-- 다운로드 조회조건 -->
-	<form id="downloadForm" action="passDownload.do" target="excelDown">
+	<form id="downloadForm" action="<%=request.getContextPath()%>/passDownload.do" target="excelDown">
 		<div class= "sVOvalue">
 			<input name="anal_fin" type="hidden" id="anal_finJS" value="${sVO.anal_fin}"/>
 			<input name="dateStart" type="hidden" id="dateStartJS" value="${sVO.dateStart}"/>
@@ -54,7 +54,7 @@
 	</form>
 	
 	<!-- 그래프 조회조건 -->
-	<form id="graphForm" action="passGraph.do" target="graph" method="post">
+	<form id="graphForm" action="<%=request.getContextPath()%>/passGraph.do" target="graph" method="post">
 		
 		<input name="anal_fin" type="hidden" id="anal_finJS" value="${sVO.anal_fin}"/>
 		<input name="dateStart" type="hidden" id="dateStartJS" value="${sVO.dateStart}"/>
@@ -88,7 +88,7 @@
 	        <div class="header">
 	            <p>통행 분석 지표</p>
 	            <div class="button">
-	            	<c:if test = "${anal_groupText != '노선별OD' && anal_typeText != ''}">
+	            	<c:if test = "${anal_typeText == '목적통행' || anal_typeText == '수단통행' || anal_typeText == '노선별통행'}">
 	                	<div class="g"><button type="button" id="graph">그래프</button></div>
 	                </c:if>
 	                <c:if test = "${anal_groupText == '노선별OD' && anal_typeText == ''}">

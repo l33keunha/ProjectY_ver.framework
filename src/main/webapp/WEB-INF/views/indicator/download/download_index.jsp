@@ -129,188 +129,189 @@
                             	<span>※ 다운로드 파일의 예시 내용입니다.</span>
 	                        </div>
                             <div id="cell4_01_03_02">
-	                            <table>
-	                            <colgroup>
-		                            <col width="50px"/>
-	                            </colgroup>
-									<tr>	
-										<th>광역/도</th>
-										<th>시/군</th>
-										<th>분석자료</th>
-										<th>분석일자</th>
-										<th>정류장구분</th>
-										<th>정류장ID</th>
-										<th>정류장명</th>
-										<th>행정동</th>
-										<th>시간</th>
-										<th>일반_승차</th>
-										<th>일반_하차</th>
-										<th>일반_환승</th>
-										<th>어린이_승차</th>
-										<th>어린이_하차</th>
-										<th>어린이_환승</th>
-										<th>청소년_승차</th>
-										<th>청소년_하차</th>
-										<th>청소년_환승</th>
-										<th>경로_승차</th>
-										<th>경로_하차</th>
-										<th>경로_환승</th>
-										<th>장애인_승차</th>
-										<th>장애인_하차</th>
-										<th>장애인_환승</th>
-										<th>국가유공자_승차</th>
-										<th>국가유공자_하차</th>
-										<th>국가유공자_환승</th>
-										<th>다자녀부모_승차</th>
-										<th>다자녀부모_하차</th>
-										<th>다자녀부모_환승</th>
-										<th>동반_승차</th>
-										<th>동반_하차</th>
-										<th>동반_환승</th>
-										<th>대학생_승차</th>
-										<th>대학생_하차</th>
-										<th>대학생_환승</th>
-										<th>복지_승차</th>
-										<th>복지_하차</th>
-										<th>복지_환승</th>
-										<th>기타_승차</th>
-										<th>기타_하차</th>
-										<th>기타_환승</th>
-									</tr>	      
-									<tr>
-										<td>경기도</td>
-										<td>의정부시</td>
-										<td>지자체</td>
-										<td>20210322</td>
-										<td>버스</td>
-										<td>8108</td>
-										<td>대원여객</td>
-										<td>경기도 의정부시 가능동</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-									</tr>      
-									<tr>
-										<td>경기도</td>
-										<td>의정부시</td>
-										<td>지자체</td>
-										<td>20210322</td>
-										<td>버스</td>
-										<td>8108</td>
-										<td>대원여객</td>
-										<td>경기도 의정부시 가능동</td>
-										<td>1</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-									</tr>          
-									<tr>
-										<td>경기도</td>
-										<td>의정부시</td>
-										<td>지자체</td>
-										<td>20210322</td>
-										<td>버스</td>
-										<td>8108</td>
-										<td>대원여객</td>
-										<td>경기도 의정부시 가능동</td>
-										<td>2</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-										<td>0</td>
-									</tr>      
-	                            </table>
-                        	</div>
+							    <div style="width: 3368px;">
+								    <table style="border-collapse: collapse;table-layout: fixed;">
+										<tbody>
+							                <tr>	
+										    	<th style="width: 73px;">광역/도</th>
+										    	<th style="width: 82px;">시/군</th>
+										    	<th style="width: 68px;">분석자료</th>
+										    	<th style="width: 100px;">분석일자</th>
+										    	<th style="width: 95px;">정류장구분</th>
+										    	<th style="width: 77px;">정류장ID</th>
+										    	<th style="width: 103px;">정류장명</th>
+										    	<th style="width: 198px;">행정동</th>
+										    	<th style="width: 45px;">시간</th>
+										    	<th style="width: 92px;">일반_승차</th>
+										    	<th style="width: 92px;">일반_하차</th>
+										    	<th style="width: 92px;">일반_환승</th>
+										    	<th style="width: 92px;">어린이_승차</th>
+										    	<th style="width: 92px;">어린이_하차</th>
+										    	<th style="width: 92px;">어린이_환승</th>
+										    	<th style="width: 100px;">청소년_승차</th>
+										    	<th style="width: 100px;">청소년_하차</th>
+										    	<th style="width: 100px;">청소년_환승</th>
+										    	<th style="width: 100px;">경로_승차</th>
+										    	<th style="width: 100px;">경로_하차</th>
+										    	<th style="width: 100px;">경로_환승</th>
+										    	<th style="width: 100px;">장애인_승차</th>
+										    	<th style="width: 100px;">장애인_하차</th>
+										    	<th style="width: 100px;">장애인_환승</th>
+										    	<th style="width: 142px;">국가유공자_승차</th>
+										    	<th style="width: 142px;">국가유공자_하차</th>
+										    	<th style="width: 142px;">국가유공자_환승</th>
+										    	<th style="width: 142px;">다자녀부모_승차</th>
+										    	<th style="width: 142px;">다자녀부모_하차</th>
+										    	<th style="width: 142px;">다자녀부모_환승</th>
+										    	<th style="width: 100px;">동반_승차</th>
+										    	<th style="width: 100px;">동반_하차</th>
+										    	<th style="width: 100px;">동반_환승</th>
+										    	<th style="width: 100px;">대학생_승차</th>
+										    	<th style="width: 100px;">대학생_하차</th>
+										    	<th style="width: 100px;">대학생_환승</th>
+										    	<th style="width: 100px;">복지_승차</th>
+										    	<th style="width: 100px;">복지_하차</th>
+										    	<th style="width: 100px;">복지_환승</th>
+										    	<th style="width: 100px;">기타_승차</th>
+										    	<th style="width: 100px;">기타_하차</th>
+										    	<th style="width: 100px;">기타_환승</th>
+										    </tr>	      
+										    <tr>
+										    	<td>경기도</td>
+										    	<td>의정부시</td>
+										    	<td>지자체</td>
+										    	<td>20210322</td>
+										    	<td>버스</td>
+										    	<td>8108</td>
+										    	<td>대원여객</td>
+										    	<td>경기도 의정부시 가능동</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    </tr>      
+										    <tr>
+										    	<td>경기도</td>
+										    	<td>의정부시</td>
+										    	<td>지자체</td>
+										    	<td>20210322</td>
+										    	<td>버스</td>
+										    	<td>8108</td>
+										    	<td>대원여객</td>
+										    	<td>경기도 의정부시 가능동</td>
+										    	<td>1</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    </tr>          
+										    <tr>
+										    	<td>경기도</td>
+										    	<td>의정부시</td>
+										    	<td>지자체</td>
+										    	<td>20210322</td>
+										    	<td>버스</td>
+										    	<td>8108</td>
+										    	<td>대원여객</td>
+										    	<td>경기도 의정부시 가능동</td>
+										    	<td>2</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    	<td>0</td>
+										    </tr>      
+								        </tbody>
+							        </table>
+							    </div>
+							</div>
 	                    </div>
                     </div> 
                   <!--   <div class="cell4_02">

@@ -30,7 +30,7 @@
 	            <p>통행 분석 지표</p>
 	            <div class="button">
 	                <div class="d"><button type="button" id="download">다운로드</button></div>
-	                <div class="e"><button type="button" id="exit">닫기</button></div>
+	                <div class="e"><button type="button" id="exit"  onClick="window.open('','_self').close();">닫기</button></div>
 	            </div> 
 	        </div>
 	        
@@ -49,9 +49,6 @@
 				</div>
 	      	</div>
 	      	
-	      	<div class="infowrap">
-				<span class="info">(단위 : 환승통행량)</span>
-		    </div>
 	     	
 	     	<div class="test">
 		     	<div class="content_wrap">

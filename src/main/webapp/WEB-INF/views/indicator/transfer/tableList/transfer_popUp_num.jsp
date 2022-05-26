@@ -18,10 +18,7 @@
 		
 		<c:set var = "timeCnt" value = "${(sVO.tmEnd - sVO.tmStart + 2)}"/>							<!-- 시간 반복 갯수-->
 		<fmt:parseNumber var = "timeCnt" value = "${timeCnt}"  />									<!-- 시간 출력 갯수 -->
-		
-		<c:set var = "numCnt" value = "${dateCnt/timeCnt}"/>										<!-- 횟수 반복 갯수-->
-		<fmt:parseNumber var = "dateCnt" value = "${numCnt}"  />									<!-- 날짜 출력 갯수 -->
-		
+	
 		<c:set var = "indexCnt" value = "0"/>														<!-- 날짜 index count -->
 
  		<!-- 보여줄 row 개수 -->
@@ -67,19 +64,19 @@
 								<!-- 시간대 : 1일 -->
 								<c:if test="${sVO.tm == 'allDay'}">
 									<c:if test = "${j == 0}">
-											<td class="tg-0pky" rowspan='${forCnt}' 	style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${anal_area_cd_sido_text}</div></td>				<!-- 광역/도 -->
-											<td class="tg-0pky" rowspan='${forCnt}'	 	style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${anal_area_cd_text}</div></td>						<!-- 시/군 -->												
-										</c:if>
+										<td class="tg-0pky" rowspan='${forCnt}' 	style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${anal_area_cd_sido_text}</div></td>				<!-- 광역/도 -->
+										<td class="tg-0pky" rowspan='${forCnt}'	 	style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${anal_area_cd_text}</div></td>						<!-- 시/군 -->												
+									</c:if>
 										
-										<c:if test="${(j % dateCnt) == 0}">	   
-											<td class="tg-0pky" rowspan='5' 	style="width: 70px; min-width: 70px; max-width: 70px;"><div class="lavel-2">${transferResultList[j*columnCnt].opratDate}</div></td>			<!-- 날짜 -->
-											<td class="tg-0pky" rowspan='5' 	style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2">${transferResultList[j*columnCnt].dy}</div></td>					<!-- 요일 --> 
-										</c:if>
+									<c:if test="${(j % dateCnt) == 0}">	   
+										<td class="tg-0pky" rowspan='${dateCnt}' 	style="width: 70px; min-width: 70px; max-width: 70px;"><div class="lavel-2">${transferResultList[j*columnCnt].opratDate}</div></td>		<!-- 날짜 -->
+										<td class="tg-0pky" rowspan='${dateCnt}' 	style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2">${transferResultList[j*columnCnt].dy}</div></td>			<!-- 요일 --> 
+									</c:if>
 										
-										<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2">${transferResultList[j*columnCnt].transferNum}</div></td>				<!-- 횟수 -->
+									<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2">${transferResultList[j*columnCnt].transferNum}</div></td>						<!-- 횟수 -->
 									
 									<c:if test="${(j % forCnt) == 0}">	 
-										<td class="tg-0pky" rowspan='${forCnt}' style="width: 30px; min-width: 30px; max-width: 30px;">전체</td>															<!-- 시간 -->
+										<td class="tg-0pky" rowspan='${forCnt}' style="width: 30px; min-width: 30px; max-width: 30px;">전체</td>																		<!-- 시간 -->
 									</c:if>
 								</c:if>
 								
@@ -87,22 +84,22 @@
 								<!-- 시간대 : 시작시간 ~ 끝시간 -->
 								<c:if test="${sVO.tm == null}">
 									<!-- 조회한 시간에 따라 실행 -->
-									<c:if test="${(j % timeCnt) == 0}">	   												
-										<!-- 전체 row 수 -->
-										<c:if test = "${j == 0}">
-											<td class="tg-0pky" rowspan='${forCnt}' 	style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${anal_area_cd_sido_text}</div></td>				<!-- 광역/도 -->
-											<td class="tg-0pky" rowspan='${forCnt}'	 	style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${anal_area_cd_text}</div></td>						<!-- 시/군 -->												
-										</c:if>
-										
-										<c:if test="${(j % dateCnt) == 0}">	   
-											<td class="tg-0pky" rowspan='${timeCnt*5}' 	style="width: 70px; min-width: 70px; max-width: 70px;"><div class="lavel-2">${transferResultList[j*columnCnt].opratDate}</div></td>			<!-- 날짜 -->
-											<td class="tg-0pky" rowspan='${timeCnt*5}' 	style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2">${transferResultList[j*columnCnt].dy}</div></td>					<!-- 요일 -->
-										</c:if>
-										
-										<td class="tg-0pky" rowspan='${timeCnt}' 	style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2">${transferResultList[j*columnCnt].transferNum}</div></td>				<!-- 횟수 -->
-										 
-										<c:set var = "indexCnt" value = "${indexCnt + 1}"/>
+									
+									<!-- 전체 row 수 -->
+									<c:if test = "${j == 0}">
+										<td class="tg-0pky" rowspan='${forCnt}' 	style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${anal_area_cd_sido_text}</div></td>							<!-- 광역/도 -->
+										<td class="tg-0pky" rowspan='${forCnt}'	 	style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${anal_area_cd_text}</div></td>									<!-- 시/군 -->												
 									</c:if>
+									
+									<c:if test="${(j % dateCnt) == 0}">	   
+										<td class="tg-0pky" rowspan='${dateCnt}' 	style="width: 70px; min-width: 70px; max-width: 70px;"><div class="lavel-2">${transferResultList[j*columnCnt].opratDate}</div></td>			<!-- 날짜 -->
+										<td class="tg-0pky" rowspan='${dateCnt}' 	style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2">${transferResultList[j*columnCnt].dy}</div></td>				<!-- 요일 -->
+									</c:if>
+									
+									<c:if test="${(j % timeCnt) == 0}">	   												
+										<td class="tg-0pky" rowspan='${timeCnt}' 	style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2">${transferResultList[j*columnCnt].transferNum}</div></td>			<!-- 횟수 -->
+									</c:if>
+									
 									<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;">${transferResultList[j*columnCnt].tm}</td>		<!-- 시간 -->
 								</c:if>
 							</tr>

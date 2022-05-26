@@ -92,9 +92,12 @@ html, body {
     margin-top: 7px;
 }
 
+.legend {
+    margin-right: 6px;
+}
 
 .button > .e {
-    background: #d98282 url(./icon02.png) no-repeat 4px 5.5px;
+    background: #d98282 url(../../images/indicator/icon02.png) no-repeat 4px 5.5px;
     margin-left: 42px;
     width: 84px;;
 }
