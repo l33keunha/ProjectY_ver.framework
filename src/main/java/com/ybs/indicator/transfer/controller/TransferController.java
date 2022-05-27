@@ -144,6 +144,48 @@ public class TransferController {
 				List<EgovMap> dataList = service.graphTransferResultList(sVO, res); // 그래프 데이터 리스트
 				List<String> routeNmaList = new ArrayList<String>();
 				List<Integer> userCntAggList = new ArrayList<Integer>();
+			
+				System.out.println("dataList:"+dataList);
+				
+				
+			    //이용자 유형 코드 값 
+				Map<String, Object[]> codeMap = new HashMap<String, Object[]>(); 
+				codeMap.put("01",  new Object[] {"일반", 		"#ffb6b6", "rgb(255, 99, 132)"});
+				codeMap.put("02",  new Object[] {"어린이", 	"#b6bcff", "rgb(255, 99, 132)"});
+				codeMap.put("03",  new Object[] {"청소년", 	"#86d7b9", "rgb(255, 99, 132)"});
+				codeMap.put("04",  new Object[] {"경로", 		"#f9e76a", "rgb(255, 99, 132)"});
+				codeMap.put("05",  new Object[] {"장애인", 	"#f96a6a", "rgb(255, 99, 132)"});
+				codeMap.put("06",  new Object[] {"국가유공자", "#cbb1ff", "rgb(255, 99, 132)"});
+				codeMap.put("07",  new Object[] {"다자녀부모", "#8ec2cb", "rgb(255, 99, 132)"});
+				codeMap.put("08",  new Object[] {"동반", 		"#9f3838", "rgb(255, 99, 132)"});
+				codeMap.put("09",  new Object[] {"대학생", 	"#532981", "rgb(255, 99, 132)"});
+				codeMap.put("10",  new Object[] {"복지", 		"#1d6c36", "rgb(255, 99, 132)"});
+				codeMap.put("11",  new Object[] {"기타", 		"#6c1d54", "rgb(255, 99, 132)"});
+				
+				codeMap.put("B_B",  new Object[] {"버스_버스", 	"#ffb6b6", "rgb(255, 99, 132)"});
+				codeMap.put("B_T",  new Object[] {"버스_지하철", 	"#b6bcff", "rgb(255, 99, 132)"});
+				codeMap.put("T_B",  new Object[] {"지하철_버스", 	"#86d7b9", "rgb(255, 99, 132)"});
+
+				codeMap.put("0",  new Object[] {"0회", 	"#ffb6b6", "rgb(255, 99, 132)"});
+				codeMap.put("1",  new Object[] {"1회", 	"#b6bcff", "rgb(255, 99, 132)"});
+				codeMap.put("2",  new Object[] {"2회", 	"#86d7b9", "rgb(255, 99, 132)"});
+				codeMap.put("3",  new Object[] {"3회", 	"#f9e76a", "rgb(255, 99, 132)"});
+				codeMap.put("4",  new Object[] {"4회", 	"#f96a6a", "rgb(255, 99, 132)"});
+				codeMap.put("5",  new Object[] {"5회", 	"#cbb1ff", "rgb(255, 99, 132)"});
+				codeMap.put("6",  new Object[] {"6회", 	"#8ec2cb", "rgb(255, 99, 132)"});
+			
+				
+				String dateColumn ="";
+				String jsonDataColumn = "";
+				String dataCodeColumn = "";
+				String labels = "";
+				List<String> labelsArray = new ArrayList<String>();
+				String x = "";
+				String y = "";
+				
+				Gson gson = new Gson();
+				
+				
 				
 				//환승_노선별통행_그래프 (행 수가 너무 많은 관계로 for 문으로 데이터를 차트형식에 맞춰준다. )
 				if("transferCnt_route".equals(sVO.getAnal_type()) ) {
@@ -162,46 +204,39 @@ public class TransferController {
 					
 					dataList = new ArrayList<EgovMap>();
 					dataList.add(routeMap);
+				
+				//환승_수단,횟수 그래프
+				}else {
+					
+					//횟수 구하기
+					//labelsArray = (dataList.get(0).get("userDistnAvg").toString()).split(",");
+					//for(int i=0; i<labelsArray.length; i++) {
+					//	labelsArray[i] = i+"회";
+					//}
+					
+					//수단 구하기
+					//labelsArray = ("버스_버스,버스_지하철,지하철_버스").split(",");
+					
+					for(int v=0; v<sVO.getCd_no().length; v++) {
+						if("00".equals(sVO.getCd_no()[v])) {
+							continue;
+						}
+						labelsArray.add((String)codeMap.get(sVO.getCd_no()[v])[0]);
+					}
 				}
 				
 				
-			    //이용자 유형 코드 값 
-				Map<String, Object[]> codeMap = new HashMap<String, Object[]>(); 
-				codeMap.put("01",  new Object[] {"일반", 		"#ffb6b6", "rgb(255, 99, 132)"});
-				codeMap.put("02",  new Object[] {"어린이", 	"#b6bcff", "rgb(255, 99, 132)"});
-				codeMap.put("03",  new Object[] {"청소년", 	"#86d7b9", "rgb(255, 99, 132)"});
-				codeMap.put("04",  new Object[] {"경로", 		"#f9e76a", "rgb(255, 99, 132)"});
-				codeMap.put("05",  new Object[] {"장애인", 	"#f96a6a", "rgb(255, 99, 132)"});
-				codeMap.put("06",  new Object[] {"국가유공자", "#cbb1ff", "rgb(255, 99, 132)"});
-				codeMap.put("07",  new Object[] {"다자녀부모", "#8ec2cb", "rgb(255, 99, 132)"});
-				codeMap.put("08",  new Object[] {"동반", 		"#9f3838", "rgb(255, 99, 132)"});
-				codeMap.put("09",  new Object[] {"대학생", 	"#532981", "rgb(255, 99, 132)"});
-				codeMap.put("10",  new Object[] {"복지", 		"#1d6c36", "rgb(255, 99, 132)"});
-				codeMap.put("11",  new Object[] {"기타", 		"#6c1d54", "rgb(255, 99, 132)"});
-
-				
-
-				String dateColumn ="";
-				String jsonDataColumn = "";
-				String dataCodeColumn = "";
-				String labels = "";
-				String [] labelsArray; 
-				String x = "";
-				String y = "";
-				
-				Gson gson = new Gson();
 				
 				// 해당 그래프 페이지에 표출된 값
 				switch(sVO.getAnal_type()) {
 				case "transferCnt_method" :
 						//System.out.println("환승_수단별통행_그래프");
-
-						labelsArray = ("버스_버스,버스_지하철,지하철_버스").split(",");
+					 
 						dateColumn = "opratDate";						// 날짜 컬럼
 						jsonDataColumn = "userCntAgg";					// 표출 데이터 컬럼
-						dataCodeColumn = "cdNo";						// 그래프 속성 컬럼
+						dataCodeColumn = "tfcmn";						// 그래프 속성 컬럼
 						labels = gson.toJson(labelsArray);				// x축 표출 이름
-						x = "수단";			// x축
+						x = "이용자유형(수단)";			// x축
 						y = "합계통행량";			// y축 
 						
 						break;
@@ -212,7 +247,7 @@ public class TransferController {
 						dateColumn = "opratDate";									// 날짜 컬럼
 						jsonDataColumn = "userCntAgg";								// 표출 데이터 컬럼
 						labels = gson.toJson(dataList.get(0).get("routeNma"));		// x축 표출 이름
-						x = "노선";			// x축
+						x = "이용자유형(노선)";			// x축
 						y = "합계통행량";			// y축 
 						
 						break;
@@ -220,80 +255,60 @@ public class TransferController {
 				case "transferCnt_num" :
 						//System.out.println("환승_횟수별통행_그래프");
 						
-						//횟수 구하기
-						labelsArray = (dataList.get(0).get("userCntAgg").toString()).split(",");
-						for(int i=0; i<labelsArray.length; i++) {
-							labelsArray[i] = i+"회";
-						}	
-						
 						dateColumn = "opratDate";						// 날짜 컬럼
 						jsonDataColumn = "userCntAgg";					// 표출 데이터 컬럼
-						dataCodeColumn = "cdNo";						// 그래프 속성 컬럼
+						dataCodeColumn = "transferNum";					// 그래프 속성 컬럼
 						labels = gson.toJson(labelsArray);				// x축 표출 이름
-						x = "횟수";				// x축
-						y = "합계통행량";				// y축 
+						x = "이용자유형(횟수)";								// x축
+						y = "합계통행량";									// y축 
 						
 						break;
 					
 				case "transferTime_method" :
 						//System.out.println("환승_수단별 환승통행시간_그래프");
-						
-						labelsArray = ("버스_버스,버스_지하철,지하철_버스").split(",");
-						dateColumn = "opratDate";							// 날짜 컬럼
-						jsonDataColumn = "userTimeAvg";						// 표출 데이터 컬럼
-						dataCodeColumn = "cdNo";							// 그래프 속성 컬럼
-						labels = gson.toJson(labelsArray);					// x축 표출 이름
-						x = "수단";					// x축
-						y = "평균시간(분)";				// y축 
+			
+						dateColumn = "opratDate";						// 날짜 컬럼
+						jsonDataColumn = "userTimeAvg";					// 표출 데이터 컬럼
+						dataCodeColumn = "tfcmn";						// 그래프 속성 컬럼
+						labels = gson.toJson(labelsArray);				// x축 표출 이름
+						x = "이용자유형(수단)";								// x축
+						y = "평균시간(분)";								// y축 
 						
 						break;
 					
 				case "transferTime_num" :
 						//System.out.println("환승_횟수별 환승통행시간_그래프");
 						
-						//횟수 구하기
-						labelsArray = (dataList.get(0).get("userTimeAvg").toString()).split(",");
-						for(int i=0; i<labelsArray.length; i++) {
-							labelsArray[i] = i+"회";
-						}
-						
 						dateColumn = "opratDate";						// 날짜 컬럼
 						jsonDataColumn = "userTimeAvg";					// 표출 데이터 컬럼
-						dataCodeColumn = "cdNo";						// 그래프 속성 컬럼
+						dataCodeColumn = "transferNum";					// 그래프 속성 컬럼
 						labels = gson.toJson(labelsArray);				// x축 표출 이름
-						x = "횟수";					// x축
-						y = "평균시간(분)";				// y축 
+						x = "이용자유형(횟수)";								// x축
+						y = "평균시간(분)";								// y축 
 						
 						break;
 					
 				case "transferDistn_method" :
 						//System.out.println("환승_수단별 환승통행거리_그래프");
 
-						labelsArray = ("버스_버스,버스_지하철,지하철_버스").split(",");
 						dateColumn = "opratDate";						// 날짜 컬럼
-						jsonDataColumn = "userDistnAvg";					// 표출 데이터 컬럼
-						dataCodeColumn = "cdNo";						// 그래프 속성 컬럼
+						jsonDataColumn = "userDistnAvg";				// 표출 데이터 컬럼
+						dataCodeColumn = "tfcmn";						// 그래프 속성 컬럼
 						labels = gson.toJson(labelsArray);				// x축 표출 이름
-						x = "수단";					// x축
-						y = "평균거리(km)";				// y축 
+						x = "이용자유형(수단)";								// x축
+						y = "평균거리(km)";								// y축 
 						
 						break;
 					
 				case "transferDistn_num" :
 					//System.out.println("환승_횟수별 환승통행거리_그래프");
 						
-						//횟수 구하기
-						labelsArray = (dataList.get(0).get("userDistnAvg").toString()).split(",");
-						for(int i=0; i<labelsArray.length; i++) {
-							labelsArray[i] = i+"회";
-						}
-						
 						dateColumn = "opratDate";						// 날짜 컬럼
 						jsonDataColumn = "userDistnAvg";				// 표출 데이터 컬럼
-						dataCodeColumn = "cdNo";						// 그래프 속성 컬럼
+						dataCodeColumn = "transferNum";					// 그래프 속성 컬럼
 						labels = gson.toJson(labelsArray);				// x축 표출 이름
-						x = "횟수";					// x축
-						y = "평균거리(km)";				// y축 
+						x = "이용자유형(횟수)";								// x축
+						y = "평균거리(km)";								// y축 
 						
 						break;
 				}
@@ -310,7 +325,7 @@ public class TransferController {
 					
 					//2. list 한 행을 map에 넣어준다.
 					Map tempItem = (Map) dataList.get(i);
-					List listOfDay = null;
+					List<Map<String, Object>> listOfDay = null;
 					
 					//3.allDay 맵 변수에 해당 키의 날짜가 있는지 확인한다.
 					//  - 있다면, listOfDay에 날짜를 넣어준다.
@@ -336,7 +351,7 @@ public class TransferController {
 					
 					
 					//4. map을 생성해 해당 정보를 list에 담는다.
-					Map dayItem = new HashMap();
+					Map<String, Object> dayItem = new HashMap<String, Object>();
 				
 					// 해당 그래프 페이지에 표출된 값
 					switch(sVO.getAnal_type()) {
@@ -366,9 +381,9 @@ public class TransferController {
 					case "transferCnt_num" :
 							//System.out.println("환승_횟수별통행_그래프");
 							
-							dayItem.put("label", codeMap.get(tempItem.get(dataCodeColumn))[0]);
-							dayItem.put("backgroundColor", codeMap.get(tempItem.get(dataCodeColumn))[1]);
-							dayItem.put("borderColor", codeMap.get(tempItem.get(dataCodeColumn))[2]);
+							dayItem.put("label", codeMap.get(tempItem.get(dataCodeColumn).toString())[0]);
+							dayItem.put("backgroundColor", codeMap.get(tempItem.get(dataCodeColumn).toString())[1]);
+							dayItem.put("borderColor", codeMap.get(tempItem.get(dataCodeColumn).toString())[2]);
 							dayItem.put("data", data);
 							
 							listOfDay.add(dayItem);
@@ -390,9 +405,9 @@ public class TransferController {
 					case "transferTime_num" :
 							//System.out.println("환승_횟수별 환승통행시간_그래프");
 
-							dayItem.put("label", codeMap.get(tempItem.get(dataCodeColumn))[0]);
-							dayItem.put("backgroundColor", codeMap.get(tempItem.get(dataCodeColumn))[1]);
-							dayItem.put("borderColor", codeMap.get(tempItem.get(dataCodeColumn))[2]);
+							dayItem.put("label", codeMap.get(tempItem.get(dataCodeColumn).toString())[0]);
+							dayItem.put("backgroundColor", codeMap.get(tempItem.get(dataCodeColumn).toString())[1]);
+							dayItem.put("borderColor", codeMap.get(tempItem.get(dataCodeColumn).toString())[2]);
 							dayItem.put("data", data);
 							
 							listOfDay.add(dayItem);
@@ -414,9 +429,9 @@ public class TransferController {
 					case "transferDistn_num" :
 							//System.out.println("환승_횟수별 환승통행거리_그래프");
 							
-							dayItem.put("label", codeMap.get(tempItem.get(dataCodeColumn))[0]);
-							dayItem.put("backgroundColor", codeMap.get(tempItem.get(dataCodeColumn))[1]);
-							dayItem.put("borderColor", codeMap.get(tempItem.get(dataCodeColumn))[2]);
+							dayItem.put("label", codeMap.get(tempItem.get(dataCodeColumn).toString())[0]);
+							dayItem.put("backgroundColor", codeMap.get(tempItem.get(dataCodeColumn).toString())[1]);
+							dayItem.put("borderColor", codeMap.get(tempItem.get(dataCodeColumn).toString())[2]);
 							dayItem.put("data", data);
 							
 							listOfDay.add(dayItem);
@@ -428,7 +443,7 @@ public class TransferController {
 				}
 				
 			
-				List chartList = new ArrayList();
+				List<String> chartList = new ArrayList<String>();
 				for(String key : dateListSt) {
 					chartList.add(gson.toJson(allDay.get(key))); 
 				}

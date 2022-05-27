@@ -74,4 +74,74 @@
 		ORDER BY 코드번호
 	</select>
 	
+	
+	
+	
+	
+	
+	
+	<!-- Ajax: 분석지역 시도 조회 _다운로드 -->
+	<select id ="selectPassSearchAjaxAnalAreaCd_dl" parameterType="sVO" resultType="egovMap">
+		SELECT DISTINCT SUBSTR(분석지역_CD,0,2) ANAL_AREA_CD_SIDO
+          ,CASE WHEN SUBSTR(분석지역_CD,0,2) = '11' THEN  '서울특별시'
+          		WHEN SUBSTR(분석지역_CD,0,2) = '23' THEN  '인천광역시'
+          		WHEN SUBSTR(분석지역_CD,0,2) = '31' THEN  '경기도'
+                WHEN SUBSTR(분석지역_CD,0,2) = '32' THEN  '강원도'
+                WHEN SUBSTR(분석지역_CD,0,2) = '34' THEN  '충청남도'
+                ELSE 분석지역_CD
+                END  ANAL_AREA_NM
+		FROM 지표별ROW_COUNT 
+		ORDER BY ANAL_AREA_CD_SIDO
+	</select>
+	
+	<!-- Ajax: 분석지역 시군구 조회 _다운로드 -->
+	<select id ="selectPassSearchAjaxAnalArea_dl" parameterType="sVO" resultType="egovMap">
+		SELECT DISTINCT 
+				A.분석지역_CD ANAL_AREA_CD
+				,CASE WHEN A.분석지역_CD LIKE '__' THEN '전체' ELSE 분석지역명 END analAreaNm 
+		FROM 지표별ROW_COUNT A, 분석지역_CD B
+		WHERE 1=1
+			AND A.분석지역_CD = B.분석지역_CD 
+			AND A.분석지역_CD LIKE #{anal_area_cd_sido} || '%'
+		ORDER BY A.분석지역_CD
+	</select>
+
+	<!-- Ajax: 분석자료 조회 _다운로드 -->
+	<select id ="selectPassSearchAjaxProvider_dl" parameterType="sVO" resultType="egovMap">
+		SELECT DISTINCT OWNER PROVIDER
+		FROM 지표별ROW_COUNT
+		WHERE 1=1
+			AND 분석지역_CD = #{anal_area_cd}
+		ORDER BY OWNER
+	</select>
+	
+	<!-- Ajax: 날짜 조회 _다운로드 -->
+	<select id ="selectPassSearchAjaxDate_dl" parameterType="sVO" resultType="egovMap">
+		SELECT DISTINCT 
+	        TO_CHAR(MIN(운행일자) OVER (PARTITION BY SUBSTR(운행일자, 0,6) ORDER BY 운행일자),'YYYYMMDD') OPRAT_DATE
+	        ,TO_CHAR(MAX(유효일자) OVER (PARTITION BY SUBSTR(운행일자, 0,6) ORDER BY 운행일자),'YYYYMMDD') SDATE
+		FROM
+		    (
+		        SELECT  
+		            FIRST_VALUE(SDATE) OVER (PARTITION BY SUBSTR(SDATE, 0,6) ORDER BY SDATE) 운행일자
+		            ,LAST_VALUE(SDATE) OVER (PARTITION BY SUBSTR(SDATE, 0,6) ORDER BY SDATE) 유효일자
+		        FROM 지표별ROW_COUNT  
+		        WHERE 1=1
+			AND 분석지역_CD = #{anal_area_cd}
+			AND OWNER = #{provider}
+		    )
+		ORDER BY OPRAT_DATE
+	</select>
+	
+	
+	<!-- Ajax: 지역에 따른 가능 여부 status조회 -->
+	<select id="selectSearchStatusList" parameterType="sVO" resultType="egovMap">
+		SELECT STATUS
+		FROM 지표별ROW_COUNT
+		WHERE 1=1 
+			AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
+			AND 분석지표구분 = #{anal_fin}
+			AND 분석지역_CD = #{anal_area_cd}
+	</select>
+	
 </mapper>

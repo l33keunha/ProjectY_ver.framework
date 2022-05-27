@@ -32,28 +32,21 @@ public class TimeDistnController {
 		System.out.println(sVO.toString());
 		
 		List<EgovMap> timeDistnResultList = new ArrayList<EgovMap>();
-//		List<EgovMap> timeDistnResultListD = new ArrayList<EgovMap>();
 		
-		timeDistnResultList = service.selectTimeDistnResultListT(sVO);
-//		timeDistnResultListD = service.selectTimeDistnResultListD(sVO);
+		timeDistnResultList = service.selectTimeDistnResultList(sVO);
 		
 		if(timeDistnResultList.size() > 0) {
 			for(int i = 0; i < 2; i++) {
 				System.out.println(timeDistnResultList.get(i).toString());
 			}
 			mv.addObject("timeDistnResultList", timeDistnResultList);
-		} 
-		
-//		if(timeDistnResultListD.size() > 0) {
-//			for(int i = 0; i < 2; i++) {
-//				System.out.println(timeDistnResultListD.get(i).toString());
-//			}
-//			mv.addObject("timeDistnResultListD", timeDistnResultListD);
-//		} 
+			mv.setViewName("indicator/timeDistn/timeDistn_popUp");
+		} else {
+			mv.setViewName("common/error");
+		}
 		
 		mv.addObject("sVO", sVO);
 		mv.addObject("req", req);
-		mv.setViewName("indicator/timeDistn/timeDistn_popUp");
 		
 		return mv;
 	}

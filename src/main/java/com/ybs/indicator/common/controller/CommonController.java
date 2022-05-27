@@ -64,6 +64,10 @@ public class CommonController {
 	}
 	
 	
+	
+	
+	
+	// 조회조건 공통 cell3 
 	@ResponseBody
 	@RequestMapping(value="/searchAnal.do")
 	public ModelAndView selectPassSearchList(@ModelAttribute SearchVO sVO) {
@@ -82,7 +86,8 @@ public class CommonController {
 		return mv;
 	}
 		
-		
+	
+	// 노선별OD : 지역에 따른 노선Id 조회
 	@ResponseBody
 	@RequestMapping(value="/searchRouteId.do")
 	public ModelAndView selectPassRoutdIdList(@ModelAttribute SearchVO sVO) {
@@ -102,6 +107,8 @@ public class CommonController {
 		return mv;
 	}
 	
+	
+	// 자료에 따른 이용자유형 조회
 	@ResponseBody
 	@RequestMapping(value="/searchCdNo.do")
 	public ModelAndView selectCdNoList(@ModelAttribute SearchVO sVO) {
@@ -117,6 +124,26 @@ public class CommonController {
 		}
 		
 		mv.addObject("cdNoList", cdNoList);
+		
+		return mv;
+	}
+	
+	
+	// 다운로드 가능 지역에 따른 status 조회
+	@ResponseBody
+	@RequestMapping(value="/searchStatus.do")
+	public ModelAndView selectSearchStatusList(@ModelAttribute SearchVO sVO) {
+		ModelAndView mv = new ModelAndView("jsonView");
+		List<EgovMap> searchStatusList = new ArrayList<EgovMap>();
+		
+		System.out.println(sVO.toString());
+		
+		searchStatusList = service.selectSearchStatusList(sVO);
+		
+		for(int i = 0; i < searchStatusList.size(); i++) {
+			System.out.println(searchStatusList.get(i).toString());
+		}
+		mv.addObject("searchStatusList", searchStatusList);
 		
 		return mv;
 	}

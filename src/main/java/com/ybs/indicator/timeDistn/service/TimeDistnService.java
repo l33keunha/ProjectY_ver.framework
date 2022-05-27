@@ -8,7 +8,6 @@ import com.ybs.indicator.common.service.SearchVO;
 
 public interface TimeDistnService {
 
-	List<EgovMap> selectTimeDistnResultListT(SearchVO sVO);
+	List<EgovMap> selectTimeDistnResultList(SearchVO sVO);
 
-	List<EgovMap> selectTimeDistnResultListD(SearchVO sVO);
 }

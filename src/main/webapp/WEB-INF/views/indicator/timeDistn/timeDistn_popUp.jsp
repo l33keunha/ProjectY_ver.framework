@@ -85,7 +85,7 @@
      	
       	<div class="wrap">
 	        <div class="header">
-	            <p>환승 분석 지표</p>
+	            <p>시간거리 분석 지표</p>
 	            <div class="button">
 	                <div class="g"><button type="button" id="graph">그래프</button></div>
 	                <div class="d"><button type="button" id="download">다운로드</button></div>

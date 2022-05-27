@@ -26,93 +26,50 @@ public class TimeDistnServiceImpl extends EgovAbstractServiceImpl implements Tim
 	private TimeDistnMapper mapper;
 
 	@Override
-	public List<EgovMap> selectTimeDistnResultListT(SearchVO sVO) {
-		List<EgovMap> transferResultListT = new ArrayList<EgovMap>();
+	public List<EgovMap> selectTimeDistnResultList(SearchVO sVO) {
+		List<EgovMap> transferResultList = new ArrayList<EgovMap>();
 		
 		switch(sVO.getAnal_group()) {
 		case "timeDistn_avg_day" :
 			if("allDay".equals(sVO.getTm())) {
 				System.out.println("1일 평균 통행시간_일별");
-				transferResultListT = mapper.selectTimeDistnResultListDayTime_d(sVO); break;
+				transferResultList = mapper.selectTimeDistnResultListDay_d(sVO); break;
 			} else {
 				System.out.println("1일 평균 통행시간");
-				transferResultListT = mapper.selectTimeDistnResultListDayTime(sVO); break;
+				transferResultList = mapper.selectTimeDistnResultListDay(sVO); break;
 			}
 			
 		case "timeDistn_avg_purpose" :
 			if("allDay".equals(sVO.getTm())) {
 				System.out.println("목적통행 평균 통행시간_일별");
-				transferResultListT = mapper.selectTimeDistnResultListPurposeTime_d(sVO); break;
+				transferResultList = mapper.selectTimeDistnResultListPurpose_d(sVO); break;
 			} else {
 				System.out.println("목적통행 평균 통행시간");
-				transferResultListT = mapper.selectTimeDistnResultListPurposeTime(sVO); break;
+				transferResultList = mapper.selectTimeDistnResultListPurpose(sVO); break;
 			}
 			
 		case "timeDistn_avg_method" :
 			if("allDay".equals(sVO.getTm())) {
 				System.out.println("수단통행 평균 통행시간_일별");
-				transferResultListT = mapper.selectTimeDistnResultListMethodTime_d(sVO); break;
+				transferResultList = mapper.selectTimeDistnResultListMethod_d(sVO); break;
 			} else {
 				System.out.println("수단통행 평균 통행시간");
-				transferResultListT = mapper.selectTimeDistnResultListMethodTime(sVO); break;
+				transferResultList = mapper.selectTimeDistnResultListMethod(sVO); break;
 			}
 			
 		case "timeDistn_avg_route" :
 			if("allDay".equals(sVO.getTm())) {
 				System.out.println("노선별 평균 통행시간_일별");
-				transferResultListT = mapper.selectTimeDistnResultListRouteTime_d(sVO); break;
+				transferResultList = mapper.selectTimeDistnResultListRoute_d(sVO); break;
 			} else {
 				System.out.println("노선별 평균 통행시간");
-				transferResultListT = mapper.selectTimeDistnResultListRouteTime(sVO); break;
+				transferResultList = mapper.selectTimeDistnResultListRoute(sVO); break;
 			}
 		}
 		
-		return transferResultListT;
+		return transferResultList;
 	}
 
-	@Override
-	public List<EgovMap> selectTimeDistnResultListD(SearchVO sVO) {
-		List<EgovMap> transferResultListD = new ArrayList<EgovMap>();
-		
-		switch(sVO.getAnal_group()) {
-		case "timeDistn_avg_day" :
-			if("allDay".equals(sVO.getTm())) {
-				System.out.println("1일 평균 통행거리_일별");
-				transferResultListD = mapper.selectTimeDistnResultListDayDistn_d(sVO); break;
-			} else {
-				System.out.println("1일 평균 통행거리");
-				transferResultListD = mapper.selectTimeDistnResultListDayDistn(sVO); break;
-			}
-			
-		case "timeDistn_avg_purpose" :
-			if("allDay".equals(sVO.getTm())) {
-				System.out.println("목적통행 평균 통행거리 일별");
-				transferResultListD = mapper.selectTimeDistnResultListPurposeDistn_d(sVO); break;
-			} else {
-				System.out.println("목적통행 평균 통행거리");
-				transferResultListD = mapper.selectTimeDistnResultListPurposeDistn(sVO); break;
-			}
-			
-		case "timeDistn_avg_method" :
-			if("allDay".equals(sVO.getTm())) {
-				System.out.println("수단통행 평균 통행거리 일별");
-				transferResultListD = mapper.selectTimeDistnResultListMethodDistn_d(sVO); break;
-			} else {
-				System.out.println("수단통행 평균 통행거리");
-				transferResultListD = mapper.selectTimeDistnResultListMethodDistn(sVO); break;
-			}
-			
-		case "timeDistn_avg_route" :
-			if("allDay".equals(sVO.getTm())) {
-				System.out.println("노선별 평균 통행거리 일별");
-				transferResultListD = mapper.selectTimeDistnResultListRouteDistn_d(sVO); break;
-			} else {
-				System.out.println("노선별 평균 통행거리");
-				transferResultListD = mapper.selectTimeDistnResultListRouteDistn(sVO); break;
-			}
-		}
-		return transferResultListD;
-	}
 
 
 	

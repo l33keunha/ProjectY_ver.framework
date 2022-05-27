@@ -296,7 +296,7 @@ public class PassController {
 					
 					//2. list 한 행을 map에 넣어준다.
 					Map tempItem = (Map) dataList.get(i);
-					List listOfDay = null;
+					List<Map<String, Object>> listOfDay = null;
 					
 					//3.allDay 맵 변수에 해당 키의 날짜가 있는지 확인한다.
 					//  - 있다면, listOfDay에 날짜를 넣어준다.
@@ -322,7 +322,7 @@ public class PassController {
 					
 					
 					//4. map을 생성해 해당 정보를 list에 담는다.
-					Map dayItem = new HashMap();
+					Map<String, Object> dayItem = new HashMap<String, Object>();
 				
 					
 					switch(sVO.getAnal_type()) {
@@ -363,7 +363,7 @@ public class PassController {
 				}
 				
 			
-				List chartList = new ArrayList();
+				List<String> chartList = new ArrayList<String>();
 				for(String key : dateListSt) {
 					chartList.add(gson.toJson(allDay.get(key))); 
 				}

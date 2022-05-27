@@ -11,7 +11,7 @@
 				<div class="option">
 					<button onclick="resetZoomChart_${status.index}()" id="resetZoomChart">새로고침</button>
 					<label>
-						<input class="legend" id="legend_${status.index}" type="checkbox" value="범례">범례
+						<input class="legend" id="legend_${status.index}" type="checkbox" value="범례" checked="on">범례
 					</label>
 	
 					<div class="Icon">
@@ -97,7 +97,7 @@
 						},
 						plugins : {
 							legend : {
-								display : false,
+								display : true,
 								position : 'right', //범례위치
 								align : 'start', //범례 위쪽 정렬
 								labels : {

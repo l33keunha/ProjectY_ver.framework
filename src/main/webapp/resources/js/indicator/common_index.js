@@ -331,6 +331,9 @@
 		$('.submit').css("opacity", 0.3);
 		$('.submit').css("cursor", "auto");
 		
+		$('.cell4_01_01').text("");
+		$('.cell4_01_02').text("");
+		
 		if(num == 2 || num ==3){
 			$("select[name=anal_area_cd_sido]").children('option:not(:first)').remove();
 		    jsonArray["anal_area_cd_sido"] = "null";

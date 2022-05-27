@@ -26,5 +26,24 @@ public interface CommonMapper {
 
 	// Ajax: 이용자유형 리스트 조회
 	List<EgovMap> selectCdNoList(SearchVO sVO);
+	
+	
+	
+	
+	
+	// Ajax: 분석지역 시도 조회 _다운로드
+	List<EgovMap> selectPassSearchAjaxAnalAreaCd_dl(SearchVO sVO);
+
+	// Ajax: 분석지역 시군구 조회 _다운로드
+	List<EgovMap> selectPassSearchAjaxAnalArea_dl(SearchVO sVO);
+
+	// Ajax: 분석자료 조회 _다운로드
+	List<EgovMap> selectPassSearchAjaxProvider_dl(SearchVO sVO);
+
+	// Ajax: 날짜 조회 _다운로드
+	List<EgovMap> selectPassSearchAjaxDate_dl(SearchVO sVO);
+	
+	// Ajax: 지역에 따른 가능 여부 status조회
+	List<EgovMap> selectSearchStatusList(SearchVO sVO);
 
 }

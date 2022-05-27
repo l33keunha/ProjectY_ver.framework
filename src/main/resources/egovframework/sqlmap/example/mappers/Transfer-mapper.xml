@@ -439,7 +439,7 @@
 	<select id ="selectTransferResultListTimeMethod_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
 	    SELECT 	SDATE
 	            ,OPRAT_DATE
-				,DY
+				,TO_CHAR(SDATE,'DY') DY
 	            ,ANAL_AREA_CD
 	            ,CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) TFCMN
 	            ,NVL(CD_NO,'평균') CD_NO
@@ -449,7 +449,6 @@
 	            SELECT 
 	                SDATE
 	                ,OPRAT_DATE
-					,TO_CHAR(SDATE, 'DY') DY
 	                ,ANAL_AREA_CD
 	                ,CASE WHEN TFCMN_START ='B' THEN '버스' ELSE '지하철' END TFCMN_START
 	                ,CASE WHEN TFCMN_END ='B' THEN '버스' ELSE '지하철' END TFCMN_END
@@ -468,13 +467,12 @@
 	                    </foreach>
 	                </if>
 	        )
-	    WHERE CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) != '지하철_지하철'
 	    GROUP BY SDATE
 	            ,OPRAT_DATE
-				,DY
+				,TO_CHAR(SDATE,'DY')
 	            ,ANAL_AREA_CD
 	            ,CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END))
-	            ,ROLLUP (CD_NO)
+	            ,ROLLUP(CD_NO)
 	    ORDER BY  SDATE, DECODE( TFCMN, '버스_버스','1', '버스_지하철','2' ,'지하철_지하철','3', '지하철_버스','4'), CD_NO
 	</select>
 	
@@ -536,27 +534,44 @@
 	        ,NVL(TRUNC(AVG(USER_TIME_AVG), 0), 0) USER_TIME_AVG
 	    FROM
 	        (
-	            SELECT 
-	                SDATE
-	                ,OPRAT_DATE
-					,TO_CHAR(SDATE, 'DY') DY
-	                ,ANAL_AREA_CD
-	                ,TRANSFER_NUM
-	                ,CD_NO
-	                ,AVG(CASE WHEN USER_TIME_AVG = 0 THEN NULL ELSE USER_TIME_AVG END) OVER (PARTITION BY OPRAT_DATE, CD_NO,TRANSFER_NUM) USER_TIME_AVG
-	            FROM 환승_횟수별_환승통행시간
-	            WHERE 1=1
-	                AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
-	                AND ANAL_AREA_CD = #{anal_area_cd}
-	                AND PROVIDER = #{provider}
-	                <if test="!cd_no[0].equals('00')">
-	                    AND CD_NO IN
-	                    <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
-	                        #{arr}
-	                    </foreach>
-	                </if>
-	        )
-	    GROUP BY SDATE
+				SELECT 
+				SDATE
+				,OPRAT_DATE
+				,DY
+				,ANAL_AREA_CD
+				,TRANSFER_NUM
+				,CD_NO
+				,TRUNC(AVG(USER_TIME_AVG), 0) USER_TIME_AVG
+				FROM
+					(
+						SELECT 
+							SDATE
+							,OPRAT_DATE
+							,TO_CHAR(SDATE, 'DY') DY
+							,ANAL_AREA_CD
+							,TRANSFER_NUM
+							,CD_NO
+							,CASE WHEN USER_TIME_AVG = 0 THEN NULL ELSE USER_TIME_AVG END USER_TIME_AVG
+						FROM 환승_횟수별_환승통행시간
+						WHERE 1=1
+							AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
+							AND ANAL_AREA_CD = #{anal_area_cd}
+							AND PROVIDER = #{provider}
+							<if test="!cd_no[0].equals('00')">
+								AND CD_NO IN
+								<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+									#{arr}
+								</foreach>
+							</if>
+					)
+				GROUP BY SDATE
+						,OPRAT_DATE
+						,DY
+						,ANAL_AREA_CD
+						,TRANSFER_NUM
+						,CD_NO
+			)
+		GROUP BY SDATE
 	            ,OPRAT_DATE
 				,DY
 	            ,ANAL_AREA_CD
@@ -615,45 +630,59 @@
 	
 	<!-- 환승 수단별 환승통행거리 일별 -->
 	<select id ="selectTransferResultListDistnMethod_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-	    SELECT 	SDATE
-	            ,OPRAT_DATE
-				,DY
-	            ,ANAL_AREA_CD
-	            ,CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) TFCMN
-	            ,NVL(CD_NO,'평균') CD_NO
-	            ,NVL(TRUNC(AVG(USER_DISTN_AVG), 0), 0)USER_DISTN_AVG
-	    FROM
-	        (		
-	            SELECT 
-	                SDATE
-	                ,OPRAT_DATE
-					,TO_CHAR(SDATE, 'DY') DY
-	                ,ANAL_AREA_CD
-	                ,CASE WHEN TFCMN_START ='B' THEN '버스' ELSE '지하철' END TFCMN_START
-	                ,CASE WHEN TFCMN_END ='B' THEN '버스' ELSE '지하철' END TFCMN_END
-	                ,CD_NO
-	                ,AVG(CASE WHEN USER_DISTN_AVG = '0' THEN NULL ELSE USER_DISTN_AVG END) OVER (PARTITION BY OPRAT_DATE, CD_NO, TFCMN_START, TFCMN_END) USER_DISTN_AVG
-	                ,PROVIDER 
-	            FROM 환승_수단별_환승통행거리
-	            WHERE 1=1
-	                AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
-	                AND ANAL_AREA_CD = #{anal_area_cd}
-	                AND PROVIDER = #{provider}
-	                <if test="!cd_no[0].equals('00')">
-	                    AND CD_NO IN
-	                    <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
-	                        #{arr}
-	                    </foreach>
-	                </if>
-	        )
-	 	WHERE CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) != '지하철_지하철'
-	    GROUP BY SDATE
-	            ,OPRAT_DATE
-				,DY
-	            ,ANAL_AREA_CD
-	            ,CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END))
-	            ,ROLLUP (CD_NO)
-	    ORDER BY  SDATE, DECODE( TFCMN, '버스_버스','1', '버스_지하철','2' ,'지하철_지하철','3', '지하철_버스','4'), CD_NO
+	    SELECT
+   			SDATE
+   			,OPRAT_DATE
+			,TO_CHAR(SDATE, 'DY') DY
+   			,ANAL_AREA_CD
+   			,TFCMN
+   			,NVL(CD_NO,'평균') CD_NO
+			,NVL(TRUNC(AVG(USER_DISTN_AVG), 0), 0)USER_DISTN_AVG
+		FROM
+			(
+				SELECT 	SDATE
+						,OPRAT_DATE
+						,ANAL_AREA_CD
+						,CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) TFCMN
+						,CD_NO
+						,TRUNC(AVG(USER_DISTN_AVG), 0) USER_DISTN_AVG
+				FROM
+					(		
+						SELECT 
+							SDATE
+							,OPRAT_DATE
+							,ANAL_AREA_CD
+							,CASE WHEN TFCMN_START ='B' THEN '버스' ELSE '지하철' END TFCMN_START
+							,CASE WHEN TFCMN_END ='B' THEN '버스' ELSE '지하철' END TFCMN_END
+							,CD_NO
+							,CASE WHEN USER_DISTN_AVG = '0' THEN NULL ELSE USER_DISTN_AVG END USER_DISTN_AVG
+							,PROVIDER 
+						FROM 환승_수단별_환승통행거리
+						WHERE 1=1
+							AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
+							AND ANAL_AREA_CD = #{anal_area_cd}
+							AND PROVIDER = #{provider}
+							<if test="!cd_no[0].equals('00')">
+								AND CD_NO IN
+								<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+									#{arr}
+								</foreach>
+							</if>
+					)
+				GROUP BY SDATE
+						,OPRAT_DATE
+						,ANAL_AREA_CD
+						,CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END))
+						,CD_NO
+			)
+		GROUP BY 
+				SDATE
+				,OPRAT_DATE
+				,TO_CHAR(SDATE, 'DY')
+				,ANAL_AREA_CD
+				,TFCMN
+				,ROLLUP(CD_NO)
+		ORDER BY  SDATE, TFCMN, CD_NO
 	</select>
 	
 	<!-- 환승 횟수별 환승통행거리 -->
@@ -704,43 +733,57 @@
 	
 	<!-- 환승 횟수별 환승통행거리 일별-->
 	<select id ="selectTransferResultListDistnNum_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-	    SELECT 
-	        SDATE
-	        ,OPRAT_DATE
-			,DY
-	        ,ANAL_AREA_CD
-	        ,TRANSFER_NUM
-	        ,NVL(CD_NO,'평균') CD_NO
-	        ,NVL(TRUNC(AVG(USER_DISTN_AVG), 0), 0) USER_DISTN_AVG
-	    FROM
-	        (
-	            SELECT 
-	                SDATE
-	                ,OPRAT_DATE
-					,TO_CHAR(SDATE, 'DY') DY
-	                ,ANAL_AREA_CD
-	                ,TRANSFER_NUM
-	                ,CD_NO
-	                ,AVG(CASE WHEN USER_DISTN_AVG = 0 THEN NULL ELSE USER_DISTN_AVG END) OVER (PARTITION BY OPRAT_DATE, CD_NO, TRANSFER_NUM)  USER_DISTN_AVG
-	            FROM 환승_횟수별_환승통행거리
-	            WHERE 1=1
-	                AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
-	                AND ANAL_AREA_CD = #{anal_area_cd}
-	                AND PROVIDER = #{provider}
-	                <if test="!cd_no[0].equals('00')">
-	                    AND CD_NO IN
-	                    <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
-	                        #{arr}
-	                    </foreach>
-	                </if>
-	        )
-	    GROUP BY SDATE
-	            ,OPRAT_DATE
-				,DY
-	            ,ANAL_AREA_CD
-	            ,TRANSFER_NUM
-	            ,ROLLUP(CD_NO)
-	    ORDER BY  SDATE, TRANSFER_NUM, CD_NO
+	    SELECT
+			SDATE
+			,OPRAT_DATE
+			,TO_CHAR(SDATE, 'DY') DY
+			,ANAL_AREA_CD
+			,TRANSFER_NUM
+			,NVL(CD_NO,'평균') CD_NO
+			,NVL(TRUNC(AVG(USER_DISTN_AVG), 0), 0) USER_DISTN_AVG
+		FROM
+			(
+				SELECT 
+					SDATE
+					,OPRAT_DATE
+					,ANAL_AREA_CD
+					,TRANSFER_NUM
+					,CD_NO
+					,TRUNC(AVG(USER_DISTN_AVG), 0) USER_DISTN_AVG
+				FROM
+					(
+						SELECT 
+							SDATE
+							,OPRAT_DATE
+							,ANAL_AREA_CD
+							,TRANSFER_NUM
+							,CD_NO
+							,CASE WHEN USER_DISTN_AVG = 0 THEN NULL ELSE USER_DISTN_AVG END USER_DISTN_AVG
+						FROM 환승_횟수별_환승통행거리
+						WHERE 1=1
+							AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
+							AND ANAL_AREA_CD = #{anal_area_cd}
+							AND PROVIDER = #{provider}
+							<if test="!cd_no[0].equals('00')">
+								AND CD_NO IN
+								<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+									#{arr}
+								</foreach>
+							</if>
+					)
+				GROUP BY SDATE
+						,OPRAT_DATE
+						,ANAL_AREA_CD
+						,TRANSFER_NUM
+						,CD_NO
+			)
+		GROUP BY SDATE
+				,OPRAT_DATE
+				,TO_CHAR(SDATE, 'DY')
+				,ANAL_AREA_CD
+				,TRANSFER_NUM
+				,ROLLUP(CD_NO)
+		ORDER BY  SDATE, TRANSFER_NUM, CD_NO
 	</select>
 		
 	
@@ -794,7 +837,6 @@
                                 </foreach>
                             </if>
                     )
-                WHERE CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) != '지하철_지하철'
                 GROUP BY 
                         OPRAT_DATE
                         ,DY
@@ -850,7 +892,6 @@
                             </foreach>
                         </if>
                 )
-            WHERE CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) != '지하철_지하철'
             GROUP BY 
                     OPRAT_DATE
                     ,DY
@@ -888,6 +929,9 @@
                 WHERE 1=1
                     AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
                     AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
+                    <if test="tm==null || tm.equals('')">
+                        AND TM BETWEEN #{tmStart} AND #{tmEnd}
+                    </if>
                     <if test="!cd_no[0].equals('00')">
                         AND CD_NO IN
                         <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
@@ -918,9 +962,9 @@
         FROM 
             (
                 SELECT 
-                    '경기도'ANAL_AREA_SIDO_CD_TEXT
-                    ,'평택시' ANAL_AREA_CD_TEXT
-                    ,'국토부' PROVIDER
+                    #{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
+                    ,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
+                    ,#{provider_text} PROVIDER
                     ,OPRAT_DATE
                     ,TO_CHAR(SDATE,'DY') DY
                     ,CASE WHEN TFCMN = 'B' THEN '버스' ELSE  '지하철' END TFCMN
@@ -936,9 +980,6 @@
                 WHERE 1=1
                     AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
                     AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
-                    <if test="tm==null || tm.equals('')">
-                        AND TM BETWEEN #{tmStart} AND #{tmEnd}
-                    </if>
                     <if test="!cd_no[0].equals('00')">
                         AND CD_NO IN
                         <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
@@ -1143,7 +1184,6 @@
                             </foreach>
                         </if>
                 )
-            WHERE CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) != '지하철_지하철'
             GROUP BY 
                     OPRAT_DATE
                     ,DY
@@ -1165,45 +1205,46 @@
         SELECT *
         FROM 	
             (
-                SELECT 	
+                SELECT
                     #{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
                     ,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
                     ,#{provider_text} PROVIDER
                     ,OPRAT_DATE
-                    ,DY
+                    ,TO_CHAR(SDATE,'DY') DY
+                    ,ANAL_AREA_CD
                     ,CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) TFCMN
                     ,NVL(CD_NO,'평균') CD_NO
                     ,NVL(TRUNC(AVG(USER_TIME_AVG), 0), 0)USER_TIME_AVG
-            FROM
-                (		
-                    SELECT 
-                        SDATE
+                FROM
+                    (		
+                        SELECT 
+                            SDATE
+                            ,OPRAT_DATE
+                            ,ANAL_AREA_CD
+                            ,CASE WHEN TFCMN_START ='B' THEN '버스' ELSE '지하철' END TFCMN_START
+                            ,CASE WHEN TFCMN_END ='B' THEN '버스' ELSE '지하철' END TFCMN_END
+                            ,CD_NO
+                            ,CASE WHEN USER_TIME_AVG = 0 THEN NULL ELSE USER_TIME_AVG END USER_TIME_AVG
+                            ,PROVIDER 
+                        FROM 환승_수단별_환승통행시간
+                        WHERE 1=1
+                            AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
+                            AND ANAL_AREA_CD = #{anal_area_cd}
+                            AND PROVIDER = #{provider}
+                            <if test="!cd_no[0].equals('00')">
+                                AND CD_NO IN
+                                <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+                                    #{arr}
+                                </foreach>
+                            </if>
+                    )
+                GROUP BY SDATE
                         ,OPRAT_DATE
-                        ,TO_CHAR(SDATE,'DY') DY
+                        ,TO_CHAR(SDATE,'DY')
                         ,ANAL_AREA_CD
-                        ,CASE WHEN TFCMN_START ='B' THEN '버스' ELSE '지하철' END TFCMN_START
-                        ,CASE WHEN TFCMN_END ='B' THEN '버스' ELSE '지하철' END TFCMN_END
-                        ,CD_NO
-                        ,AVG(CASE WHEN USER_TIME_AVG = 0 THEN NULL ELSE USER_TIME_AVG END) OVER (PARTITION BY OPRAT_DATE, CD_NO, TFCMN_START,TFCMN_END) USER_TIME_AVG
-                        ,PROVIDER 
-                    FROM 환승_수단별_환승통행시간
-                    WHERE 1=1
-                        AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
-                        AND ANAL_AREA_CD = #{anal_area_cd}
-                        AND PROVIDER = #{provider}
-                        <if test="!cd_no[0].equals('00')">
-                            AND CD_NO IN
-                            <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
-                                #{arr}
-                            </foreach>
-                        </if>
-                )
-            WHERE CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) != '지하철_지하철'
-            GROUP BY 
-                    OPRAT_DATE
-                    ,DY
-                    ,CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END))
-                    ,ROLLUP (CD_NO)
+                        ,CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END))
+                        ,ROLLUP(CD_NO)
+                ORDER BY  SDATE, DECODE( TFCMN, '버스_버스','1', '버스_지하철','2' ,'지하철_지하철','3', '지하철_버스','4'), CD_NO
             )
         PIVOT
             (
@@ -1279,42 +1320,59 @@
         SELECT *
         FROM 	
             (
-                SELECT 
+                SELECT
                     #{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
                     ,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
                     ,#{provider_text} PROVIDER
                     ,OPRAT_DATE
                     ,DY
+                    ,ANAL_AREA_CD
                     ,TRANSFER_NUM
                     ,NVL(CD_NO,'평균') CD_NO
                     ,NVL(TRUNC(AVG(USER_TIME_AVG), 0), 0) USER_TIME_AVG
                 FROM
                     (
                         SELECT 
-                            SDATE
-                            ,OPRAT_DATE
-                            ,ANAL_AREA_CD
-                            ,TO_CHAR(SDATE,'DY') DY
-                            ,TRANSFER_NUM
-                            ,TM
-                            ,CD_NO
-                            ,AVG(CASE WHEN USER_TIME_AVG = 0 THEN NULL ELSE USER_TIME_AVG END) OVER (PARTITION BY OPRAT_DATE, CD_NO,TRANSFER_NUM) USER_TIME_AVG
-                        FROM 환승_횟수별_환승통행시간
-                        WHERE 1=1
-	                        AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
-	                        AND ANAL_AREA_CD = #{anal_area_cd}
-	                        AND PROVIDER = #{provider}
-	                        <if test="!cd_no[0].equals('00')">
-	                            AND CD_NO IN
-	                            <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
-	                                #{arr}
-	                            </foreach>
-	                        </if>
-                    )
-                GROUP BY 
-                        OPRAT_DATE
-                        ,ANAL_AREA_CD
+                        SDATE
+                        ,OPRAT_DATE
                         ,DY
+                        ,ANAL_AREA_CD
+                        ,TRANSFER_NUM
+                        ,CD_NO
+                        ,TRUNC(AVG(USER_TIME_AVG), 0) USER_TIME_AVG
+                        FROM
+                            (
+                                SELECT 
+                                    SDATE
+                                    ,OPRAT_DATE
+                                    ,TO_CHAR(SDATE, 'DY') DY
+                                    ,ANAL_AREA_CD
+                                    ,TRANSFER_NUM
+                                    ,CD_NO
+                                    ,CASE WHEN USER_TIME_AVG = 0 THEN NULL ELSE USER_TIME_AVG END USER_TIME_AVG
+                                FROM 환승_횟수별_환승통행시간
+                                WHERE 1=1
+                                    AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
+                                    AND ANAL_AREA_CD = #{anal_area_cd}
+                                    AND PROVIDER = #{provider}
+                                    <if test="!cd_no[0].equals('00')">
+                                        AND CD_NO IN
+                                        <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+                                            #{arr}
+                                        </foreach>
+                                    </if>
+                            )
+                        GROUP BY SDATE
+                                ,OPRAT_DATE
+                                ,DY
+                                ,ANAL_AREA_CD
+                                ,TRANSFER_NUM
+                                ,CD_NO
+                    )
+                GROUP BY SDATE
+                        ,OPRAT_DATE
+                        ,DY
+                        ,ANAL_AREA_CD
                         ,TRANSFER_NUM
                         ,ROLLUP(CD_NO)
                 ORDER BY  SDATE, TRANSFER_NUM, CD_NO
@@ -1371,7 +1429,6 @@
                             </foreach>
                         </if>
                 )
-            WHERE CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) != '지하철_지하철'
             GROUP BY 
                     OPRAT_DATE
                     ,DY
@@ -1393,46 +1450,62 @@
         SELECT *
         FROM 	
             (
-                SELECT 
+                SELECT
                     #{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
                     ,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
                     ,#{provider_text} PROVIDER
                     ,OPRAT_DATE
-                    ,DY
-                    ,CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) TFCMN
+                    ,TO_CHAR(SDATE, 'DY') DY
+                    ,ANAL_AREA_CD
+                    ,TFCMN
                     ,NVL(CD_NO,'평균') CD_NO
                     ,NVL(TRUNC(AVG(USER_DISTN_AVG), 0), 0)USER_DISTN_AVG
-            FROM
-                (		
-                    SELECT 
+                FROM
+                    (
+                        SELECT 	SDATE
+                                ,OPRAT_DATE
+                                ,ANAL_AREA_CD
+                                ,CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) TFCMN
+                                ,CD_NO
+                                ,TRUNC(AVG(USER_DISTN_AVG), 0) USER_DISTN_AVG
+                        FROM
+                            (		
+                                SELECT 
+                                    SDATE
+                                    ,OPRAT_DATE
+                                    ,ANAL_AREA_CD
+                                    ,CASE WHEN TFCMN_START ='B' THEN '버스' ELSE '지하철' END TFCMN_START
+                                    ,CASE WHEN TFCMN_END ='B' THEN '버스' ELSE '지하철' END TFCMN_END
+                                    ,CD_NO
+                                    ,CASE WHEN USER_DISTN_AVG = '0' THEN NULL ELSE USER_DISTN_AVG END USER_DISTN_AVG
+                                    ,PROVIDER 
+                                FROM 환승_수단별_환승통행거리
+                                WHERE 1=1
+                                    AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
+                                    AND ANAL_AREA_CD = #{anal_area_cd}
+                                    AND PROVIDER = #{provider}
+                                    <if test="!cd_no[0].equals('00')">
+                                        AND CD_NO IN
+                                        <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+                                            #{arr}
+                                        </foreach>
+                                    </if>
+                            )
+                        GROUP BY SDATE
+                                ,OPRAT_DATE
+                                ,ANAL_AREA_CD
+                                ,CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END))
+                                ,CD_NO
+                    )
+                GROUP BY 
                         SDATE
                         ,OPRAT_DATE
-                        ,TO_CHAR(SDATE,'DY') DY
+                        ,TO_CHAR(SDATE, 'DY')
                         ,ANAL_AREA_CD
-                        ,CASE WHEN TFCMN_START ='B' THEN '버스' ELSE '지하철' END TFCMN_START
-                        ,CASE WHEN TFCMN_END ='B' THEN '버스' ELSE '지하철' END TFCMN_END
-                        ,CD_NO
-                        ,AVG(CASE WHEN USER_DISTN_AVG = '0' THEN NULL ELSE USER_DISTN_AVG END) OVER (PARTITION BY OPRAT_DATE, CD_NO, TFCMN_START, TFCMN_END) USER_DISTN_AVG
-                        ,PROVIDER 
-                    FROM 환승_수단별_환승통행거리
-                    WHERE 1=1
-                        AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
-                        AND ANAL_AREA_CD = #{anal_area_cd}
-                        AND PROVIDER = #{provider}
-                        <if test="!cd_no[0].equals('00')">
-                            AND CD_NO IN
-                            <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
-                                #{arr}
-                            </foreach>
-                        </if>
-                )
-           	WHERE CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) != '지하철_지하철'
-            GROUP BY 
-                    OPRAT_DATE
-                    ,DY
-                    ,CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END))
-                    ,ROLLUP (CD_NO)
-                    )
+                        ,TFCMN
+                        ,ROLLUP(CD_NO)
+                ORDER BY  SDATE, TFCMN, CD_NO
+            )
         PIVOT
             (
                 SUM(USER_DISTN_AVG)
@@ -1506,12 +1579,14 @@
         SELECT *
         FROM 	
             (
-            SELECT 
+                SELECT
                     #{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
                     ,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
                     ,#{provider_text} PROVIDER
+                    ,SDATE
                     ,OPRAT_DATE
-                    ,DY
+                    ,TO_CHAR(SDATE, 'DY') DY
+                    ,ANAL_AREA_CD
                     ,TRANSFER_NUM
                     ,NVL(CD_NO,'평균') CD_NO
                     ,NVL(TRUNC(AVG(USER_DISTN_AVG), 0), 0) USER_DISTN_AVG
@@ -1521,25 +1596,40 @@
                             SDATE
                             ,OPRAT_DATE
                             ,ANAL_AREA_CD
-                            ,TO_CHAR(SDATE,'DY') DY
                             ,TRANSFER_NUM
                             ,CD_NO
-                            ,AVG(CASE WHEN USER_DISTN_AVG = 0 THEN NULL ELSE USER_DISTN_AVG END) OVER (PARTITION BY OPRAT_DATE, CD_NO, TRANSFER_NUM)  USER_DISTN_AVG
-                        FROM 환승_횟수별_환승통행거리
-                        WHERE 1=1
-	                        AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
-	                        AND ANAL_AREA_CD = #{anal_area_cd}
-	                        AND PROVIDER = #{provider}
-	                        <if test="!cd_no[0].equals('00')">
-	                            AND CD_NO IN
-	                            <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
-	                                #{arr}
-	                            </foreach>
-	                        </if>
+                            ,TRUNC(AVG(USER_DISTN_AVG), 0) USER_DISTN_AVG
+                        FROM
+                            (
+                                SELECT 
+                                    SDATE
+                                    ,OPRAT_DATE
+                                    ,ANAL_AREA_CD
+                                    ,TRANSFER_NUM
+                                    ,CD_NO
+                                    ,CASE WHEN USER_DISTN_AVG = 0 THEN NULL ELSE USER_DISTN_AVG END USER_DISTN_AVG
+                                FROM 환승_횟수별_환승통행거리
+                                WHERE 1=1
+                                    AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
+                                    AND ANAL_AREA_CD = #{anal_area_cd}
+                                    AND PROVIDER = #{provider}
+                                    <if test="!cd_no[0].equals('00')">
+                                        AND CD_NO IN
+                                        <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+                                            #{arr}
+                                        </foreach>
+                                    </if>
+                            )
+                        GROUP BY SDATE
+                                ,OPRAT_DATE
+                                ,ANAL_AREA_CD
+                                ,TRANSFER_NUM
+                                ,CD_NO
                     )
-                GROUP BY 
-                        OPRAT_DATE
-                        ,DY
+                GROUP BY SDATE
+                        ,OPRAT_DATE
+                        ,TO_CHAR(SDATE, 'DY')
+                        ,ANAL_AREA_CD
                         ,TRANSFER_NUM
                         ,ROLLUP(CD_NO)
                 ORDER BY  SDATE, TRANSFER_NUM, CD_NO
@@ -1558,6 +1648,7 @@
 	
 	
 	
+	
 	<!-- ********************** 그래프 쿼리 **********************  -->
 	
 	
@@ -1566,36 +1657,36 @@
 	<!-- graph 환승 수단별통행 -->
 	<select id ="graphTransferResultListMethod" parameterType="sVO" resultType="egovMap">
 	    SELECT OPRAT_DATE 
-				,CD_NO
-				,LISTAGG(USER_CNT_AGG,',') WITHIN GROUP(ORDER BY TFCMN)  USER_CNT_AGG
-		    FROM
-		        (
-		            SELECT OPRAT_DATE 
-		                    ,CONCAT(TFCMN_START,CONCAT('_',TFCMN_END)) TFCMN
-		                    ,CD_NO
-		                    ,SUM(USER_CNT_AGG)  USER_CNT_AGG
-		            FROM 환승_수단별통행
-		            WHERE 1 = 1
-		                AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
-		                AND ANAL_AREA_CD = #{anal_area_cd}
-		                AND PROVIDER = #{provider}
-		                <if test="tm==null || tm.equals('')">
-		                    AND TM BETWEEN #{tmStart} AND #{tmEnd}
-		                </if>
-		                <if test="!cd_no[0].equals('00')">
-		                    AND CD_NO IN
-		                    <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
-		                        #{arr}
-		                    </foreach>
-		                </if>
-		            GROUP BY 
-		                OPRAT_DATE 
-		                ,CONCAT(TFCMN_START,CONCAT('_',TFCMN_END)) 
-		                ,CD_NO
-		        )
-		    GROUP BY OPRAT_DATE 
-		            ,CD_NO 
-		    ORDER BY OPRAT_DATE, CD_NO
+				, TFCMN
+				, LISTAGG(USER_CNT_AGG,',') WITHIN GROUP(ORDER BY CD_NO)  USER_CNT_AGG
+        FROM
+            (
+                SELECT OPRAT_DATE 
+                        ,CONCAT(TFCMN_START,CONCAT('_',TFCMN_END)) TFCMN
+                        ,CD_NO
+                        ,SUM(USER_CNT_AGG)  USER_CNT_AGG
+                FROM 환승_수단별통행
+                WHERE 1 = 1
+                    AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
+                    AND ANAL_AREA_CD = #{anal_area_cd}
+                    AND PROVIDER = #{provider}
+                    <if test="tm==null || tm.equals('')">
+                        AND TM BETWEEN #{tmStart} AND #{tmEnd}
+                    </if>
+                    <if test="!cd_no[0].equals('00')">
+                        AND CD_NO IN
+                        <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+                            #{arr}
+                        </foreach>
+                    </if>
+                GROUP BY 
+                    OPRAT_DATE 
+                    ,CONCAT(TFCMN_START,CONCAT('_',TFCMN_END)) 
+                    ,CD_NO
+            )
+        GROUP BY OPRAT_DATE 
+                ,TFCMN 
+        ORDER BY OPRAT_DATE, TFCMN
 	</select>
 	
 	<!-- graph 환승 노선별통행 -->
@@ -1606,66 +1697,66 @@
 		        ,ROUTE_ID
 		        ,ROUTE_NMA
 		        ,SUM(USER_CNT_AGG) USER_CNT_AGG
-		    FROM 환승_노선별통행
-		    WHERE 1=1
-		         AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD') 
-	            AND ANAL_AREA_CD = #{anal_area_cd}
-	            AND PROVIDER = #{provider}
-	            <if test="tm==null || tm.equals('')">
-	                AND TM BETWEEN #{tmStart} AND #{tmEnd}
-	            </if>
-	            <if test="!cd_no[0].equals('00')">
-	                AND CD_NO IN
-	                <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
-	                    #{arr}
-	                </foreach>
-	            </if>
-		    GROUP BY 	OPRAT_DATE
-		                ,TFCMN
-		                ,ROUTE_ID
-		                ,ROUTE_NMA
-		    ORDER BY OPRAT_DATE, TFCMN, ROUTE_ID, ROUTE_NMA
+        FROM 환승_노선별통행
+        WHERE 1=1
+            AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD') 
+            AND ANAL_AREA_CD = #{anal_area_cd}
+            AND PROVIDER = #{provider}
+            <if test="tm==null || tm.equals('')">
+                AND TM BETWEEN #{tmStart} AND #{tmEnd}
+            </if>
+            <if test="!cd_no[0].equals('00')">
+                AND CD_NO IN
+                <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+                    #{arr}
+                </foreach>
+            </if>
+        GROUP BY 	OPRAT_DATE
+                    ,TFCMN
+                    ,ROUTE_ID
+                    ,ROUTE_NMA
+        ORDER BY OPRAT_DATE, TFCMN, ROUTE_ID, ROUTE_NMA
 	</select>
 	
 	<!-- graph 환승 횟수별통행 -->
 	<select id ="graphTransferResultListNum" parameterType="sVO" resultType="egovMap">
 	    SELECT OPRAT_DATE 
-		            ,CD_NO 
-		            ,LISTAGG(USER_CNT_AGG,',') WITHIN GROUP(ORDER BY TRANSFER_NUM)  USER_CNT_AGG
-		    FROM
-		        (
-		            SELECT OPRAT_DATE 
-		                    ,TRANSFER_NUM 
-		                    ,CD_NO
-		                    ,SUM(USER_CNT_AGG) USER_CNT_AGG
-		            FROM 환승_횟수별통행
-		            WHERE 1=1
-		                AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
-		                AND ANAL_AREA_CD = #{anal_area_cd}
-		                AND PROVIDER = #{provider}
-		                <if test="tm==null || tm.equals('')">
-		                    AND TM BETWEEN #{tmStart} AND #{tmEnd}
-		                </if>
-		                <if test="!cd_no[0].equals('00')">
-		                    AND CD_NO IN
-		                    <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
-		                        #{arr}
-		                    </foreach>
-		                </if>
-		            GROUP BY OPRAT_DATE 
-		                        ,TRANSFER_NUM
-		                        ,CD_NO
-		        )
-		    GROUP BY OPRAT_DATE 
-		            ,CD_NO
-		    ORDER BY OPRAT_DATE, CD_NO
+		            ,TRANSFER_NUM 
+		            ,LISTAGG(USER_CNT_AGG,',') WITHIN GROUP(ORDER BY CD_NO)  USER_CNT_AGG
+        FROM
+            (
+                SELECT OPRAT_DATE 
+                        ,TRANSFER_NUM 
+                        ,CD_NO
+                        ,SUM(USER_CNT_AGG) USER_CNT_AGG
+                FROM 환승_횟수별통행
+                WHERE 1=1
+                    AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
+                    AND ANAL_AREA_CD = #{anal_area_cd}
+                    AND PROVIDER = #{provider}
+                    <if test="tm==null || tm.equals('')">
+                        AND TM BETWEEN #{tmStart} AND #{tmEnd}
+                    </if>
+                    <if test="!cd_no[0].equals('00')">
+                        AND CD_NO IN
+                        <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+                            #{arr}
+                        </foreach>
+                    </if>
+                GROUP BY OPRAT_DATE 
+                            ,TRANSFER_NUM
+                            ,CD_NO
+            )
+        GROUP BY OPRAT_DATE 
+                ,TRANSFER_NUM
+        ORDER BY OPRAT_DATE, TRANSFER_NUM
 	</select>
 	
 	<!-- graph 환승 수단별 환승통행시간  -->
 	<select id ="graphTransferResultListTimeMethod" parameterType="sVO" resultType="egovMap">
-	     SELECT OPRAT_DATE 
-				,CD_NO 
-				,LISTAGG(USER_TIME_AVG,',') WITHIN GROUP(ORDER BY TFCMN)  USER_TIME_AVG
+	    SELECT OPRAT_DATE 
+				,TFCMN 
+				,LISTAGG(USER_TIME_AVG,',') WITHIN GROUP(ORDER BY CD_NO)  USER_TIME_AVG
 	    FROM 
 	        (
 	            SELECT OPRAT_DATE 
@@ -1698,100 +1789,100 @@
 	                        ,CD_NO
 	        )
 	    GROUP BY OPRAT_DATE 
-	                ,CD_NO
-	    ORDER BY OPRAT_DATE, CD_NO
+	                ,TFCMN
+	    ORDER BY OPRAT_DATE, TFCMN
 	</select>
 	
 	
 	<!-- graph 환승 횟수별 환승통행시간 -->
 	<select id ="graphTransferResultListTimeNum" parameterType="sVO" resultType="egovMap">
 	    SELECT OPRAT_DATE 
-		            ,CD_NO
-		            ,LISTAGG(USER_TIME_AVG,',') WITHIN GROUP(ORDER BY TRANSFER_NUM)  USER_TIME_AVG
-		    FROM
-		        (
-		            SELECT OPRAT_DATE 
-		                    ,TRANSFER_NUM 
-		                    ,CD_NO 
-		                    ,NVL(TRUNC(AVG(USER_TIME_AVG), 0), 0)USER_TIME_AVG
-		            FROM
-		            (
-		                SELECT OPRAT_DATE 
-		                        ,TRANSFER_NUM 
-		                        ,CD_NO 
-		                        ,CASE WHEN USER_TIME_AVG ='0' THEN NULL ELSE USER_TIME_AVG END USER_TIME_AVG 
-		                FROM 환승_횟수별_환승통행시간
-		                WHERE 1=1
-		                    AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
-			                AND ANAL_AREA_CD = #{anal_area_cd}
-			                AND PROVIDER = #{provider}
-			                <if test="tm==null || tm.equals('')">
-			                    AND TM BETWEEN #{tmStart} AND #{tmEnd}
-			                </if>
-			                <if test="!cd_no[0].equals('00')">
-			                    AND CD_NO IN
-			                    <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
-			                        #{arr}
-			                    </foreach>
-			                </if>
-		            )
-		            GROUP BY OPRAT_DATE 
-		                        ,TRANSFER_NUM
-		                        ,CD_NO
-		        )
-		    GROUP BY OPRAT_DATE 
-		                ,CD_NO
-		    ORDER BY OPRAT_DATE, CD_NO
+		            ,TRANSFER_NUM
+		            ,LISTAGG(USER_TIME_AVG,',') WITHIN GROUP(ORDER BY CD_NO)  USER_TIME_AVG
+        FROM
+            (
+                SELECT OPRAT_DATE 
+                        ,TRANSFER_NUM 
+                        ,CD_NO 
+                        ,NVL(TRUNC(AVG(USER_TIME_AVG), 0), 0)USER_TIME_AVG
+                FROM
+                (
+                    SELECT OPRAT_DATE 
+                            ,TRANSFER_NUM 
+                            ,CD_NO 
+                            ,CASE WHEN USER_TIME_AVG ='0' THEN NULL ELSE USER_TIME_AVG END USER_TIME_AVG 
+                    FROM 환승_횟수별_환승통행시간
+                    WHERE 1=1
+                        AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
+                        AND ANAL_AREA_CD = #{anal_area_cd}
+                        AND PROVIDER = #{provider}
+                        <if test="tm==null || tm.equals('')">
+                            AND TM BETWEEN #{tmStart} AND #{tmEnd}
+                        </if>
+                        <if test="!cd_no[0].equals('00')">
+                            AND CD_NO IN
+                            <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+                                #{arr}
+                            </foreach>
+                        </if>
+                )
+                GROUP BY OPRAT_DATE 
+                            ,TRANSFER_NUM
+                            ,CD_NO
+            )
+        GROUP BY OPRAT_DATE 
+                    ,TRANSFER_NUM
+        ORDER BY OPRAT_DATE,TRANSFER_NUM
 	</select>
 	
 	
 	<!-- graph 환승 수단별 환승통행거리 -->
 	<select id ="graphTransferResultListDistnMethod" parameterType="sVO" resultType="egovMap">
 	    SELECT OPRAT_DATE 
-				,CD_NO 
-				,LISTAGG(USER_DISTN_AVG,',') WITHIN GROUP(ORDER BY TFCMN)  USER_DISTN_AVG
-		    FROM 
-		        (
-		            SELECT OPRAT_DATE 
-		                    ,TFCMN
-		                    ,CD_NO
-		                    ,NVL(TRUNC(AVG(USER_DISTN_AVG), 0), 0)USER_DISTN_AVG
-		            FROM
-		            (
-		                SELECT OPRAT_DATE 
-		                        ,CONCAT(TFCMN_START, CONCAT('_',TFCMN_END)) TFCMN
-		                        ,CASE WHEN USER_DISTN_AVG = '0' THEN NULL ELSE USER_DISTN_AVG END USER_DISTN_AVG
-		                        ,CD_NO
-		                FROM 환승_수단별_환승통행거리
-		                WHERE 1=1
-		                   AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
-			               AND ANAL_AREA_CD = #{anal_area_cd}
-			               AND PROVIDER = #{provider}
-			               <if test="tm==null || tm.equals('')">
-			                  AND TM BETWEEN #{tmStart} AND #{tmEnd}
-			               </if>
-			               <if test="!cd_no[0].equals('00')">
-	                          AND CD_NO IN
-	                          <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
-	                             #{arr}
-	                          </foreach>
-	                        </if>
-		            )
-		            GROUP BY OPRAT_DATE 
-		                        ,TFCMN
-		                        ,CD_NO
-		        )
-		    GROUP BY OPRAT_DATE 
-		                ,CD_NO
-		    ORDER BY OPRAT_DATE, CD_NO
+				,TFCMN 
+				,LISTAGG(USER_DISTN_AVG,',') WITHIN GROUP(ORDER BY CD_NO)  USER_DISTN_AVG
+        FROM 
+            (
+                SELECT OPRAT_DATE 
+                        ,TFCMN
+                        ,CD_NO
+                        ,NVL(TRUNC(AVG(USER_DISTN_AVG), 0), 0)USER_DISTN_AVG
+                FROM
+                (
+                    SELECT OPRAT_DATE 
+                            ,CONCAT(TFCMN_START, CONCAT('_',TFCMN_END)) TFCMN
+                            ,CASE WHEN USER_DISTN_AVG = '0' THEN NULL ELSE USER_DISTN_AVG END USER_DISTN_AVG
+                            ,CD_NO
+                    FROM 환승_수단별_환승통행거리
+                    WHERE 1=1
+                        AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
+                        AND ANAL_AREA_CD = #{anal_area_cd}
+                        AND PROVIDER = #{provider}
+                        <if test="tm==null || tm.equals('')">
+                            AND TM BETWEEN #{tmStart} AND #{tmEnd}
+                        </if>
+                        <if test="!cd_no[0].equals('00')">
+                            AND CD_NO IN
+                            <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+                                #{arr}
+                            </foreach>
+                        </if>
+                )
+                GROUP BY OPRAT_DATE 
+                            ,TFCMN
+                            ,CD_NO
+            )
+        GROUP BY OPRAT_DATE 
+                    ,TFCMN
+        ORDER BY OPRAT_DATE, TFCMN
 	</select>
 	
 	
 	<!-- graph 환승 횟수별 환승통행거리 -->
 	<select id ="graphTransferResultListDistnNum" parameterType="sVO" resultType="egovMap">
 	    SELECT OPRAT_DATE 
-		            ,CD_NO
-		            ,LISTAGG(USER_DISTN_AVG,',') WITHIN GROUP(ORDER BY TRANSFER_NUM)  USER_DISTN_AVG
+		            ,TRANSFER_NUM
+		            ,LISTAGG(USER_DISTN_AVG,',') WITHIN GROUP(ORDER BY CD_NO)  USER_DISTN_AVG
 	    FROM
 	        (
 	            SELECT OPRAT_DATE 
@@ -1824,9 +1915,9 @@
 	                        ,CD_NO
 	        )
 	    GROUP BY OPRAT_DATE 
-	                ,CD_NO
-	    ORDER BY OPRAT_DATE, CD_NO
+	                ,TRANSFER_NUM
+	    ORDER BY OPRAT_DATE, TRANSFER_NUM
 	</select>
-
+	
 	
 </mapper>

@@ -3,7 +3,7 @@
 <mapper namespace="com.ybs.indicator.timeDistn.service.impl.TimeDistnMapper">
 
 	<!-- 1일 평균 통행시간 -->
-	<select id ="selectTimeDistnResultListDayTime" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+	<select id ="selectTimeDistnResultListDay" parameterType="sVO" resultType="egovMap" fetchSize="1000">
 		SELECT *
 		FROM 시간거리_평균통행
 		WHERE 1=1
@@ -23,63 +23,31 @@
 	</select>
 	
 	<!-- 1일 평균 통행시간 일별 -->
-	<select id ="selectTimeDistnResultListDayTime_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+	<select id ="selectTimeDistnResultListDay_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
 	</select>
 	
 	<!-- 목적통행 평균 통행시간 -->
-	<select id ="selectTimeDistnResultListPurposeTime" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+	<select id ="selectTimeDistnResultListPurpose" parameterType="sVO" resultType="egovMap" fetchSize="1000">
 	</select>
 	
 	<!-- 목적통행 평균 통행시간 일별 -->
-	<select id ="selectTimeDistnResultListPurposeTime_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+	<select id ="selectTimeDistnResultListPurpose_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
 	</select>
 	
 	<!-- 수단통행 평균 통행시간 -->
-	<select id ="selectTimeDistnResultListMethodTime" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+	<select id ="selectTimeDistnResultListMethod" parameterType="sVO" resultType="egovMap" fetchSize="1000">
 	</select>
 	
 	<!-- 수단통행 평균 통행시간 일별 -->
-	<select id ="selectTimeDistnResultListMethodTime_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+	<select id ="selectTimeDistnResultListMethod_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
 	</select>
 	
 	<!-- 노선별 평균 통행시간 -->
-	<select id ="selectTimeDistnResultListRouteTime" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+	<select id ="selectTimeDistnResultListRoute" parameterType="sVO" resultType="egovMap" fetchSize="1000">
 	</select>
 	
 	<!-- 노선별 평균 통행시간 일별 -->
-	<select id ="selectTimeDistnResultListRouteTime_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-	</select>
-	
-	<!-- 1일 평균 통행거리 -->
-	<select id ="selectTimeDistnResultListDayDistn" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-	</select>
-	
-	<!-- 1일 평균 통행거리 일별 -->
-	<select id ="selectTimeDistnResultListDayDistn_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-	</select>
-	
-	<!-- 목적통행 평균 통행거리 -->
-	<select id ="selectTimeDistnResultListPurposeDistn" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-	</select>
-	
-	<!-- 목적통행 평균 통행거리 일별 -->
-	<select id ="selectTimeDistnResultListPurposeDistn_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-	</select>
-	
-	<!-- 수단통행 평균 통행거리 -->
-	<select id ="selectTimeDistnResultListMethodDistn" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-	</select>
-	
-	<!-- 수단통행 평균 통행거리 일별 -->
-	<select id ="selectTimeDistnResultListMethodDistn_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-	</select>
-	
-	<!-- 노선별 평균 통행거리 -->
-	<select id ="selectTimeDistnResultListRouteDistn" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-	</select>
-	
-	<!-- 노선별 평균 통행거리 일별 -->
-	<select id ="selectTimeDistnResultListRouteDistn_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+	<select id ="selectTimeDistnResultListRoute_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
 	</select>
 	
 </mapper>

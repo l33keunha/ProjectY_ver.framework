@@ -27,7 +27,7 @@
     <body>
       	<div class="wrap">
 	        <div class="header">
-	            <p>통행 분석 지표</p>
+	            <p>환승 분석 그래프</p>
 	            <div class="button">
 	                <div class="d"><button type="button" id="download">다운로드</button></div>
 	                <div class="e"><button type="button" id="exit"  onClick="window.open('','_self').close();">닫기</button></div>

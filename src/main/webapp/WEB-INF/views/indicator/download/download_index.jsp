@@ -8,7 +8,7 @@
         <link rel="stylesheet" type="text/css" href="resources/css/indicator/common_index.css"> 
         <link rel="stylesheet" type="text/css" href="resources/css/indicator/download_index.css"> 
         <link rel="stylesheet" type="text/css" href="resources/css/indicator/jquery-ui.css"> 
-        <!-- <script type="text/javascript" src="resources/js/indicator/common_index.js" defer ></script> --> 
+        <script type="text/javascript" src="resources/js/indicator/common_index.js" defer ></script> 
         <script type="text/javascript" src="resources/js/indicator/download_index.js" defer ></script>
         <script src ="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -59,25 +59,25 @@
                 <p>분석유형</p>
                 <div class="cell2_01">
                     <div>
-                        <label><input type="radio" name="anal_type" value="dlStation_stationCnt"> 정류장별 통행</label>
-                        <label><input type="radio" name="anal_type" value="dlStation_station_purpose"> 정류장간 목적통행</label>
-                        <label><input type="radio" name="anal_type" value="dlStation_station_method"> 정류장간 수단통행</label>
-                        <label><input type="radio" name="anal_type" value="dlStation_station_run"> 정류장별 운행지표</label>
-                        <label><input type="radio" name="anal_type" value="dlStation_station_runCongestion"> 정류장간 운행/혼잡지표</label>
+                        <label><input type="radio" name="anal_type" value="dlStation_stationCnt" text2="정류장별_통행"> 정류장별 통행</label>
+                        <label><input type="radio" name="anal_type" value="dlStation_station_purpose" text2="정류장간_목적통행"> 정류장간 목적통행</label>
+                        <label><input type="radio" name="anal_type" value="dlStation_station_method" text2="정류장간_수단통행"> 정류장간 수단통행</label>
+                        <label><input type="radio" name="anal_type" value="dlStation_station_run" text2="정류장별_운행지표"> 정류장별 운행지표</label>
+                        <label><input type="radio" name="anal_type" value="dlStation_station_runCongestion" text2="정류장간_운행/혼잡지표"> 정류장간 운행/혼잡지표</label>
                     </div>
                 </div>
                 <div class="cell2_02">
                     <div>
-                        <label><input type="radio" name="anal_type" value="dlRoute_routeCnt"> 노선별통행</label>
-                        <label><input type="radio" name="anal_type" value="dlRoute_routeODCnt"> 노선별 기종점통행</label>
-                        <label><input type="radio" name="anal_type" value="dlRoute_routeCBP"> 노선별 재차인원</label>
+                        <label><input type="radio" name="anal_type" value="dlRoute_routeCnt" text2="노선별통행"> 노선별통행</label>
+                        <label><input type="radio" name="anal_type" value="dlRoute_routeODCnt" text2="노선별_기종점통행"> 노선별 기종점통행</label>
+                        <label><input type="radio" name="anal_type" value="dlRoute_routeCBP" text2="노선별_재차인원"> 노선별 재차인원</label>
                     </div>
                 </div>
 
                 <div class="cell2_03">
                     <div>
-                        <label><input type="radio" name="anal_type" value="dlArea_areaOD_purpose"> 행정동간 목적통행</label>
-                        <label><input type="radio" name="anal_type" value="dlArea_areaOD_method"> 행정동간 수단통행</label>
+                        <label><input type="radio" name="anal_type" value="dlArea_areaOD_purpose" text2="행정동간_목적통행"> 행정동간 목적통행</label>
+                        <label><input type="radio" name="anal_type" value="dlArea_areaOD_method" text2="행정동간_수단통행"> 행정동간 수단통행</label>
                     </div>
                 </div>
             </div>
@@ -111,214 +111,10 @@
             <div class ="hcell1">
                 <div class ="cell4">
                     <p>제공 자료</p>
-                    <div class="cell4_01">
-	                    <div class="cell4_01_01">
-	                        <div>
-	                            <span>파일명 : </span> 
-	                            <p>정류장별_통행_서울특별시_전체_20210322</p>
-	                        </div>
-	                    </div>
-	                    <div class="cell4_01_02">
-	                        <div>
-	                            <span>파일설명 : </span>
-	                            <p>분석지역 내에 존재하는 정류장별의 통행량입니다.</p>
-	                        </div>
-	                    </div>
-	                    <div class="cell4_01_03">
-	                        <div id="cell4_01_03_01">
-                            	<span>※ 다운로드 파일의 예시 내용입니다.</span>
-	                        </div>
-                            <div id="cell4_01_03_02">
-							    <div style="width: 3368px;">
-								    <table style="border-collapse: collapse;table-layout: fixed;">
-										<tbody>
-							                <tr>	
-										    	<th style="width: 73px;">광역/도</th>
-										    	<th style="width: 82px;">시/군</th>
-										    	<th style="width: 68px;">분석자료</th>
-										    	<th style="width: 100px;">분석일자</th>
-										    	<th style="width: 95px;">정류장구분</th>
-										    	<th style="width: 77px;">정류장ID</th>
-										    	<th style="width: 103px;">정류장명</th>
-										    	<th style="width: 198px;">행정동</th>
-										    	<th style="width: 45px;">시간</th>
-										    	<th style="width: 92px;">일반_승차</th>
-										    	<th style="width: 92px;">일반_하차</th>
-										    	<th style="width: 92px;">일반_환승</th>
-										    	<th style="width: 92px;">어린이_승차</th>
-										    	<th style="width: 92px;">어린이_하차</th>
-										    	<th style="width: 92px;">어린이_환승</th>
-										    	<th style="width: 100px;">청소년_승차</th>
-										    	<th style="width: 100px;">청소년_하차</th>
-										    	<th style="width: 100px;">청소년_환승</th>
-										    	<th style="width: 100px;">경로_승차</th>
-										    	<th style="width: 100px;">경로_하차</th>
-										    	<th style="width: 100px;">경로_환승</th>
-										    	<th style="width: 100px;">장애인_승차</th>
-										    	<th style="width: 100px;">장애인_하차</th>
-										    	<th style="width: 100px;">장애인_환승</th>
-										    	<th style="width: 142px;">국가유공자_승차</th>
-										    	<th style="width: 142px;">국가유공자_하차</th>
-										    	<th style="width: 142px;">국가유공자_환승</th>
-										    	<th style="width: 142px;">다자녀부모_승차</th>
-										    	<th style="width: 142px;">다자녀부모_하차</th>
-										    	<th style="width: 142px;">다자녀부모_환승</th>
-										    	<th style="width: 100px;">동반_승차</th>
-										    	<th style="width: 100px;">동반_하차</th>
-										    	<th style="width: 100px;">동반_환승</th>
-										    	<th style="width: 100px;">대학생_승차</th>
-										    	<th style="width: 100px;">대학생_하차</th>
-										    	<th style="width: 100px;">대학생_환승</th>
-										    	<th style="width: 100px;">복지_승차</th>
-										    	<th style="width: 100px;">복지_하차</th>
-										    	<th style="width: 100px;">복지_환승</th>
-										    	<th style="width: 100px;">기타_승차</th>
-										    	<th style="width: 100px;">기타_하차</th>
-										    	<th style="width: 100px;">기타_환승</th>
-										    </tr>	      
-										    <tr>
-										    	<td>경기도</td>
-										    	<td>의정부시</td>
-										    	<td>지자체</td>
-										    	<td>20210322</td>
-										    	<td>버스</td>
-										    	<td>8108</td>
-										    	<td>대원여객</td>
-										    	<td>경기도 의정부시 가능동</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    </tr>      
-										    <tr>
-										    	<td>경기도</td>
-										    	<td>의정부시</td>
-										    	<td>지자체</td>
-										    	<td>20210322</td>
-										    	<td>버스</td>
-										    	<td>8108</td>
-										    	<td>대원여객</td>
-										    	<td>경기도 의정부시 가능동</td>
-										    	<td>1</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    </tr>          
-										    <tr>
-										    	<td>경기도</td>
-										    	<td>의정부시</td>
-										    	<td>지자체</td>
-										    	<td>20210322</td>
-										    	<td>버스</td>
-										    	<td>8108</td>
-										    	<td>대원여객</td>
-										    	<td>경기도 의정부시 가능동</td>
-										    	<td>2</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    	<td>0</td>
-										    </tr>      
-								        </tbody>
-							        </table>
-							    </div>
-							</div>
-	                    </div>
+                    <div class="cell4_01_01">
                     </div> 
-                  <!--   <div class="cell4_02">
-                   		<span>!</span>
-                   		<p>조회하고자 하시는 지역은 대용량 자료로 인해 웹 다운로드가 불가합니다. 
-							다운받기를 원하시는 경우 관리자에게 문의해주세요.</p>
-                    </div> -->
+                  	<div class="cell4_01_02">
+                    </div>
                 </div>
             </div>
         </div>
