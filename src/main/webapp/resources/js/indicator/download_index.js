@@ -50,6 +50,10 @@
 	
 	// 제공 자료 오픈 후 다운로드 가능
 	$('.submit2').on('click',function(){
+		$('.submit2').prop("disabled",true);
+		$('.submit2').css("opacity", 0.3);
+		$('.submit2').css("cursor", "default");
+						
 		var analType = $("input[name=anal_type]:checked").attr("text2");
 		var analAreaCdSido = $("select[name=anal_area_cd_sido] option:selected").text();
 		var analAreaCd = $("select[name=anal_area_cd] option:selected").text();
@@ -71,6 +75,10 @@
 						$('.cell4_01_01').text("");
 						$('.cell4_01_02').text("");
 						$('.cell4').css("opacity", 0.3);
+						
+						$('.submit2').prop("disabled",false);
+						$('.submit2').css("opacity", 1);
+						$('.submit2').css("cursor", "pointer");
 		
 						$('.submit').prop("disabled",true);
 						$('.submit').css("opacity", 0.3);
