@@ -124,7 +124,6 @@ public class PassController {
 				System.out.println(stationNmList.get(i).toString());
 			}
 			mv.addObject("stationNmList", stationNmList);
-			mv.setViewName("indicator/pass/tableList/pass_popUp_passRouteODmatrix");
 		}  
 		
 		routeOD = service.selectRouteOD(sVO);
@@ -133,9 +132,9 @@ public class PassController {
 				System.out.println(routeOD.get(i).toString());
 			}
 			mv.addObject("routeOD", routeOD);
-			mv.setViewName("indicator/pass/tableList/pass_popUp_passRouteODmatrix");
 		} 
 		
+		mv.setViewName("indicator/pass/pass_popUp");
 		mv.addObject("sVO", sVO);
 		mv.addObject("req", req);
 		

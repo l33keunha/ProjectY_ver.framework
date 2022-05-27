@@ -88,13 +88,18 @@
 	        <div class="header">
 	            <p>통행 분석 지표</p>
 	            <div class="button">
-	            	<c:if test = "${anal_typeText == '목적통행' || anal_typeText == '수단통행' || anal_typeText == '노선별통행'}">
+	            	<c:if test = "${anal_groupText == '통행량' && (anal_typeText == '목적통행' || anal_typeText == '수단통행' || anal_typeText == '노선별통행')}">
 	                	<div class="g"><button type="button" id="graph">그래프</button></div>
 	                </c:if>
 	                <c:if test = "${anal_groupText == '노선별OD' && anal_typeText == ''}">
-		                <div class="g" style="width: 145px;"><button type="button" id="matrix" style="width: 109px;">OD매트릭스</button></div>
+		                <!-- 표 -->
+			     		<c:if test = "${sVO.anal_fin == null || sVO.anal_fin == ''}">
+			     			<div class="g" style="width: 145px;"><button type="button" id="matrix" style="width: 109px;">OD매트릭스</button></div>
+			     		</c:if>
 	                </c:if>
+			     	<c:if test = "${sVO.anal_fin != 'routeODmatrix'}">	
 	                <div class="d"><button type="button" id="download">다운로드</button></div>
+	                </c:if>
 	                <div class="e"><button type="button" id="exit" onClick="window.open('','_self').close();">닫기</button></div>
 	            </div> 
 	        </div>
@@ -130,24 +135,44 @@
 								<th>기점</th>
 								<th>종점</th>
 							</tr>
-							<tr>
-								<td>${anal_area_cd_sido_text}</td>
-								<td>${anal_area_cd_text}</td>
-								<td>${passResultList[0].opratDate}</td>
-								<td>${passResultList[0].dy}</td>
-								<td>
-									<c:if test="${passResultList[0].tfcmn == 'B'}">
-										버스
-									</c:if>
-									<c:if test="${passResultList[0].tfcmn == 'T'}">
-										지하철
-									</c:if>
-								</td>
-								<td>${passResultList[0].routeNma}</td>
-								<td>${passResultList[0].routeType}</td>
-								<td>${passResultList[0].routeStart}</td>
-								<td>${passResultList[0].routeEnd}</td>
-							</tr>
+							
+							
+							<!-- 표 -->
+		     				<c:if test = "${sVO.anal_fin == null || sVO.anal_fin == ''}">
+				     			<tr>	
+					     			<td>${anal_area_cd_sido_text}</td>
+									<td>${anal_area_cd_text}</td>
+									<td>${passResultList[0].opratDate}</td>
+									<td>${passResultList[0].dy}</td>
+									<td>
+										<c:if test="${passResultList[0].tfcmn == 'B'}">
+											버스
+										</c:if>
+										<c:if test="${passResultList[0].tfcmn == 'T'}">
+											지하철
+										</c:if>
+									</td>
+									<td>${passResultList[0].routeNma}</td>
+									<td>${passResultList[0].routeType}</td>
+									<td>${passResultList[0].routeStart}</td>
+									<td>${passResultList[0].routeEnd}</td>
+				     			</tr>
+				     		</c:if>
+				     		
+				     		<!-- OD매트릭스 -->
+		     				<c:if test = "${sVO.anal_fin == 'routeODmatrix'}">
+				     			<tr>
+				     				<td>${anal_area_cd_sido_text}</td>
+									<td>${anal_area_cd_text}</td>
+									<td>${param.date_yyyymmdd}</td>
+									<td>${param.today}</td>
+									<td>${param.tfcmnText}</td>
+									<td>${param.routeNma}</td>
+									<td>${param.routeType}</td>
+									<td>${param.routeStart}</td>
+									<td>${param.routeEnd}</td>
+				     			</tr>
+				     		</c:if>
 						</table>
 					</div>
 	      		</div>
@@ -172,6 +197,25 @@
 						<input name="tcboId" type="hidden" id="tcboIdJS" value="${sVO.tcboId}"/>
 						<input name="routeId" type="hidden" id="routeIdJS" value="${sVO.routeId}"/>
 						<input name="anal_fin" type="hidden" id="routeIdJS" value="routeODmatrix"/>
+						
+						<input name="date_yyyymmdd" type="hidden" id="date_yyyymmdd" value="${dateStart}"/> 
+						<input name="date_yyyy-mm-dd" type="hidden" id="date_yyyy-mm-dd" value="${dateText}"/> 
+						
+						<fmt:parseDate value="${dateStart}" var="dateFmt" pattern="yyyyMMdd"/>
+						<fmt:formatDate value="${dateFmt}" pattern="E" var="today"/>
+						<input name="today" type="hidden" id="today" value="${today}"/>
+						
+						<c:if test="${passResultList[0].tfcmn == 'B'}">
+							<input name="tfcmnText" type="hidden" id="tfcmnText" value="버스"/>
+						</c:if>
+						<c:if test="${passResultList[0].tfcmn == 'T'}">
+							<input name="tfcmnText" type="hidden" id="tfcmnText" value="지하철"/>
+						</c:if>
+						
+						<input name="routeNma" type="hidden" id="routeNma" value="${passResultList[0].routeNma}"/>
+						<input name="routeType" type="hidden" id="routeType" value="${passResultList[0].routeType}"/>
+						<input name="routeStart" type="hidden" id="routeStart" value="${passResultList[0].routeStart}"/>
+						<input name="routeEnd" type="hidden" id="routeEnd" value="${passResultList[0].routeEnd}"/>
 					</div>
 					<!-- 이용자유형 코드 -->
 					<div class="sVOvalue_cd_no">
@@ -181,7 +225,7 @@
 					</div>
 					<input type="submit" id="routeODSubmitBtn" style="display: none;"/>
 				</form>
-	      	</c:if>
+			</c:if>
 	      	
 	      	<div class="infowrap">
 				<span class="info">(단위 : 통행량)</span>
@@ -207,12 +251,23 @@
 			     	</c:if> 
 			     	
 			     	<c:if test = "${anal_groupText == '노선별OD' && anal_typeText == ''}">
-			     		<%@ include file="tableList/pass_popUp_passRouteODCnt.jsp" %>
+			     		
+			     		<!-- 표 -->
+			     		<c:if test = "${sVO.anal_fin == null || sVO.anal_fin == ''}">
+			     			<%@ include file="tableList/pass_popUp_passRouteODCnt.jsp" %>
+			     		</c:if>
+			     		
+			     		<!-- OD매트릭스 -->
+			     		<c:if test = "${sVO.anal_fin == 'routeODmatrix'}">
+			     			<%@ include file="tableList/pass_popUp_passRouteODmatrix.jsp" %>
+			     		</c:if>
+			     		
 			     		<script>
 			     			$(".test").css("height", "682px");
 			     			$(".content_wrap").css("height", "682px");
 			     		</script>
-			     	</c:if> 
+			     	</c:if>
+			     	
 			     	<c:if test = "${anal_groupText == '행정동간OD' && anal_typeText == '목적통행'}">
 			     		<%@ include file="tableList/pass_popUp_passAreaODCnt_purpose.jsp" %>
 			     	</c:if> 

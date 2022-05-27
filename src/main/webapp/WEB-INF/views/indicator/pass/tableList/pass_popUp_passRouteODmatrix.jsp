@@ -71,14 +71,14 @@
  	
 		<!-- ● 노선별OD matrix -->
 		<div class="table-left">
-			<div class="table1" style="position: fixed;left: 0;">
+			<div class="table1" style="position: sticky;left: 0;">
 				<table style="border-collapse: collapse;">
 					
 					<!--thead 시작▼-->
 					<thead>
 						<tr>
 							
-							<th class="tg-0pky"  style="width: 120px; min-width: 120px; max-width: 120px; height: 41px;">정류장명칭</th>		<!-- 빈칸 -->
+							<th class="tg-0pky"  style="width: 120px; min-width: 120px; max-width: 120px;">정류장명칭</th>		<!-- 빈칸 -->
 							
 						</tr>
 					</thead>
@@ -108,9 +108,9 @@
 				    
 							<tr style="${scroll_display_none}" class= "show_${showScroll}">	
 							
-							<!-- 출발정류장ID 그룹이 시작될 때마다 실행 -->
-							<td class="tg-0pky" style="width: 120px; min-width: 120px; max-width: 120px;"><div class="lavel-2 lavel-1">${stationNmList[j*columnCnt].sttnNma}</div></td>
-								
+								<!-- 출발정류장ID 그룹이 시작될 때마다 실행 -->
+								<td class="tg-0pky" style="width: 120px; min-width: 120px; max-width: 120px;"><div class="lavel-2 lavel-1">${stationNmList[j].sttnNma}</div></td>
+							</tr>
 						</c:forEach>
 
 					</tbody>
@@ -130,7 +130,7 @@
 					
 						<tr>
 							<c:forEach var='j' begin='0' end='${stationNmList.size()-1}'>
-								<th class="tg-0pky" style="width: 120px; min-width: 120px; max-width: 120px;"><div class="lavel-2 lavel-1">${stationNmList[j*columnCnt].sttnNma}</div></th>				
+								<th class="tg-0pky" style="width: 120px; min-width: 120px; max-width: 120px;"><div class="lavel-2 lavel-1">${stationNmList[j].sttnNma}</div></th>				
 							</c:forEach>
 						</tr>
 						
@@ -146,7 +146,7 @@
 						<c:forEach var='j' begin='0' end='${routeOD.size()-1}'>
 							<tr>
 								<c:forEach var='k' begin='0' end='${routeOD.size()-1}'>
-									<td class="tg-0pky" style="width: 120px; min-width: 120px; max-width: 120px;"><div class="lavel-2 lavel-1">${routeOD[j*columnCnt][k]}</div></td>				
+									<td class="tg-0pky" style="width: 120px; min-width: 120px; max-width: 120px;"><div class="lavel-2 lavel-1">${routeOD[j][k]}</div></td>				
 								</c:forEach>
 							</tr>
 						</c:forEach>
