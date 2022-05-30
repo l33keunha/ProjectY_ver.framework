@@ -1,14 +1,12 @@
 package com.ybs.indicator.pass.controller;
 
 import java.text.ParseException;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +21,7 @@ import org.springmodules.validation.commons.DefaultBeanValidator;
 
 import com.google.gson.Gson;
 import com.ybs.indicator.common.service.SearchVO;
+import com.ybs.indicator.common.service.YbsUtil;
 import com.ybs.indicator.pass.service.PassService;
 
 @Controller
@@ -145,28 +144,24 @@ public class PassController {
 	
 	@RequestMapping(value="/passGraph.do")
 	public ModelAndView graphPassResultList(ModelAndView mv, @ModelAttribute SearchVO sVO, HttpServletRequest req, HttpServletResponse res) throws ParseException {
-		//날짜 사이 날짜리스트 출력
+			//날짜 사이 날짜리스트 출력
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-				LocalDate startDate = LocalDate.parse( sVO.getDateStart(), formatter);
-				List<LocalDate> dateList = new ArrayList<LocalDate>();	//yyyy-MM-dd 형식
+			
+				List<String> dateList = new ArrayList<String>();	//yyyy-MM-dd 형식
 				List<String> dateListSt = new ArrayList<String>();		//yyyyMMdd 형식
 			
 
 				// 1일 조회 일떄 (통행량_노선별 통행)
 				if("passCnt_route".equals(sVO.getAnal_type()) ) {
 					
-					dateList.add(startDate);
-					dateListSt.add((startDate.toString()).replaceAll("-", ""));
+					dateList.add(sVO.getDateStart());
+					dateListSt.add((sVO.getDateStart()).replaceAll("-", ""));
+					
 					
 					//여러 날 조회 일때 
 				}else {
-					LocalDate endDate = LocalDate.parse( sVO.getDateEnd(), formatter).plusDays(1);
-					dateList = startDate.datesUntil(endDate).collect(Collectors.toList());
-					
-					for(LocalDate  test: dateList) {
-						dateListSt.add((test.toString()).replaceAll("-", ""));
-					}
-					
+					dateList =YbsUtil.getDayBetween( sVO.getDateStart(), sVO.getDateEnd(), "yyyy-MM-dd");
+					dateListSt =YbsUtil.getDayBetween( (sVO.getDateStart()).replace("-", ""), (sVO.getDateEnd()).replace("-", ""), "yyyyMMdd");
 				}
 				
 				
