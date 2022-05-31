@@ -108,31 +108,57 @@ public class CongestionServiceImpl extends EgovAbstractServiceImpl implements Co
 							+",22시"
 							+",23시";
 		
-		// ▶ 시간 컬럼 
-		String timeStr = ",tm00"
-						+",tm01"
-						+",tm02"
-						+",tm03"
-						+",tm04"
-						+",tm05"
-						+",tm06"
-						+",tm07"
-						+",tm08"
-						+",tm09"
-						+",tm10"
-						+",tm11"
-						+",tm12"
-						+",tm13"
-						+",tm14"
-						+",tm15"
-						+",tm16"
-						+",tm17"
-						+",tm18"
-						+",tm19"
-						+",tm20"
-						+",tm21"
-						+",tm22"
-						+",tm23";
+		// ▶ 재차인원 컬럼 
+		String brdngStr =  ",brdng00"
+							+",brdng01"
+							+",brdng02"
+							+",brdng03"
+							+",brdng04"
+							+",brdng05"
+							+",brdng06"
+							+",brdng07"
+							+",brdng08"
+							+",brdng09"
+							+",brdng10"
+							+",brdng11"
+							+",brdng12"
+							+",brdng13"
+							+",brdng14"
+							+",brdng15"
+							+",brdng16"
+							+",brdng17"
+							+",brdng18"
+							+",brdng19"
+							+",brdng20"
+							+",brdng21"
+							+",brdng22"
+							+",brdng23";
+		
+		// ▶ 혼잡도 컬럼 
+		String conStr = ",con00"
+						+",con01"
+						+",con02"
+						+",con03"
+						+",con04"
+						+",con05"
+						+",con06"
+						+",con07"
+						+",con08"
+						+",con09"
+						+",con10"
+						+",con11"
+						+",con12"
+						+",con13"
+						+",con14"
+						+",con15"
+						+",con16"
+						+",con17"
+						+",con18"
+						+",con19"
+						+",con20"
+						+",con21"
+						+",con22"
+						+",con23";
 		
 		// ▶ 최대 컬럼 
 		String maxStr = ",max00"
@@ -192,7 +218,7 @@ public class CongestionServiceImpl extends EgovAbstractServiceImpl implements Co
 		switch(sVO.getAnal_type()) {
 		case "congestionRoute_CBP" :
 			System.out.println("PIVOT 노선별 재차인원");
-			congestionResultList = mapper.downloadCongestionResultListRouteCBP(sVO); 
+			congestionResultList = mapper.selectCongestionResultListRouteCBP(sVO); 
 			
 			System.out.println("query 조회 시간 : " + ((System.currentTimeMillis() - sdt) / 1000));
 			
@@ -222,13 +248,13 @@ public class CongestionServiceImpl extends EgovAbstractServiceImpl implements Co
 							+",routeType"
 							+",routeStart"
 							+",routeEnd"
-							+ timeStr
-							+",userCntAvg";
+							+ brdngStr
+							+",brdngCntAvg";
 			
 			break;
 		case "congestionRoute_DOC" :
 			System.out.println("PIVOT 노선별 혼잡도");
-			congestionResultList = mapper.downloadCongestionResultListRouteDOC(sVO);
+			congestionResultList = mapper.selectCongestionResultListRouteDOC(sVO);
 
 			System.out.println("query 조회 시간 : " + ((System.currentTimeMillis() - sdt) / 1000));
 			
@@ -258,13 +284,13 @@ public class CongestionServiceImpl extends EgovAbstractServiceImpl implements Co
 							+",routeType"
 							+",routeStart"
 							+",routeEnd"
-							+ timeStr
-							+",userCntAvg";
+							+ conStr
+							+",conRateAvg";
 			
 			break;
 		case "congestionTopRouteOD_DOC_max" :
 			System.out.println("PIVOT 노선별 최대 혼잡구");
-			congestionResultList = mapper.downloadCongestionResultListRouteDOC_max(sVO); 
+			congestionResultList = mapper.selectCongestionResultListRouteDOC_max(sVO); 
 
 			System.out.println("query 조회 시간 : " + ((System.currentTimeMillis() - sdt) / 1000));
 			
@@ -303,12 +329,12 @@ public class CongestionServiceImpl extends EgovAbstractServiceImpl implements Co
 							+",edSttnNma"
 							+",edSttnHjd"
 							+ maxStr
-							+",userCntMax";
+							+",conRateMax";
 			
 			break;
 		case "congestionTopRouteOD_DOC_avg" :
 			System.out.println("PIVOT 노선별 평균 혼잡구");
-			congestionResultList = mapper.downloadCongestionResultListRouteDOC_avg(sVO); 
+			congestionResultList = mapper.selectCongestionResultListRouteDOC_avg(sVO); 
 			System.out.println("query 조회 시간 : " + ((System.currentTimeMillis() - sdt) / 1000));
 			
 			// ● 인자값 : 시트명
@@ -329,7 +355,7 @@ public class CongestionServiceImpl extends EgovAbstractServiceImpl implements Co
 							+",도착정류장명"
 							+",도착행정동"
 							+ headerStr
-							+",최대";
+							+",평균";
 			
 			// ● 인자값 : 컬럼명
 			columnListSt = "analAreaSidoCdText"
@@ -346,11 +372,11 @@ public class CongestionServiceImpl extends EgovAbstractServiceImpl implements Co
 							+",edSttnNma"
 							+",edSttnHjd"
 							+ avgStr
-							+",userCntAvg";
+							+",conRateAvg";
 			break;
 		case "congestionTopStationOD_DOC_max" :
 			System.out.println("PIVOT 정류장간 최대 혼잡도");
-			congestionResultList = mapper.downloadCongestionResultListStationDOC_max(sVO); 
+			congestionResultList = mapper.selectCongestionResultListStationDOC_max(sVO); 
 			System.out.println("query 조회 시간 : " + ((System.currentTimeMillis() - sdt) / 1000));
 			
 			// ● 인자값 : 시트명
@@ -386,11 +412,11 @@ public class CongestionServiceImpl extends EgovAbstractServiceImpl implements Co
 							+",edSttnNma"
 							+",edSttnHjd"
 							+ maxStr
-							+",userCntMax";
+							+",conRateMax";
 			break;
 		case "congestionTopStationOD_DOC_avg" :
 			System.out.println("PIVOT 정류장간 평균 혼잡도");
-			congestionResultList = mapper.downloadCongestionResultListStationDOC_avg(sVO); 
+			congestionResultList = mapper.selectCongestionResultListStationDOC_avg(sVO); 
 			System.out.println("query 조회 시간 : " + ((System.currentTimeMillis() - sdt) / 1000));
 			
 			// ● 인자값 : 시트명
@@ -426,7 +452,7 @@ public class CongestionServiceImpl extends EgovAbstractServiceImpl implements Co
 							+",edSttnNma"
 							+",edSttnHjd"
 							+ avgStr
-							+",userCntAvg";
+							+",conRateAvg";
 			break;
 		}
 		

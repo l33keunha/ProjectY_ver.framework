@@ -267,7 +267,7 @@
 									<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].max21}</div></td>
 									<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].max22}</div></td>
 									<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].max23}</div></td>  
-									<td class="tg-0pky" style="width: 100px; min-width: 100px; max-width: 100px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].userCntMax}</div></td>
+									<td class="tg-0pky" style="width: 100px; min-width: 100px; max-width: 100px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].conRateMax}</div></td>
 								</c:if> 
 								<c:if test="${sVO.anal_type == 'congestionTopStationOD_DOC_avg'}">
 									<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].avg00}</div></td>
@@ -294,7 +294,7 @@
 									<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].avg21}</div></td>
 									<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].avg22}</div></td>
 									<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].avg23}</div></td> 
-									<td class="tg-0pky" style="width: 100px; min-width: 100px; max-width: 100px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].userCntAvg}</div></td>
+									<td class="tg-0pky" style="width: 100px; min-width: 100px; max-width: 100px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].conRateAvg}</div></td>
 								</c:if> 
 							</tr>
 						</c:forEach>

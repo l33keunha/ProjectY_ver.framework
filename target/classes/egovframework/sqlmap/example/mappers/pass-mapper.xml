@@ -495,7 +495,7 @@
 	
 	<!-- 행정동간OD 목적통행 -->
 	<select id ="selectPassResultListAreaODPurpose" parameterType="sVO" resultType="egovMap"  fetchSize="2000">
-		SELECT /*+ PARALLEL(8) */ 
+		SELECT /*+ INDEX(A) */ 
             운행일자 OPRAT_DATE
             ,TO_CHAR(SDATE, 'DY') DY
             ,분석지역_CD ANAL_AREA_CD
@@ -504,9 +504,11 @@
             ,하차내외부 OFFINOUT
             ,하차지역명 OFFINOUTNM
             ,NVL(코드번호,'합계') CD_NO, SUM(정류장OD_통행량) CNT
-		FROM 행정시군구별OD_목적통행_일별
+		FROM 행정시군구별OD_목적통행_일별 A
 		WHERE 1=1
 			AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
+            AND 운행일자 = TO_CHAR(TO_DATE(#{dateStart} , 'YYYY-MM-DD'),'YYYYMMDD')
+            AND OWNER = #{provider}
 			AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
 			<if test="!cd_no[0].equals('00')">
                 AND 코드번호 IN
@@ -528,7 +530,7 @@
 	
 	<!-- 행정동간OD 수단통행 -->
 	<select id ="selectPassResultListAreaODMethod" parameterType="sVO" resultType="egovMap" fetchSize="2000">
-		SELECT /*+ PARALLEL(8) */ 
+		SELECT /*+ INDEX(A) */ 
             운행일자 OPRAT_DATE, TO_CHAR(SDATE, 'DY') DY
             ,분석지역_CD ANAL_AREA_CD
             ,승차내외부 GETINOUT
@@ -536,9 +538,11 @@
             ,하차내외부 OFFINOUT
             ,하차지역명 OFFINOUTNM
             ,NVL(코드번호,'합계') CD_NO, SUM(정류장OD_통행량) CNT
-		FROM 행정시군구별OD_수단통행_일별
+		FROM 행정시군구별OD_수단통행_일별 A
 		WHERE 1=1
 			AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
+           	AND 운행일자 = TO_CHAR(TO_DATE(#{dateStart} , 'YYYY-MM-DD'),'YYYYMMDD')
+            AND OWNER = #{provider}
 			AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
 			<if test="!cd_no[0].equals('00')">
                 AND 코드번호 IN
@@ -1696,7 +1700,7 @@
 	    SELECT *
 	    FROM 
 	        (
-	            SELECT /*+ PARALLEL(8) */ 
+	            SELECT  /*+ index(A) */ 
 	                    ANAL_AREA_SIDO_CD_TEXT
 	                ,ANAL_AREA_CD_TEXT
 	                ,PROVIDER
@@ -1746,7 +1750,7 @@
 	                        ,TM
 	                        ,CD_NO
 	                        ,정류장OD_통행량 CNT
-	                    FROM 노선별정류장간OD
+	                    FROM 노선별정류장간OD A
 	                    WHERE 1=1
 	                        AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 	                        AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
@@ -1795,10 +1799,10 @@
 	
 	<!-- PIVOT  노선별 정류장간 OD 일별 -->
 	<select id ="downloadPassResultListRouteOD_d" parameterType="sVO" resultType="egovMap">
-	    SELECT * /*+ PARALLEL(8) */ 
+	    SELECT *  
 	    FROM 
 	        (
-	            SELECT /*+ PARALLEL(8) */ 
+	            SELECT    
 	                 ANAL_AREA_SIDO_CD_TEXT
 	                ,ANAL_AREA_CD_TEXT
 	                ,PROVIDER
@@ -1821,7 +1825,7 @@
 	                ,SUM(CNT) CNT		
 	            FROM
 	                (
-	                    SELECT /*+ PARALLEL(8) */ 
+	                    SELECT   /*+ index(A) */ 
 	                        ANAL_AREA_CD 
 	                        ,#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
 	                        ,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
@@ -1846,17 +1850,17 @@
 	                        ,도착정류장행정동 OFF_STN_AREA
 	                        ,CD_NO
 	                        ,정류장OD_통행량 CNT
-	                    FROM 노선별정류장간OD_일별
+	                    FROM 노선별정류장간OD_일별 A
 	                    WHERE 1=1
 	                        AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 	                        AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
 	                        AND ROUTE_ID =#{routeId}
-	                            <if test="!cd_no[0].equals('00')">
-	                        AND CD_NO IN
-	                        <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
-	                            #{arr}
-	                        </foreach>
-	        </if>
+                            <if test="!cd_no[0].equals('00')">
+		                        AND CD_NO IN
+		                        <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+		                            #{arr}
+		                        </foreach>
+	       					</if>
 	            )
 	        GROUP BY 	             
 	            ANAL_AREA_SIDO_CD_TEXT
@@ -1894,7 +1898,7 @@
 	    SELECT *
 	    FROM
 	        (
-	            SELECT /*+ PARALLEL(8) */ 
+	            SELECT /*+ INDEX(A) */ 
 		                  #{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
 		                ,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
 		                ,#{provider_text} PROVIDER
@@ -1903,9 +1907,11 @@
 		                ,승차내외부 GETINOUT, 승차지역명 GETINOUTNM, 하차내외부 OFFINOUT, 하차지역명 OFFINOUTNM
 		                ,NVL(코드번호,'합계') CD_NO
 		                ,SUM(정류장OD_통행량) CNT
-	            FROM 행정시군구별OD_목적통행_일별
+	            FROM 행정시군구별OD_목적통행_일별 A
 	            WHERE 1=1
 	                AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
+                    AND 운행일자 = TO_CHAR(TO_DATE(#{dateStart} , 'YYYY-MM-DD'),'YYYYMMDD')
+            		AND OWNER = #{provider}
 	                AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
 	                <if test="!cd_no[0].equals('00')">
 	                    AND 코드번호 IN
@@ -1930,7 +1936,7 @@
 	    SELECT *
 	    FROM
 	        (
-	            SELECT /*+ PARALLEL(8) */ 
+	            SELECT /*+ INDEX(A) */ 
 		                  #{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
 		                ,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
 		                ,#{provider_text} PROVIDER
@@ -1939,9 +1945,11 @@
 		                ,승차내외부 GETINOUT, 승차지역명 GETINOUTNM, 하차내외부 OFFINOUT, 하차지역명 OFFINOUTNM
 		                ,NVL(코드번호,'합계') CD_NO
 		                ,SUM(정류장OD_통행량) CNT
-	            FROM 행정시군구별OD_수단통행_일별
+	            FROM 행정시군구별OD_수단통행_일별 A
 	            WHERE 1=1
 	                AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
+	                AND 운행일자 = TO_CHAR(TO_DATE(#{dateStart} , 'YYYY-MM-DD'),'YYYYMMDD')
+	                AND OWNER = #{provider}
 	                AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
 	                <if test="!cd_no[0].equals('00')">
 	                    AND 코드번호 IN

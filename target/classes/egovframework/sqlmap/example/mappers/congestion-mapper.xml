@@ -2,292 +2,55 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ybs.indicator.congestion.service.impl.CongestionMapper">
 		
-	<!-- 노선별 재차인원 -->
+	<!--  노선별 재차인원 -->
 	<select id ="selectCongestionResultListRouteCBP" parameterType="sVO" resultType="egovMap" fetchSize="1000">
 		SELECT 
-			OPRAT_DATE
+		 	#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
+            ,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
+            ,#{provider_text} PROVIDER
+			,OPRAT_DATE
 			,TO_CHAR(SDATE,'DY') DY
 			,ROUTE_ID
 			,ROUTE_NMA
 			,ROUTE_TYPE
 			,ROUTE_START
 			,ROUTE_END
-			,TM00
-			,TM01
-			,TM02
-			,TM03
-			,TM04
-			,TM05
-			,TM06
-			,TM07
-			,TM08
-			,TM09
-			,TM10
-			,TM11
-			,TM12
-			,TM13
-			,TM14
-			,TM15
-			,TM16
-			,TM17
-			,TM18
-			,TM19
-			,TM20
-			,TM21
-			,TM22
-			,TM23
-			,USER_CNT_AVG
-		FROM 혼잡_노선별_재차인원
+			,BRDNG00
+			,BRDNG01
+			,BRDNG02
+			,BRDNG03
+			,BRDNG04
+			,BRDNG05
+			,BRDNG06
+			,BRDNG07
+			,BRDNG08
+			,BRDNG09
+			,BRDNG10
+			,BRDNG11
+			,BRDNG12
+			,BRDNG13
+			,BRDNG14
+			,BRDNG15
+			,BRDNG16
+			,BRDNG17
+			,BRDNG18
+			,BRDNG19
+			,BRDNG20
+			,BRDNG21
+			,BRDNG22
+			,BRDNG23
+			,BRDNG_CNT_AVG
+		FROM 혼잡_노선별_재차인원혼잡도
 		WHERE 1=1
 			AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
-			AND ANAL_AREA_CD = #{anal_area_cd_sido}
+			AND ANAL_AREA_CD = #{anal_area_cd}
 			AND PROVIDER = #{provider}
 		ORDER BY ROUTE_ID, ROUTE_NMA
 	</select>
 	
-	<!-- 노선별 혼잡도 -->
+	<!--  노선별 혼잡도 -->
 	<select id ="selectCongestionResultListRouteDOC" parameterType="sVO" resultType="egovMap" fetchSize="1000">
 		SELECT 
-			OPRAT_DATE
-			,TO_CHAR(SDATE,'DY') DY
-			,ROUTE_ID
-			,ROUTE_NMA
-			,ROUTE_TYPE
-			,ROUTE_START
-			,ROUTE_END
-			,TM00
-			,TM01
-			,TM02
-			,TM03
-			,TM04
-			,TM05
-			,TM06
-			,TM07
-			,TM08
-			,TM09
-			,TM10
-			,TM11
-			,TM12
-			,TM13
-			,TM14
-			,TM15
-			,TM16
-			,TM17
-			,TM18
-			,TM19
-			,TM20
-			,TM21
-			,TM22
-			,TM23
-			,USER_CNT_AVG
-		FROM 혼잡_노선별_혼잡도
-		WHERE 1=1
-			AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
-			AND ANAL_AREA_CD = #{anal_area_cd_sido}
-			AND PROVIDER = #{provider}
-		ORDER BY ROUTE_ID, ROUTE_NMA
-	</select>
-	
-	<!-- 노선별 최대 혼잡구 -->
-	<select id ="selectCongestionResultListRouteDOC_max" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-		SELECT 
-			OPRAT_DATE
-			,TO_CHAR(SDATE,'DY') DY
-			,ROUTE_ID
-			,ROUTE_NMA
-			,ROUTE_TYPE
-			,ROUTE_START
-			,ROUTE_END
-			,STTN_RANK
-			,ST_STTN_ID
-			,ST_STTN_NMA
-			,ST_STTN_HJD
-			,ED_STTN_ID
-			,ED_STTN_NMA
-			,ED_STTN_HJD
-			,MAX00
-			,MAX01
-			,MAX02
-			,MAX03
-			,MAX04
-			,MAX05
-			,MAX06
-			,MAX07
-			,MAX08
-			,MAX09
-			,MAX10
-			,MAX11
-			,MAX12
-			,MAX13
-			,MAX14
-			,MAX15
-			,MAX16
-			,MAX17
-			,MAX18
-			,MAX19
-			,MAX20
-			,MAX21
-			,MAX22
-			,MAX23
-			,USER_CNT_MAX
-		FROM 혼잡_노선별_최대평균혼잡도 
-		WHERE 1=1
-			AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
-			AND ANAL_AREA_CD = #{anal_area_cd_sido}
-			AND PROVIDER = #{provider}
-		ORDER BY ROUTE_ID, ROUTE_NMA, STTN_RANK
-	</select>
-	
-	<!-- 노선별 평균 혼잡구 -->
-	<select id ="selectCongestionResultListRouteDOC_avg" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-		SELECT 
-			OPRAT_DATE
-			,TO_CHAR(SDATE,'DY') DY
-			,ROUTE_ID
-			,ROUTE_NMA
-			,ROUTE_TYPE
-			,ROUTE_START
-			,ROUTE_END
-			,STTN_RANK
-			,ST_STTN_ID
-			,ST_STTN_NMA
-			,ST_STTN_HJD
-			,ED_STTN_ID
-			,ED_STTN_NMA
-			,ED_STTN_HJD
-			,AVG00
-			,AVG01
-			,AVG02
-			,AVG03
-			,AVG04
-			,AVG05
-			,AVG06
-			,AVG07
-			,AVG08
-			,AVG09
-			,AVG10
-			,AVG11
-			,AVG12
-			,AVG13
-			,AVG14
-			,AVG15
-			,AVG16
-			,AVG17
-			,AVG18
-			,AVG19
-			,AVG20
-			,AVG21
-			,AVG22
-			,AVG23
-			,USER_CNT_AVG
-		FROM 혼잡_노선별_최대평균혼잡도 
-		WHERE 1=1
-			AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
-			AND ANAL_AREA_CD = #{anal_area_cd_sido}
-			AND PROVIDER = #{provider}
-		ORDER BY ROUTE_ID, ROUTE_NMA, STTN_RANK
-	</select>
-	
-	<!-- 정류장간 최대 혼잡도 -->
-	<select id ="selectCongestionResultListStationDOC_max" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-		SELECT 
-			OPRAT_DATE
-			,TO_CHAR(SDATE,'DY') DY
-			,STTN_RANK
-			,ST_STTN_ID
-			,ST_STTN_NMA
-			,ST_STTN_HJD
-			,ED_STTN_ID
-			,ED_STTN_NMA
-			,ED_STTN_HJD
-			,MAX00
-			,MAX01
-			,MAX02
-			,MAX03
-			,MAX04
-			,MAX05
-			,MAX06
-			,MAX07
-			,MAX08
-			,MAX09
-			,MAX10
-			,MAX11
-			,MAX12
-			,MAX13
-			,MAX14
-			,MAX15
-			,MAX16
-			,MAX17
-			,MAX18
-			,MAX19
-			,MAX20
-			,MAX21
-			,MAX22
-			,MAX23
-			,USER_CNT_MAX
-		FROM 혼잡_정류장간_최대평균혼잡도 
-		WHERE 1=1
-			AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
-			AND ANAL_AREA_CD = #{anal_area_cd_sido}
-			AND PROVIDER = #{provider}
-		ORDER BY STTN_RANK
-	</select>
-	
-	<!-- 정류장간 평균 혼잡도 -->
-	<select id ="selectCongestionResultListStationDOC_avg" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-		SELECT 
-			OPRAT_DATE
-			,TO_CHAR(SDATE,'DY') DY
-			,STTN_RANK
-			,ST_STTN_ID
-			,ST_STTN_NMA
-			,ST_STTN_HJD
-			,ED_STTN_ID
-			,ED_STTN_NMA
-			,ED_STTN_HJD
-			,AVG00
-			,AVG01
-			,AVG02
-			,AVG03
-			,AVG04
-			,AVG05
-			,AVG06
-			,AVG07
-			,AVG08
-			,AVG09
-			,AVG10
-			,AVG11
-			,AVG12
-			,AVG13
-			,AVG14
-			,AVG15
-			,AVG16
-			,AVG17
-			,AVG18
-			,AVG19
-			,AVG20
-			,AVG21
-			,AVG22
-			,AVG23
-			,USER_CNT_AVG
-		FROM 혼잡_정류장간_최대평균혼잡도 
-		WHERE 1=1
-			AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
-			AND ANAL_AREA_CD = #{anal_area_cd_sido}
-			AND PROVIDER = #{provider}
-		ORDER BY STTN_RANK
-	</select>
-	
-	
-	
-	
-	
-	<!-- /********************** 화면용 다운로드 **********************/ -->
-	
-	
-	<!-- PIVOT 노선별 재차인원 -->
-	<select id ="downloadCongestionResultListRouteCBP" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-		SELECT 
 		 	#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
             ,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
             ,#{provider_text} PROVIDER
@@ -298,88 +61,42 @@
 			,ROUTE_TYPE
 			,ROUTE_START
 			,ROUTE_END
-			,TM00
-			,TM01
-			,TM02
-			,TM03
-			,TM04
-			,TM05
-			,TM06
-			,TM07
-			,TM08
-			,TM09
-			,TM10
-			,TM11
-			,TM12
-			,TM13
-			,TM14
-			,TM15
-			,TM16
-			,TM17
-			,TM18
-			,TM19
-			,TM20
-			,TM21
-			,TM22
-			,TM23
-			,USER_CNT_AVG
-		FROM 혼잡_노선별_재차인원
+			,CON00
+			,CON01
+			,CON02
+			,CON03
+			,CON04
+			,CON05
+			,CON06
+			,CON07
+			,CON08
+			,CON09
+			,CON10
+			,CON11
+			,CON12
+			,CON13
+			,CON14
+			,CON15
+			,CON16
+			,CON17
+			,CON18
+			,CON19
+			,CON20
+			,CON21
+			,CON22
+			,CON23
+			,CON_RATE_AVG
+		FROM 혼잡_노선별_재차인원혼잡도
 		WHERE 1=1
 			AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
-			AND ANAL_AREA_CD = #{anal_area_cd_sido}
-			AND PROVIDER = #{provider}
-		ORDER BY ROUTE_ID, ROUTE_NMA
-	</select>
-	
-	<!-- PIVOT 노선별 혼잡도 -->
-	<select id ="downloadCongestionResultListRouteDOC" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-		SELECT 
-		 	#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
-            ,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
-            ,#{provider_text} PROVIDER
-			,OPRAT_DATE
-			,TO_CHAR(SDATE,'DY') DY
-			,ROUTE_ID
-			,ROUTE_NMA
-			,ROUTE_TYPE
-			,ROUTE_START
-			,ROUTE_END
-			,TM00
-			,TM01
-			,TM02
-			,TM03
-			,TM04
-			,TM05
-			,TM06
-			,TM07
-			,TM08
-			,TM09
-			,TM10
-			,TM11
-			,TM12
-			,TM13
-			,TM14
-			,TM15
-			,TM16
-			,TM17
-			,TM18
-			,TM19
-			,TM20
-			,TM21
-			,TM22
-			,TM23
-			,USER_CNT_AVG
-		FROM 혼잡_노선별_혼잡도
-		WHERE 1=1
-			AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
-			AND ANAL_AREA_CD = #{anal_area_cd_sido}
+			AND ANAL_AREA_CD = #{anal_area_cd}
 			AND PROVIDER = #{provider}
 		ORDER BY ROUTE_ID, ROUTE_NMA
 		
 	</select>
 	
-	<!-- PIVOT 노선별 최대 혼잡구 -->
-	<select id ="downloadCongestionResultListRouteDOC_max" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+	<!--  노선별 최대 혼잡구 -->
+	<select id ="selectCongestionResultListRouteDOC_max" parameterType="sVO" resultType="egovMap" fetchSize="1000">
 		SELECT 
 			#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
             ,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
@@ -422,18 +139,17 @@
 			,MAX21
 			,MAX22
 			,MAX23
-			,USER_CNT_MAX
-			,STTN_RANK
+			,CON_RATE_MAX
 		FROM 혼잡_노선별_최대평균혼잡도 
 		WHERE 1=1
 			AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
-			AND ANAL_AREA_CD = #{anal_area_cd_sido}
+			AND ANAL_AREA_CD = #{anal_area_cd}
 			AND PROVIDER = #{provider}
 		ORDER BY ROUTE_ID, ROUTE_NMA, STTN_RANK
 	</select>
 	
-	<!-- PIVOT 노선별 평균 혼잡구 -->
-	<select id ="downloadCongestionResultListRouteDOC_avg" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+	<!--  노선별 평균 혼잡구 -->
+	<select id ="selectCongestionResultListRouteDOC_avg" parameterType="sVO" resultType="egovMap" fetchSize="1000">
 		SELECT 
 			#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
             ,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
@@ -476,18 +192,17 @@
 			,AVG21
 			,AVG22
 			,AVG23
-			,USER_CNT_AVG
-			,STTN_RANK
+			,CON_RATE_AVG
 		FROM 혼잡_노선별_최대평균혼잡도 
 		WHERE 1=1
 			AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
-			AND ANAL_AREA_CD = #{anal_area_cd_sido}
+			AND ANAL_AREA_CD = #{anal_area_cd}
 			AND PROVIDER = #{provider}
 		ORDER BY ROUTE_ID, ROUTE_NMA, STTN_RANK
 	</select>
 	
-	<!-- PIVOT 정류장간 최대 혼잡도 -->
-	<select id ="downloadCongestionResultListStationDOC_max" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+	<!--  정류장간 최대 혼잡도 -->
+	<select id ="selectCongestionResultListStationDOC_max" parameterType="sVO" resultType="egovMap" fetchSize="1000">
 		SELECT 
 			#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
             ,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
@@ -525,17 +240,17 @@
 			,MAX21
 			,MAX22
 			,MAX23
-			,USER_CNT_MAX
+			,CON_RATE_MAX
 		FROM 혼잡_정류장간_최대평균혼잡도 
 		WHERE 1=1
 			AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
-			AND ANAL_AREA_CD = #{anal_area_cd_sido}
+			AND ANAL_AREA_CD = #{anal_area_cd}
 			AND PROVIDER = #{provider}
 		ORDER BY STTN_RANK
 	</select>
 	
-	<!-- PIVOT 정류장간 평균 혼잡도 -->
-	<select id ="downloadCongestionResultListStationDOC_avg" parameterType="sVO" resultType="egovMap" fetchSize="1000">
+	<!--  정류장간 평균 혼잡도 -->
+	<select id ="selectCongestionResultListStationDOC_avg" parameterType="sVO" resultType="egovMap" fetchSize="1000">
 		SELECT 
 			#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
             ,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
@@ -573,11 +288,11 @@
 			,AVG21
 			,AVG22
 			,AVG23
-			,USER_CNT_AVG
+			,CON_RATE_AVG
 		FROM 혼잡_정류장간_최대평균혼잡도 
 		WHERE 1=1
 			AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
-			AND ANAL_AREA_CD = #{anal_area_cd_sido}
+			AND ANAL_AREA_CD = #{anal_area_cd}
 			AND PROVIDER = #{provider}
 		ORDER BY STTN_RANK
 	</select>
