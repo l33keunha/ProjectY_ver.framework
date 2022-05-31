@@ -11,7 +11,7 @@
     
     	
 		<c:set var="columnCnt" value='${columnCnt+1}' />											<!-- 컬럼 반복 횟수 (합계 포함) -->
-		<c:set var = "forCnt" value = '${timeDistnResultList.size()/columnCnt/2}'/>						<!-- 컬럼갯수(이용자 유형)에 따른 총 반복횟수 -->	
+		<c:set var = "forCnt" value = '${timeDistnResultList.size()/columnCnt}'/>						<!-- 컬럼갯수(이용자 유형)에 따른 총 반복횟수 -->	
 		<c:set var = "dateCnt" value = "${dateEnd - dateStart + 1}"/>								<!-- 날짜 종류 갯수 -->
 		<fmt:parseNumber var = "dateCnt" value = "${forCnt/dateCnt}"  />							<!-- 날짜 출력 갯수 -->
 		
@@ -91,11 +91,12 @@
 					<!--thead 시작▼-->
 					<thead>
 						 <tr>
-							<th class="tg-0pky" rowspan="2" style="width: 80px; min-width: 80px; max-width: 80px; height: 56px;">광역/도</th>		<!-- 광역/도 -->
-							<th class="tg-0pky" rowspan="2" style="width: 80px; min-width: 80px; max-width: 80px;">시/군</th>					<!-- 시/군 -->
-							<th class="tg-0pky" rowspan="2" style="width: 70px; min-width: 70px; max-width: 70px;">날짜</th>						<!-- 날짜 -->
-							<th class="tg-0pky" rowspan="2" style="width: 30px; min-width: 30px; max-width: 30px;">요일</th>						<!-- 요일 -->								
-							<th class="tg-0pky" rowspan="2" style="width: 30px; min-width: 30px; max-width: 30px;">시간</th>						<!-- 시간 -->	
+							<th class="tg-0pky"  style="width: 80px; min-width: 80px; max-width: 80px; height:56px;">광역/도</th>				<!-- 광역/도 -->
+							<th class="tg-0pky"  style="width: 80px; min-width: 80px; max-width: 80px;">시/군</th>							<!-- 시/군 -->
+							<th class="tg-0pky"  style="width: 80px; min-width: 80px; max-width: 80px;">날짜</th>								<!-- 날짜 -->
+							<th class="tg-0pky"  style="width: 30px; min-width: 30px; max-width: 30px;">요일</th>								<!-- 요일 -->								
+							<th class="tg-0pky"  style="width: 80px; min-width: 80px; max-width: 80px;">노선구분</th>							<!-- 노선구분 -->
+							<th class="tg-0pky"  style="width: 30px; min-width: 30px; max-width: 30px;">시간</th>								<!-- 시간 -->	
 						 </tr>
 					</thead>
 					<!--thead 끝▲-->
@@ -131,8 +132,12 @@
 										<td class="tg-0pky" rowspan='${forCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${anal_area_cd_text}</div></td>				<!-- 시/군 -->
 									</c:if>				
 									
-									<td class="tg-0pky"  style="width: 70px; min-width: 70px; max-width: 70px;"><div class="lavel-2">${timeDistnResultList[j*columnCnt*2].opratDate}</div></td>				<!-- 날짜 -->
-									<td class="tg-0pky"  style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2">${timeDistnResultList[j*columnCnt*2].dy}</div></td>						<!-- 요일 -->
+									<c:if test="${(j % dateCnt) == 0}">	   
+										<td class="tg-c3ow" rowspan='${dateCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${timeDistnResultList[j*columnCnt].opratDate}</div></td>		<!-- 날짜 -->
+										<td class="tg-0pky" rowspan='${dateCnt}' style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2">${timeDistnResultList[j*columnCnt].dy}</div></td>				<!-- 요일 -->
+									</c:if>	
+							
+									<td class="tg-0pky"  style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${timeDistnResultList[j*columnCnt].tfcmn}</div></td>				<!-- 노선구분 -->
 							
 									<c:if test="${(j % forCnt) == 0}">	   
 										<td class="tg-0pky" rowspan='${forCnt}' style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2">전체</div></td>								<!-- 시간 -->
@@ -142,18 +147,26 @@
 								
 								<!-- 시간대 : 시작시간 ~ 끝시간 -->
 								<c:if test="${sVO.tm == null}">
+								
+									<!-- 전체 row 수 -->
+									<c:if test = "${j == 0}">
+										<td class="tg-c3ow" rowspan='${forCnt}' 	style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${anal_area_cd_sido_text}</div></td>	<!-- 광역/도 -->
+										<td class="tg-0pky" rowspan='${forCnt}'	 	style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${anal_area_cd_text}</div></td>			<!-- 시/군 -->												
+									</c:if>
+									
+									<!-- 조회한 날짜에 따라 실행 -->
+									<c:if test="${(j % dateCnt) == 0}">	   
+										<td class="tg-c3ow" rowspan='${dateCnt}' 	style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${timeDistnResultList[j*columnCnt].opratDate}</div></td>		<!-- 날짜 -->
+										<td class="tg-0pky" rowspan='${dateCnt}'	 	style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2">${timeDistnResultList[j*columnCnt].dy}</div></td>			<!-- 요일 -->												
+									</c:if>
+								
 									<!-- 조회한 시간에 따라 실행 -->
 									<c:if test="${(j % timeCnt) == 0}">	   
-										<!-- 전체 row 수 -->
-										<c:if test = "${j == 0}">
-											<td class="tg-c3ow" rowspan='${forCnt}' 	style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${anal_area_cd_sido_text}</div></td>	<!-- 광역/도 -->
-											<td class="tg-0pky" rowspan='${forCnt}'	 	style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${anal_area_cd_text}</div></td>			<!-- 시/군 -->												
-										</c:if>
-										<td class="tg-0pky" rowspan='${timeCnt}' 	style="width: 70px; min-width: 70px; max-width: 70px;"><div class="lavel-2">${timeDistnResultList[dateCnt*indexCnt*columnCnt*2].opratDate}</div></td>	<!-- 날짜 -->
-										<td class="tg-0pky" rowspan='${timeCnt}' 	style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2">${timeDistnResultList[dateCnt*indexCnt*columnCnt*2].dy}</div></td>			<!-- 요일 -->
-										<c:set var = "indexCnt" value = "${indexCnt + 1}"/>
+										<td class="tg-0pky" rowspan='${timeCnt}' 	style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${timeDistnResultList[j*columnCnt].tfcmn}</div></td>		<!-- 노선구분 -->
 									</c:if>
-									<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;">${timeDistnResultList[j*columnCnt*2].tm}</td>		<!-- 시간 -->
+									
+									
+									<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;">${timeDistnResultList[j*columnCnt].tm}</td>		<!-- 시간 -->
 								</c:if>
 						
 							</tr>
@@ -175,20 +188,24 @@
 				
 					<!--헤더 시작▼-->
 					<thead>
+							
 						<tr>
-							<c:forTokens  var="name" items="${cd_noText}" delims="_">
-								<th class="tg-0pky" colspan="3" style="width: 210px; min-width: 210px; max-width: 210px;">${name}</th>			<!-- 이용자 유형 -->
-							</c:forTokens>
-							<th class="tg-0pky" rowspan="2" style="width: 100px; min-width: 100px; max-width: 100px;">버스소계</th>				<!-- 버스소계-->
-							<th class="tg-0pky" rowspan="2" style="width: 100px; min-width: 100px; max-width: 100px;">지하철소계</th>				<!-- 지하철소계-->
-							<th class="tg-0pky" rowspan="2" style="width: 100px; min-width: 100px; max-width: 100px;">합계</th>					<!-- 합계-->
+						
+							<th class="tg-0pky" colspan ="${columnCnt}" style="width: ${(columnCnt*70)+30}px; min-width: ${(columnCnt*70)+30}px; max-width: ${(columnCnt*70)+30}px;">통행시간</th>		<!-- 통행시간 -->
+							<th class="tg-0pky" colspan ="${columnCnt}" style="width: ${(columnCnt*70)+30}px; min-width: ${(columnCnt*70)+30}px; max-width: ${(columnCnt*70)+30}px;">통행거리</th>		<!-- 통행거리 -->
 						</tr>
 						<tr>
-							<c:forEach var='j' begin='0' end='${columnCnt-2}' >	
-								<th class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;">버스</th>								<!-- 버스-->
-								<th class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;">지하철</th>							<!-- 지하철 -->
-								<th class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;">소계</th>								<!-- 소계 -->							
-							</c:forEach>
+							<!-- 통행시간 -->
+						 	<c:forTokens  var="name" items="${cd_noText}" delims="_">
+								<th class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;">${name}</th>		<!-- 이용자 유형 -->
+							</c:forTokens>
+							<th class="tg-0pky" style="width: 100px; min-width: 100px; max-width: 100px;">평균</th>			<!-- 평균-->
+							
+							<!-- 통행거리 -->
+							<c:forTokens  var="name" items="${cd_noText}" delims="_">
+								<th class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;">${name}</th>		<!-- 이용자 유형 -->
+							</c:forTokens>
+							<th class="tg-0pky" style="width: 100px; min-width: 100px; max-width: 100px;">평균</th>			<!-- 평균-->
 						</tr>
 					</thead>
 					<!--헤더 끝▲-->
@@ -217,25 +234,36 @@
 							</c:if>
 				    
 							<tr style="${scroll_display_none}" class= "show_${showScroll}">
-							
 								<!-- 컬럼 갯수대로 실행 -->
 								<c:set var = "st" value = '${j*columnCnt}'/>	<!-- 시작 index -->
 								<c:set var = "ed" value = '${st+columnCnt}'/>	<!-- 끝 index -->
-						
-								<c:forEach var='i' begin='${st}' end='${ed-1}' >	    
-									
-									<!-- 컬럼에 따른 Size 변수 -->
-									<c:set var="tdSize" value="${70}" />
-									<c:if test="${i == (ed-1)}">
-										<c:set var="tdSize" value="${100}" />
-									</c:if>
-									
-									<td class="tg-0pky" style="width: ${tdSize}px; min-width: ${tdSize}px; max-width: ${tdSize}px;"><fmt:formatNumber type="number" value="${timeDistnResultList[i*2].userCntAgg}"/></td>												<!-- 버스-->
-									<td class="tg-0pky" style="width: ${tdSize}px; min-width: ${tdSize}px; max-width: ${tdSize}px;"><fmt:formatNumber type="number" value="${timeDistnResultList[(i*2)+1].userCntAgg}"/></td>											<!-- 지하철-->
-									<td class="tg-0pky" style="width: ${tdSize}px; min-width: ${tdSize}px; max-width: ${tdSize}px;"><fmt:formatNumber type="number" value="${timeDistnResultList[(i*2)].userCntAgg + timeDistnResultList[(i*2)+1].userCntAgg}"/></td>		<!-- 소계(버스+지하철) -->	
-									
-								</c:forEach>
 								
+								<!-- 통행시간 or 통행거리에 따른 표 표출 -->
+								<c:forEach var='k' begin='0' end='1' >	    
+									
+									<c:forEach var='i' begin='${st}' end='${ed-1}' >	    
+								
+										<!-- 컬럼에 따른 Size 변수 -->
+										<c:set var="tdSize" value="${70}" />
+										<c:if test="${i == (ed-1)}">
+											<c:set var="tdSize" value="${100}" />
+										</c:if>
+									
+									
+										<!-- 통행시간 or 통행 거리에 따른 데이터 컬럼 -->
+										<c:set var="timeDistn_value" value="" />
+										<c:if test="${k == 0}">
+											<c:set var="timeDistn_value" value="${timeDistnResultList[i].brdngTmAvg}" />
+										</c:if>
+										<c:if test="${k == 1}">
+											<c:set var="timeDistn_value" value="${timeDistnResultList[i].useDstAvg}" />
+										</c:if>
+									
+										<td class="tg-0pky" style="width: ${tdSize}px; min-width: ${tdSize}px; max-width: ${tdSize}px;"><fmt:formatNumber type="number" value="${timeDistn_value}"/></td>		<!-- 이용자유형-->
+									
+									</c:forEach>
+								
+								</c:forEach>
 							</tr>
 							
 						

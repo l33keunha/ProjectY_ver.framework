@@ -403,7 +403,7 @@
 			,NVL(TM,'합계') TM
 			,NVL(CD_NO,'합계') CD_NO
 			,SUM(정류장OD_통행량) CNT
-			FROM 노선별정류장간OD_주석 A
+			FROM 노선별정류장간OD A
 			WHERE 1=1
 				AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 				AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
@@ -460,7 +460,7 @@
 			,도착정류장행정동 OFF_STN_AREA
 			,NVL(CD_NO,'합계') CD_NO
 			,SUM(정류장OD_통행량) CNT
-			FROM 노선별정류장간OD_주석_일별 A
+			FROM 노선별정류장간OD_일별 A
 			WHERE 1=1
 				AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 				AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
@@ -1746,7 +1746,7 @@
 	                        ,TM
 	                        ,CD_NO
 	                        ,정류장OD_통행량 CNT
-	                    FROM 노선별정류장간OD_주석
+	                    FROM 노선별정류장간OD
 	                    WHERE 1=1
 	                        AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 	                        AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
@@ -1846,7 +1846,7 @@
 	                        ,도착정류장행정동 OFF_STN_AREA
 	                        ,CD_NO
 	                        ,정류장OD_통행량 CNT
-	                    FROM 노선별정류장간OD_주석_일별
+	                    FROM 노선별정류장간OD_일별
 	                    WHERE 1=1
 	                        AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 	                        AND PART_KEY = #{provider} || '_' || #{anal_area_cd}

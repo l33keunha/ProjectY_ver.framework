@@ -74,7 +74,7 @@
 		</script>
 		
 		
-		<!-- ● 목적통행 -->
+		<!-- ● 1일 평균 통행시간/거리 -->
 		<div class="table-left">
 			<div class="table1">
 				<table style="border-collapse: collapse;">
@@ -82,11 +82,11 @@
 					<!--thead 시작▼-->
 					<thead>
 						 <tr>
-							<th class="tg-0pky" style="width: 80px; min-width: 80px; max-width: 80px;">광역/도</th>								<!-- 광역/도 -->
-							<th class="tg-0pky" style="width: 80px; min-width: 80px; max-width: 80px;">시/군</th>							<!-- 시/군 -->
-							<th class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;">날짜</th>								<!-- 날짜 -->
-							<th class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;">요일</th>								<!-- 요일 -->								
-							<th class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;">시간</th>								<!-- 시간 -->	
+							<th class="tg-0pky"  style="width: 80px; min-width: 80px; max-width: 80px; height:56px;">광역/도</th>				<!-- 광역/도 -->
+							<th class="tg-0pky"  style="width: 80px; min-width: 80px; max-width: 80px;">시/군</th>							<!-- 시/군 -->
+							<th class="tg-0pky"  style="width: 70px; min-width: 70px; max-width: 70px;">날짜</th>								<!-- 날짜 -->
+							<th class="tg-0pky"  style="width: 30px; min-width: 30px; max-width: 30px;">요일</th>								<!-- 요일 -->								
+							<th class="tg-0pky"  style="width: 30px; min-width: 30px; max-width: 30px;">시간</th>								<!-- 시간 -->	
 						 </tr>
 					</thead>
 					<!--thead 끝▲-->
@@ -117,14 +117,14 @@
 									<!-- 시간대 : 1일 -->
 									<c:if test="${sVO.tm == 'allDay'}">
 										<c:if test="${(j % forCnt) == 0}">	   
-											<td class="tg-c3ow" rowspan='${forCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2 lavel-1">${anal_area_cd_sido_text}</div></td>		<!-- 광역/도 -->
-											<td class="tg-0pky" rowspan='${forCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2 lavel-1">${anal_area_cd_text}</div></td>				<!-- 시/군 -->
+											<td class="tg-c3ow" rowspan='${forCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2 lavel-1">${anal_area_cd_sido_text}</div></td>	<!-- 광역/도 -->
+											<td class="tg-0pky" rowspan='${forCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2 lavel-1">${anal_area_cd_text}</div></td>			<!-- 시/군 -->
 										</c:if>				
 									
 										<td class="tg-0pky"  style="width: 70px; min-width: 70px; max-width: 70px;"><div class="lavel-2">${timeDistnResultList[j*columnCnt].opratDate}</div></td>				<!-- 날짜 -->
 										<td class="tg-0pky"  style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2">${timeDistnResultList[j*columnCnt].dy}</div></td>						<!-- 요일 -->
 										<c:if test="${(j % forCnt) == 0}">	 
-											<td class="tg-0pky" rowspan='${forCnt}' style="width: 30px; min-width: 30px; max-width: 30px;">전체</td>															<!-- 시간 -->
+											<td class="tg-0pky" rowspan='${forCnt}' style="width: 30px; min-width: 30px; max-width: 30px;">전체</td>																<!-- 시간 -->
 										</c:if>
 									</c:if>
 									
@@ -139,7 +139,7 @@
 												<td class="tg-0pky" rowspan='${forCnt}'	 	style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${anal_area_cd_text}</div></td>						<!-- 시/군 -->												
 											</c:if>
 											 
-											<td class="tg-0pky" rowspan='${timeCnt}' 	style="width: 70px; min-width: 70px; max-width: 70px;"><div class="lavel-2">${timeDistnResultList[dateCnt*indexCnt*columnCnt].opratDate}</div></td>	<!-- 날짜 -->
+											<td class="tg-0pky" rowspan='${timeCnt}' 	style="width: 70px; min-width: 70px; max-width: 70px;"><div class="lavel-2">${timeDistnResultList[dateCnt*indexCnt*columnCnt].opratDate}</div></td>		<!-- 날짜 -->
 											<td class="tg-0pky" rowspan='${timeCnt}' 	style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2">${timeDistnResultList[dateCnt*indexCnt*columnCnt].dy}</div></td>			<!-- 요일 -->
 											<c:set var = "indexCnt" value = "${indexCnt + 1}"/>
 										</c:if>
@@ -163,11 +163,24 @@
 				
 					<!--헤더 시작▼-->
 					<thead>
+							
 						<tr>
+						
+							<th class="tg-0pky" colspan ="${columnCnt}" style="width: ${(columnCnt*70)+30}px; min-width: ${(columnCnt*70)+30}px; max-width: ${(columnCnt*70)+30}px;">통행시간</th>		<!-- 통행시간 -->
+							<th class="tg-0pky" colspan ="${columnCnt}" style="width: ${(columnCnt*70)+30}px; min-width: ${(columnCnt*70)+30}px; max-width: ${(columnCnt*70)+30}px;">통행거리</th>		<!-- 통행거리 -->
+						</tr>
+						<tr>
+							<!-- 통행시간 -->
 						 	<c:forTokens  var="name" items="${cd_noText}" delims="_">
 								<th class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;">${name}</th>		<!-- 이용자 유형 -->
 							</c:forTokens>
-							<th class="tg-0pky" style="width: 100px; min-width: 100px; max-width: 100px;">합계</th>			<!-- 합계-->
+							<th class="tg-0pky" style="width: 100px; min-width: 100px; max-width: 100px;">평균</th>			<!-- 평균-->
+							
+							<!-- 통행거리 -->
+							<c:forTokens  var="name" items="${cd_noText}" delims="_">
+								<th class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;">${name}</th>		<!-- 이용자 유형 -->
+							</c:forTokens>
+							<th class="tg-0pky" style="width: 100px; min-width: 100px; max-width: 100px;">평균</th>			<!-- 평균-->
 						</tr>
 					</thead>
 					<!--헤더 끝▲-->
@@ -200,17 +213,32 @@
 								<c:set var = "st" value = '${j*columnCnt}'/>	<!-- 시작 index -->
 								<c:set var = "ed" value = '${st+columnCnt}'/>	<!-- 끝 index -->
 								
-								<c:forEach var='i' begin='${st}' end='${ed-1}' >	    
+								<!-- 통행시간 or 통행거리에 따른 표 표출 -->
+								<c:forEach var='k' begin='0' end='1' >	    
+									
+									<c:forEach var='i' begin='${st}' end='${ed-1}' >	    
 								
-									<!-- 컬럼에 따른 Size 변수 -->
-									<c:set var="tdSize" value="${70}" />
-									<c:if test="${i == (ed-1)}">
-										<c:set var="tdSize" value="${100}" />
-									</c:if>
-									<td class="tg-0pky" style="width: ${tdSize}px; min-width: ${tdSize}px; max-width: ${tdSize}px;"><fmt:formatNumber type="number" value="${timeDistnResultList[i].userCntAgg}"/></td>				<!-- 이용자유형-->
+										<!-- 컬럼에 따른 Size 변수 -->
+										<c:set var="tdSize" value="${70}" />
+										<c:if test="${i == (ed-1)}">
+											<c:set var="tdSize" value="${100}" />
+										</c:if>
+									
+									
+										<!-- 통행시간 or 통행 거리에 따른 데이터 컬럼 -->
+										<c:set var="timeDistn_value" value="" />
+										<c:if test="${k == 0}">
+											<c:set var="timeDistn_value" value="${timeDistnResultList[i].brdngTmAvg}" />
+										</c:if>
+										<c:if test="${k == 1}">
+											<c:set var="timeDistn_value" value="${timeDistnResultList[i].useDstAvg}" />
+										</c:if>
+									
+										<td class="tg-0pky" style="width: ${tdSize}px; min-width: ${tdSize}px; max-width: ${tdSize}px;"><fmt:formatNumber type="number" value="${timeDistn_value}"/></td>		<!-- 이용자유형-->
+									
+									</c:forEach>
+								
 								</c:forEach>
-								
-								
 							</tr>
 							
 						</c:forEach>

@@ -23,7 +23,7 @@
     <iframe id="excelDown" name="excelDown" width="0" height="0"></iframe>
     
 	<!-- 다운로드 조회조건 -->
-	<form id="downloadForm" action="transferDownload.do" target="excelDown">
+	<form id="downloadForm" action="timeDistnDownload.do" target="excelDown">
 		<div class= "sVOvalue">
 			<input name="anal_fin" type="hidden" id="anal_finJS" value="${sVO.anal_fin}"/>
 			<input name="dateStart" type="hidden" id="dateStartJS" value="${sVO.dateStart}"/>
@@ -52,7 +52,7 @@
 	</form>
 	
 	<!-- 그래프 조회조건 -->
-	<form id="graphForm" action="transferGraph.do" target="excelDown">
+	<form id="graphForm" action="timeDistnGraph.do" target="excelDown">
 		<div class= "sVOvalue">
 			<input name="anal_fin" type="hidden" id="anal_finJS" value="${sVO.anal_fin}"/>
 			<input name="dateStart" type="hidden" id="dateStartJS" value="${sVO.dateStart}"/>

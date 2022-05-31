@@ -50,9 +50,7 @@ public class TransferController {
 				}
 				mv.addObject("transferResultListB", transferResultListB);
 				mv.setViewName("indicator/transfer/transfer_popUp");
-			}  else {
-				mv.setViewName("common/error");
-			}
+			}  
 			
 			transferResultListT = service.selectTransferResultListT(sVO);
 			if(transferResultListT.size() > 0) {
@@ -61,8 +59,6 @@ public class TransferController {
 				}
 				mv.addObject("transferResultListT", transferResultListT);
 				mv.setViewName("indicator/transfer/transfer_popUp");
-			} else {
-				mv.setViewName("common/error");
 			}
 		} else {
 			transferResultList = service.selectTransferResultList(sVO);
@@ -73,10 +69,8 @@ public class TransferController {
 				}
 				mv.addObject("transferResultList", transferResultList);
 				mv.setViewName("indicator/transfer/transfer_popUp");
-			} else {
-				mv.setViewName("common/error");
 			}
-		}
+		} 
 		
 		mv.addObject("sVO", sVO);
 		mv.addObject("req", req);
