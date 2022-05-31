@@ -98,14 +98,15 @@
 						<tr>
 							<th class="tg-0pky" rowspan="2" style="width: 80px; min-width: 80px; max-width: 80px; height: 56px;">광역/도</th>
 							<!-- 광역/도 -->
+							
 							<th class="tg-0pky" rowspan="2" style="width: 80px; min-width: 80px; max-width: 80px;">시/군</th>
 							<!-- 시/군 -->
-							<th class="tg-0pky" rowspan="2" style="width: 80px; min-width: 80px; max-width: 80px;">노선구분</th>
-							<!-- 노선구분 -->
 							<th class="tg-0pky" rowspan="2" style="width: 70px; min-width: 70px; max-width: 70px;">날짜</th>
 							<!-- 분석일자 -->
 							<th class="tg-0pky" rowspan="2" style="width: 30px; min-width: 30px; max-width: 30px;">요일</th>
 							<!-- 요일 -->
+							<th class="tg-0pky" rowspan="2" style="width: 80px; min-width: 80px; max-width: 80px;">노선구분</th>
+							<!-- 노선구분 -->
 							<th class="tg-0pky" rowspan="2" style="width: 122px; min-width: 122px; max-width: 122px;">노선명</th>
 							<!-- 노선명 -->
 							<th class="tg-0pky" rowspan="2" style="width: 80px; min-width: 80px; max-width: 80px;">노선유형</th>
@@ -148,30 +149,32 @@
 								<!-- 시간대 : 1일 -->
 								<c:if test="${sVO.tm == 'allDay'}">
 		
-									<c:if test="${(j % dateCnt) == 0}">
-		
-										<!-- 전체 row 수 -->
-										<c:if test="${j == 0}">
-											<td class="tg-c3ow" rowspan='${forCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${anal_area_cd_sido_text}</div></td>
-											<!-- 광역/도 -->
-											<td class="tg-0pky" rowspan='${forCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${anal_area_cd_text}</div></td>
-											<!-- 시/군 -->
-		
-											<td class="tg-0pky" rowspan='${busCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${timeDistnResultList[0].tfcmn}</div></td>
-											<!-- 노선구분 -->
-										</c:if>
+						
+									<!-- 전체 row 수 -->
+									<c:if test="${j == 0}">
+										<td class="tg-c3ow" rowspan='${forCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${anal_area_cd_sido_text}</div></td>
+										<!-- 광역/도 -->
+										<td class="tg-0pky" rowspan='${forCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${anal_area_cd_text}</div></td>
+										<!-- 시/군 -->
 									</c:if>
-		
-									<c:if test="${j == busCnt}">
-										<td class="tg-0pky" rowspan='${trainCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${timeDistnResultList[j * columnCnt].tfcmn}</div></td>
-									</c:if>
-		
+									
 									<c:if test="${(j % dateCnt) == 0}">
 										<!-- 시간 * 날짜수  -->           
 										<td class="tg-0pky" rowspan='${dateCnt}' style="width: 70px; min-width: 70px; max-width: 70px;"><div class="lavel-2">${timeDistnResultList[j*columnCnt].opratDate }</div></td>
 										<!-- 분석일자 -->
 										<td class="tg-0pky" rowspan='${dateCnt}' style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2">${timeDistnResultList[j*columnCnt].dy }</div></td>
 									</c:if>
+									
+									<c:if test="${j == 0}">
+										<td class="tg-0pky" rowspan='${busCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${timeDistnResultList[0].tfcmn}</div></td>
+										<!-- 노선구분 -->
+									</c:if>
+										
+									<c:if test="${j == busCnt}">
+										<td class="tg-0pky" rowspan='${trainCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${timeDistnResultList[j * columnCnt].tfcmn}</div></td>
+									</c:if>
+		
+									
 		
 									<td class="tg-0pky" style="width: 122px; min-width: 122px; max-width: 122px;"><div class="lavel-2  lavel-1">${timeDistnResultList[j * columnCnt].routeNma}</div></td>
 									<!-- 노선명 -->
@@ -197,31 +200,14 @@
 								<!-- 시간대 : 시작시간 ~ 끝시간 -->
 								<c:if test="${sVO.tm == null}">
 		
-									<c:if test="${(j % dateCnt) == 0}">
-		
-										<c:if test="${timeDistnResultList[0].tfcmn == 'B'}">
-											<c:set var="t_b_name" value='버스' />
-										</c:if>
-										<c:if test="${timeDistnResultList[0].tfcmn == 'T'}">
-											<c:set var="t_b_name" value='지하철' />
-										</c:if>
-		
-										<!-- 전체 row 수 -->
-										<c:if test="${j == 0}">
-											<td class="tg-c3ow" rowspan='${forCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${anal_area_cd_sido_text}</div></td>
-											<!-- 광역/도 -->
-											<td class="tg-0pky" rowspan='${forCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${anal_area_cd_text}</div></td>
-											<!-- 시/군 -->
-											<td class="tg-0pky" rowspan='${busCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${timeDistnResultList[0].tfcmn }</div></td>
-											<!-- 노선구분 -->
-										</c:if>
-									</c:if>	
-									
-									<c:if test='${j == busCnt}'>
-										<td class="tg-0pky" rowspan='${trainCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${timeDistnResultList[j * columnCnt].tfcmn }</div></td>
+									<!-- 전체 row 수 -->
+									<c:if test="${j == 0}">
+										<td class="tg-c3ow" rowspan='${forCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${anal_area_cd_sido_text}</div></td>
+										<!-- 광역/도 -->
+										<td class="tg-0pky" rowspan='${forCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${anal_area_cd_text}</div></td>
+										<!-- 시/군 -->
 									</c:if>
 									
-		
 									<c:if test="${(j % dateCnt) == 0}">
 										<!-- 시간 * 날짜수  -->
 										<td class="tg-0pky" rowspan='${dateCnt}' style="width: 70px; min-width: 70px; max-width: 70px;"><div class="lavel-2">${timeDistnResultList[dateCnt*indexCnt*columnCnt].opratDate }</div></td>
@@ -231,7 +217,14 @@
 										<c:set var="indexCnt" value="${indexCnt + 1}" />
 									</c:if>
 		
+									<c:if test="${j == 0}">
+										<td class="tg-0pky" rowspan='${busCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${timeDistnResultList[0].tfcmn }</div></td>
+										<!-- 노선구분 -->
+									</c:if>
 									
+									<c:if test='${j == busCnt}'>
+										<td class="tg-0pky" rowspan='${trainCnt}' style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2">${timeDistnResultList[j * columnCnt].tfcmn }</div></td>
+									</c:if>
 									
 									<!-- 노선명 그룹이 시작될 때마다 실행 -->
 									<c:if test="${(j % timeCnt) == 0}">
