@@ -37,6 +37,27 @@
 			newForm.attr("target", "_parent");
 			pushArray.splice(4,2);
 			newForm.attr("action","downloadTest.do");
+			
+			
+			
+			var analType = $("input[name=anal_type]:checked").attr("text2");
+			if(analType == "정류장별_통행"){
+				alert("선택하신 지역에 따라 최대 1분정도 소요될 수 있습니다.");
+			} else if(analType == "정류장간_목적통행" || analType == "정류장간_수단통행"){
+				alert("선택하신 지역에 따라 최대 5분정도 소요될 수 있습니다.");
+			} else if(analType == "노선별통행"){
+				alert("선택하신 지역에 따라 최대 1분정도 소요될 수 있습니다.");
+			} else if(analType == "노선별_기종점통행"){
+				alert("선택하신 지역에 따라 최대 5분정도 소요될 수 있습니다.");
+			} else if(analType == "노선별_재차인원"){
+				alert("선택하신 지역에 따라 최대 1분정도 소요될 수 있습니다.");
+			} else if(analType == "행정동간_목적통행" || analType == "행정동간_수단통행"){	
+				alert("선택하신 지역에 따라 최대 3분정도 소요될 수 있습니다.");
+			}
+			
+			
+			
+			
 		} else if($(this).attr('id') == 'transferBtn'){
 			window.open("" ,"newForm", "toolbar=no, width=1800, height=1000, directories=no, status=no, scrollorbars=no, resizable=no");
 			newForm.attr("action","transferTest.do");
