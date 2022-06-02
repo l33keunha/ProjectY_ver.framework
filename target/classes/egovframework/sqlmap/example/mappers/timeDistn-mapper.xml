@@ -69,8 +69,8 @@
                     ,TO_CHAR(SDATE,'DY') DY
                     ,ANAL_AREA_CD
                     ,CD_NO
-                    ,CASE WHEN TRUNC(AVG(BRDNG_TM_AVG),0) = '0' THEN NULL ELSE TRUNC(AVG(BRDNG_TM_AVG),0) END  BRDNG_TM_AVG
-                    ,CASE WHEN TRUNC(AVG(USE_DST_AVG),0) = '0' THEN NULL ELSE TRUNC(AVG(USE_DST_AVG),0) END USE_DST_AVG 
+                    ,TRUNC(AVG(CASE WHEN BRDNG_TM_AVG = '0' THEN NULL ELSE BRDNG_TM_AVG END),0)  BRDNG_TM_AVG
+                    ,TRUNC(AVG(CASE WHEN USE_DST_AVG = '0' THEN NULL ELSE USE_DST_AVG END),0)  USE_DST_AVG 
                 FROM 시간거리_목적통행
                 WHERE 1=1
                     AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
@@ -164,8 +164,8 @@
                     ,TO_CHAR(SDATE,'DY') DY
                     ,ANAL_AREA_CD
                     ,CD_NO
-                    ,CASE WHEN TRUNC(AVG(BRDNG_TM_AVG),0) = '0' THEN NULL ELSE TRUNC(AVG(BRDNG_TM_AVG),0) END  BRDNG_TM_AVG
-                    ,CASE WHEN TRUNC(AVG(USE_DST_AVG),0) = '0' THEN NULL ELSE TRUNC(AVG(USE_DST_AVG),0) END USE_DST_AVG 
+                    ,TRUNC(AVG(CASE WHEN BRDNG_TM_AVG = '0' THEN NULL ELSE BRDNG_TM_AVG END),0)  BRDNG_TM_AVG
+                    ,TRUNC(AVG(CASE WHEN USE_DST_AVG = '0' THEN NULL ELSE USE_DST_AVG END),0)  USE_DST_AVG  
                 FROM 시간거리_목적통행
                 WHERE 1=1
                     AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
@@ -267,8 +267,8 @@
                     ,ANAL_AREA_CD
                     ,CASE WHEN TFCMN='B' THEN '버스' ELSE '지하철' END TFCMN
                     ,CD_NO
-                    ,CASE WHEN TRUNC(AVG(BRDNG_TM_AVG),0) = '0' THEN NULL ELSE TRUNC(AVG(BRDNG_TM_AVG),0) END  BRDNG_TM_AVG
-                    ,CASE WHEN TRUNC(AVG(USE_DST_AVG),0) = '0' THEN NULL ELSE TRUNC(AVG(USE_DST_AVG),0) END USE_DST_AVG 
+                    ,TRUNC(AVG(CASE WHEN BRDNG_TM_AVG = '0' THEN NULL ELSE BRDNG_TM_AVG END),0)  BRDNG_TM_AVG
+                    ,TRUNC(AVG(CASE WHEN USE_DST_AVG = '0' THEN NULL ELSE USE_DST_AVG END),0)  USE_DST_AVG  
                 FROM 시간거리_수단통행
                 WHERE 1=1
                     AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
@@ -538,8 +538,8 @@
                             ,TO_CHAR(SDATE,'DY') DY
                             ,ANAL_AREA_CD
                             ,CD_NO
-                            ,CASE WHEN TRUNC(AVG(BRDNG_TM_AVG),0) = '0' THEN NULL ELSE TRUNC(AVG(BRDNG_TM_AVG),0) END  BRDNG_TM_AVG
-                            ,CASE WHEN TRUNC(AVG(USE_DST_AVG),0) = '0' THEN NULL ELSE TRUNC(AVG(USE_DST_AVG),0) END USE_DST_AVG 
+                            ,TRUNC(AVG(CASE WHEN BRDNG_TM_AVG = '0' THEN NULL ELSE BRDNG_TM_AVG END),0)  BRDNG_TM_AVG
+                    		,TRUNC(AVG(CASE WHEN USE_DST_AVG = '0' THEN NULL ELSE USE_DST_AVG END),0)  USE_DST_AVG 
                         FROM 시간거리_목적통행
                         WHERE 1=1
                             AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
@@ -661,8 +661,8 @@
                             ,TO_CHAR(SDATE,'DY') DY
                             ,ANAL_AREA_CD
                             ,CD_NO
-                            ,CASE WHEN TRUNC(AVG(BRDNG_TM_AVG),0) = '0' THEN NULL ELSE TRUNC(AVG(BRDNG_TM_AVG),0) END  BRDNG_TM_AVG
-                            ,CASE WHEN TRUNC(AVG(USE_DST_AVG),0) = '0' THEN NULL ELSE TRUNC(AVG(USE_DST_AVG),0) END USE_DST_AVG 
+                            ,TRUNC(AVG(CASE WHEN BRDNG_TM_AVG = '0' THEN NULL ELSE BRDNG_TM_AVG END),0)  BRDNG_TM_AVG
+                    		,TRUNC(AVG(CASE WHEN USE_DST_AVG = '0' THEN NULL ELSE USE_DST_AVG END),0)  USE_DST_AVG 
                         FROM 시간거리_목적통행
                         WHERE 1=1
                             AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
@@ -791,8 +791,8 @@
                             ,ANAL_AREA_CD
                             ,CASE WHEN TFCMN='B' THEN '버스' ELSE '지하철' END TFCMN
                             ,CD_NO
-                            ,CASE WHEN TRUNC(AVG(BRDNG_TM_AVG),0) = '0' THEN NULL ELSE TRUNC(AVG(BRDNG_TM_AVG),0) END  BRDNG_TM_AVG
-                            ,CASE WHEN TRUNC(AVG(USE_DST_AVG),0) = '0' THEN NULL ELSE TRUNC(AVG(USE_DST_AVG),0) END USE_DST_AVG 
+                            ,TRUNC(AVG(CASE WHEN BRDNG_TM_AVG = '0' THEN NULL ELSE BRDNG_TM_AVG END),0)  BRDNG_TM_AVG
+                    		,TRUNC(AVG(CASE WHEN USE_DST_AVG = '0' THEN NULL ELSE USE_DST_AVG END),0)  USE_DST_AVG 
                         FROM 시간거리_수단통행
                         WHERE 1=1
                            AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
@@ -924,9 +924,9 @@
         FROM 
             (
                 SELECT 	
-                    '경기도' ANAL_AREA_SIDO_CD_TEXT
-                    ,'평택시' ANAL_AREA_CD_TEXT
-                    ,'지자체' PROVIDER
+                    #{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
+                    ,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
+                    ,#{provider_text} PROVIDER
                     ,OPRAT_DATE
                     ,DY
                     ,ANAL_AREA_CD
@@ -1138,7 +1138,6 @@
 				,ROUTE_NMA 
 		ORDER BY ROUTE_NMA, ROUTE_ID
 	</select>
-		
 		
 		
 		

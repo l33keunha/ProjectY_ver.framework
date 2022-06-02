@@ -76,7 +76,6 @@ public class PassController {
 				mv.setViewName("indicator/pass/pass_popUp");
 			}else {
 				System.out.println("버스 리스트 존재하지않음");
-				mv.setViewName("common/error");
 			}
 			
 			passResultListT = service.selectPassResultListT(sVO);
@@ -89,7 +88,6 @@ public class PassController {
 				mv.setViewName("indicator/pass/pass_popUp");
 			}else {
 				System.out.println("지하철 리스트 존재하지않음");
-				mv.setViewName("common/error");
 			}
 		} 
 		

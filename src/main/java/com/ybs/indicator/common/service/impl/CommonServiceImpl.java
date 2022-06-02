@@ -84,7 +84,7 @@ public class CommonServiceImpl extends EgovAbstractServiceImpl implements Common
 		} else if(sVO.getAnal_type().equals("dlRoute_routeODCnt")) {
 			sVO.setAnal_fin("PIVOT_노선별OD");
 		} else if(sVO.getAnal_type().equals("dlRoute_routeCBP")) {
-			sVO.setAnal_fin("혼잡_노선별_재차인원");
+			sVO.setAnal_fin("혼잡_노선별_재차인원혼잡도");
 		} else if(sVO.getAnal_type().equals("dlArea_areaOD_purpose")) {
 			sVO.setAnal_fin("PIVOT_행정동별OD_목적통행");
 		} else if(sVO.getAnal_type().equals("dlArea_areaOD_method")) {

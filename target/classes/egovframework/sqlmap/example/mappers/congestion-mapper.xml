@@ -45,7 +45,7 @@
 			AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
 			AND ANAL_AREA_CD = #{anal_area_cd}
 			AND PROVIDER = #{provider}
-		ORDER BY ROUTE_ID, ROUTE_NMA
+		ORDER BY ROUTE_NMA, ROUTE_ID
 	</select>
 	
 	<!--  노선별 혼잡도 -->
@@ -91,7 +91,7 @@
 			AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
 			AND ANAL_AREA_CD = #{anal_area_cd}
 			AND PROVIDER = #{provider}
-		ORDER BY ROUTE_ID, ROUTE_NMA
+		ORDER BY ROUTE_NMA, ROUTE_ID
 		
 	</select>
 	
@@ -145,7 +145,7 @@
 			AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
 			AND ANAL_AREA_CD = #{anal_area_cd}
 			AND PROVIDER = #{provider}
-		ORDER BY ROUTE_ID, ROUTE_NMA, STTN_RANK
+		ORDER BY ROUTE_NMA, ROUTE_ID, STTN_RANK
 	</select>
 	
 	<!--  노선별 평균 혼잡구 -->
@@ -198,7 +198,7 @@
 			AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
 			AND ANAL_AREA_CD = #{anal_area_cd}
 			AND PROVIDER = #{provider}
-		ORDER BY ROUTE_ID, ROUTE_NMA, STTN_RANK
+		ORDER BY ROUTE_NMA, ROUTE_ID, STTN_RANK
 	</select>
 	
 	<!--  정류장간 최대 혼잡도 -->

@@ -91,7 +91,9 @@
 	        <div class="header">
 	            <p>환승 분석 지표</p>
 	            <div class="button">
-	                <div class="g"><button type="button" id="graph">그래프</button></div>
+	                <c:if test = "${anal_typeText != '정류장별통행'}">
+	                	<div class="g"><button type="button" id="graph">그래프</button></div>
+	                </c:if>
 	                <div class="d"><button type="button" id="download">다운로드</button></div>
 	                <div class="e"><button type="button" id="exit" onClick="window.open('','_self').close();">닫기</button></div>
 	            </div> 
@@ -118,10 +120,16 @@
 		     	</c:if> 
 		      
 		     	<c:if test = "${anal_groupText == '환승통행시간'}">
+		     		<c:if test="${sVO.tm != 'allDay'}">
+		     			<span class="info" style="float:left; font-weight:bold;">※ 평균x평균의 값은 전체평균을 뜻합니다.</span>
+		     		</c:if>
 		     		<span class="info">(단위 : 분)</span>
 		     	</c:if> 
 		     	
 		     	<c:if test = "${anal_groupText == '환승통행거리'}">
+	     			<c:if test="${sVO.tm != 'allDay'}">
+		     			<span class="info" style="float:left; font-weight:bold;">※ 평균x평균의 값은 전체평균을 뜻합니다.</span>
+		     		</c:if>
 		     		<span class="info">(단위 : km)</span>
 		     	</c:if> 
 		    </div>

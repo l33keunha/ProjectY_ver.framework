@@ -85,7 +85,7 @@ public class TimeDistnController {
 	
 
 		// 1일 조회 일떄 (통행량_노선별 통행)
-		if("timeDistn_avg_route".equals(sVO.getAnal_type()) ) {
+		if("timeDistn_avg_route".equals(sVO.getAnal_group()) ) {
 			
 			dateList.add(sVO.getDateStart());
 			dateListSt.add((sVO.getDateStart()).replaceAll("-", ""));
@@ -103,7 +103,6 @@ public class TimeDistnController {
 		List<Integer> routeNmaListDst = new ArrayList<Integer>();
 		List<Integer> routeNmaListTm = new ArrayList<Integer>();
 		
-		System.out.println("dataList:"+dataList);
 		
 		//이용자 유형 코드 값 
 		Map<String, Object[]> codeMap = new HashMap<String, Object[]>(); 
@@ -305,7 +304,7 @@ public class TimeDistnController {
 				dateColumn = "opratDate";									// 날짜 컬럼
 				labels = gson.toJson(dataList.get(0).get("routeNma"));		// x축 표출 이름
 				
-				x = "이용자유형";					// x축
+				x = "노선명";					// x축
 				y_left = "평균시간";				// 왼쪽 y축 
 				y_right = "평균거리";				// 오른쪽 y축 
 				
@@ -322,8 +321,6 @@ public class TimeDistnController {
 		
 		Map allDay = new HashMap();
 		
-		List<int[]> sumDataList = new ArrayList<int[]>();
-				
 		//1. 가져온 데이터 횟수대로 돌린다.
 		for(int i=0;i<dataList.size();i++) {
 			
@@ -404,6 +401,7 @@ public class TimeDistnController {
 			case "timeDistn_avg_route":                                                
 				//System.out.println("노선별통행 평균 통행시간거리_그래프");
 				
+				dayItem = new HashMap<String, Object>();
 				dayItem.put("label", "거리");
 				dayItem.put("type", "line");
 				dayItem.put("backgroundColor", "#b6bcff" );
@@ -412,6 +410,7 @@ public class TimeDistnController {
 				dayItem.put("yAxisID", "y2");
 				listOfDay.add(dayItem);
 				
+				dayItem = new HashMap<String, Object>();
 				dayItem.put("label", "시간");
 				dayItem.put("type", "bar");
 				dayItem.put("backgroundColor", "#ffb6b6" );

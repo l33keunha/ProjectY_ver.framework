@@ -95,7 +95,7 @@ public class TransferController {
 			
 
 				// 1일 조회 일떄 (통행량_노선별 통행)
-				if("passCnt_route".equals(sVO.getAnal_type()) ) {
+				if("transferCnt_route".equals(sVO.getAnal_type()) ) {
 					
 					dateList.add(sVO.getDateStart());
 					dateListSt.add((sVO.getDateStart()).replaceAll("-", ""));

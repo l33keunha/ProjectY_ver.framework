@@ -96,8 +96,8 @@
 	          <div>
 	          <p>&nbsp;분석날짜 : ${dateText}</p>
 	          <p>분석자료 : ${sVO.provider_text}</p>
-	          <p>분석지역 : ${anal_area_cd_sido_text} ${anal_area_cd_text}</p>
-	          <p>&nbsp;분석지표 : ${anal_groupText}</p>
+	          <p style="width: 33%;">분석지역 : ${anal_area_cd_sido_text} ${anal_area_cd_text}</p>
+	          <p style="width: 17%;">&nbsp;분석지표 : ${anal_groupText}</p>
 	          </div>
 	          <div>
 	          <p>&nbsp;${anal_typeText_titleDraw}</p>
@@ -108,7 +108,10 @@
 	      	</div>
 	      		
       		<div class="infowrap">
-		     		<span class="info">(단위 : 분 / m)</span>
+	     		<c:if test="${sVO.tm != 'allDay'}">
+	     			<span class="info" style="float:left; font-weight:bold;">※ 평균x평균의 값은 전체평균을 뜻합니다.</span>
+	     		</c:if>
+	     		<span class="info">(단위 : 분 / m)</span>
 		    </div>
 	     	
 	     	<div class="test">

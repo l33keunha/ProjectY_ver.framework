@@ -105,7 +105,7 @@
 					<!--thead 시작▼-->
 					<thead>
 						<tr>
-							<th class="tg-0pky" rowspan="2" style="width: 80px; min-width: 80px; max-width: 80px; height: 56px;">광역/도</th>
+							<th class="tg-0pky" rowspan="2" style="width: 80px; min-width: 80px; max-width: 80px; height: 55px;">광역/도</th>
 							<!-- 광역/도 -->
 							<th class="tg-0pky" rowspan="2" style="width: 80px; min-width: 80px; max-width: 80px;">시/군</th>
 							<!-- 시/군 -->

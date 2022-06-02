@@ -167,31 +167,37 @@
 								<th class="tg-0pky" colspan= "25" style="width: 100px; min-width: 100px; max-width: 100px;">평균 혼잡도</th>
 							</c:if>
 						<tr>
+							<c:if test="${sVO.anal_type == 'congestionRoute_CBP'}">
+								<c:set var="minWidth" value="30px"></c:set>
+							</c:if>
+							<c:if test="${sVO.anal_type == 'congestionRoute_DOC'}">
+								<c:set var="minWidth" value="50px"></c:set>
+							</c:if>
 						<tr>
-							<th class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;">00</th>		<!-- 시간대 -->
-							<th class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;">01</th>		<!-- 시간대 -->
-							<th class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;">02</th>		<!-- 시간대 -->
-							<th class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;">03</th>		<!-- 시간대 -->
-							<th class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;">04</th>		<!-- 시간대 -->
-							<th class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;">05</th>		<!-- 시간대 -->
-							<th class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;">06</th>		<!-- 시간대 -->
-							<th class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;">07</th>		<!-- 시간대 -->
-							<th class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;">08</th>		<!-- 시간대 -->
-							<th class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;">09</th>		<!-- 시간대 -->
-							<th class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;">10</th>		<!-- 시간대 -->
-							<th class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;">11</th>		<!-- 시간대 -->
-							<th class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;">12</th>		<!-- 시간대 -->
-							<th class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;">13</th>		<!-- 시간대 -->
-							<th class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;">14</th>		<!-- 시간대 -->
-							<th class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;">15</th>		<!-- 시간대 -->
-							<th class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;">16</th>		<!-- 시간대 -->
-							<th class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;">17</th>		<!-- 시간대 -->
-							<th class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;">18</th>		<!-- 시간대 -->
-							<th class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;">19</th>		<!-- 시간대 -->
-							<th class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;">20</th>		<!-- 시간대 -->
-							<th class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;">21</th>		<!-- 시간대 -->
-							<th class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;">22</th>		<!-- 시간대 -->
-							<th class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;">23</th>		<!-- 시간대 -->
+							<th class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};">00</th>		<!-- 시간대 -->
+							<th class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};">01</th>		<!-- 시간대 -->
+							<th class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};">02</th>		<!-- 시간대 -->
+							<th class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};">03</th>		<!-- 시간대 -->
+							<th class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};">04</th>		<!-- 시간대 -->
+							<th class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};">05</th>		<!-- 시간대 -->
+							<th class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};">06</th>		<!-- 시간대 -->
+							<th class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};">07</th>		<!-- 시간대 -->
+							<th class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};">08</th>		<!-- 시간대 -->
+							<th class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};">09</th>		<!-- 시간대 -->
+							<th class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};">10</th>		<!-- 시간대 -->
+							<th class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};">11</th>		<!-- 시간대 -->
+							<th class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};">12</th>		<!-- 시간대 -->
+							<th class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};">13</th>		<!-- 시간대 -->
+							<th class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};">14</th>		<!-- 시간대 -->
+							<th class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};">15</th>		<!-- 시간대 -->
+							<th class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};">16</th>		<!-- 시간대 -->
+							<th class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};">17</th>		<!-- 시간대 -->
+							<th class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};">18</th>		<!-- 시간대 -->
+							<th class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};">19</th>		<!-- 시간대 -->
+							<th class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};">20</th>		<!-- 시간대 -->
+							<th class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};">21</th>		<!-- 시간대 -->
+							<th class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};">22</th>		<!-- 시간대 -->
+							<th class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};">23</th>		<!-- 시간대 -->
 							<th class="tg-0pky" style="width: 100px; min-width: 100px; max-width: 100px;">평균</th>			<!-- 평균-->
 						</tr>
 					</thead>
@@ -219,59 +225,59 @@
 						
 						<c:if test="${sVO.anal_type == 'congestionRoute_CBP'}">
 							<tr style="${scroll_display_none}" class= "show_${showScroll}">
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng00}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng01}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng02}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng03}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng04}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng05}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng06}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng07}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng08}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng09}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng10}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng11}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng12}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng13}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng14}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng15}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng16}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng17}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng18}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng19}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng20}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng21}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng22}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng23}</div></td> 
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng00}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng01}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng02}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng03}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng04}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng05}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng06}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng07}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng08}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng09}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng10}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng11}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng12}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng13}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng14}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng15}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng16}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng17}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng18}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng19}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng20}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng21}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng22}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdng23}</div></td> 
 								<td class="tg-0pky" style="width: 100px; min-width: 100px; max-width: 100px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].brdngCntAvg}</div></td> 
 							</tr>
 						</c:if>
 						<c:if test="${sVO.anal_type == 'congestionRoute_DOC'}">
 							<tr style="${scroll_display_none}" class= "show_${showScroll}">
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con00}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con01}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con02}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con03}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con04}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con05}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con06}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con07}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con08}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con09}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con10}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con11}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con12}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con13}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con14}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con15}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con16}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con17}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con18}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con19}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con20}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con21}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con22}</div></td>
-								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con23}</div></td> 
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con00}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con01}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con02}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con03}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con04}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con05}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con06}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con07}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con08}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con09}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con10}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con11}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con12}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con13}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con14}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con15}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con16}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con17}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con18}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con19}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con20}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con21}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con22}</div></td>
+								<td class="tg-0pky" style="width: ${minWidth}; min-width: ${minWidth}; max-width: ${minWidth};"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].con23}</div></td> 
 								<td class="tg-0pky" style="width: 100px; min-width: 100px; max-width: 100px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].conRateAvg}</div></td> 
 							</tr>
 						</c:if>

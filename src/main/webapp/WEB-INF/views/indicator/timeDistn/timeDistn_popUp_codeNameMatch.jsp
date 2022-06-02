@@ -109,7 +109,7 @@
     <c:if test="${tmText == 'allDay'}">
     	<c:set var = "tmText" value = "1일"/>
     </c:if>
-    <c:if test="${tmText == null}">
+    <c:if test="${tmText == null || tmText == ''}">
     	<c:set var = "tmText" value = "${sVO.tmStart}시 ~ ${sVO.tmEnd}시"/>
     </c:if>
   
@@ -151,6 +151,7 @@
    	</c:if>
     <c:if test = "${anal_groupText == '노선별 평균 통행시간/거리'}">
    		<c:set var = "anal_typeText_titleDraw" value = ""/>
+   		<c:set var = "dateText" value = "${sVO.dateStart}"/>
    	</c:if>
    	
     

@@ -9,7 +9,7 @@
 			
 			<div class="table01">
             <div class="option">
-              <button onclick="resetZoomChart_${status.index}()" id="resetZoomChart_${status.index}">새로고침</button>
+              <button onclick="resetZoomChart_${status.index}()" class="resetZoomChart" id="resetZoomChart_${status.index}">새로고침</button>
               <label><input class="legend" id='legend_${status.index}' type="checkbox" value="범례" checked="on">범례</label>
               
               <div class="Icon">

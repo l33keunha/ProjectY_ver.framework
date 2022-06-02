@@ -75,6 +75,9 @@
       			<c:if test = "${anal_typeText == '평균 재차인원'}">
 		     		<span class="info">(단위 : 명)</span>
 		     	</c:if> 
+      			<c:if test = "${anal_typeText != '평균 재차인원'}">
+		     		<span class="info">(단위 : %)</span>
+		     	</c:if> 
 		    </div>
 	     	
 	     	<div class="test">

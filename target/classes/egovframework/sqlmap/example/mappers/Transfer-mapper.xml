@@ -200,7 +200,7 @@
                 ,ROUTE_START
                 ,ROUTE_END
                 ,CUBE(TM, CD_NO)
-        ORDER BY ROUTE_ID, ROUTE_NMA, TM, CD_NO
+        ORDER BY ROUTE_NMA, ROUTE_ID, TM, CD_NO
 	</select>
 
     <!-- 환승 노선별통행 지하철 -->
@@ -242,7 +242,7 @@
                 ,ROUTE_START
                 ,ROUTE_END
                 ,CUBE(TM, CD_NO)
-        ORDER BY ROUTE_ID, ROUTE_NMA, TM, CD_NO
+        ORDER BY ROUTE_NMA, ROUTE_ID, TM, CD_NO
 	</select>
 	
 	<!-- 환승 노선별통행  버스 일별 -->
@@ -281,7 +281,7 @@
                 ,ROUTE_START
                 ,ROUTE_END
                 ,ROLLUP(CD_NO)
-        ORDER BY ROUTE_ID, ROUTE_NMA, CD_NO
+        ORDER BY ROUTE_NMA, ROUTE_ID, CD_NO
 	</select>
 
     <!-- 환승 노선별통행 지하철 일별 -->
@@ -320,7 +320,7 @@
                 ,ROUTE_START
                 ,ROUTE_END
                 ,ROLLUP(CD_NO)
-        ORDER BY ROUTE_ID, ROUTE_NMA, CD_NO
+        ORDER BY ROUTE_NMA, ROUTE_ID, CD_NO
 	</select>
 	
 	<!-- 환승 횟수별통행 -->
