@@ -18,7 +18,7 @@
            	 <c:set var = "anal_groupText" value = "노선별 상위 5개"/>
          </c:when>
          <c:when test = "${anal_groupText == 'congestionTopStationOD'}">
-           	 <c:set var = "anal_groupText" value = "정류장간 상위 100개"/>
+           	 <c:set var = "anal_groupText" value = "노선 정류장간 상위 100개"/>
          </c:when>
     	
          <c:otherwise>
@@ -37,10 +37,10 @@
            	 <c:set var = "anal_typeText" value = "평균 혼잡도"/>
          </c:when>
     	 <c:when test = "${anal_typeText == 'congestionTopRouteOD_DOC_max'}">
-           	 <c:set var = "anal_typeText" value = "최대 혼잡구"/>
+           	 <c:set var = "anal_typeText" value = "최대 혼잡구간"/>
          </c:when>
     	 <c:when test = "${anal_typeText == 'congestionTopRouteOD_DOC_avg'}">
-           	 <c:set var = "anal_typeText" value = "평균 혼잡구"/>
+           	 <c:set var = "anal_typeText" value = "평균 혼잡구간"/>
          </c:when>
     	 <c:when test = "${anal_typeText == 'congestionTopStationOD_DOC_max'}">
            	 <c:set var = "anal_typeText" value = "최대 혼잡도"/>
@@ -107,20 +107,20 @@
    	
     <c:if test = "${anal_groupText == '노선별 상위 5개'}">
    		
-   		<c:if test = "${anal_typeText == '최대 혼잡구'}">
-   			<c:set var = "anal_typeText_titleDraw" value = "분석유형 : 최대 혼잡구"/>
+   		<c:if test = "${anal_typeText == '최대 혼잡구간'}">
+   			<c:set var = "anal_typeText_titleDraw" value = "분석유형 : 최대 혼잡구간"/>
 		   	<c:set var = "tmText" value = "1일"/>
 		    <c:set var = "dateText" value = "${sVO.dateStart}"/>
    		</c:if>
-   		<c:if test = "${anal_typeText == '평균 혼잡구'}">
-   			<c:set var = "anal_typeText_titleDraw" value = "분석유형 : 평균 혼잡구"/>
+   		<c:if test = "${anal_typeText == '평균 혼잡구간'}">
+   			<c:set var = "anal_typeText_titleDraw" value = "분석유형 : 평균 혼잡구간"/>
 		   	<c:set var = "tmText" value = "1일"/>
 		    <c:set var = "dateText" value = "${sVO.dateStart}"/>
    		</c:if>
    		
    	</c:if> 
    	
-    <c:if test = "${anal_groupText == '정류장간 상위 100개'}">
+    <c:if test = "${anal_groupText == '노선 정류장간 상위 100개'}">
    		
    		<c:if test = "${anal_typeText == '최대 혼잡도'}">
    			<c:set var = "anal_typeText_titleDraw" value = "분석유형 : 최대 혼잡도"/>

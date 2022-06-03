@@ -125,7 +125,7 @@
             ,STTN_NMA
             ,STTN_HJD
             ,CUBE(CD_NO)
-        ORDER BY STTN_ID, STTN_NMA, CD_NO
+        ORDER BY STTN_NMA, STTN_ID, CD_NO
 	</select>
 
     <!-- 환승 정류장별통행 지하철 -->
@@ -158,7 +158,7 @@
             ,STTN_NMA
             ,STTN_HJD
             ,CUBE(CD_NO)
-        ORDER BY STTN_ID, STTN_NMA, CD_NO
+        ORDER BY STTN_NMA, STTN_ID, CD_NO
 	</select>
 	
 	<!-- 환승 노선별통행 버스 -->
@@ -396,7 +396,7 @@
 	            ,CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) TFCMN
 	            ,NVL(TM,'평균') TM
 	            ,NVL(CD_NO,'평균') CD_NO
-	            ,NVL(TRUNC(AVG(USER_TIME_AVG), 0), 0)USER_TIME_AVG
+	            ,NVL(ROUND(AVG(USER_TIME_AVG), 1), 0)USER_TIME_AVG
 	    FROM
 	        (		
 	            SELECT 
@@ -443,7 +443,7 @@
 	            ,ANAL_AREA_CD
 	            ,CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) TFCMN
 	            ,NVL(CD_NO,'평균') CD_NO
-	            ,NVL(TRUNC(AVG(USER_TIME_AVG), 0), 0)USER_TIME_AVG
+	            ,NVL(ROUND(AVG(USER_TIME_AVG), 1), 0)USER_TIME_AVG
 	    FROM
 	        (		
 	            SELECT 
@@ -486,7 +486,7 @@
 	            ,TRANSFER_NUM
 	            ,NVL(TM,'평균') TM
 	            ,NVL(CD_NO,'평균') CD_NO
-	            ,NVL(TRUNC(AVG(USER_TIME_AVG), 0), 0) USER_TIME_AVG
+	            ,NVL(ROUND(AVG(USER_TIME_AVG), 1), 0) USER_TIME_AVG
 	    FROM
 	        (
 	            SELECT 
@@ -531,7 +531,7 @@
 	        ,ANAL_AREA_CD
 	        ,TRANSFER_NUM
 	        ,NVL(CD_NO,'평균') CD_NO
-	        ,NVL(TRUNC(AVG(USER_TIME_AVG), 0), 0) USER_TIME_AVG
+	        ,NVL(ROUND(AVG(USER_TIME_AVG), 1), 0) USER_TIME_AVG
 	    FROM
 	        (
 				SELECT 
@@ -541,7 +541,7 @@
 				,ANAL_AREA_CD
 				,TRANSFER_NUM
 				,CD_NO
-				,TRUNC(AVG(USER_TIME_AVG), 0) USER_TIME_AVG
+				,ROUND(AVG(USER_TIME_AVG), 1) USER_TIME_AVG
 				FROM
 					(
 						SELECT 
@@ -589,7 +589,7 @@
 	            ,CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) TFCMN
 	            ,NVL(TM,'평균') TM
 	            ,NVL(CD_NO,'평균') CD_NO
-	            ,NVL(TRUNC(AVG(USER_DISTN_AVG), 0), 0) USER_DISTN_AVG
+	            ,NVL(ROUND(AVG(USER_DISTN_AVG), 1), 0) USER_DISTN_AVG
 	    FROM
 	        (		
 	            SELECT 
@@ -637,7 +637,7 @@
    			,ANAL_AREA_CD
    			,TFCMN
    			,NVL(CD_NO,'평균') CD_NO
-			,NVL(TRUNC(AVG(USER_DISTN_AVG), 0), 0)USER_DISTN_AVG
+			,NVL(ROUND(AVG(USER_DISTN_AVG), 1), 0)USER_DISTN_AVG
 		FROM
 			(
 				SELECT 	SDATE
@@ -645,7 +645,7 @@
 						,ANAL_AREA_CD
 						,CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) TFCMN
 						,CD_NO
-						,TRUNC(AVG(USER_DISTN_AVG), 0) USER_DISTN_AVG
+						,ROUND(AVG(USER_DISTN_AVG), 1) USER_DISTN_AVG
 				FROM
 					(		
 						SELECT 
@@ -695,7 +695,7 @@
 	        ,TRANSFER_NUM
 	        ,NVL(TM,'평균') TM
 	        ,NVL(CD_NO,'평균') CD_NO
-	        ,NVL(TRUNC(AVG(USER_DISTN_AVG), 0), 0) USER_DISTN_AVG
+	        ,NVL(ROUND(AVG(USER_DISTN_AVG), 1), 0) USER_DISTN_AVG
 	    FROM
 	        (
 	            SELECT 
@@ -740,7 +740,7 @@
 			,ANAL_AREA_CD
 			,TRANSFER_NUM
 			,NVL(CD_NO,'평균') CD_NO
-			,NVL(TRUNC(AVG(USER_DISTN_AVG), 0), 0) USER_DISTN_AVG
+			,NVL(ROUND(AVG(USER_DISTN_AVG), 1), 0) USER_DISTN_AVG
 		FROM
 			(
 				SELECT 
@@ -749,7 +749,7 @@
 					,ANAL_AREA_CD
 					,TRANSFER_NUM
 					,CD_NO
-					,TRUNC(AVG(USER_DISTN_AVG), 0) USER_DISTN_AVG
+					,ROUND(AVG(USER_DISTN_AVG), 1) USER_DISTN_AVG
 				FROM
 					(
 						SELECT 
@@ -929,9 +929,6 @@
                 WHERE 1=1
                     AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
                     AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
-                    <if test="tm==null || tm.equals('')">
-                        AND TM BETWEEN #{tmStart} AND #{tmEnd}
-                    </if>
                     <if test="!cd_no[0].equals('00')">
                         AND CD_NO IN
                         <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
@@ -953,7 +950,7 @@
                                 ,'05'장애인 , '06' 국가유공자, '07' 다자녀부모, '08' 동반
                                 ,'09' 대학생 , '10' 복지 , '11' 기타, '합계' 합계)
             )
-        ORDER BY TFCMN, STTN_ID, STTN_NMA
+        ORDER BY TFCMN, STTN_NMA, STTN_ID
 	</select>
 	
 	<!-- PIVOT 환승 노선별통행 -->
@@ -1003,7 +1000,7 @@
                                 ,'05'장애인 , '06' 국가유공자, '07' 다자녀부모, '08' 동반
                                 ,'09' 대학생 , '10' 복지 , '11' 기타, '합계' 합계)
             )
-        ORDER BY TFCMN, ROUTE_ID, ROUTE_NMA, TM
+        ORDER BY TFCMN, ROUTE_NMA, ROUTE_ID, TM
 	</select>
 	
 	<!-- PIVOT 환승 노선별통행 일별 -->
@@ -1052,7 +1049,7 @@
                                 ,'05'장애인 , '06' 국가유공자, '07' 다자녀부모, '08' 동반
                                 ,'09' 대학생 , '10' 복지 , '11' 기타, '합계' 합계)
             )
-        ORDER BY TFCMN, ROUTE_ID, ROUTE_NMA
+        ORDER BY TFCMN, ROUTE_NMA, ROUTE_ID
 	</select>
 	
 	<!-- PIVOT 환승 횟수별통행 -->
@@ -1155,7 +1152,7 @@
                     ,CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) TFCMN
                     ,NVL(TM,'평균') TM
                     ,NVL(CD_NO,'평균') CD_NO
-                    ,NVL(TRUNC(AVG(USER_TIME_AVG), 0), 0)USER_TIME_AVG
+                    ,NVL(ROUND(AVG(USER_TIME_AVG), 1), 0)USER_TIME_AVG
             FROM
                 (		
                     SELECT 
@@ -1214,7 +1211,7 @@
                     ,ANAL_AREA_CD
                     ,CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) TFCMN
                     ,NVL(CD_NO,'평균') CD_NO
-                    ,NVL(TRUNC(AVG(USER_TIME_AVG), 0), 0)USER_TIME_AVG
+                    ,NVL(ROUND(AVG(USER_TIME_AVG), 1), 0)USER_TIME_AVG
                 FROM
                     (		
                         SELECT 
@@ -1270,7 +1267,7 @@
                     ,TRANSFER_NUM
                     ,NVL(TM,'평균') TM
                     ,NVL(CD_NO,'평균') CD_NO
-                    ,NVL(TRUNC(AVG(USER_TIME_AVG), 0), 0) USER_TIME_AVG
+                    ,NVL(ROUND(AVG(USER_TIME_AVG), 1), 0) USER_TIME_AVG
             FROM
                 (
                     SELECT 
@@ -1329,7 +1326,7 @@
                     ,ANAL_AREA_CD
                     ,TRANSFER_NUM
                     ,NVL(CD_NO,'평균') CD_NO
-                    ,NVL(TRUNC(AVG(USER_TIME_AVG), 0), 0) USER_TIME_AVG
+                    ,NVL(ROUND(AVG(USER_TIME_AVG), 1), 0) USER_TIME_AVG
                 FROM
                     (
                         SELECT 
@@ -1339,7 +1336,7 @@
                         ,ANAL_AREA_CD
                         ,TRANSFER_NUM
                         ,CD_NO
-                        ,TRUNC(AVG(USER_TIME_AVG), 0) USER_TIME_AVG
+                        ,ROUND(AVG(USER_TIME_AVG), 1) USER_TIME_AVG
                         FROM
                             (
                                 SELECT 
@@ -1401,7 +1398,7 @@
                     ,CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) TFCMN
                     ,NVL(TM,'평균') TM
                     ,NVL(CD_NO,'평균') CD_NO
-                    ,NVL(TRUNC(AVG(USER_DISTN_AVG), 0), 0) USER_DISTN_AVG
+                    ,NVL(ROUND(AVG(USER_DISTN_AVG), 1), 0) USER_DISTN_AVG
             FROM
                 (		
                     SELECT 
@@ -1459,7 +1456,7 @@
                     ,ANAL_AREA_CD
                     ,TFCMN
                     ,NVL(CD_NO,'평균') CD_NO
-                    ,NVL(TRUNC(AVG(USER_DISTN_AVG), 0), 0)USER_DISTN_AVG
+                    ,NVL(ROUND(AVG(USER_DISTN_AVG), 1), 0)USER_DISTN_AVG
                 FROM
                     (
                         SELECT 	SDATE
@@ -1467,7 +1464,7 @@
                                 ,ANAL_AREA_CD
                                 ,CONCAT(TFCMN_START ,CONCAT('_',TFCMN_END)) TFCMN
                                 ,CD_NO
-                                ,TRUNC(AVG(USER_DISTN_AVG), 0) USER_DISTN_AVG
+                                ,ROUND(AVG(USER_DISTN_AVG), 1) USER_DISTN_AVG
                         FROM
                             (		
                                 SELECT 
@@ -1530,7 +1527,7 @@
                     ,TRANSFER_NUM
                     ,NVL(TM,'평균') TM
                     ,NVL(CD_NO,'평균') CD_NO
-                    ,NVL(TRUNC(AVG(USER_DISTN_AVG), 0), 0) USER_DISTN_AVG
+                    ,NVL(ROUND(AVG(USER_DISTN_AVG), 1), 0) USER_DISTN_AVG
                 FROM
                     (
                         SELECT 
@@ -1589,7 +1586,7 @@
                     ,ANAL_AREA_CD
                     ,TRANSFER_NUM
                     ,NVL(CD_NO,'평균') CD_NO
-                    ,NVL(TRUNC(AVG(USER_DISTN_AVG), 0), 0) USER_DISTN_AVG
+                    ,NVL(ROUND(AVG(USER_DISTN_AVG), 1), 0) USER_DISTN_AVG
                 FROM
                     (
                         SELECT 
@@ -1598,7 +1595,7 @@
                             ,ANAL_AREA_CD
                             ,TRANSFER_NUM
                             ,CD_NO
-                            ,TRUNC(AVG(USER_DISTN_AVG), 0) USER_DISTN_AVG
+                            ,ROUND(AVG(USER_DISTN_AVG), 1) USER_DISTN_AVG
                         FROM
                             (
                                 SELECT 
@@ -1762,7 +1759,7 @@
 	            SELECT OPRAT_DATE 
 	                    ,TFCMN
 	                    ,CD_NO
-	                    ,NVL(TRUNC(AVG(USER_TIME_AVG), 0), 0)USER_TIME_AVG
+	                    ,NVL(ROUND(AVG(USER_TIME_AVG), 1), 0)USER_TIME_AVG
 	            FROM
 	            (
 	                SELECT OPRAT_DATE 
@@ -1804,7 +1801,7 @@
                 SELECT OPRAT_DATE 
                         ,TRANSFER_NUM 
                         ,CD_NO 
-                        ,NVL(TRUNC(AVG(USER_TIME_AVG), 0), 0)USER_TIME_AVG
+                        ,NVL(ROUND(AVG(USER_TIME_AVG), 1), 0)USER_TIME_AVG
                 FROM
                 (
                     SELECT OPRAT_DATE 
@@ -1846,7 +1843,7 @@
                 SELECT OPRAT_DATE 
                         ,TFCMN
                         ,CD_NO
-                        ,NVL(TRUNC(AVG(USER_DISTN_AVG), 0), 0)USER_DISTN_AVG
+                        ,NVL(ROUND(AVG(USER_DISTN_AVG), 1), 0)USER_DISTN_AVG
                 FROM
                 (
                     SELECT OPRAT_DATE 
@@ -1888,7 +1885,7 @@
 	            SELECT OPRAT_DATE 
 	                    ,TRANSFER_NUM 
 	                    ,CD_NO 
-	                    ,NVL(TRUNC(AVG(USER_DISTN_AVG), 0), 0)USER_DISTN_AVG
+	                    ,NVL(ROUND(AVG(USER_DISTN_AVG), 1), 0)USER_DISTN_AVG
 	            FROM
 	            (
 	                SELECT OPRAT_DATE 

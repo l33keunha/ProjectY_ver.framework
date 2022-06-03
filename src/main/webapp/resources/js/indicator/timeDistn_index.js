@@ -12,6 +12,11 @@
 			abledDateStart_End();
 			disabledFalse(4);
 			validationCd_no();
+			
+			if(jsonArray['anal_group'] == 'timeDistn_avg_day'){
+				disabledTime()
+			}
+			
 		}
 		
 		if(jsonArray['anal_group'] == 'timeDistn_avg_route'){

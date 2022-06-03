@@ -95,7 +95,7 @@
 		
 	</select>
 	
-	<!--  노선별 최대 혼잡구 -->
+	<!--  노선별 최대 혼잡구간 -->
 	<select id ="selectCongestionResultListRouteDOC_max" parameterType="sVO" resultType="egovMap" fetchSize="1000">
 		SELECT 
 			#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
@@ -148,7 +148,7 @@
 		ORDER BY ROUTE_NMA, ROUTE_ID, STTN_RANK
 	</select>
 	
-	<!--  노선별 평균 혼잡구 -->
+	<!--  노선별 평균 혼잡구간 -->
 	<select id ="selectCongestionResultListRouteDOC_avg" parameterType="sVO" resultType="egovMap" fetchSize="1000">
 		SELECT 
 			#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT

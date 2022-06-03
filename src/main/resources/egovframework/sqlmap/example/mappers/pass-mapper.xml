@@ -265,7 +265,7 @@
             ,ROUTE_START
             ,ROUTE_END
             ,CUBE (TM, CD_NO)
-		ORDER BY OPRAT_DATE, ROUTE_NMA, ROUTE_ID, TM, CD_NO
+		ORDER BY OPRAT_DATE,ROUTE_NMA, ROUTE_ID, TM, CD_NO
 	</select>
 	
 	<!-- 노선별통행 지하철 일별 -->
@@ -2439,6 +2439,29 @@
 	        )
 	    ORDER BY 순위
 	</select>
+	
+	<select id="downloadPassResultListRouteOD_m" parameterType="sVO" resultType="egovMap">
+		SELECT A.*
+			, B.정류장명칭 
+		FROM 노선별정류장OD A, STDNN_BRS B
+		WHERE 1=1
+			AND A.운행일자 = B.운행일자 
+			AND SUBSTR(A.PART_KEY, 0, 2) = B.OWNER 
+			<if test="tmStart==2">
+				AND SUBSTR(A.PART_KEY, 4) = B.인허가지역코드_시도
+			</if>
+			<if test="tmStart==5">
+				AND SUBSTR(A.PART_KEY, 4) = B.인허가지역코드
+			</if>
+			AND A.정산사ID = B.정산사ID 
+			AND A.노선ID = B.노선ID
+			AND A.SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
+			AND A.PART_KEY = #{provider} || '_' || #{anal_area_cd}
+			AND A.정산사ID = #{tcboId}
+			AND A.노선ID = #{routeId}
+			AND A.정류장ID = B.정류장ID 
+		ORDER BY A.정류장순번
+	</select>
 
 
 	<!-- ********************** 노선별OD 매트릭스 **********************  -->
@@ -2483,9 +2506,9 @@
 		SELECT *
 		FROM 노선별정류장OD
 		WHERE 1=1
-		AND 운행일자 = #{dateStart}
-		AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
-		AND 노선ID = #{routeId}
+			AND 운행일자 = #{dateStart}
+			AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
+			AND 노선ID = #{routeId}
 		ORDER BY 정류장순번
 	</select>
 	

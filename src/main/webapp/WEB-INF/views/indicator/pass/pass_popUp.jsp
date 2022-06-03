@@ -97,9 +97,7 @@
 			     			<div class="g" style="width: 145px;"><button type="button" id="matrix" style="width: 109px;">OD매트릭스</button></div>
 			     		</c:if>
 	                </c:if>
-			     	<c:if test = "${sVO.anal_fin != 'routeODmatrix'}">	
 	                <div class="d"><button type="button" id="download">다운로드</button></div>
-	                </c:if>
 	                <div class="e"><button type="button" id="exit" onClick="window.open('','_self').close();">닫기</button></div>
 	            </div> 
 	        </div>

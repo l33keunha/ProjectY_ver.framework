@@ -18,7 +18,7 @@
 		SELECT 
 			 #{anal_area_cd_sido_text} 분석지역_광역도
 			,#{anal_area_cd_text} 분석지역_시군
-			,#{provider_text} PROVIDER
+			,#{provider_text} 분석자료
 			,OPRAT_DATE
 			,CASE WHEN TFCMN  ='B' THEN '버스' ELSE '지하철' END TFCMN
 			,ROUTE_ID 
@@ -64,7 +64,7 @@
 		WHERE 1=1
 			AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 			AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
-		ORDER BY TFCMN, ROUTE_ID, ROUTE_NMA, TM
+		ORDER BY TFCMN, ROUTE_NMA, ROUTE_ID, TM
 	</select>
 	
 	<!-- 정류장별통행 -->
@@ -72,7 +72,7 @@
 		SELECT 
              #{anal_area_cd_sido_text} 분석지역_광역도
 			,#{anal_area_cd_text} 분석지역_시군
-			,#{provider_text} PROVIDER
+			,#{provider_text} 분석자료
 			,OPRAT_DATE
 			,CASE WHEN TFCMN  ='B' THEN '버스' ELSE '지하철' END TFCMN
 			,STTN_ID
@@ -116,7 +116,7 @@
 		WHERE 1=1
 			AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 			AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
-		ORDER BY TFCMN, STTN_ID, TM
+		ORDER BY TFCMN, STTN_NMA, STTN_ID, TM
 	</select>
 	
 	<!-- 행정동간OD 목적통행 -->
@@ -124,7 +124,7 @@
 		SELECT 
              #{anal_area_cd_sido_text} 분석지역_광역도
 			,#{anal_area_cd_text} 분석지역_시군
-			,#{provider_text} PROVIDER
+			,#{provider_text} 분석자료
 			,운행일자
 			,승차내외부
 			,승차지역코드
@@ -156,7 +156,7 @@
 		SELECT 
              #{anal_area_cd_sido_text} 분석지역_광역도
 			,#{anal_area_cd_text} 분석지역_시군
-			,#{provider_text} PROVIDER
+			,#{provider_text} 분석자료
 			,운행일자
 			,승차내외부
 			,승차지역코드
@@ -188,7 +188,7 @@
 		SELECT /*+ PARALLEL(4) */
 			#{anal_area_cd_sido_text} 분석지역_광역도
 			,#{anal_area_cd_text} 분석지역_시군
-			,#{provider_text} PROVIDER
+			,#{provider_text} 분석자료
 			,운행일자
 			,승차내외부
 			,승차역ID
@@ -220,7 +220,7 @@
 		SELECT /*+ PARALLEL(4) */
 			 #{anal_area_cd_sido_text} 분석지역_광역도
 			,#{anal_area_cd_text} 분석지역_시군
-			,#{provider_text} PROVIDER
+			,#{provider_text} 분석자료
 			,운행일자
 			,승차내외부
 			,승차역ID
@@ -284,7 +284,7 @@
 		WHERE 1=1
 			AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 			AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
-		ORDER BY ROUTE_ID, 출발정류장순번, 도착정류장순번, TM
+		ORDER BY ROUTE_NMA, ROUTE_ID, 출발정류장순번, 도착정류장순번, TM
 	</select>
 	
 	<!-- 노선별 재차인원 -->
@@ -330,7 +330,7 @@
 			AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
 			AND ANAL_AREA_CD = #{anal_area_cd}
 			AND PROVIDER = #{provider}
-		ORDER BY ROUTE_ID, ROUTE_NMA
+		ORDER BY ROUTE_NMA, ROUTE_ID
 	</select>
 	
 </mapper>

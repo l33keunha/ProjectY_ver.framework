@@ -44,11 +44,11 @@ public class CongestionServiceImpl extends EgovAbstractServiceImpl implements Co
 			congestionResultList = mapper.selectCongestionResultListRouteDOC(sVO); break;
 			
 		case "congestionTopRouteOD_DOC_max" :
-			System.out.println("노선별 최대 혼잡구");
+			System.out.println("노선별 최대 혼잡구간");
 			congestionResultList = mapper.selectCongestionResultListRouteDOC_max(sVO); break;
 			
 		case "congestionTopRouteOD_DOC_avg" :
-			System.out.println("노선별 평균 혼잡구");
+			System.out.println("노선별 평균 혼잡구간");
 			congestionResultList = mapper.selectCongestionResultListRouteDOC_avg(sVO); break;
 			
 		case "congestionTopStationOD_DOC_max" :
@@ -289,13 +289,13 @@ public class CongestionServiceImpl extends EgovAbstractServiceImpl implements Co
 			
 			break;
 		case "congestionTopRouteOD_DOC_max" :
-			System.out.println("PIVOT 노선별 최대 혼잡구");
+			System.out.println("PIVOT 노선별 최대 혼잡구간");
 			congestionResultList = mapper.selectCongestionResultListRouteDOC_max(sVO); 
 
 			System.out.println("query 조회 시간 : " + ((System.currentTimeMillis() - sdt) / 1000));
 			
 			// ● 인자값 : 시트명
-			excelName = "노선별_상위5개_최대혼잡구_"+date_SidoText;
+			excelName = "노선별_상위5개_최대혼잡구간_"+date_SidoText;
 			
 			// ● 인자값 : 헤더명
 			headerListSt = "분석지역광역도"
@@ -333,12 +333,12 @@ public class CongestionServiceImpl extends EgovAbstractServiceImpl implements Co
 			
 			break;
 		case "congestionTopRouteOD_DOC_avg" :
-			System.out.println("PIVOT 노선별 평균 혼잡구");
+			System.out.println("PIVOT 노선별 평균 혼잡구간");
 			congestionResultList = mapper.selectCongestionResultListRouteDOC_avg(sVO); 
 			System.out.println("query 조회 시간 : " + ((System.currentTimeMillis() - sdt) / 1000));
 			
 			// ● 인자값 : 시트명
-			excelName = "노선별_상위5개_평균혼잡구_"+date_SidoText;
+			excelName = "노선별_상위5개_평균혼잡구간_"+date_SidoText;
 			
 			// ● 인자값 : 헤더명
 			headerListSt = "분석지역광역도"
@@ -380,7 +380,7 @@ public class CongestionServiceImpl extends EgovAbstractServiceImpl implements Co
 			System.out.println("query 조회 시간 : " + ((System.currentTimeMillis() - sdt) / 1000));
 			
 			// ● 인자값 : 시트명
-			excelName = "정류장간_상위100개_최대혼잡도_"+date_SidoText;
+			excelName = "노선정류장간_상위100개_최대혼잡도_"+date_SidoText;
 			
 			// ● 인자값 : 헤더명
 			headerListSt = "분석지역광역도"
@@ -420,7 +420,7 @@ public class CongestionServiceImpl extends EgovAbstractServiceImpl implements Co
 			System.out.println("query 조회 시간 : " + ((System.currentTimeMillis() - sdt) / 1000));
 			
 			// ● 인자값 : 시트명
-			excelName = "정류장간_상위100개_최대혼잡도_"+date_SidoText;
+			excelName = "노선정류장간_상위100개_최대혼잡도_"+date_SidoText;
 			
 			// ● 인자값 : 헤더명
 			headerListSt = "분석지역광역도"

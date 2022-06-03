@@ -94,15 +94,15 @@
 			   	</c:if> 
 		   	
 		    	<c:if test = "${anal_groupText == '노선별 상위 5개'}">
-			   		<c:if test = "${anal_typeText == '최대 혼잡구'}">
+			   		<c:if test = "${anal_typeText == '최대 혼잡구간'}">
 			   			<%@ include file="tableList/congestion_popUp_routeOD.jsp" %>
 			   		</c:if>
-			   		<c:if test = "${anal_typeText == '평균 혼잡구'}">
+			   		<c:if test = "${anal_typeText == '평균 혼잡구간'}">
 			   			<%@ include file="tableList/congestion_popUp_routeOD.jsp" %>
 			   		</c:if>
 			   	</c:if> 
 		   	
-		   		<c:if test = "${anal_groupText == '정류장간 상위 100개'}">
+		   		<c:if test = "${anal_groupText == '노선 정류장간 상위 100개'}">
 			   		<c:if test = "${anal_typeText == '최대 혼잡도'}">
 			   			<%@ include file="tableList/congestion_popUp_stationOD.jsp" %>
 			   		</c:if>

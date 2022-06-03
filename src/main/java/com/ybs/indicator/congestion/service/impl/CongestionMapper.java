@@ -16,10 +16,10 @@ public interface CongestionMapper {
 	// 노선별 혼잡도
 	List<EgovMap> selectCongestionResultListRouteDOC(SearchVO sVO);
 
-	// 노선별 최대 혼잡구
+	// 노선별 최대 혼잡구간
 	List<EgovMap> selectCongestionResultListRouteDOC_max(SearchVO sVO);
 
-	// 노선별 평균 혼잡구
+	// 노선별 평균 혼잡구간
 	List<EgovMap> selectCongestionResultListRouteDOC_avg(SearchVO sVO);
 
 	// 정류장간 최대 혼잡도

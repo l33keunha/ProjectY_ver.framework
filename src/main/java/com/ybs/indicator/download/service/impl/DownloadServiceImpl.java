@@ -79,7 +79,7 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 				// ● 인자값 : 컬럼명
 				columnListSt = "분석지역광역도"
 						+",분석지역시군"
-						+",provider"
+						+",분석자료"
 						+",opratDate"
 						+",tfcmn"
 						+",sttnId"
@@ -117,7 +117,7 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 				// ● 인자값 : 컬럼명
 				columnListSt = "분석지역광역도"
 						+",분석지역시군"
-						+",provider"
+						+",분석자료"
 						+",opratDate"
 						+",tfcmn"
 						+",sttnId"
@@ -179,7 +179,7 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 				// ● 인자값 : 컬럼명
 				columnListSt = "분석지역광역도"
 						+",분석지역시군"
-						+",provider"
+						+",분석자료"
 						+",운행일자"
 						+",승차내외부"
 						+",승차역id"
@@ -206,7 +206,7 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 				// ● 인자값 : 컬럼명
 				columnListSt = "분석지역광역도"
 						+",분석지역시군"
-						+",provider"
+						+",분석자료"
 						+",운행일자"
 						+",승차내외부"
 						+",승차역id"
@@ -250,7 +250,7 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 				// ● 인자값 : 컬럼명
 				columnListSt = "분석지역광역도"
 						+",분석지역시군"
-						+",provider"
+						+",분석자료"
 						+",운행일자"
 						+",승차내외부"
 						+",승차역id"
@@ -277,7 +277,7 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 				// ● 인자값 : 컬럼명
 				columnListSt = "분석지역광역도"
 						+",분석지역시군"
-						+",provider"
+						+",분석자료"
 						+",운행일자"
 						+",승차내외부"
 						+",승차역id"
@@ -321,7 +321,7 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 			 if(sVO.getProvider().equals("03")) {
 				 
 				 // ● 인자값 : 헤더명
-				 headerListSt = "분석지역광역도," + "분석지역시도," + "분석자료," + "분석일자," +  "노선구분," + "노선명," + "노선유형," + "기점," + "종점," + ",시간"
+				 headerListSt = "분석지역광역도," + "분석지역시도," + "분석자료," + "분석일자," +  "노선구분," + "노선명," + "노선유형," + "기점," + "종점," + "시간,"
 						 + "일반_승차,일반_하차,일반_환승," + "어린이_승차,어린이_하차,어린이_환승," + "청소년_승차,청소년_하차,청소년_환승," + "경로_승차,경로_하차,경로_환승,"
 						 + "대학생_승차,대학생_하차,대학생_환승," + "복지_승차,복지_하차,복지_환승,";
 				 
@@ -329,7 +329,7 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 				 // ● 인자값 : 컬럼명
 				 columnListSt = "분석지역광역도"
 						 +",분석지역시군"
-						 +",provider"
+						 +",분석자료"
 						 +",opratDate"
 						 +",tfcmn"
 						 +",routeNma"
@@ -360,7 +360,7 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 			 } else {
 				 
 				 // ● 인자값 : 헤더명
-				 headerListSt = "분석지역광역도," + "분석지역시도," + "분석자료," + "분석일자," +  "노선구분," + "노선명," + "노선유형," + "기점," + "종점," + ",시간"
+				 headerListSt = "분석지역광역도," + "분석지역시도," + "분석자료," + "분석일자," +  "노선구분," + "노선명," + "노선유형," + "기점," + "종점," + "시간,"
 						 + "일반_승차,일반_하차,일반_환승," + "어린이_승차,어린이_하차,어린이_환승," + "청소년_승차,청소년_하차,청소년_환승," + "경로_승차,경로_하차,경로_환승,"
 						 + "장애인_승차,장애인_하차,장애인_환승," + "국가유공자_승차,국가유공자_하차,국가유공자_환승," + "다자녀부모_승차,다자녀부모_하차,다자녀부모_환승,"
 						 + "동반_승차,동반_하차,동반_환승," + "대학생_승차,대학생_하차,대학생_환승," + "복지_승차,복지_하차,복지_환승," + "기타_승차,기타_하차,기타_환승";
@@ -369,7 +369,7 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 				 // ● 인자값 : 컬럼명
 				 columnListSt = "분석지역광역도"
 						 +",분석지역시군"
-						 +",provider"
+						 +",분석자료"
 						 +",opratDate"
 						 +",tfcmn"
 						 +",routeNma"
@@ -429,7 +429,7 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 				
 				// ● 인자값 : 헤더명
 				headerListSt = "분석지역광역도," + "분석지역시도," + "분석자료," + "분석일자," + "노선구분," + "노선명," + "노선유형," + "기점," + "종점,"
-						+ "출발정류장ID,출발정류장명,출발정류장행정동,도착정류장ID,도착정류장명,도착정류장행정동,시간," + "일반," + "어린이," + "청소년," + "경로," + "대학생," + "복지";
+						+ "출발정류장순번, 출발정류장ID, 출발정류장명, 출발정류장행정동, 도착정류장순번, 도착정류장ID, 도착정류장명, 도착정류장행정동, 시간," + "일반," + "어린이," + "청소년," + "경로," + "대학생," + "복지";
 		
 				columnListSt = "분석지역광역도"
 								+",분석지역시군"
@@ -461,7 +461,7 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 				
 				// ● 인자값 : 헤더명
 				headerListSt = "분석지역광역도," + "분석지역시도," + "분석자료," + "분석일자," + "노선구분," + "노선명," + "노선유형," + "기점," + "종점,"
-						+ "출발정류장ID,출발정류장명,출발정류장행정동,도착정류장ID,도착정류장명,도착정류장행정동,시간," + "일반," + "어린이," + "청소년," + "경로," + "장애인,"
+						+ "출발정류장순번, 출발정류장ID, 출발정류장명, 출발정류장행정동, 도착정류장순번, 도착정류장ID, 도착정류장명, 도착정류장행정동, 시간," + "일반," + "어린이," + "청소년," + "경로," + "장애인,"
 						+ "국가유공자," + "다자녀부모," + "동반," + "대학생," + "복지," + "기타";
 		
 				columnListSt = "분석지역광역도"
@@ -605,10 +605,8 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 						+",분석자료"
 						+",운행일자"
 						+",승차내외부"
-						+",승차지역코드"
 						+",승차지역명"
 						+",하차내외부"
-						+",하차지역코드"
 						+",하차지역명"
 						+",시간"
 						+",일반"
@@ -631,10 +629,8 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 						+",분석자료"
 						+",운행일자"
 						+",승차내외부"
-						+",승차지역코드"
 						+",승차지역명"
 						+",하차내외부"
-						+",하차지역코드"
 						+",하차지역명"
 						+",시간"
 						+",일반"
@@ -675,10 +671,8 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 							+",분석자료"
 							+",운행일자"
 							+",승차내외부"
-							+",승차지역코드"
 							+",승차지역명"
 							+",하차내외부"
-							+",하차지역코드"
 							+",하차지역명"
 							+",시간"
 							+",일반"
@@ -701,10 +695,8 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 							+",분석자료"
 							+",운행일자"
 							+",승차내외부"
-							+",승차지역코드"
 							+",승차지역명"
 							+",하차내외부"
-							+",하차지역코드"
 							+",하차지역명"
 							+",시간"
 							+",일반"

@@ -67,8 +67,8 @@
                 </div>
                 <div class="cell2_02">
                     <div>
-                        <label><input type="radio" name="anal_type" value="congestionTopRouteOD_DOC_max"> 최대혼잡구</label>
-                        <label><input type="radio" name="anal_type" value="congestionTopRouteOD_DOC_avg"> 평균혼잡구</label>
+                        <label><input type="radio" name="anal_type" value="congestionTopRouteOD_DOC_max"> 최대혼잡구간</label>
+                        <label><input type="radio" name="anal_type" value="congestionTopRouteOD_DOC_avg"> 평균혼잡구간</label>
                     </div>
                 </div>
 

@@ -387,12 +387,12 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 									+",운행일자"
 									+",요일"
 									+",교통수단"
-									+",시간"
 									+",노선ID"
 									+",노선명"
 									+",노선유형"
 									+",기점"
 									+",종점"
+									+",시간"
 									+ cdnoStrLong
 									+",전체승차"
 									+",전체하차"
@@ -406,12 +406,12 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 									+",opratDate"
 									+",dy"
 									+",tfcmn"
-									+",tm"
 									+",routeId"
 									+",routeNma"
 									+",routeType"
 									+",routeStart"
 									+",routeEnd"
+									+",tm"
 									+ cdnoStrLong
 									+",전체승차"
 									+",전체하차"
@@ -544,305 +544,336 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 			}
 		} else if("".equals((String)sVO.getAnal_type()) || sVO.getAnal_type()==null){           // # 분석유형이 없음 : 노선별OD, 상위...
 			
-			switch(sVO.getAnal_group()) {
-			case "passRouteODCnt":                                                              // 노선별OD
-				if("allDay".equals((String)sVO.getTm())) {
-					System.out.println("노선별od 일별 다운로드");
-					
-					// ● 인자값 : 데이터 리스트
-					passResultList = mapper.downloadPassResultListRouteOD_d(sVO);
-					
-					System.out.println("query 조회 시간 : " + ((System.currentTimeMillis() - sdt) / 1000));
-					
-					// ● 인자값 : 시트명
-					excelName = "노선별OD_일별_"+date_SidoText;
-					
-					// ● 인자값 : 헤더명
-					headerListSt = "분석지역광역도"
-									+",분석지역시군"
-									+",분석자료"
-									+",운행일자"
-									+",요일"
-									+",교통수단"
-									+",노선명"
-									+",노선유형"
-									+",기점"
-									+",종점"
-									+",출발정류장ID"
-									+",출발정류장명"
-									+",출발행정동"
-									+",도착정류장ID"
-									+",도착정류장명"
-									+",도착행정동"
-									+ cdnoStr
-									+",합계";
-					
-					// ● 인자값 : 컬럼명
-					columnListSt = "analAreaSidoCdText"
-									+",analAreaCdText"
-									+",provider"
-									+",opratDate"
-									+",dy"
-									+",tfcmn"
-									+",routeNma"
-									+",routeType"
-									+",routeStart"
-									+",routeEnd"
-									+",getStnId"
-									+",getStnNm"
-									+",getStnArea"
-									+",offStnId"
-									+",offStnNm"
-									+",offStnArea"
-									+ cdnoStr
-									+",합계";
-					
-					break;
-				} else {
-					System.out.println("노선별od 다운로드");
-					
-					// ● 인자값 : 데이터 리스트
-					passResultList = mapper.downloadPassResultListRouteOD(sVO);
-					
-					System.out.println("query 조회 시간 : " + ((System.currentTimeMillis() - sdt) / 1000));
-					
-					// ● 인자값 : 시트명
-					excelName = "노선별OD_시간대별_"+date_SidoText;
-					
-					// ● 인자값 : 헤더명
-					headerListSt = "분석지역광역도"
-									+",분석지역시군"
-									+",분석자료"
-									+",운행일자"
-									+",요일"
-									+",교통수단"
-									+",노선명"
-									+",노선유형"
-									+",기점"
-									+",종점"
-									+",출발정류장ID"
-									+",출발정류장명"
-									+",출발행정동"
-									+",도착정류장ID"
-									+",도착정류장명"
-									+",도착행정동"
-									+",시간"
-									+ cdnoStr
-									+",합계";
-					
-					// ● 인자값 : 컬럼명
-					columnListSt = "analAreaSidoCdText"
-									+",analAreaCdText"
-									+",provider"
-									+",opratDate"
-									+",dy"
-									+",tfcmn"
-									+",routeNma"
-									+",routeType"
-									+",routeStart"
-									+",routeEnd"
-									+",getStnId"
-									+",getStnNm"
-									+",getStnArea"
-									+",offStnId"
-									+",offStnNm"
-									+",offStnArea"
-									+",tm"
-									+ cdnoStr
-									+",합계"; 
-					
-					break;
-				}
+			if(sVO.getAnal_fin().equals("routeODmatrix")) {
+				System.out.println("노선별od 매트릭스 다운로드");
 				
-			case "passTopRotue":                                                                // 상위이용노선
-				System.out.println("상위이용노선 다운로드");
+				// 문자열 길이 비교하기 위한 int변수 담기
+				sVO.setTmStart(sVO.getAnal_area_cd().length());
 				
 				// ● 인자값 : 데이터 리스트
-				passResultList = mapper.downloadPassREsultListTopRoute(sVO); 
+				passResultList = mapper.downloadPassResultListRouteOD_m(sVO);
 				
 				System.out.println("query 조회 시간 : " + ((System.currentTimeMillis() - sdt) / 1000));
 				
 				// ● 인자값 : 시트명
-				excelName = "상위이용노선_"+date_SidoText;
+				excelName = "노선별OD_매트릭스_노선번호_"+sVO.getRouteId()+date_SidoText;
 				
 				// ● 인자값 : 헤더명
-				headerListSt = "분석지역광역도"
+				for(int i = 0; i < passResultList.size(); i++) {
+					headerListSt += "," + passResultList.get(i).get("정류장명칭");
+				}
+				headerListSt = "정류장명칭" + headerListSt;
+				
+				// ● 인자값 : 컬럼명
+				for(int i = 0; i < passResultList.size(); i++) {
+					columnListSt += ","+i+"번정류장";
+				}
+				
+				columnListSt = "정류장명칭" + columnListSt;
+				
+			} else {
+				
+				switch(sVO.getAnal_group()) {
+				case "passRouteODCnt":                                                              // 노선별OD
+					if("allDay".equals((String)sVO.getTm())) {
+						System.out.println("노선별od 일별 다운로드");
+						
+						// ● 인자값 : 데이터 리스트
+						passResultList = mapper.downloadPassResultListRouteOD_d(sVO);
+						
+						System.out.println("query 조회 시간 : " + ((System.currentTimeMillis() - sdt) / 1000));
+						
+						// ● 인자값 : 시트명
+						excelName = "노선별OD_일별_"+date_SidoText;
+						
+						// ● 인자값 : 헤더명
+						headerListSt = "분석지역광역도"
 								+",분석지역시군"
 								+",분석자료"
 								+",운행일자"
 								+",요일"
-								+",순위"
-								+",노선ID"
+								+",교통수단"
 								+",노선명"
 								+",노선유형"
 								+",기점"
 								+",종점"
+								+",출발정류장ID"
+								+",출발정류장명"
+								+",출발행정동"
+								+",도착정류장ID"
+								+",도착정류장명"
+								+",도착행정동"
+								+ cdnoStr
+								+",합계";
+						
+						// ● 인자값 : 컬럼명
+						columnListSt = "analAreaSidoCdText"
+								+",analAreaCdText"
+								+",provider"
+								+",opratDate"
+								+",dy"
+								+",tfcmn"
+								+",routeNma"
+								+",routeType"
+								+",routeStart"
+								+",routeEnd"
+								+",getStnId"
+								+",getStnNm"
+								+",getStnArea"
+								+",offStnId"
+								+",offStnNm"
+								+",offStnArea"
+								+ cdnoStr
+								+",합계";
+						
+						break;
+					} else {
+						System.out.println("노선별od 다운로드");
+						
+						// ● 인자값 : 데이터 리스트
+						passResultList = mapper.downloadPassResultListRouteOD(sVO);
+						
+						System.out.println("query 조회 시간 : " + ((System.currentTimeMillis() - sdt) / 1000));
+						
+						// ● 인자값 : 시트명
+						excelName = "노선별OD_시간대별_"+date_SidoText;
+						
+						// ● 인자값 : 헤더명
+						headerListSt = "분석지역광역도"
+								+",분석지역시군"
+								+",분석자료"
+								+",운행일자"
+								+",요일"
+								+",교통수단"
+								+",노선명"
+								+",노선유형"
+								+",기점"
+								+",종점"
+								+",출발정류장ID"
+								+",출발정류장명"
+								+",출발행정동"
+								+",도착정류장ID"
+								+",도착정류장명"
+								+",도착행정동"
+								+",시간"
+								+ cdnoStr
+								+",합계";
+						
+						// ● 인자값 : 컬럼명
+						columnListSt = "analAreaSidoCdText"
+								+",analAreaCdText"
+								+",provider"
+								+",opratDate"
+								+",dy"
+								+",tfcmn"
+								+",routeNma"
+								+",routeType"
+								+",routeStart"
+								+",routeEnd"
+								+",getStnId"
+								+",getStnNm"
+								+",getStnArea"
+								+",offStnId"
+								+",offStnNm"
+								+",offStnArea"
+								+",tm"
+								+ cdnoStr
+								+",합계"; 
+						
+						break;
+					}
+					
+				case "passTopRotue":                                                                // 상위이용노선
+					System.out.println("상위이용노선 다운로드");
+					
+					// ● 인자값 : 데이터 리스트
+					passResultList = mapper.downloadPassREsultListTopRoute(sVO); 
+					
+					System.out.println("query 조회 시간 : " + ((System.currentTimeMillis() - sdt) / 1000));
+					
+					// ● 인자값 : 시트명
+					excelName = "상위이용노선_"+date_SidoText;
+					
+					// ● 인자값 : 헤더명
+					headerListSt = "분석지역광역도"
+							+",분석지역시군"
+							+",분석자료"
+							+",운행일자"
+							+",요일"
+							+",순위"
+							+",노선ID"
+							+",노선명"
+							+",노선유형"
+							+",기점"
+							+",종점"
+							+ cdnoStrLong
+							+",전체승차"
+							+",전체하차"
+							+",전체환승"
+							+",전체승하차합계"; 
+					
+					// ● 인자값 : 컬럼명
+					columnListSt = "analAreaSidoCdText"
+							+",analAreaCdText"
+							+",provider"
+							+",opratDate"
+							+",dy"
+							+",순위"
+							+",routeId"
+							+",routeNma"
+							+",routeType"
+							+",routeStart"
+							+",routeEnd"
+							+ cdnoStrLong
+							+",전체승차"
+							+",전체하차"
+							+",전체환승"
+							+",전체승하차합계";  
+					
+					break;
+					
+				case "passTopStation":                                                              // 상위이용정류장
+					if("B".equals(sVO.getTfcmn())) {
+						System.out.println("상위이용정류장 버스 다운로드");
+						
+						// ● 인자값 : 데이터 리스트
+						passResultList = mapper.downloadPassResultListTopStationB(sVO); 
+						
+						System.out.println("query 조회 시간 : " + ((System.currentTimeMillis() - sdt) / 1000));
+						
+						// ● 인자값 : 시트명
+						excelName = "상위이용정류장_버스_"+date_SidoText;
+						
+						// ● 인자값 : 헤더명
+						headerListSt = "분석지역광역도"
+								+",분석지역시군"
+								+",분석자료"
+								+",운행일자"
+								+",요일"
+								+",교통수단"
+								+",순위"
+								+",정류장ID"
+								+",정류장명"
+								+",행정동"
 								+ cdnoStrLong
 								+",전체승차"
 								+",전체하차"
 								+",전체환승"
 								+",전체승하차합계"; 
-				
-				// ● 인자값 : 컬럼명
-				columnListSt = "analAreaSidoCdText"
+						
+						// ● 인자값 : 컬럼명
+						columnListSt = "analAreaSidoCdText"
 								+",analAreaCdText"
 								+",provider"
 								+",opratDate"
 								+",dy"
+								+",tfcmn"
 								+",순위"
-								+",routeId"
-								+",routeNma"
-								+",routeType"
-								+",routeStart"
-								+",routeEnd"
+								+",sttnId"
+								+",sttnNma"
+								+",sttnHjd"
 								+ cdnoStrLong
 								+",전체승차"
 								+",전체하차"
 								+",전체환승"
 								+",전체승하차합계";  
+						
+						break;
+					} else if("T".equals(sVO.getTfcmn())){
+						System.out.println("상위이용정류장 지하철 다운로드");
+						
+						// ● 인자값 : 데이터 리스트
+						passResultList = mapper.downloadPassResultListTopStationT(sVO); 
+						
+						System.out.println("query 조회 시간 : " + ((System.currentTimeMillis() - sdt) / 1000));
+						
+						// ● 인자값 : 시트명
+						excelName = "상위이용정류장_지하철_"+date_SidoText;
+						
+						// ● 인자값 : 헤더명
+						headerListSt = "분석지역광역도"
+								+",분석지역시군"
+								+",분석자료"
+								+",운행일자"
+								+",요일"
+								+",교통수단"
+								+",순위"
+								+",정류장ID"
+								+",정류장명"
+								+",행정동"
+								+ cdnoStrLong
+								+",전체승차"
+								+",전체하차"
+								+",전체환승"
+								+",전체승하차합계"; 
+						
+						// ● 인자값 : 컬럼명
+						columnListSt = "analAreaSidoCdText"
+								+",analAreaCdText"
+								+",provider"
+								+",opratDate"
+								+",dy"
+								+",tfcmn"
+								+",순위"
+								+",sttnId"
+								+",sttnNma"
+								+",sttnHjd"
+								+ cdnoStrLong
+								+",전체승차"
+								+",전체하차"
+								+",전체환승"
+								+",전체승하차합계";  
+						
+						
+						break;
+					} else {
+						System.out.println("상위이용정류장 전체 다운로드");
+						
+						// ● 인자값 : 데이터 리스트
+						passResultList = mapper.downloadPassResultListTopStation(sVO); 
+						
+						System.out.println("query 조회 시간 : " + ((System.currentTimeMillis() - sdt) / 1000));
+						
+						// ● 인자값 : 시트명
+						excelName = "상위이용정류장_"+date_SidoText;
+						
+						// ● 인자값 : 헤더명
+						headerListSt = "분석지역광역도"
+								+",분석지역시군"
+								+",분석자료"
+								+",운행일자"
+								+",요일"
+								+",교통수단"
+								+",순위"
+								+",정류장ID"
+								+",정류장명"
+								+",행정동"
+								+ cdnoStrLong
+								+",전체승차"
+								+",전체하차"
+								+",전체환승"
+								+",전체승하차합계"; 
+						
+						// ● 인자값 : 컬럼명
+						columnListSt = "analAreaSidoCdText"
+								+",analAreaCdText"
+								+",provider"
+								+",opratDate"
+								+",dy"
+								+",tfcmn"
+								+",순위"
+								+",sttnId"
+								+",sttnNma"
+								+",sttnHjd"
+								+ cdnoStrLong
+								+",전체승차"
+								+",전체하차"
+								+",전체환승"
+								+",전체승하차합계";  
+						
+						break;
+					}
 				
-				break;
-				
-			case "passTopStation":                                                              // 상위이용정류장
-				if("B".equals(sVO.getTfcmn())) {
-					System.out.println("상위이용정류장 버스 다운로드");
-					
-					// ● 인자값 : 데이터 리스트
-					passResultList = mapper.downloadPassResultListTopStationB(sVO); 
-					
-					System.out.println("query 조회 시간 : " + ((System.currentTimeMillis() - sdt) / 1000));
-					
-					// ● 인자값 : 시트명
-					excelName = "상위이용정류장_버스_"+date_SidoText;
-					
-					// ● 인자값 : 헤더명
-					headerListSt = "분석지역광역도"
-									+",분석지역시군"
-									+",분석자료"
-									+",운행일자"
-									+",요일"
-									+",교통수단"
-									+",순위"
-									+",정류장ID"
-									+",정류장명"
-									+",행정동"
-									+ cdnoStrLong
-									+",전체승차"
-									+",전체하차"
-									+",전체환승"
-									+",전체승하차합계"; 
-					
-					// ● 인자값 : 컬럼명
-					columnListSt = "analAreaSidoCdText"
-									+",analAreaCdText"
-									+",provider"
-									+",opratDate"
-									+",dy"
-									+",tfcmn"
-									+",순위"
-									+",sttnId"
-									+",sttnNma"
-									+",sttnHjd"
-									+ cdnoStrLong
-									+",전체승차"
-									+",전체하차"
-									+",전체환승"
-									+",전체승하차합계";  
-					
-					break;
-				} else if("T".equals(sVO.getTfcmn())){
-					System.out.println("상위이용정류장 지하철 다운로드");
-					
-					// ● 인자값 : 데이터 리스트
-					passResultList = mapper.downloadPassResultListTopStationT(sVO); 
-					
-					System.out.println("query 조회 시간 : " + ((System.currentTimeMillis() - sdt) / 1000));
-					
-					// ● 인자값 : 시트명
-					excelName = "상위이용정류장_지하철_"+date_SidoText;
-					
-					// ● 인자값 : 헤더명
-					headerListSt = "분석지역광역도"
-									+",분석지역시군"
-									+",분석자료"
-									+",운행일자"
-									+",요일"
-									+",교통수단"
-									+",순위"
-									+",정류장ID"
-									+",정류장명"
-									+",행정동"
-									+ cdnoStrLong
-									+",전체승차"
-									+",전체하차"
-									+",전체환승"
-									+",전체승하차합계"; 
-					
-					// ● 인자값 : 컬럼명
-					columnListSt = "analAreaSidoCdText"
-									+",analAreaCdText"
-									+",provider"
-									+",opratDate"
-									+",dy"
-									+",tfcmn"
-									+",순위"
-									+",sttnId"
-									+",sttnNma"
-									+",sttnHjd"
-									+ cdnoStrLong
-									+",전체승차"
-									+",전체하차"
-									+",전체환승"
-									+",전체승하차합계";  
-					
-					
-					break;
-				} else {
-					System.out.println("상위이용정류장 전체 다운로드");
-					
-					// ● 인자값 : 데이터 리스트
-					passResultList = mapper.downloadPassResultListTopStation(sVO); 
-					
-					System.out.println("query 조회 시간 : " + ((System.currentTimeMillis() - sdt) / 1000));
-					
-					// ● 인자값 : 시트명
-					excelName = "상위이용정류장_"+date_SidoText;
-					
-					// ● 인자값 : 헤더명
-					headerListSt = "분석지역광역도"
-									+",분석지역시군"
-									+",분석자료"
-									+",운행일자"
-									+",요일"
-									+",교통수단"
-									+",순위"
-									+",정류장ID"
-									+",정류장명"
-									+",행정동"
-									+ cdnoStrLong
-									+",전체승차"
-									+",전체하차"
-									+",전체환승"
-									+",전체승하차합계"; 
-					
-					// ● 인자값 : 컬럼명
-					columnListSt = "analAreaSidoCdText"
-									+",analAreaCdText"
-									+",provider"
-									+",opratDate"
-									+",dy"
-									+",tfcmn"
-									+",순위"
-									+",sttnId"
-									+",sttnNma"
-									+",sttnHjd"
-									+ cdnoStrLong
-									+",전체승차"
-									+",전체하차"
-									+",전체환승"
-									+",전체승하차합계";  
-					
-					break;
 				}
 				
 			}
