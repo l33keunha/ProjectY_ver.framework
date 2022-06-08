@@ -39,5 +39,13 @@ public interface DownloadMapper {
 	// 노선별 재차인원
 	List<EgovMap> selectdownloadResultListRouteCBP(SearchVO sVO);
 
+	
+	
+	// 정류장간OD 목적통행 _ 서울||인천
+	List<EgovMap> selectdownloadResultListStationOD_purpose_small(SearchVO sVO);
+	
+	// 정류장간OD 수단통행 _ 서울||인천
+	List<EgovMap> selectdownloadResultListStationOD_method_small(SearchVO sVO);
+
 
 }

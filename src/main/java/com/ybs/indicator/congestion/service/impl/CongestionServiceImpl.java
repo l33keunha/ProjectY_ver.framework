@@ -389,6 +389,9 @@ public class CongestionServiceImpl extends EgovAbstractServiceImpl implements Co
 							+",운행일자"
 							+",요일"
 							+",순위"
+							+",노선ID"
+							+",노선명"
+							+",노선유형"
 							+",출발정류장ID"
 							+",출발정류장명"
 							+",출발행정동"
@@ -405,6 +408,9 @@ public class CongestionServiceImpl extends EgovAbstractServiceImpl implements Co
 							+",opratDate"
 							+",dy"
 							+",sttnRank"
+							+",routeId"
+							+",routeNma"
+							+",routeType"
 							+",stSttnId"
 							+",stSttnNma"
 							+",stSttnHjd"
@@ -412,7 +418,7 @@ public class CongestionServiceImpl extends EgovAbstractServiceImpl implements Co
 							+",edSttnNma"
 							+",edSttnHjd"
 							+ maxStr
-							+",conRateMax";
+							+",conRateAvg";
 			break;
 		case "congestionTopStationOD_DOC_avg" :
 			System.out.println("PIVOT 정류장간 평균 혼잡도");

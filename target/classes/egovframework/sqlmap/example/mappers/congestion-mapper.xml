@@ -209,6 +209,9 @@
             ,#{provider_text} PROVIDER
 			,OPRAT_DATE
 			,TO_CHAR(SDATE,'DY') DY
+			,ROUTE_ID 
+			,ROUTE_NMA 
+			,ROUTE_TYPE 
 			,STTN_RANK
 			,ST_STTN_ID
 			,ST_STTN_NMA
@@ -240,8 +243,8 @@
 			,MAX21
 			,MAX22
 			,MAX23
-			,CON_RATE_MAX
-		FROM 혼잡_정류장간_최대평균혼잡도 
+			,CON_RATE_AVG
+		FROM 혼잡_정류장간_최대혼잡도 
 		WHERE 1=1
 			AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
 			AND ANAL_AREA_CD = #{anal_area_cd}
@@ -289,7 +292,7 @@
 			,AVG22
 			,AVG23
 			,CON_RATE_AVG
-		FROM 혼잡_정류장간_최대평균혼잡도 
+		FROM 혼잡_정류장간_평균혼잡도 
 		WHERE 1=1
 			AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
 			AND ANAL_AREA_CD = #{anal_area_cd}

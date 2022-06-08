@@ -280,7 +280,7 @@
 			,대학생
 			,복지
 			,기타
-		FROM PIVOT_노선별OD
+		FROM PIVOT_노선별OD_SMALL
 		WHERE 1=1
 			AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 			AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
@@ -331,6 +331,76 @@
 			AND ANAL_AREA_CD = #{anal_area_cd}
 			AND PROVIDER = #{provider}
 		ORDER BY ROUTE_NMA, ROUTE_ID
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	<!-- 정류장간OD 목적통행 _ 서울||인천  -->
+	<select id ="selectdownloadResultListStationOD_purpose_small" parameterType="sVO" resultType="egovMap" fetchSize="2000">
+		SELECT /*+ PARALLEL(4) */
+			#{anal_area_cd_sido_text} 분석지역_광역도
+			,#{anal_area_cd_text} 분석지역_시군
+			,#{provider_text} 분석자료
+			,운행일자
+			,승차내외부
+			,승차역ID
+			,승차지역명
+			,하차내외부
+			,하차역ID
+			,하차지역명
+			,시간
+			,일반
+			,어린이
+			,청소년
+			,경로
+			,장애인
+			,국가유공자
+			,다자녀부모
+			,동반
+			,대학생
+			,복지
+			,기타
+		FROM PIVOT_정류장별OD_목적통행_SMALL
+		WHERE 1=1
+			AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
+			AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
+		ORDER BY 승차내외부, 승차역ID, 하차내외부, 하차역ID, 시간
+	</select>
+	
+	<!-- 정류장간OD 수단통행 _ 서울||인천 -->
+	<select id ="selectdownloadResultListStationOD_method_small" parameterType="sVO" resultType="egovMap" fetchSize="2000">
+		SELECT /*+ PARALLEL(4) */
+			 #{anal_area_cd_sido_text} 분석지역_광역도
+			,#{anal_area_cd_text} 분석지역_시군
+			,#{provider_text} 분석자료
+			,운행일자
+			,승차내외부
+			,승차역ID
+			,승차지역명
+			,하차내외부
+			,하차역ID
+			,하차지역명
+			,시간
+			,일반
+			,어린이
+			,청소년
+			,경로
+			,장애인
+			,국가유공자
+			,다자녀부모
+			,동반
+			,대학생
+			,복지
+			,기타
+		FROM PIVOT_정류장별OD_수단통행_SMALL
+		WHERE 1=1
+			AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
+			AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
+		ORDER BY 승차내외부, 승차역ID, 하차내외부, 하차역ID, 시간
 	</select>
 	
 </mapper>

@@ -164,7 +164,11 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 			System.out.println("정류장간목적통행");
 
 			// ● 인자값 : 데이터 리스트
-			downloadResultList = mapper.selectdownloadResultListStationOD_purpose(sVO);
+			if(sVO.getAnal_area_cd().equals("11") || sVO.getAnal_area_cd().equals("23")) {
+				downloadResultList = mapper.selectdownloadResultListStationOD_purpose_small(sVO);
+			} else {
+				downloadResultList = mapper.selectdownloadResultListStationOD_purpose(sVO);
+			}
 			System.out.println("query 조회 시간 : " + ((System.currentTimeMillis() - sdt) / 1000));
 
 			// ● 인자값 : 시트명
@@ -235,7 +239,11 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 			System.out.println("정류장간수단통행");
 
 			// ● 인자값 : 데이터 리스트
-			downloadResultList = mapper.selectdownloadResultListStationOD_method(sVO);
+			if(sVO.getAnal_area_cd().equals("11") || sVO.getAnal_area_cd().equals("23")) {
+				downloadResultList = mapper.selectdownloadResultListStationOD_method_small(sVO);				
+			} else {
+				downloadResultList = mapper.selectdownloadResultListStationOD_method(sVO);
+			}
 			System.out.println("query 조회 시간 : " + ((System.currentTimeMillis() - sdt) / 1000));
 
 			// ● 인자값 : 시트명
