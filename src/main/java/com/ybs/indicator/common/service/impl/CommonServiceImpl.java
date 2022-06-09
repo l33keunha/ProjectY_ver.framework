@@ -22,7 +22,7 @@ public class CommonServiceImpl extends EgovAbstractServiceImpl implements Common
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(CommonServiceImpl.class);
 	
-	@Resource(name="CommonMapper")
+	@Resource(name="commonMapper")
 	private CommonMapper mapper;
 
 	@Override

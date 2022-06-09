@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.egovframe.rte.psl.dataaccess.util.EgovMap;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -65,30 +68,15 @@ public class CommonController {
 	
 	
 	
-	/* *************** 로그인 *************** */
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	// 조회조건 공통 cell3 
 	@ResponseBody
 	@RequestMapping(value="/searchAnal.do")
-	public ModelAndView selectPassSearchList(@ModelAttribute SearchVO sVO) {
+	public ModelAndView selectPassSearchList(@ModelAttribute SearchVO sVO, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		List<EgovMap> passSearchList = new ArrayList<EgovMap>();
 		
+		HttpSession session = request.getSession();
+		sVO.setDept((String)session.getAttribute("dept"));
 		System.out.println(sVO.toString());
 		
 		passSearchList = service.selectPassSearchList(sVO);
@@ -147,9 +135,12 @@ public class CommonController {
 	// 다운로드 가능 지역에 따른 status 조회
 	@ResponseBody
 	@RequestMapping(value="/searchStatus.do")
-	public ModelAndView selectSearchStatusList(@ModelAttribute SearchVO sVO) {
+	public ModelAndView selectSearchStatusList(@ModelAttribute SearchVO sVO, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		List<EgovMap> searchStatusList = new ArrayList<EgovMap>();
+		
+		HttpSession session = request.getSession();
+		sVO.setDept((String)session.getAttribute("dept"));
 		
 		System.out.println(sVO.toString());
 		

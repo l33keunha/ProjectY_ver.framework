@@ -6,12 +6,10 @@
 <head>
      <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
      <link rel="stylesheet" type="text/css" href="resources/css/common/login.css">
+     <script src ="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
-	<script>
-		location.href="goPassIndex.do";
-	</script>
-	
 	<div class="wrap">
             <!-- 해더 -->
             <div class = " header">
@@ -32,20 +30,22 @@
 
            </div>
             <section class="login-input-section-wrap">
-                <div class="login_wrap">
-                    <div class="login-input-wrap">
-                        <span>ID</span>	
-                        <input placeholder="Username" type="text"></input>
-                    </div>
-                    <div class="login-input-wrap password-wrap">
-                        <span>PW</span>		
-                        <input placeholder="Password" type="password"></input>
-                    </div>
-                </div>
+	            <form action="login.do" method="post">
+	                <div class="login_wrap">
+	                    <div class="login-input-wrap">
+	                        <span>ID</span>	
+	                        <input placeholder="Username" type="text" name="id"></input>
+	                    </div>
+	                    <div class="login-input-wrap password-wrap">
+	                        <span>PW</span>		
+	                        <input placeholder="Password" type="password" name="pwd"></input>
+	                    </div>
+	                </div>
+               
                 <div class="login-button-wrap">
-                     <button>Sign in</button>
+                     <button style="cursor:pointer;" onclick="location.href='login.do'">Sign in</button>
                 </div>
-                
+               </form> 
             </section>
             </div>
             <footer>

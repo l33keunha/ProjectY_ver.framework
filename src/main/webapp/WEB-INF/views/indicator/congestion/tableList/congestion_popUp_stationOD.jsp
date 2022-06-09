@@ -88,6 +88,11 @@
 							
 							<th class="tg-0pky" rowspan="2" style="width: 30px; min-width: 30px; max-width: 30px;">순위</th>
 							<!-- 순위 -->
+							
+							<th class="tg-0pky" rowspan="2" style="width: 80px; min-width: 80px; max-width: 80px;">노선ID</th>	<!-- 노선ID -->
+							<th class="tg-0pky" rowspan="2" style="width: 80px; min-width: 80px; max-width: 80px;">노선명</th>	<!-- 노선명 -->
+							<th class="tg-0pky" rowspan="2" style="width: 80px; min-width: 80px; max-width: 80px;">노선유형</th>	<!-- 노선유형 -->
+							
 							<th class="tg-0pky" rowspan="2" style="width: 80px; min-width: 80px; max-width: 80px;">출발정류장ID</th>
 							<!-- 출발정류장ID -->
 							<th class="tg-0pky" rowspan="2" style="width: 134px; min-width: 134px; max-width: 134px;">출발정류장명</th>
@@ -143,9 +148,14 @@
 								<!-- 요일 -->
 								</c:if> 
 								--%>
-								
+								 
 								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].sttnRank}</div></td>
 								<!-- 순위 -->
+								
+								<td class="tg-0pky" style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].routeId}</div></td> 		<!-- 노선ID -->
+								<td class="tg-0pky" style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].routeNma}</div></td>		<!-- 노선명 -->
+								<td class="tg-0pky" style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].routeType}</div></td>	<!-- 노선유형 -->
+							
 								<td class="tg-0pky" style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].stSttnId}</div></td>
 								<!-- 출발정류장ID -->
 								<td class="tg-0pky" style="width: 134px; min-width: 134px; max-width: 134px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].stSttnNma}</div></td>
@@ -267,7 +277,7 @@
 									<td class="tg-0pky" style="width: 50px; min-width: 50px; max-width: 50px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].max21}</div></td>
 									<td class="tg-0pky" style="width: 50px; min-width: 50px; max-width: 50px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].max22}</div></td>
 									<td class="tg-0pky" style="width: 50px; min-width: 50px; max-width: 50px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].max23}</div></td>  
-									<td class="tg-0pky" style="width: 100px; min-width: 100px; max-width: 100px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].conRateMax}</div></td>
+									<td class="tg-0pky" style="width: 100px; min-width: 100px; max-width: 100px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].conRateAvg}</div></td>
 								</c:if> 
 								<c:if test="${sVO.anal_type == 'congestionTopStationOD_DOC_avg'}">
 									<td class="tg-0pky" style="width: 50px; min-width: 50px; max-width: 50px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].avg00}</div></td>

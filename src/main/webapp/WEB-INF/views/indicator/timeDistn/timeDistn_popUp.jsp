@@ -108,9 +108,6 @@
 	      	</div>
 	      		
       		<div class="infowrap">
-	     		<c:if test="${sVO.tm != 'allDay'}">
-	     			<span class="info" style="float:left; font-weight:bold;">※ 평균x평균의 값은 전체평균을 뜻합니다.</span>
-	     		</c:if>
 	     		<span class="info">(단위 : 분 / m)</span>
 		    </div>
 	     	

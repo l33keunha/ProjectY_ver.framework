@@ -205,7 +205,6 @@
    	
    	<c:if test = "${anal_groupText == '노선별OD' && anal_typeText == ''}">
    		<c:set var = "anal_typeText_titleDraw" value = ""/>
-   		<c:set var = "tmText" value = "1일"/>
     	<c:set var = "dateText" value = "${sVO.dateStart}"/>
    	</c:if> 
    	

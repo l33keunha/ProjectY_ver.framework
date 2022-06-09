@@ -7,7 +7,7 @@ import org.egovframe.rte.psl.dataaccess.util.EgovMap;
 
 import com.ybs.indicator.common.service.SearchVO;
 
-@Mapper("CommonMapper")
+@Mapper("commonMapper")
 public interface CommonMapper {
 	// Ajax: 분석지역 시도 조회 
 	List<EgovMap> selectPassSearchAjaxAnalAreaCd(SearchVO sVO);

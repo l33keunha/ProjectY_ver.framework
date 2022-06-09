@@ -219,6 +219,10 @@
 					<!--바디 시작▼-->
 					<tbody>
 						
+						<c:set var="avgOfAvgTm" value="0" /> 			<!-- 평균의 평균값 통행시간 변수 -->
+						<c:set var="avgOfAvgDst" value="0" /> 			<!-- 평균의 평균값 통행거리 변수 -->
+						<c:set var="avgOfAvgTmCnt" value="0" /> 		<!-- 평균의 평균값 통행거리 cnt 변수 -->
+						<c:set var="avgOfAvgDstCnt" value="0" /> 		<!-- 평균의 평균값 통행거리 cnt 변수 -->
 						
 						<!-- 데이터 뿌려주는 부분 -->
 						<c:forEach var='j' begin='0' end='${forCnt-1}'>
@@ -244,21 +248,70 @@
 									<c:forEach var='i' begin='${st}' end='${ed-1}' >	    
 								
 										<!-- 컬럼에 따른 Size 변수 -->
-										<c:set var="tdSize" value="${70}" />
-										<c:if test="${i == (ed-1)}">
-											<c:set var="tdSize" value="${100}" />
-										</c:if>
-									
-									
-										<!-- 통행시간 or 통행 거리에 따른 데이터 컬럼 -->
+					 					<c:set var="tdSize" value="${70}" />
+										
+										<!-- 통행시간 or 통행 거리 데이터 변수 -->
 										<c:set var="timeDistn_value" value="" />
-										<c:if test="${k == 0}">
-											<c:set var="timeDistn_value" value="${timeDistnResultList[i].brdngTmAvg}" />
-										</c:if>
-										<c:if test="${k == 1}">
-											<c:set var="timeDistn_value" value="${timeDistnResultList[i].useDstAvg}" />
-										</c:if>
 									
+										<!-- 통행 시간 데이터 -->
+										<c:if test="${k == 0}">
+											
+											<c:set var="timeDistn_value" value="${timeDistnResultList[i].brdngTmAvg}" />			<!-- 통행시간 데이터 -->
+											
+											<!-- 통행시간 평균 라인-->
+											<c:if test="${i == (ed-1)}">
+												<c:set var="tdSize" value="${100}" />												<!-- 통행시간 평균컬럼 사이즈 -->
+												
+												<!-- 통행시간 평균값 합 계산(=평균의 평균) -->
+												<c:if test="${timeDistn_value > 0}">
+													<c:choose>
+														<c:when test = "${timeDistnResultList[i].tm != '평균'}">
+														 	<c:set var="avgOfAvgTm" value="${avgOfAvgTm + timeDistn_value}" />		<!-- 통행시간 합산 -->
+															<c:set var="avgOfAvgTmCnt" value="${avgOfAvgTmCnt+1}" />				<!-- 통행시간 0넘는 값 개수 카운트 -->
+														</c:when>
+														 
+														<c:when test = "${timeDistnResultList[i].tm == '평균'}">
+															<c:set var="timeDistn_value" value="${avgOfAvgTm/avgOfAvgTmCnt}" />		<!-- 통행시간 평균 -->
+															<c:set var="avgOfAvgTm" value="0" />									<!-- 통행시간 초기화-->
+															<c:set var="avgOfAvgTmCnt" value="0" />									<!-- 통행시간 0넘는 값 개수 초기화 -->
+												        </c:when>
+													</c:choose>
+												</c:if>
+												
+											</c:if>
+											
+										</c:if>
+										
+										
+										<!-- 통행 거리 데이터 -->
+										<c:if test="${k == 1}">
+											
+											<c:set var="timeDistn_value" value="${timeDistnResultList[i].useDstAvg}" />			<!-- 통행시간 데이터 -->
+											
+											<!-- 통행시간 평균 라인-->
+											<c:if test="${i == (ed-1)}">
+												<c:set var="tdSize" value="${100}" />												<!-- 통행시간 평균컬럼 사이즈 -->
+												
+												<!-- 통행시간 평균값 합 계산(=평균의 평균) -->
+												<c:if test="${timeDistn_value > 0}">
+													<c:choose>
+														<c:when test = "${timeDistnResultList[i].tm != '평균'}">
+														 	<c:set var="avgOfAvgDst" value="${avgOfAvgDst + timeDistn_value}" />	<!-- 통행시간 합산 -->
+															<c:set var="avgOfAvgDstCnt" value="${avgOfAvgDstCnt+1}" />				<!-- 통행시간 0넘는 값 개수 카운트 -->
+														</c:when>
+														 
+														<c:when test = "${timeDistnResultList[i].tm == '평균'}">
+															<c:set var="timeDistn_value" value="${avgOfAvgDst/avgOfAvgDstCnt}" />	<!-- 통행시간 평균 -->
+															<c:set var="avgOfAvgDst" value="0" />									<!-- 통행시간 초기화-->
+															<c:set var="avgOfAvgDstCnt" value="0" />								<!-- 통행시간 0넘는 값 개수 초기화 -->
+												        </c:when>
+													</c:choose>
+												</c:if>
+												
+											</c:if>
+											
+										</c:if>
+										
 										<td class="tg-0pky" style="width: ${tdSize}px; min-width: ${tdSize}px; max-width: ${tdSize}px;"><fmt:formatNumber type="number" value="${timeDistn_value}"/></td>		<!-- 이용자유형-->
 									
 									</c:forEach>

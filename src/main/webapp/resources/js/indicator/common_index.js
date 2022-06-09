@@ -91,6 +91,7 @@
 		$("[class=selectbox]").find("input:checked").each(function(index, item){
 		jsonArray[$(item)[0].name] = $(item)[0].value;
 		})
+		jsonArray["dept"] = $("input[name=dept]").val();
 		
 		$("select[name=anal_area_cd_sido]").prop("disabled", false);
 		$(".cell3").css("opacity", 1); $(".cell3_02").css("opacity", 0.3); $(".cell3_03").css("opacity", 0.3);
@@ -157,9 +158,12 @@
 		success: function (data){
 				if(data.passSearchList.length == 1 && data.passSearchList[0].provider == '00'){
 					$('#provider99').prop("disabled", true);
-				} else{
+				} else if(data.passSearchList.length == 1 && data.passSearchList[0].provider != '00'){
+					$('#provider00').prop("disabled", true);
+					$("#provider99").val(data.passSearchList[0].provider);
+				} else {
 					console.log(data.passSearchList[1].provider);
-					 $("#provider99").val(data.passSearchList[1].provider);    
+					$("#provider99").val(data.passSearchList[1].provider);    
 					console.log($("#provider99").val());
 				}
 			}

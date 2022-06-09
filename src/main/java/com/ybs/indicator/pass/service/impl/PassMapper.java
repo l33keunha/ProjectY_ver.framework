@@ -122,7 +122,11 @@ public interface PassMapper {
 	int selectStatioCnt(SearchVO sVO);
 
 	List<EgovMap> selectRouteOD(SearchVO sVO);
-
+	
+	/********************** 행정동OD 매트릭스 **********************/
+	
+	List<EgovMap> downloadPassResultListAreaOD(SearchVO sVO);
+	
 	/********************** 그래프 쿼리 **********************/
 	
 	//  목적통행 그래프 시간대별 
@@ -142,6 +146,9 @@ public interface PassMapper {
 	
 	//  노선별통행 그래프  일별
 	List<EgovMap> graphPassResultListRoute_d(SearchVO sVO);
+
+
+
 
 	
 	

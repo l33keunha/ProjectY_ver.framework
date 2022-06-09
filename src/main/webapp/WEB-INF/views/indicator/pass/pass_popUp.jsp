@@ -53,6 +53,30 @@
 		<input type="submit" id="downloadSubmitBtn" style="display: none;"/>
 	</form>
 	
+	<!-- 행정동OD 다운로드 조회조건 -->
+	<form id="downloadForm" action="<%=request.getContextPath()%>/passDownload.do" target="excelDown">
+		<div class= "sVOvalue">
+			<input name="anal_fin" type="hidden" id="anal_finJS" value="areaODmatrix"/>
+			<input name="dateStart" type="hidden" id="dateStartJS" value="${sVO.dateStart}"/>
+			<input name="dateEnd" type="hidden" id="dateEndJS" value="${sVO.dateEnd}"/>
+			<input name="anal_area_cd_sido" type="hidden" id="anal_area_cd_sidoJS" value="${sVO.anal_area_cd_sido}"/>
+			<input name="anal_area_cd_sido_text" type="hidden" id="anal_area_cd_sido_textJS" value="${sVO.anal_area_cd_sido_text}"/>
+			<input name="anal_area_cd" type="hidden" id="anal_area_cdJS" value="${sVO.anal_area_cd}"/>
+			<input name="anal_area_cd_text" type="hidden" id="anal_area_cd_textJS" value="${sVO.anal_area_cd_text}"/>
+			<input name="provider" type="hidden" id="providerJS" value="${sVO.provider}"/>
+			<input name="provider_text" type="hidden" id="provider_textJS" value="${sVO.provider_text}"/>
+			<input name="anal_group" type="hidden" id="anal_groupJS" value="${sVO.anal_group}"/>
+			<input name="anal_type" type="hidden" id="anal_tyajdEpeJS" value="${sVO.anal_type}"/>
+		</div>
+		<!-- 이용자유형 코드 -->
+		<div class="sVOvalue_cd_no">
+		    <c:forEach var='j' begin='0' end='${cd_noLength-1}' >
+				<input name="cd_no" type="hidden"  value="${sVO.cd_no[j]}"/>
+		    </c:forEach>
+		</div>
+		<input type="submit" id="downloadMatrixSubmitBtn" style="display: none;"/>
+	</form>
+	
 	<!-- 그래프 조회조건 -->
 	<form id="graphForm" action="<%=request.getContextPath()%>/passGraph.do" target="graph" method="post">
 		
@@ -96,6 +120,9 @@
 			     		<c:if test = "${sVO.anal_fin == null || sVO.anal_fin == ''}">
 			     			<div class="g" style="width: 145px;"><button type="button" id="matrix" style="width: 109px;">OD매트릭스</button></div>
 			     		</c:if>
+	                </c:if>
+	                <c:if test = "${anal_groupText == '행정동간OD' && (anal_typeText == '목적통행' || anal_typeText == '수단통행')}">
+	                	<div class="g" style="width: 245px;"><button type="button" id="downloadMatrix" style="width: 109px;">OD매트릭스형태로 다운로드</button></div>
 	                </c:if>
 	                <div class="d"><button type="button" id="download">다운로드</button></div>
 	                <div class="e"><button type="button" id="exit" onClick="window.open('','_self').close();">닫기</button></div>
@@ -224,7 +251,8 @@
 					<input type="submit" id="routeODSubmitBtn" style="display: none;"/>
 				</form>
 			</c:if>
-	      	
+			
+			
 	      	<div class="infowrap">
 				<span class="info">(단위 : 통행량)</span>
 		    </div>

@@ -138,7 +138,6 @@
             ,ROLLUP(CD_NO)
         ORDER BY OPRAT_DATE, CD_NO, TFCMN
 	</select>
-	
 
 	<!-- 노선별통행 버스 시간대별 (시간대 합계있음)-->
 	<select id ="selectPassResultListRouteB" parameterType="sVO" resultType="egovMap" fetchSize="2000">
@@ -1067,7 +1066,6 @@
 	        )
 	    ORDER BY OPRAT_DATE
 	</select>
-	
 	
 	<!-- PIVOT  수단통행 시간대별 -->
 	<select id ="downloadPassResultListMethod" parameterType="sVO" resultType="egovMap" fetchSize="1000">
@@ -2464,6 +2462,7 @@
 	</select>
 
 
+
 	<!-- ********************** 노선별OD 매트릭스 **********************  -->
 	
 	
@@ -2514,14 +2513,19 @@
 	
 	
 	
+	<!-- ********************** 행정동별OD 매트릭스 **********************  -->
 	
-	
+	<select id ="downloadPassResultListAreaOD" parameterType="sVO" resultType="egovMap">
+		SELECT *
+		FROM 분석지역별행정동OD
+		WHERE 1=1
+			AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
+			AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
+		ORDER BY 승차지역순번
+	</select>
 	
 	
 	<!-- ********************** 그래프 쿼리 **********************  -->
-
-
-
 
 		
 	<!--  목적통행 그래프 시간대별 -->

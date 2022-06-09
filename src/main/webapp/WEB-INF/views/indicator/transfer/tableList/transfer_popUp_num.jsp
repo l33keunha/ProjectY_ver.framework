@@ -164,14 +164,68 @@
 									<c:if test="${i == (ed-1)}">
 										<c:set var="tdSize" value="${100}" />
 									</c:if>
+									
+									<!-- 횟수별통행 -->
 									<c:if test="${sVO.anal_type == 'transferCnt_num'}">
 										<td class="tg-0pky" style="width: ${tdSize}px; min-width: ${tdSize}px; max-width: ${tdSize}px;"><fmt:formatNumber type="number" value="${transferResultList[i].userCntAgg}"/></td>				<!-- 이용자유형-->
 									</c:if>
+									
+									<!-- 횟수별 환승통행시간 -->
 									<c:if test="${sVO.anal_type == 'transferTime_num'}">
-										<td class="tg-0pky" style="width: ${tdSize}px; min-width: ${tdSize}px; max-width: ${tdSize}px;"><fmt:formatNumber type="number" value="${transferResultList[i].userTimeAvg}"/></td>				<!-- 이용자유형-->
+										
+										<c:set var="userValueAvg" value="${transferResultList[i].userTimeAvg}" />			<!-- 사용자 데이터 -->
+											
+										<!--  평균 라인-->
+										<c:if test="${i == (ed-1)}">
+											
+											<!--  평균값 합 계산(=평균의 평균) -->
+											<c:if test="${userValueAvg > 0}">
+												<c:choose>
+													<c:when test = "${transferResultList[i].tm != '평균'}">
+													 	<c:set var="avgOfAvg" value="${avgOfAvg + userValueAvg}" />			<!-- 사용자 평균값 합산 -->
+														<c:set var="avgOfAvgCnt" value="${avgOfAvgCnt+1}" />				<!-- 사용자 0넘는 값 개수 카운트 -->
+													</c:when>
+													 
+													<c:when test = "${transferResultList[i].tm == '평균'}">
+														<c:set var="userValueAvg" value="${avgOfAvg/avgOfAvgCnt}" />		<!-- 사용자 평균 -->
+														<c:set var="avgOfAvg" value="0" />									<!-- 사용자 초기화-->
+														<c:set var="avgOfAvgCnt" value="0" />								<!-- 사용자 0넘는 값 개수 초기화 -->
+											        </c:when>
+												</c:choose>
+											</c:if>
+											
+										</c:if>
+										
+										<td class="tg-0pky" style="width: ${tdSize}px; min-width: ${tdSize}px; max-width: ${tdSize}px;"><fmt:formatNumber type="number" value="${userValueAvg}"/></td>				<!-- 이용자유형-->
 									</c:if>
+									
+									<!-- 횟수별 환승통행거리 -->
 									<c:if test="${sVO.anal_type == 'transferDistn_num'}">
-										<td class="tg-0pky" style="width: ${tdSize}px; min-width: ${tdSize}px; max-width: ${tdSize}px;"><fmt:formatNumber type="number" value="${transferResultList[i].userDistnAvg}"/></td>				<!-- 이용자유형-->
+										
+										<c:set var="userValueAvg" value="${transferResultList[i].userDistnAvg}" />			<!-- 사용자 데이터 -->
+											
+										<!--  평균 라인-->
+										<c:if test="${i == (ed-1)}">
+											
+											<!--  평균값 합 계산(=평균의 평균) -->
+											<c:if test="${userValueAvg > 0}">
+												<c:choose>
+													<c:when test = "${transferResultList[i].tm != '평균'}">
+													 	<c:set var="avgOfAvg" value="${avgOfAvg + userValueAvg}" />			<!-- 사용자 평균값 합산 -->
+														<c:set var="avgOfAvgCnt" value="${avgOfAvgCnt+1}" />				<!-- 사용자 0넘는 값 개수 카운트 -->
+													</c:when>
+													 
+													<c:when test = "${transferResultList[i].tm == '평균'}">
+														<c:set var="userValueAvg" value="${avgOfAvg/avgOfAvgCnt}" />		<!-- 사용자 평균 -->
+														<c:set var="avgOfAvg" value="0" />									<!-- 사용자 초기화-->
+														<c:set var="avgOfAvgCnt" value="0" />								<!-- 사용자 0넘는 값 개수 초기화 -->
+											        </c:when>
+												</c:choose>
+											</c:if>
+											
+										</c:if>
+										
+										<td class="tg-0pky" style="width: ${tdSize}px; min-width: ${tdSize}px; max-width: ${tdSize}px;"><fmt:formatNumber type="number" value="${userValueAvg}"/></td>				<!-- 이용자유형-->
 									</c:if>
 								</c:forEach>
 							</tr>

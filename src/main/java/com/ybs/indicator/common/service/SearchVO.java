@@ -22,13 +22,14 @@ public class SearchVO {
 	private String tfcmn;
 	private String tcboId;
 	private String routeId;
+	private String dept;
 	
 	public SearchVO() {}
 
 	public SearchVO(String anal_fin, String dateStart, String dateEnd, String anal_area_cd_sido,
 			String anal_area_cd_sido_text, String anal_area_cd, String anal_area_cd_text, String provider,
 			String provider_text, String anal_group, String anal_type, String tm, int tmStart, int tmEnd,
-			String[] cd_no, String tfcmn, String tcboId, String routeId) {
+			String[] cd_no, String tfcmn, String tcboId, String routeId, String dept) {
 		super();
 		this.anal_fin = anal_fin;
 		this.dateStart = dateStart;
@@ -48,6 +49,7 @@ public class SearchVO {
 		this.tfcmn = tfcmn;
 		this.tcboId = tcboId;
 		this.routeId = routeId;
+		this.dept = dept;
 	}
 
 	public String getAnal_fin() {
@@ -194,6 +196,14 @@ public class SearchVO {
 		this.routeId = routeId;
 	}
 
+	public String getDept() {
+		return dept;
+	}
+
+	public void setDept(String dept) {
+		this.dept = dept;
+	}
+
 	@Override
 	public String toString() {
 		return "SearchVO [anal_fin=" + anal_fin + ", dateStart=" + dateStart + ", dateEnd=" + dateEnd
@@ -201,7 +211,9 @@ public class SearchVO {
 				+ ", anal_area_cd=" + anal_area_cd + ", anal_area_cd_text=" + anal_area_cd_text + ", provider="
 				+ provider + ", provider_text=" + provider_text + ", anal_group=" + anal_group + ", anal_type="
 				+ anal_type + ", tm=" + tm + ", tmStart=" + tmStart + ", tmEnd=" + tmEnd + ", cd_no="
-				+ Arrays.toString(cd_no) + ", tfcmn=" + tfcmn + ", tcboId=" + tcboId + ", routeId=" + routeId + "]";
+				+ Arrays.toString(cd_no) + ", tfcmn=" + tfcmn + ", tcboId=" + tcboId + ", routeId=" + routeId
+				+ ", dept=" + dept + "]";
 	}
+
 
 }
