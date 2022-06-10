@@ -1,4 +1,4 @@
-package com.ybs.member.common.service;
+package com.ybs.user.common.service;
 
 public class commonUtil {
 	public static String containsDept(String dept) {

@@ -10,23 +10,11 @@
                 WHEN 분석지역_CD_시도 = '34' THEN  '충청남도'
                ELSE 분석지역명
                END  ANAL_AREA_NM
-		FROM 분석지역_CD_DEPT
+		FROM 분석지역_CD A, USER_INFO B, USER_DEPT C
 		WHERE 1=1
-			<if test='@com.ybs.member.common.service.commonUtil@containsDept(dept)=="M"'>
-				AND DEPT1 = #{dept}
-			</if> 
-			<if test='@com.ybs.member.common.service.commonUtil@containsDept(dept)=="A"'>
-				AND DEPT2 = #{dept}
-			</if> 
-			<if test='@com.ybs.member.common.service.commonUtil@containsDept(dept)=="D"'>
-				AND DEPT3 = #{dept}
-			</if> 
-			<if test='@com.ybs.member.common.service.commonUtil@containsDept(dept)=="S"'>
-				AND DEPT4 = #{dept}
-			</if> 
-			<if test='@com.ybs.member.common.service.commonUtil@containsDept(dept)=="L"'>
-				AND DEPT5 = #{dept}
-			</if> 
+			AND B.DEPT = C.DEPT 
+			AND C.ANAL_AREA_CD = A.분석지역_CD 
+			AND B.UNO = #{uNo}
 		ORDER BY 분석지역_CD_시도
 	</select>
 	
@@ -34,31 +22,19 @@
 	<select id ="selectPassSearchAjaxAnalArea" parameterType="sVO" resultType="egovMap">
 		SELECT DISTINCT 분석지역_CD ANAL_AREA_CD
 		  ,CASE WHEN 분석지역_CD LIKE '__' THEN '전체' ELSE 분석지역명 END analAreaNm
-		FROM 분석지역_CD_DEPT 
+		FROM 분석지역_CD A, USER_INFO B, USER_DEPT C
 		WHERE 1=1
-			AND 분석지역_CD LIKE #{anal_area_cd_sido} || '%'
-			<if test='@com.ybs.member.common.service.commonUtil@containsDept(dept)=="M"'>
-				AND DEPT1 = #{dept}
-			</if> 
-			<if test='@com.ybs.member.common.service.commonUtil@containsDept(dept)=="A"'>
-				AND DEPT2 = #{dept}
-			</if> 
-			<if test='@com.ybs.member.common.service.commonUtil@containsDept(dept)=="D"'>
-				AND DEPT3 = #{dept}
-			</if> 
-			<if test='@com.ybs.member.common.service.commonUtil@containsDept(dept)=="S"'>
-				AND DEPT4 = #{dept}
-			</if> 
-			<if test='@com.ybs.member.common.service.commonUtil@containsDept(dept)=="L"'>
-				AND DEPT5 = #{dept}
-			</if> 
+			AND B.DEPT = C.DEPT 
+			AND C.ANAL_AREA_CD = A.분석지역_CD 
+			AND B.UNO = #{uNo}
+			AND 분석지역_CD_시도 = #{anal_area_cd_sido}
 		ORDER BY 분석지역_CD
 	</select>
 
 	<!-- Ajax: 분석자료 조회 -->
 	<select id ="selectPassSearchAjaxProvider" parameterType="sVO" resultType="egovMap">
 		SELECT DISTINCT OWNER PROVIDER
-		FROM 분석지역_CD_DEPT
+		FROM 분석지역_CD
 		WHERE 1=1
 			AND 분석지역_CD = #{anal_area_cd}
 		ORDER BY OWNER
@@ -67,7 +43,7 @@
 	<!-- Ajax: 날짜 조회 -->
 	<select id ="selectPassSearchAjaxDate" parameterType="sVO" resultType="egovMap">
 		SELECT DISTINCT 운행일자 OPRAT_DATE, 유효일자 SDATE
-		FROM 분석지역_CD_DEPT
+		FROM 분석지역_CD
 		WHERE 1=1
 			AND 분석지역_CD = #{anal_area_cd}
 			AND OWNER = #{provider}

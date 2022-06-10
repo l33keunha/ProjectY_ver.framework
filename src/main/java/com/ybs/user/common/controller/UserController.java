@@ -1,4 +1,4 @@
-package com.ybs.member.common.controller;
+package com.ybs.user.common.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,33 +14,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springmodules.validation.commons.DefaultBeanValidator;
 
-import com.ybs.member.common.service.MemberService;
-import com.ybs.member.common.service.MemberVO;
+import com.ybs.user.common.service.UserService;
+import com.ybs.user.common.service.UserVO;
 
 @Controller
-public class MemberController {
+public class UserController {
 	
-	@Resource(name = "memberService")
-	private MemberService service;
+	@Resource(name = "userService")
+	private UserService service;
 	
 	/** Validator */
 	@Resource(name = "beanValidator")
 	protected DefaultBeanValidator beanValidator;
 	
 	@RequestMapping(value="/login.do")
-	public ModelAndView login (ModelAndView mv, @ModelAttribute MemberVO mVO, HttpServletRequest request) {
+	public ModelAndView login (ModelAndView mv, @ModelAttribute UserVO uVO, HttpServletRequest request) {
 		
 		/* 로그인 정보 담기 */
-		List<EgovMap> mList = new ArrayList<EgovMap>();
-		mList = service.login(mVO);
+		List<EgovMap> uList = new ArrayList<EgovMap>();
+		uList = service.login(uVO);
 		
 		/* 세션에 로그인 정보 담기 */
 		// 세션생성
 		HttpSession session = request.getSession();
 		// 값 저장
-		session.setAttribute("mNo", mList.get(0).get("no"));
-		session.setAttribute("name", mList.get(0).get("name"));
-		session.setAttribute("dept", mList.get(0).get("dept"));
+		session.setAttribute("uNo", uList.get(0).get("uno"));
+		session.setAttribute("name", uList.get(0).get("name"));
+		
 		
 		mv.setViewName("indicator/pass/pass_index");
 		

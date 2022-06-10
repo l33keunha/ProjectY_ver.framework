@@ -76,7 +76,7 @@ public class CommonController {
 		List<EgovMap> passSearchList = new ArrayList<EgovMap>();
 		
 		HttpSession session = request.getSession();
-		sVO.setDept((String)session.getAttribute("dept"));
+		sVO.setuNo(session.getAttribute("uNo"));
 		System.out.println(sVO.toString());
 		
 		passSearchList = service.selectPassSearchList(sVO);
@@ -140,7 +140,7 @@ public class CommonController {
 		List<EgovMap> searchStatusList = new ArrayList<EgovMap>();
 		
 		HttpSession session = request.getSession();
-		sVO.setDept((String)session.getAttribute("dept"));
+		sVO.setuNo((String)session.getAttribute("uNo"));
 		
 		System.out.println(sVO.toString());
 		

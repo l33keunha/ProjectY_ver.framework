@@ -219,9 +219,14 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 					for(int i = 0; i < passResultList.size(); i++) {
 						headerListSt += "," + passResultList.get(i).get("승차지역명");
 					}
-					headerListSt = "승차지역명" + headerListSt;
+					headerListSt = "행정동" + headerListSt;
 					
+					// ● 인자값 : 컬럼명
+					for(int i = 1; i <= passResultList.size(); i++) {
+						columnListSt += ","+i+"지역";
+					}
 					
+					columnListSt = "승차지역명" + columnListSt;
 					break;
 				}
 			} else {

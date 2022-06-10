@@ -1,9 +1,9 @@
-package com.ybs.member.common.service;
+package com.ybs.user.common.service;
 
 import java.util.Date;
 
-public class MemberVO {
-	private int no;
+public class UserVO {
+	private int uNo;
 	private String id;
 	private String pwd;
 	private String name;
@@ -15,12 +15,12 @@ public class MemberVO {
 	private String dept;
 	private String status;
 	
-	public MemberVO() {}
+	public UserVO() {}
 
-	public MemberVO(int no, String id, String pwd, String name, String phone, String email, String address,
-			Date entDate, Date dropdate, String dept, String status) {
+	public UserVO(int uNo, String id, String pwd, String name, String phone, String email, String address, Date entDate,
+			Date dropdate, String dept, String status) {
 		super();
-		this.no = no;
+		this.uNo = uNo;
 		this.id = id;
 		this.pwd = pwd;
 		this.name = name;
@@ -33,12 +33,12 @@ public class MemberVO {
 		this.status = status;
 	}
 
-	public int getNo() {
-		return no;
+	public int getuNo() {
+		return uNo;
 	}
 
-	public void setNo(int no) {
-		this.no = no;
+	public void setuNo(int uNo) {
+		this.uNo = uNo;
 	}
 
 	public String getId() {
@@ -123,9 +123,10 @@ public class MemberVO {
 
 	@Override
 	public String toString() {
-		return "MemberVO [no=" + no + ", id=" + id + ", pwd=" + pwd + ", name=" + name + ", phone=" + phone + ", email="
+		return "UserVO [uNo=" + uNo + ", id=" + id + ", pwd=" + pwd + ", name=" + name + ", phone=" + phone + ", email="
 				+ email + ", address=" + address + ", entDate=" + entDate + ", dropdate=" + dropdate + ", dept=" + dept
 				+ ", status=" + status + "]";
 	}
+
 	
 }

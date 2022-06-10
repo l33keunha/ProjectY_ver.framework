@@ -92,7 +92,6 @@
 		jsonArray[$(item)[0].name] = $(item)[0].value;
 		})
 		jsonArray["dept"] = $("input[name=dept]").val();
-		
 		$("select[name=anal_area_cd_sido]").prop("disabled", false);
 		$(".cell3").css("opacity", 1); $(".cell3_02").css("opacity", 0.3); $(".cell3_03").css("opacity", 0.3);
 		$.ajax({
