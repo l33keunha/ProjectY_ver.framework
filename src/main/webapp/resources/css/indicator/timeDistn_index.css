@@ -1,106 +1,143 @@
 
-.contents :nth-child(5){
-    background-color: #5C7D9A;
-    color: white;
+#timeDistnCate{
+        color: #001687;
 }
 
 
 
 .cell1{
-    width: calc(100% / 6 * 1.5);
-    background: #ccdded;
+	width: calc(1336px / 6 * 1.5);
+    background:#c7e4ff;
 }
 .cell1 p {
-    margin-top: 10px;
+    margin-top: 0;
     margin-bottom: 10px;
     text-align: center;
-    width: 152px;
-    font-size: 25px;
+    width: 100%;
+    font-size: 18px;
+    line-height: 42px;
     font-weight: bold;
-    border-bottom: 2px solid #1f2958;
-    margin-left: 105px;
+    background-color: #32689b;
+    height: 42px;
+    color: #fff;
 }
 .cell1 label{
-    margin: 15px 39px;
-    font-size: 20px;
+    margin: 0 39px;
+    font-size: 15px;
     display: block;
+    margin-top: 15px;
 }
 .cell1_01{
-    margin-top: 14px;
-    height: 163px;
+    margin-top: 34px;
+    height: 159px;
+    /* border-bottom: 1px solid #b9b9b9; */
 }
 .cell1_01 div{
-    width: 505px;
+    width: 293px;
+}
+.cell1_02{
+    height: 128px;
+    /* border-bottom: 1px solid #b9b9b9; */
+}
+.cell1_02 div{
+    /*width: 643px;*/
+}
+.cell1_02 div label {
+    height: 82px;
+    margin-left: 38px;
+    margin-top: 15px;
+}
+.OD{
+    height: 37px;
+    /* width: 640px; */
+   /*  border-bottom: 1px solid #b9b9b9; */
+}
+
+.cell1_03{
+    height: 106px;
+}
+.cell1_03 div{
+    width: 239px;
 }
 
 .cell2{
-    background: #ccdded;
+    background: #c7e4ff;
 }
 .cell2 p {
-    margin-top: 10px;
+    margin-top: 0;
     margin-bottom: 10px;
     text-align: center;
-    width: 152px;
-    font-size: 25px;
+    width: 100%;
+    font-size: 18px;
+    line-height: 42px;
     font-weight: bold;
-    border-bottom: 2px solid #1f2958;
+    background-color: #32689b;
+    height: 42px;
+    color: #fff;
 }
 .cell2 label{
-    margin: 12px;
-    font-size: 20px;
+    margin: 12px -6px;
+    font-size: 15px;
     display: block;
 }
 .cell2_01{
     margin-top: 14px;
     height: 163px;
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid #b9b9b9;
 }
 .cell2_01 div{
-    width: 265px;
+    width: 179px;
+    margin-top: 30px;
 }
 .cell2_02{
-    height: 162px;
-    border-bottom: 1px solid gray;
+    height: 128px;
+    border-bottom: 1px solid #b9b9b9;
+    /* border-top: 1px solid #b9b9b9; */
     margin-top: 15px;
 }
 .cell2_02 div{
-    width: 265px;
-    margin-top: -13px;
+    width: 179px;
+    margin-top: 3px;
 }
 .cell2_03{
     height: 100px;
 }
 .cell2_03 div{
-    width: 265px;
-    margin-top: -11px;
+    width: 179px;
 }
 
 
 
 .cell3{
-    width: calc(100% / 6 * 1.5);
-    background: #ccdded;
+	width: calc(1336px / 6 * 1.5);
+    /* background: #ccdded; */
+    background: #c7e4ff;
 }
 .cell3_01{}
 .cell3_02{
-    margin:98px 0px 58px 0px;
+    margin: 63px 0px 69px 0px;
     
 }
 .cell3_02 p {
+    margin-top: 0;
     margin-bottom: 10px;
     text-align: center;
-    width: 152px;
-    font-size: 25px;
+    width: 100%;
+    font-size: 18px;
+    line-height: 42px;
     font-weight: bold;
-    border-bottom: 2px solid #1f2958;
-}
-.cell3_02 label{
-    margin: 12px;
-    font-size: 20px;
-    display: inline-block;
+    background-color: #32689b;
+    height: 42px;
+    color: #fff;
 }
 .cell3_02 div {
-    width: 273px;
+    margin-top: 15px;
+}
+
+.cell3_02 label{
+    margin: 12px;
+    font-size: 15px;
+    display: inline-block;
 }
 .cell3_02 div label {
     width: 186px;}
@@ -111,26 +148,30 @@
     font-size: 15px;
 }
 .cell3_02 span{
-    font-size: 20px;
+    font-size: 15px;
     /* float: left; */
 }
-.cell3_03 {
-    width: 294px;
-}
 .cell3 p {
-    margin-top: 10px;
+    margin-top: 0;
     margin-bottom: 10px;
     text-align: center;
-    width: 152px;
-    font-size: 25px;
+    width: 100%;
+    font-size: 18px;
+    line-height: 42px;
     font-weight: bold;
-    border-bottom: 2px solid #1f2958;
+    background-color: #32689b;
+    height: 42px;
+    color: #fff;
 }
 .cell3 label{
-    margin: 0 -84px 0 62px;
-    font-size: 20px;
+    margin: 10px 0px 0px 93px;
+    font-size: 15px;
     display: inline-block;
-    width: 202px;
+    width: 127px;
+}
+input.date {
+    margin-left: 10px;
+    width: 79px;
 }
 
 #passDate {
@@ -142,6 +183,7 @@
     width: 154px;
     display: block;
     font-size: 15px;
+    margin-top: 30px;
 }
 #anal_area_cd{
     margin: 10px auto;
@@ -154,140 +196,177 @@
 /* hcell1 */
 .hcell1{
     float: left;
-    height: 555px;
-    width: calc(100% / 2);
+    height: 500px;
+    width: calc(1336px  / 2);
 }
 .hcell1 >*{ 
     float: left;
-    width: calc(100% / 3);
-    height: 555px;
+        width: calc(1336px  / 2 /3);
+   height: 500px;
+    /* border-left: 1px solid rgb(189, 189, 189); */
 }
 .hcell1 > .cell4{}
 .hcell1 > .cell4 p{}
 .hcell1 > .cell4 > .cell4_01{
-    width: 257px;
+        width: 153px;
+    margin-top: 29px;
 }
+.hcell1 > .cell5{}
+.hcell1 > .cell5 p {}
+.hcell1 >.cell5 > .cell5_01 div{}
+/* .hcell1 > .cell6{width: calc(100% / 2);} */
+.hcell1 > .cell6 p {}
 .hcell1 >.cell6 > .cell6_01 div{
     margin-top: -60px;
     margin-left: 83px;}
 
-/* hcell 요소 */
+/* hcell �슂�냼 */
 
 .cell4{
+    /* background: #ccdded; */
 }
 .cell4 p {
-    margin-top: 10px;
+   margin-top: 0;
     margin-bottom: 10px;
     text-align: center;
-    width: 152px;
-    font-size: 25px;
+    width: 100%;
+    font-size: 18px;
+    line-height: 42px;
     font-weight: bold;
-    border-bottom: 2px solid #1f2958;
+    background-color: #32689b;
+    height: 42px;
+    color: #fff;
 }
 .cell4 label{
     margin: 12px;
-    font-size: 20px;
+    font-size: 15px;
     display: block;
 }
 .cell4_01{
     margin-top: 14px;
     height: 163px;
+    /* border-bottom: 1px solid #b9b9b9; */
 }
 .cell4 select{
     font-size: 15px;
-    margin-left: 10px;
-    width: 110px;
+    width: 66px;
 }
+
+
+/* .cell5{background: #ccdded;} */
 .cell5 p {
-    margin-top: 10px;
+    margin-top: 0;
     margin-bottom: 10px;
     text-align: center;
-    width: 152px;
-    font-size: 25px;
+    width: 100%;
+    font-size: 18px;
+    line-height: 42px;
     font-weight: bold;
-    border-bottom: 2px solid #1f2958;
+    background-color: #32689b;
+    height: 42px;
+    color: #fff;
 }
 .cell5 label{
     margin: 9px;
-    font-size: 20px;
+    font-size: 15px;
     display: block;
 }
 .cell5_01{
     margin-top: 14px;
     height: 163px;
+    /* border-bottom: 1px solid #b9b9b9; */
 }
 .cell5_01 div{
     width: 179px;
+    margin-top: 29px;
 }
 
+
+/* .cell6{background-color: #e8f4ff;} */
 .cell6 p {
-    margin-top: 10px;
+    margin-top: 0;
     margin-bottom: 10px;
     text-align: center;
-    width: 184px;
-    font-size: 25px;
+    width: 100%;
+    font-size: 18px;
+    line-height: 42px;
     font-weight: bold;
-    border-bottom: 2px solid #1f2958;
+    background-color: #32689b;
+    height: 42px;
+    color: #fff;
 }
 .cell6 label{
     margin: 9px;
-    font-size: 20px;
+    font-size: 15px;
     display: block;
 }
 .cell6_01{
     margin-top: 14px;
     height: 161px;
+    /* border-bottom: 1px solid #b9b9b9; */
 }
 .cell6_01 div{
-    width: 179px;
+    width: 143px;
 }
 .cell6_01 p {
     display: inline-block;
-    font-size: 20px;
+    font-size: 15px;
     border: none;
+    /* background-color: #ccdded; */
     width: 87px;
     line-height: 50px;
     height: 50px;
-    margin-left: 7px;}
+    margin-left: 7px;
+    color: #000;
+    background: #fff;}
 .cell6_02{
     margin-top: 14px;
     height: 71px;
+    /* border-bottom: 1px solid #b9b9b9; */
 }
 .cell6_02 p {
     display: inline-block;
-    font-size: 20px;
+    font-size: 15px;
     border: none;
+    /* background-color: #ccdded; */
     width: 87px;
-    margin-left: 15px;
-    margin-top: -6px;
+    line-height: 50px;
+    height: 50px;
+    margin-left: 7px;
+    color: #000;
+    background: #fff;
 }
-/* -----노선명----- */
+/* -----�끂�꽑紐�----- */
 .busname_wrap{
-    width: 217px;
-    height: 222px;
+    width: 133px;
+    height: 48px;
     border-radius: 14px;
-    margin-left: 93px;
+    margin-left: 82px;
     margin-top: -43px;
 }
 .search{
     height: 52px;
+    /* background-color: #90bde8; */
     border-radius: 10px;
 }
 .input-wrap{
-    margin: 8px 8px;
-    width: 181px;
+    /* width: 181px; */
+    /* background-color: aqua; */
     float: left;
 }
 .input-wrap input{
-    width: 189px;
+    /* width: 189px; */
     height: 26px;
+    /* border: none; */
     padding: 5px;
     border: 1px solid #838383;
 }
 .button-wrap{
     width: 150px;
     width: 41px;
+    /* background-color: aqua; */
     float: left;
+    /* height: 26px; */
     margin: 5px 0;
 }
 .button-wrap button{
@@ -298,35 +377,21 @@
 }
 
 .search-con{
-    height: 227px;
-    overflow-y: scroll;
-    margin-left: 7px;
-    width: 205px;
-}
-.search-con label{
-    font-size: 20px;
-}
-
-.submit{
-    width: 92px;
-    height: 49px;
-}
-
-.search-con{
-    height: 227px;
-    margin-left: -57px;
-    width: 282px;
+   	/*background: bisque; */
+    height: 152px;
+    margin-left: -105px;
+    width: 252px;
 }
 .search-con p {
     display: inline-block;
     text-align: left;
-    font-size: 15px;
-    margin-bottom: 41px;
-    margin-top: 1px;
+    font-size: 13px;
+    margin-bottom: 34px;
+    margin-top: 13px;
     border-right: 1px solid;
-    line-height: 17px;
-    width: 76px;
-    height: 20px;
+    line-height: 13px;
+    width: 59px;
+    height: 13px;
 }
 .search-con div span {
     display: inherit;
@@ -334,12 +399,31 @@
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: 14px;
-    margin-left: 25px;
+    line-height: 35px;
+    /* margin-left: -113px; */
     width: 165px;
     float: right;
 }
 
-/* modal구역 */
+.submit{
+    width: 66px;
+    height: 35px;
+}
+a{
+}
+
+input[type=radio] + label{
+   display: inline-block;
+   margin: -2px;
+   padding: 8px 19px;
+   background-color: #f5f5f5;
+   border: 1px solid #ccc;
+   font-size: 13px !important;
+}
+
+
+
+/* modal援ъ뿭 */
 input[id=modalBtn] {
     display: none;
 }
@@ -356,18 +440,17 @@ input[id=modalBtn] + label {
     font-size: 15px;
     border: 1px solid darkgrey;
     border-radius: 10px;
-    cursor: pointer;
 }
 
 .modalContainer{
-   position: absolute;
-   top: 0;
-   left: 0;
-   width: 100%;
-   height: 100%;
-   display: none;
-   background-color: #16161699
-   
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: none;
+	background-color: #16161699;
+	
 }
 
 /* modalBox */
@@ -382,7 +465,6 @@ input[id=modalBtn] + label {
     height: 500px;
     background: #fff;
     text-align: center;
-    
 }
 /* overlay */
 .modalContainer > label {
@@ -403,13 +485,14 @@ input[id=modalBtn] + label {
     text-align: center;
     line-height: 22px;
     font-size: 27px;
+    /* border-radius: 2px; */
     background: #5c7d9a;
     cursor: pointer;
     color: #fff;
 }
 
 .routeNotice{
-   text-align: center;
+    text-align: center;
     font-weight: bold;
     font-size: 25px;
     color: #44627c;
@@ -419,26 +502,44 @@ input[id=modalBtn] + label {
 }
 
 .routeBox{
-   display: flex;
-   flex-direction: column;
-   justify-content: space-around;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
     width: 100%;
     height: 88%;
 }
 
 .routeListBox{
-   width: 700px;
+	width: 700px;
     height: 320px;
-   border: 1px solid darkgrey;
-   border-radius: 3px;
-   display: flex;
+	border: 1px solid darkgrey;
+	border-radius: 3px;
+	display: flex;
     height: 60%;
     flex-direction: column;
-    overflow: auto;
+}
+.routeListTh{
+	width: 100%;
+    /* margin-top: 11px; */
+    background-color: #ccdded;
+    line-height: 46px;
+    height: 36px;
+    color: #44627c;
+	/* height: 10%; */
+	display: flex;
 }
 
+.routeListTh > p{
+	font-size: 18px;
+}
+
+.routeLists{
+	width: 100%;
+	height: 90%;
+    overflow: auto;
+}
 .routeList{
-   display: flex;
+	display: flex;
     flex-direction: row;
     align-items: center;
     margin: unset;
@@ -447,36 +548,35 @@ input[id=modalBtn] + label {
 #searchRouteId{
     width: 250px;
     height: 23px;
-   margin: 0px 0px -50px 50px;
+	margin: 0px 0px -50px 50px;
     border-radius: 5px;
 }
 
 input[name=routeId]{
-   width: 15px;
-    margin: 0px 30px;
+	/*width: 15px;*/
+    margin: 0px 20px;
 }
 
 .routeNm{
-   width: 30%;
+	width: 30%;
     display: flex;
     flex-direction: row;
     align-items: center;
-   
+	
 }
 .routeType{
-   width: 10%;
-   
+	width: 10%;
 }
 .routeStart{
-   width: 30%;
+	width: 30%;
 }
 .routeEnd{
-   width: 30%;
+	width: 30%;
 }
 
 
 #routeBtn{
-   background-color: #5c7d9a;
+	background-color: #5c7d9a;
     color: white;
     width: 60px;
     height: 30px;
@@ -485,3 +585,100 @@ input[name=routeId]{
     margin: -33px 370px 0px 370px;
     cursor: pointer;
 }
+
+
+
+/* ------------ �끂�꽑諛뺤뒪 濡쒕뵫�럹�씠吏� */
+/* 濡쒕뵫�솕硫� */
+#lds-spinner {
+    background: #0000004f;
+    display: flex;
+    position: absolute;
+    width: 88%;
+    left: 6%;
+    top: 28%;
+    height: 54%;
+    z-index: 1000000000;
+  }
+  #lds-spinner div {
+    position: absolute;
+    margin-left: 45%;
+    top: 36%;
+    transform-origin: 40px 40px;
+    animation: lds-spinner 1.2s linear infinite;
+  }
+  #lds-spinner div:after {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 3px;
+    left: 37px;
+    width: 6px;
+    height: 18px;
+    border-radius: 20%;
+    background: rgb(0, 0, 0);
+  }
+  #lds-spinner div:nth-child(1) {
+    transform: rotate(0deg);
+    animation-delay: -1.1s;
+  }
+  #lds-spinner div:nth-child(2) {
+    transform: rotate(30deg);
+    animation-delay: -1s;
+  }
+  #lds-spinner div:nth-child(3) {
+    transform: rotate(60deg);
+    animation-delay: -0.9s;
+  }
+  #lds-spinner div:nth-child(4) {
+    transform: rotate(90deg);
+    animation-delay: -0.8s;
+  }
+  #lds-spinner div:nth-child(5) {
+    transform: rotate(120deg);
+    animation-delay: -0.7s;
+  }
+  #lds-spinner div:nth-child(6) {
+    transform: rotate(150deg);
+    animation-delay: -0.6s;
+  }
+  #lds-spinner div:nth-child(7) {
+    transform: rotate(180deg);
+    animation-delay: -0.5s;
+  }
+  #lds-spinner div:nth-child(8) {
+    transform: rotate(210deg);
+    animation-delay: -0.4s;
+  }
+  #lds-spinner div:nth-child(9) {
+    transform: rotate(240deg);
+    animation-delay: -0.3s;
+  }
+  #lds-spinner div:nth-child(10) {
+    transform: rotate(270deg);
+    animation-delay: -0.2s;
+  }
+  #lds-spinner div:nth-child(11) {
+    transform: rotate(300deg);
+    animation-delay: -0.1s;
+  }
+  #lds-spinner div:nth-child(12) {
+    transform: rotate(330deg);
+    animation-delay: 0s;
+  }
+  @keyframes lds-spinner {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  
+  .lavel-1{
+  white-space: nowrap;
+   		overflow: hidden;
+    	text-overflow: ellipsis;
+    	width: 138px;
+    	text-align: left;
+    	}

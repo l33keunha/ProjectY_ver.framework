@@ -1,87 +1,100 @@
 
-.contents :nth-child(2){
-    background-color: #5C7D9A;
-    color: white;
+#passCate{
+        color: #001687;
 }
 
 
 
 .cell1{
-    background: #ccdded;
+    background:#c7e4ff;
 }
 .cell1 p {
-    margin-top: 10px;
+    margin-top: 0;
     margin-bottom: 10px;
     text-align: center;
-    width: 152px;
-    font-size: 25px;
+    font-size: 18px;
+    line-height: 42px;
     font-weight: bold;
-    border-bottom: 2px solid #1f2958;
+    background-color: #32689b;
+    height: 42px;
+    color: #fff;
 }
 .cell1 label{
     margin: 0 39px;
-    font-size: 20px;
+    font-size: 15px;
     display: block;
+    margin-top: 15px;
 }
 .cell1_01{
-    margin-top: 14px;
-    height: 163px;
-    border-bottom: 1px solid gray;
+    margin-top: 34px;
+    height: 159px;
+    border-bottom: 1px solid #b9b9b9;
 }
 .cell1_01 div{
     width: 235px;
 }
 .cell1_02{
-    height: 164px;
-    border-bottom: 1px solid gray;
+    height: 128px;
+    border-bottom: 1px solid #b9b9b9;
 }
 .cell1_02 div{
     /*width: 643px;*/
 }
 .cell1_02 div label {
     height: 82px;
-    margin-left: 82px;
+    margin-left: 38px;
+    margin-top: 15px;
 }
 .OD{
-    height: 82px;
+    height: 37px;
     /* width: 640px; */
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid #b9b9b9;
+}
+
+.cell1_03{
+    height: 106px;
+}
+.cell1_03 div{
+    width: 239px;
 }
 
 .cell2{
-    background: #ccdded;
+    background: #c7e4ff;
 }
 .cell2 p {
-    margin-top: 10px;
+    margin-top: 0;
     margin-bottom: 10px;
     text-align: center;
-    width: 152px;
-    font-size: 25px;
+    font-size: 18px;
+    line-height: 42px;
     font-weight: bold;
-    border-bottom: 2px solid #1f2958;
+    background-color: #32689b;
+    height: 42px;
+    color: #fff;
 }
 .cell2 label{
     margin: 12px -6px;
-    font-size: 20px;
+    font-size: 15px;
     display: block;
 }
 .cell2_01{
     margin-top: 14px;
     height: 163px;
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid #b9b9b9;
 }
 .cell2_01 div{
-    width: 207px;
+    width: 141px;
+    margin-top: 30px;
 }
 .cell2_02{
-    height: 81px;
-    border-bottom: 1px solid gray;
-    border-top: 1px solid gray;
-    margin-top: 82px;
+    height: 90px;
+    border-bottom: 1px solid #b9b9b9;
+    border-top: 1px solid #b9b9b9;
+    margin-top: 52px;
 }
 .cell2_02 div{
-    width: 207px;
-    margin-top: -13px;
+    width: 141px;
+    margin-top: 3px;
 }
 .cell2_03{
     height: 100px;
@@ -91,32 +104,34 @@
 }
 
 
-.cell1_03{
-    height: 106px;
-}
-.cell1_03 div{
-    width: 239px;
-}
+
 .cell3{
     /* background: #ccdded; */
-    background: #ccdded;
+    background: #c7e4ff;
 }
 .cell3_01{}
 .cell3_02{
-    margin:98px 0px 58px 0px;
+        margin: 63px 0px 69px 0px;
     
 }
 .cell3_02 p {
+    margin-top: 0;
     margin-bottom: 10px;
     text-align: center;
-    width: 152px;
-    font-size: 25px;
+    font-size: 18px;
+    line-height: 42px;
     font-weight: bold;
-    border-bottom: 2px solid #1f2958;
+    background-color: #32689b;
+    height: 42px;
+    color: #fff;
 }
+.cell3_02 div {
+    margin-top: 15px;
+}
+
 .cell3_02 label{
     margin: 12px;
-    font-size: 20px;
+    font-size: 15px;
     display: inline-block;
 }
 .cell3_02 div label {
@@ -128,26 +143,30 @@
     font-size: 15px;
 }
 .cell3_02 span{
-    font-size: 20px;
+    font-size: 15px;
     /* float: left; */
 }
 .cell3 p {
-    margin-top: 10px;
+        margin-top: 0;
     margin-bottom: 10px;
     text-align: center;
-    width: 152px;
-    font-size: 25px;
+    width: 100%;
+    font-size: 18px;
+    line-height: 42px;
     font-weight: bold;
-    border-bottom: 2px solid #1f2958;
+    background-color: #32689b;
+    height: 42px;
+    color: #fff;
 }
 .cell3 label{
-    margin: 0 -84px 0 62px;
-    font-size: 20px;
+    margin: 10px 0px 0px 41px;
+    font-size: 15px;
     display: inline-block;
-    width: 202px;
+    width: 127px;
 }
 input.date {
     margin-left: 10px;
+    width: 79px;
 }
 
 #passDate {
@@ -159,6 +178,7 @@ input.date {
     width: 154px;
     display: block;
     font-size: 15px;
+    margin-top: 30px;
 }
 #anal_area_cd{
     margin: 10px auto;
@@ -170,22 +190,21 @@ input.date {
 
 /* hcell1 */
 .hcell1{
-    /* display: none; */
     float: left;
-    height: 555px;
-    width: calc(100% / 2);
-    /* border: 1px solid red; */
+    height: 500px;
+    width: calc(1336px  / 2);
 }
 .hcell1 >*{ 
     float: left;
-    width: calc(100% / 3);
-    height: 555px;
+        width: calc(1336px  / 2 /3);
+   height: 500px;
     /* border-left: 1px solid rgb(189, 189, 189); */
 }
 .hcell1 > .cell4{}
 .hcell1 > .cell4 p{}
 .hcell1 > .cell4 > .cell4_01{
-    width: 257px;
+        width: 153px;
+    margin-top: 29px;
 }
 .hcell1 > .cell5{}
 .hcell1 > .cell5 p {}
@@ -196,115 +215,126 @@ input.date {
     margin-top: -60px;
     margin-left: 83px;}
 
-/* hcell 요소 */
+/* hcell �슂�냼 */
 
 .cell4{
     /* background: #ccdded; */
 }
 .cell4 p {
-    margin-top: 10px;
+        margin-top: 0;
     margin-bottom: 10px;
     text-align: center;
-    width: 152px;
-    font-size: 25px;
+    width: 100%;
+    font-size: 18px;
+    line-height: 42px;
     font-weight: bold;
-    border-bottom: 2px solid #1f2958;
+    background-color: #32689b;
+    height: 42px;
+    color: #fff;
 }
 .cell4 label{
     margin: 12px;
-    font-size: 20px;
+    font-size: 15px;
     display: block;
 }
 .cell4_01{
     margin-top: 14px;
     height: 163px;
-    /* border-bottom: 1px solid gray; */
+    /* border-bottom: 1px solid #b9b9b9; */
 }
 .cell4 select{
     font-size: 15px;
-    margin-left: 10px;
-    width: 110px;
+    width: 66px;
 }
 
 
 /* .cell5{background: #ccdded;} */
 .cell5 p {
-    margin-top: 10px;
+        margin-top: 0;
     margin-bottom: 10px;
     text-align: center;
-    width: 152px;
-    font-size: 25px;
+    width: 100%;
+    font-size: 18px;
+    line-height: 42px;
     font-weight: bold;
-    border-bottom: 2px solid #1f2958;
+    background-color: #32689b;
+    height: 42px;
+    color: #fff;
 }
 .cell5 label{
     margin: 9px;
-    font-size: 20px;
+    font-size: 15px;
     display: block;
 }
 .cell5_01{
     margin-top: 14px;
     height: 163px;
-    /* border-bottom: 1px solid gray; */
+    /* border-bottom: 1px solid #b9b9b9; */
 }
 .cell5_01 div{
     width: 179px;
+    margin-top: 29px;
 }
 
 
 /* .cell6{background-color: #e8f4ff;} */
 .cell6 p {
-    margin-top: 10px;
+        margin-top: 0;
     margin-bottom: 10px;
     text-align: center;
-    width: 184px;
-    font-size: 25px;
+    width: 100%;
+    font-size: 18px;
+    line-height: 42px;
     font-weight: bold;
-    border-bottom: 2px solid #1f2958;
+    background-color: #32689b;
+    height: 42px;
+    color: #fff;
 }
 .cell6 label{
     margin: 9px;
-    font-size: 20px;
+    font-size: 15px;
     display: block;
 }
 .cell6_01{
     margin-top: 14px;
     height: 161px;
-    /* border-bottom: 1px solid gray; */
+    /* border-bottom: 1px solid #b9b9b9; */
 }
 .cell6_01 div{
-    width: 179px;
+    width: 143px;
 }
 .cell6_01 p {
     display: inline-block;
-    font-size: 20px;
+    font-size: 15px;
     border: none;
     /* background-color: #ccdded; */
     width: 87px;
     line-height: 50px;
     height: 50px;
-    margin-left: 7px;}
+    margin-left: 7px;
+        color: #000;
+    background: #fff;}
 .cell6_02{
     margin-top: 14px;
     height: 71px;
-    /* border-bottom: 1px solid gray; */
+    /* border-bottom: 1px solid #b9b9b9; */
 }
 .cell6_02 p {
     display: inline-block;
-    font-size: 20px;
+    font-size: 15px;
     border: none;
     width: 87px;
     margin-left: 15px;
     margin-top: -6px;
+        color: #000;
+    background: #fff;
 }
-/* -----노선명----- */
+/* -----�끂�꽑紐�----- */
 .busname_wrap{
-    /* border: 2px solid #518ec6; */
-    width: 217px;
-    height: 222px;
-    /* overflow: hidden; */
+    width: 133px;
+    height: 48px;
     border-radius: 14px;
-    margin-left: 93px;
+    margin-left: 82px;
     margin-top: -43px;
 }
 .search{
@@ -313,7 +343,7 @@ input.date {
     border-radius: 10px;
 }
 .input-wrap{
-    width: 181px;
+    /* width: 181px; */
     /* background-color: aqua; */
     float: left;
 }
@@ -340,22 +370,21 @@ input.date {
 }
 
 .search-con{
-    /* background: bisque; */
-    height: 227px;
-    /* overflow-y: scroll; */
-    margin-left: -57px;
-    width: 282px;
+   	/*background: bisque; */
+    height: 152px;
+    margin-left: -105px;
+    width: 252px;
 }
 .search-con p {
     display: inline-block;
     text-align: left;
-    font-size: 15px;
-    margin-bottom: 41px;
-    margin-top: 1px;
+    font-size: 13px;
+    margin-bottom: 34px;
+    margin-top: 13px;
     border-right: 1px solid;
-    line-height: 17px;
-    width: 76px;
-    height: 20px;
+    line-height: 13px;
+    width: 59px;
+    height: 13px;
 }
 .search-con div span {
     display: inherit;
@@ -363,14 +392,15 @@ input.date {
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: 14px;
-    margin-left: 25px;
+    line-height: 35px;
+    /* margin-left: -113px; */
     width: 165px;
     float: right;
 }
 
 .submit{
-    width: 92px;
-    height: 49px;
+    width: 66px;
+    height: 35px;
 }
 a{
 }
@@ -386,7 +416,7 @@ input[type=radio] + label{
 
 
 
-/* modal구역 */
+/* modal援ъ뿭 */
 input[id=modalBtn] {
     display: none;
 }
@@ -551,8 +581,8 @@ input[name=routeId]{
 
 
 
-/* ------------ 노선박스 로딩페이지 */
-/* 로딩화면 */
+/* ------------ �끂�꽑諛뺤뒪 濡쒕뵫�럹�씠吏� */
+/* 濡쒕뵫�솕硫� */
 #lds-spinner {
     background: #0000004f;
     display: flex;

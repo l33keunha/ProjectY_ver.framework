@@ -3,10 +3,10 @@
     margin: 0 auto;
     padding: 0 auto;
     font-family: 'Nanum Gothic', sans-serif;
-    font-size: 15px;
+    font-size: 12px;
 }
 html, body {
-    height: 100%;
+    /* height: 100%; */
   }
 .wrap{
     width: 100%;
@@ -14,11 +14,10 @@ html, body {
     display: flex;
     flex-direction: column;
 }
-
 .header p{
     text-align: center;
-    font-size: 30px;
-    color:#1f2958;
+    font-size: 22px;
+    color: #1f2958;
     font-weight: bold;
 }
 .dateform {
@@ -29,11 +28,12 @@ html, body {
     /* background-color: #c5e4ff; */
     /* position: fixed; */
     top: 64px;
+    margin-top: 10px;
 }
 
 
-.dateform > *{
-    font-size: 15px;
+.dateform > div > * {
+    font-size: 12px;
 }
 .dateform div :first-child {
     width: 17%;
@@ -89,26 +89,39 @@ html, body {
 .button {
     float: right;
     margin-right: 4vw;
-    margin-top: 7px;
+    margin-top: -20px;
 }
 
-.legend {
-    margin-right: 6px;
+.button >.g{
+    background: #82b0d9 url(../../images/indicator/icon03.png) no-repeat 5px 3.5px;
+    /* border-radius:5px; */
+    background-size: 21px;
+    width: 86px
 }
-
+.button >.g button {
+    width: 72px;
+}
+.button >.d{    
+        /* background: #82b0d9 url(../../images/indicator/icon01.png) no-repeat 5px 3.5px; */
+        /* border-radius:5px; */
+    background-size: 21px;
+    margin-left: 10px;
+    width: 95px;
+}
 .button > .e {
-    background: #d98282 url(../../images/indicator/icon02.png) no-repeat 4px 5.5px;
-    margin-left: 42px;
-    width: 84px;;
+    background: #d98282 url(../../images/indicator/icon02.png) no-repeat 5px 3.5px;
+    /* border-radius:5px; */
+    background-size: 18px;
+    margin-left: 40px;
+    width: 70px;
 }
 .button > .e button {
     width: 52px;
 }
 
 .button  div{
-    /* background: #82b0d9 url(./icon01.png) no-repeat 4px 3.5px; */
     width: 129px;
-    height: 32px;
+    height: 24px;
     float: left;
     cursor: pointer;
 }
@@ -117,31 +130,38 @@ html, body {
     border: none;
     background: none;
     color: #ffffff;
-    margin-left: 31px;
+    margin-left: 25px;
     text-align: left;
-    font-size: 17px;
+    font-size: 14px;
     width: 95px;
-    height: 32px;
+    height: 24px;
     cursor: pointer;
 }
 .header{    
-    height: 79px;
-    border-bottom: 4px solid #5C7D9A;
+    height: 38px;
+    border-bottom: 2px solid #5C7D9A;
     width: 100%;
 }
 
 .option{
     width: 92vw;
     margin-top: 2vh;
+    margin-bottom: 0.5vh;
 }
 
 button.resetZoomChart {
-    border: 2px solid #4a7295;
-    background-color: #b7d3eb;
-    font-size: 17px;
+    background: url(../../images/indicator/rechart_icon3.png) no-repeat 3px 2.5px;
+    /* background-color: #5bb2ff; */
+    background-size: 18px;
+    border: 1px solid #5bb2ff;
+    text-align: end;
+    font-size: 12px;
     font-weight: bold;
     color: #1f2958;
-    padding: 3px 6px;
+    padding: 3px 7px;
+    width: 85px;
+    /* height: 24px; */
+    /* border-radius: 151%;*/
 }
 .resetZoomChart:hover {
     cursor: pointer;
@@ -150,12 +170,18 @@ button.resetZoomChart {
 }
 
 button#resetZoomChart {
-    border: 2px solid #4a7295;
-    background-color: #b7d3eb;
-    font-size: 17px;
+	background: url(../../images/indicator/rechart_icon3.png) no-repeat 3px 2.5px;
+    /* background-color: #5bb2ff; */
+    background-size: 18px;
+    border: 1px solid #5bb2ff;
+    text-align: end;
+    font-size: 12px;
     font-weight: bold;
     color: #1f2958;
-    padding: 3px 6px;
+    padding: 3px 7px;
+    width: 85px;
+    /* height: 24px; */
+    /* border-radius: 151%;*/
 }
 #resetZoomChart:hover {
     cursor: pointer;
@@ -167,18 +193,18 @@ label {
     margin-left: 1%;
     margin-top: -2%;
     width: 60px;
-    border: 2px solid #4a7295;
-    background-color: #b7d3eb;
-    font-size: 17px;
+    /* border: 2px solid #4a7295;
+    background-color: #b7d3eb; */
+    font-size: 14px;
     font-weight: bold;
     color: #1f2958;
     padding: 3px 6px;
     display: inline-block;
 }
-input#legend {
+input.legend {
     border: none;
     margin-right: 5px;
-    font-size: 17px;
+    font-size: 14px;
     font-weight: bold;
 }
 
@@ -197,27 +223,27 @@ p.date01 span {
     float: right;
 }
 .Icon_01{
-	font-size: 20px;
+	font-size: 14px;
     font-weight: bold;
-    line-height: 23px;
+    line-height: 19px;
     text-align: center;
     color: #215a8d;
     border-radius: 100%;
-    border: 4px solid #215a8d;
-    width: 25px;
-    height: 25px;
+    border: 2px solid #215a8d;
+    width: 20px;
+    height: 20px;
     position: relative;
     display: inline-block;
 }
 /* 모달 */
 .modal{
 	display: none;
-    width: 450px;
-    height: 97px;
+    width: 359px;
+    height: 74px;
     background: #8cb6db;
     position: absolute;
-    margin-top: 7px;
-    margin-left: -484px;
+    margin-top: 3px;
+    margin-left: -401px;
     border-radius: 5px;
     box-shadow: 5px 5px 13px 3px #00000087;
     padding: 18px 30px 57px 30px;
@@ -229,9 +255,9 @@ p.date01 span {
 }
 
 .modal-title{
-	font-size: 30px;
-	font-weight: bold;	
-	margin-bottom: 10px;
+	font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 .modal-content{
 	line-height: 25px;

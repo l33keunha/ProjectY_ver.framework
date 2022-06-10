@@ -1,120 +1,140 @@
 
-.contents :nth-child(8){
-    background-color: #5C7D9A;
-    color: white;
+#downloadcate{
+        color: #001687;
 }
+
 
 
 .cell1{
-    /* width: calc(100% / 6 *2); */
-    background: #ccdded;
+    background:#c7e4ff;
 }
 .cell1 p {
-    margin-top: 10px;
+    margin-top: 0;
     margin-bottom: 10px;
     text-align: center;
-    width: 152px;
-    font-size: 25px;
+    width: 100%;
+    font-size: 18px;
+    line-height: 42px;
     font-weight: bold;
-    border-bottom: 2px solid #1f2958;
-    margin-left: 105px;
+    background-color: #32689b;
+    height: 42px;
+    color: #fff;
 }
 .cell1 label{
     margin: 0 39px;
-    font-size: 20px;
+    font-size: 15px;
     display: block;
+    margin-top: 15px;
 }
 .cell1_01{
-    margin-top: 14px;
-    height: 185px;
-    border-bottom: 1px solid gray;
+    margin-top: 34px;
+    height: 159px;
+    border-bottom: 1px solid #b9b9b9;
 }
 .cell1_01 div{
-    width: 193px;
+    width: 235px;
 }
 .cell1_02{
-    height: 162px;
-    border-bottom: 1px solid gray;
+    height: 128px;
+    border-bottom: 1px solid #b9b9b9;
 }
 .cell1_02 div{
-    width: 281px;
+    /*width: 643px;*/
 }
 .cell1_02 div label {
     height: 82px;
-    margin-left: 82px;
+    margin-left: 38px;
+    margin-top: 15px;
 }
+.OD{
+    height: 37px;
+    /* width: 640px; */
+    border-bottom: 1px solid #b9b9b9;
+}
+
 .cell1_03{
     height: 106px;
 }
 .cell1_03 div{
-    width: 193px;
+    width: 239px;
 }
 
 .cell2{
-    background: #ccdded;
+    background: #c7e4ff;
 }
 .cell2 p {
-    margin-top: 10px;
+    margin-top: 0;
     margin-bottom: 10px;
     text-align: center;
-    width: 152px;
-    font-size: 25px;
+    width: 100%;
+    font-size: 18px;
+    line-height: 42px;
     font-weight: bold;
-    border-bottom: 2px solid #1f2958;
+    background-color: #32689b;
+    height: 42px;
+    color: #fff;
 }
 .cell2 label{
-    margin: 12px;
-    font-size: 20px;
+    margin: 12px -6px;
+    font-size: 15px;
     display: block;
 }
 .cell2_01{
     margin-top: 14px;
-    height: 185px;
-    border-bottom: 1px solid gray;
+    height: 163px;
+    border-bottom: 1px solid #b9b9b9;
 }
 .cell2_01 div{
-    width: 265px;
+    width: 179px;
+    margin-top: 30px;
 }
 .cell2_02{
-    height: 162px;
-    border-bottom: 1px solid gray;
-    /* border-top: 1px solid gray; */
-    margin-top: 13px;
+    height: 128px;
+    border-bottom: 1px solid #b9b9b9;
+    /* border-top: 1px solid #b9b9b9; */
+    margin-top: 15px;
 }
 .cell2_02 div{
-    width: 265px;
-    margin-top: -13px;
+    width: 179px;
+    margin-top: 3px;
 }
 .cell2_03{
     height: 100px;
 }
 .cell2_03 div{
-    width: 265px;
-    margin-top: -11px;
+    width: 179px;
 }
 
 
 
 .cell3{
     /* background: #ccdded; */
-    background: #ccdded;
+    background: #c7e4ff;
 }
 .cell3_01{}
 .cell3_02{
-    margin:98px 0px 58px 0px;
+    margin: 63px 0px 69px 0px;
     
 }
 .cell3_02 p {
+    margin-top: 0;
     margin-bottom: 10px;
     text-align: center;
-    width: 152px;
-    font-size: 25px;
+    width: 100%;
+    font-size: 18px;
+    line-height: 42px;
     font-weight: bold;
-    border-bottom: 2px solid #1f2958;
+    background-color: #32689b;
+    height: 42px;
+    color: #fff;
 }
+.cell3_02 div {
+    margin-top: 15px;
+}
+
 .cell3_02 label{
     margin: 12px;
-    font-size: 20px;
+    font-size: 15px;
     display: inline-block;
 }
 .cell3_02 div label {
@@ -126,26 +146,30 @@
     font-size: 15px;
 }
 .cell3_02 span{
-    font-size: 20px;
+    font-size: 15px;
     /* float: left; */
 }
 .cell3 p {
-    margin-top: 10px;
+    margin-top: 0;
     margin-bottom: 10px;
     text-align: center;
-    width: 152px;
-    font-size: 25px;
+    width: 100%;
+    font-size: 18px;
+    line-height: 42px;
     font-weight: bold;
-    border-bottom: 2px solid #1f2958;
+    background-color: #32689b;
+    height: 42px;
+    color: #fff;
 }
 .cell3 label{
-    margin: 0 -84px 0 62px;
-    font-size: 20px;
+    margin: 10px 0px 0px 41px;
+    font-size: 15px;
     display: inline-block;
-    width: 202px;
+    width: 127px;
 }
 input.date {
     margin-left: 10px;
+    width: 79px;
 }
 
 #passDate {
@@ -157,6 +181,7 @@ input.date {
     width: 154px;
     display: block;
     font-size: 15px;
+    margin-top: 30px;
 }
 #anal_area_cd{
     margin: 10px auto;
@@ -169,37 +194,56 @@ input.date {
 /* hcell1 */
 .hcell1{
     float: left;
-    height: 555px;
-    width: calc(100% / 2);
+    height: 500px;
+    width: calc(1336px  / 2);
 }
 .hcell1 >*{ 
     float: left;
-    width: 100%;
-    height: 555px;
+       /*  width: calc(1336px  / 2 /3); */
+   height: 500px;
+    /* border-left: 1px solid rgb(189, 189, 189); */
 }
+.hcell1 > .cell4{}
+.hcell1 > .cell4 p{}
+.hcell1 > .cell4 > .cell4_01{
+        width: 153px;
+    margin-top: 29px;
+}
+.hcell1 > .cell5{}
+.hcell1 > .cell5 p {}
+.hcell1 >.cell5 > .cell5_01 div{}
+/* .hcell1 > .cell6{width: calc(100% / 2);} */
+.hcell1 > .cell6 p {}
 .hcell1 >.cell6 > .cell6_01 div{
     margin-top: -60px;
     margin-left: 83px;}
 
-/* hcell 요소 */
+/* hcell �슂�냼 */
 
+.cell4{
+    /* background: #ccdded; */
+    width: calc(1336px  / 2);
+}
 .cell4 p {
-    margin-top: 10px;
+    margin-top: 0;
     margin-bottom: 10px;
     text-align: center;
-    width: 152px;
-    font-size: 25px;
+    width: 100%;
+    font-size: 18px;
+    line-height: 42px;
     font-weight: bold;
-    border-bottom: 2px solid #1f2958;
+    background-color: #32689b;
+    height: 42px;
+    color: #fff;
 }
 .cell4 label{
     margin: 12px;
-    font-size: 20px;
+    font-size: 15px;
     display: block;
 }
 .cell4_01_01_Y{
     margin-top: 23px;
-    width: 836px;
+    width: 612px;
     height: 306px;
     padding: 30px;
 }
@@ -215,28 +259,30 @@ input.date {
     text-align: inherit;
     margin: auto;
     width: 80%;
-    border-bottom: none;
+    border-bottom: none; 
+    color: #000;
+    background: none;
 }
 
 .cell4_01_01_N{
 	opacity: 1;
     border: 1px solid #0000007d;
     border-radius: 5px;
-    width: 700px;
+    width: 630px;
     height: 200px;
     margin-top: 122px;
     box-shadow: 13px 13px 10px 0px #0000002e;
 }
 
 .cell4_01_01_N span{
-    font-size: 56px;
+    font-size: 41px;
     margin-left: 30px;
     color: red;
     font-weight: bold;
 }
 
 .cell4_01_01_N p{
-    font-size: 17px;
+    font-size: 15px;
     border-bottom: none;
     width: 578px;
     text-align: left;
@@ -252,31 +298,29 @@ table, th, td{
 th{
 	width: 100px;
 	background: #ccdded;
-    font-size: 18px;
+    font-size: 16px;
 }
-
-
 
 
 
 .submit{
-    width: 145px;
-    height: 49px;
+    width: 90px;
+    height: 35px;
     float: left;
-    margin-left: 46%;
+    margin-left: 43%;
 }
-
 .submit2{
-    margin-top: 11px;
+    width: 66px;
+    height: 35px;
+    font-size: 19px;
+    margin-top: 25px;
     text-align: center;
     display: block;
-    width: 145px;
-    height: 49px;
-    font-size: 25px;
-    background-color: #5c7d9a;
-    color: white;
+    background-color: #c7e4ff;
+    color: #004281;
     font-weight: bold;
-    border-radius: 20px;
+    border-radius: 11px;
+    border: none;
     float: left;
-    margin-left: 21%;
+    margin-left: 25%;
 }

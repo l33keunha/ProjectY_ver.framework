@@ -3,10 +3,10 @@
     margin: 0 auto;
     padding: 0 auto;
     font-family: 'Nanum Gothic', sans-serif;
-    font-size: 15px;
+    font-size: 12px;
 }
 html, body {
-    height: 100%;
+    /* height: 100%; */
   }
 .wrap{
     width: 100%;
@@ -16,8 +16,8 @@ html, body {
 }
 .header p{
     text-align: center;
-    font-size: 30px;
-    color:#1f2958;
+    font-size: 22px;
+    color: #1f2958;
     font-weight: bold;
 }
 .dateform {
@@ -28,11 +28,11 @@ html, body {
     /* background-color: #c5e4ff; */
     /* position: fixed; */
     top: 64px;
+    margin-top: 10px;
 }
 
-
 .dateform > *{
-    font-size: 15px;
+    font-size: 12px;
 }
 .dateform div :first-child {
     width: 17%;
@@ -88,34 +88,39 @@ html, body {
 .button {
     float: right;
     margin-right: 4vw;
-    margin-top: 7px;
+    margin-top: -20px;
 }
 
 .button >.g{
-    background: #82b0d9 url(../../images/indicator/icon03.png) no-repeat 4px 7.5px;
-    width: 104px;
+    background: #82b0d9 url(../../images/indicator/icon03.png) no-repeat 5px 3.5px;
+    /* border-radius:5px; */
+    background-size: 21px;
+    width: 86px
 }
 .button >.g button {
     width: 72px;
 }
 .button >.d{    
-    background: #82b0d9 url(../../images/indicator/icon01.png) no-repeat 4px 7.5px;
+        background: #82b0d9 url(../../images/indicator/icon01.png) no-repeat 5px 3.5px;
+        /* border-radius:5px; */
+    background-size: 21px;
     margin-left: 10px;
-    width: 128px;
+    width: 95px;
 }
 .button > .e {
-    background: #d98282 url(../../images/indicator/icon02.png) no-repeat 4px 5.5px;
-    margin-left: 42px;
-    width: 84px;;
+    background: #d98282 url(../../images/indicator/icon02.png) no-repeat 5px 3.5px;
+    /* border-radius:5px; */
+    background-size: 18px;
+    margin-left: 40px;
+    width: 70px;
 }
 .button > .e button {
     width: 52px;
 }
 
 .button  div{
-    /* background: #82b0d9 url(./icon01.png) no-repeat 4px 3.5px; */
     width: 129px;
-    height: 32px;
+    height: 24px;
     float: left;
     cursor: pointer;
 }
@@ -124,16 +129,16 @@ html, body {
     border: none;
     background: none;
     color: #ffffff;
-    margin-left: 31px;
+    margin-left: 25px;
     text-align: left;
-    font-size: 17px;
+    font-size: 14px;
     width: 95px;
-    height: 32px;
+    height: 24px;
     cursor: pointer;
 }
 .header{    
-    height: 79px;
-    border-bottom: 4px solid #5C7D9A;
+    height: 38px;
+    border-bottom: 2px solid #5C7D9A;
     width: 100%;
 }
 .test{
@@ -180,7 +185,7 @@ td {
     border-style: solid;
     border-width: 1px;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 12px;
     padding: 10px 5px;
     background-color: #ffffff;
     text-align: center;
@@ -198,10 +203,14 @@ th{
     border-width: 1px;
     font-weight: bold;
     /*font-size: 13px;*/
-    font-size: 15px;
+    font-size: 13px;
     overflow: hidden;
     padding: 10px 5px;
     background-color: #c5e4ff;
+}
+
+.routeOD_body {
+    margin-top: 10px;
 }
 
 table{
@@ -277,8 +286,8 @@ table{
 
 
 
-/* ------------ 로딩페이지 */
-/* 로딩화면 */
+/* ------------ 濡쒕뵫�럹�씠吏� */
+/* 濡쒕뵫�솕硫� */
 #lds-spinner {
     background: #0000004f;
     position: fixed;

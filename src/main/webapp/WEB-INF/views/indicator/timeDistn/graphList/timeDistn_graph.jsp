@@ -161,7 +161,7 @@
 			                    text: '${dateList[status.index]}',
 			                    font: { // [타이틀 폰트 스타일 변경]
 			    							family: 'Comic Sans MS',
-			    							size: 15,
+			    							size: 13,
 			    							weight: 'bold',
 			    							lineHeight: 1.2,    							
 			    					},

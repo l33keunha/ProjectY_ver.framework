@@ -10,9 +10,9 @@ a{
     color: #000;
 }
 .header {
-    width: 100%;
-    height: 69px;
-    border-bottom: 3px solid #1f2958;
+    width: 1336px;
+    height: 43px;
+    border-bottom: 2px solid #1f2958;
     padding-bottom: 5px;
     position: relative;
 }
@@ -40,11 +40,11 @@ a{
   }
   .mtap p{
       float: left;
-      font-size: 17px;
+      font-size: 13px;
       padding: 0 6px;
   }
   
-/* 드롭다운 베뉴 */
+/* �뱶濡��떎�슫 踰좊돱 */
 .dropdown {
     position: relative;
     display: inline-block;
@@ -52,7 +52,7 @@ a{
   .dropbtn {
     background-color: #ffffff;
     color: black;
-    font-size: 16px;
+    font-size: 13px;
     border: none;
   }
   .dropdown-content {
@@ -78,32 +78,42 @@ a{
   
   .dropdown:hover .dropbtn {background-color: #c6dcf0;}
 
-/* 상단메뉴 */
+/* �긽�떒硫붾돱 */
   .ConName{
-    height: 41px;
-    width: 1920px;
-    border-bottom: 3px solid #5C7D9A;
+        height:30px;
+    width: 1224px;
   }
 .contents{
     text-align: center;
-    width: 1528px;
     height: 42px;
+    margin-top: 10px;
 }
 .contents a{
     text-decoration: none;
     color: #000;
     float: left;
-    font-size: 23px;
-    margin-left: 26px;
-    width: 165px;
+    margin-left: 79px;
+    width: 61px;
 }
 .contents span{
-    float: left;
-    font-size: 23px;
+        float: left;
+    font-size: 16px;
     margin-left: 26px;
-    width: 155px;
+    width: 103px;
     padding: 5px;
 }
+
+.contents span:after {/*after 가상요소*/
+   	display: block;
+    content: '';
+    border-bottom: solid 2px #162d97;
+    transform: scaleX(0);
+    transition: transform 250ms ease-in-out;
+}
+.contents span:hover:after {
+   transform: scaleX(1);/*a 속성에 hover시 after를 기존 크기로 변경*/
+}
+
 .contents div{
     background-color: #5C7D9A;
     width: 170px;
@@ -114,7 +124,7 @@ a{
 .contents :first-child{
     margin-left: 0;
 }
-/* 데이트피커 */
+/* �뜲�씠�듃�뵾而� */
 div#ui-datepicker-div{
     position: absolute;
     top: 754px;
@@ -124,38 +134,45 @@ div#ui-datepicker-div{
     width: 223px;
 }
 
-/* 베너 */
+/* 踰좊꼫 */
 
 .ConEx{
-    width: 1920px;
-    height: 190px;
-    background-color: #555555;
+	width: 1336px;
+    height: 181px;
+    background-color: #fffff5;
+    margin-top: 10px;
 }
 
 /* selectbox */
 
 .selectbox{
-    height: 555px;
-    width: 1920px;
+    height: 550px;
+    width: 1336px;
+    margin-top: 25px;
 }
 .selectbox >*{ 
     float: left;
-    width: calc(100% / 6);
-    height: 555px;
+    width: calc(1336px  / 6);
+    height: 550px;
 }
-/* 조회버튼 */
+/* 議고쉶踰꾪듉 */
 
 .submit{
-    font-size: 25px;
-    margin-top: 11px;
+    font-size: 19px;
+    margin-top: 25px;
     text-align: center;
     display: block;
-    background-color: #5c7d9a;
-    color: white;
+    background-color: #c7e4ff;
+    color: #004281;
     font-weight: bold;
-    border-radius: 20px;
+    border-radius: 11px;
+    border: none;
 }
 
-
+.submit :hover {
+    cursor: pointer;
+    box-shadow: 0px 2px 5px #000000;
+    font-weight: bold;
+}
 
 

@@ -118,7 +118,7 @@
 	                <c:if test = "${anal_groupText == '노선별OD' && anal_typeText == ''}">
 		                <!-- 표 -->
 			     		<c:if test = "${sVO.anal_fin == null || sVO.anal_fin == ''}">
-			     			<div class="g" style="width: 145px;"><button type="button" id="matrix" style="width: 109px;">OD매트릭스</button></div>
+			     			<div class="g" style="width: 115px;"><button type="button" id="matrix" style="width: 109px;">OD매트릭스</button></div>
 			     		</c:if>
 	                </c:if>
 	                <c:if test = "${anal_groupText == '행정동간OD' && (anal_typeText == '목적통행' || anal_typeText == '수단통행')}">
@@ -146,7 +146,7 @@
 	      	
 	      	<c:if test = "${anal_groupText == '노선별OD' && anal_typeText == ''}">
 	      		<div class="routeOD_box" style="border">
-					<div class="routeOD_header" style="font-size: 18px;font-weight: bold;text-align: center;">[조회 조건 및 노선 정보]</div>
+					<div class="routeOD_header" style="font-size: 15px;font-weight: bold;text-align: center;">[조회 조건 및 노선 정보]</div>
 					<div class="routeOD_body">
 						<table>
 							<tr>
