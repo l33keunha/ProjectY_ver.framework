@@ -40,39 +40,24 @@ public class TransferServiceImpl extends EgovAbstractServiceImpl implements Tran
 				transferResultList = mapper.selectTransferResultListMethod(sVO); break;
 			
 		case "transferCnt_num" :
-			if("allDay".equals(sVO.getTm())) {
-				System.out.println("환승_횟수별통행_일별");
-				transferResultList = mapper.selectTransferResultListNum_d(sVO); break;
-			} else {
 				System.out.println("환승_횟수별통행");
 				transferResultList = mapper.selectTransferResultListNum(sVO); break;
-			}
 			
 		case "transferTime_method" :
 				System.out.println("환승_수단별 환승통행시간");
 				transferResultList = mapper.selectTransferResultListTimeMethod(sVO); break;
 			
 		case "transferTime_num" :
-			if("allDay".equals(sVO.getTm())) {
-				System.out.println("환승_횟수별 환승통행시간_일별");
-				transferResultList = mapper.selectTransferResultListTimeNum_d(sVO); break;
-			} else {
 				System.out.println("환승_횟수별 환승통행시간");
 				transferResultList = mapper.selectTransferResultListTimeNum(sVO); break;
-			}
 			
 		case "transferDistn_method" :
 				System.out.println("환승_수단별 환승통행거리");
 				transferResultList = mapper.selectTransferResultListDistnMethod(sVO); break;
 				
 		case "transferDistn_num" :
-			if("allDay".equals(sVO.getTm())) {
-				System.out.println("환승_횟수별 환승통행거리_일별");
-				transferResultList = mapper.selectTransferResultListDistnNum_d(sVO); break;
-			} else {
 				System.out.println("환승_횟수별 환승통행거리");
 				transferResultList = mapper.selectTransferResultListDistnNum(sVO); break;
-			}
 			
 		}
 		
@@ -391,23 +376,6 @@ public class TransferServiceImpl extends EgovAbstractServiceImpl implements Tran
 			}	
 			
 		case "transferCnt_num" :
-			if("allDay".equals(sVO.getTm())) {
-				System.out.println("환승_횟수별통행_일별 다운로드");
-				transferResultList = mapper.downloadTransferResultListNum_d(sVO); 
-				
-				System.out.println("query 조회 시간 : " + ((System.currentTimeMillis() - sdt) / 1000));
-				
-				// ● 인자값 : 시트명
-				excelName = "환승_횟수별통행_일별"+date_SidoText;
-				
-				// ● 인자값 : 헤더명
-				headerListSt = numHeader + ",합계";
-				
-				// ● 인자값 : 컬럼명
-				columnListSt = numStr + ",합계";
-				
-				break;
-			} else {
 				System.out.println("환승_횟수별통행 다운로드");
 				transferResultList = mapper.downloadTransferResultListNum(sVO); 
 				
@@ -423,7 +391,6 @@ public class TransferServiceImpl extends EgovAbstractServiceImpl implements Tran
 				columnListSt = numStr + ",합계";
 				
 				break;
-			}
 			
 		case "transferTime_method" :
 				System.out.println("환승_수단별 환승통행시간 다운로드");
@@ -442,23 +409,6 @@ public class TransferServiceImpl extends EgovAbstractServiceImpl implements Tran
 				
 				break;
 		case "transferTime_num" :
-			if("allDay".equals(sVO.getTm())) {
-				System.out.println("환승_횟수별 환승통행시간_일별 다운로드");
-				transferResultList = mapper.downloadTransferResultListTimeNum_d(sVO);
-				
-				System.out.println("query 조회 시간 : " + ((System.currentTimeMillis() - sdt) / 1000));
-				
-				// ● 인자값 : 시트명
-				excelName = "환승_횟수별_환승통행시간_일별_"+date_SidoText;
-				
-				// ● 인자값 : 헤더명
-				headerListSt = numHeader + ",평균";
-				
-				// ● 인자값 : 컬럼명
-				columnListSt = numStr + ",평균";
-				
-				break;
-			} else {
 				System.out.println("환승_횟수별 환승통행시간 다운로드");
 				transferResultList = mapper.downloadTransferResultListTimeNum(sVO);
 				
@@ -474,8 +424,6 @@ public class TransferServiceImpl extends EgovAbstractServiceImpl implements Tran
 				columnListSt = numStr + ",평균";
 				
 				break;
-			}
-			
 		case "transferDistn_method" :
 				System.out.println("환승_수단별 환승통행거리 다운로드");
 				transferResultList = mapper.downloadTransferResultListDistnMethod(sVO);
@@ -493,23 +441,6 @@ public class TransferServiceImpl extends EgovAbstractServiceImpl implements Tran
 				
 				break;
 		case "transferDistn_num" :
-			if("allDay".equals(sVO.getTm())) {
-				System.out.println("환승_횟수별 환승통행거리_일별 다운로드");
-				transferResultList = mapper.downloadTransferResultListDistnNum_d(sVO);
-				
-				System.out.println("query 조회 시간 : " + ((System.currentTimeMillis() - sdt) / 1000));
-				
-				// ● 인자값 : 시트명
-				excelName = "환승_횟수별_환승통행거리_일별_"+date_SidoText;
-				
-				// ● 인자값 : 헤더명
-				headerListSt = numHeader + ",평균";
-				
-				// ● 인자값 : 컬럼명
-				columnListSt = numStr + ",평균";
-				
-				break;
-			} else {
 				System.out.println("환승_횟수별_환승통행거리 다운로드");
 				transferResultList = mapper.downloadTransferResultListDistnNum(sVO);	
 				
@@ -525,7 +456,6 @@ public class TransferServiceImpl extends EgovAbstractServiceImpl implements Tran
 				columnListSt = numStr + ",평균";
 				
 				break;
-			}
 			
 		}
 		
