@@ -89,15 +89,19 @@
 	
 	<!-- Ajax: 분석지역 시도 조회 _다운로드 -->
 	<select id ="selectPassSearchAjaxAnalAreaCd_dl" parameterType="sVO" resultType="egovMap">
-		SELECT DISTINCT SUBSTR(분석지역_CD,0,2) ANAL_AREA_CD_SIDO
-          ,CASE WHEN SUBSTR(분석지역_CD,0,2) = '11' THEN  '서울특별시'
-          		WHEN SUBSTR(분석지역_CD,0,2) = '23' THEN  '인천광역시'
-          		WHEN SUBSTR(분석지역_CD,0,2) = '31' THEN  '경기도'
-                WHEN SUBSTR(분석지역_CD,0,2) = '32' THEN  '강원도'
-                WHEN SUBSTR(분석지역_CD,0,2) = '34' THEN  '충청남도'
-                ELSE 분석지역_CD
+		SELECT DISTINCT SUBSTR(A.분석지역_CD,0,2) ANAL_AREA_CD_SIDO
+          ,CASE WHEN SUBSTR(A.분석지역_CD,0,2) = '11' THEN  '서울특별시'
+          		WHEN SUBSTR(A.분석지역_CD,0,2) = '23' THEN  '인천광역시'
+          		WHEN SUBSTR(A.분석지역_CD,0,2) = '31' THEN  '경기도'
+                WHEN SUBSTR(A.분석지역_CD,0,2) = '32' THEN  '강원도'
+                WHEN SUBSTR(A.분석지역_CD,0,2) = '34' THEN  '충청남도'
+                ELSE A.분석지역_CD
                 END  ANAL_AREA_NM
-		FROM 지표별ROW_COUNT 
+		FROM 지표별ROW_COUNT A, USER_INFO B, USER_DEPT C
+		WHERE 1=1
+			AND B.DEPT = C.DEPT 
+			AND C.ANAL_AREA_CD = A.분석지역_CD 
+			AND B.UNO = #{uNo}
 		ORDER BY ANAL_AREA_CD_SIDO
 	</select>
 	
@@ -106,9 +110,12 @@
 		SELECT DISTINCT 
 				A.분석지역_CD ANAL_AREA_CD
 				,CASE WHEN A.분석지역_CD LIKE '__' THEN '전체' ELSE 분석지역명 END analAreaNm 
-		FROM 지표별ROW_COUNT A, 분석지역_CD B
+		FROM 지표별ROW_COUNT A, USER_INFO B, USER_DEPT C, 분석지역_CD D
 		WHERE 1=1
-			AND A.분석지역_CD = B.분석지역_CD 
+			AND B.DEPT = C.DEPT 
+			AND C.ANAL_AREA_CD = A.분석지역_CD 
+			AND B.UNO = #{uNo}
+			AND A.분석지역_CD = D.분석지역_CD 
 			AND A.분석지역_CD LIKE #{anal_area_cd_sido} || '%'
 		ORDER BY A.분석지역_CD
 	</select>
@@ -150,5 +157,41 @@
 			AND 분석지표구분 = #{anal_fin}
 			AND 분석지역_CD = #{anal_area_cd}
 	</select>
+	
+	
+	<!-- Ajax: 다운로드 가능여부 리스트 -->
+	<select id="selectDownloadList" parameterType="sVO" resultType="egovMap">
+		SELECT DISTINCT 
+	        TO_CHAR(MIN(운행일자) OVER (PARTITION BY SUBSTR(운행일자, 0,6) ORDER BY 운행일자),'YYYYMMDD') OPRAT_DATE
+	        ,TO_CHAR(MAX(유효일자) OVER (PARTITION BY SUBSTR(운행일자, 0,6) ORDER BY 운행일자),'YYYYMMDD') SDATE
+            ,분석지역_CD
+            ,분석지역명
+			,ROW_COUNT
+			,분석지표구분
+			,OWNER
+			,STATUS
+		FROM
+		    (
+		        SELECT  
+		            FIRST_VALUE(A.SDATE) OVER (PARTITION BY SUBSTR(A.SDATE, 0,6) ORDER BY SDATE) 운행일자
+		            ,LAST_VALUE(A.SDATE) OVER (PARTITION BY SUBSTR(A.SDATE, 0,6) ORDER BY SDATE) 유효일자
+		            ,A.분석지역_CD
+					,A.ROW_COUNT
+					,분석지표구분
+					,A.OWNER
+					,A.STATUS
+					,D.분석지역명 
+		        FROM 지표별ROW_COUNT A, USER_INFO B, USER_DEPT C, 분석지역_CD D
+		        WHERE 1=1
+					AND B.DEPT = C.DEPT 
+					AND C.ANAL_AREA_CD = A.분석지역_CD 
+					AND B.UNO = '1'
+					AND A.분석지역_CD = D.분석지역_CD 
+		    )
+		ORDER BY 분석지표구분, OPRAT_DATE, 분석지역_CD
+		
+	</select>
+	
+	
 	
 </mapper>

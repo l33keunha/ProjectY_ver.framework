@@ -60,13 +60,13 @@
 			$("input[name=searchpassRoute]").prop("disabled", false);
 			$("label[for='modalBtn']").css("cursor","pointer");
 			
-			// 노선별OD는 2시간씩만 선택가능하게끔
-			/*$("select[name=tmEnd] option:eq(2)").prop("selected", true);*/
-			var addHtml = "<div style='width:250px; background:rgb(253 240 240); height:34px; margin:10px 0px 0px 8px; text-align:center; border-radius:5px;'>";
-			addHtml += "<span style='color:red; font-size:20px; font-weight: bolder;'> ! </span>";
-			addHtml += "<span> 노선별OD는 2시간씩 조회가 가능합니다. </span>";
-			addHtml += "</div>";
-			$('.timeNotice').append(addHtml);
+			 // 노선별OD는 2시간씩만 선택가능하게끔
+	         /*$("select[name=tmEnd] option:eq(2)").prop("selected", true);*/
+	         var addHtml = "<div style='width: 199px; background:rgb(253 240 240);height: 23px;margin: 10px 0px 0px -16px; text-align:center; border-radius:5px;padding: 4px;'>";
+	         addHtml += "<span style='color:red;font-size: 14px;font-weight: bolder;'> ! </span>";
+	         addHtml += "<span style='font-size: 10px;'> 노선별OD는 2시간씩 조회가 가능합니다. </span>";
+	         addHtml += "</div>";
+	         $('.timeNotice').append(addHtml);
 			
 			// 디폴트 값 설정
 			$("select[name=tmEnd]").empty();

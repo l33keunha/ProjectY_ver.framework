@@ -108,8 +108,8 @@
 						
 						addHtml += "<div class='cell4_01_01_N'>";
 						addHtml += "<span>!</span>";
-						addHtml += "<p>조회하고자 하시는 지역은 대용량 자료로 인해 웹 다운로드가 불가합니다.";
-						addHtml += "다운받기를 원하시는 경우 관리자에게 문의해주세요.</p>";
+						addHtml += "<p>조회하고자 하시는 지역은 대용량 자료로 인해 웹 다운로드가 불가합니다.</p>";
+						addHtml += "<p>다운받기를 원하시는 경우 관리자에게 문의해주세요.</p>";
 						addHtml += "</div>";
 						
 						$('.cell4_01_02').append(addHtml);

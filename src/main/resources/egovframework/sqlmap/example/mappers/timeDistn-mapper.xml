@@ -4,31 +4,35 @@
 
 	<!-- 1일 평균 통행시간 -->
 	<select id ="selectTimeDistnResultListDay" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-		SELECT 	SDATE
-                ,OPRAT_DATE
-                ,DY
-                ,ANAL_AREA_CD
-                ,NVL(TM, '평균') TM
-                ,NVL(CD_NO, '평균') CD_NO
-                ,NVL(ROUND(AVG(BRDNG_TM_AVG),1), 0) BRDNG_TM_AVG
-                ,NVL(ROUND(AVG(USE_DST_AVG),1), 0) USE_DST_AVG 
-        FROM
-            (
-                SELECT 
-                    SDATE
-                    ,OPRAT_DATE
-                    ,TO_CHAR(SDATE,'DY') DY
-                    ,ANAL_AREA_CD
-                    ,TM
-                    ,CD_NO
-                    ,CASE WHEN ROUND(AVG(BRDNG_TM_AVG),1) = '0' THEN NULL ELSE ROUND(AVG(BRDNG_TM_AVG),1) END  BRDNG_TM_AVG
-                    ,CASE WHEN ROUND(AVG(USE_DST_AVG),1) = '0' THEN NULL ELSE ROUND(AVG(USE_DST_AVG),1) END USE_DST_AVG 
-                FROM 시간거리_목적통행
-                WHERE 1=1
-                    AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
+		SELECT 
+			SDATE
+			,OPRAT_DATE
+			,TO_CHAR(SDATE, 'DY') DY
+			,ANAL_AREA_CD
+		    <if test="tm==null">
+		        ,NVL(TM, '평균') TM
+		    </if>
+			,CD_NO
+			,NVL(ROUND(AVG(BRDNG_TM_AVG),1),0) BRDNG_TM_AVG
+			,NVL(ROUND(AVG(USE_DST_AVG),1),0) USE_DST_AVG
+		FROM
+			(
+				SELECT 
+					SDATE
+					,OPRAT_DATE
+					,ANAL_AREA_CD
+		            <if test="tm==null">
+		                ,TM
+		            </if>
+					,NVL(CD_NO, '평균') CD_NO
+					,ROUND(AVG(CASE WHEN BRDNG_TM_AVG = 0 THEN NULL ELSE BRDNG_TM_AVG END),1) BRDNG_TM_AVG
+					,ROUND(AVG(CASE WHEN USE_DST_AVG = 0 THEN NULL ELSE USE_DST_AVG END),1) USE_DST_AVG
+				FROM 시간거리_목적통행
+				WHERE 1=1
+					AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD') 
                     AND ANAL_AREA_CD = #{anal_area_cd}
                     AND PROVIDER = #{provider}
-                    <if test="tm==null || tm.equals('')">
+                    <if test="tm==null">
                         AND TM BETWEEN #{tmStart} AND #{tmEnd}
                     </if>
                     <if test="!cd_no[0].equals('00')">
@@ -37,93 +41,61 @@
                             #{arr}
                         </foreach>
                     </if>
-                GROUP BY 	SDATE
-                            ,OPRAT_DATE
-                            ,TO_CHAR(SDATE,'DY')
-                            ,ANAL_AREA_CD
-                            ,TM
-                            ,CD_NO
-            )			
-        GROUP BY 	SDATE
-                    ,OPRAT_DATE
-                    ,DY
-                    ,ANAL_AREA_CD
-                    ,CUBE(TM, CD_NO)
-        ORDER BY OPRAT_DATE, TM, CD_NO
-	</select>
-	
-	<!-- 1일 평균 통행시간 일별 -->
-	<select id ="selectTimeDistnResultListDay_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-        SELECT 	SDATE
-                ,OPRAT_DATE
-                ,DY
-                ,ANAL_AREA_CD
-                ,NVL(CD_NO,'평균') CD_NO
-                ,NVL(ROUND(AVG(BRDNG_TM_AVG),1), 0) BRDNG_TM_AVG
-                ,NVL(ROUND(AVG(USE_DST_AVG),1), 0) USE_DST_AVG 
-        FROM
-            (
-                SELECT 
-                    SDATE
-                    ,OPRAT_DATE
-                    ,TO_CHAR(SDATE,'DY') DY
-                    ,ANAL_AREA_CD
-                    ,CD_NO
-                    ,ROUND(AVG(CASE WHEN BRDNG_TM_AVG = '0' THEN NULL ELSE BRDNG_TM_AVG END),1)  BRDNG_TM_AVG
-                    ,ROUND(AVG(CASE WHEN USE_DST_AVG = '0' THEN NULL ELSE USE_DST_AVG END),1)  USE_DST_AVG 
-                FROM 시간거리_목적통행
-                WHERE 1=1
-                    AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
-                    AND ANAL_AREA_CD = #{anal_area_cd}
-                    AND PROVIDER = #{provider}
-                    <if test="!cd_no[0].equals('00')">
-                        AND CD_NO IN
-                        <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
-                            #{arr}
-                        </foreach>
-                    </if>
-                GROUP BY 	SDATE
-                            ,OPRAT_DATE
-                            ,TO_CHAR(SDATE,'DY')
-                            ,ANAL_AREA_CD
-                            ,CD_NO
-                ORDER BY OPRAT_DATE, CD_NO           
-            )			
-        GROUP BY 	SDATE
-                    ,OPRAT_DATE
-                    ,DY
-                    ,ANAL_AREA_CD
-                    ,ROLLUP(CD_NO)
-        ORDER BY OPRAT_DATE, CD_NO
+				GROUP BY 	SDATE
+							,OPRAT_DATE
+							,ANAL_AREA_CD
+		                    <if test="tm==null">
+		                        ,TM
+		                    </if>
+							,ROLLUP(CD_NO)
+			)
+		GROUP BY
+				SDATE
+				,OPRAT_DATE
+				,TO_CHAR(SDATE, 'DY')
+				,ANAL_AREA_CD
+		        <if test="tm==null">
+		            ,ROLLUP(TM)
+				    ,CD_NO
+		            ORDER BY SDATE, TM, CD_NO 
+		        </if>
+		        <if test="tm!=null">
+				    ,CD_NO
+		            ORDER BY SDATE, CD_NO 
+		        </if>
 	</select>
 	
 	<!-- 목적통행 평균 통행시간 -->
 	<select id ="selectTimeDistnResultListPurpose" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-        SELECT 	SDATE
-                ,OPRAT_DATE
-                ,DY
-                ,ANAL_AREA_CD
-                ,NVL(TM, '평균') TM
-                ,NVL(CD_NO, '평균') CD_NO
-                ,NVL(ROUND(AVG(BRDNG_TM_AVG),1), 0) BRDNG_TM_AVG
-                ,NVL(ROUND(AVG(USE_DST_AVG),1), 0) USE_DST_AVG 
-        FROM
-            (
-                SELECT 
-                    SDATE
-                    ,OPRAT_DATE
-                    ,TO_CHAR(SDATE,'DY') DY
-                    ,ANAL_AREA_CD
-                    ,TM
-                    ,CD_NO
-                    ,CASE WHEN ROUND(AVG(BRDNG_TM_AVG),1) = '0' THEN NULL ELSE ROUND(AVG(BRDNG_TM_AVG),1) END  BRDNG_TM_AVG
-                    ,CASE WHEN ROUND(AVG(USE_DST_AVG),1) = '0' THEN NULL ELSE ROUND(AVG(USE_DST_AVG),1) END USE_DST_AVG 
-                FROM 시간거리_목적통행
-                WHERE 1=1
-                    AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
+        SELECT 
+			SDATE
+			,OPRAT_DATE
+			,TO_CHAR(SDATE, 'DY') DY
+			,ANAL_AREA_CD
+		    <if test="tm==null">
+		        ,NVL(TM, '평균') TM
+		    </if>
+			,CD_NO
+			,NVL(ROUND(AVG(BRDNG_TM_AVG),1),0) BRDNG_TM_AVG
+			,NVL(ROUND(AVG(USE_DST_AVG),1),0) USE_DST_AVG
+		FROM
+			(
+				SELECT 
+					SDATE
+					,OPRAT_DATE
+					,ANAL_AREA_CD
+		            <if test="tm==null">
+		                ,TM
+		            </if>
+					,NVL(CD_NO, '평균') CD_NO
+					,ROUND(AVG(CASE WHEN BRDNG_TM_AVG = 0 THEN NULL ELSE BRDNG_TM_AVG END),1) BRDNG_TM_AVG
+					,ROUND(AVG(CASE WHEN USE_DST_AVG = 0 THEN NULL ELSE USE_DST_AVG END),1) USE_DST_AVG
+				FROM 시간거리_목적통행
+				WHERE 1=1
+					AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD') 
                     AND ANAL_AREA_CD = #{anal_area_cd}
                     AND PROVIDER = #{provider}
-                    <if test="tm==null || tm.equals('')">
+                    <if test="tm==null">
                         AND TM BETWEEN #{tmStart} AND #{tmEnd}
                     </if>
                     <if test="!cd_no[0].equals('00')">
@@ -132,96 +104,66 @@
                             #{arr}
                         </foreach>
                     </if>
-                GROUP BY 	SDATE
-                            ,OPRAT_DATE
-                            ,TO_CHAR(SDATE,'DY')
-                            ,ANAL_AREA_CD
-                            ,TM
-                            ,CD_NO
-            )			
-        GROUP BY 	SDATE
-                    ,OPRAT_DATE
-                    ,DY
-                    ,ANAL_AREA_CD
-                    ,CUBE(TM, CD_NO)
-        ORDER BY OPRAT_DATE, TM, CD_NO
-	</select>
-	
-	<!-- 목적통행 평균 통행시간 일별 -->
-	<select id ="selectTimeDistnResultListPurpose_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-        SELECT 	SDATE
-                ,OPRAT_DATE
-                ,DY
-                ,ANAL_AREA_CD
-                ,NVL(CD_NO,'평균') CD_NO
-                ,NVL(ROUND(AVG(BRDNG_TM_AVG),1), 0) BRDNG_TM_AVG
-                ,NVL(ROUND(AVG(USE_DST_AVG),1), 0) USE_DST_AVG 
-        FROM
-            (
-                SELECT 
-                    SDATE
-                    ,OPRAT_DATE
-                    ,TO_CHAR(SDATE,'DY') DY
-                    ,ANAL_AREA_CD
-                    ,CD_NO
-                    ,ROUND(AVG(CASE WHEN BRDNG_TM_AVG = '0' THEN NULL ELSE BRDNG_TM_AVG END),1)  BRDNG_TM_AVG
-                    ,ROUND(AVG(CASE WHEN USE_DST_AVG = '0' THEN NULL ELSE USE_DST_AVG END),1)  USE_DST_AVG  
-                FROM 시간거리_목적통행
-                WHERE 1=1
-                    AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
-                    AND ANAL_AREA_CD = #{anal_area_cd}
-                    AND PROVIDER = #{provider}
-                    <if test="!cd_no[0].equals('00')">
-                        AND CD_NO IN
-                        <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
-                            #{arr}
-                        </foreach>
-                    </if>
-                GROUP BY 	SDATE
-                            ,OPRAT_DATE
-                            ,TO_CHAR(SDATE,'DY')
-                            ,ANAL_AREA_CD
-                            ,CD_NO
-                ORDER BY OPRAT_DATE, CD_NO           
-            )			
-        GROUP BY 	SDATE
-                    ,OPRAT_DATE
-                    ,DY
-                    ,ANAL_AREA_CD
-                    ,ROLLUP(CD_NO)
-        ORDER BY OPRAT_DATE, CD_NO
+				GROUP BY 	SDATE
+							,OPRAT_DATE
+							,ANAL_AREA_CD
+		                    <if test="tm==null">
+		                        ,TM
+		                    </if>
+							,ROLLUP(CD_NO)
+			)
+		GROUP BY
+				SDATE
+				,OPRAT_DATE
+				,TO_CHAR(SDATE, 'DY') 
+				,ANAL_AREA_CD
+		        <if test="tm==null">
+		            ,ROLLUP(TM)
+				    ,CD_NO
+		            ORDER BY SDATE, TM, CD_NO 
+		        </if>
+		        <if test="tm!=null">
+				    ,CD_NO
+		            ORDER BY SDATE, CD_NO 
+		        </if>
 	</select>
 	
 	<!-- 수단통행 평균 통행시간 -->
 	<select id ="selectTimeDistnResultListMethod" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-        SELECT 	
-                SDATE
-                ,OPRAT_DATE
-                ,DY
-                ,ANAL_AREA_CD
-                ,TFCMN
-                ,NVL(TM, '평균') TM
-                ,NVL(CD_NO, '평균') CD_NO
-                ,NVL(ROUND(AVG(BRDNG_TM_AVG),1), 0) BRDNG_TM_AVG
-                ,NVL(ROUND(AVG(USE_DST_AVG),1), 0) USE_DST_AVG 
-        FROM
-            (
-                SELECT 
-                    SDATE
-                    ,OPRAT_DATE
-                    ,TO_CHAR(SDATE,'DY') DY
-                    ,ANAL_AREA_CD
-                    ,CASE WHEN TFCMN='B' THEN '버스' ELSE '지하철' END TFCMN
-                    ,TM
-                    ,CD_NO
-                    ,CASE WHEN ROUND(AVG(BRDNG_TM_AVG),1) = '0' THEN NULL ELSE ROUND(AVG(BRDNG_TM_AVG),1) END  BRDNG_TM_AVG
-                    ,CASE WHEN ROUND(AVG(USE_DST_AVG),1) = '0' THEN NULL ELSE ROUND(AVG(USE_DST_AVG),1) END USE_DST_AVG 
-                FROM 시간거리_수단통행
-                WHERE 1=1
-                    AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
+        SELECT 
+			SDATE
+			,OPRAT_DATE
+			,TO_CHAR(SDATE, 'DY') DY
+			,ANAL_AREA_CD
+		    <if test="tm==null">
+		    	,TFCMN
+		        ,NVL(TM, '평균') TM
+		    </if>
+  		    <if test="tm!=null">
+		        ,NVL(TFCMN, '평균') TFCMN
+		    </if>
+			,CD_NO
+			,NVL(ROUND(AVG(BRDNG_TM_AVG),1),0) BRDNG_TM_AVG
+			,NVL(ROUND(AVG(USE_DST_AVG),1),0) USE_DST_AVG
+		FROM
+			(
+				SELECT 
+					SDATE
+					,OPRAT_DATE
+					,ANAL_AREA_CD
+					,CASE WHEN TFCMN = 'B' THEN '버스' ELSE '지하철' END TFCMN
+		            <if test="tm==null">
+		                ,TM
+		            </if>
+					,NVL(CD_NO, '평균') CD_NO
+					,ROUND(AVG(CASE WHEN BRDNG_TM_AVG = 0 THEN NULL ELSE BRDNG_TM_AVG END),1) BRDNG_TM_AVG
+					,ROUND(AVG(CASE WHEN USE_DST_AVG = 0 THEN NULL ELSE USE_DST_AVG END),1) USE_DST_AVG
+				FROM 시간거리_수단통행
+				WHERE 1=1
+					AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD') 
                     AND ANAL_AREA_CD = #{anal_area_cd}
                     AND PROVIDER = #{provider}
-                    <if test="tm==null || tm.equals('')">
+                    <if test="tm==null">
                         AND TM BETWEEN #{tmStart} AND #{tmEnd}
                     </if>
                     <if test="!cd_no[0].equals('00')">
@@ -230,70 +172,31 @@
                             #{arr}
                         </foreach>
                     </if>
-                GROUP BY 	SDATE
-                            ,OPRAT_DATE
-                            ,TO_CHAR(SDATE,'DY')
-                            ,ANAL_AREA_CD
-                            ,TFCMN
-                            ,TM
-                            ,CD_NO
-            )			
-        GROUP BY 	SDATE
-                    ,OPRAT_DATE
-                    ,DY
-                    ,ANAL_AREA_CD
-                    ,TFCMN
-                    ,CUBE(TM, CD_NO)
-        ORDER BY OPRAT_DATE, TFCMN, TM, CD_NO
-	</select>
-	
-	<!-- 수단통행 평균 통행시간 일별 -->
-	<select id ="selectTimeDistnResultListMethod_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-        SELECT 	
-                SDATE
-                ,OPRAT_DATE
-                ,DY
-                ,ANAL_AREA_CD
-                ,TFCMN
-                ,NVL(CD_NO, '평균') CD_NO
-                ,NVL(ROUND(AVG(BRDNG_TM_AVG),1), 0) BRDNG_TM_AVG
-                ,NVL(ROUND(AVG(USE_DST_AVG),1), 0) USE_DST_AVG 
-        FROM
-            (
-                SELECT 
-                    SDATE
-                    ,OPRAT_DATE
-                    ,TO_CHAR(SDATE,'DY') DY
-                    ,ANAL_AREA_CD
-                    ,CASE WHEN TFCMN='B' THEN '버스' ELSE '지하철' END TFCMN
-                    ,CD_NO
-                    ,ROUND(AVG(CASE WHEN BRDNG_TM_AVG = '0' THEN NULL ELSE BRDNG_TM_AVG END),1)  BRDNG_TM_AVG
-                    ,ROUND(AVG(CASE WHEN USE_DST_AVG = '0' THEN NULL ELSE USE_DST_AVG END),1)  USE_DST_AVG  
-                FROM 시간거리_수단통행
-                WHERE 1=1
-                    AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
-                    AND ANAL_AREA_CD = #{anal_area_cd}
-                    AND PROVIDER = #{provider}
-                    <if test="!cd_no[0].equals('00')">
-                        AND CD_NO IN
-                        <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
-                            #{arr}
-                        </foreach>
-                    </if>
-                GROUP BY 	SDATE
-                            ,OPRAT_DATE
-                            ,TO_CHAR(SDATE,'DY')
-                            ,ANAL_AREA_CD
-                            ,TFCMN
-                            ,CD_NO
-            )			
-        GROUP BY 	SDATE
-                    ,OPRAT_DATE
-                    ,DY
-                    ,ANAL_AREA_CD
-                    ,TFCMN
-                    ,ROLLUP(CD_NO)
-        ORDER BY OPRAT_DATE, TFCMN, CD_NO
+				GROUP BY 	SDATE
+							,OPRAT_DATE
+							,ANAL_AREA_CD
+							,TFCMN
+		                    <if test="tm==null">
+		                        ,TM
+		                    </if>
+							,ROLLUP(CD_NO)
+			)
+		GROUP BY
+				SDATE
+				,OPRAT_DATE
+				,TO_CHAR(SDATE, 'DY') 
+				,ANAL_AREA_CD
+		        <if test="tm==null">
+				  	,TFCMN
+		            ,ROLLUP(TM)
+				    ,CD_NO
+		            ORDER BY SDATE, TFCMN, TM, CD_NO 
+		        </if>
+		        <if test="tm!=null">
+	        		,ROLLUP(TFCMN)
+				    ,CD_NO
+		            ORDER BY SDATE, TFCMN, CD_NO 
+		        </if>
 	</select>
 	
 	<!-- 노선별 평균 통행시간 -->
@@ -456,54 +359,66 @@
         SELECT *
         FROM 
             (
-                SELECT 			
-                        #{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
-                        ,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
-                        ,#{provider_text} PROVIDER
-                        ,OPRAT_DATE
-                        ,DY
-                        ,ANAL_AREA_CD
-                        ,NVL(TM, '평균') TM
-                        ,NVL(CD_NO, '평균') CD_NO
-                        ,NVL(ROUND(AVG(BRDNG_TM_AVG),1), 0) BRDNG_TM_AVG
-                        ,NVL(ROUND(AVG(USE_DST_AVG),1), 0) USE_DST_AVG 
-                FROM
-                    (
-                        SELECT 
-                            SDATE
-                            ,OPRAT_DATE
-                            ,TO_CHAR(SDATE,'DY') DY
-                            ,ANAL_AREA_CD
-                            ,TM
-                            ,CD_NO
-                            ,CASE WHEN ROUND(AVG(BRDNG_TM_AVG),1) = '0' THEN NULL ELSE ROUND(AVG(BRDNG_TM_AVG),1) END  BRDNG_TM_AVG
-                            ,CASE WHEN ROUND(AVG(USE_DST_AVG),1) = '0' THEN NULL ELSE ROUND(AVG(USE_DST_AVG),1) END USE_DST_AVG 
-                        FROM 시간거리_목적통행
-                        WHERE 1=1
-                            AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
-	                        AND ANAL_AREA_CD = #{anal_area_cd}
-	                        AND PROVIDER = #{provider}
-	                        <if test="tm==null || tm.equals('')">
-	                            AND TM BETWEEN #{tmStart} AND #{tmEnd}
-	                        </if>
-	                        <if test="!cd_no[0].equals('00')">
-                                AND CD_NO IN
-                                <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
-                                    #{arr}
-                                </foreach>
-                            </if>
-                        GROUP BY 	SDATE
-                                    ,OPRAT_DATE
-                                    ,TO_CHAR(SDATE,'DY')
-                                    ,ANAL_AREA_CD
-                                    ,TM
-                                    ,CD_NO
-                    )			
-                GROUP BY 	SDATE
-                            ,OPRAT_DATE
-                            ,DY
-                            ,ANAL_AREA_CD
-                            ,CUBE(TM, CD_NO)
+                SELECT 
+                	#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
+					,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
+					,#{provider_text} PROVIDER
+					,TO_CHAR(SDATE, 'DY') DY
+					,SDATE
+					,OPRAT_DATE
+					,ANAL_AREA_CD
+				    <if test="tm.equals('')">
+				        ,NVL(TM, '평균') TM
+				    </if>
+					,CD_NO
+					,NVL(ROUND(AVG(BRDNG_TM_AVG),1),0) BRDNG_TM_AVG
+					,NVL(ROUND(AVG(USE_DST_AVG),1),0) USE_DST_AVG
+				FROM
+					(
+						SELECT 
+							SDATE
+							,OPRAT_DATE
+							,ANAL_AREA_CD
+				            <if test="tm.equals('')">
+				                ,TM
+				            </if>
+							,NVL(CD_NO, '평균') CD_NO
+							,ROUND(AVG(CASE WHEN BRDNG_TM_AVG = 0 THEN NULL ELSE BRDNG_TM_AVG END),1) BRDNG_TM_AVG
+							,ROUND(AVG(CASE WHEN USE_DST_AVG = 0 THEN NULL ELSE USE_DST_AVG END),1) USE_DST_AVG
+						FROM 시간거리_목적통행
+						WHERE 1=1
+							AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD') 
+		                    AND ANAL_AREA_CD = #{anal_area_cd}
+		                    AND PROVIDER = #{provider}
+		                    <if test="tm.equals('')">
+		                        AND TM BETWEEN #{tmStart} AND #{tmEnd}
+		                    </if>
+		                    <if test="!cd_no[0].equals('00')">
+		                        AND CD_NO IN
+		                        <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+		                            #{arr}
+		                        </foreach>
+	                   		</if>
+						GROUP BY 	SDATE
+									,OPRAT_DATE
+									,ANAL_AREA_CD
+				                    <if test="tm.equals('')">
+				                        ,TM
+				                    </if>
+									,ROLLUP(CD_NO)
+					)
+				GROUP BY
+						SDATE
+						,OPRAT_DATE
+						,ANAL_AREA_CD
+						,TO_CHAR(SDATE, 'DY')
+				        <if test="tm.equals('')">
+				            ,ROLLUP(TM)
+						    ,CD_NO
+				        </if>
+				        <if test="!tm.equals('')">
+						    ,CD_NO
+				        </if>
             )
         PIVOT
             (
@@ -513,65 +428,12 @@
                                     ,'05'장애인 , '06' 국가유공자, '07' 다자녀부모, '08' 동반
                                     ,'09' 대학생 , '10' 복지 , '11' 기타, '평균' 평균)
             )
-        ORDER BY OPRAT_DATE, TM
-	</select>
-	
-	<!--  PIVOT 1일 평균 통행시간 일별 -->
-	<select id ="downloadTimeDistnResultListDay_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-        SELECT *
-        FROM 
-            (
-                SELECT 	#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
-                        ,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
-                        ,#{provider_text} PROVIDER
-                        ,OPRAT_DATE
-                        ,DY
-                        ,ANAL_AREA_CD
-                        ,NVL(CD_NO,'평균') CD_NO
-                        ,NVL(ROUND(AVG(BRDNG_TM_AVG),1),0) BRDNG_TM_AVG
-                        ,NVL(ROUND(AVG(USE_DST_AVG),1),0) USE_DST_AVG 
-                FROM
-                    (
-                        SELECT 
-                            SDATE
-                            ,OPRAT_DATE
-                            ,TO_CHAR(SDATE,'DY') DY
-                            ,ANAL_AREA_CD
-                            ,CD_NO
-                            ,ROUND(AVG(CASE WHEN BRDNG_TM_AVG = '0' THEN NULL ELSE BRDNG_TM_AVG END),1)  BRDNG_TM_AVG
-                    		,ROUND(AVG(CASE WHEN USE_DST_AVG = '0' THEN NULL ELSE USE_DST_AVG END),1)  USE_DST_AVG 
-                        FROM 시간거리_목적통행
-                        WHERE 1=1
-                            AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
-	                        AND ANAL_AREA_CD = #{anal_area_cd}
-	                        AND PROVIDER = #{provider}
-	                        <if test="!cd_no[0].equals('00')">
-                                AND CD_NO IN
-                                <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
-                                    #{arr}
-                                </foreach>
-                            </if>
-                        GROUP BY 	SDATE
-                                    ,OPRAT_DATE
-                                    ,TO_CHAR(SDATE,'DY')
-                                    ,ANAL_AREA_CD
-                                    ,CD_NO
-                    )			
-                GROUP BY 	SDATE
-                            ,OPRAT_DATE
-                            ,DY
-                            ,ANAL_AREA_CD
-                            ,ROLLUP(CD_NO)
-            )
-        PIVOT
-            (
-                SUM(BRDNG_TM_AVG) 시간
-                ,SUM(USE_DST_AVG) 거리
-                FOR CD_NO IN ('01'일반 , '02'어린이, '03'청소년, '04'경로
-                                    ,'05'장애인 , '06' 국가유공자, '07' 다자녀부모, '08' 동반
-                                    ,'09' 대학생 , '10' 복지 , '11' 기타, '평균' 평균)
-            )
-        ORDER BY OPRAT_DATE
+        <if test="tm.equals('')">
+        	ORDER BY  OPRAT_DATE, TM
+        </if>
+        <if test="!tm.equals('')">
+        	ORDER BY  OPRAT_DATE
+        </if>
 	</select>
 	
 	<!--  PIVOT 목적통행 평균 통행시간 -->
@@ -579,54 +441,66 @@
         SELECT *
         FROM 
             (
-                SELECT 			
-                        #{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
-                        ,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
-                        ,#{provider_text} PROVIDER
-                        ,OPRAT_DATE
-                        ,DY
-                        ,ANAL_AREA_CD
-                        ,NVL(TM, '평균') TM
-                        ,NVL(CD_NO, '평균') CD_NO
-                        ,NVL(ROUND(AVG(BRDNG_TM_AVG),1), 0) BRDNG_TM_AVG
-                        ,NVL(ROUND(AVG(USE_DST_AVG),1), 0) USE_DST_AVG 
-                FROM
-                    (
-                        SELECT 
-                            SDATE
-                            ,OPRAT_DATE
-                            ,TO_CHAR(SDATE,'DY') DY
-                            ,ANAL_AREA_CD
-                            ,TM
-                            ,CD_NO
-                            ,CASE WHEN ROUND(AVG(BRDNG_TM_AVG),1) = '0' THEN NULL ELSE ROUND(AVG(BRDNG_TM_AVG),1) END  BRDNG_TM_AVG
-                            ,CASE WHEN ROUND(AVG(USE_DST_AVG),1) = '0' THEN NULL ELSE ROUND(AVG(USE_DST_AVG),1) END USE_DST_AVG 
-                        FROM 시간거리_목적통행
-                        WHERE 1=1
-                            AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
-	                        AND ANAL_AREA_CD = #{anal_area_cd}
-	                        AND PROVIDER = #{provider}
-	                        <if test="tm==null || tm.equals('')">
-	                            AND TM BETWEEN #{tmStart} AND #{tmEnd}
-	                        </if>
-	                        <if test="!cd_no[0].equals('00')">
-                                AND CD_NO IN
-                                <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
-                                    #{arr}
-                                </foreach>
-                            </if>
-                        GROUP BY 	SDATE
-                                    ,OPRAT_DATE
-                                    ,TO_CHAR(SDATE,'DY')
-                                    ,ANAL_AREA_CD
-                                    ,TM
-                                    ,CD_NO
-                    )			
-                GROUP BY 	SDATE
-                            ,OPRAT_DATE
-                            ,DY
-                            ,ANAL_AREA_CD
-                            ,CUBE(TM, CD_NO)
+                SELECT 
+                	#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
+					,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
+					,#{provider_text} PROVIDER
+					,TO_CHAR(SDATE, 'DY') DY
+					,SDATE
+					,OPRAT_DATE
+					,ANAL_AREA_CD
+				    <if test="tm.equals('')">
+				        ,NVL(TM, '평균') TM
+				    </if>
+					,CD_NO
+					,NVL(ROUND(AVG(BRDNG_TM_AVG),1),0) BRDNG_TM_AVG
+					,NVL(ROUND(AVG(USE_DST_AVG),1),0) USE_DST_AVG
+				FROM
+					(
+						SELECT 
+							SDATE
+							,OPRAT_DATE
+							,ANAL_AREA_CD
+				            <if test="tm.equals('')">
+				                ,TM
+				            </if>
+							,NVL(CD_NO, '평균') CD_NO
+							,ROUND(AVG(CASE WHEN BRDNG_TM_AVG = 0 THEN NULL ELSE BRDNG_TM_AVG END),1) BRDNG_TM_AVG
+							,ROUND(AVG(CASE WHEN USE_DST_AVG = 0 THEN NULL ELSE USE_DST_AVG END),1) USE_DST_AVG
+						FROM 시간거리_목적통행
+						WHERE 1=1
+							AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
+		                    AND ANAL_AREA_CD = #{anal_area_cd}
+		                    AND PROVIDER = #{provider}
+		                    <if test="tm.equals('')">
+		                        AND TM BETWEEN #{tmStart} AND #{tmEnd}
+		                    </if>
+		                    <if test="!cd_no[0].equals('00')">
+		                        AND CD_NO IN
+		                        <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+		                            #{arr}
+		                        </foreach>
+	                   		</if>
+						GROUP BY 	SDATE
+									,OPRAT_DATE
+									,ANAL_AREA_CD
+				                    <if test="tm.equals('')">
+				                        ,TM
+				                    </if>
+									,ROLLUP(CD_NO)
+					)
+				GROUP BY
+						SDATE
+						,OPRAT_DATE
+						,ANAL_AREA_CD
+						,TO_CHAR(SDATE, 'DY')
+				        <if test="tm.equals('')">
+				            ,ROLLUP(TM)
+						    ,CD_NO
+				        </if>
+				        <if test="!tm.equals('')">
+						    ,CD_NO
+				        </if>
             )
         PIVOT
             (
@@ -636,124 +510,87 @@
                                     ,'05'장애인 , '06' 국가유공자, '07' 다자녀부모, '08' 동반
                                     ,'09' 대학생 , '10' 복지 , '11' 기타, '평균' 평균)
             )
-        ORDER BY OPRAT_DATE, TM
-	</select>
-	
-	<!--  PIVOT 목적통행 평균 통행시간 일별 -->
-	<select id ="downloadTimeDistnResultListPurpose_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-        SELECT *
-        FROM 
-            (
-                SELECT 	#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
-                        ,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
-                        ,#{provider_text} PROVIDER
-                        ,OPRAT_DATE
-                        ,DY
-                        ,ANAL_AREA_CD
-                        ,NVL(CD_NO,'평균') CD_NO
-                        ,NVL(ROUND(AVG(BRDNG_TM_AVG),1),0) BRDNG_TM_AVG
-                        ,NVL(ROUND(AVG(USE_DST_AVG),1),0) USE_DST_AVG 
-                FROM
-                    (
-                        SELECT 
-                            SDATE
-                            ,OPRAT_DATE
-                            ,TO_CHAR(SDATE,'DY') DY
-                            ,ANAL_AREA_CD
-                            ,CD_NO
-                            ,ROUND(AVG(CASE WHEN BRDNG_TM_AVG = '0' THEN NULL ELSE BRDNG_TM_AVG END),1)  BRDNG_TM_AVG
-                    		,ROUND(AVG(CASE WHEN USE_DST_AVG = '0' THEN NULL ELSE USE_DST_AVG END),1)  USE_DST_AVG 
-                        FROM 시간거리_목적통행
-                        WHERE 1=1
-                            AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
-	                        AND ANAL_AREA_CD = #{anal_area_cd}
-	                        AND PROVIDER = #{provider}
-	                        <if test="!cd_no[0].equals('00')">
-                                AND CD_NO IN
-                                <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
-                                    #{arr}
-                                </foreach>
-                            </if>
-                        GROUP BY 	SDATE
-                                    ,OPRAT_DATE
-                                    ,TO_CHAR(SDATE,'DY')
-                                    ,ANAL_AREA_CD
-                                    ,CD_NO
-                    )			
-                GROUP BY 	SDATE
-                            ,OPRAT_DATE
-                            ,DY
-                            ,ANAL_AREA_CD
-                            ,ROLLUP(CD_NO)
-            )
-        PIVOT
-            (
-                SUM(BRDNG_TM_AVG) 시간
-                ,SUM(USE_DST_AVG) 거리
-                FOR CD_NO IN ('01'일반 , '02'어린이, '03'청소년, '04'경로
-                                    ,'05'장애인 , '06' 국가유공자, '07' 다자녀부모, '08' 동반
-                                    ,'09' 대학생 , '10' 복지 , '11' 기타, '평균' 평균)
-            )
-        ORDER BY OPRAT_DATE
+        <if test="tm.equals('')">
+        	ORDER BY  OPRAT_DATE, TM
+        </if>
+        <if test="!tm.equals('')">
+        	ORDER BY  OPRAT_DATE
+        </if>
 	</select>
 	
 	<!--  PIVOT 수단통행 평균 통행시간 -->
 	<select id ="downloadTimeDistnResultListMethod" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-        SELECT *
+                SELECT *
         FROM 
             (
-                SELECT 	
-                    #{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
-                    ,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
-                    ,#{provider_text} PROVIDER
-                    ,OPRAT_DATE
-                    ,DY
-                    ,ANAL_AREA_CD
-                    ,TFCMN
-                    ,NVL(TM, '평균') TM
-                    ,NVL(CD_NO, '평균') CD_NO
-                    ,NVL(ROUND(AVG(BRDNG_TM_AVG),1), 0) BRDNG_TM_AVG
-                    ,NVL(ROUND(AVG(USE_DST_AVG),1), 0) USE_DST_AVG 
-                FROM
-                    (
-                        SELECT 
-                            SDATE
-                            ,OPRAT_DATE
-                            ,TO_CHAR(SDATE,'DY') DY
-                            ,ANAL_AREA_CD
-                            ,CASE WHEN TFCMN='B' THEN '버스' ELSE '지하철' END TFCMN
-                            ,TM
-                            ,CD_NO
-                            ,CASE WHEN ROUND(AVG(BRDNG_TM_AVG),1) = '0' THEN NULL ELSE ROUND(AVG(BRDNG_TM_AVG),1) END  BRDNG_TM_AVG
-                            ,CASE WHEN ROUND(AVG(USE_DST_AVG),1) = '0' THEN NULL ELSE ROUND(AVG(USE_DST_AVG),1) END USE_DST_AVG 
-                        FROM 시간거리_수단통행
-                        WHERE 1=1
-                            AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
-	                        AND ANAL_AREA_CD = #{anal_area_cd}
-	                        AND PROVIDER = #{provider}
-	                        <if test="tm==null || tm.equals('')">
-	                            AND TM BETWEEN #{tmStart} AND #{tmEnd}
-	                        </if>
-	                        <if test="!cd_no[0].equals('00')">
-                                AND CD_NO IN
-                                <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
-                                    #{arr}
-                                </foreach>
-                            </if>
-                        GROUP BY 	SDATE
-                                    ,OPRAT_DATE
-                                    ,TO_CHAR(SDATE,'DY')
-                                    ,ANAL_AREA_CD
-                                    ,TFCMN
-                                    ,TM
-                                    ,CD_NO
-                    )			
-                GROUP BY 	SDATE
-                            ,OPRAT_DATE
-                            ,DY
-                            ,ANAL_AREA_CD
-                            ,TFCMN
-                            ,CUBE(TM, CD_NO)
+                SELECT 
+                	#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
+					,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
+					,#{provider_text} PROVIDER
+					,TO_CHAR(SDATE, 'DY') DY
+					,SDATE
+					,OPRAT_DATE
+					,ANAL_AREA_CD
+				    <if test="tm.equals('')">
+				    	,TFCMN
+				        ,NVL(TM, '평균') TM
+				    </if>
+				    <if test="!tm.equals('')">
+				        ,NVL(TFCMN, '평균') TFCMN
+				    </if>
+					,CD_NO
+					,NVL(ROUND(AVG(BRDNG_TM_AVG),1),0) BRDNG_TM_AVG
+					,NVL(ROUND(AVG(USE_DST_AVG),1),0) USE_DST_AVG
+				FROM
+					(
+						SELECT 
+							SDATE
+							,OPRAT_DATE
+							,ANAL_AREA_CD
+							,CASE WHEN TFCMN = 'B' THEN '버스' ELSE '지하철' END TFCMN
+				            <if test="tm.equals('')">
+				                ,TM
+				            </if>
+							,NVL(CD_NO, '평균') CD_NO
+							,ROUND(AVG(CASE WHEN BRDNG_TM_AVG = 0 THEN NULL ELSE BRDNG_TM_AVG END),1) BRDNG_TM_AVG
+							,ROUND(AVG(CASE WHEN USE_DST_AVG = 0 THEN NULL ELSE USE_DST_AVG END),1) USE_DST_AVG
+						FROM 시간거리_수단통행
+						WHERE 1=1
+							AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD') 
+		                    AND ANAL_AREA_CD = #{anal_area_cd}
+		                    AND PROVIDER = #{provider}
+		                    <if test="tm.equals('')">
+		                        AND TM BETWEEN #{tmStart} AND #{tmEnd}
+		                    </if>
+		                    <if test="!cd_no[0].equals('00')">
+		                        AND CD_NO IN
+		                        <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+		                            #{arr}
+		                        </foreach>
+	                   		</if>
+						GROUP BY 	SDATE
+									,OPRAT_DATE
+									,ANAL_AREA_CD
+									,TFCMN
+				                    <if test="tm.equals('')">
+				                        ,TM
+				                    </if>
+									,ROLLUP(CD_NO)
+					)
+				GROUP BY
+						SDATE
+						,OPRAT_DATE
+						,ANAL_AREA_CD
+						,TO_CHAR(SDATE, 'DY')
+				        <if test="tm.equals('')">
+				        	,TFCMN
+				            ,ROLLUP(TM)
+						    ,CD_NO
+				        </if>
+				        <if test="!tm.equals('')">
+				        	,ROLLUP(TFCMN)
+						    ,CD_NO
+				        </if>
             )
         PIVOT
             (
@@ -763,70 +600,12 @@
                                     ,'05'장애인 , '06' 국가유공자, '07' 다자녀부모, '08' 동반
                                     ,'09' 대학생 , '10' 복지 , '11' 기타, '평균' 평균)
             )
-        ORDER BY OPRAT_DATE, TFCMN, TM
-	</select>
-	
-	<!--  PIVOT 수단통행 평균 통행시간 일별 -->
-	<select id ="downloadTimeDistnResultListMethod_d" parameterType="sVO" resultType="egovMap" fetchSize="1000">
-        SELECT *
-        FROM 
-            (
-                SELECT 	
-                        #{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
-                        ,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
-                        ,#{provider_text} PROVIDER
-                        ,OPRAT_DATE
-                        ,DY
-                        ,ANAL_AREA_CD
-                        ,TFCMN
-                        ,NVL(CD_NO, '평균') CD_NO
-                        ,NVL(ROUND(AVG(BRDNG_TM_AVG),1), 0) BRDNG_TM_AVG
-                        ,NVL(ROUND(AVG(USE_DST_AVG),1), 0) USE_DST_AVG 
-                FROM
-                    (
-                        SELECT 
-                            SDATE
-                            ,OPRAT_DATE
-                            ,TO_CHAR(SDATE,'DY') DY
-                            ,ANAL_AREA_CD
-                            ,CASE WHEN TFCMN='B' THEN '버스' ELSE '지하철' END TFCMN
-                            ,CD_NO
-                            ,ROUND(AVG(CASE WHEN BRDNG_TM_AVG = '0' THEN NULL ELSE BRDNG_TM_AVG END),1)  BRDNG_TM_AVG
-                    		,ROUND(AVG(CASE WHEN USE_DST_AVG = '0' THEN NULL ELSE USE_DST_AVG END),1)  USE_DST_AVG 
-                        FROM 시간거리_수단통행
-                        WHERE 1=1
-                           AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
-	                        AND ANAL_AREA_CD = #{anal_area_cd}
-	                        AND PROVIDER = #{provider}
-	                        <if test="!cd_no[0].equals('00')">
-                                AND CD_NO IN
-                                <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
-                                    #{arr}
-                                </foreach>
-                            </if>
-                        GROUP BY 	SDATE
-                                    ,OPRAT_DATE
-                                    ,TO_CHAR(SDATE,'DY')
-                                    ,ANAL_AREA_CD
-                                    ,TFCMN
-                                    ,CD_NO
-                    )			
-                GROUP BY 	SDATE
-                            ,OPRAT_DATE
-                            ,DY
-                            ,ANAL_AREA_CD
-                            ,TFCMN
-                            ,ROLLUP(CD_NO)
-            )
-         PIVOT
-            (
-                SUM(BRDNG_TM_AVG) 시간
-                ,SUM(USE_DST_AVG) 거리
-                FOR CD_NO IN ('01'일반 , '02'어린이, '03'청소년, '04'경로
-                                    ,'05'장애인 , '06' 국가유공자, '07' 다자녀부모, '08' 동반
-                                    ,'09' 대학생 , '10' 복지 , '11' 기타, '평균' 평균)
-            )
-        ORDER BY OPRAT_DATE, TFCMN
+        <if test="tm.equals('')">
+        	ORDER BY  OPRAT_DATE, TFCMN, TM
+        </if>
+        <if test="!tm.equals('')">
+        	ORDER BY  OPRAT_DATE, TFCMN
+        </if>
 	</select>
 	
 	<!--  PIVOT 노선별 평균 통행시간 -->

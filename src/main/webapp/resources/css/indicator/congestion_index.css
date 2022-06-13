@@ -56,7 +56,10 @@
     height: 106px;
 }
 .cell1_03 div{
-    width: 239px;
+    width: 190px;
+}
+.cell1_03 label {
+    margin-left: 21px;
 }
 
 .cell2{
@@ -215,10 +218,10 @@ input.date {
 /* .hcell1 > .cell6{width: calc(100% / 2);} */
 .hcell1 > .cell6 p {}
 .hcell1 >.cell6 > .cell6_01 div{
-    margin-top: -60px;
+    margin-top:-46px;
     margin-left: 83px;}
 
-/* hcell �슂�냼 */
+/* hcell 占쎌뒄占쎈꺖 */
 
 .cell4{
     /* background: #ccdded; */
@@ -299,9 +302,8 @@ input.date {
     display: block;
 }
 .cell6_01{
-    margin-top: 14px;
+    margin-top: 25px;
     height: 161px;
-    /* border-bottom: 1px solid #b9b9b9; */
 }
 .cell6_01 div{
     width: 143px;
@@ -310,13 +312,11 @@ input.date {
     display: inline-block;
     font-size: 15px;
     border: none;
-    /* background-color: #ccdded; */
     width: 87px;
-    line-height: 50px;
-    height: 50px;
-    margin-left: 7px;
+    margin-left: 15px;
+    margin-top: -6px;
     color: #000;
-    background: #fff;}
+    background: none;}
 .cell6_02{
     margin-top: 14px;
     height: 71px;
@@ -326,15 +326,13 @@ input.date {
     display: inline-block;
     font-size: 15px;
     border: none;
-    /* background-color: #ccdded; */
     width: 87px;
-    line-height: 50px;
-    height: 50px;
-    margin-left: 7px;
+    margin-left: 15px;
+    margin-top: -6px;
     color: #000;
-    background: #fff;
+    background: none;
 }
-/* -----�끂�꽑紐�----- */
+/* -----占쎈걗占쎄퐨筌륅옙----- */
 .busname_wrap{
     width: 133px;
     height: 48px;
@@ -421,7 +419,7 @@ input[type=radio] + label{
 
 
 
-/* modal援ъ뿭 */
+/* modal�뤃�딅열 */
 input[id=modalBtn] {
     display: none;
 }
@@ -430,12 +428,12 @@ input[id=modalBtn]:checked ~ .modalContainer {
 }
 
 input[id=modalBtn] + label {
-    display: inline-block;
-    width: 120px;
+        display: inline-block;
+    width: 103px;
     height: 30px;
     text-align: center;
     line-height: 30px;
-    font-size: 15px;
+    font-size: 13px;
     border: 1px solid darkgrey;
     border-radius: 10px;
 }
@@ -459,8 +457,8 @@ input[id=modalBtn] + label {
     left: 0;
     bottom: 0;
     margin: auto;
-    width: 800px;
-    height: 500px;
+    width: 768px;
+    height: 444px;
     background: #fff;
     text-align: center;
 }
@@ -475,7 +473,7 @@ input[id=modalBtn] + label {
 }
 /* close Btn */
 .modalBox > label {
-    position: absolute;
+        position: absolute;
     right: -9px;
     top: -9px;
     width: 30px;
@@ -484,7 +482,7 @@ input[id=modalBtn] + label {
     line-height: 22px;
     font-size: 27px;
     /* border-radius: 2px; */
-    background: #5c7d9a;
+    background: #32689b;
     cursor: pointer;
     color: #fff;
 }
@@ -492,11 +490,11 @@ input[id=modalBtn] + label {
 .routeNotice{
     text-align: center;
     font-weight: bold;
-    font-size: 25px;
-    color: #44627c;
+    font-size: 20px;
+    color: #32689b;
     height: 12%;
     line-height: 58px;
-    background: #ccdded;
+    background: #c7e4ff;
 }
 
 .routeBox{
@@ -517,18 +515,14 @@ input[id=modalBtn] + label {
     flex-direction: column;
 }
 .routeListTh{
-	width: 100%;
-    /* margin-top: 11px; */
-    background-color: #ccdded;
+	background-color: #aad6ff;
     line-height: 46px;
-    height: 36px;
-    color: #44627c;
-	/* height: 10%; */
-	display: flex;
+    height: 29px;
+    display: flex;
 }
 
 .routeListTh > p{
-	font-size: 18px;
+	font-size: 15px;
 }
 
 .routeLists{
@@ -546,7 +540,7 @@ input[id=modalBtn] + label {
 #searchRouteId{
     width: 250px;
     height: 23px;
-	margin: 0px 0px -50px 50px;
+    margin: 0px 0px -50px 34px;
     border-radius: 5px;
 }
 
@@ -574,7 +568,7 @@ input[name=routeId]{
 
 
 #routeBtn{
-	background-color: #5c7d9a;
+	background-color: #32689b;
     color: white;
     width: 60px;
     height: 30px;
@@ -586,8 +580,8 @@ input[name=routeId]{
 
 
 
-/* ------------ �끂�꽑諛뺤뒪 濡쒕뵫�럹�씠吏� */
-/* 濡쒕뵫�솕硫� */
+/* ------------ 占쎈걗占쎄퐨獄쏅벡�뮞 嚥≪뮆逾ワ옙�읂占쎌뵠筌욑옙 */
+/* 嚥≪뮆逾ワ옙�넅筌롳옙 */
 #lds-spinner {
     background: #0000004f;
     display: flex;

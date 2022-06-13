@@ -44,7 +44,7 @@ a{
       padding: 0 6px;
   }
   
-/* �뱶濡��떎�슫 踰좊돱 */
+/* 占쎈굡嚥∽옙占쎈뼄占쎌뒲 甕곗쥓�뤀 */
 .dropdown {
     position: relative;
     display: inline-block;
@@ -78,7 +78,7 @@ a{
   
   .dropdown:hover .dropbtn {background-color: #c6dcf0;}
 
-/* �긽�떒硫붾돱 */
+/* 占쎄맒占쎈뼊筌롫뗀�뤀 */
   .ConName{
         height:30px;
     width: 1224px;
@@ -103,7 +103,7 @@ a{
     padding: 5px;
 }
 
-.contents span:after {/*after 가상요소*/
+.contents span:after {/*after 媛��긽�슂�냼*/
    	display: block;
     content: '';
     border-bottom: solid 2px #162d97;
@@ -111,7 +111,7 @@ a{
     transition: transform 250ms ease-in-out;
 }
 .contents span:hover:after {
-   transform: scaleX(1);/*a 속성에 hover시 after를 기존 크기로 변경*/
+   transform: scaleX(1);/*a �냽�꽦�뿉 hover�떆 after瑜� 湲곗〈 �겕湲곕줈 蹂�寃�*/
 }
 
 .contents div{
@@ -124,7 +124,7 @@ a{
 .contents :first-child{
     margin-left: 0;
 }
-/* �뜲�씠�듃�뵾而� */
+/* 占쎈쑓占쎌뵠占쎈뱜占쎈돗�뚳옙 */
 div#ui-datepicker-div{
     position: absolute;
     top: 754px;
@@ -134,7 +134,7 @@ div#ui-datepicker-div{
     width: 223px;
 }
 
-/* 踰좊꼫 */
+/* 甕곗쥓瑗� */
 
 .ConEx{
 	width: 1336px;
@@ -155,7 +155,7 @@ div#ui-datepicker-div{
     width: calc(1336px  / 6);
     height: 550px;
 }
-/* 議고쉶踰꾪듉 */
+/* 鈺곌퀬�돳甕곌쑵�뱣 */
 
 .submit{
     font-size: 19px;
@@ -169,10 +169,11 @@ div#ui-datepicker-div{
     border: none;
 }
 
-.submit :hover {
+.submit:hover {
     cursor: pointer;
     box-shadow: 0px 2px 5px #000000;
     font-weight: bold;
+    background-color: #004281;
+    color: #c7e4ff;
 }
-
 

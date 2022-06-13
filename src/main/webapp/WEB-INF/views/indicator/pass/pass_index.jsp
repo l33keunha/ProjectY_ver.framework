@@ -73,7 +73,7 @@
                     <p>지역</p>
                     
                     <select id="anal_area_cd_sido" name="anal_area_cd_sido">
-                        <option>시/도</option>
+                        <option>광역/도</option>
                     </select>
                     <select id="anal_area_cd" name="anal_area_cd">
                         <option>시/군</option>
@@ -174,7 +174,7 @@
                 </div>
 
                 <div class ="cell6">
-                    <p>교통 수단/노선</p>
+                    <p>교통수단/노선</p>
                     <div class="cell6_01">
                         <p>수단</p>
                         <div>
@@ -214,9 +214,9 @@
                                     <input type="text" placeholder="(노선번호/노선유형/기점/종점) 검색..." id="searchRouteId">
                                     <div class="routeListBox">
                                        <div class='routeListTh' style='width:100%;'>
-                                          <p style="width: 21%; float:left;"> 노선명 </p>
-                                          <p style="width: 11%; float:left;margin-left: 23px;"> 노선유형 </p>
-                                          <p style="width: 7%; float:left;margin-left: 61px;"> 기점 </p>
+                                          <p style="width: 28%; float:left;"> 노선명 </p>
+                                          <p style="width: 11%; float:left;margin-left:-20px;"> 노선유형 </p>
+                                          <p style="width: 7%; float:left;margin-left: 56px;"> 기점 </p>
                                           <p style="width:30%; float:left;margin-left: 61px;"> 종점 </p>
                                        </div>
                                        <div class="routeLists">

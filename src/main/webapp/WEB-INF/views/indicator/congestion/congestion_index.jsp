@@ -39,7 +39,7 @@
 
                 <div class="cell1_03">
                     <div>
-                        <label><input type="radio" name="anal_group" value="congestionTopStationOD"> 정류장간 상위 100개</label>
+                        <label><input type="radio" name="anal_group" value="congestionTopStationOD"> 노선 정류장간 &nbsp;&nbsp;&nbsp;상위 100개</label>
                     </div>
                 </div>
             </div>

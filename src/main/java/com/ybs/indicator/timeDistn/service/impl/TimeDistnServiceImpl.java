@@ -36,31 +36,16 @@ public class TimeDistnServiceImpl extends EgovAbstractServiceImpl implements Tim
 		
 		switch(sVO.getAnal_group()) {
 		case "timeDistn_avg_day" :
-			if("allDay".equals(sVO.getTm())) {
-				System.out.println("1일 평균 통행시간_일별 다운로드");
-				timeDistnResultList = mapper.selectTimeDistnResultListDay_d(sVO); break;
-			} else {
 				System.out.println("1일 평균 통행시간");
 				timeDistnResultList = mapper.selectTimeDistnResultListDay(sVO); break;
-			}
 			
 		case "timeDistn_avg_purpose" :
-			if("allDay".equals(sVO.getTm())) {
-				System.out.println("목적통행 평균 통행시간_일별 다운로드");
-				timeDistnResultList = mapper.selectTimeDistnResultListPurpose_d(sVO); break;
-			} else {
 				System.out.println("목적통행 평균 통행시간");
 				timeDistnResultList = mapper.selectTimeDistnResultListPurpose(sVO); break;
-			}
 			
 		case "timeDistn_avg_method" :
-			if("allDay".equals(sVO.getTm())) {
-				System.out.println("수단통행 평균 통행시간_일별 다운로드");
-				timeDistnResultList = mapper.selectTimeDistnResultListMethod_d(sVO); break;
-			} else {
 				System.out.println("수단통행 평균 통행시간");
 				timeDistnResultList = mapper.selectTimeDistnResultListMethod(sVO); break;
-			}
 			
 		case "timeDistn_avg_route" :
 			if("allDay".equals(sVO.getTm())) {
@@ -134,7 +119,7 @@ public class TimeDistnServiceImpl extends EgovAbstractServiceImpl implements Tim
 				System.out.println("1일 평균 통행시간_일별 다운로드");
 				
 				// ● 인자값 : 데이터 리스트
-				timeDistnResultList = mapper.downloadTimeDistnResultListDay_d(sVO); 
+				timeDistnResultList = mapper.downloadTimeDistnResultListDay(sVO); 
 				
 				System.out.println("query 조회 시간 : " + ((System.currentTimeMillis() - sdt) / 1000));
 				
@@ -207,7 +192,7 @@ public class TimeDistnServiceImpl extends EgovAbstractServiceImpl implements Tim
 				System.out.println("목적통행 평균 통행시간_일별 다운로드");
 				
 				// ● 인자값 : 데이터 리스트
-				timeDistnResultList = mapper.downloadTimeDistnResultListPurpose_d(sVO); 
+				timeDistnResultList = mapper.downloadTimeDistnResultListPurpose(sVO); 
 				
 
 				System.out.println("query 조회 시간 : " + ((System.currentTimeMillis() - sdt) / 1000));
@@ -282,7 +267,7 @@ public class TimeDistnServiceImpl extends EgovAbstractServiceImpl implements Tim
 				System.out.println("수단통행 평균 통행시간_일별 다운로드");
 				
 				// ● 인자값 : 데이터 리스트
-				timeDistnResultList = mapper.downloadTimeDistnResultListMethod_d(sVO); 
+				timeDistnResultList = mapper.downloadTimeDistnResultListMethod(sVO); 
 				
 				System.out.println("query 조회 시간 : " + ((System.currentTimeMillis() - sdt) / 1000));
 				

@@ -72,9 +72,9 @@ public class CommonServiceImpl extends EgovAbstractServiceImpl implements Common
 		if(sVO.getAnal_type().equals("dlStation_stationCnt")) {
 			sVO.setAnal_fin("PIVOT_정류장별통행");
 		} else if(sVO.getAnal_type().equals("dlStation_station_purpose")) {
-			sVO.setAnal_fin("PIVOT_정류장별OD_목적통행");
+			sVO.setAnal_fin("PIVOT_정류장별OD_목적통행_SMALL");
 		} else if(sVO.getAnal_type().equals("dlStation_station_method")) {
-			sVO.setAnal_fin("PIVOT_정류장별OD_수단통행");
+			sVO.setAnal_fin("PIVOT_정류장별OD_수단통행_SMALL");
 		} else if(sVO.getAnal_type().equals("dlStation_station_run")) {
 			
 		} else if(sVO.getAnal_type().equals("dlStation_station_runCongestion")) {
@@ -82,7 +82,7 @@ public class CommonServiceImpl extends EgovAbstractServiceImpl implements Common
 		} else if(sVO.getAnal_type().equals("dlRoute_routeCnt")) {
 			sVO.setAnal_fin("PIVOT_노선별통행");
 		} else if(sVO.getAnal_type().equals("dlRoute_routeODCnt")) {
-			sVO.setAnal_fin("PIVOT_노선별OD");
+			sVO.setAnal_fin("PIVOT_노선별OD_SMALL");
 		} else if(sVO.getAnal_type().equals("dlRoute_routeCBP")) {
 			sVO.setAnal_fin("혼잡_노선별_재차인원혼잡도");
 		} else if(sVO.getAnal_type().equals("dlArea_areaOD_purpose")) {

@@ -140,8 +140,7 @@ public class CommonController {
 		List<EgovMap> searchStatusList = new ArrayList<EgovMap>();
 		
 		HttpSession session = request.getSession();
-		sVO.setuNo((String)session.getAttribute("uNo"));
-		
+		sVO.setuNo(session.getAttribute("uNo"));
 		System.out.println(sVO.toString());
 		
 		searchStatusList = service.selectSearchStatusList(sVO);

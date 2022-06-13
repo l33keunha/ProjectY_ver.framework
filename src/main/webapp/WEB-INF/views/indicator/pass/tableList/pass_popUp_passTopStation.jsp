@@ -27,7 +27,7 @@
 							<th class="tg-0pky" rowspan="2" style="width: 30px; min-width: 30px; max-width: 30px;">순위</th>				<!-- 순위 -->
 							<th class="tg-0pky" rowspan="2" style="width: 70px; min-width: 70px; max-width: 70px;">정류장구분</th>			<!-- 정류장구분 -->
 							<th class="tg-0pky" rowspan="2" style="width: 80px; min-width: 80px; max-width: 80px;">정류장ID</th>			<!-- 정류장ID -->
-							<th class="tg-0pky" rowspan="2" style="width: 200px; min-width: 200px; max-width: 200px;">정류장명</th>		<!-- 정류장명 -->
+							<th class="tg-0pky" rowspan="2" style="width: 200px; min-width: 200px; max-width: 200px;" onclick="getXY();">정류장명</th>		<!-- 정류장명 -->
 							<th class="tg-0pky" rowspan="2" style="width: 210px; min-width: 210px; max-width: 210px;">정류장행정동</th>		<!-- 정류장행정동 -->
 						</tr>
 					</thead>
