@@ -403,4 +403,37 @@
 		ORDER BY 승차내외부, 승차역ID, 하차내외부, 하차역ID, 시간
 	</select>
 	
+	
+	
+	
+	
+	<!-- Ajax: 다운로드 가능여부 리스트 -->
+	<select id="selectDownloadList" parameterType="sVO" resultType="egovMap">
+		SELECT DISTINCT 
+				A.분석지역_CD ANAL_AREA_CD
+				,CASE WHEN A.분석지역_CD = '11' THEN '서울특별시'
+					  WHEN A.분석지역_CD = '23' THEN '인천광역시'		
+					  WHEN A.분석지역_CD LIKE '31%' THEN '경기도'		
+					  WHEN A.분석지역_CD LIKE '34%' THEN '충청남도'	
+	 			 ELSE NULL 
+	 			 END ANAL_AREA_CD_SIDO_TEXT
+	 			,CASE WHEN A.분석지역_CD = '11' THEN '전체'
+					  WHEN A.분석지역_CD = '23' THEN '전체'		
+				 ELSE D.분석지역명
+				 END ANAL_AREA_CD_TEXT
+				,CONCAT(CONCAT(CONCAT(SUBSTR(A.SDATE,0,2),'년 '), SUBSTR(A.SDATE,4,2)),'월') SERVICE_DATE
+				,분석지표구분 TABLE_NAME
+				,A.OWNER
+				,A.STATUS
+		FROM 지표별ROW_COUNT A, USER_INFO B, USER_DEPT C, 분석지역_CD D
+	    WHERE 1=1
+			AND B.DEPT = C.DEPT 
+			AND C.ANAL_AREA_CD = A.분석지역_CD 
+			AND B.UNO = #{uNo}
+			AND A.분석지역_CD = D.분석지역_CD 
+			AND 분석지표구분 = #{anal_fin}
+		ORDER BY ANAL_AREA_CD, SERVICE_DATE
+	
+	
+	</select>
 </mapper>

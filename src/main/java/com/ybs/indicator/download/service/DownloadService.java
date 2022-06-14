@@ -17,4 +17,6 @@ public interface DownloadService {
 
 	void writeCsvOutput(HttpServletResponse res, List<EgovMap> excelList, String excelName, String headerListSt, String columnListSt);
 
+	List<EgovMap> selectDownloadList(SearchVO sVO);
+
 }

@@ -228,3 +228,186 @@
 		})
 		
 	})
+	
+	
+	
+	
+	
+	
+	// 다운로드 가능여부 리스트
+	$('.modal-content-background').click(function() {
+		$('.modal-content-background').removeClass('active');
+		$('.modal-content').removeClass('active');
+	});
+	
+	function downloadList(){
+	 	$('.modal-content-background').addClass('active');
+        $('.modal-content').addClass('active');
+		$('#header_1').click();	
+	}
+	
+	
+	var headers = document.getElementsByClassName("headers");
+	
+	function handleClick(event) {
+	  if (event.target.classList[1] === "clicked") {
+	    event.target.classList.remove("clicked");
+	  } else {
+	    for (var i = 0; i < headers.length; i++) {
+	        headers[i].classList.remove("clicked");
+	    }
+	
+	    event.target.classList.add("clicked");
+	  }
+	}
+	
+	function init() {
+	  for (var i = 0; i < headers.length; i++) {
+	    headers[i].addEventListener("click", handleClick);
+	  }
+	}
+	
+	init();
+	
+	$(document).on('click', '.headers', function(){
+		$('.dlHeader').prop("disabled", false);
+		$('.dlHeader').css("opacity", 1);
+		$('.body-sub-content').scrollTop(0);
+		
+		for(var i=1; i<=3; i++){
+			$("#dlHeader_"+i).children('option:not(:first)').remove();
+		}
+		
+		jsonArray["anal_fin"] = $(this).attr('table');
+		
+		if($(this).attr('table') == "정류장별 운행지표" || $(this).attr('table') == "정류장간 운행/혼잡지표"){
+			$('.body-content').css("display","none")
+			$('.body-sub-content').css("display","none")
+			$('.body-notice').css("display","block");
+		} else {
+		
+			$.ajax({
+				url: 'selectDownloadList.do',
+				type: 'post',
+				traditional: true,
+				data: jsonArray,
+				async: false,
+				dataType: "json",
+				success: function (data){
+					$('.body-notice').css("display","none");
+					$('.body-content').css("display","block");
+					
+					$('.body-sub-content').css("display","block");
+					$('.body-sub-content-list').text("");
+					
+					
+					/* select 태그 중복값 제거해서 만들기 */
+					var analAreaCdSidoText = [];
+					var analAreaCdText = [];
+					var serviceDate = [];
+					
+					for(var i in data.downloadList){
+						var list = data.downloadList[i];
+						
+						analAreaCdSidoText.push(list.analAreaCdSidoText);
+						analAreaCdText.push(list.analAreaCdText);
+						serviceDate.push(list.serviceDate);
+						
+					}
+					
+					var analAreaCdSidoTextUnique = [...new Set(analAreaCdSidoText)];
+					//Create and append the options 
+					for (var i = 0; i < analAreaCdSidoTextUnique.length; i++) { 
+						var option = document.createElement("option");
+						option.value = analAreaCdSidoTextUnique[i];
+						option.text = analAreaCdSidoTextUnique[i];
+						$("#dlHeader_1").append(option); 
+					}
+					
+					var analAreaCdTextUnique = [...new Set(analAreaCdText)];
+					//Create and append the options 
+					for (var i = 0; i < analAreaCdTextUnique.length; i++) { 
+						var option = document.createElement("option");
+						option.value = analAreaCdTextUnique[i];
+						option.text = analAreaCdTextUnique[i];
+						$("#dlHeader_2").append(option); 
+					}
+					
+					var serviceDateUnique = [...new Set(serviceDate)];
+					for (var i = 0; i < serviceDateUnique.length; i++) { 
+						var option = document.createElement("option");
+						option.value = serviceDateUnique[i];
+						option.text = serviceDateUnique[i];
+						$("#dlHeader_3").append(option); 
+					}
+					
+					
+					/* 데이터 리스트 나열 */					
+					for(var i in data.downloadList){
+						var list = data.downloadList[i];
+						
+						var addHtml = "";
+						
+						addHtml += "<div class='body-sub-content-list'>"
+						addHtml +=	"<div>" + list.analAreaCdSidoText + "</div>";
+		                addHtml +=  "<div>" + list.analAreaCdText + "</div>";
+	
+						if(list.owner == '00'){
+							addHtml +=  "<div>지자체</div>";
+						} else{
+							addHtml +=  "<div>정산사</div>";
+						}
+						
+		                addHtml +=  "<div>" + list.serviceDate + "</div>";
+		
+						
+						if(list.status == 'Y'){
+							addHtml +=  "<div>O</div>";
+						} else{
+							addHtml +=  "<div>X</div>";
+						}
+						
+						
+						addHtml += "</div>";
+						$('.body-sub-content').append(addHtml);
+					}
+				}
+			})
+		}
+	});
+
+	$("#resetBtn").on('click',function(){
+		$('.dlHeader').prop("disabled", false);
+		$('.dlHeader').css("opacity", 1);
+		$('.dlHeader').css("font-weight","normal");
+		$('.body-sub-content').scrollTop(0);
+		
+		for(var i=1; i<=5; i++){
+			$("#dlHeader_"+i).val("1").prop("selected", true);
+		}
+	});
+
+
+	$("select[name=dlHeader]").on('change',function(){
+		var k = $(this).val();
+		var id = $(this).attr('id').substr(9);
+		console.log(id);
+		for(var i=1; i<6; i++){
+			if(i != id){
+				$('#dlHeader_'+i).prop("disabled", true);
+				$('#dlHeader_'+i).css("opactiy",'0.3');
+			} else {
+				$('#dlHeader_'+i).css("font-weight","bold");
+			}
+		}
+		
+		$(".body-sub-content-list").hide();
+		var temp = $(".body-sub-content-list:contains('" + k + "')");
+		$(temp).show();
+	});
+
+
+
+
+
+

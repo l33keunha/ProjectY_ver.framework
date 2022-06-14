@@ -667,8 +667,8 @@
 		        ,TRS_AGG
 		        ,GIN_GFF_SUM
 		        ,STTN_SUM
-		        ,정류장X좌표 X
-		        ,정류장Y좌표 Y
+		        ,정류장X좌표_REV X
+		        ,정류장Y좌표_REV Y
 		FROM 
 			(
 				SELECT 
@@ -791,7 +791,15 @@
 		            ,STTN_SUM
 		            ,TCBO_ID
 		            ,ROLLUP(CD_NO)
-			) F1, STDNN_BRS F2
+			) F1,
+		(SELECT DISTINCT 
+			운행일자
+			,OWNER
+			,정산사ID
+			,정류장ID
+			,정류장X좌표_REV
+			,정류장Y좌표_REV
+		FROM STDNN_BRS_REV2) F2
 		WHERE 1=1
 		AND F1.OPRAT_DATE = F2.운행일자
 		AND F1.PROVIDER = F2.OWNER
@@ -817,8 +825,8 @@
 		    ,GIN_GFF_SUM
 		    ,STTN_SUM
 		    ,TCBO_ID
-		    ,정류장X좌표 X
-		    ,정류장Y좌표 Y
+		    ,정류장X좌표_REV X
+		    ,정류장Y좌표_REV Y
 		FROM 
 			(
 				SELECT 
@@ -912,7 +920,15 @@
 		                ,STTN_SUM
 		                ,TCBO_ID
 		                ,ROLLUP(CD_NO)
-			) F1, STDNN_BRS F2
+			) F1,
+		(SELECT DISTINCT 
+			운행일자
+			,OWNER
+			,정산사ID
+			,정류장ID
+			,정류장X좌표_REV
+			,정류장Y좌표_REV
+		FROM STDNN_BRS_REV2) F2
 		WHERE 1=1
 		AND F1.OPRAT_DATE = F2.운행일자
 		AND F1.PROVIDER = F2.OWNER
@@ -937,8 +953,8 @@
 		    ,TRS_AGG
 		    ,GIN_GFF_SUM
 		    ,STTN_SUM
-		    ,정류장X좌표 X
-		    ,정류장Y좌표 Y
+		    ,정류장X좌표_REV X
+		    ,정류장Y좌표_REV Y
 		FROM 
 			(
 				SELECT 
@@ -1032,7 +1048,15 @@
 		                ,STTN_SUM
 		                ,TCBO_ID
 		                ,ROLLUP(CD_NO)
-			) F1, STDNN_BRS F2
+			) F1,
+		(SELECT DISTINCT 
+		운행일자
+		,OWNER
+		,정산사ID
+		,정류장ID
+		,정류장X좌표_REV
+		,정류장Y좌표_REV
+		FROM STDNN_BRS_REV2) F2
 		WHERE 1=1
 		AND F1.OPRAT_DATE = F2.운행일자
 		AND F1.PROVIDER = F2.OWNER

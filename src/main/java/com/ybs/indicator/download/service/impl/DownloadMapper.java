@@ -46,6 +46,12 @@ public interface DownloadMapper {
 	
 	// 정류장간OD 수단통행 _ 서울||인천
 	List<EgovMap> selectdownloadResultListStationOD_method_small(SearchVO sVO);
+	
+	
+	
+	
+	// Ajax: 다운로드 가능여부 리스트
+	List<EgovMap> selectDownloadList(SearchVO sVO);
 
 
 }

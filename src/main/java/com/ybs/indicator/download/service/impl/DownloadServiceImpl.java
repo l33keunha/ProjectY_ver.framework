@@ -803,4 +803,33 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 		}
 	}
 
+
+
+	@Override
+	public List<EgovMap> selectDownloadList(SearchVO sVO) {
+		if(sVO.getAnal_type().equals("dlStation_stationCnt")) {
+			sVO.setAnal_fin("PIVOT_정류장별통행");
+		} else if(sVO.getAnal_type().equals("dlStation_station_purpose")) {
+			sVO.setAnal_fin("PIVOT_정류장별OD_목적통행_SMALL");
+		} else if(sVO.getAnal_type().equals("dlStation_station_method")) {
+			sVO.setAnal_fin("PIVOT_정류장별OD_수단통행_SMALL");
+		} else if(sVO.getAnal_type().equals("dlStation_station_run")) {
+			
+		} else if(sVO.getAnal_type().equals("dlStation_station_runCongestion")) {
+			
+		} else if(sVO.getAnal_type().equals("dlRoute_routeCnt")) {
+			sVO.setAnal_fin("PIVOT_노선별통행");
+		} else if(sVO.getAnal_type().equals("dlRoute_routeODCnt")) {
+			sVO.setAnal_fin("PIVOT_노선별OD_SMALL");
+		} else if(sVO.getAnal_type().equals("dlRoute_routeCBP")) {
+			sVO.setAnal_fin("혼잡_노선별_재차인원혼잡도");
+		} else if(sVO.getAnal_type().equals("dlArea_areaOD_purpose")) {
+			sVO.setAnal_fin("PIVOT_행정동별OD_목적통행");
+		} else if(sVO.getAnal_type().equals("dlArea_areaOD_method")) {
+			sVO.setAnal_fin("PIVOT_행정동별OD_수단통행");
+		}
+		
+		return mapper.selectDownloadList(sVO);
+	}
+
 }
