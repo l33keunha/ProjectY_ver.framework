@@ -6,6 +6,9 @@ import org.egovframe.rte.psl.dataaccess.util.EgovMap;
 
 public interface UserService {
 
-	List<EgovMap> login(UserVO uVO);
+	List<EgovMap> checkUser(UserVO uVO);
+	
+	UserVO login(UserVO uVO);
+
 
 }

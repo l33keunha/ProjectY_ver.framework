@@ -1,6 +1,11 @@
 // [ 1 ] 페이지 로드 시 비활성화로 시작
 	window.onload = function(){
-		disabledTrue(2)
+		if(window.sessionStorage.getItem("uVO")!=null) {
+			alert("로그인하셔");
+			location.href="../../index.jsp";
+		} else{
+			disabledTrue(2)
+		}
 	}
 	// [ --1 ]
 	
@@ -181,6 +186,8 @@
 		
 		$('.cell3_03').empty();
 		$('.cell3_03').append("<p>날짜</p>");
+		$('.cell3_03').append("<input type='checkBox' id='dateBtn'>");
+		$('.cell3_03').append("<label for='dateBtn'>!</label>");
 		selectProvider()
 		
 		$.ajax({
@@ -268,10 +275,50 @@
 						}
 					if(jsonArray['provider'] == '00'){
 						$('.date').datepicker("setDate",'2021-03-22');
+					} else if (jsonArray['provider'] == '08'){
+						$('.date').datepicker("setDate",'2021-11-22');
 					} else{
 						$('.date').datepicker("setDate",abledDays[0]);
-					}					
+					}		
+								
 				})
+				
+				$('#dateBtn').on('change', function () {
+					
+					if($('#dateBtn').is(":checked") == true){
+						$('.cell3_03').append("<div class='serviceDate'>");
+						
+						var addHtml ="";
+						
+						addHtml += "<div class='serviceDate_notice'>※ 서비스 제공날짜를 선택하세요.</div>";
+						addHtml += "<table class='serviceDate_table'>";
+						
+						for( var i in data.passSearchList){
+							var list = data.passSearchList[i];
+							
+							addHtml += "<tr>";
+							addHtml += "<td> · </td>";
+							addHtml += "<td>" + list.opratDate + "</td>";
+							addHtml += "<td> ~ </td>";
+							addHtml += "<td>" + list.sdate + "</td>";
+							addHtml += "</tr>"
+						}
+						
+						addHtml += "</table>";
+						
+						$('.serviceDate').append(addHtml);
+						
+						$('tr').on('click', function () {
+							var opratDate = $(this).children().eq(1).text();
+							opratDate = opratDate.substr(0, 4) + "-" +  opratDate.substr(4, 2) + "-" +  opratDate.substr(6, 2);
+							$('.date').datepicker("setDate",opratDate);
+						})
+					} else {
+						$('.serviceDate').remove();
+					}
+				
+				})
+				
 			}
 		})
 		

@@ -19,6 +19,7 @@ import org.springmodules.validation.commons.DefaultBeanValidator;
 
 import com.ybs.indicator.common.service.SearchVO;
 import com.ybs.indicator.download.service.DownloadService;
+import com.ybs.user.common.service.UserVO;
 
 @Controller
 public class DownloadController {
@@ -53,14 +54,14 @@ public class DownloadController {
 		List<EgovMap> downloadList = new ArrayList<EgovMap>();
 		
 		HttpSession session = request.getSession();
-		sVO.setuNo(session.getAttribute("uNo"));
+		
+		UserVO uVO = (UserVO)session.getAttribute("uVO");
+		sVO.setuNo(uVO.getuNo());
+		
 		System.out.println(sVO.toString());
 		
 		downloadList = service.selectDownloadList(sVO);
 		
-		for(int i = 0; i < 2; i++) {
-			System.out.println(downloadList.get(i).toString());
-		}
 		mv.addObject("downloadList", downloadList);
 		
 		return mv;

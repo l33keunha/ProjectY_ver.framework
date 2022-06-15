@@ -1,0 +1,144 @@
+*{
+     margin: 0 auto;
+    padding: 0 auto;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 12px;
+}
+.wrap{
+}
+.header {
+    width: 100%;
+    height: 43px;
+    border-bottom: 2px solid #1f2958;
+    padding-bottom: 5px;
+    position: relative;
+}
+
+.logo{
+    float: left;
+    width: 156px;
+    height: 57px;
+    margin-left: 14px;
+    margin-top: 10px;
+}
+.logo02{
+    float: left;
+    color: #1f2958;
+    font-size: 35px;
+    padding: 10px 0;
+    font-weight: bold;
+}
+.mtap{
+    position: absolute;
+    float: right;
+    bottom: 0;
+    right: 20px;
+    
+  }
+  h1 {
+    font-size: 23px;
+    text-align: center;
+    color: #62a9cd;
+}
+.login-input-section-wrap{
+        flex-direction: column;
+    align-items: center;
+    margin-top: 0%;
+}
+
+.login_wrap{
+	width: 100%;
+    text-align: center;
+}
+
+.login-input-wrap{
+	    margin-bottom: 11px;
+}
+
+
+.password-wrap{
+	margin-top: 13px;
+}
+
+.login-input-wrap input{
+    width: 265px;
+    font-size: 14px;
+    height: 28px;
+}
+.login-button-wrap {
+	text-align: center;
+}
+.login-button-wrap button{
+	width: 273px;
+    height: 35px;
+    font-size: 16px;
+    color: white;
+    border: none;
+    text-align: center;
+    background-color: #3086a7;
+    border-radius: 22px;
+}
+.login-stay-sign-in{
+	width: 465px;
+	height: 52px;
+	
+	display: flex;
+	font-size: 15px;
+	color: #4e4e4e;
+	align-items: center;
+	justify-content: flex-start;
+	border-bottom: solid 1px var(--border-gray-color);
+}
+.login-stay-sign-in i{
+	font-size: 25px;
+	color: #9ba1a3;
+}
+.login-stay-sign-in span{
+	padding-left: 5px;
+	line-height: 25px;
+}
+
+.logo03{
+        margin-top: 17px;
+    line-height: 106px;
+}
+
+
+.wraplog {
+    width: 30vw;
+    float: left;
+    margin-top: 8vh;
+    }
+    
+    .logo-box{float: left;
+    width: 213px;
+    height: 398px;
+    background: #ffffff00 url(../../images/indicator/logo.svg) no-repeat;}
+
+footer{
+    padding: 15px;
+    text-align: center;
+    font-size: 13px;
+    border-top: 1px solid #818181;
+    margin-top: 177px;
+}
+  
+  footer span{
+    display: block;
+    font-size: 12px;
+  }
+  .lodcon{
+  	width: calc(30vw + 321px);
+    height: 58vh;
+    margin-top: 15vh;
+    background: #f0fbff url(../../images/user/log_bg.png) no-repeat -146px 2px;
+    background-size: cover;
+  }
+  .bg-illust {
+        background: #ffffff00 url(../../images/indicator/logo.svg) no-repeat 7vw 22vh;
+    background-size: 49%;
+    width: 321px;
+    height: 396px;
+    float: left;
+    z-index: -1;
+}

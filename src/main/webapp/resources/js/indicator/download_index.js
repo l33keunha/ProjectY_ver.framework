@@ -2,6 +2,8 @@
 	$(document).ready(function(){
 		// 1. 통행량 선택시
 		$('.cell1').change(function(){
+			$('.cell2_icon').css('cursor','pointer');
+			
 			disabledTrue(2)
 			
 			if($("input[name=anal_group]:checked").val()=='dlStation'){
@@ -382,16 +384,15 @@
 		$('.dlHeader').css("font-weight","normal");
 		$('.body-sub-content').scrollTop(0);
 		
-		for(var i=1; i<=5; i++){
-			$("#dlHeader_"+i).val("1").prop("selected", true);
-		}
+		$("#dlHeader_1 option:selected").prop("selected", false);
 	});
 
 
 	$("select[name=dlHeader]").on('change',function(){
 		var k = $(this).val();
+		
 		var id = $(this).attr('id').substr(9);
-		console.log(id);
+		
 		for(var i=1; i<6; i++){
 			if(i != id){
 				$('#dlHeader_'+i).prop("disabled", true);
@@ -404,6 +405,8 @@
 		$(".body-sub-content-list").hide();
 		var temp = $(".body-sub-content-list:contains('" + k + "')");
 		$(temp).show();
+		
+		
 	});
 
 

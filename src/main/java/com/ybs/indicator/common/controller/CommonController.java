@@ -9,8 +9,6 @@ import javax.servlet.http.HttpSession;
 
 import org.egovframe.rte.psl.dataaccess.util.EgovMap;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,6 +17,7 @@ import org.springmodules.validation.commons.DefaultBeanValidator;
 
 import com.ybs.indicator.common.service.CommonService;
 import com.ybs.indicator.common.service.SearchVO;
+import com.ybs.user.common.service.UserVO;
 
 @Controller
 public class CommonController {
@@ -33,6 +32,12 @@ public class CommonController {
 	@RequestMapping(value="/goError.do")
 	public ModelAndView goError (ModelAndView mv) {
 		mv.setViewName("common/error");
+		return mv;
+	}
+	
+	@RequestMapping(value="/goLoginPage.do")
+	public ModelAndView goLoginPage (ModelAndView mv) {
+		mv.setViewName("user/login");
 		return mv;
 	}
 	
@@ -76,7 +81,10 @@ public class CommonController {
 		List<EgovMap> passSearchList = new ArrayList<EgovMap>();
 		
 		HttpSession session = request.getSession();
-		sVO.setuNo(session.getAttribute("uNo"));
+		
+		UserVO uVO = (UserVO)session.getAttribute("uVO");
+		sVO.setuNo(uVO.getuNo());
+		
 		System.out.println(sVO.toString());
 		
 		passSearchList = service.selectPassSearchList(sVO);
@@ -140,7 +148,10 @@ public class CommonController {
 		List<EgovMap> searchStatusList = new ArrayList<EgovMap>();
 		
 		HttpSession session = request.getSession();
-		sVO.setuNo(session.getAttribute("uNo"));
+		
+		UserVO uVO = (UserVO)session.getAttribute("uVO");
+		sVO.setuNo(uVO.getuNo());
+		
 		System.out.println(sVO.toString());
 		
 		searchStatusList = service.selectSearchStatusList(sVO);

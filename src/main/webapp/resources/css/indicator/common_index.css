@@ -177,3 +177,96 @@ div#ui-datepicker-div{
     color: #c7e4ff;
 }
 
+
+
+
+/* 로그인하러가기 css */
+.ConName-background{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	transition: .3s;
+	background: rgba(0, 0, 0, 0.38);
+	z-index: 1;
+	display: block; 
+}
+.pleaseLogin{
+    width: 438px;
+    height: 148px;
+    margin-top: 11%;
+    border-radius: 5px;
+    box-shadow: 0px 0 16px 0px #0000002e;
+    padding: 34px;
+    padding-right: 42px;
+    position: fixed;
+    top: 18%;
+    left: 40%;
+    background: #fff;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+}
+.pleaseLogin span{
+	margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+#pleaseLoginBtn{
+    background-color: #c7e4ff;
+    color: #004281;
+    width: 127px;
+    height: 40px;
+    font-size: 14px;
+    border-radius: 10px;
+    border: none;
+}
+
+#pleaseLoginBtn:hover{
+	color: #c7e4ff;
+    background-color: #004281;
+    box-shadow: 0px 2px 5px #000000;
+    font-weight: bold;
+    cursor:pointer;
+}
+
+
+
+
+
+/* cell3 - 날짜 - 제공날짜 css */
+.serviceDate{
+    position: absolute;
+    margin-left: 11.5%;
+    margin-top: -7.1%;
+    padding: 10px;
+    box-shadow: 6px 8px 10px 0px rgb(0 0 0 / 20%);
+}
+
+.serviceDate_notice {
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 11px;
+}
+
+input#dateBtn {
+    position: absolute;
+    display: inline;
+    margin-top: -37px;
+    margin-left: 195px;
+}
+
+.serviceDate table{
+	float: left;
+}
+
+.serviceDate table tr:hover{
+	cursor:pointer;
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+

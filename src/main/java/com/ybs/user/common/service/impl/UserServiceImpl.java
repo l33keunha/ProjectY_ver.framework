@@ -19,11 +19,18 @@ import com.ybs.user.common.service.UserVO;
 public class UserServiceImpl extends EgovAbstractServiceImpl implements UserService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 	
+	
+	
 	@Resource(name="userMapper")
 	private UserMapper mapper;
 
 	@Override
-	public List<EgovMap> login(UserVO uVO) {
+	public List<EgovMap> checkUser(UserVO uVO) {
+		return mapper.checkUser(uVO);
+	}
+	
+	@Override
+	public UserVO login(UserVO uVO) {
 		return mapper.login(uVO);
 	}
 }

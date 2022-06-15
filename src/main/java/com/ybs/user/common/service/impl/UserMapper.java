@@ -10,6 +10,9 @@ import com.ybs.user.common.service.UserVO;
 @Mapper("userMapper")
 public interface UserMapper {
 
-	List<EgovMap> login(UserVO uVO);
+	List<EgovMap> checkUser(UserVO uVO);
+	
+	UserVO login(UserVO uVO);
+
 	
 }
