@@ -238,11 +238,13 @@
 	
 	// 다운로드 가능여부 리스트
 	$('.modal-content-background').click(function() {
+		$('.test-modal-wrap').removeClass('active');
 		$('.modal-content-background').removeClass('active');
 		$('.modal-content').removeClass('active');
 	});
 	
 	function downloadList(){
+		$('.test-modal-wrap').addClass('active');
 	 	$('.modal-content-background').addClass('active');
         $('.modal-content').addClass('active');
 		$('#header_1').click();	
@@ -384,7 +386,11 @@
 		$('.dlHeader').css("font-weight","normal");
 		$('.body-sub-content').scrollTop(0);
 		
-		$("#dlHeader_1 option:selected").prop("selected", false);
+		for(var i=1; i<=5; i++){
+			$("#dlHeader_"+i).val("1").prop("selected", true);
+		}
+		
+		$(".body-sub-content-list").show();
 	});
 
 

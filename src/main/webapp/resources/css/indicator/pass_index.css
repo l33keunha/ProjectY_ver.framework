@@ -456,6 +456,7 @@ input[id=modalBtn] + label {
     height: 444px;
     background: #fff;
     text-align: center;
+    z-index: 1;
 }
 /* overlay */
 .modalContainer > label {

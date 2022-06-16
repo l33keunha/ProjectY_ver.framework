@@ -125,7 +125,9 @@ public interface PassMapper {
 	
 	/********************** 행정동OD 매트릭스 **********************/
 	
-	List<EgovMap> downloadPassResultListAreaOD(SearchVO sVO);
+	List<EgovMap> downloadPassResultListAreaODMatrixPurpose(SearchVO sVO);
+	
+	List<EgovMap> downloadPassResultListAreaODMatrixMethod(SearchVO sVO);
 	
 	/********************** 그래프 쿼리 **********************/
 	
@@ -146,6 +148,7 @@ public interface PassMapper {
 	
 	//  노선별통행 그래프  일별
 	List<EgovMap> graphPassResultListRoute_d(SearchVO sVO);
+
 
 
 

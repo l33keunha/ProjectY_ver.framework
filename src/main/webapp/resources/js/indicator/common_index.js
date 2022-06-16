@@ -273,10 +273,8 @@
 						    var noWeekend = jQuery.datepicker.noWeekends(date);
 						    return noWeekend[0] ? [true] : noWeekend;
 						}
-					if(jsonArray['provider'] == '00'){
-						$('.date').datepicker("setDate",'2021-03-22');
-					} else if (jsonArray['provider'] == '08'){
-						$('.date').datepicker("setDate",'2021-11-22');
+					if(jsonArray['provider'] == '03'){
+						$('.date').datepicker("setDate",'2020-10-19');
 					} else{
 						$('.date').datepicker("setDate",abledDays[0]);
 					}		

@@ -2639,15 +2639,24 @@
 	
 	<!-- ********************** 행정동별OD 매트릭스 **********************  -->
 	
-	<select id ="downloadPassResultListAreaOD" parameterType="sVO" resultType="egovMap">
+	<select id ="downloadPassResultListAreaODMatrixPurpose" parameterType="sVO" resultType="egovMap">
 		SELECT *
-		FROM 분석지역별행정동OD
+		FROM 분석지역별행정동OD_목적통행
 		WHERE 1=1
 			AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
 			AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
 		ORDER BY 승차지역순번
 	</select>
 	
+	
+	<select id ="downloadPassResultListAreaODMatrixMethod" parameterType="sVO" resultType="egovMap">
+		SELECT *
+		FROM 분석지역별행정동OD_수단통행
+		WHERE 1=1
+			AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
+			AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
+		ORDER BY 승차지역순번
+	</select>
 	
 	<!-- ********************** 그래프 쿼리 **********************  -->
 

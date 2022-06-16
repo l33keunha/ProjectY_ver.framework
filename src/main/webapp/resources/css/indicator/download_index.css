@@ -227,7 +227,7 @@ margin-top: 29px;
 margin-top: -60px;
 margin-left: 83px;}
 
-/* hcell �슂�냼 */
+/* hcell 占쎌뒄占쎈꺖 */
 
 .cell4{
 /* background: #ccdded; */
@@ -357,7 +357,23 @@ color: #c7e4ff;
 
 
 
-/* 다운로드 리스트 모달창 css */
+/* �떎�슫濡쒕뱶 由ъ뒪�듃 紐⑤떖李� css */
+.test-modal-wrap{
+	position: fixed;
+	opacity: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    opacity: 0;
+    transition: .3s;
+    z-index: 1;
+    display: none; 
+}
+
+.test-modal-wrap.active{opacity:1;
+display:block;}
+
 .modal-content-background{
 position: fixed;
 top: 0;
@@ -367,7 +383,7 @@ height: 100vh;
 opacity: 0;
 transition: .3s;
 background: rgba(0, 0, 0, 0.38);
-z-index: 1;
+z-index: 2;
 display: none; 
 }
 
@@ -386,13 +402,13 @@ box-shadow: 0px 0 16px 0px #0000002e;
 padding: 34px;
 padding-right: 42px;
 
-
-position:fixed;
+position:relative;
+/* position:fixed;
 top:18%;
-left:30%;
+left:30%; */
 background: #fff;
 display:none;
-z-index:2;
+z-index:3;
 }
 
 .modal-content-wrap {
@@ -472,9 +488,10 @@ color: #fff;
 }
 
 .body-sub-content {
-height: 363px;
-overflow-y: scroll;
-margin-top: 10px;
+    width: 649px;
+    height: 363px;
+    overflow-y: scroll;
+    margin-top: 10px;
 }
 
 .body-sub-content div {
@@ -527,7 +544,7 @@ cursor: pointer;
 
 
 
-/* cell3 - 날짜 - 제공날짜 css */
+/* cell3 - �궇吏� - �젣怨듬궇吏� css */
 .serviceDate{
     position: absolute;
     margin-left: 11.5%;

@@ -114,58 +114,63 @@
         <input class="submit" type="button" id="downloadBtn" value="다운로드" style="cursor: pointer;">
         
         
-		<div class="modal-content-background"></div>
-        <div class="modal-content">
-           <div class="modal-content-wrap">
-                  <div class="modal-header">
-                      <div class ="headers" id="header_1" table="PIVOT_정류장별통행">정류장별 통행</div>        
-                      <div class ="headers" id="header_2" table="PIVOT_정류장별OD_목적통행_SMALL">정류장간 목적통행</div>        
-                      <div class ="headers" id="header_3" table="PIVOT_정류장별OD_수단통행_SMALL">정류장간 수단통행</div>        
-                      <div class ="headers" id="header_4" table="정류장별 운행지표">정류장별 운행지표</div>        
-                      <div class ="headers" id="header_5" table="정류장간 운행/혼잡지표">정류장간 운행/혼잡지표</div>        
-                      <div class ="headers" id="header_6" table="PIVOT_노선별통행">노선별통행</div>        
-                      <div class ="headers" id="header_7" table="PIVOT_노선별OD_SMALL">노선별 기종점통행</div>        
-                      <div class ="headers" id="header_8" table="혼잡_노선별_재차인원혼잡도">노선별 재차인원</div>        
-                      <div class ="headers" id="header_9" table="PIVOT_행정동별OD_목적통행">행정동간 목적통행</div>        
-                      <div class ="headers" id="header_10" table="PIVOT_행정동별OD_수단통행">행정동간 수단통행</div>        
-                  </div>
-                  <div class="modal-body">
-                  
-                     <div class="body-notice">
-                        현재 준비중입니다.
+		<div class="test-modal-wrap">
+		
+           <div class="modal-content-background"></div>
+         
+           <div class="modal-content">
+              <div class="modal-content-wrap">
+                     <div class="modal-header">
+                         <div class ="headers" id="header_1" table="PIVOT_정류장별통행">정류장별 통행</div>        
+                         <div class ="headers" id="header_2" table="PIVOT_정류장별OD_목적통행_SMALL">정류장간 목적통행</div>        
+                         <div class ="headers" id="header_3" table="PIVOT_정류장별OD_수단통행_SMALL">정류장간 수단통행</div>        
+                         <div class ="headers" id="header_4" table="정류장별 운행지표">정류장별 운행지표</div>        
+                         <div class ="headers" id="header_5" table="정류장간 운행/혼잡지표">정류장간 운행/혼잡지표</div>        
+                         <div class ="headers" id="header_6" table="PIVOT_노선별통행">노선별통행</div>        
+                         <div class ="headers" id="header_7" table="PIVOT_노선별OD_SMALL">노선별 기종점통행</div>        
+                         <div class ="headers" id="header_8" table="혼잡_노선별_재차인원혼잡도">노선별 재차인원</div>        
+                         <div class ="headers" id="header_9" table="PIVOT_행정동별OD_목적통행">행정동간 목적통행</div>        
+                         <div class ="headers" id="header_10" table="PIVOT_행정동별OD_수단통행">행정동간 수단통행</div>        
                      </div>
-                    
-                      <div class="body-content">
-                          <div class ="modalHead">
-                              <select name="dlHeader" id="dlHeader_1" class="dlHeader">
-                                 <option value="1">광역/도</option>
-                              </select>
-                              <select name="dlHeader" id="dlHeader_2" class="dlHeader">
-                                 <option value="1">시/군</option>
-                              </select>
-                              <select name="dlHeader" id="dlHeader_4" class="dlHeader">
-                                  <option value="1">분석자료</option>
-                                  <option value="지자체">지자체</option>
-                                  <option value="정산사">정산사</option>
-                              </select>
-                              <select name="dlHeader" id="dlHeader_3" class="dlHeader">
-                                 <option value="1">제공날짜</option>
-                              </select>
-                              <select name="dlHeader" id="dlHeader_5" class="dlHeader">
-                                 <option value="1">가능여부</option>
-                                 <option value="O">O</option>
-                                 <option value="X">X</option>
-                              </select>
-                          </div>
-                          <button id="resetBtn"></button>
-                      </div>
-                      
-                      
-                      <div class="body-sub-content">
-                          
-                      </div>
+                     <div class="modal-body">
+                     
+                        <div class="body-notice">
+                           현재 준비중입니다.
+                        </div>
+                       
+                         <div class="body-content">
+                             <div class ="modalHead">
+                                 <select name="dlHeader" id="dlHeader_1" class="dlHeader">
+                                    <option value="1">광역/도</option>
+                                 </select>
+                                 <select name="dlHeader" id="dlHeader_2" class="dlHeader">
+                                    <option value="1">시/군</option>
+                                 </select>
+                                 <select name="dlHeader" id="dlHeader_4" class="dlHeader">
+                                     <option value="1">분석자료</option>
+                                     <option value="지자체">지자체</option>
+                                     <option value="정산사">정산사</option>
+                                 </select>
+                                 <select name="dlHeader" id="dlHeader_3" class="dlHeader">
+                                    <option value="1">제공날짜</option>
+                                 </select>
+                                 <select name="dlHeader" id="dlHeader_5" class="dlHeader">
+                                    <option value="1">가능여부</option>
+                                    <option value="O">O</option>
+                                    <option value="X">X</option>
+                                 </select>
+                             </div>
+                             <button id="resetBtn"></button>
+                         </div>
+                         
+                         
+                         <div class="body-sub-content">
+                             
+                         </div>
+                     </div>
                   </div>
-               </div>
+           </div>
+        
         </div>
         
         

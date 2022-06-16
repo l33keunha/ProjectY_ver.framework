@@ -200,7 +200,26 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 				case "passAreaODCnt_purpose":
 					System.out.println("행정동간OD 목적통행 매트릭스 다운로드");
 					
+					// ● 인자값 : 데이터 리스트
+					passResultList = mapper.downloadPassResultListAreaODMatrixPurpose(sVO);
 					
+					System.out.println("query 조회 시간 : " + ((System.currentTimeMillis() - sdt) / 1000));
+					
+					// ● 인자값 : 시트명
+					excelName = "행정동별OD_목적통행_매트릭스_"+date_SidoText;
+					
+					// ● 인자값 : 헤더명
+					for(int i = 0; i < passResultList.size(); i++) {
+						headerListSt += "," + passResultList.get(i).get("승차지역명");
+					}
+					headerListSt = "행정동" + headerListSt;
+					
+					// ● 인자값 : 컬럼명
+					for(int i = 1; i <= passResultList.size(); i++) {
+						columnListSt += ","+i+"지역";
+					}
+					
+					columnListSt = "승차지역명" + columnListSt;
 					
 					
 					break;
@@ -208,7 +227,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 					System.out.println("행정동간OD 수단통행 매트릭스 다운로드");
 					
 					// ● 인자값 : 데이터 리스트
-					passResultList = mapper.downloadPassResultListAreaOD(sVO);
+					passResultList = mapper.downloadPassResultListAreaODMatrixMethod(sVO);
 					
 					System.out.println("query 조회 시간 : " + ((System.currentTimeMillis() - sdt) / 1000));
 					

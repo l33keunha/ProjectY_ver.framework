@@ -47,7 +47,7 @@
 		WHERE 1=1
 			AND 분석지역_CD = #{anal_area_cd}
 			AND OWNER = #{provider}
-		ORDER BY 운행일자
+		ORDER BY 운행일자 DESC
 	</select>
 	
 	<!-- Ajax: 분석 노선번호 조회 -->
@@ -144,7 +144,7 @@
 			AND 분석지역_CD = #{anal_area_cd}
 			AND OWNER = #{provider}
 		    )
-		ORDER BY OPRAT_DATE
+		ORDER BY OPRAT_DATE DESC
 	</select>
 	
 	
