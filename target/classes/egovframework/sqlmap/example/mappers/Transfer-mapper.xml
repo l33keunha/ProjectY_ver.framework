@@ -639,7 +639,7 @@
 					,SDATE
 					,OPRAT_DATE
 					,ANAL_AREA_CD
-					<if test="tm==null">
+					<if test="tm.equals('')">
 		            ,CASE WHEN TFCMN = 'B-T' THEN '버스→지하철'
 			              WHEN TFCMN = 'B-B' THEN '버스↔버스'
 			        	  WHEN TFCMN = 'T-B' THEN '지하철→버스'
@@ -647,7 +647,7 @@
 			              END TFCMN
 			            ,NVL(TM, '합계') TM
 			        </if>
-			        <if test="tm!=null">
+			        <if test="!tm.equals('')">
 			            ,CASE WHEN NVL(TFCMN,'합계') = 'B-T' THEN '버스→지하철'
 			        	  WHEN NVL(TFCMN,'합계') = 'B-B' THEN '버스↔버스'
 			        	  WHEN NVL(TFCMN,'합계') = 'T-B' THEN '지하철→버스'
@@ -663,7 +663,7 @@
 							,OPRAT_DATE
 							,ANAL_AREA_CD
 							,CONCAT(TFCMN_START, CONCAT('-', TFCMN_END)) TFCMN 
-				            <if test="tm==null">
+				            <if test="tm.equals('')">
 				                ,TM
 				            </if>
 							,NVL(CD_NO, '합계') CD_NO
@@ -673,7 +673,7 @@
 							AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
 				            AND ANAL_AREA_CD = #{anal_area_cd}
 				            AND PROVIDER = #{provider}
-				            <if test="tm==null">
+				            <if test="tm.equals('')">
 				                AND TM BETWEEN #{tmStart} AND #{tmEnd}
 				            </if>
 				            <if test="!cd_no[0].equals('00')">
@@ -686,7 +686,7 @@
 									,OPRAT_DATE
 									,ANAL_AREA_CD
 									,CONCAT(TFCMN_START, CONCAT('-', TFCMN_END)) 
-				                    <if test="tm==null">
+				                    <if test="tm.equals('')">
 				                        ,TM
 				                    </if>
 									,ROLLUP(CD_NO)
@@ -697,12 +697,12 @@
 							,OPRAT_DATE
 							,ANAL_AREA_CD
 							,CD_NO
-							<if test="tm==null">
+							<if test="tm.equals('')">
 						    ,TFCMN
 				            ,ROLLUP(TM)
 				            ORDER BY SDATE, TFCMN, TM, CD_NO
 				            </if>
-				            <if test="tm!=null">
+				            <if test="!tm.equals('')">
 				                ,ROLLUP(TFCMN)
 				                ORDER BY SDATE, TFCMN, CD_NO
 				            </if> 
@@ -884,7 +884,7 @@
 				        	,TRANSFER_NUM
 				            ,NVL(TM, '합계') TM
 				        </if>
-             	    	<if test="tm!=null">
+             	    	<if test="!tm.equals('')">
 				            ,NVL(TO_CHAR(TRANSFER_NUM),'합계') TRANSFER_NUM
 				        </if>
 						,NVL(CD_NO, '합계') CD_NO

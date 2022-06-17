@@ -124,8 +124,8 @@ public class TimeDistnController {
 		codeMap.put("T-tm",  new Object[] {"지하철-시간", 	"#ffc39f", "#ffc39f", "bar"});
 		
 
-		codeMap.put("dst", new Object[] {"거리", 	"#b6bcff", "#b6bcff", "y2" ,"line"});
-		codeMap.put("tm",  new Object[] {"시간", 	"#ffb6b6", "#ffb6b6", "y", "bar"});
+		codeMap.put("dst", new Object[] {"거리", 	"#b6bcff", "#b6bcff", "bar"});
+		codeMap.put("tm",  new Object[] {"시간", 	"#ffb6b6", "#ffb6b6", "bar"});
 		
 
 		String dateColumn ="";
@@ -364,12 +364,19 @@ public class TimeDistnController {
 			case "timeDistn_avg_day": 														   
 				//System.out.println("1일 평균 통행시간거리_그래프");
 
+				/*
 				dayItem.put("label", codeMap.get(tempItem.get(dataCodeColumn).toString())[0]);
 				dayItem.put("type", codeMap.get(tempItem.get(dataCodeColumn).toString())[4]);
 				dayItem.put("backgroundColor", codeMap.get(tempItem.get(dataCodeColumn).toString())[1]);
 				dayItem.put("borderColor", codeMap.get(tempItem.get(dataCodeColumn).toString())[2]);
 				dayItem.put("data", data);
 				dayItem.put("yAxisID", codeMap.get(tempItem.get(dataCodeColumn).toString())[3]);
+				*/
+				dayItem.put("label", codeMap.get(tempItem.get(dataCodeColumn).toString())[0]);
+				dayItem.put("type", codeMap.get(tempItem.get(dataCodeColumn).toString())[3]);
+				dayItem.put("backgroundColor", codeMap.get(tempItem.get(dataCodeColumn).toString())[1]);
+				dayItem.put("borderColor", codeMap.get(tempItem.get(dataCodeColumn).toString())[2]);
+				dayItem.put("data", data);
 				
 				listOfDay.add(dayItem);
 				
@@ -377,12 +384,19 @@ public class TimeDistnController {
 			case "timeDistn_avg_purpose":                                                         
 				//System.out.println("목적통행 평균 통행시간거리_그래프");
 				
+				/*
 				dayItem.put("label", codeMap.get(tempItem.get(dataCodeColumn).toString())[0]);
 				dayItem.put("type", codeMap.get(tempItem.get(dataCodeColumn).toString())[4]);
 				dayItem.put("backgroundColor", codeMap.get(tempItem.get(dataCodeColumn).toString())[1]);
 				dayItem.put("borderColor", codeMap.get(tempItem.get(dataCodeColumn).toString())[2]);
 				dayItem.put("data", data);
 				dayItem.put("yAxisID", codeMap.get(tempItem.get(dataCodeColumn).toString())[3]);
+				*/
+				dayItem.put("label", codeMap.get(tempItem.get(dataCodeColumn).toString())[0]);
+				dayItem.put("type", codeMap.get(tempItem.get(dataCodeColumn).toString())[3]);
+				dayItem.put("backgroundColor", codeMap.get(tempItem.get(dataCodeColumn).toString())[1]);
+				dayItem.put("borderColor", codeMap.get(tempItem.get(dataCodeColumn).toString())[2]);
+				dayItem.put("data", data);
 				
 				listOfDay.add(dayItem);
 				
@@ -428,7 +442,7 @@ public class TimeDistnController {
 		
 	
 	
-		
+		//수단통행 평균 통행시간거리 그래프
 		if("timeDistn_avg_method".equals(sVO.getAnal_group())) {
 			List<String> chartListTm = new ArrayList<String>();
 			List<String> chartListDst = new ArrayList<String>();
@@ -458,6 +472,38 @@ public class TimeDistnController {
 			mv.addObject("jsonListTm", chartListTm);				// json 데이터 (시간 데이터)
 			mv.addObject("jsonListDst", chartListDst);				// json 데이터 (거리 데이터)
 			
+		//목적통행 평균 통행시간거리_그래프	|| 1일 평균 통행시간거리_그래프
+		}else if("timeDistn_avg_purpose".equals(sVO.getAnal_group()) || "timeDistn_avg_day".equals(sVO.getAnal_group())) {
+			
+			List<String> chartListTm = new ArrayList<String>();
+			List<String> chartListDst = new ArrayList<String>();
+			
+			Map<String, Object> allDayTm = new HashMap<String, Object>();
+			Map<String, Object> allDayDst = new HashMap<String, Object>();
+			
+			List<Map<String,Object>> mapListTm = new ArrayList<Map<String,Object>>();
+			List<Map<String,Object>> mapListDst = new ArrayList<Map<String,Object>>();
+			
+			for(String key : dateListSt) {
+		
+				mapListTm = new ArrayList<Map<String,Object>>();
+				
+				mapListTm.add((Map<String, Object>) (allDay.get(key)).get(0));
+				System.out.println("allDay:"+allDay);
+				allDayTm.put((String)key, (Object)mapListTm);				
+				chartListTm.add(gson.toJson(allDayTm.get(key)));
+				
+				mapListDst = new ArrayList<Map<String,Object>>();
+				mapListDst.add((Map<String, Object>) (allDay.get(key)).get(1));
+			
+				allDayDst.put((String)key, (Object)mapListDst);
+				chartListDst.add(gson.toJson(allDayDst.get(key)));
+			
+				
+			}
+			
+			mv.addObject("jsonListTm", chartListTm);				// json 데이터 (시간 데이터)
+			mv.addObject("jsonListDst", chartListDst);				// json 데이터 (거리 데이터)
 			
 		}else{
 			

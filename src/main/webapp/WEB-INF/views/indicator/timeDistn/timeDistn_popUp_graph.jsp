@@ -53,11 +53,11 @@
 	     	<div class="test">
 		     	<div class="content_wrap">
 			     	<c:if test = "${anal_groupText == '1일 평균 통행시간/거리'}">
-			     		<%@ include file="graphList/timeDistn_graph.jsp" %>
+			     		<%@ include file="graphList/timeDistn_avg_method_graph.jsp" %>
 			     	</c:if> 
 			      
 			     	<c:if test = "${anal_groupText == '목적통행 평균 통행시간/거리'}">
-			     		<%@ include file="graphList/timeDistn_graph.jsp" %>
+			     		<%@ include file="graphList/timeDistn_avg_method_graph.jsp" %>
 			     	</c:if> 
 			     	
 			     	<c:if test = "${anal_groupText == '수단통행 평균 통행시간/거리'}">
