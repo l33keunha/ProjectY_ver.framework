@@ -100,8 +100,8 @@ public class TimeDistnController {
 	
 		
 		List<EgovMap> dataList = service.graphTimeDistnResultList(sVO, res); // 그래프 데이터 리스트
-		List<Integer> routeNmaListDst = new ArrayList<Integer>();
-		List<Integer> routeNmaListTm = new ArrayList<Integer>();
+		List<Double> routeNmaListDst = new ArrayList<Double>();
+		List<Double> routeNmaListTm = new ArrayList<Double>();
 		
 		
 		//이용자 유형 코드 값 
@@ -201,8 +201,8 @@ public class TimeDistnController {
 			for(int i=0; i<dataList.size(); i++) {
 				
 				routeNmaList.add((String) dataList.get(i).get("routeNma"));
-				routeNmaListDst.add(Integer.parseInt(dataList.get(i).get("useDstAvg").toString()));
-				routeNmaListTm.add(Integer.parseInt(dataList.get(i).get("brdngTmAvg").toString()));
+				routeNmaListDst.add(Double.parseDouble(dataList.get(i).get("useDstAvg").toString()));
+				routeNmaListTm.add(Double.parseDouble(dataList.get(i).get("brdngTmAvg").toString()));
 			}
 	
 			routeMap.put("opratDate", dataList.get(0).get("opratDate"));
@@ -343,16 +343,16 @@ public class TimeDistnController {
 			}
 			
 			//string 배열 -> int 배열 변환
-			int[] data;
-			int[] data1 = null;
+			double[] data;
+			double[] data1 = null;
 			
 			//노선별통행 평균 통행시간거리_그래프
 			if("timeDistn_avg_route".equals(sVO.getAnal_group()) ) {	
 				
-				 data = routeNmaListDst.stream().mapToInt(Integer::intValue).toArray(); 
-				 data1 = routeNmaListTm.stream().mapToInt(Integer::intValue).toArray(); 
+				 data = routeNmaListDst.stream().mapToDouble(Double::intValue).toArray(); 
+				 data1 = routeNmaListTm.stream().mapToDouble(Double::intValue).toArray(); 
 			}else {
-				data = Arrays.asList((tempItem.get(jsonDataColumn).toString()).split(",")).stream().mapToInt(Integer::parseInt).toArray();
+				data = Arrays.asList((tempItem.get(jsonDataColumn).toString()).split(",")).stream().mapToDouble(Double::parseDouble).toArray();
 			}
 			
 			

@@ -9,6 +9,7 @@
 			SDATE
 			,OPRAT_DATE
 			,ANAL_AREA_CD
+			,TO_CHAR(SDATE, 'DY') DY
 			<if test="tm==null">
 	            ,TFCMN
 	            ,NVL(TM, '합계') TM
@@ -56,6 +57,7 @@
 		GROUP BY 	SDATE
 					,OPRAT_DATE
 					,ANAL_AREA_CD
+					,TO_CHAR(SDATE, 'DY')
 					,CD_NO
 					<if test="tm==null">
 				    ,TFCMN
@@ -310,6 +312,7 @@
 	    SELECT SDATE
 			,OPRAT_DATE
 			,ANAL_AREA_CD
+			,TO_CHAR(SDATE, 'DY') DY
 	        <if test="tm==null">
 	        	,TRANSFER_NUM
 	            ,NVL(TM, '합계') TM
@@ -335,6 +338,7 @@
 		    </if>
 		GROUP BY SDATE
 				,OPRAT_DATE
+				,TO_CHAR(SDATE, 'DY')
 				,ANAL_AREA_CD
 				,ROLLUP(CD_NO)
 		        <if test="tm==null">
@@ -352,6 +356,7 @@
 	<select id ="selectTransferResultListTimeMethod" parameterType="sVO" resultType="egovMap" fetchSize="1000">
 		SELECT SDATE
 				,OPRAT_DATE
+				,TO_CHAR(SDATE, 'DY') DY
 				,ANAL_AREA_CD
 		        <if test="tm==null">
 		            ,TFCMN
@@ -390,6 +395,7 @@
 		            </if>
 				GROUP BY 	SDATE
 							,OPRAT_DATE
+							
 							,ANAL_AREA_CD
 							,CONCAT(TFCMN_START, CONCAT('-',TFCMN_END))
 		                    <if test="tm==null">
@@ -400,6 +406,7 @@
 		GROUP BY SDATE
 				,OPRAT_DATE
 				,ANAL_AREA_CD
+				,TO_CHAR(SDATE, 'DY') 				
 				,CD_NO
 		        <if test="tm==null">
 				    ,TFCMN
@@ -416,6 +423,7 @@
 	<select id ="selectTransferResultListTimeNum" parameterType="sVO" resultType="egovMap" fetchSize="1000">
 	    SELECT 	SDATE
 				,OPRAT_DATE
+				,TO_CHAR(SDATE, 'DY') DY
 				,ANAL_AREA_CD
 		        <if test="tm==null">
 		            ,TRANSFER_NUM
@@ -463,6 +471,7 @@
 			)
 		GROUP BY  	SDATE
 					,OPRAT_DATE
+					,TO_CHAR(SDATE, 'DY') 
 					,ANAL_AREA_CD
 					,CD_NO
 		            <if test="tm==null">
@@ -480,6 +489,7 @@
 	<select id ="selectTransferResultListDistnMethod" parameterType="sVO" resultType="egovMap" fetchSize="1000">
 	    SELECT SDATE
 				,OPRAT_DATE
+				,TO_CHAR(SDATE, 'DY') DY
 				,ANAL_AREA_CD
 		        <if test="tm==null">
 		            ,TFCMN
@@ -527,6 +537,7 @@
 			)
 		GROUP BY SDATE
 				,OPRAT_DATE
+				,TO_CHAR(SDATE, 'DY') 
 				,ANAL_AREA_CD
 				,CD_NO
 		        <if test="tm==null">
@@ -544,6 +555,7 @@
 	<select id ="selectTransferResultListDistnNum" parameterType="sVO" resultType="egovMap" fetchSize="1000">
    	    SELECT 	SDATE
 				,OPRAT_DATE
+				,TO_CHAR(SDATE, 'DY') DY
 				,ANAL_AREA_CD
 		        <if test="tm==null">
 		            ,TRANSFER_NUM
@@ -591,6 +603,7 @@
 			)
 		GROUP BY  	SDATE
 					,OPRAT_DATE
+					,TO_CHAR(SDATE, 'DY') 
 					,ANAL_AREA_CD
 					,CD_NO
 		            <if test="tm==null">

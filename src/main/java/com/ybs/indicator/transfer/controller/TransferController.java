@@ -132,7 +132,7 @@ public class TransferController {
 				
 				List<EgovMap> dataList = service.graphTransferResultList(sVO, res); // 그래프 데이터 리스트
 				List<String> routeNmaList = new ArrayList<String>();
-				List<Integer> userCntAggList = new ArrayList<Integer>();
+				List<Double> userCntAggList = new ArrayList<Double>();
 			
 				System.out.println("dataList:"+dataList);
 				
@@ -184,7 +184,7 @@ public class TransferController {
 					for(int i=0; i<dataList.size(); i++) {
 						
 						routeNmaList.add((String) dataList.get(i).get("routeNma"));
-						userCntAggList.add(Integer.parseInt(dataList.get(i).get("userCntAgg").toString()));
+						userCntAggList.add(Double.parseDouble(dataList.get(i).get("userCntAgg").toString()));
 					}
 			
 					routeMap.put("opratDate", dataList.get(0).get("opratDate"));
@@ -329,15 +329,15 @@ public class TransferController {
 					}
 					
 					//string 배열 -> int 배열 변환
-					int[] data;
+					double[] data;
 					
 					//환승_노선별통행_그래프
 					if("transferCnt_route".equals(sVO.getAnal_type()) ) {	
-						data = userCntAggList.stream().mapToInt(Integer::intValue).toArray(); 
+						data = userCntAggList.stream().mapToDouble(Double::intValue).toArray(); 
 					}else {
-						data = Arrays.asList((tempItem.get(jsonDataColumn).toString()).split(",")).stream().mapToInt(Integer::parseInt).toArray();
+						data = Arrays.asList((tempItem.get(jsonDataColumn).toString()).split(",")).stream().mapToDouble(Double::parseDouble).toArray();
 					}
-					
+				
 					
 					//4. map을 생성해 해당 정보를 list에 담는다.
 					Map<String, Object> dayItem = new HashMap<String, Object>();

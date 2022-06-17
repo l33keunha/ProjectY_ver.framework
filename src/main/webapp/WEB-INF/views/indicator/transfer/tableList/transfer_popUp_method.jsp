@@ -78,9 +78,9 @@
 									<!-- 수단 데이터 : 언더바 -> 화살표 치환 -->
 									<c:set var = "tfcmnValue" value = "${transferResultList[j*columnCnt].tfcmn}"/>
 								
-									<c:set var = "tfcmnArrowValue" value = "${fn:replace(tfcmnValue, '버스_버스' ,'버스↔버스')}"/>
-									<c:set var = "tfcmnArrowValue" value = "${fn:replace(tfcmnArrowValue, '버스_지하철' ,'버스→지하철')}"/>
-									<c:set var = "tfcmnArrowValue" value = "${fn:replace(tfcmnArrowValue, '지하철_버스' ,'지하철→버스')}"/>
+									<c:set var = "tfcmnArrowValue" value = "${fn:replace(tfcmnValue, 'B-B' ,'버스↔버스')}"/>
+									<c:set var = "tfcmnArrowValue" value = "${fn:replace(tfcmnArrowValue, 'B-T' ,'버스→지하철')}"/>
+									<c:set var = "tfcmnArrowValue" value = "${fn:replace(tfcmnArrowValue, 'T-B' ,'지하철→버스')}"/>
 									
 									<td class="tg-0pky" style="width: 100px; min-width: 100px; max-width: 100px;"><div class="lavel-2">${tfcmnArrowValue}</div></td>									<!-- 수단 -->
 									
@@ -108,9 +108,9 @@
 										<!-- 수단 데이터 : 언더바 -> 화살표 치환 -->
 										<c:set var = "tfcmnValue" value = "${transferResultList[j*columnCnt].tfcmn}"/>
 										
-										<c:set var = "tfcmnArrowValue" value = "${fn:replace(tfcmnValue, '버스_버스' ,'버스↔버스')}"/>
-										<c:set var = "tfcmnArrowValue" value = "${fn:replace(tfcmnArrowValue, '버스_지하철' ,'버스→지하철')}"/>
-										<c:set var = "tfcmnArrowValue" value = "${fn:replace(tfcmnArrowValue, '지하철_버스' ,'지하철→버스')}"/>
+										<c:set var = "tfcmnArrowValue" value = "${fn:replace(tfcmnValue, 'B-B' ,'버스↔버스')}"/>
+										<c:set var = "tfcmnArrowValue" value = "${fn:replace(tfcmnArrowValue, 'B-T' ,'버스→지하철')}"/>
+										<c:set var = "tfcmnArrowValue" value = "${fn:replace(tfcmnArrowValue, 'T-B' ,'지하철→버스')}"/>
 										
 										<td class="tg-0pky" rowspan='${timeCnt}' 	style="width: 100px; min-width: 100px; max-width: 100px;"><div class="lavel-2">${tfcmnArrowValue}</div></td>			<!-- 수단 -->
 										 

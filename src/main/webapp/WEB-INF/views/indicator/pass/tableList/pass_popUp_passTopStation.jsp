@@ -7,6 +7,37 @@
 
 		
 		
+		<style>
+			.modal-content{
+				z-index: 100000000000000000;
+				position: absolute;
+			    /*
+			    width: 202px;
+			    height: 173px;
+			    */
+			    width: 700px;
+			    height: 400px;
+			    background: #c5e4ff;
+			    box-shadow: 5px 5px 13px 3px #00000087;
+			    color: #1c2e3e;
+			    margin-top: 4px;
+			    margin-left: 66px;
+			}
+	
+			.modal-content.active{
+			   display: block;
+			}
+			
+			.map-choice:visited {
+			  color : black;
+			}
+			.map-choice:hover {
+			  color : red;
+			  cursor: pointer;
+			}
+			
+		</style>
+		
 		<!-- 행 계산 변수 -->
 		
 		<c:set var="columnCnt" value='${columnCnt+1}' />									<!-- 컬럼 반복 횟수 (합계 포함) -->
@@ -35,7 +66,8 @@
 					
 				</table>	
 			</div>
-			  
+			
+			
 			<div class="table2">
 				<table style="border-collapse: collapse;">
 					
@@ -63,10 +95,36 @@
 									<c:set var="t_b_name" value='지하철' />
 								</c:if>
 								
-								<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;"><div class="lavel-2 lavel-1">${t_b_name}</div></td>															<!-- 정류장구분 -->
-								<td class="tg-0pky" style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2 lavel-1">${passResultList[j * columnCnt].sttnId}</div></td>								<!-- 정류장ID -->
-								<td class="tg-0pky" style="width: 200px; min-width: 200px; max-width: 200px;"><div class="lavel-2 lavel-1">${passResultList[j * columnCnt].sttnNma}</div></td>							<!-- 정류장명 -->
-								<td class="tg-0pky" style="width: 210px; min-width: 210px; max-width: 210px;"><div class="lavel-2 lavel-1">${passResultList[j * columnCnt].sttnHjd}</div></td>							<!-- 정류장행정동 -->
+								<td class="tg-0pky" style="width: 70px; min-width: 70px; max-width: 70px;"><div class="lavel-2 lavel-1">${t_b_name}</div></td>																							<!-- 정류장구분 -->
+								<td class="tg-0pky" style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2 lavel-1" id="busTest_${passResultList[j * columnCnt].sttnId}" >${passResultList[j * columnCnt].sttnId}</div></td>		<!-- 정류장ID -->
+								<td class="tg-0pky" style="width: 200px; min-width: 200px; max-width: 200px;">
+									<!-- 
+									<div class="lavel-2 lavel-1" id="mapPage_${j}"     x="${passResultList[j * columnCnt].x}" 
+																					   y="${passResultList[j * columnCnt].y}" 
+																					   tfcmn="${passResultList[j * columnCnt].tfcmn}" 
+																					   bus_hjd="${passResultList[j * columnCnt].sttnHjd}"
+																					   bus_name="${passResultList[j * columnCnt].sttnNma}"
+																					   bus_id="${passResultList[j * columnCnt].sttnId}" >  
+									
+												${passResultList[j * columnCnt].sttnNma}
+									</div>											
+									 -->
+									<!-- 정류장명 -->
+									<a class="map-choice">
+										<div class="lavel-2 lavel-1" onClick="mapPage(${passResultList[j * columnCnt].y}, ${passResultList[j * columnCnt].x}, '${passResultList[j * columnCnt].tfcmn}', '${passResultList[j * columnCnt].sttnNma}', '${passResultList[j * columnCnt].sttnHjd}');">${passResultList[j * columnCnt].sttnNma}</div>	<!-- 정류장명 -->
+									</a>	
+									<!--  
+										<div class="lavel-2 lavel-1 modal" id="modal_${j}" x="${passResultList[j * columnCnt].x}" 
+																					   y="${passResultList[j * columnCnt].y}" 
+																					   tfcmn="${passResultList[j * columnCnt].tfcmn}" 
+																					   bus_hjd="${passResultList[j * columnCnt].sttnHjd}"
+																					   bus_name="${passResultList[j * columnCnt].sttnNma}"
+																					   bus_id="${passResultList[j * columnCnt].sttnId}" >
+											${passResultList[j * columnCnt].sttnNma}
+										</div>  
+									-->
+								</td>							
+								<td class="tg-0pky" style="width: 210px; min-width: 210px; max-width: 210px;"><div class="lavel-2 lavel-1">${passResultList[j * columnCnt].sttnHjd}</div></td>															<!-- 정류장행정동 -->
 								
 							</tr>
 							
@@ -167,8 +225,59 @@
 	
 		</div>
 
-			
-			
+	<!-- 지도 조회조건 -->
+	<form id="mapForm" action="<%=request.getContextPath()%>/passMap.do" target="map" method="post">
 		
-      
- 
+		<input name="bus_x" 		type="hidden" id="bus_x" 		value=""/>
+		<input name="bus_y" 		type="hidden" id="bus_y" 		value=""/>
+		<input name="bus_sttnNma" 	type="hidden" id="bus_sttnNma" 	value=""/>
+		<input name="bus_sttnHjd" 	type="hidden" id="bus_sttnHjd" value=""/>
+		<input name="bus_tfcmn" 	type="hidden" id="bus_tfcmn" value=""/>
+		<input name="dataList" 		type="hidden" id="dataList" value=""/>
+	
+		<input type="submit" id="mapSubmitBtn" style="display: none;"/>
+	</form>
+
+	<script>
+   
+		//지도 x,y 좌표 데이터 가져오기
+		var arr = new Array();
+		<c:forEach var='j' begin='0' end='${forCnt-1}'>
+		
+			arr.push({	
+				tfcmn :"${passResultList[j * columnCnt].tfcmn}",
+				x:"${passResultList[j * columnCnt].y}",
+				y:"${passResultList[j * columnCnt].x}", 		
+				sttnNma:"${passResultList[j * columnCnt].sttnNma}", 		
+				sttnHjd:"${passResultList[j * columnCnt].sttnHjd}" 		
+			});
+			
+		</c:forEach>
+	 
+	    
+		var openWin;
+		function mapPage(x, y, tfcmn, sttnNma, sttnHjd) {
+			
+			//팝업 존재 유무
+			if(typeof openWin == "undefined" || openWin.closed) {
+			
+				$('#bus_x').val(x);
+				$('#bus_y').val(y);
+				$('#bus_tfcmn').val(tfcmn);
+				$('#bus_sttnNma').val(sttnNma);
+				$('#bus_sttnHjd').val(sttnHjd);
+				$('#dataList').val(encodeURIComponent(JSON.stringify(arr)));
+				
+				openWin = window.open("" ,"map", "toolbar=no, width=560, height=275, directories=no, status=no, scrollorbars=no, resizable=no");
+				$('#mapSubmitBtn').click();
+				
+			}else{
+				
+				openWin.focus();
+				popup.markerChoice(x,y,tfcmn+"choice", sttnNma, sttnHjd); // 자식창 함수 호출
+			}
+			
+		}
+		
+		
+	</script>

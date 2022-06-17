@@ -375,4 +375,15 @@ public class PassController {
 	}
 	
 	
+	@RequestMapping(value="/passMap.do")
+	public ModelAndView passMap(ModelAndView mv, @ModelAttribute SearchVO sVO, HttpServletRequest req, HttpServletResponse res) {
+		
+		mv.setViewName("indicator/pass/pass_popUp_map");
+		mv.addObject("sVO", sVO);
+		mv.addObject("req", req);
+		
+		return mv;
+	}
+	
+	
 }

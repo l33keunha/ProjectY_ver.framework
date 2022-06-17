@@ -9,17 +9,22 @@
 <c:set var="list" value="${passResultList }"/>
 <!DOCTYPE html>
 <html>
+
+	<!-- 코드 텍스트 매칭 -->
+    <%@ include file="pass_popUp_codeNameMatch.jsp" %>
+    
     <head>
     	<meta charset="UTF-8">
     	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
         <script type="text/javascript" src="resources/js/indicator/common_popUp.js" async ></script>
+         <c:if test = "${anal_groupText == '상위이용정류장' && anal_typeText == ''}">
+     		<script type="text/javascript" src="http://map.vworld.kr/js/vworldMapInit.js.do?version=2.0&apiKey=7D1285BF-31DC-3DD8-A3E3-86D92C9568E8&domain=localhost:8080"></script>
+     	</c:if>
         <link rel="stylesheet" type="text/css" href="resources/css/indicator/pass_popup.css">
     </head>
     
     	
-    <!-- 코드 텍스트 매칭 -->
-    <%@ include file="pass_popUp_codeNameMatch.jsp" %>
     
     <iframe id="excelDown" name="excelDown" width="0" height="0"></iframe>
     

@@ -15,6 +15,7 @@
 		} else if($("input[name=anal_group]:checked").val()=='passRouteODCnt' || 'passTopRotue' || 'passTopStation'){
 			searchAnal()
 		} 
+		
 	})
 	
 	// ※ [2] 분석유형 change

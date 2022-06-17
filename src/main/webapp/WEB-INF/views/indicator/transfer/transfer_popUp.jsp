@@ -124,7 +124,7 @@
 		     	</c:if> 
 		     	
 		     	<c:if test = "${anal_groupText == '환승통행거리'}">
-		     		<span class="info">(단위 : km)</span>
+		     		<span class="info">(단위 : m)</span>
 		     	</c:if> 
 		    </div>
 	     	

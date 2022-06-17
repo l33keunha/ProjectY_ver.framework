@@ -177,7 +177,7 @@
 	// [ 3-4 ] 정산사 다시 선택하고 싶은 경우 : 1. 날짜 활성화 2. anal_fin에 따른 선택박스 오픈
 	$("input[name=provider]").change(function(){
 		$("[class=selectbox]").find("input:checked").each(function(index, item){
-		jsonArray[$(item)[0].name] = $(item)[0].value;
+			jsonArray[$(item)[0].name] = $(item)[0].value;
 		})
 		
 		jsonArray["anal_area_cd_sido"] = $("select[name=anal_area_cd_sido]").val();
