@@ -212,7 +212,7 @@
 		WHERE 1=1
 			AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 			AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
-		ORDER BY 승차내외부, 승차역ID, 하차내외부, 하차역ID, 시간
+		ORDER BY 승차내외부, 하차내외부, 승차역ID, 하차역ID, 시간
 	</select>
 	
 	<!-- 정류장간OD 수단통행 -->
@@ -244,7 +244,7 @@
 		WHERE 1=1
 			AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 			AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
-		ORDER BY 승차내외부, 승차역ID, 하차내외부, 하차역ID, 시간
+		ORDER BY 승차내외부, 하차내외부, 승차역ID, 하차역ID, 시간
 	</select>
 	
 	<!-- 노선별 정류장간OD -->

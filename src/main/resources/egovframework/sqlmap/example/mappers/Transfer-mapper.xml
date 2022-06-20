@@ -715,10 +715,19 @@
                                     ,'09' 대학생 , '10' 복지 , '11' 기타, '합계' 합계)
             )
         <if test="tm.equals('')">
-        	ORDER BY  OPRAT_DATE, TFCMN, TM
+        	ORDER BY  OPRAT_DATE, CASE WHEN TFCMN = '버스↔버스' THEN 1
+        	                           WHEN TFCMN = '버스→지하철' THEN 2
+        	                           WHEN TFCMN = '지하철→버스' THEN 3 
+        	                           ELSE 99
+        	                           END ASC
+        	                    , TM
         </if>
         <if test="!tm.equals('')">
-        	ORDER BY  OPRAT_DATE, TFCMN
+        	ORDER BY  OPRAT_DATE, CASE WHEN TFCMN = '버스↔버스' THEN 1
+        	                           WHEN TFCMN = '버스→지하철' THEN 2
+        	                           WHEN TFCMN = '지하철→버스' THEN 3 
+        	                           ELSE 99
+        	                           END ASC
         </if>
 	</select>
 	
@@ -1023,10 +1032,19 @@
                                     ,'09' 대학생 , '10' 복지 , '11' 기타, '평균' 평균)
             )
         <if test="tm.equals('')">
-        	ORDER BY  OPRAT_DATE, TFCMN, TM
+        	ORDER BY  OPRAT_DATE, CASE WHEN TFCMN = '버스↔버스' THEN 1
+                           WHEN TFCMN = '버스→지하철' THEN 2
+                           WHEN TFCMN = '지하철→버스' THEN 3 
+                           ELSE 99
+                           END ASC
+                    , TM
         </if>
         <if test="!tm.equals('')">
-        	ORDER BY  OPRAT_DATE, TFCMN
+        	ORDER BY  OPRAT_DATE, CASE WHEN TFCMN = '버스↔버스' THEN 1
+                           WHEN TFCMN = '버스→지하철' THEN 2
+                           WHEN TFCMN = '지하철→버스' THEN 3 
+                           ELSE 99
+                           END ASC
         </if>
 	</select>
 	
@@ -1207,10 +1225,19 @@
                                     ,'09' 대학생 , '10' 복지 , '11' 기타, '평균' 평균)
             )
         <if test="tm.equals('')">
-        	ORDER BY  OPRAT_DATE, TFCMN, TM
+        	ORDER BY  OPRAT_DATE, CASE WHEN TFCMN = '버스↔버스' THEN 1
+                           WHEN TFCMN = '버스→지하철' THEN 2
+                           WHEN TFCMN = '지하철→버스' THEN 3 
+                           ELSE 99
+                           END ASC
+                    , TM
         </if>
         <if test="!tm.equals('')">
-        	ORDER BY  OPRAT_DATE, TFCMN
+        	ORDER BY  OPRAT_DATE, CASE WHEN TFCMN = '버스↔버스' THEN 1
+                           WHEN TFCMN = '버스→지하철' THEN 2
+                           WHEN TFCMN = '지하철→버스' THEN 3 
+                           ELSE 99
+                           END ASC
         </if>
 	</select>
 	
@@ -1371,7 +1398,7 @@
                     ,TFCMN
                     ,ROUTE_ID
                     ,ROUTE_NMA
-        ORDER BY OPRAT_DATE, TFCMN, ROUTE_ID, ROUTE_NMA
+        ORDER BY OPRAT_DATE, TFCMN, ROUTE_NMA, ROUTE_ID
 	</select>
 	
 	<!-- graph 환승 횟수별통행 -->

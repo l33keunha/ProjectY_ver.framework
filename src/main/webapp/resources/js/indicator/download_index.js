@@ -2,7 +2,7 @@
 	$(document).ready(function(){
 		// 1. 통행량 선택시
 		$('.cell1').change(function(){
-			$('.cell2_icon').css('cursor','pointer');
+			$('.cell2_icon').addClass('active');
 			
 			disabledTrue(2)
 			

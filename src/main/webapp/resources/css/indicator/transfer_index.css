@@ -671,3 +671,16 @@ input[name=routeId]{
     	width: 138px;
     	text-align: left;
     	}
+    	
+    	
+    	
+    	
+/* cell3 - 날짜 - 제공날짜 css */
+.serviceDate{
+    position: absolute;
+	margin-left: 11.5%;
+    margin-top: -6.8%;
+    padding: 10px;
+    box-shadow: 6px 8px 10px 0px rgb(0 0 0 / 20%);
+    z-index: 1;
+}

@@ -192,6 +192,17 @@ div#ui-datepicker-div{
 	z-index: 1;
 	display: block; 
 }
+.popUp-background{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	transition: .3s;
+	background: rgba(0, 0, 0, 0.88);
+	z-index: 1;
+	display: block; 
+}
 .pleaseLogin{
     width: 438px;
     height: 148px;
@@ -236,7 +247,6 @@ div#ui-datepicker-div{
 
 
 
-
 /* cell3 - 날짜 - 제공날짜 css */
 .serviceDate{
     position: absolute;
@@ -244,7 +254,7 @@ div#ui-datepicker-div{
     margin-top: -7.1%;
     padding: 10px;
     box-shadow: 6px 8px 10px 0px rgb(0 0 0 / 20%);
-    z-index: 2;
+    z-index: 3; 
 }
 
 .serviceDate_notice {

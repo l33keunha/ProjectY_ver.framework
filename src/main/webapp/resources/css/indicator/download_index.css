@@ -109,12 +109,28 @@ width: 179px;
 .cell2_icon{
 width: 74px;
 height: 40px;
-background: #32689b url(../../images/indicator/download-header-icon.png) no-repeat 3px 10px;
+background: #32689b url(../../images/indicator/download-header-icon2.png) no-repeat 3px 10px;
 background-size: 23px;
-/* position: absolute; */
 float: right;
 }
 
+.cell2_icon.active {
+cursor:pointer;
+width: 74px;
+height: 40px;
+background: #32689b url(../../images/indicator/download-header-icon2.png) no-repeat 3px 10px;
+background-size: 23px;
+float: right;
+}
+
+.cell2_icon.active:hover {
+cursor:pointer;
+width: 74px;
+height: 40px;
+background: #32689b url(../../images/indicator/download-header-icon.png) no-repeat 3px 10px;
+background-size: 26px;
+float: right;
+}
 
 .cell3{
 /* background: #ccdded; */
