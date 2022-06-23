@@ -908,14 +908,14 @@
             </if>
             <if test="!cd_no[0].equals('00')">
                 AND CD_NO IN
-                <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+                <foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">  
                     #{arr}
                 </foreach>
             </if>
 		GROUP BY OPRAT_DATE 
 				,ROUTE_ID 
 				,ROUTE_NMA 
-		ORDER BY ROUTE_NMA, ROUTE_ID
+		ORDER BY TFCMN, ROUTE_NMA, ROUTE_ID, TM
 	</select>
 		
 		

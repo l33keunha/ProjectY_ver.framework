@@ -9,7 +9,7 @@
 		
 		<style>
 			.modal-content{
-				z-index: 100000000000000000;
+				z-index: 10000;
 				position: absolute;
 			    /*
 			    width: 202px;

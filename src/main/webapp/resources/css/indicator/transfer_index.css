@@ -587,7 +587,7 @@ input[name=routeId]{
     left: 6%;
     top: 28%;
     height: 54%;
-    z-index: 1000000000;
+    z-index: 1000;
   }
   #lds-spinner div {
     position: absolute;

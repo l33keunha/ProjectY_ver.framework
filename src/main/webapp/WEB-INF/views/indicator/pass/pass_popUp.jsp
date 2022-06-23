@@ -9,6 +9,21 @@
 <c:set var="list" value="${passResultList }"/>
 <!DOCTYPE html>
 <html>
+
+     <div id="lds-spinner">
+         <div></div>
+         <div></div>
+         <div></div>
+         <div></div>
+         <div></div>
+         <div></div>
+         <div></div>
+         <div></div>
+         <div></div>
+         <div></div>
+         <div></div>
+         <div></div>
+     </div>
 	
 
 	<!-- 코드 텍스트 매칭 -->
@@ -114,6 +129,11 @@
 
   
     <body>
+   
+    
+    
+    
+    
       	<div class="wrap">
 	        <div class="header">
 	            <p>통행 분석 지표</p>
@@ -326,5 +346,5 @@
 			if (this.offsetWidth < this.scrollWidth)
 			    $(this).attr('title', $(this).text());
 		});
-       </script>   
+    </script>   
 </html>

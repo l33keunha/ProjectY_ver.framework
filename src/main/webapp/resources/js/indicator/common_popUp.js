@@ -1,4 +1,10 @@
 
+	$(document).ready(function(){
+    	$('#lds-spinner').css('display','none');
+	});
+	
+	
+	
 	$("#download").on('click',function(){
 		$('#downloadSubmitBtn').click();
 	})

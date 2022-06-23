@@ -71,6 +71,12 @@ public class CommonController {
 		return mv;
 	}
 	
+	@RequestMapping(value="/goMapIndex.do")
+	public ModelAndView goMapIndex (ModelAndView mv) {
+		mv.setViewName("indicator/map/map_index");
+		return mv;
+	}
+	
 	
 	
 	// 조회조건 공통 cell3 

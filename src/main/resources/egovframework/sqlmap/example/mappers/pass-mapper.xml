@@ -11,7 +11,7 @@
             ,NVL(TM,'합계') TM
             ,NVL(CD_NO,'합계') CD_NO
             ,SUM(USER_CNT_AGG) USER_CNT_AGG
-		FROM 결과지표_목적통행
+		FROM SYSDG.결과지표_목적통행
 		WHERE 1=1
 			AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
 			AND ANAL_AREA_CD = #{anal_area_cd}
@@ -43,7 +43,7 @@
                     ,ANAL_AREA_CD, CD_NO
                     ,SUM(USER_CNT_AGG)OVER(PARTITION BY OPRAT_DATE, CD_NO ORDER BY CD_NO) USER_CNT_AGG
                     ,ROW_NUMBER() OVER(PARTITION BY OPRAT_DATE, CD_NO ORDER BY CD_NO) R1
-                FROM 결과지표_목적통행
+                FROM SYSDG.결과지표_목적통행
                 WHERE 1=1
                     AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
                     AND ANAL_AREA_CD = #{anal_area_cd}
@@ -72,7 +72,7 @@
             ,NVL(CD_NO,'합계') CD_NO
             ,TFCMN
             ,SUM(USER_CNT_AGG) USER_CNT_AGG
-		FROM 결과지표_수단통행
+		FROM SYSDG.결과지표_수단통행
 		WHERE 1=1
 			AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
 			AND ANAL_AREA_CD = #{anal_area_cd}
@@ -113,7 +113,7 @@
                     ,TFCMN
                     ,SUM(USER_CNT_AGG)OVER(PARTITION BY OPRAT_DATE, CD_NO, TFCMN ORDER BY CD_NO) USER_CNT_AGG
                     ,ROW_NUMBER() OVER(PARTITION BY OPRAT_DATE, CD_NO, TFCMN ORDER BY CD_NO) R1
-                FROM 결과지표_수단통행
+                FROM SYSDG.결과지표_수단통행
                 WHERE 1=1
                     AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
                     AND ANAL_AREA_CD = #{anal_area_cd}
@@ -154,7 +154,7 @@
             ,NVL(TM,'합계') TM ,NVL(CD_NO,'합계') CD_NO
             ,SUM(ROUTE_BUS_GIN_AGG) ROUTE_BUS_GIN_AGG ,SUM(ROUTE_BUS_GFF_AGG) ROUTE_BUS_GFF_AGG ,SUM(ROUTE_BUS_TRS_AGG) ROUTE_BUS_TRS_AGG
             ,SUM(ROUTE_BUS_GIN_AGG) + SUM(ROUTE_BUS_GFF_AGG) GIN_GFF_SUM
-		FROM 결과지표_노선별통행
+		FROM SYSDG.결과지표_노선별통행
 		WHERE 1=1
 			AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 			AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
@@ -197,7 +197,7 @@
             ,NVL(CD_NO,'합계') CD_NO
             ,SUM(ROUTE_BUS_GIN_AGG) ROUTE_BUS_GIN_AGG ,SUM(ROUTE_BUS_GFF_AGG) ROUTE_BUS_GFF_AGG ,SUM(ROUTE_BUS_TRS_AGG) ROUTE_BUS_TRS_AGG
             ,SUM(ROUTE_BUS_GIN_AGG) + SUM(ROUTE_BUS_GFF_AGG) GIN_GFF_SUM
-		FROM 결과지표_노선별통행_일별
+		FROM SYSDG.결과지표_노선별통행_일별
 		WHERE 1=1
 			AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 			AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
@@ -239,7 +239,7 @@
             ,NVL(TM,'합계') TM ,NVL(CD_NO,'합계') CD_NO
             ,SUM(ROUTE_TRAIN_GIN_AGG) ROUTE_TRAIN_GIN_AGG ,SUM(ROUTE_TRAIN_GFF_AGG) ROUTE_TRAIN_GFF_AGG ,SUM(ROUTE_TRAIN_TRS_AGG) ROUTE_TRAIN_TRS_AGG
             ,SUM(ROUTE_TRAIN_GIN_AGG) + SUM(ROUTE_TRAIN_GFF_AGG) GIN_GFF_SUM
-		FROM 결과지표_노선별통행
+		FROM SYSDG.결과지표_노선별통행
 		WHERE 1=1
 			AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 			AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
@@ -282,7 +282,7 @@
             ,NVL(CD_NO,'합계') CD_NO
             ,SUM(ROUTE_TRAIN_GIN_AGG) ROUTE_TRAIN_GIN_AGG ,SUM(ROUTE_TRAIN_GFF_AGG) ROUTE_TRAIN_GFF_AGG ,SUM(ROUTE_TRAIN_TRS_AGG) ROUTE_TRAIN_TRS_AGG
             ,SUM(ROUTE_TRAIN_GIN_AGG) + SUM(ROUTE_TRAIN_GFF_AGG) GIN_GFF_SUM
-		FROM 결과지표_노선별통행_일별
+		FROM SYSDG.결과지표_노선별통행_일별
 		WHERE 1=1
 			AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 			AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
@@ -322,7 +322,7 @@
             ,NVL(CD_NO,'합계') CD_NO
             ,SUM(STTN_BUS_GIN_AGG) STTN_BUS_GIN_AGG, SUM(STTN_BUS_GFF_AGG) STTN_BUS_GFF_AGG, SUM(STTN_BUS_TRS_AGG) STTN_BUS_TRS_AGG
             ,SUM(STTN_BUS_GIN_AGG) + SUM(STTN_BUS_GFF_AGG) GIN_GFF_SUM 
-		FROM 결과지표_정류장별통행_일별
+		FROM SYSDG.결과지표_정류장별통행_일별
 		WHERE 1=1
 			AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 			AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
@@ -357,7 +357,7 @@
             ,NVL(CD_NO,'합계') CD_NO
             ,SUM(STTN_TRAIN_GIN_AGG) STTN_TRAIN_GIN_AGG, SUM(STTN_TRAIN_GFF_AGG) STTN_TRAIN_GFF_AGG, SUM(STTN_TRAIN_TRS_AGG) STTN_TRAIN_TRS_AGG
             ,SUM(STTN_TRAIN_GIN_AGG) + SUM(STTN_TRAIN_GFF_AGG) GIN_GFF_SUM 
-		FROM 결과지표_정류장별통행_일별
+		FROM SYSDG.결과지표_정류장별통행_일별
 		WHERE 1=1
 			AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 			AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
@@ -402,38 +402,38 @@
 			,NVL(TM,'합계') TM
 			,NVL(CD_NO,'합계') CD_NO
 			,SUM(정류장OD_통행량) CNT
-			FROM 노선별정류장간OD A
-			WHERE 1=1
-				AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
-				AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
-				AND ROUTE_ID =#{routeId}
-				<if test="tm==null">
-					AND TM BETWEEN #{tmStart} AND #{tmEnd}
-				</if>
-				<if test="!cd_no[0].equals('00')">
-					AND CD_NO IN
-					<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
-						#{arr}
-					</foreach>
-				</if> 
-			GROUP BY 	
-                OPRAT_DATE
-                ,TO_CHAR(SDATE, 'DY')
-                ,ANAL_AREA_CD
-                ,TFCMN
-                ,ROUTE_NMA
-                ,ROUTE_TYPE
-                ,ROUTE_START
-                ,ROUTE_END
-                ,출발정류장순번
-                ,출발정류장ID
-                ,출발정류장명 
-                ,출발정류장행정동 
-                ,도착정류장순번
-                ,도착정류장ID
-                ,도착정류장명 
-                ,도착정류장행정동 
-                ,CUBE(TM, CD_NO)
+		FROM SYSDG.노선별정류장간OD A
+		WHERE 1=1
+			AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
+			AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
+			AND ROUTE_ID =#{routeId}
+			<if test="tm==null">
+				AND TM BETWEEN #{tmStart} AND #{tmEnd}
+			</if>
+			<if test="!cd_no[0].equals('00')">
+				AND CD_NO IN
+				<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+					#{arr}
+				</foreach>
+			</if> 
+		GROUP BY 	
+               OPRAT_DATE
+               ,TO_CHAR(SDATE, 'DY')
+               ,ANAL_AREA_CD
+               ,TFCMN
+               ,ROUTE_NMA
+               ,ROUTE_TYPE
+               ,ROUTE_START
+               ,ROUTE_END
+               ,출발정류장순번
+               ,출발정류장ID
+               ,출발정류장명 
+               ,출발정류장행정동 
+               ,도착정류장순번
+               ,도착정류장ID
+               ,도착정류장명 
+               ,도착정류장행정동 
+               ,CUBE(TM, CD_NO)
 		ORDER BY 출발정류장순번, 도착정류장순번, TM, CD_NO
 	</select>
 	
@@ -459,36 +459,36 @@
 			,도착정류장행정동 OFF_STN_AREA
 			,NVL(CD_NO,'합계') CD_NO
 			,SUM(정류장OD_통행량) CNT
-			FROM 노선별정류장간OD_일별 A
-			WHERE 1=1
-				AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
-				AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
-				AND ROUTE_ID =#{routeId}
-				<if test="!cd_no[0].equals('00')">
-					AND CD_NO IN
-					<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
-						#{arr}
-					</foreach>
-				</if>
-			GROUP BY 	
-                OPRAT_DATE
-                ,TO_CHAR(SDATE, 'DY') 
-                ,ANAL_AREA_CD
-                ,TFCMN
-                ,ROUTE_ID 
-                ,ROUTE_NMA
-                ,ROUTE_TYPE
-                ,ROUTE_START
-                ,ROUTE_END
-                ,출발정류장순번
-                ,출발정류장ID
-                ,출발정류장명
-                ,출발정류장행정동
-                ,도착정류장순번
-                ,도착정류장ID
-                ,도착정류장명
-                ,도착정류장행정동
-                ,ROLLUP(CD_NO)
+		FROM SYSDG.노선별정류장간OD_일별 A
+		WHERE 1=1
+			AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
+			AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
+			AND ROUTE_ID =#{routeId}
+			<if test="!cd_no[0].equals('00')">
+				AND CD_NO IN
+				<foreach collection="cd_no" item="arr" index="i" separator="," open="(" close=")">
+					#{arr}
+				</foreach>
+			</if>
+		GROUP BY 	
+               OPRAT_DATE
+               ,TO_CHAR(SDATE, 'DY') 
+               ,ANAL_AREA_CD
+               ,TFCMN
+               ,ROUTE_ID 
+               ,ROUTE_NMA
+               ,ROUTE_TYPE
+               ,ROUTE_START
+               ,ROUTE_END
+               ,출발정류장순번
+               ,출발정류장ID
+               ,출발정류장명
+               ,출발정류장행정동
+               ,도착정류장순번
+               ,도착정류장ID
+               ,도착정류장명
+               ,도착정류장행정동
+               ,ROLLUP(CD_NO)
 		ORDER BY 출발정류장순번, 도착정류장순번, CD_NO
 	</select>
 	
@@ -503,7 +503,7 @@
             ,하차내외부 OFFINOUT
             ,하차지역명 OFFINOUTNM
             ,NVL(코드번호,'합계') CD_NO, SUM(정류장OD_통행량) CNT
-		FROM 행정시군구별OD_목적통행_일별 A
+		FROM SYSDG.행정시군구별OD_목적통행_일별 A
 		WHERE 1=1
 			AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
             AND 운행일자 = TO_CHAR(TO_DATE(#{dateStart} , 'YYYY-MM-DD'),'YYYYMMDD')
@@ -537,7 +537,7 @@
             ,하차내외부 OFFINOUT
             ,하차지역명 OFFINOUTNM
             ,NVL(코드번호,'합계') CD_NO, SUM(정류장OD_통행량) CNT
-		FROM 행정시군구별OD_수단통행_일별 A
+		FROM SYSDG.행정시군구별OD_수단통행_일별 A
 		WHERE 1=1
 			AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
            	AND 운행일자 = TO_CHAR(TO_DATE(#{dateStart} , 'YYYY-MM-DD'),'YYYYMMDD')
@@ -595,7 +595,7 @@
                     ,ROUTE_BUS_GIN_AGG  + ROUTE_BUS_GFF_AGG GIN_GFF_SUM
                     ,PART_KEY
                     ,SDATE
-                FROM 결과지표_노선별통행_일별
+                FROM SYSDG.결과지표_노선별통행_일별
                 WHERE 1=1
                     AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
                     AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
@@ -618,7 +618,7 @@
                             ROUTE_ID
                             ,SUM(ROUTE_BUS_GIN_AGG) OVER (PARTITION BY ROUTE_ID) + SUM(ROUTE_BUS_GFF_AGG) OVER (PARTITION BY ROUTE_ID) ROUTE_BUS_SUM 
                             ,ROW_NUMBER() OVER (PARTITION BY ROUTE_ID ORDER BY CD_NO) R1
-                        FROM 결과지표_노선별통행_일별
+                        FROM SYSDG.결과지표_노선별통행_일별
                         WHERE 1=1
                             AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
                             AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
@@ -707,7 +707,7 @@
 		                    ,PART_KEY
 		                    ,SDATE
 		                    ,TCBO_ID
-		                FROM 결과지표_정류장별통행_일별
+		                FROM SYSDG.결과지표_정류장별통행_일별
 		                WHERE 1=1
 		                    AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 		                    AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
@@ -734,7 +734,7 @@
 		                                    STTN_ID
 		                                    ,SUM(STTN_BUS_GIN_AGG) OVER (PARTITION BY STTN_ID) + SUM(STTN_BUS_GFF_AGG) OVER (PARTITION BY STTN_ID) STTN_BUS_SUM 
 		                                    ,ROW_NUMBER() OVER (PARTITION BY STTN_ID ORDER BY CD_NO) R1
-		                                FROM 결과지표_정류장별통행_일별
+		                                FROM SYSDG.결과지표_정류장별통행_일별
 		                                WHERE 1=1
 						                    AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 						                    AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
@@ -758,7 +758,7 @@
 		                                    STTN_ID
 		                                    ,SUM(STTN_TRAIN_GIN_AGG) OVER (PARTITION BY STTN_ID) + SUM(STTN_TRAIN_GFF_AGG) OVER (PARTITION BY STTN_ID) STTN_TRAIN_SUM 
 		                                    ,ROW_NUMBER() OVER (PARTITION BY STTN_ID ORDER BY CD_NO) R1
-		                                FROM 결과지표_정류장별통행_일별
+		                                FROM SYSDG.결과지표_정류장별통행_일별
 		                                WHERE 1=1
                              		        AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 						                    AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
@@ -865,7 +865,7 @@
 		                    ,PART_KEY
 		                    ,SDATE
 		                    ,TCBO_ID
-		                FROM 결과지표_정류장별통행_일별
+		                FROM SYSDG.결과지표_정류장별통행_일별
 		                WHERE 1=1
 		                    AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 		                    AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
@@ -888,7 +888,7 @@
 		                                STTN_ID
 		                            ,SUM(STTN_BUS_GIN_AGG) OVER (PARTITION BY STTN_ID) + SUM(STTN_BUS_GFF_AGG) OVER (PARTITION BY STTN_ID) STTN_BUS_SUM 
 		                            ,ROW_NUMBER() OVER (PARTITION BY STTN_ID ORDER BY CD_NO) R1
-		                        FROM 결과지표_정류장별통행_일별
+		                        FROM SYSDG.결과지표_정류장별통행_일별
 		                        WHERE 1=1
                     		        AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 				                    AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
@@ -993,7 +993,7 @@
 		                    ,PART_KEY
 		                    ,SDATE
 		                    ,TCBO_ID
-		                FROM 결과지표_정류장별통행_일별
+		                FROM SYSDG.결과지표_정류장별통행_일별
 		                WHERE 1=1
 		                    AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 		                    AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
@@ -1016,7 +1016,7 @@
 	                                STTN_ID
 		                            ,SUM(STTN_TRAIN_GIN_AGG) OVER (PARTITION BY STTN_ID) + SUM(STTN_TRAIN_GFF_AGG) OVER (PARTITION BY STTN_ID) STTN_TRAIN_SUM 
 		                            ,ROW_NUMBER() OVER (PARTITION BY STTN_ID ORDER BY CD_NO) R1
-		                        FROM 결과지표_정류장별통행_일별
+		                        FROM SYSDG.결과지표_정류장별통행_일별
 		                        WHERE 1=1
 		                            AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 				                    AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
@@ -1103,7 +1103,7 @@
 	                        ,TM
 	                        ,CD_NO
 	                        ,USER_CNT_AGG
-	                    FROM 결과지표_목적통행
+	                    FROM SYSDG.결과지표_목적통행
 	                    WHERE 1=1
 	                        AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
 	                        AND ANAL_AREA_CD = #{anal_area_cd}
@@ -1160,7 +1160,7 @@
 	                        ,CD_NO
 	                        ,SUM(USER_CNT_AGG)OVER(PARTITION BY OPRAT_DATE, CD_NO ORDER BY CD_NO) USER_CNT_AGG
 	                        ,ROW_NUMBER() OVER(PARTITION BY OPRAT_DATE, CD_NO ORDER BY CD_NO) R1
-	                    FROM 결과지표_목적통행
+	                    FROM SYSDG.결과지표_목적통행
 	                    WHERE 1=1
 	                        AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
 	                        AND ANAL_AREA_CD = #{anal_area_cd}
@@ -1221,7 +1221,7 @@
 	                        ,TM
 	                        ,CD_NO 
 	                        ,USER_CNT_AGG 
-	                    FROM 결과지표_수단통행
+	                    FROM SYSDG.결과지표_수단통행
 	                    WHERE 1=1
 	                        AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
 	                        AND ANAL_AREA_CD = #{anal_area_cd}
@@ -1285,7 +1285,7 @@
 	                        ,CD_NO 
 	                        ,SUM(USER_CNT_AGG)OVER(PARTITION BY OPRAT_DATE, CD_NO, TFCMN ORDER BY CD_NO) USER_CNT_AGG
 	                        ,ROW_NUMBER() OVER(PARTITION BY OPRAT_DATE, CD_NO, TFCMN ORDER BY CD_NO) R1
-	                    FROM 결과지표_수단통행
+	                    FROM SYSDG.결과지표_수단통행
 	                    WHERE 1=1
 	                        AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
 	                        AND ANAL_AREA_CD = #{anal_area_cd}
@@ -1367,7 +1367,7 @@
 	                                ,ROUTE_BUS_GFF_AGG
 	                                ,ROUTE_BUS_TRS_AGG
 	                                ,ROUTE_BUS_GIN_AGG + ROUTE_BUS_GFF_AGG GIN_GFF_SUM
-	                            FROM 결과지표_노선별통행
+	                            FROM SYSDG.결과지표_노선별통행
 	                            WHERE 1=1
 	                                AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 	                                AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
@@ -1451,7 +1451,7 @@
 	                                ,ROUTE_TRAIN_GFF_AGG
 	                                ,ROUTE_TRAIN_TRS_AGG
 	                                ,ROUTE_TRAIN_GIN_AGG + ROUTE_TRAIN_GFF_AGG GIN_GFF_SUM
-	                            FROM 결과지표_노선별통행
+	                            FROM SYSDG.결과지표_노선별통행
 	                            WHERE 1=1
 	                                AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 	                                AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
@@ -1542,7 +1542,7 @@
 	                                ,ROUTE_BUS_GFF_AGG
 	                                ,ROUTE_BUS_TRS_AGG
 	                                ,ROUTE_BUS_GIN_AGG + ROUTE_BUS_GFF_AGG GIN_GFF_SUM
-	                            FROM 결과지표_노선별통행_일별
+	                            FROM SYSDG.결과지표_노선별통행_일별
 	                            WHERE 1=1
 	                                AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 	                                AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
@@ -1621,7 +1621,7 @@
 	                                ,ROUTE_TRAIN_GFF_AGG
 	                                ,ROUTE_TRAIN_TRS_AGG
 	                                ,ROUTE_TRAIN_GIN_AGG + ROUTE_TRAIN_GFF_AGG GIN_GFF_SUM
-	                            FROM 결과지표_노선별통행_일별
+	                            FROM SYSDG.결과지표_노선별통행_일별
 	                            WHERE 1=1
 	                                AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 	                                AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
@@ -1706,7 +1706,7 @@
 		                            ,STTN_BUS_GFF_AGG
 		                            ,STTN_BUS_TRS_AGG
 		                            ,STTN_BUS_GIN_AGG + STTN_BUS_GFF_AGG GIN_GFF_SUM
-		                        FROM 결과지표_정류장별통행_일별
+		                        FROM SYSDG.결과지표_정류장별통행_일별
 		                        WHERE 1=1
 		                            AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 		                            AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
@@ -1779,7 +1779,7 @@
 		                            ,STTN_TRAIN_GFF_AGG
 		                            ,STTN_TRAIN_TRS_AGG
 		                            ,STTN_TRAIN_GIN_AGG + STTN_TRAIN_GFF_AGG GIN_GFF_SUM
-		                        FROM 결과지표_정류장별통행_일별
+		                        FROM SYSDG.결과지표_정류장별통행_일별
 		                        WHERE 1=1
 		                            AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 		                            AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
@@ -2132,7 +2132,7 @@
 	                        ,ROUTE_BUS_GIN_AGG  + ROUTE_BUS_GFF_AGG GIN_GFF_SUM
 	                        ,PART_KEY
 	                        ,SDATE
-	                    FROM 결과지표_노선별통행_일별
+	                    FROM SYSDG.결과지표_노선별통행_일별
 	                    WHERE 1=1
 	                        AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 	                        AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
@@ -2155,7 +2155,7 @@
 	                                ROUTE_ID
 	                                ,SUM(ROUTE_BUS_GIN_AGG) OVER (PARTITION BY ROUTE_ID) + SUM(ROUTE_BUS_GFF_AGG) OVER (PARTITION BY ROUTE_ID) ROUTE_BUS_SUM 
 	                                ,ROW_NUMBER() OVER (PARTITION BY ROUTE_ID ORDER BY CD_NO) R1
-	                            FROM 결과지표_노선별통행_일별
+	                            FROM SYSDG.결과지표_노선별통행_일별
 	                            WHERE 1=1
 	                                AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 	                                AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
@@ -2244,7 +2244,7 @@
 	                        , CASE WHEN TFCMN = 'B' THEN STTN_BUS_GIN_AGG + STTN_BUS_GFF_AGG ELSE STTN_TRAIN_GIN_AGG + STTN_TRAIN_GFF_AGG END GIN_GFF_SUM
 	                        ,PART_KEY
 	                        ,SDATE
-	                    FROM 결과지표_정류장별통행_일별
+	                    FROM SYSDG.결과지표_정류장별통행_일별
 	                    WHERE 1=1
 	                        AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 	                        AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
@@ -2271,7 +2271,7 @@
 	                                        STTN_ID
 	                                        ,SUM(STTN_BUS_GIN_AGG) OVER (PARTITION BY STTN_ID) + SUM(STTN_BUS_GFF_AGG) OVER (PARTITION BY STTN_ID) STTN_BUS_SUM 
 	                                        ,ROW_NUMBER() OVER (PARTITION BY STTN_ID ORDER BY CD_NO) R1
-	                                    FROM 결과지표_정류장별통행_일별
+	                                    FROM SYSDG.결과지표_정류장별통행_일별
 	                                    WHERE 1=1
 	                                        AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 	                                        AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
@@ -2293,7 +2293,7 @@
 	                                        STTN_ID
 	                                        ,SUM(STTN_TRAIN_GIN_AGG) OVER (PARTITION BY STTN_ID) + SUM(STTN_TRAIN_GFF_AGG) OVER (PARTITION BY STTN_ID) STTN_TRAIN_SUM 
 	                                        ,ROW_NUMBER() OVER (PARTITION BY STTN_ID ORDER BY CD_NO) R1
-	                                    FROM 결과지표_정류장별통행_일별
+	                                    FROM SYSDG.결과지표_정류장별통행_일별
 	                                    WHERE 1=1
 	                                        AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 	                                        AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
@@ -2383,7 +2383,7 @@
 	                        , STTN_BUS_GIN_AGG  + STTN_BUS_GFF_AGG GIN_GFF_SUM
 	                        ,PART_KEY
 	                        ,SDATE
-	                    FROM 결과지표_정류장별통행_일별
+	                    FROM SYSDG.결과지표_정류장별통행_일별
 	                    WHERE 1=1
 	                        AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 	                        AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
@@ -2406,7 +2406,7 @@
 	                                 STTN_ID
 	                                ,SUM(STTN_BUS_GIN_AGG) OVER (PARTITION BY STTN_ID) + SUM(STTN_BUS_GFF_AGG) OVER (PARTITION BY STTN_ID) STTN_BUS_SUM 
 	                                ,ROW_NUMBER() OVER (PARTITION BY STTN_ID ORDER BY CD_NO) R1
-	                            FROM 결과지표_정류장별통행_일별
+	                            FROM SYSDG.결과지표_정류장별통행_일별
 	                            WHERE 1=1
 	                                AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 	                                AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
@@ -2494,7 +2494,7 @@
 	                        ,STTN_TRAIN_GIN_AGG  + STTN_TRAIN_GFF_AGG GIN_GFF_SUM
 	                        ,PART_KEY
 	                        ,SDATE
-	                    FROM 결과지표_정류장별통행_일별
+	                    FROM SYSDG.결과지표_정류장별통행_일별
 	                    WHERE 1=1
 	                        AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 	                        AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
@@ -2517,7 +2517,7 @@
 	                                 STTN_ID
 	                                ,SUM(STTN_TRAIN_GIN_AGG) OVER (PARTITION BY STTN_ID) + SUM(STTN_TRAIN_GFF_AGG) OVER (PARTITION BY STTN_ID) STTN_TRAIN_SUM 
 	                                ,ROW_NUMBER() OVER (PARTITION BY STTN_ID ORDER BY CD_NO) R1
-	                            FROM 결과지표_정류장별통행_일별
+	                            FROM SYSDG.결과지표_정류장별통행_일별
 	                            WHERE 1=1
 	                                AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 	                                AND PART_KEY = #{provider} || '_' || #{anal_area_cd}
@@ -2667,7 +2667,7 @@
 	        OPRAT_DATE
 	        ,CD_NO 
 	        ,LISTAGG(USER_CNT_AGG,',') WITHIN GROUP(ORDER BY TM)  USER_CNT_AGG
-	    FROM 결과지표_목적통행
+	    FROM SYSDG.결과지표_목적통행
 	    WHERE 1 = 1
 	        AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
 	        AND ANAL_AREA_CD = #{anal_area_cd}
@@ -2690,7 +2690,7 @@
 	    SELECT OPRAT_DATE
 	            ,CD_NO 
 	            ,SUM(USER_CNT_AGG) USER_CNT_AGG
-	    FROM 결과지표_목적통행
+	    FROM SYSDG.결과지표_목적통행
 	    WHERE 1 = 1
 	        AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
 	        AND ANAL_AREA_CD = #{anal_area_cd}
@@ -2717,7 +2717,7 @@
 	                    ,TM
 	                    ,CD_NO 
 	                    ,SUM(USER_CNT_AGG) USER_CNT_AGG
-	            FROM 결과지표_수단통행
+	            FROM SYSDG.결과지표_수단통행
 	            WHERE 1 = 1
 	                AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
 	                AND ANAL_AREA_CD = #{anal_area_cd}
@@ -2746,7 +2746,7 @@
 	    SELECT OPRAT_DATE 
 	            ,CD_NO 
 	            ,SUM(USER_CNT_AGG) USER_CNT_AGG
-	    FROM 결과지표_수단통행
+	    FROM SYSDG.결과지표_수단통행
 	    WHERE 1 = 1
 	        AND SDATE BETWEEN TO_DATE(#{dateStart} , 'YYYY-MM-DD') AND TO_DATE(#{dateEnd} , 'YYYY-MM-DD')
 	        AND ANAL_AREA_CD = #{anal_area_cd}
@@ -2772,7 +2772,7 @@
 	     	,CASE WHEN TFCMN = 'B' THEN SUM(ROUTE_BUS_GIN_AGG) + SUM(ROUTE_BUS_GFF_AGG)
 	        	  WHEN TFCMN = 'T' THEN SUM(ROUTE_TRAIN_GIN_AGG) + SUM(ROUTE_TRAIN_GFF_AGG) 
 	        END GIN_GFF_SUM
-		FROM 결과지표_노선별통행
+		FROM SYSDG.결과지표_노선별통행
 		WHERE 1=1
 	      	AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
 	        AND ANAL_AREA_CD = #{anal_area_cd}
@@ -2804,7 +2804,7 @@
 	     	,CASE WHEN TFCMN = 'B' THEN SUM(ROUTE_BUS_GIN_AGG) + SUM(ROUTE_BUS_GFF_AGG)
 	        	  WHEN TFCMN = 'T' THEN SUM(ROUTE_TRAIN_GIN_AGG) + SUM(ROUTE_TRAIN_GFF_AGG) 
 	        END GIN_GFF_SUM
-		FROM 결과지표_노선별통행
+		FROM SYSDG.결과지표_노선별통행
 		WHERE 1=1
 	      	AND SDATE = TO_DATE(#{dateStart} , 'YYYY-MM-DD')
             AND ANAL_AREA_CD = #{anal_area_cd}

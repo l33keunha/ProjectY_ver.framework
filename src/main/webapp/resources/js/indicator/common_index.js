@@ -72,7 +72,10 @@
 		} else if($(this).attr('id') == 'timeDistnBtn'){
 			window.open("" ,"newForm", "toolbar=no, width=1800, height=1000, directories=no, status=no, scrollorbars=no, resizable=no");
 			newForm.attr("action","timeDistnTest.do");
-		} 
+		} else if($(this).attr('id') == 'mapBtn'){
+			window.open("" ,"newForm", "toolbar=no, width=100%, height=100%, directories=no, status=no, scrollorbars=no, resizable=no");
+			newForm.attr("action","mapTest.do");
+		}
 		
 		newForm.attr("target","newForm"); 
 		// create element & set attribute (input) 

@@ -18,7 +18,7 @@
 	<%@ include file="../../common/MainHeader.jsp"%>
 	
 	<%@ include file="../../common/ConName.jsp"%>
-    <div class="ConEx"></div>
+    <div class="ConEx" style="background:#fff url(resources/images/indicator/passB.jpg)"></div>
 
    
         <div class="selectbox">

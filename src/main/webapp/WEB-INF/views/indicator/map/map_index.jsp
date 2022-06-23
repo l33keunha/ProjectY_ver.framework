@@ -4,77 +4,54 @@
 <!DOCTYPE html>
 <html lang="ko">
     <head>
-        <title>혼잡분석</title>
+        <title>통행분석</title> 
+        <link rel="stylesheet" type="text/css" href="resources/css/indicator/jquery-ui.css">
         <link rel="stylesheet" type="text/css" href="resources/css/indicator/common_index.css"> 
-        <link rel="stylesheet" type="text/css" href="resources/css/indicator/congestion_index.css"> 
-        <link rel="stylesheet" type="text/css" href="resources/css/indicator/jquery-ui.css"> 
+        <link rel="stylesheet" type="text/css" href="resources/css/indicator/pass_index.css"> 
  		<script type="text/javascript" src="resources/js/indicator/common_index.js" defer ></script> 
- 		<script type="text/javascript" src="resources/js/indicator/congestion_index.js" defer ></script> 
+ 		<script type="text/javascript" src="resources/js/indicator/pass_index.js" defer ></script> 
         <script src ="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     </head>
-    
-    <body>
-    <%@ include file="../../common/MainHeader.jsp"%>
 
-    
-    <%@ include file="../../common/ConName.jsp"%>
-    <div class="ConEx" style="background:#fff url(resources/images/indicator/congestionB.jpg)"></div>
+    <body>
+	<%@ include file="../../common/MainHeader.jsp"%>
+	
+	<%@ include file="../../common/ConName.jsp"%>
+    <div class="ConEx"></div>
 
    
         <div class="selectbox">
             <div class ="cell1" >
-               <p>분석지표</p>
+            
+                <p>분석지표</p>
                 <div class="cell1_01"> 
                     <div>
-                        <label><input type="radio" name="anal_group" value="congestionRoute"> 노선별</label>
+                        <label><input type="radio" name="anal_group" value="passCnt"> 통행량</label>
                     </div>
                 </div>
 
-                <div class="cell1_02">
-                    <div>
-                        <label><input type="radio" name="anal_group" value="congestionTopRouteOD"> 노선별 상위 5개</label>
-                    </div>
-                </div>
-
-                <div class="cell1_03">
-                    <div>
-                        <label><input type="radio" name="anal_group" value="congestionTopStationOD"> 노선 정류장간 &nbsp;&nbsp;&nbsp;상위 100개</label>
-                    </div>
-                </div>
             </div>
             
             <div class ="cell2">
+            
                 <p>분석유형</p>
                 <div class="cell2_01">
                     <div>
-                        <label><input type="radio" name="anal_type" value="congestionRoute_CBP"> 평균재차인원</label>
-                        <label><input type="radio" name="anal_type" value="congestionRoute_DOC"> 평균혼잡도</label>
-                    </div>
-                </div>
-                <div class="cell2_02">
-                    <div>
-                        <label><input type="radio" name="anal_type" value="congestionTopRouteOD_DOC_max"> 최대혼잡구간</label>
-                        <label><input type="radio" name="anal_type" value="congestionTopRouteOD_DOC_avg"> 평균혼잡구간</label>
+                        <label><input type="radio" name="anal_type" value="passCnt_purpose"> 목적통행</label>
                     </div>
                 </div>
 
-                <div class="cell2_03">
-                    <div>
-                        <label><input type="radio" name="anal_type" value="congestionTopStationOD_DOC_max"> 최대혼잡도</label>
-                        <label><input type="radio" name="anal_type" value="congestionTopStationOD_DOC_avg"> 평균혼잡도</label>
-                    </div>
-                </div>
             </div>
             
             <div class ="cell3">
                 <div class="cell3_01">
                     <p>지역</p>
                     
-                    <select id="anal_area_cd_sido" name="anal_area_cd_sido" onchange="chngSido">
+                    <select id="anal_area_cd_sido" name="anal_area_cd_sido">
                         <option>광역/도</option>
                     </select>
-                    <select id="anal_area_cd" name="anal_area_cd" onchange="chngSigungu">
+                    <select id="anal_area_cd" name="anal_area_cd">
                         <option>시/군</option>
                     </select>
                 </div>
@@ -88,7 +65,7 @@
                 </div>
 
                 <div class = "cell3_03"> 
-	                <p>날짜</p>
+                   <p>날짜</p>
                 </div>
             </div>
             <div class ="hcell1">
@@ -148,6 +125,7 @@
                             <option value="22" >22</option>
                             <option value="23" >23</option>
                         </select>
+                        <div class="timeNotice"></div>
                     </div>
                 </div>
 
@@ -195,9 +173,30 @@
                                  <div class="routeNotice">노선번호 검색</div>
                                  <label for="modalBtn">x</label>
                                  <div class="routeBox">
+	                                 <div id="lds-spinner">
+	                                        <div></div>
+	                                        <div></div>
+	                                        <div></div>
+	                                        <div></div>
+	                                        <div></div>
+	                                        <div></div>
+	                                        <div></div>
+	                                        <div></div>
+	                                        <div></div>
+	                                        <div></div>
+	                                        <div></div>
+	                                        <div></div>
+	                                    </div>
                                     <input type="text" placeholder="(노선번호/노선유형/기점/종점) 검색..." id="searchRouteId">
                                     <div class="routeListBox">
-                                        
+                                       <div class='routeListTh' style='width:100%;'>
+                                          <p style="width: 28%; float:left;"> 노선명 </p>
+                                          <p style="width: 11%; float:left;margin-left:-20px;"> 노선유형 </p>
+                                          <p style="width: 7%; float:left;margin-left: 56px;"> 기점 </p>
+                                          <p style="width:30%; float:left;margin-left: 61px;"> 종점 </p>
+                                       </div>
+                                       <div class="routeLists">
+                                       </div>
                                     </div>
                                     <input type="button" id="routeBtn" value="확인">
                                  </div>
@@ -205,8 +204,8 @@
                              </div> 
                                 </div>
                             </div>
-                             <!-- 5 -->
-                            <div class="search-con">
+
+                              <div class="search-con">
                             </div>
                         </div>
                     </div>
@@ -214,8 +213,9 @@
             </div>
         </div>
 
-        <input class="submit" type="button" id="congestionBtn" value="조회" >
-       
+        <input class="submit" type="button" id="mapBtn" value="조회" style="cursor: pointer;" >
+        
     </body>
-
+	
+	
 </html>

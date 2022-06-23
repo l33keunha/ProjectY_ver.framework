@@ -17,7 +17,7 @@
             <a onclick="location.href='goCongestionIndex.do'" id="congestionCate" style="cursor: pointer;"><span>혼잡분석</span></a>
             <a onclick="location.href='goTimeDistnIndex.do'" id="timeDistnCate" style="cursor: pointer;"><span>시간/거리분석</span></a>
             <a href="#"><span>운행분석</span></a>
-            <a href="#"><span>지도분석</span></a>
+            <a onclick="location.href='goMapIndex.do'" id="MapCate" style="cursor: pointer;"><span>지도분석</span></a>
             <a onclick="location.href='goDownloadIndex.do'" id="downloadcate" style="cursor: pointer;"><span>다운로드</span></a>
         </div>
     </div>

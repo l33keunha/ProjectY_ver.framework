@@ -582,3 +582,34 @@ cursor: pointer;
     padding: 2px;
 }
 
+
+
+/* 다운로드 리스트 마우스오버 */
+.cell2_alret{
+    background: #e6e6e6;
+    color: #000;
+    position: absolute;
+    margin-top: -33px;
+    margin-left: 161px;
+    padding: 7px;
+    display: none;
+}
+
+.cell2_alret.block{
+    display: block;
+}
+
+/* 다은로드 리스트 새로고침 마우스오버 */
+.resetBtn_alret{
+    background: #e6e6e6;
+    color: #000;
+    position: absolute;
+    margin-top: -33px;
+    margin-left: 627px;
+    padding: 7px;
+    display: none;
+}
+
+.resetBtn_alret.block{
+    display: block;
+}

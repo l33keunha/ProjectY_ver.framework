@@ -586,7 +586,7 @@ input[name=routeId]{
     left: 6%;
     top: 28%;
     height: 54%;
-    z-index: 1000000000;
+    z-index: 1000;
   }
   #lds-spinner div {
     position: absolute;
@@ -677,7 +677,7 @@ input[name=routeId]{
 /* cell3 - 날짜 - 제공날짜 css */
 .serviceDate{
     position: absolute;
-	margin-left: 11.8;
+	margin-left: 221px;
     margin-top: -5.4%;
     padding: 10px;
     box-shadow: 6px 8px 10px 0px rgb(0 0 0 / 20%);

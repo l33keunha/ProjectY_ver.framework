@@ -4,6 +4,14 @@
 		$('.cell1').change(function(){
 			$('.cell2_icon').addClass('active');
 			
+			$('.cell2_icon').mouseover(function(){
+			      $('.cell2_alret').addClass('block');
+			  });
+			
+			$('.cell2_icon').mouseleave(function(){
+			$('.cell2_alret').removeClass('block');
+			});
+			
 			disabledTrue(2)
 			
 			if($("input[name=anal_group]:checked").val()=='dlStation'){
@@ -52,6 +60,7 @@
 	
 	// 제공 자료 오픈 후 다운로드 가능
 	$('.submit2').on('click',function(){
+			
 		$('.submit2').prop("disabled",true);
 		$('.submit2').css("opacity", 0.3);
 		$('.submit2').css("cursor", "default");
@@ -244,6 +253,7 @@
 	});
 	
 	function downloadList(){
+		
 		$('.test-modal-wrap').addClass('active');
 	 	$('.modal-content-background').addClass('active');
         $('.modal-content').addClass('active');
@@ -274,6 +284,7 @@
 	init();
 	
 	$(document).on('click', '.headers', function(){
+		
 		$('.dlHeader').prop("disabled", false);
 		$('.dlHeader').css("opacity", 1);
 		$('.body-sub-content').scrollTop(0);
@@ -416,7 +427,13 @@
 	});
 
 
-
+	$('#resetBtn').mouseover(function(){
+  	$('.resetBtn_alret').addClass('block');
+  	});	
+	
+	$('#resetBtn').mouseleave(function(){
+	$('.resetBtn_alret').removeClass('block');
+	});
 
 
 

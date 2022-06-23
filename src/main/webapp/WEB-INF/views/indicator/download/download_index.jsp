@@ -18,7 +18,7 @@
     <%@ include file="../../common/MainHeader.jsp"%>
 
 	<%@ include file="../../common/ConName.jsp"%>
-    <div class="ConEx"></div>
+    <div class="ConEx" style="background:#fff url(resources/images/indicator/downloadB.jpg)"></div>
    
         <div class="selectbox">
             <div class ="cell1" >
@@ -44,6 +44,7 @@
 
             <div class ="cell2">
           		<div style="background-color: #32689b;width: 100%;height: 42px;">
+                    <span class="cell2_alret">다운로드 가능한 목록이 제공됩니다.</span>
 	                <p style="width: 73px;float: left;margin-left: 32.5%;">분석유형</p>
 	                <div class="cell2_icon" onclick="downloadList();"></div>
                 </div>
@@ -160,6 +161,7 @@
                                     <option value="X">X</option>
                                  </select>
                              </div>
+                             <span class="resetBtn_alret">새로고침</span>
                              <button id="resetBtn"></button>
                          </div>
                          
