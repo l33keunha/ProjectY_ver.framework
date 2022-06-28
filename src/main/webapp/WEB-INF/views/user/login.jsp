@@ -10,41 +10,47 @@
 </head>
 <body>
 	<div class="wrap">
-            <!-- 해더 -->
-            <div class="lodcon">
-	            <div class="bg-illust"></div>
-	            <div class="wraplog">
-	           <div class="logo03">
-	           	<h1>Log-In</h1>
-	           </div>
+	    <!-- 해더 -->
+	    <div class="lodcon">
+	        <div class="bg-illust"></div>
+	        <div class="wraplog">
+	            <div class="logo03">
+	                <h1>Log-In</h1>
+	            </div>
 	            <section class="login-input-section-wrap">
-		            <form action="login.do" method="post">
-		                <div class="login_wrap">
-		                    <div class="login-input-wrap">
-		                        <input placeholder="Username" type="text" name="id"></input>
-		                    </div>
-		                    <div class="login-input-wrap password-wrap">
-		                        <input placeholder="Password" type="password" name="pwd"></input>
-		                    </div>
-		                </div>
-		                <input type='submit'style='display: none;'>
-	               </form> 
-	               
+	                <form action="login.do" method="post" name="myForm">
+	                    <div class="login_wrap">
+	                        <div class="login-input-wrap">
+	                            <input placeholder="Username" type="text" name="id"></input>
+	                        </div>
+	                        <div class="login-input-wrap password-wrap">
+	                            <input placeholder="Password" type="password" name="pwd"></input>
+	                        </div>
+	                    </div>
+	                    <input type='submit'style='display: none;'>
+	                </form> 
+	                
 	                <div class="login-button-wrap">
-	                     <button style="cursor:pointer;" onclick="checkUser();">Sign in</button>
+	                        <button style="cursor:pointer;" onclick="checkUser();">Sign in</button>
 	                </div>
 	            </section>
-	            </div>
-	            
-               </div>
-        </div>
-        <footer>
-         <span>(주)와이비에스[서울] 서울시 관악구 관악로 122, 401호(봉천동, 평창빌딩) 2호선 서울대입구역 2번 출구 관악구청 방향 도보 500M</span>
-         <span> 2017 YBS CO., LTD. ALL RIGHT RESERVED.</span>
-        </footer>
+	        </div>
+	        
+	    </div>
+	</div>
+	<footer>
+	    <span>(주)와이비에스[서울] 서울시 관악구 관악로 122, 401호(봉천동, 평창빌딩) 2호선 서울대입구역 2번 출구 관악구청 방향 도보 500M</span>
+	    <span> 2017 YBS CO., LTD. ALL RIGHT RESERVED.</span>
+	</footer>
 </body>
 
 <script>
+	document.myForm.addEventListener("keydown", evt => {
+	    if ((evt.keyCode || evt.which) === 13) {
+	        evt.preventDefault();
+	    }
+	});
+	
 	function checkUser(){
 		var jsonArray = {};
 		var id = $("input[name=id]").val();

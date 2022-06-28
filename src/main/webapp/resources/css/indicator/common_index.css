@@ -1,85 +1,7 @@
-*{
-    margin: 0 auto;
-    padding: 0 auto;
-    font-family: 'Nanum Gothic', sans-serif;
-    font-size: 12px;
-}
-a{
-    text-decoration-line: none;
-    text-decoration: none;
-    color: #000;
-}
-.header {
-    width: 1336px;
-    height: 43px;
-    border-bottom: 2px solid #1f2958;
-    padding-bottom: 5px;
-    position: relative;
-}
 
-.logo{
-    float: left;
-    width: 156px;
-    height: 57px;
-    margin-left: 14px;
-    margin-top: 10px;
-}
-.logo02{
-    float: left;
-    color: #1f2958;
-    font-size: 35px;
-    padding: 10px 0;
-    font-weight: bold;
-}
-.mtap{
-    position: absolute;
-    float: right;
-    bottom: 0;
-    right: 20px;
-    
-  }
-  .mtap p{
-      float: left;
-      font-size: 13px;
-      padding: 0 6px;
-  }
-  
-/* 占쎈굡嚥∽옙占쎈뼄占쎌뒲 甕곗쥓�뤀 */
-.dropdown {
-    position: relative;
-    display: inline-block;
-  }
-  .dropbtn {
-    background-color: #ffffff;
-    color: black;
-    font-size: 13px;
-    border: none;
-  }
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #c6dcf0;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgb(0 0 0 / 20%);
-    z-index: 1;
-    right: 1px;
-  }
-  
-  .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-  }
-  
-  .dropdown-content a:hover {background-color: #b3d3f0;}
-  
-  .dropdown:hover .dropdown-content {display: block;}
-  
-  .dropdown:hover .dropbtn {background-color: #c6dcf0;}
 
 /* 占쎄맒占쎈뼊筌롫뗀�뤀 */
-  .ConName{
+  .conName{
         height:30px;
     width: 1224px;
   }
@@ -99,7 +21,7 @@ a{
         float: left;
     font-size: 16px;
     margin-left: 26px;
-    width: 103px;
+    width: 104px;
     padding: 5px;
 }
 
@@ -181,7 +103,7 @@ div#ui-datepicker-div{
 
 
 /* 로그인하러가기 css */
-.ConName-background{
+.conName-background{
 	position: fixed;
 	top: 0;
 	left: 0;

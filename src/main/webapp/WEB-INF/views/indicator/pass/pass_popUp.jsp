@@ -10,22 +10,6 @@
 <!DOCTYPE html>
 <html>
 
-     <div id="lds-spinner">
-         <div></div>
-         <div></div>
-         <div></div>
-         <div></div>
-         <div></div>
-         <div></div>
-         <div></div>
-         <div></div>
-         <div></div>
-         <div></div>
-         <div></div>
-         <div></div>
-     </div>
-	
-
 	<!-- 코드 텍스트 매칭 -->
     <%@ include file="pass_popUp_codeNameMatch.jsp" %>
     

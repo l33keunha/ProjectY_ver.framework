@@ -101,7 +101,7 @@ public interface PassMapper {
 	List<EgovMap> downloadPassResultListRouteOD(SearchVO sVO);
 
 	// PIVOT 상위이용노선 
-	List<EgovMap> downloadPassREsultListTopRoute(SearchVO sVO);
+	List<EgovMap> downloadPassResultListTopRoute(SearchVO sVO);
 
 	// PIVOT 상위이용정류장 버스 : 서울 선택
 	List<EgovMap> downloadPassResultListTopStationB(SearchVO sVO);

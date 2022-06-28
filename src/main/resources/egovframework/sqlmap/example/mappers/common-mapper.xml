@@ -10,7 +10,7 @@
                 WHEN 분석지역_CD_시도 = '34' THEN  '충청남도'
                ELSE 분석지역명
                END  ANAL_AREA_NM
-		FROM SYSDG.분석지역_CD A, SYSDG.USER_INFO B, SYSDG.USER_DEPT C
+		FROM 분석지역_CD A, USER_INFO B, USER_DEPT C
 		WHERE 1=1
 			AND B.DEPT = C.DEPT 
 			AND C.ANAL_AREA_CD = A.분석지역_CD 
@@ -22,7 +22,7 @@
 	<select id ="selectPassSearchAjaxAnalArea" parameterType="sVO" resultType="egovMap">
 		SELECT DISTINCT 분석지역_CD ANAL_AREA_CD
 		  ,CASE WHEN 분석지역_CD LIKE '__' THEN '전체' ELSE 분석지역명 END analAreaNm
-		FROM SYSDG.분석지역_CD A, SYSDG.USER_INFO B, SYSDG.USER_DEPT C
+		FROM 분석지역_CD A, USER_INFO B, USER_DEPT C
 		WHERE 1=1
 			AND B.DEPT = C.DEPT 
 			AND C.ANAL_AREA_CD = A.분석지역_CD 
@@ -34,7 +34,7 @@
 	<!-- Ajax: 분석자료 조회 -->
 	<select id ="selectPassSearchAjaxProvider" parameterType="sVO" resultType="egovMap">
 		SELECT DISTINCT OWNER PROVIDER
-		FROM SYSDG.분석지역_CD
+		FROM 분석지역_CD
 		WHERE 1=1
 			AND 분석지역_CD = #{anal_area_cd}
 		ORDER BY OWNER
@@ -43,7 +43,7 @@
 	<!-- Ajax: 날짜 조회 -->
 	<select id ="selectPassSearchAjaxDate" parameterType="sVO" resultType="egovMap">
 		SELECT DISTINCT 운행일자 OPRAT_DATE, 유효일자 SDATE
-		FROM SYSDG.분석지역_CD
+		FROM 분석지역_CD
 		WHERE 1=1
 			AND 분석지역_CD = #{anal_area_cd}
 			AND OWNER = #{provider}
@@ -55,7 +55,7 @@
 		SELECT /*+ PARALLEL(8) */ DISTINCT 정산사ID TCBO_ID, 노선ID ROUTE_ID, 노선명칭 ROUTE_NMA, NVL(유형, '-') ROUTE_TYPE
 	 		,기점 ROUTE_START
 	        ,종점 ROUTE_END
-		FROM SYSDG.STDNN_BRS
+		FROM STDNN_BRS
 		WHERE 1=1
 		<![CDATA[
 			AND 운행일자 <=#{dateStart}
@@ -74,7 +74,7 @@
 	<!-- Ajax: 이용자유형 리스트 조회 -->
 	<select id="selectCdNoList" parameterType="sVO" resultType="egovMap">
 		SELECT DISTINCT 코드번호 cdNo, 이용자유형분류 cdNoNm
-		FROM SYSDG.CMM_USERTYPE 
+		FROM CMM_USERTYPE 
 		WHERE 1=1
 			AND OWNER =#{provider}
 			AND 코드번호 IS NOT NULL
@@ -97,7 +97,7 @@
                 WHEN SUBSTR(A.분석지역_CD,0,2) = '34' THEN  '충청남도'
                 ELSE A.분석지역_CD
                 END  ANAL_AREA_NM
-		FROM SYSDG.지표별ROW_COUNT A, SYSDG.USER_INFO B, SYSDG.USER_DEPT C
+		FROM 지표별ROW_COUNT A, USER_INFO B, USER_DEPT C
 		WHERE 1=1
 			AND B.DEPT = C.DEPT 
 			AND C.ANAL_AREA_CD = A.분석지역_CD 
@@ -110,7 +110,7 @@
 		SELECT DISTINCT 
 				A.분석지역_CD ANAL_AREA_CD
 				,CASE WHEN A.분석지역_CD LIKE '__' THEN '전체' ELSE 분석지역명 END analAreaNm 
-		FROM SYSDG.지표별ROW_COUNT A, SYSDG.USER_INFO B, SYSDG.USER_DEPT C, SYSDG.분석지역_CD D
+		FROM 지표별ROW_COUNT A, USER_INFO B, USER_DEPT C, 분석지역_CD D
 		WHERE 1=1
 			AND B.DEPT = C.DEPT 
 			AND C.ANAL_AREA_CD = A.분석지역_CD 
@@ -123,7 +123,7 @@
 	<!-- Ajax: 분석자료 조회 _다운로드 -->
 	<select id ="selectPassSearchAjaxProvider_dl" parameterType="sVO" resultType="egovMap">
 		SELECT DISTINCT OWNER PROVIDER
-		FROM SYSDG.지표별ROW_COUNT
+		FROM 지표별ROW_COUNT
 		WHERE 1=1
 			AND 분석지역_CD = #{anal_area_cd}
 		ORDER BY OWNER
@@ -139,7 +139,7 @@
 		        SELECT  
 		            FIRST_VALUE(SDATE) OVER (PARTITION BY SUBSTR(SDATE, 0,6) ORDER BY SDATE) 운행일자
 		            ,LAST_VALUE(SDATE) OVER (PARTITION BY SUBSTR(SDATE, 0,6) ORDER BY SDATE) 유효일자
-		        FROM SYSDG.지표별ROW_COUNT  
+		        FROM 지표별ROW_COUNT  
 		        WHERE 1=1
 			AND 분석지역_CD = #{anal_area_cd}
 			AND OWNER = #{provider}
@@ -151,7 +151,7 @@
 	<!-- Ajax: 지역에 따른 가능 여부 status조회 -->
 	<select id="selectSearchStatusList" parameterType="sVO" resultType="egovMap">
 		SELECT STATUS
-		FROM SYSDG.지표별ROW_COUNT
+		FROM 지표별ROW_COUNT
 		WHERE 1=1 
 			AND SDATE = TO_DATE(#{dateStart}, 'YYYY-MM-DD')
 			AND 분석지표구분 = #{anal_fin}

@@ -29,15 +29,14 @@ public class CommonController {
 	@Resource(name = "beanValidator")
 	protected DefaultBeanValidator beanValidator;
 	
+	@RequestMapping(value="/goMainPage.do")
+	public String goMainpage (ModelAndView mv) {
+		return "redirect:/";
+	}
+	
 	@RequestMapping(value="/goError.do")
 	public ModelAndView goError (ModelAndView mv) {
 		mv.setViewName("common/error");
-		return mv;
-	}
-	
-	@RequestMapping(value="/goLoginPage.do")
-	public ModelAndView goLoginPage (ModelAndView mv) {
-		mv.setViewName("user/login");
 		return mv;
 	}
 	

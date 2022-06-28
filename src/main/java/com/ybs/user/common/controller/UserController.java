@@ -1,10 +1,12 @@
 package com.ybs.user.common.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.egovframe.rte.psl.dataaccess.util.EgovMap;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springmodules.validation.commons.DefaultBeanValidator;
 
+import com.ybs.indicator.common.controller.CommonController;
 import com.ybs.user.common.service.UserService;
 import com.ybs.user.common.service.UserVO;
 
@@ -50,29 +53,44 @@ public class UserController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/login.do")
-	public ModelAndView login (ModelAndView mv, @ModelAttribute UserVO uVO, HttpServletRequest request) {
+	
+	
+	/* 로그인 페이지 이동 ( 이전페이지 함께 저장 ) */
+	@RequestMapping(value="/goLoginPage.do")
+	public String goLoginPage (HttpServletRequest request) {
 		
+		/* 이전 페이지 기억 */
+		HttpSession session = request.getSession();
+		session.setAttribute("refererPage", request.getHeader("Referer"));
+		
+		return "user/login";
+	}
+	
+	
+	@RequestMapping(value="/login.do")
+	public String login (ModelAndView mv, @ModelAttribute UserVO uVO, HttpServletRequest request, HttpSession session) {
 		/* 로그인 정보 담기 */
 		uVO = service.login(uVO);
 		
-		
 		/* 세션에 로그인 정보 담기 */
 		// 세션생성
-		HttpSession session = request.getSession();
+		session = request.getSession();
 		// 값 저장
 		session.setAttribute("uVO", uVO);
 		
-		mv.setViewName("indicator/pass/pass_index");
-		
-		return mv;
+		return "redirect:"+(String) session.getAttribute("refererPage");
 	}
 	
+
+
 	@RequestMapping("/logout.do")
-	public String logout(SessionStatus session) {
-		session.setComplete();
+	public String logout(HttpServletRequest request) {
 		
-		return "../../index";
+		HttpSession session = request.getSession();
+		
+		session.invalidate();
+		
+		return "redirect:/";
 	}
 	
 

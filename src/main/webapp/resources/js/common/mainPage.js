@@ -69,12 +69,14 @@ function nextSlide() {
 
 
 
+/*
 $('a').click(function() {
     $('html, body').animate({
         scrollTop: $($.attr(this, 'href')).offset().top
     }, 500);
     return false;
 });
+*/
 
 // 퀵메뉴
 $('.f16').click(function() {

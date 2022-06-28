@@ -7,7 +7,7 @@
 			CASE WHEN ID = #{id} AND PWD = #{pwd} THEN 'exist' 
 			      WHEN ID = #{id} THEN 'idOK'
 			 END STATE
-		FROM SYSDG.USER_INFO
+		FROM USER_INFO
 		WHERE 1=1
 			AND (ID = #{id} AND PWD = #{pwd})
 			OR (ID = #{id})
@@ -16,7 +16,7 @@
 	<select id="login" parameterType="uVO" resultType="uVO">
 		SELECT 
 			*
-		FROM SYSDG.USER_INFO
+		FROM USER_INFO
 		WHERE 1=1
 			AND ID = #{id}
 			AND PWD = #{pwd}

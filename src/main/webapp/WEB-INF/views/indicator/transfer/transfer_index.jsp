@@ -14,9 +14,9 @@
     </head>
 
     <body>
-	<%@ include file="../../common/MainHeader.jsp"%>
 	
-	<%@ include file="../../common/ConName.jsp"%>
+	<%@ include file="../../common/conName.jsp"%>
+	
     <div class="ConEx" style="background:#fff url(resources/images/indicator/transferB.jpg)"></div>
    
         <div class="selectbox">

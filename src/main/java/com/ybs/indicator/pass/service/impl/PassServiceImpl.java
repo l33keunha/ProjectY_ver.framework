@@ -749,7 +749,7 @@ public class PassServiceImpl extends EgovAbstractServiceImpl implements PassServ
 					System.out.println("상위이용노선 다운로드");
 					
 					// ● 인자값 : 데이터 리스트
-					passResultList = mapper.downloadPassREsultListTopRoute(sVO); 
+					passResultList = mapper.downloadPassResultListTopRoute(sVO); 
 					
 					System.out.println("query 조회 시간 : " + ((System.currentTimeMillis() - sdt) / 1000));
 					
