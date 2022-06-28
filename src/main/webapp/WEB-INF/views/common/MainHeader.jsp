@@ -27,9 +27,9 @@
 	    </c:if>
 	    
 	        <a onclick="location.href='goMainPage.do'" style="cursor:pointer;"><p>Home</p></a>
-	        <p>Contact Us</p>
+	        <a href="http://www.ybsnt.com/" target='_blank'><p>Contact Us</p></a>
 	        <div class="dropdown">
-	            <button class="dropbtn">전체 메뉴</button>
+	            <button class="dropbtn" style="cursor:pointer;">전체 메뉴</button>
 	        </div>
 	    </div>
 	</div>
@@ -39,7 +39,7 @@
 				<ul class="nav__list">
 					<!-- 선택항목에 addclass active-nav 추가 -->
 					<li class="nav__list-item"><a onclick="location.href='goMainPage.do'" class="hover-target">Home</a></li>
-					<li class="nav__list-item"><a href="../indicator/pass/pass_index.jsp" class="hover-target">교통카드 빅데이터 분석</a></li>
+					<li class="nav__list-item"><a onclick="location.href='goPassIndex.do'" class="hover-target">교통카드 빅데이터 분석</a></li>
 					<li class="nav__list-item"><a href="#" class="hover-target">승용차 경로탐색</a></li>
 					<li class="nav__list-item"><a href="#" class="hover-target">대중교통 경로탐색</a></li>
 					<li class="nav__list-item"><a href="#" class="hover-target">버스수요/노선 개편</a></li>

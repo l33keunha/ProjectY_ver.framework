@@ -1,8 +1,8 @@
 	
 	
-	$("#download").on('click',function(){
+	function download(){
 		$('#downloadSubmitBtn').click();
-	})
+	}
 	
 	$("#downloadMatrix").on('click',function(){
 		$('#downloadMatrixSubmitBtn').click();

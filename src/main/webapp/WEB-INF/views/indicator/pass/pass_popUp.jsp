@@ -134,7 +134,7 @@
 	                <c:if test = "${anal_groupText == '행정동간OD' && (anal_typeText == '목적통행' || anal_typeText == '수단통행')}">
 	                	<div class="g" style="width: 226px;"><button type="button" id="downloadMatrix" style="width: 223px;margin-left: 30px;">OD매트릭스형태로 다운로드</button></div>
 	                </c:if>
-	                <div class="d"><button type="button" id="download">다운로드</button></div>
+	                <div class="d"><button type="button" id="download" onclick="download();">다운로드</button></div>
 	                <div class="e"><button type="button" id="exit" onClick="window.open('','_self').close();">닫기</button></div>
 	            </div> 
 	        </div>

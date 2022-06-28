@@ -29,6 +29,7 @@
 	$('.cell2').change(function(){
 		disabledTrue(3)
 		searchAnal()
+		$("input[name=cd_no]").prop("disabled", true);
 	})
 	
 	// 분석지표 및 유형에 따른 선택박스 활성화
