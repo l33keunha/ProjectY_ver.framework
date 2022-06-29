@@ -62,6 +62,10 @@ public class TimeDistnController {
 			mv.addObject("trainCnt",Collections.frequency(valueList, "지하철"));
 		}
 		
+		//날짜 yyyy-mm-dd 변환
+		String dataFormatReturn = YbsUtil.getStringDateFormat(sVO.getDateStart() ,"yyyyMMdd" ,"yyyy-MM-dd");		
+		sVO.setDateStart(dataFormatReturn);
+		
 		mv.addObject("sVO", sVO);
 		mv.addObject("req", req);
 		
@@ -77,8 +81,8 @@ public class TimeDistnController {
 	@RequestMapping(value="/timeDistnGraph.do")
 	public ModelAndView graphTimeDistnResultList(ModelAndView mv, @ModelAttribute SearchVO sVO, HttpServletRequest req, HttpServletResponse res) {
 		//날짜 사이 날짜리스트 출력
-		String dataFormatReturn = YbsUtil.getStringDateFormat(sVO.getDateStart() ,"yyyyMMdd" ,"yyyy-MM-dd");		
-		sVO.setDateStart(dataFormatReturn);
+		//String dataFormatReturn = YbsUtil.getStringDateFormat(sVO.getDateStart() ,"yyyy-MM-dd" ,"yyyyMMdd");		
+		//sVO.setDateStart(dataFormatReturn);
 		
 		List<String> dateList = new ArrayList<String>();		//yyyy-MM-dd 형식
 		List<String> dateListSt = new ArrayList<String>();		//yyyyMMdd 형식

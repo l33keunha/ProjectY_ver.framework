@@ -147,9 +147,14 @@
 								</c:if> 
 								--%>
 								
-								<c:if test="${j%5 == 0}">
-									<td class="tg-0pky" rowspan='5' style="width: 122px; min-width: 122px; max-width: 122px;"><div class="lavel-2">${congestionResultList[j * columnCnt].routeNma}</div></td>
-									<!-- 노선명 -->
+								<c:if test="${j == 0}">
+									<td class="tg-0pky" rowspan='${congestionResultList[0].cnt}' style="width: 122px; min-width: 122px; max-width: 122px;"><div class="lavel-2">${congestionResultList[0].routeNma}</div></td>
+								</c:if>
+								<c:if test="${j > 0}">
+									<c:if test="${((congestionResultList[j-1].sttnRank+1) != (congestionResultList[j].sttnRank)) }">
+										<td class="tg-0pky" rowspan='${congestionResultList[j].cnt}' style="width: 122px; min-width: 122px; max-width: 122px;"><div class="lavel-2">${congestionResultList[j * columnCnt].routeNma}</div></td>
+										<!-- 노선명 -->
+									</c:if>
 								</c:if>
 								
 								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].sttnRank}</div></td>

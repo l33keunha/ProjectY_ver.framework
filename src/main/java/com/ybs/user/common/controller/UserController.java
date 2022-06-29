@@ -66,6 +66,17 @@ public class UserController {
 		return "user/login";
 	}
 	
+	/* 로그인 페이지 이동 ( 팝업에서 넘어왔을 시 메인페이지로 이동 ) */
+	@RequestMapping(value="/goLoginPagePopUp.do")
+	public String goLoginPagePopUp (HttpServletRequest request) {
+		
+		/* 세션에 메인페이지 저장 */
+		HttpSession session = request.getSession();
+		session.setAttribute("refererPage", "/");
+		
+		return "user/login";
+	}
+	
 	
 	@RequestMapping(value="/login.do")
 	public String login (ModelAndView mv, @ModelAttribute UserVO uVO, HttpServletRequest request, HttpSession session) {

@@ -72,7 +72,7 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 			if(sVO.getProvider().equals("03")) {
 				
 				// ● 인자값 : 헤더명
-				headerListSt = "분석지역광역도," + "분석지역시도," + "분석자료," + "분석일자," + "정류장구분," + "정류장ID," + "정류장명," + "행정동," + "시간,"
+				headerListSt = "분석지역광역도," + "분석지역시군," + "분석자료," + "분석일자," + "정류장구분," + "정류장ID," + "정류장명," + "행정동," + "시간,"
 						+ "일반_승차,일반_하차,일반_환승," + "어린이_승차,어린이_하차,어린이_환승," + "청소년_승차,청소년_하차,청소년_환승," + "경로_승차,경로_하차,경로_환승,"
 						+ "대학생_승차,대학생_하차,대학생_환승," + "복지_승차,복지_하차,복지_환승,";
 				
@@ -109,10 +109,14 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 			} else {
 				
 				// ● 인자값 : 헤더명
-				headerListSt = "분석지역광역도," + "분석지역시도," + "분석자료," + "분석일자," + "정류장구분," + "정류장ID," + "정류장명," + "행정동," + "시간,"
+				headerListSt = "분석지역광역도," + "분석지역시군," + "분석자료," + "분석일자," + "정류장구분," + "정류장ID," + "정류장명," + "행정동," + "시간,"
 						+ "일반_승차,일반_하차,일반_환승," + "어린이_승차,어린이_하차,어린이_환승," + "청소년_승차,청소년_하차,청소년_환승," + "경로_승차,경로_하차,경로_환승,"
 						+ "장애인_승차,장애인_하차,장애인_환승," + "국가유공자_승차,국가유공자_하차,국가유공자_환승," + "다자녀부모_승차,다자녀부모_하차,다자녀부모_환승,"
-						+ "동반_승차,동반_하차,동반_환승," + "대학생_승차,대학생_하차,대학생_환승," + "복지_승차,복지_하차,복지_환승," + "기타_승차,기타_하차,기타_환승";
+						+ "동반_승차,동반_하차,동반_환승," + "대학생_승차,대학생_하차,대학생_환승,";
+				if(sVO.getProvider().equals("00")) {
+					headerListSt += "복지_승차,복지_하차,복지_환승," + "기타_승차,기타_하차,기타_환승";
+				}
+						
 				
 				// ● 인자값 : 컬럼명
 				columnListSt = "분석지역광역도"
@@ -150,13 +154,15 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 						+",동반TrsAgg"
 						+",대학생GinAgg"
 						+",대학생GffAgg"
-						+",대학생TrsAgg"
-						+",복지GinAgg"
-						+",복지GffAgg"
-						+",복지TrsAgg"
-						+",기타GinAgg"
-						+",기타GffAgg"
-						+",기타TrsAgg";
+						+",대학생TrsAgg";
+				if(sVO.getProvider().equals("00")) {
+					columnListSt += ",복지GinAgg"
+									+",복지GffAgg"
+									+",복지TrsAgg"
+									+",기타GinAgg"
+									+",기타GffAgg"
+									+",기타TrsAgg";
+				}
 				
 			}
 			break;
@@ -204,8 +210,10 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 				
 				// ● 인자값 : 헤더명
 				headerListSt = "분석지역광역도," + "분석지역시도," + "분석자료," + "분석일자," + "승차내외부," + "승차역ID," + "승차지역명," + "하차내외부," + "하차역ID,"
-						+ "하차지역명," + "시간," + "일반," + "어린이," + "청소년," + "경로," + "장애인," + "국가유공자," + "다자녀부모," + "동반," + "대학생,"
-						+ "복지," + "기타";
+						+ "하차지역명," + "시간," + "일반," + "어린이," + "청소년," + "경로," + "장애인," + "국가유공자," + "다자녀부모," + "동반," + "대학생,";
+				if(sVO.getProvider().equals("00")) {
+					headerListSt += "복지," + "기타";
+				}
 				
 				// ● 인자값 : 컬럼명
 				columnListSt = "분석지역광역도"
@@ -227,9 +235,11 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 						+",국가유공자"
 						+",다자녀부모"
 						+",동반"
-						+",대학생"
-						+",복지"
-						+",기타";
+						+",대학생";
+				if(sVO.getProvider().equals("00")) {
+					columnListSt += ",복지"
+									+",기타";
+				}
 				
 			}
 
@@ -279,8 +289,10 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 				
 				// ● 인자값 : 헤더명
 				headerListSt = "분석지역광역도," + "분석지역시도," + "분석자료," + "분석일자," + "승차내외부," + "승차역ID," + "승차지역명," + "하차내외부," + "하차역ID,"
-						+ "하차지역명," + "시간," + "일반," + "어린이," + "청소년," + "경로," + "장애인," + "국가유공자," + "다자녀부모," + "동반," + "대학생,"
-						+ "복지," + "기타";
+						+ "하차지역명," + "시간," + "일반," + "어린이," + "청소년," + "경로," + "장애인," + "국가유공자," + "다자녀부모," + "동반," + "대학생,";
+				if(sVO.getProvider().equals("00")) {
+					headerListSt += "복지," + "기타";
+				}
 				
 				// ● 인자값 : 컬럼명
 				columnListSt = "분석지역광역도"
@@ -302,9 +314,11 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 						+",국가유공자"
 						+",다자녀부모"
 						+",동반"
-						+",대학생"
-						+",복지"
-						+",기타";
+						+",대학생";
+				if(sVO.getProvider().equals("00")) {
+					columnListSt += ",복지"
+									+",기타";
+				}
 				
 			}
 
@@ -371,7 +385,11 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 				 headerListSt = "분석지역광역도," + "분석지역시도," + "분석자료," + "분석일자," +  "노선구분," + "노선명," + "노선유형," + "기점," + "종점," + "시간,"
 						 + "일반_승차,일반_하차,일반_환승," + "어린이_승차,어린이_하차,어린이_환승," + "청소년_승차,청소년_하차,청소년_환승," + "경로_승차,경로_하차,경로_환승,"
 						 + "장애인_승차,장애인_하차,장애인_환승," + "국가유공자_승차,국가유공자_하차,국가유공자_환승," + "다자녀부모_승차,다자녀부모_하차,다자녀부모_환승,"
-						 + "동반_승차,동반_하차,동반_환승," + "대학생_승차,대학생_하차,대학생_환승," + "복지_승차,복지_하차,복지_환승," + "기타_승차,기타_하차,기타_환승";
+						 + "동반_승차,동반_하차,동반_환승," + "대학생_승차,대학생_하차,대학생_환승,";
+					if(sVO.getProvider().equals("00")) {
+						headerListSt += "복지_승차,복지_하차,복지_환승," + "기타_승차,기타_하차,기타_환승";
+					}
+				 
 				 
 				 
 				 // ● 인자값 : 컬럼명
@@ -411,14 +429,15 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 						 +",동반TrsAgg"
 						 +",대학생GinAgg"
 						 +",대학생GffAgg"
-						 +",대학생TrsAgg"
-						 +",복지GinAgg"
-						 +",복지GffAgg"
-						 +",복지TrsAgg"
-						 +",기타GinAgg"
-						 +",기타GffAgg"
-						 +",기타TrsAgg";
-				 
+						 +",대학생TrsAgg";
+					if(sVO.getProvider().equals("00")) {
+						columnListSt += ",복지GinAgg"
+										+",복지GffAgg"
+										+",복지TrsAgg"
+										+",기타GinAgg"
+										+",기타GffAgg"
+										+",기타TrsAgg";
+					}
 			 }
 				
 				
@@ -470,7 +489,10 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 				// ● 인자값 : 헤더명
 				headerListSt = "분석지역광역도," + "분석지역시도," + "분석자료," + "분석일자," + "노선구분," + "노선명," + "노선유형," + "기점," + "종점,"
 						+ "출발정류장순번, 출발정류장ID, 출발정류장명, 출발정류장행정동, 도착정류장순번, 도착정류장ID, 도착정류장명, 도착정류장행정동, 시간," + "일반," + "어린이," + "청소년," + "경로," + "장애인,"
-						+ "국가유공자," + "다자녀부모," + "동반," + "대학생," + "복지," + "기타";
+						+ "국가유공자," + "다자녀부모," + "동반," + "대학생,";
+				if(sVO.getProvider().equals("00")) {
+					headerListSt +=  "복지," + "기타";
+				}
 		
 				columnListSt = "분석지역광역도"
 								+",분석지역시군"
@@ -498,10 +520,11 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 								+",국가유공자"
 								+",다자녀부모"
 								+",동반"
-								+",대학생"
-								+",복지"
-								+",기타";
-				
+								+",대학생";
+				if(sVO.getProvider().equals("00")) {
+					columnListSt += ",복지"
+									+",기타";
+				}
 			}
 
 			break;
@@ -604,7 +627,7 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 			if(sVO.getProvider().equals("03")) {
 				
 				// ● 인자값 : 헤더명
-				headerListSt = "분석지역광역도," + "분석지역시도," + "분석자료," + "분석일자," + "출발존," + "출발행정동," + "도착존," + "도착행정동," + "시간," + "일반,"
+				headerListSt = "분석지역광역도," + "분석지역시군," + "분석자료," + "분석일자," + "출발존," + "출발행정동," + "도착존," + "도착행정동," + "시간," + "일반,"
 						+ "어린이," + "청소년," + "경로," + "대학생," + "복지";
 				
 				// ● 인자값 : 컬럼명
@@ -628,8 +651,11 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 			} else {
 				
 				// ● 인자값 : 헤더명
-				headerListSt = "분석지역광역도," + "분석지역시도," + "분석자료," + "분석일자," + "출발존," + "출발행정동," + "도착존," + "도착행정동," + "시간," + "일반,"
-						+ "어린이," + "청소년," + "경로," + "장애인," + "국가유공자," + "다자녀부모," + "동반," + "대학생," + "복지," + "기타";
+				headerListSt = "분석지역광역도," + "분석지역시군," + "분석자료," + "분석일자," + "출발존," + "출발행정동," + "도착존," + "도착행정동," + "시간," + "일반,"
+						+ "어린이," + "청소년," + "경로," + "장애인," + "국가유공자," + "다자녀부모," + "동반," + "대학생,";
+				if(sVO.getProvider().equals("00")) {
+					headerListSt += "복지," + "기타";
+				}
 				
 				// ● 인자값 : 컬럼명
 				columnListSt = "분석지역광역도"
@@ -649,10 +675,11 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 						+",국가유공자"
 						+",다자녀부모"
 						+",동반"
-						+",대학생"
-						+",복지"
-						+",기타";
-				
+						+",대학생";
+				if(sVO.getProvider().equals("00")) {
+					columnListSt += ",복지"
+									+",기타";
+				}
 			}
 
 			break;
@@ -670,8 +697,8 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 			if(sVO.getProvider().equals("03")) {
 				
 				// ● 인자값 : 헤더명
-				headerListSt = "분석지역광역도," + "분석지역시도," + "분석자료," + "분석일자," + "출발존," + "출발행정동," + "도착존," + "도착행정동," + "시간," + "일반,"
-						+ "어린이," + "청소년," + "경로," + "동반," + "대학생," + "복지" ;
+				headerListSt = "분석지역광역도," + "분석지역시군," + "분석자료," + "분석일자," + "출발존," + "출발행정동," + "도착존," + "도착행정동," + "시간," + "일반,"
+						+ "어린이," + "청소년," + "경로," + "대학생," + "복지" ;
 
 				// ● 인자값 : 컬럼명
 				columnListSt ="분석지역광역도"
@@ -694,8 +721,11 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 			} else {
 				
 				// ● 인자값 : 헤더명
-				headerListSt = "분석지역광역도," + "분석지역시도," + "분석자료," + "분석일자," + "출발존," + "출발행정동," + "도착존," + "도착행정동," + "시간," + "일반,"
-						+ "어린이," + "청소년," + "경로," + "장애인," + "국가유공자," + "다자녀부모," + "동반," + "대학생," + "복지," + "기타";
+				headerListSt = "분석지역광역도," + "분석지역시군," + "분석자료," + "분석일자," + "출발존," + "출발행정동," + "도착존," + "도착행정동," + "시간," + "일반,"
+						+ "어린이," + "청소년," + "경로," + "장애인," + "국가유공자," + "다자녀부모," + "동반," + "대학생,";
+				if(sVO.getProvider().equals("00")) {
+					headerListSt += "복지," + "기타";
+				}
 
 				// ● 인자값 : 컬럼명
 				columnListSt ="분석지역광역도"
@@ -715,10 +745,11 @@ public class DownloadServiceImpl extends EgovAbstractServiceImpl implements Down
 							+",국가유공자"
 							+",다자녀부모"
 							+",동반"
-							+",대학생"
-							+",복지"
-							+",기타";
-				
+							+",대학생";
+				if(sVO.getProvider().equals("00")) {
+					columnListSt += ",복지"
+									+",기타";
+				}
 			}
 
 			break;

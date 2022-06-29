@@ -14,14 +14,22 @@
 
 	<body>
         <div class="wrap">
+        	<div class="d"><button type="button" id="exit">메인으로</button></div>
             <div class="e"><button type="button" name="Close" onclick="closeMe()" value=" 창닫기 ">닫기</button></div>
             <div class="img"></div>
         </div>
         <script>
+        
             function closeMe() {
                 var win=window.open("","_self");
                 win.close();
             }
-            </script>
+            
+        	document.getElementById('exit').onclick = function(){
+        		var win=window.open("","_self");
+                win.close();
+                window.open('goMainPage.do');
+        	}
+        </script>
     </body>
 </html>

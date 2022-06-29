@@ -78,7 +78,7 @@
 					<thead>
 						<tr>
 							
-							<th class="tg-0pky"  style="width: 120px; min-width: 120px; max-width: 120px;">정류장명칭</th>		<!-- 빈칸 -->
+							<th class="tg-0pky"  style="width: 120px; min-width: 120px; max-width: 120px; font-size: 12px;">정류장명칭</th>		<!-- 빈칸 -->
 							
 						</tr>
 					</thead>

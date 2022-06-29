@@ -148,8 +148,8 @@
 	          </div>
 	          <div>
 	          <p>&nbsp;${anal_typeText_titleDraw}</p>
-	          <p>시간대 : ${tmText}</p> 
-	          <p>이용자유형 : ${cd_noText_slash}</p>
+	          <p>&nbsp;${tmText}</p> 
+	          <p>&nbsp;${cd_noText_slash}</p>
 	          <p>&nbsp;${tfcmn_titleDraw}</p>
 	          </div>
 	      	</div>
@@ -293,15 +293,15 @@
 			     			<%@ include file="tableList/pass_popUp_passRouteODCnt.jsp" %>
 			     		</c:if>
 			     		
-			     		<!-- OD매트릭스 -->
-			     		<c:if test = "${sVO.anal_fin == 'routeODmatrix'}">
-			     			<%@ include file="tableList/pass_popUp_passRouteODmatrix.jsp" %>
-			     		</c:if>
-			     		
 			     		<script>
 			     			$(".test").css("height", "682px");
 			     			$(".content_wrap").css("height", "682px");
 			     		</script>
+			     	</c:if>
+			     
+			     	<c:if test = "${anal_groupText == '노선별OD 매트릭스'}">
+			     		<!-- OD매트릭스 -->
+			     		<%@ include file="tableList/pass_popUp_passRouteODmatrix.jsp" %>
 			     	</c:if>
 			     	
 			     	<c:if test = "${anal_groupText == '행정동간OD' && anal_typeText == '목적통행'}">

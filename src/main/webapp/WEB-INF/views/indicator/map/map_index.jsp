@@ -4,48 +4,147 @@
 <!DOCTYPE html>
 <html lang="ko">
     <head>
-        <title>통행분석</title> 
+        <title>지도분석</title>
         <link rel="stylesheet" type="text/css" href="resources/css/indicator/jquery-ui.css">
         <link rel="stylesheet" type="text/css" href="resources/css/indicator/common_index.css"> 
-        <link rel="stylesheet" type="text/css" href="resources/css/indicator/pass_index.css"> 
- 		<script type="text/javascript" src="resources/js/indicator/common_index.js" defer ></script> 
- 		<script type="text/javascript" src="resources/js/indicator/pass_index.js" defer ></script> 
+        <link rel="stylesheet" type="text/css" href="testStyle2.css">
+        <script type="text/javascript" src="resources/js/indicator/common_index.js" defer ></script>
         <script src ="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+
     </head>
 
     <body>
-	
-	<%@ include file="../../common/conName.jsp"%>
-	
-    <div class="ConEx"></div>
+        <%@ include file="../../common/conName.jsp"%>
+        <div class="ConEx" style="background:#fff url(resources/images/indicator/passB.jpg)"></div>
 
    
         <div class="selectbox">
             <div class ="cell1" >
-            
+
                 <p>분석지표</p>
+
                 <div class="cell1_01"> 
                     <div>
-                        <label><input type="radio" name="anal_group" value="passCnt"> 통행량</label>
+                        <label><input type="radio" name="anal_group" value=""> 정류장</label>
+                    </div>
+                </div>
+
+                <div class="cell1_02">
+                    <div>
+                        <label><input type="radio" name="anal_group" value=""> 노선</label>
+                    </div>
+                </div>
+
+                <div class="cell1_03">
+                    <div>
+                        <label><input type="radio" name="anal_group" value=""> 행정동</label>
                     </div>
                 </div>
 
             </div>
-            
+
             <div class ="cell2">
-            
+
                 <p>분석유형</p>
+
                 <div class="cell2_01">
                     <div>
-                        <label><input type="radio" name="anal_type" value="passCnt_purpose"> 목적통행</label>
+                        <label><input type="radio" name="anal_type" value=""> 수단 통행량</label>
+                        <label><input type="radio" name="anal_type" value=""> 목적 통행량</label>
+                        <label><input type="radio" name="anal_type" value=""> 정류장간  통행량</label>
                     </div>
                 </div>
 
+                <div class="cell2_02">
+                    <div>
+                        <label><input type="radio" name="anal_type" value=""> 정류장 통행량</label>
+                        <label><input type="radio" name="anal_type" value=""> 재차인원</label>
+                        <label><input type="radio" name="anal_type" value=""> 혼잡도</label>
+                        <label><input type="radio" name="anal_type" value=""> 중복도</label>
+                    </div>
+                </div>
+
+                <div class="cell2_03">
+                    <label><input type="radio" name="anal_type" value=""> 수단 통행량</label>
+                    <label><input type="radio" name="anal_type" value=""> 목적 통행량</label>
+                    <label><input type="radio" name="anal_type" value=""> 행정동간 수단 통행량</label>
+                    <label><input type="radio" name="anal_type" value=""> 행정동간 목적 통행량</label>
+                </div>
+
+            </div>
+
+            <div class ="cell22">
+
+                <p>분석유형</p>
+
+                <div class="cell22_01">
+
+                    <div class="cell22_01_a">
+                        <select name="">
+                            <option value="00" >총/승차/하차/환승</option>
+                        </select>
+                    </div>
+
+                    <div class="cell22_01_b">
+                        <div>
+                            <span>출발</span>
+                            <select name="">
+                                <option value="00" >전체</option>
+                            </select>
+                        </div>
+                        <div>
+                            <span>도착</span>
+                            <select name="">
+                                <option value="00" >전체</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="cell22_02">
+
+                    <div class="cell22_02_a">
+                        <select name="">
+                            <option value="00" >총/승차/하차/환승</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="cell22_03">
+
+                    <div class="cell22_03_a">
+                        <select name="">
+                            <option value="00" >총/승차/하차/환승</option>
+                        </select>
+                    </div>
+
+                    <div class="cell22_03_b">
+                        <div>
+                            <span>출발</span>
+                            <select name="">
+                                <option value="00" >전체</option>
+                            </select>
+                        </div>
+                        <div>
+                            <span>도착</span>
+                            <select name="">
+                                <option value="00" >전체</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
             </div>
             
             <div class ="cell3">
+
                 <div class="cell3_01">
+
                     <p>지역</p>
                     
                     <select id="anal_area_cd_sido" name="anal_area_cd_sido">
@@ -54,20 +153,28 @@
                     <select id="anal_area_cd" name="anal_area_cd">
                         <option>시/군</option>
                     </select>
+
                 </div>
 
                 <div class ="cell3_02">
+
                     <p>자료</p>
+
                     <div>
                         <label><input type="radio" name="provider" id="provider00" value="00" text2="지자체"> 지자체</label>
                         <label><input type="radio" name="provider" id="provider99" value="99" text2="정산사"> 정산사</label>
                     </div>
+
                 </div>
 
                 <div class = "cell3_03"> 
+
                    <p>날짜</p>
+
                 </div>
+
             </div>
+
             <div class ="hcell1">
                 <div class ="cell4">
                     <p>시간대</p>
@@ -168,44 +275,46 @@
                                     <input type="checkbox" id="modalBtn" name="searchpassRoute">
                                     <label for="modalBtn">노선번호 검색</label>
                                     <!-- 노선번호 확인 modal -->
-                             <div class="modalContainer">
-                              <div class="modalBox">
-                                 <div class="routeNotice">노선번호 검색</div>
-                                 <label for="modalBtn">x</label>
-                                 <div class="routeBox">
-	                                 <div id="lds-spinner">
-	                                        <div></div>
-	                                        <div></div>
-	                                        <div></div>
-	                                        <div></div>
-	                                        <div></div>
-	                                        <div></div>
-	                                        <div></div>
-	                                        <div></div>
-	                                        <div></div>
-	                                        <div></div>
-	                                        <div></div>
-	                                        <div></div>
-	                                    </div>
-                                    <input type="text" placeholder="(노선번호/노선유형/기점/종점) 검색..." id="searchRouteId">
-                                    <div class="routeListBox">
-                                       <div class='routeListTh' style='width:100%;'>
-                                          <p style="width: 28%; float:left;"> 노선명 </p>
-                                          <p style="width: 11%; float:left;margin-left:-20px;"> 노선유형 </p>
-                                          <p style="width: 7%; float:left;margin-left: 56px;"> 기점 </p>
-                                          <p style="width:30%; float:left;margin-left: 61px;"> 종점 </p>
-                                       </div>
-                                       <div class="routeLists">
-                                       </div>
-                                    </div>
-                                    <input type="button" id="routeBtn" value="확인">
-                                 </div>
-                              </div>           
-                             </div> 
+                                    <div class="modalContainer">
+                                        <div class="modalBox">
+                                            <div class="routeNotice">노선번호 검색</div>
+                                            <label for="modalBtn">x</label>
+                                            <div class="routeBox">
+                                                <div id="lds-spinner">
+                                                    <div></div>
+                                                    <div></div>
+                                                    <div></div>
+                                                    <div></div>
+                                                    <div></div>
+                                                    <div></div>
+                                                    <div></div>
+                                                    <div></div>
+                                                    <div></div>
+                                                    <div></div>
+                                                    <div></div>
+                                                    <div></div>
+                                                </div>
+                                                <input type="text" placeholder="(노선번호/노선유형/기점/종점) 검색..." id="searchRouteId">
+                                                <div class="routeListBox">
+                                                    <div class='routeListTh' style='width:100%;'>
+                                                        <p style="width: 28%; float:left;"> 노선명 </p>
+                                                        <p style="width: 11%; float:left;margin-left:-20px;"> 노선유형 </p>
+                                                        <p style="width: 7%; float:left;margin-left: 56px;"> 기점 </p>
+                                                        <p style="width:30%; float:left;margin-left: 61px;"> 종점 </p>
+                                                    </div>
+                                                    <div class="routeLists"> 
+
+                                                    </div>
+                                                </div>
+                                                <input type="button" id="routeBtn" value="확인">
+                                            </div>
+                                        </div>           
+                                    </div> 
                                 </div>
                             </div>
 
-                              <div class="search-con">
+                            <div class="search-con">
+                                
                             </div>
                         </div>
                     </div>
@@ -213,7 +322,7 @@
             </div>
         </div>
 
-        <input class="submit" type="button" id="mapBtn" value="조회" style="cursor: pointer;" >
+        <input class="submit" type="button" id="passBtn" value="조회" style="cursor: pointer;" >
         
     </body>
 	

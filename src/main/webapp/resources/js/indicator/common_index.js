@@ -1,7 +1,6 @@
 // [ 1 ] 페이지 로드 시 비활성화로 시작
 	window.onload = function(){
 		if(window.sessionStorage.getItem("uVO")!=null) {
-			alert("로그인하셔");
 			location.href="../../index.jsp";
 		} else{
 			disabledTrue(2)

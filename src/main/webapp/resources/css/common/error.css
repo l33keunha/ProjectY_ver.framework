@@ -16,7 +16,14 @@ html, body {
     width: 99vw;
     margin-top: -3vh;
 }
-
+.d{    
+    background: #82b0d9 url(../../images/common/backHome_icon.png) no-repeat 4px 3px;
+    background-size: 23px;
+    width: 118px;
+    position: absolute;
+    left: 86.5vw;
+    margin-right: 3px;
+}
 .e {
     /* background: #d98282 url() no-repeat 4px 5.5px; */
     background: #d98282 url(../../images/indicator/icon02.png) no-repeat 4px 5.5px;
