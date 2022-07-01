@@ -150,15 +150,18 @@
 								<c:if test="${j == 0}">
 									<td class="tg-0pky" rowspan='${congestionResultList[0].cnt}' style="width: 122px; min-width: 122px; max-width: 122px;"><div class="lavel-2">${congestionResultList[0].routeNma}</div></td>
 								</c:if>
+								
+								
 								<c:if test="${j > 0}">
 									<c:if test="${((congestionResultList[j-1].sttnRank+1) != (congestionResultList[j].sttnRank)) }">
 										<td class="tg-0pky" rowspan='${congestionResultList[j].cnt}' style="width: 122px; min-width: 122px; max-width: 122px;"><div class="lavel-2">${congestionResultList[j * columnCnt].routeNma}</div></td>
 										<!-- 노선명 -->
 									</c:if>
 								</c:if>
-								
 								<td class="tg-0pky" style="width: 30px; min-width: 30px; max-width: 30px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].sttnRank}</div></td>
 								<!-- 순위 -->
+								
+								
 								<td class="tg-0pky" style="width: 80px; min-width: 80px; max-width: 80px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].stSttnId}</div></td>
 								<!-- 출발정류장ID -->
 								<td class="tg-0pky" style="width: 134px; min-width: 134px; max-width: 134px;"><div class="lavel-2  lavel-1">${congestionResultList[j * columnCnt].stSttnNma}</div></td>

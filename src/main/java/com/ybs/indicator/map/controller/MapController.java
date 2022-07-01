@@ -24,6 +24,7 @@ public class MapController {
 	
 	@RequestMapping(value="/mapTest.do")
 	public ModelAndView selectPassResultList(ModelAndView mv, HttpServletRequest req, @ModelAttribute SearchVO sVO) {
+		mv.setViewName("indicator/map/map_popUp");
 		return mv;
 	}
 }

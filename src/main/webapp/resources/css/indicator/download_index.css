@@ -1,7 +1,7 @@
 
 #downloadcate{
     font-weight:bolder;
-        color: #001fbb;
+        color: #32689b;
 }
 
 
@@ -107,31 +107,6 @@ width: 179px;
 }
 
 
-.cell2_icon{
-width: 74px;
-height: 40px;
-background: #32689b url(../../images/indicator/download-header-icon2.png) no-repeat 3px 10px;
-background-size: 23px;
-float: right;
-}
-
-.cell2_icon.active {
-cursor:pointer;
-width: 74px;
-height: 40px;
-background: #32689b url(../../images/indicator/download-header-icon2.png) no-repeat 3px 10px;
-background-size: 23px;
-float: right;
-}
-
-.cell2_icon.active:hover {
-cursor:pointer;
-width: 74px;
-height: 40px;
-background: #32689b url(../../images/indicator/download-header-icon.png) no-repeat 3px 10px;
-background-size: 26px;
-float: right;
-}
 
 .cell3{
 /* background: #ccdded; */
@@ -244,7 +219,7 @@ margin-top: 29px;
 margin-top: -60px;
 margin-left: 83px;}
 
-/* hcell 占쎌뒄占쎈꺖 */
+/* hcell �뜝�럩�뭵�뜝�럥爰� */
 
 .cell4{
 /* background: #ccdded; */
@@ -319,10 +294,10 @@ margin-bottom: 0px;
 }
 
 table, th, td{
-border: 1px solid #0000008f;
-border-collapse: collapse;
-font-size: 12px;
-padding: 12px;
+	border: 1px solid #0000008f;
+    border-collapse: collapse;
+    font-size: 14px;
+    padding: 12px;
 }
 
 th{
@@ -331,13 +306,35 @@ background: #ccdded;
 font-size: 16px;
 }
 
+.cell2_icon{
+    width: 151px;
+    height: 35px;
+    font-size: 19px;
+    margin-top: 25px;
+    text-align: center;
+    display: block;
+    background-color: #c7e4ff;
+    color: #004281;
+    font-weight: bold;
+    border-radius: 11px;
+    border: none;
+    float: left;
+    margin-left: 26.5%;
+}
+.cell2_icon:hover {
+cursor: pointer;
+box-shadow: 0px 2px 5px #000000;
+font-weight: bold;
+background-color: #004281;
+color: #c7e4ff;
+}
 
 
 .submit{
 width: 90px;
 height: 35px;
 float: left;
-margin-left: 43%;
+ margin-left: 28%;
 }
 .submit2{
 width: 66px;
@@ -352,7 +349,7 @@ font-weight: bold;
 border-radius: 11px;
 border: none;
 float: left;
-margin-left: 25%;
+margin-left: 1%;
 }
 
 .submit2:hover {
@@ -374,7 +371,7 @@ color: #c7e4ff;
 
 
 
-/* �떎�슫濡쒕뱶 由ъ뒪�듃 紐⑤떖李� css */
+/* 占쎈뼄占쎌뒲嚥≪뮆諭� �뵳�딅뮞占쎈뱜 筌뤴뫀�뼎筌∽옙 css */
 .test-modal-wrap{
 	position: fixed;
 	opacity: 0;
@@ -561,7 +558,7 @@ cursor: pointer;
 
 
 
-/* cell3 - �궇吏� - �젣怨듬궇吏� css */
+/* cell3 - 占쎄텊筌욑옙 - 占쎌젫�⑤벉沅뉛쭪占� css */
 .serviceDate{
     position: absolute;
     margin-left: 11.5%;
@@ -579,13 +576,13 @@ cursor: pointer;
 }
 
 .serviceDate_table tr, td {
-    border: none;
+    border: border: 1px solid #0000008f;
     padding: 2px;
 }
 
 
 
-/* 다운로드 리스트 마우스오버 */
+/* �떎�슫濡쒕뱶 由ъ뒪�듃 留덉슦�뒪�삤踰� */
 .cell2_alret{
     background: #e6e6e6;
     color: #000;
@@ -600,7 +597,7 @@ cursor: pointer;
     display: block;
 }
 
-/* 다은로드 리스트 새로고침 마우스오버 */
+/* �떎��濡쒕뱶 由ъ뒪�듃 �깉濡쒓퀬移� 留덉슦�뒪�삤踰� */
 .resetBtn_alret{
     background: #e6e6e6;
     color: #000;

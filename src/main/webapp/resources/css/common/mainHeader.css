@@ -22,7 +22,7 @@ a {
 .logo {
   float: left;
   width: 156px;
-  height: 57px;
+  height: 38px;
   margin-left: 14px;
   margin-top: 10px;
 }
@@ -49,7 +49,7 @@ a {
   padding: 0 6px;
 }
 
-/* 占쎈굡嚥∽옙占쎈뼄占쎌뒲 甕곗쥓�뤀 */
+/* �뜝�럥援▼슖�댙�삕�뜝�럥堉꾢뜝�럩�뮧 �뵓怨쀬쪚占쎈� */
 .dropdown {
   position: relative;
   display: inline-block;

@@ -27,10 +27,19 @@
 		<script type="text/javascript" src="http://map.vworld.kr/js/vworldMapInit.js.do?version=2.0&apiKey=7D1285BF-31DC-3DD8-A3E3-86D92C9568E8&domain=localhost:8080"></script>
 	</head>
 	
+	<style>
+		.popup_map_header{
+			text-align: center;
+		    padding: 10px 0px 7px 0px;
+		    font-weight: bolder;
+		    background-color: #def0ff;
+		    border-bottom: 1px solid darkgrey;
+		}
+	</style>
 	<body>
 	 	<!-- 버스정류장 위치 모달창 -->
 		
-        <div style=" text-align: center; margin : 7px; font-weight: bolder;">
+        <div class="popup_map_header">
 			정류장명 : <span id="bus_name"></span>
         </div>
       
@@ -131,10 +140,10 @@
 					tfcmn = '<%=request.getContextPath()%>/resources/images/indicator/train01.png';
 				
 				}else if(tfcmn == "Bchoice"){
-					tfcmn = '<%=request.getContextPath()%>/resources/images/indicator/marker.png';
+					tfcmn = '<%=request.getContextPath()%>/resources/images/indicator/bus01_select.png';
 				
 				}else if (tfcmn == "Tchoice"){
-					tfcmn = '<%=request.getContextPath()%>/resources/images/indicator/marker.png';
+					tfcmn = '<%=request.getContextPath()%>/resources/images/indicator/train01_select.png';
 				
 				}
 				
@@ -162,7 +171,7 @@
 			function markerChoice(x, y, tfcmn, sttnNma, sttnHjd) {
 			
 				x = parseFloat(x);
-				y = parseFloat(y) + 0.00006;
+				y = parseFloat(y);
 				
 				//마커레이어 초기화 
 				markerLayer.getSource().clear();

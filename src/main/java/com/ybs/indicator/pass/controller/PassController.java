@@ -118,17 +118,11 @@ public class PassController {
 		
 		stationNmList = service.selectStationNmList(sVO);
 		if (stationNmList.size() > 0) {
-			for(int i = 0; i < 2; i++) {
-				System.out.println(stationNmList.get(i).toString());
-			}
 			mv.addObject("stationNmList", stationNmList);
 		}  
 		
 		routeOD = service.selectRouteOD(sVO);
 		if (routeOD.size() > 0) {
-			for(int i = 0; i < 2; i++) {
-				System.out.println(routeOD.get(i).toString());
-			}
 			mv.addObject("routeOD", routeOD);
 		} 
 		

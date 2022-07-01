@@ -24,6 +24,7 @@
 			    margin-left: 66px;
 			}
 	
+			/*
 			.modal-content.active{
 			   display: block;
 			}
@@ -34,6 +35,35 @@
 			.map-choice:hover {
 			  color : red;
 			  cursor: pointer;
+			}
+			*/
+			
+			.modal-content.active{
+			    background-color: #32689b;
+			    color: white;
+			    width: 124px;
+			    border: 1px solid #838383;
+			    cursor: pointer;
+			}
+			.map-choice {
+				background-color: #32689b;
+			    color: white;
+			    width: 124px;
+			    border: 1px solid #838383;
+			    cursor: pointer;
+			}
+			.map-choice:visited {
+			 	 background-color: #32689b;
+			    color: white;
+			    width: 124px;
+			    border: 1px solid #838383;
+			    cursor: pointer;
+			}
+			.map-choice:hover {
+			  	color: #c7e4ff;
+			    background-color: #004281;
+			    font-weight: bold;
+			    cursor:pointer;
 			}
 			
 		</style>
@@ -110,9 +140,7 @@
 									</div>											
 									 -->
 									<!-- 정류장명 -->
-									<a class="map-choice">
-										<div class="lavel-2 lavel-1" onClick="mapPage(${passResultList[j * columnCnt].y}, ${passResultList[j * columnCnt].x}, '${passResultList[j * columnCnt].tfcmn}', '${passResultList[j * columnCnt].sttnNma}', '${passResultList[j * columnCnt].sttnHjd}');">${passResultList[j * columnCnt].sttnNma}</div>	<!-- 정류장명 -->
-									</a>	
+									<div class="lavel-2 lavel-1 map-choice" onClick="mapPage(${passResultList[j * columnCnt].y}, ${passResultList[j * columnCnt].x}, '${passResultList[j * columnCnt].tfcmn}', '${passResultList[j * columnCnt].sttnNma}', '${passResultList[j * columnCnt].sttnHjd}');">${passResultList[j * columnCnt].sttnNma}</div>	<!-- 정류장명 -->
 									<!--  
 										<div class="lavel-2 lavel-1 modal" id="modal_${j}" x="${passResultList[j * columnCnt].x}" 
 																					   y="${passResultList[j * columnCnt].y}" 

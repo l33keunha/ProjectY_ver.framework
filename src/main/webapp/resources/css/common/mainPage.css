@@ -73,7 +73,7 @@
 }
 
 
-/*메인 퀵메뉴 */
+/*硫붿씤 �듬찓�돱 */
 
 .con02 {
   width: 1331px;
@@ -277,7 +277,7 @@
   font-size: 13px;
 }
 
-/* 마우스 이벤트 소개 페이지 ABOT Y */
+/* 留덉슦�뒪 �씠踰ㅽ듃 �냼媛� �럹�씠吏� ABOT Y */
 .con03 {
   width: 100%;
   height: 747px;
@@ -319,7 +319,7 @@
 figure.click1 {
   position: relative;
   overflow: hidden;
-  background: #000000;
+  background: #c6dcf0;
   color: #ffffff;
   text-align: center;
   box-shadow: 0 0 5px rgb(0 0 0 / 15%);
@@ -340,22 +340,22 @@ figure.click1 img {
 }
 
 figure.click1 figcaption {
-  position: absolute;
-  top: 45%;
-  left: 7%;
-  right: 7%;
-  bottom: 45%;
-  border: 1px solid white;
-  border-width: 1px 1px 0;
+        position: absolute;
+    top: 45%;
+    left: 7%;
+    right: 7%;
+    bottom: 45%;
+    height: 34px;
+    background: #476c8dd9;
 }
 
 figure.click1 .heading {
-  overflow: hidden;
-  -webkit-transform: translateY(50%);
-  transform: translateY(50%);
-  position: absolute;
-  bottom: 0;
-  width: 100%;
+      overflow: hidden;
+    -webkit-transform: translateY(50%);
+    transform: translateY(50%);
+    position: absolute;
+    bottom: 17px;
+    width: 100%;
 }
 
 figure.click1 h2 {
@@ -372,13 +372,13 @@ figure.click1 h2 {
 
 figure.click1 h2:before,
 figure.click1 h2:after {
-  position: absolute;
-  display: block;
-  width: 1000%;
-  height: 1px;
-  content: '';
-  background: white;
-  top: 50%;
+      position: absolute;
+    display: block;
+    width: 1000%;
+    height: 1px;
+    content: '';
+    /* background: white; */
+    top: 50%;
 }
 
 figure.click1 h2:before {
@@ -420,8 +420,9 @@ figure.click1.hover img {
 
 figure.click1:hover figcaption,
 figure.click1.hover figcaption {
-  top: 7%;
-  bottom: 7%;
+      top: 7%;
+    bottom: 7%;
+    height: 169px;
 }
 
 figure.click1:hover p,
@@ -432,7 +433,7 @@ figure.click1.hover p {
 }
 
 .click2 {
-  background: #482c22;
+  background-color: brown;
   width: 300px;
   height: 200px;
   float: left;
@@ -441,7 +442,7 @@ figure.click1.hover p {
 figure.click2 {
   position: relative;
   overflow: hidden;
-  background: #000000;
+  background: #c6dcf0;
   color: #ffffff;
   text-align: center;
   box-shadow: 0 0 5px rgb(0 0 0 / 15%);
@@ -462,22 +463,22 @@ figure.click2 img {
 }
 
 figure.click2 figcaption {
-  position: absolute;
-  top: 45%;
-  left: 7%;
-  right: 7%;
-  bottom: 45%;
-  border: 1px solid white;
-  border-width: 1px 1px 0;
+        position: absolute;
+    top: 45%;
+    left: 7%;
+    right: 7%;
+    bottom: 45%;
+    height: 34px;
+    background: #476c8dd9;
 }
 
 figure.click2 .heading {
-  overflow: hidden;
-  -webkit-transform: translateY(50%);
-  transform: translateY(50%);
-  position: absolute;
-  bottom: 0;
-  width: 100%;
+      overflow: hidden;
+    -webkit-transform: translateY(50%);
+    transform: translateY(50%);
+    position: absolute;
+    bottom: 17px;
+    width: 100%;
 }
 
 figure.click2 h2 {
@@ -494,13 +495,13 @@ figure.click2 h2 {
 
 figure.click2 h2:before,
 figure.click2 h2:after {
-  position: absolute;
-  display: block;
-  width: 1000%;
-  height: 1px;
-  content: '';
-  background: white;
-  top: 50%;
+      position: absolute;
+    display: block;
+    width: 1000%;
+    height: 1px;
+    content: '';
+    /* background: white; */
+    top: 50%;
 }
 
 figure.click2 h2:before {
@@ -542,8 +543,9 @@ figure.click2.hover img {
 
 figure.click2:hover figcaption,
 figure.click2.hover figcaption {
-  top: 7%;
-  bottom: 7%;
+      top: 7%;
+    bottom: 7%;
+    height: 169px;
 }
 
 figure.click2:hover p,
@@ -554,16 +556,16 @@ figure.click2.hover p {
 }
 
 .click3 {
-  background: #762b10;
-  float: left;
+  background-color: brown;
   width: 300px;
   height: 200px;
+  float: left;
 }
 
 figure.click3 {
   position: relative;
   overflow: hidden;
-  background: #000000;
+  background: #c6dcf0;
   color: #ffffff;
   text-align: center;
   box-shadow: 0 0 5px rgb(0 0 0 / 15%);
@@ -584,22 +586,22 @@ figure.click3 img {
 }
 
 figure.click3 figcaption {
-  position: absolute;
-  top: 45%;
-  left: 7%;
-  right: 7%;
-  bottom: 45%;
-  border: 1px solid white;
-  border-width: 1px 1px 0;
+        position: absolute;
+    top: 45%;
+    left: 7%;
+    right: 7%;
+    bottom: 45%;
+    height: 34px;
+    background: #476c8dd9;
 }
 
 figure.click3 .heading {
-  overflow: hidden;
-  -webkit-transform: translateY(50%);
-  transform: translateY(50%);
-  position: absolute;
-  bottom: 0;
-  width: 100%;
+      overflow: hidden;
+    -webkit-transform: translateY(50%);
+    transform: translateY(50%);
+    position: absolute;
+    bottom: 17px;
+    width: 100%;
 }
 
 figure.click3 h2 {
@@ -616,13 +618,13 @@ figure.click3 h2 {
 
 figure.click3 h2:before,
 figure.click3 h2:after {
-  position: absolute;
-  display: block;
-  width: 1000%;
-  height: 1px;
-  content: '';
-  background: white;
-  top: 50%;
+      position: absolute;
+    display: block;
+    width: 1000%;
+    height: 1px;
+    content: '';
+    /* background: white; */
+    top: 50%;
 }
 
 figure.click3 h2:before {
@@ -664,8 +666,9 @@ figure.click3.hover img {
 
 figure.click3:hover figcaption,
 figure.click3.hover figcaption {
-  top: 7%;
-  bottom: 7%;
+      top: 7%;
+    bottom: 7%;
+    height: 169px;
 }
 
 figure.click3:hover p,
@@ -676,16 +679,16 @@ figure.click3.hover p {
 }
 
 .click4 {
-  background: coral;
-  float: left;
+  background-color: brown;
   width: 300px;
   height: 200px;
+  float: left;
 }
 
 figure.click4 {
   position: relative;
   overflow: hidden;
-  background: #000000;
+  background: #c6dcf0;
   color: #ffffff;
   text-align: center;
   box-shadow: 0 0 5px rgb(0 0 0 / 15%);
@@ -706,22 +709,22 @@ figure.click4 img {
 }
 
 figure.click4 figcaption {
-  position: absolute;
-  top: 45%;
-  left: 7%;
-  right: 7%;
-  bottom: 45%;
-  border: 1px solid white;
-  border-width: 1px 1px 0;
+        position: absolute;
+    top: 45%;
+    left: 7%;
+    right: 7%;
+    bottom: 45%;
+    height: 34px;
+    background: #476c8dd9;
 }
 
 figure.click4 .heading {
-  overflow: hidden;
-  -webkit-transform: translateY(50%);
-  transform: translateY(50%);
-  position: absolute;
-  bottom: 0;
-  width: 100%;
+      overflow: hidden;
+    -webkit-transform: translateY(50%);
+    transform: translateY(50%);
+    position: absolute;
+    bottom: 17px;
+    width: 100%;
 }
 
 figure.click4 h2 {
@@ -738,13 +741,13 @@ figure.click4 h2 {
 
 figure.click4 h2:before,
 figure.click4 h2:after {
-  position: absolute;
-  display: block;
-  width: 1000%;
-  height: 1px;
-  content: '';
-  background: white;
-  top: 50%;
+      position: absolute;
+    display: block;
+    width: 1000%;
+    height: 1px;
+    content: '';
+    /* background: white; */
+    top: 50%;
 }
 
 figure.click4 h2:before {
@@ -786,8 +789,9 @@ figure.click4.hover img {
 
 figure.click4:hover figcaption,
 figure.click4.hover figcaption {
-  top: 7%;
-  bottom: 7%;
+      top: 7%;
+    bottom: 7%;
+    height: 169px;
 }
 
 figure.click4:hover p,
@@ -798,16 +802,16 @@ figure.click4.hover p {
 }
 
 .click5 {
-  background: #c5b1aa;
-  float: left;
+  background-color: brown;
   width: 300px;
   height: 200px;
+  float: left;
 }
 
 figure.click5 {
   position: relative;
   overflow: hidden;
-  background: #000000;
+  background: #c6dcf0;
   color: #ffffff;
   text-align: center;
   box-shadow: 0 0 5px rgb(0 0 0 / 15%);
@@ -828,22 +832,22 @@ figure.click5 img {
 }
 
 figure.click5 figcaption {
-  position: absolute;
-  top: 45%;
-  left: 7%;
-  right: 7%;
-  bottom: 45%;
-  border: 1px solid white;
-  border-width: 1px 1px 0;
+        position: absolute;
+    top: 45%;
+    left: 7%;
+    right: 7%;
+    bottom: 45%;
+    height: 34px;
+    background: #476c8dd9;
 }
 
 figure.click5 .heading {
-  overflow: hidden;
-  -webkit-transform: translateY(50%);
-  transform: translateY(50%);
-  position: absolute;
-  bottom: 0;
-  width: 100%;
+      overflow: hidden;
+    -webkit-transform: translateY(50%);
+    transform: translateY(50%);
+    position: absolute;
+    bottom: 17px;
+    width: 100%;
 }
 
 figure.click5 h2 {
@@ -860,13 +864,13 @@ figure.click5 h2 {
 
 figure.click5 h2:before,
 figure.click5 h2:after {
-  position: absolute;
-  display: block;
-  width: 1000%;
-  height: 1px;
-  content: '';
-  background: white;
-  top: 50%;
+      position: absolute;
+    display: block;
+    width: 1000%;
+    height: 1px;
+    content: '';
+    /* background: white; */
+    top: 50%;
 }
 
 figure.click5 h2:before {
@@ -908,8 +912,9 @@ figure.click5.hover img {
 
 figure.click5:hover figcaption,
 figure.click5.hover figcaption {
-  top: 7%;
-  bottom: 7%;
+      top: 7%;
+    bottom: 7%;
+    height: 169px;
 }
 
 figure.click5:hover p,
@@ -920,16 +925,16 @@ figure.click5.hover p {
 }
 
 .click6 {
+  background-color: brown;
   width: 300px;
   height: 200px;
   float: left;
-  background-color: pink;
 }
 
 figure.click6 {
   position: relative;
   overflow: hidden;
-  background: #000000;
+  background: #c6dcf0;
   color: #ffffff;
   text-align: center;
   box-shadow: 0 0 5px rgb(0 0 0 / 15%);
@@ -950,22 +955,22 @@ figure.click6 img {
 }
 
 figure.click6 figcaption {
-  position: absolute;
-  top: 45%;
-  left: 7%;
-  right: 7%;
-  bottom: 45%;
-  border: 1px solid white;
-  border-width: 1px 1px 0;
+        position: absolute;
+    top: 45%;
+    left: 7%;
+    right: 7%;
+    bottom: 45%;
+    height: 34px;
+    background: #476c8dd9;
 }
 
 figure.click6 .heading {
-  overflow: hidden;
-  -webkit-transform: translateY(50%);
-  transform: translateY(50%);
-  position: absolute;
-  bottom: 0;
-  width: 100%;
+      overflow: hidden;
+    -webkit-transform: translateY(50%);
+    transform: translateY(50%);
+    position: absolute;
+    bottom: 17px;
+    width: 100%;
 }
 
 figure.click6 h2 {
@@ -982,13 +987,13 @@ figure.click6 h2 {
 
 figure.click6 h2:before,
 figure.click6 h2:after {
-  position: absolute;
-  display: block;
-  width: 1000%;
-  height: 1px;
-  content: '';
-  background: white;
-  top: 50%;
+      position: absolute;
+    display: block;
+    width: 1000%;
+    height: 1px;
+    content: '';
+    /* background: white; */
+    top: 50%;
 }
 
 figure.click6 h2:before {
@@ -1030,8 +1035,9 @@ figure.click6.hover img {
 
 figure.click6:hover figcaption,
 figure.click6.hover figcaption {
-  top: 7%;
-  bottom: 7%;
+      top: 7%;
+    bottom: 7%;
+    height: 169px;
 }
 
 figure.click6:hover p,
@@ -1042,16 +1048,16 @@ figure.click6.hover p {
 }
 
 .click7 {
+  background-color: brown;
   width: 300px;
   height: 200px;
   float: left;
-  background-color: #d34c64;
 }
 
 figure.click7 {
   position: relative;
   overflow: hidden;
-  background: #000000;
+  background: #c6dcf0;
   color: #ffffff;
   text-align: center;
   box-shadow: 0 0 5px rgb(0 0 0 / 15%);
@@ -1072,22 +1078,22 @@ figure.click7 img {
 }
 
 figure.click7 figcaption {
-  position: absolute;
-  top: 45%;
-  left: 7%;
-  right: 7%;
-  bottom: 45%;
-  border: 1px solid white;
-  border-width: 1px 1px 0;
+        position: absolute;
+    top: 45%;
+    left: 7%;
+    right: 7%;
+    bottom: 45%;
+    height: 34px;
+    background: #476c8dd9;
 }
 
 figure.click7 .heading {
-  overflow: hidden;
-  -webkit-transform: translateY(50%);
-  transform: translateY(50%);
-  position: absolute;
-  bottom: 0;
-  width: 100%;
+      overflow: hidden;
+    -webkit-transform: translateY(50%);
+    transform: translateY(50%);
+    position: absolute;
+    bottom: 17px;
+    width: 100%;
 }
 
 figure.click7 h2 {
@@ -1104,13 +1110,13 @@ figure.click7 h2 {
 
 figure.click7 h2:before,
 figure.click7 h2:after {
-  position: absolute;
-  display: block;
-  width: 1000%;
-  height: 1px;
-  content: '';
-  background: white;
-  top: 50%;
+      position: absolute;
+    display: block;
+    width: 1000%;
+    height: 1px;
+    content: '';
+    /* background: white; */
+    top: 50%;
 }
 
 figure.click7 h2:before {
@@ -1152,8 +1158,9 @@ figure.click7.hover img {
 
 figure.click7:hover figcaption,
 figure.click7.hover figcaption {
-  top: 7%;
-  bottom: 7%;
+      top: 7%;
+    bottom: 7%;
+    height: 169px;
 }
 
 figure.click7:hover p,
@@ -1164,16 +1171,16 @@ figure.click7.hover p {
 }
 
 .click8 {
+  background-color: brown;
   width: 300px;
   height: 200px;
   float: left;
-  background-color: #503439;
 }
 
 figure.click8 {
   position: relative;
   overflow: hidden;
-  background: #000000;
+  background: #c6dcf0;
   color: #ffffff;
   text-align: center;
   box-shadow: 0 0 5px rgb(0 0 0 / 15%);
@@ -1194,22 +1201,22 @@ figure.click8 img {
 }
 
 figure.click8 figcaption {
-  position: absolute;
-  top: 45%;
-  left: 7%;
-  right: 7%;
-  bottom: 45%;
-  border: 1px solid white;
-  border-width: 1px 1px 0;
+        position: absolute;
+    top: 45%;
+    left: 7%;
+    right: 7%;
+    bottom: 45%;
+    height: 34px;
+    background: #476c8dd9;
 }
 
 figure.click8 .heading {
-  overflow: hidden;
-  -webkit-transform: translateY(50%);
-  transform: translateY(50%);
-  position: absolute;
-  bottom: 0;
-  width: 100%;
+      overflow: hidden;
+    -webkit-transform: translateY(50%);
+    transform: translateY(50%);
+    position: absolute;
+    bottom: 17px;
+    width: 100%;
 }
 
 figure.click8 h2 {
@@ -1226,13 +1233,13 @@ figure.click8 h2 {
 
 figure.click8 h2:before,
 figure.click8 h2:after {
-  position: absolute;
-  display: block;
-  width: 1000%;
-  height: 1px;
-  content: '';
-  background: white;
-  top: 50%;
+      position: absolute;
+    display: block;
+    width: 1000%;
+    height: 1px;
+    content: '';
+    /* background: white; */
+    top: 50%;
 }
 
 figure.click8 h2:before {
@@ -1274,8 +1281,9 @@ figure.click8.hover img {
 
 figure.click8:hover figcaption,
 figure.click8.hover figcaption {
-  top: 7%;
-  bottom: 7%;
+      top: 7%;
+    bottom: 7%;
+    height: 169px;
 }
 
 figure.click8:hover p,
@@ -1285,24 +1293,7 @@ figure.click8.hover p {
   transition-delay: 0.35s;
 }
 
-.click9 {
-  width: 300px;
-  height: 200px;
-  float: left;
-  background-color: #301a1e;
-}
-
-figure.click9 {
-  position: relative;
-  overflow: hidden;
-  background: #ffffff;
-  color: #ffffff;
-  text-align: center;
-  box-shadow: 0 0 5px rgb(0 0 0 / 15%);
-  font-size: 16px;
-}
-
-/* 공지 */
+/* 怨듭� */
 .con04 {
   width: 100%;
   height: 406px;
@@ -1373,7 +1364,7 @@ figure.click9 {
   margin: 10px;
 }
 
-/* 바로가기 버튼 */
+/* 諛붾줈媛�湲� 踰꾪듉 */
 .quick_menu {
   right: 0.5%;
   position: absolute;

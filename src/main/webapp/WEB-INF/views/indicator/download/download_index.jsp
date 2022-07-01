@@ -18,7 +18,7 @@
 
 	<%@ include file="../../common/conName.jsp"%>
 	
-    <div class="ConEx" style="background:#fff url(resources/images/indicator/downloadB.jpg)"></div>
+    <div class="ConEx" style="background:#fff url(resources/images/indicator/downloadB.jpg);"></div>
    
         <div class="selectbox">
             <div class ="cell1" >
@@ -44,9 +44,8 @@
 
             <div class ="cell2">
           		<div style="background-color: #32689b;width: 100%;height: 42px;">
-                    <span class="cell2_alret">다운로드 가능한 목록이 제공됩니다.</span>
 	                <p style="width: 73px;float: left;margin-left: 32.5%;">분석유형</p>
-	                <div class="cell2_icon" onclick="downloadList();"></div>
+	                <!-- <div class="cell2_icon" onclick="downloadList();"></div> -->
                 </div>
                 
                 <div class="cell2_01">
@@ -110,7 +109,7 @@
                 </div>
             </div>
         </div>
-        
+        <input class="cell2_icon" type="button" value="제공자료 목록" style="cursor: pointer;"onclick="downloadList();"></div>
 		<input class="submit2" type="button" id="nextBtn" value="조회" style="cursor: pointer;">
         <input class="submit" type="button" id="downloadBtn" value="다운로드" style="cursor: pointer;">
         

@@ -284,40 +284,40 @@
 				})
 				
 				$('#dateBtn').on('change', function () {
-					
-					if($('#dateBtn').is(":checked") == true){
-						$('.cell3_03').append("<div class='serviceDate'>");
-						
-						var addHtml ="";
-						
-						addHtml += "<div class='serviceDate_notice'>※ 서비스 제공날짜를 선택하세요.</div>";
-						addHtml += "<table class='serviceDate_table'>";
-						
-						for( var i in data.passSearchList){
-							var list = data.passSearchList[i];
-							
-							addHtml += "<tr>";
-							addHtml += "<td> · </td>";
-							addHtml += "<td>" + list.opratDate + "</td>";
-							addHtml += "<td> ~ </td>";
-							addHtml += "<td>" + list.sdate + "</td>";
-							addHtml += "</tr>"
-						}
-						
-						addHtml += "</table>";
-						
-						$('.serviceDate').append(addHtml);
-						
-						$('tr').on('click', function () {
-							var opratDate = $(this).children().eq(1).text();
-							opratDate = opratDate.substr(0, 4) + "-" +  opratDate.substr(4, 2) + "-" +  opratDate.substr(6, 2);
-							$('.date').datepicker("setDate",opratDate);
-						})
-					} else {
-						$('.serviceDate').remove();
-					}
-				
-				})
+	               
+	               if($('#dateBtn').is(":checked") == true){
+	                  $('.cell3_03').append("<div class='serviceDate'>");
+	                  
+	                  var addHtml ="";
+	                  
+	                  addHtml += "<div class='serviceDate_notice'>※ 서비스 제공날짜를 선택하세요.</div>";
+	                  addHtml += "<table class='serviceDate_table'>";
+	                  
+	                  for( var i in data.passSearchList){
+	                     var list = data.passSearchList[i];
+	                     
+	                     addHtml += "<tr>";
+	                     addHtml += "<td style='border: none;'> · </td>";
+	                     addHtml += "<td style='border: none;'>" + list.opratDate + "</td>";
+	                     addHtml += "<td style='border: none;'> ~ </td>";
+	                     addHtml += "<td style='border: none;'>" + list.sdate + "</td>";
+	                     addHtml += "</tr>"
+	                  }
+	                  
+	                  addHtml += "</table>";
+	                  
+	                  $('.serviceDate').append(addHtml);
+	                  
+	                  $('tr').on('click', function () {
+	                     var opratDate = $(this).children().eq(1).text();
+	                     opratDate = opratDate.substr(0, 4) + "-" +  opratDate.substr(4, 2) + "-" +  opratDate.substr(6, 2);
+	                     $('.date').datepicker("setDate",opratDate);
+	                  })
+	               } else {
+	                  $('.serviceDate').remove();
+	               }
+	            
+	            })
 				
 			}
 		})

@@ -321,7 +321,7 @@ public class CongestionServiceImpl extends EgovAbstractServiceImpl implements Co
 							+",opratDate"
 							+",dy"
 							+",routeNma"
-							+",sttnRank"
+							+",maxSttnRank"
 							+",stSttnId"
 							+",stSttnNma"
 							+",stSttnHjd"
@@ -426,7 +426,7 @@ public class CongestionServiceImpl extends EgovAbstractServiceImpl implements Co
 			System.out.println("query 조회 시간 : " + ((System.currentTimeMillis() - sdt) / 1000));
 			
 			// ● 인자값 : 시트명
-			excelName = "노선정류장간_상위100개_최대혼잡도_"+date_SidoText;
+			excelName = "노선정류장간_상위100개_평균혼잡도_"+date_SidoText;
 			
 			// ● 인자값 : 헤더명
 			headerListSt = "분석지역광역도"

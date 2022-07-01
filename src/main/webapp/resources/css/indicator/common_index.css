@@ -1,9 +1,20 @@
 
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
-/* 占쎄맒占쎈뼊筌롫뗀�뤀 */
+.notosanskr * { 
+ font-family: 'Noto Sans KR', sans-serif;
+}
+
+@font-face {
+    font-family: 'MICEGothic Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+/* �뜝�럡留믣뜝�럥堉딁춯濡ル�占쎈� */
   .conName{
         height:30px;
-    width: 1224px;
+    width: 1336px;
   }
 .contents{
     text-align: center;
@@ -14,26 +25,27 @@
     text-decoration: none;
     color: #000;
     float: left;
-    margin-left: 79px;
-    width: 61px;
+    margin-left: 108px;
 }
 .contents span{
-        float: left;
-    font-size: 16px;
+	float: left;
+    font-size: 22px;
     margin-left: 26px;
-    width: 104px;
     padding: 5px;
+    font-family: 'Noto Sans KR';
+    
 }
 
-.contents span:after {/*after 媛��긽�슂�냼*/
+.contents span:after {/*after 揶쏉옙占쎄맒占쎌뒄占쎈꺖*/
    	display: block;
     content: '';
-    border-bottom: solid 2px #162d97;
+    height: 3px;
+    border-bottom: solid 2px #32689b;
     transform: scaleX(0);
     transition: transform 250ms ease-in-out;
 }
 .contents span:hover:after {
-   transform: scaleX(1);/*a �냽�꽦�뿉 hover�떆 after瑜� 湲곗〈 �겕湲곕줈 蹂�寃�*/
+   transform: scaleX(1);/*a 占쎈꺗占쎄쉐占쎈퓠 hover占쎈뻻 after�몴占� 疫꿸퀣�� 占쎄쾿疫꿸퀡以� 癰귨옙野껓옙*/
 }
 
 .contents div{
@@ -46,7 +58,7 @@
 .contents :first-child{
     margin-left: 0;
 }
-/* 占쎈쑓占쎌뵠占쎈뱜占쎈돗�뚳옙 */
+/* �뜝�럥�몥�뜝�럩逾졾뜝�럥諭쒎뜝�럥�룛占쎈슪�삕 */
 div#ui-datepicker-div{
     position: absolute;
     top: 754px;
@@ -56,13 +68,13 @@ div#ui-datepicker-div{
     width: 223px;
 }
 
-/* 甕곗쥓瑗� */
+/* �뵓怨쀬쪚�몭占� */
 
 .ConEx{
-	width: 1336px;
+	width: 1293px;
     height: 181px;
     background-color: #fffff5;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 /* selectbox */
@@ -70,14 +82,14 @@ div#ui-datepicker-div{
 .selectbox{
     height: 550px;
     width: 1336px;
-    margin-top: 25px;
+    margin-top: 5px;
 }
 .selectbox >*{ 
     float: left;
     width: calc(1336px  / 6);
     height: 550px;
 }
-/* 鈺곌퀬�돳甕곌쑵�뱣 */
+/* �댖怨뚰�э옙�뤂�뵓怨뚯뫓占쎈괏 */
 
 .submit{
     font-size: 19px;
@@ -102,7 +114,7 @@ div#ui-datepicker-div{
 
 
 
-/* 로그인하러가기 css */
+/* 濡쒓렇�씤�븯�윭媛�湲� css */
 .conName-background{
 	position: fixed;
 	top: 0;
@@ -159,7 +171,7 @@ div#ui-datepicker-div{
 
 
 
-/* cell3 - 날짜 - 제공날짜 css */
+/* cell3 - �궇吏� - �젣怨듬궇吏� css */
 .serviceDate{
     position: absolute;
     margin-left: 11.5%;

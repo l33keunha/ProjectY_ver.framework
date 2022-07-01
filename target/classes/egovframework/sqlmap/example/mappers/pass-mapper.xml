@@ -1851,7 +1851,7 @@
 	                        ,TO_CHAR(SDATE, 'DY') DY
 	                        ,#{anal_area_cd_sido_text} ANAL_AREA_SIDO_CD_TEXT
 	                        ,#{anal_area_cd_text} ANAL_AREA_CD_TEXT
-	                        ,#{provider_textww} PROVIDER
+	                        ,#{provider_text} PROVIDER
 	                        ,OPRAT_DATE
 	                        ,CASE WHEN TFCMN='B' THEN '버스'
 	                            WHEN TFCMN='T' THEN '지하철'

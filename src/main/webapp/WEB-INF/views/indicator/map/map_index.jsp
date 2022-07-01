@@ -7,8 +7,9 @@
         <title>지도분석</title>
         <link rel="stylesheet" type="text/css" href="resources/css/indicator/jquery-ui.css">
         <link rel="stylesheet" type="text/css" href="resources/css/indicator/common_index.css"> 
-        <link rel="stylesheet" type="text/css" href="testStyle2.css">
-        <script type="text/javascript" src="resources/js/indicator/common_index.js" defer ></script>
+        <link rel="stylesheet" type="text/css" href="resources/css/indicator/map_index.css">
+        <!-- <script type="text/javascript" src="resources/js/indicator/common_index.js" defer ></script> -->
+        <script type="text/javascript" src="resources/js/indicator/map_index.js" defer ></script> 
         <script src ="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
@@ -322,7 +323,7 @@
             </div>
         </div>
 
-        <input class="submit" type="button" id="passBtn" value="조회" style="cursor: pointer;" >
+        <input class="submit" type="button" id="mapBtn" value="조회" style="cursor: pointer;" >
         
     </body>
 	
