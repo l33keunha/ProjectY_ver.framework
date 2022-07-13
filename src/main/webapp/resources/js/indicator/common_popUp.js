@@ -4,16 +4,17 @@
 		$('#downloadSubmitBtn').click();
 	}
 	
-	$("#downloadMatrix").on('click',function(){
+	$(document).on("click", "button[id='downloadMatrix']", function () {
 		$('#downloadMatrixSubmitBtn').click();
 	})
 	
-	$("#matrix").on('click',function(){
+	$(document).on("click", "button[id='matrix']", function () {
 		window.open("" ,"itsme", "toolbar=no, width=1800, height=1000, directories=no, status=no, scrollorbars=no, resizable=no");
 		$('#routeODSubmitBtn').click();
 	})
 	
-	$("#graph").on('click',function(){
+	$(document).on("click", "button[id='graph']", function () {
+	/*$("#graph").onclick(),function(){*/
 		window.open("" ,"graph", "toolbar=no, width=1800, height=1000, directories=no, status=no, scrollorbars=no, resizable=no");
 		$('#graphSubmitBtn').click();
 	})

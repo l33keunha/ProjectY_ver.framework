@@ -19,7 +19,7 @@
 
     <body>
         <%@ include file="../../common/conName.jsp"%>
-        <div class="ConEx" style="background:#fff url(resources/images/indicator/passB.jpg)"></div>
+        <div class="ConEx" style="background:#fff url(resources/images/indicator/passB.jpg);"></div>
 
    
         <div class="selectbox">
@@ -79,7 +79,7 @@
 
             <div class ="cell22">
 
-                <p>분석유형</p>
+                <p>분석범위</p>
 
                 <div class="cell22_01">
 

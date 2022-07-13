@@ -106,7 +106,7 @@ public class CommonController {
 	// 노선별OD : 지역에 따른 노선Id 조회
 	@ResponseBody
 	@RequestMapping(value="/searchRouteId.do")
-	public ModelAndView selectPassRoutdIdList(@ModelAttribute SearchVO sVO) {
+	public ModelAndView selectPassRouteIdList(@ModelAttribute SearchVO sVO) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		sVO.setDateStart(sVO.getDateStart().replaceAll("-", ""));
 		System.out.println(sVO.toString());

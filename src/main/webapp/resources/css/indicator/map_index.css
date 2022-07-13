@@ -1,7 +1,7 @@
 
 #MapCate{
     font-weight:bolder;
-    color: #001fbb;
+        color: #32689b;
 }
 
 
@@ -68,7 +68,7 @@ height: 42px;
 color: #fff;
 }
 .cell2 label{
-margin: 12px -6px;
+margin: 12px 10px;
 font-size: 15px;
 display: block;
 }
@@ -108,11 +108,12 @@ margin-top: 18px;
     height: 42px;
     color: #fff;
     }
-    .cell22 label{
-    /* margin: 12px -6px; */
-    font-size: 15px;
-    display: block;
-    }
+    .cell22 select {
+    margin-left: 15px;
+	}
+	.cell22 span {
+	    margin-left: 15px;
+	}
     .cell22_01{
     margin-top: 14px;
     height: 163px;
@@ -288,7 +289,7 @@ margin-top: 29px;
 margin-top:-46px;
 margin-left: 83px;}
 
-/* hcell �뜝�럩�뭵�뜝�럥爰� */
+/* hcell 占쎈쐻占쎈윪占쎈�듸옙�쐻占쎈윥�댆占� */
 
 .cell4{
 /* background: #ccdded; */
@@ -400,7 +401,7 @@ margin-top: -6px;
     color: #000;
 background: none;
 }
-/* -----�뜝�럥嫄쀥뜝�럡�맖嶺뚮쪋�삕----- */
+/* -----占쎈쐻占쎈윥椰꾩�λ쐻占쎈윞占쎈쭡癲ル슢履뗰옙�굲----- */
 .busname_wrap{
 width: 133px;
 height: 48px;
@@ -487,7 +488,7 @@ font-size: 13px !important;
 
 
 
-/* modal占쎈쨨占쎈봾�뿴 */
+/* modal�뜝�럥夷ⓨ뜝�럥遊억옙肉� */
 input[id=modalBtn] {
 display: none;
 }
@@ -649,8 +650,8 @@ cursor: pointer;
 
 
 
-/* ------------ �뜝�럥嫄쀥뜝�럡�맖�뛾�룆踰∽옙裕� �슖�돦裕녽�얇꺈�삕占쎌쓡�뜝�럩逾좂춯�쉻�삕 */
-/* �슖�돦裕녽�얇꺈�삕占쎈꼨嶺뚮〕�삕 */
+/* ------------ 占쎈쐻占쎈윥椰꾩�λ쐻占쎈윞占쎈쭡占쎈쎗占쎈즴甕겸댙�삕獒뺧옙 占쎌뒙占쎈룱獒뺣끋占쎌뻼爰덌옙�굲�뜝�럩�뱻占쎈쐻占쎈윪�얠쥉異�占쎌돸占쎌굲 */
+/* 占쎌뒙占쎈룱獒뺣끋占쎌뻼爰덌옙�굲�뜝�럥瑗⑨┼�슢�뺧옙�굲 */
 #lds-spinner {
 background: #0000004f;
 display: flex;
@@ -747,7 +748,7 @@ white-space: nowrap;
     
     
     
-/* cell3 - �궇吏� - �젣怨듬궇吏� css */
+/* cell3 - 占쎄텊筌욑옙 - 占쎌젫�⑤벉沅뉛쭪占� css */
 .serviceDate{
 position: absolute;
 margin-left: 221px;
